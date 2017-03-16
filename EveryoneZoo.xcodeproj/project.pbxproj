@@ -1,0 +1,537 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */; };
+		8D73B4271E7AE08F00E3B301 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4261E7AE08F00E3B301 /* ViewController.swift */; };
+		8D73B42A1E7AE08F00E3B301 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B4281E7AE08F00E3B301 /* Main.storyboard */; };
+		8D73B42C1E7AE08F00E3B301 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */; };
+		8D73B42F1E7AE08F00E3B301 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */; };
+		8D73B43A1E7AE09000E3B301 /* EveryoneZooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */; };
+		8D73B4451E7AE09000E3B301 /* EveryoneZooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8D73B4361E7AE09000E3B301 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D73B4191E7AE08F00E3B301 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D73B4201E7AE08F00E3B301;
+			remoteInfo = EveryoneZoo;
+		};
+		8D73B4411E7AE09000E3B301 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D73B4191E7AE08F00E3B301 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D73B4201E7AE08F00E3B301;
+			remoteInfo = EveryoneZoo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneZoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8D73B4261E7AE08F00E3B301 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8D73B4291E7AE08F00E3B301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8D73B42E1E7AE08F00E3B301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8D73B4301E7AE08F00E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D73B4351E7AE09000E3B301 /* EveryoneZooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EveryoneZooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryoneZooTests.swift; sourceTree = "<group>"; };
+		8D73B43B1E7AE09000E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D73B4401E7AE09000E3B301 /* EveryoneZooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EveryoneZooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryoneZooUITests.swift; sourceTree = "<group>"; };
+		8D73B4461E7AE09000E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D73B41E1E7AE08F00E3B301 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D73B4321E7AE09000E3B301 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D73B43D1E7AE09000E3B301 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8D73B4181E7AE08F00E3B301 = {
+			isa = PBXGroup;
+			children = (
+				8D73B4231E7AE08F00E3B301 /* EveryoneZoo */,
+				8D73B4381E7AE09000E3B301 /* EveryoneZooTests */,
+				8D73B4431E7AE09000E3B301 /* EveryoneZooUITests */,
+				8D73B4221E7AE08F00E3B301 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8D73B4221E7AE08F00E3B301 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */,
+				8D73B4351E7AE09000E3B301 /* EveryoneZooTests.xctest */,
+				8D73B4401E7AE09000E3B301 /* EveryoneZooUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8D73B4231E7AE08F00E3B301 /* EveryoneZoo */ = {
+			isa = PBXGroup;
+			children = (
+				8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */,
+				8D73B4261E7AE08F00E3B301 /* ViewController.swift */,
+				8D73B4281E7AE08F00E3B301 /* Main.storyboard */,
+				8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */,
+				8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */,
+				8D73B4301E7AE08F00E3B301 /* Info.plist */,
+			);
+			path = EveryoneZoo;
+			sourceTree = "<group>";
+		};
+		8D73B4381E7AE09000E3B301 /* EveryoneZooTests */ = {
+			isa = PBXGroup;
+			children = (
+				8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */,
+				8D73B43B1E7AE09000E3B301 /* Info.plist */,
+			);
+			path = EveryoneZooTests;
+			sourceTree = "<group>";
+		};
+		8D73B4431E7AE09000E3B301 /* EveryoneZooUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */,
+				8D73B4461E7AE09000E3B301 /* Info.plist */,
+			);
+			path = EveryoneZooUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D73B4201E7AE08F00E3B301 /* EveryoneZoo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D73B4491E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZoo" */;
+			buildPhases = (
+				8D73B41D1E7AE08F00E3B301 /* Sources */,
+				8D73B41E1E7AE08F00E3B301 /* Frameworks */,
+				8D73B41F1E7AE08F00E3B301 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EveryoneZoo;
+			productName = EveryoneZoo;
+			productReference = 8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8D73B4341E7AE09000E3B301 /* EveryoneZooTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D73B44C1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZooTests" */;
+			buildPhases = (
+				8D73B4311E7AE09000E3B301 /* Sources */,
+				8D73B4321E7AE09000E3B301 /* Frameworks */,
+				8D73B4331E7AE09000E3B301 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8D73B4371E7AE09000E3B301 /* PBXTargetDependency */,
+			);
+			name = EveryoneZooTests;
+			productName = EveryoneZooTests;
+			productReference = 8D73B4351E7AE09000E3B301 /* EveryoneZooTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8D73B43F1E7AE09000E3B301 /* EveryoneZooUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D73B44F1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZooUITests" */;
+			buildPhases = (
+				8D73B43C1E7AE09000E3B301 /* Sources */,
+				8D73B43D1E7AE09000E3B301 /* Frameworks */,
+				8D73B43E1E7AE09000E3B301 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8D73B4421E7AE09000E3B301 /* PBXTargetDependency */,
+			);
+			name = EveryoneZooUITests;
+			productName = EveryoneZooUITests;
+			productReference = 8D73B4401E7AE09000E3B301 /* EveryoneZooUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8D73B4191E7AE08F00E3B301 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "junpei ono";
+				TargetAttributes = {
+					8D73B4201E7AE08F00E3B301 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 5RH346BQ66;
+						ProvisioningStyle = Automatic;
+					};
+					8D73B4341E7AE09000E3B301 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 5RH346BQ66;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8D73B4201E7AE08F00E3B301;
+					};
+					8D73B43F1E7AE09000E3B301 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 5RH346BQ66;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8D73B4201E7AE08F00E3B301;
+					};
+				};
+			};
+			buildConfigurationList = 8D73B41C1E7AE08F00E3B301 /* Build configuration list for PBXProject "EveryoneZoo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8D73B4181E7AE08F00E3B301;
+			productRefGroup = 8D73B4221E7AE08F00E3B301 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D73B4201E7AE08F00E3B301 /* EveryoneZoo */,
+				8D73B4341E7AE09000E3B301 /* EveryoneZooTests */,
+				8D73B43F1E7AE09000E3B301 /* EveryoneZooUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D73B41F1E7AE08F00E3B301 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D73B42F1E7AE08F00E3B301 /* LaunchScreen.storyboard in Resources */,
+				8D73B42C1E7AE08F00E3B301 /* Assets.xcassets in Resources */,
+				8D73B42A1E7AE08F00E3B301 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D73B4331E7AE09000E3B301 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D73B43E1E7AE09000E3B301 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D73B41D1E7AE08F00E3B301 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D73B4271E7AE08F00E3B301 /* ViewController.swift in Sources */,
+				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D73B4311E7AE09000E3B301 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D73B43A1E7AE09000E3B301 /* EveryoneZooTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D73B43C1E7AE09000E3B301 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D73B4451E7AE09000E3B301 /* EveryoneZooUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8D73B4371E7AE09000E3B301 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D73B4201E7AE08F00E3B301 /* EveryoneZoo */;
+			targetProxy = 8D73B4361E7AE09000E3B301 /* PBXContainerItemProxy */;
+		};
+		8D73B4421E7AE09000E3B301 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D73B4201E7AE08F00E3B301 /* EveryoneZoo */;
+			targetProxy = 8D73B4411E7AE09000E3B301 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8D73B4281E7AE08F00E3B301 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8D73B4291E7AE08F00E3B301 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8D73B42E1E7AE08F00E3B301 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8D73B4471E7AE09000E3B301 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D73B4481E7AE09000E3B301 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8D73B44A1E7AE09000E3B301 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5RH346BQ66;
+				INFOPLIST_FILE = EveryoneZoo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.EveryoneZoo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		8D73B44B1E7AE09000E3B301 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5RH346BQ66;
+				INFOPLIST_FILE = EveryoneZoo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.EveryoneZoo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		8D73B44D1E7AE09000E3B301 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 5RH346BQ66;
+				INFOPLIST_FILE = EveryoneZooTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.EveryoneZooTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EveryoneZoo.app/EveryoneZoo";
+			};
+			name = Debug;
+		};
+		8D73B44E1E7AE09000E3B301 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 5RH346BQ66;
+				INFOPLIST_FILE = EveryoneZooTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.EveryoneZooTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EveryoneZoo.app/EveryoneZoo";
+			};
+			name = Release;
+		};
+		8D73B4501E7AE09000E3B301 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 5RH346BQ66;
+				INFOPLIST_FILE = EveryoneZooUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.EveryoneZooUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = EveryoneZoo;
+			};
+			name = Debug;
+		};
+		8D73B4511E7AE09000E3B301 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 5RH346BQ66;
+				INFOPLIST_FILE = EveryoneZooUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.EveryoneZooUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = EveryoneZoo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8D73B41C1E7AE08F00E3B301 /* Build configuration list for PBXProject "EveryoneZoo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D73B4471E7AE09000E3B301 /* Debug */,
+				8D73B4481E7AE09000E3B301 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D73B4491E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZoo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D73B44A1E7AE09000E3B301 /* Debug */,
+				8D73B44B1E7AE09000E3B301 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8D73B44C1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZooTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D73B44D1E7AE09000E3B301 /* Debug */,
+				8D73B44E1E7AE09000E3B301 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8D73B44F1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZooUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D73B4501E7AE09000E3B301 /* Debug */,
+				8D73B4511E7AE09000E3B301 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8D73B4191E7AE08F00E3B301 /* Project object */;
+}
