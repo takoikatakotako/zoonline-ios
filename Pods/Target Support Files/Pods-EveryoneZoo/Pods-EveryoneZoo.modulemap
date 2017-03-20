@@ -1,0 +1,6 @@
+framework module Pods_EveryoneZoo {
+  umbrella header "Pods-EveryoneZoo-umbrella.h"
+
+  export *
+  module * { export * }
+}

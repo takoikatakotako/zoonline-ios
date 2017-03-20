@@ -1,26 +1,112 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dco-yk-reu">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--おうち-->
+        <scene sceneID="exH-33-yZp">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vYg-Yy-Lye" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="YLd-1i-YOa"/>
+                        <viewControllerLayoutGuide type="bottom" id="gX1-tv-GCU"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="JA5-fa-oBh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="おうち" image="tab_kabi" id="Gyj-XE-EqV"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ubk-pv-9Ws" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-1091" y="848"/>
+        </scene>
+        <!--動物園-->
+        <scene sceneID="yNV-z2-Lkw">
+            <objects>
+                <viewController id="qKR-ST-zao" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="V7w-dA-Xm6"/>
+                        <viewControllerLayoutGuide type="bottom" id="K7s-mP-snq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y7A-Uw-XSN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="動物園" image="tab_kabi" id="5BP-NF-QO9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dMx-Jh-jJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="15" y="666"/>
+        </scene>
+        <!--タイムライン-->
+        <scene sceneID="qVH-hn-w8t">
+            <objects>
+                <viewController id="WqF-PM-LmS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="heL-GJ-Z6Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="1Om-1f-GzM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TAt-Lp-w2F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="タイムライン" image="tab_kabi" id="1VB-JX-Rlp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cNa-8x-7e2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="681" y="79"/>
+        </scene>
+        <!--ひろば-->
+        <scene sceneID="t6q-zQ-dUp">
+            <objects>
+                <viewController id="WKI-q4-4Xn" customClass="PictureViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dka-iS-5iN"/>
+                        <viewControllerLayoutGuide type="bottom" id="jrY-Wn-gDI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ex7-yY-IL3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="ひろば" image="tab_kabi" id="abn-T6-VUk"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SMG-4W-IBX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-38" y="-280"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="5kq-oP-oNt">
+            <objects>
+                <tabBarController id="Dco-yk-reu" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="ABy-Fm-F0N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="WKI-q4-4Xn" kind="relationship" relationship="viewControllers" id="ipY-ay-8sh"/>
+                        <segue destination="WqF-PM-LmS" kind="relationship" relationship="viewControllers" id="WdN-Uk-Emp"/>
+                        <segue destination="qKR-ST-zao" kind="relationship" relationship="viewControllers" id="iy4-rn-0GJ"/>
+                        <segue destination="vYg-Yy-Lye" kind="relationship" relationship="viewControllers" id="EqS-PD-xfH"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kfe-43-FV6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-780" y="124"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tab_kabi" width="30" height="30"/>
+    </resources>
 </document>
