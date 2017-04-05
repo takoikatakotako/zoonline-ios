@@ -11,6 +11,8 @@
 		72F50AA25E9B21009A0C6FAD /* Pods_EveryoneZoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */; };
 		8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */; };
 		8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */; };
+		8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */; };
+		8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4591E8031800008D997 /* ZooListViewController.swift */; };
 		8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */; };
 		8D73B42A1E7AE08F00E3B301 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B4281E7AE08F00E3B301 /* Main.storyboard */; };
 		8D73B42C1E7AE08F00E3B301 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */; };
@@ -45,6 +47,8 @@
 		831076F39DE8E24A4BCF6907 /* Pods-EveryoneZooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureViewController.swift; sourceTree = "<group>"; };
 		8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityLibrary.swift; sourceTree = "<group>"; };
+		8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
+		8D0FB4591E8031800008D997 /* ZooListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZooListViewController.swift; sourceTree = "<group>"; };
 		8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneZoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D73B4291E7AE08F00E3B301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */,
 				8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */,
 				8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */,
+				8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */,
+				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
 				8D73B4281E7AE08F00E3B301 /* Main.storyboard */,
 				8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */,
 				8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */,
@@ -453,8 +459,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */,
+				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
+				8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,7 +618,7 @@
 				DEVELOPMENT_TEAM = 5RH346BQ66;
 				INFOPLIST_FILE = EveryoneZoo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.EveryoneZoo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.everyzoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -624,7 +632,7 @@
 				DEVELOPMENT_TEAM = 5RH346BQ66;
 				INFOPLIST_FILE = EveryoneZoo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.EveryoneZoo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.everyzoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
