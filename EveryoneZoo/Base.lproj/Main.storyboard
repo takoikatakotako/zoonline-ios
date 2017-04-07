@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dco-yk-reu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dco-yk-reu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="おうち" image="tab_kabi" id="Gyj-XE-EqV"/>
+                    <tabBarItem key="tabBarItem" title="おうち" image="tab_mypage" id="Gyj-XE-EqV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ubk-pv-9Ws" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -41,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="動物園" image="tab_kabi" id="5BP-NF-QO9"/>
+                    <tabBarItem key="tabBarItem" title="動物園" image="tab_notice" id="5BP-NF-QO9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMx-Jh-jJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -60,7 +60,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="タイムライン" image="tab_kabi" id="1VB-JX-Rlp"/>
+                    <tabBarItem key="tabBarItem" title="タイムライン" image="tab_timeline" id="1VB-JX-Rlp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNa-8x-7e2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -79,16 +79,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="ひろば" image="tab_kabi" id="abn-T6-VUk"/>
+                    <tabBarItem key="tabBarItem" title="ひろば" image="tab_field" id="abn-T6-VUk"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SMG-4W-IBX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-38" y="-280"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Zoo Tab Bar Controller-->
         <scene sceneID="5kq-oP-oNt">
             <objects>
-                <tabBarController id="Dco-yk-reu" sceneMemberID="viewController">
+                <tabBarController id="Dco-yk-reu" customClass="ZooTabBarController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ABy-Fm-F0N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -107,6 +107,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tab_kabi" width="30" height="30"/>
+        <image name="tab_field" width="30" height="30"/>
+        <image name="tab_mypage" width="30" height="30"/>
+        <image name="tab_notice" width="30" height="30"/>
+        <image name="tab_timeline" width="30" height="30"/>
     </resources>
 </document>

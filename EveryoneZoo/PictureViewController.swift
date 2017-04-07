@@ -11,20 +11,22 @@ import UIKit
 
 class PictureViewController: UIViewController,UIScrollViewDelegate {
     
-    
+    //width, height
     var statusHeight:CGFloat!
     var navBarHeight:CGFloat!
+    var segmentViewHeight:CGFloat!
     var tabBarHeight:CGFloat!
-    
     var viewWidth:CGFloat!
     var viewHeight:CGFloat!
-    
     var scrollViewHeight:CGFloat!
     
-    
+    //view parts
     var myNavBar:UINavigationBar!
-    
+    var segmentView:UIView!
     var pictureScrollView: UIScrollView!
+    
+    //imageViews
+    var imageViewAry:Array<UIImageView> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,58 +35,18 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         viewWidth = self.view.frame.width
         viewHeight = self.view.frame.height
         
-        //ステータスバーの高さの取得
+        //各部品の高さを取得
         statusHeight = UIApplication.shared.statusBarFrame.height
+        navBarHeight =  40
+        segmentViewHeight = 40
+        tabBarHeight = UITabBar.appearance().frame.size.height
+        scrollViewHeight = viewHeight-(statusHeight+navBarHeight+segmentViewHeight+tabBarHeight+tabBarHeight)
         
-        //ナビゲーションバーのサイズの取得
-        navBarHeight = 40
-
-        //タブバーの高さの取得
-        tabBarHeight = 40
-        
-        //スクロルビュー
-        scrollViewHeight = viewHeight-(statusHeight+navBarHeight)
         
         setView()
         
+        setScrollView()
         
-    
-        // ScrollViewを生成.
-        pictureScrollView = UIScrollView()
-        
-        self.pictureScrollView.delegate = self
-        
-        // ScrollViewの大きさを設定する.
-        pictureScrollView.frame = CGRect(x: 0, y: statusHeight+navBarHeight, width: viewWidth, height: scrollViewHeight)
-        /*
-        // UIImageに画像を設定する.
-        let examplePic = UIImage(named: "example_pictures")!
-        
-        // UIImageViewを生成する.
-        let exampleImageView = UIImageView()
-        
-        // myImageViewのimageにmyImageを設定する.
-        exampleImageView.image = examplePic
-        
-        // frameの値を設定する.
-        exampleImageView.frame = pictureScrollView.frame
-        
-        // 画像のアスペクト比を設定.
-        exampleImageView.contentMode = UIViewContentMode.scaleAspectFill
-        
-        // ScrollViewにmyImageViewを追加する.
-        pictureScrollView.addSubview(exampleImageView)
-        */
-        // Scrollの高さを計算しておく.
-        let scroll_height = viewHeight*2
-        
-        // ScrollViewにcontentSizeを設定する.
-        pictureScrollView.contentSize = CGSize(width:viewWidth, height:scroll_height)
-
-        pictureScrollView.backgroundColor = UIColor.red
-        // ViewにScrollViewをAddする.
-        self.view.addSubview(pictureScrollView)
- 
     }
     
     //Viewへの配置
@@ -93,13 +55,9 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         //背景色を変更
         self.view.backgroundColor = UtilityLibrary.getZooThemeColor()
         
-        //UINavigationBarを作成
+        // MARK: - UINavigationBar
         myNavBar = UINavigationBar()
-        
-        //UINavigationBarの位置とサイズを指定
         myNavBar.frame = CGRect(x: 0, y: statusHeight, width: viewWidth, height: navBarHeight)
-        
-        //ナビゲーションバーの色を変える
         myNavBar.barTintColor = UtilityLibrary.getZooThemeColor()
         
         //ハイライトを消す
@@ -107,6 +65,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         
         //ナビゲーションボタンの色を変更する
         UINavigationBar.appearance().tintColor = UIColor.white
+        
         
         //ナビゲーションアイテムを作成
         let myNavItems = UINavigationItem()
@@ -120,9 +79,130 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         myNavBar.pushItem(myNavItems, animated: true)
         self.view.addSubview(myNavBar)
         
-        print("上")
+        
+        // MARK: - segmentView
+        segmentView = UIView()
+        segmentView.frame = CGRect(x: 0, y: statusHeight+navBarHeight, width: viewWidth, height: segmentViewHeight)
+        segmentView.backgroundColor = UIColor.white
+        self.view.addSubview(segmentView)
+        
+        //
+        let segmentLeftBtn = UIButton()
+        segmentLeftBtn.frame = CGRect(x: 0, y: 0, width: viewWidth/3, height: 20)
+        segmentLeftBtn.setTitle("人気", for: UIControlState.normal)
+        segmentLeftBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
+        segmentView.addSubview(segmentLeftBtn)
 
+        let segmentRightBtn = UIButton()
+        segmentRightBtn.frame = CGRect(x: viewWidth/3, y: 0, width: viewWidth/3, height: 20)
+        segmentRightBtn.setTitle("新着", for: UIControlState.normal)
+        segmentRightBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
+        segmentView.addSubview(segmentRightBtn)
   
+    }
+    
+    //スクロールビューの生成
+    func setScrollView(){
+        
+        // ScrollViewを生成.
+        pictureScrollView = UIScrollView()
+        self.pictureScrollView.delegate = self
+        
+        //一つあたりの画像サイズ
+        let picImageWidth = viewWidth/3.0
+
+        //設定画像
+        let myImage: UIImage = UIImage(named: "sample_kabi1")!
+
+        //表示数
+        let imageCount:NSInteger = 24
+        
+        for i in 0..<imageCount {
+        
+            let scrollYPos:CGFloat! = viewWidth*CGFloat(i/6)
+    
+            let pictureImageView:UIImageView = UIImageView()
+            pictureImageView.image = myImage
+            
+            if ((i/6)%2 == 0){
+                
+                switch i%6 {
+                case 0:
+                    pictureImageView.frame = CGRect(x: 0, y: scrollYPos, width: picImageWidth*2, height: picImageWidth*2)
+                    break
+                case 1:
+                    
+                    pictureImageView.frame = CGRect(x: picImageWidth*2, y: scrollYPos, width: picImageWidth, height: picImageWidth)
+                    break
+                    
+                case 2:
+                    pictureImageView.frame = CGRect(x: picImageWidth*2, y: picImageWidth+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    break
+                    
+                case 3:
+                    pictureImageView.frame = CGRect(x: 0, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    break
+                    
+                case 4:
+                    pictureImageView.frame = CGRect(x: picImageWidth, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    break
+                    
+                case 5:
+                    pictureImageView.frame = CGRect(x: picImageWidth*2, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    break
+                default:
+                    break
+                }
+            }else{
+                
+                switch i%6 {
+                case 0:
+                    pictureImageView.frame = CGRect(x: 0, y: scrollYPos, width: picImageWidth, height: picImageWidth)
+                    break
+                case 1:
+                    pictureImageView.frame = CGRect(x: 0, y: picImageWidth+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    break
+                case 2:
+                    pictureImageView.frame = CGRect(x: picImageWidth, y: scrollYPos, width: picImageWidth*2, height: picImageWidth*2)
+                    break
+                    
+                case 3:
+                    pictureImageView.frame = CGRect(x: 0, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    break
+                    
+                case 4:
+                    pictureImageView.frame = CGRect(x: picImageWidth, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    break
+                    
+                case 5:
+                    pictureImageView.frame = CGRect(x: picImageWidth*2, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    break
+                default:
+                    break
+                }
+
+            }
+            
+            imageViewAry.append(pictureImageView)
+            
+            
+            for imgView in imageViewAry{
+                pictureScrollView.addSubview(imgView)
+            }
+        }
+        
+        // ScrollViewの大きさを設定する.
+        pictureScrollView.frame = CGRect(x: 0, y: statusHeight+navBarHeight+segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
+        
+        // Scrollの高さを計算しておく.
+        let scroll_height = viewWidth*CGFloat((imageCount/6))+picImageWidth
+        
+        // ScrollViewにcontentSizeを設定する.
+        pictureScrollView.contentSize = CGSize(width:viewWidth, height:scroll_height)
+        
+        pictureScrollView.backgroundColor = UIColor.red
+        // ViewにScrollViewをAddする.
+        self.view.addSubview(pictureScrollView)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
@@ -146,33 +226,28 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     func hidesBarsWithScrollView( hidden:Bool, hiddenTop:Bool, hiddenBottom:Bool) {
         
         let timing = UICubicTimingParameters(animationCurve: .easeInOut)
-        let animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: timing)
+        let animator = UIViewPropertyAnimator(duration: 0.2, timingParameters: timing)
         
         
         if hidden {
             animator.addAnimations {
                 // animation
                 self.myNavBar.frame = CGRect(x: 0, y: -(self.statusHeight+self.navBarHeight), width: self.viewWidth, height: self.navBarHeight)
-                self.pictureScrollView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.viewHeight)
+                self.segmentView.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.segmentViewHeight)
+                self.pictureScrollView.frame = CGRect(x: 0, y: self.statusHeight+self.segmentViewHeight, width: self.viewWidth, height: self.viewHeight)
 
             }
         }else{
             animator.addAnimations {
                 // animation
                 self.myNavBar.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.navBarHeight)
-                self.pictureScrollView.frame = CGRect(x: 0, y: self.statusHeight+self.navBarHeight, width: self.viewWidth, height: self.scrollViewHeight)
+                self.segmentView.frame = CGRect(x: 0, y: self.statusHeight+self.navBarHeight, width: self.viewWidth, height: self.segmentViewHeight)
+                self.pictureScrollView.frame = CGRect(x: 0, y: self.statusHeight+self.navBarHeight+self.segmentViewHeight!, width: self.viewWidth, height: self.scrollViewHeight)
 
             }
         }
         
-        
-        
         animator.startAnimation()
-        
-        /*
-        myNavBar.animateWithDuration(5, animations: { () -> Void in
-            myNavBar.backgroundColor = UIColor.greenColor()
-        })*/
     }
     
     

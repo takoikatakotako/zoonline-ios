@@ -19,6 +19,7 @@
 		8D73B42F1E7AE08F00E3B301 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */; };
 		8D73B43A1E7AE09000E3B301 /* EveryoneZooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */; };
 		8D73B4451E7AE09000E3B301 /* EveryoneZooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */; };
+		8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */; };
 		EAAB25067CF3061B46797FE0 /* Pods_EveryoneZooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22ADCE5CE831A681A93AECC6 /* Pods_EveryoneZooTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		8D73B4401E7AE09000E3B301 /* EveryoneZooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EveryoneZooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryoneZooUITests.swift; sourceTree = "<group>"; };
 		8D73B4461E7AE09000E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZooTabBarController.swift; path = ../ZooTabBarController.swift; sourceTree = "<group>"; };
 		A53C8612E552A7E943C79BF7 /* Pods-EveryoneZoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZoo.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo.release.xcconfig"; sourceTree = "<group>"; };
 		B6E6153F1CF883E44B3F5A09 /* Pods-EveryoneZoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZoo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo.debug.xcconfig"; sourceTree = "<group>"; };
 		E15B20675E61512C92B15E98 /* Pods-EveryoneZooUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */,
 				8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */,
+				8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */,
 				8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */,
 				8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */,
 				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
@@ -462,6 +465,7 @@
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
+				8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */,
 				8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
