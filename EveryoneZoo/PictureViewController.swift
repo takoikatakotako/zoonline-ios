@@ -45,6 +45,8 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         
         setView()
         
+        setSegmentView()
+        
         setScrollView()
         
     }
@@ -78,7 +80,10 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         //作成したNavItemをNavBarに追加する
         myNavBar.pushItem(myNavItems, animated: true)
         self.view.addSubview(myNavBar)
-        
+    }
+    
+    //セグメントビューの生成
+    func setSegmentView(){
         
         // MARK: - segmentView
         segmentView = UIView()
@@ -89,23 +94,33 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         //スクロールビューとの区切り線
         let segmentLine = UIView()
         segmentLine.frame = CGRect(x: 0, y: segmentViewHeight - 2, width: viewWidth, height: 2)
-        segmentLine.backgroundColor = UIColor.white
+        segmentLine.backgroundColor = UIColor.gray
         segmentView.addSubview(segmentLine)
         
-        //
+        //セグメントビューの左
         let segmentLeftBtn = UIButton()
-        segmentLeftBtn.frame = CGRect(x: 0, y: 0, width: viewWidth/3, height: 20)
+        segmentLeftBtn.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
         segmentLeftBtn.setTitle("人気", for: UIControlState.normal)
-        segmentLeftBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
+        segmentLeftBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
+        //segmentLeftBtn.backgroundColor = UIColor.blue
         segmentView.addSubview(segmentLeftBtn)
-
+        
+        //下線
+        let leftUnderBar = UIView()
+        leftUnderBar.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
+        leftUnderBar.backgroundColor = UIColor.segmetRightBlue()
+        
+        //セグメントビューの右
         let segmentRightBtn = UIButton()
-        segmentRightBtn.frame = CGRect(x: viewWidth/3, y: 0, width: viewWidth/3, height: 20)
+        segmentRightBtn.frame = CGRect(x: viewWidth*0.55, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
         segmentRightBtn.setTitle("新着", for: UIControlState.normal)
-        segmentRightBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
+        segmentRightBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
+        //segmentRightBtn.backgroundColor = UIColor.blue
         segmentView.addSubview(segmentRightBtn)
-  
+    
     }
+    
+    
     
     //スクロールビューの生成
     func setScrollView(){
@@ -208,7 +223,8 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         // ScrollViewにcontentSizeを設定する.
         pictureScrollView.contentSize = CGSize(width:viewWidth, height:scroll_height)
         
-        //pictureScrollView.backgroundColor = UIColor.red
+        pictureScrollView.backgroundColor = UIColor.white
+        
         // ViewにScrollViewをAddする.
         self.view.addSubview(pictureScrollView)
     }
