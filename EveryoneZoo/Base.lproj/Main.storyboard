@@ -28,10 +28,29 @@
             </objects>
             <point key="canvasLocation" x="-1091" y="848"/>
         </scene>
+        <!--投稿-->
+        <scene sceneID="dU7-6a-kIm">
+            <objects>
+                <viewController id="prJ-Gc-YTA" customClass="PostViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PUj-lI-kZk"/>
+                        <viewControllerLayoutGuide type="bottom" id="cz6-Jt-enA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Ny-wP-xzQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="投稿" image="tab_post" id="edl-dL-8Uc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ld-YG-Z1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-361" y="1039"/>
+        </scene>
         <!--動物園-->
         <scene sceneID="yNV-z2-Lkw">
             <objects>
-                <viewController id="qKR-ST-zao" sceneMemberID="viewController">
+                <viewController id="qKR-ST-zao" customClass="ZooListViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="V7w-dA-Xm6"/>
                         <viewControllerLayoutGuide type="bottom" id="K7s-mP-snq"/>
@@ -97,6 +116,7 @@
                     <connections>
                         <segue destination="WKI-q4-4Xn" kind="relationship" relationship="viewControllers" id="ipY-ay-8sh"/>
                         <segue destination="WqF-PM-LmS" kind="relationship" relationship="viewControllers" id="WdN-Uk-Emp"/>
+                        <segue destination="prJ-Gc-YTA" kind="relationship" relationship="viewControllers" id="d3Z-vs-9JK"/>
                         <segue destination="qKR-ST-zao" kind="relationship" relationship="viewControllers" id="iy4-rn-0GJ"/>
                         <segue destination="vYg-Yy-Lye" kind="relationship" relationship="viewControllers" id="EqS-PD-xfH"/>
                     </connections>
@@ -110,6 +130,7 @@
         <image name="tab_field" width="30" height="30"/>
         <image name="tab_mypage" width="30" height="30"/>
         <image name="tab_notice" width="30" height="30"/>
+        <image name="tab_post" width="30" height="30"/>
         <image name="tab_timeline" width="30" height="30"/>
     </resources>
 </document>

@@ -86,6 +86,12 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         segmentView.backgroundColor = UIColor.white
         self.view.addSubview(segmentView)
         
+        //スクロールビューとの区切り線
+        let segmentLine = UIView()
+        segmentLine.frame = CGRect(x: 0, y: segmentViewHeight - 2, width: viewWidth, height: 2)
+        segmentLine.backgroundColor = UIColor.white
+        segmentView.addSubview(segmentLine)
+        
         //
         let segmentLeftBtn = UIButton()
         segmentLeftBtn.frame = CGRect(x: 0, y: 0, width: viewWidth/3, height: 20)
@@ -123,6 +129,8 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     
             let pictureImageView:UIImageView = UIImageView()
             pictureImageView.image = myImage
+            pictureImageView.layer.cornerRadius = 30
+            pictureImageView.clipsToBounds = true
             
             if ((i/6)%2 == 0){
                 
@@ -200,7 +208,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         // ScrollViewにcontentSizeを設定する.
         pictureScrollView.contentSize = CGSize(width:viewWidth, height:scroll_height)
         
-        pictureScrollView.backgroundColor = UIColor.red
+        //pictureScrollView.backgroundColor = UIColor.red
         // ViewにScrollViewをAddする.
         self.view.addSubview(pictureScrollView)
     }
