@@ -15,7 +15,8 @@ class ZooTabBarController: UITabBarController {
 
         
         // アイコンの色
-        UITabBar.appearance().tintColor = UIColor.gray
+        UITabBar.appearance().tintColor = UIColor.tabIconSelected()
+        UITabBar.appearance().unselectedItemTintColor = UIColor.tabNonIconSelected()
         
         // 背景色
         UITabBar.appearance().barTintColor = UIColor.white

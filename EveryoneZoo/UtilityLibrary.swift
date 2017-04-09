@@ -11,13 +11,6 @@ import UIKit
 class UtilityLibrary: NSObject {
 
     
-    class func getZooThemeColor() -> UIColor{
-        
-        let themeColor:UIColor = UIColor(red:0.0,green:0.5,blue:1.0,alpha:1.0)
-        return themeColor
-        
-    }
-    
     
     
 

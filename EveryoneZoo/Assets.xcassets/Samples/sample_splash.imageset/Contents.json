@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "tab_mypage.png",
+      "filename" : "sample_splash.png",
       "scale" : "1x"
     },
     {
@@ -11,7 +11,6 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "icons_0003s_0001_smile.png",
       "scale" : "3x"
     }
   ],

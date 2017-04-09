@@ -89,7 +89,7 @@ class TimeLineViewController: UIViewController {
     func setView() {
         
         //背景色を変更
-        self.view.backgroundColor = UtilityLibrary.getZooThemeColor()
+        self.view.backgroundColor = UIColor.mainAppColor()
         
         //UINavigationBarを作成
         let myNavBar = UINavigationBar()
@@ -98,7 +98,7 @@ class TimeLineViewController: UIViewController {
         myNavBar.frame = CGRect(x: 0, y: statusHeight, width: viewWidth, height: navBarHeight)
         
         //ナビゲーションバーの色を変える
-        myNavBar.barTintColor = UtilityLibrary.getZooThemeColor()
+        myNavBar.barTintColor = UIColor.mainAppColor()
         
         //ハイライトを消す
         myNavBar.isTranslucent = false

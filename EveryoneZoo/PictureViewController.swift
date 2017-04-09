@@ -12,21 +12,21 @@ import UIKit
 class PictureViewController: UIViewController,UIScrollViewDelegate {
     
     //width, height
-    var statusHeight:CGFloat!
-    var navBarHeight:CGFloat!
-    var segmentViewHeight:CGFloat!
-    var tabBarHeight:CGFloat!
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
-    var scrollViewHeight:CGFloat!
+    private var statusHeight:CGFloat!
+    private var navBarHeight:CGFloat!
+    private var segmentViewHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
+    private var viewWidth:CGFloat!
+    private var viewHeight:CGFloat!
+    private var scrollViewHeight:CGFloat!
     
     //view parts
-    var myNavBar:UINavigationBar!
-    var segmentView:UIView!
-    var pictureScrollView: UIScrollView!
+    private var myNavBar:UINavigationBar!
+    private var segmentView:UIView!
+    private var pictureScrollView: UIScrollView!
     
     //imageViews
-    var imageViewAry:Array<UIImageView> = []
+    var imageViewAry:Array<UIButton> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,12 +55,12 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     func setView() {
         
         //背景色を変更
-        self.view.backgroundColor = UtilityLibrary.getZooThemeColor()
+        self.view.backgroundColor = UIColor.mainAppColor()
         
         // MARK: - UINavigationBar
         myNavBar = UINavigationBar()
         myNavBar.frame = CGRect(x: 0, y: statusHeight, width: viewWidth, height: navBarHeight)
-        myNavBar.barTintColor = UtilityLibrary.getZooThemeColor()
+        myNavBar.barTintColor = UIColor.mainAppColor()
         
         //ハイライトを消す
         myNavBar.isTranslucent = false
@@ -119,8 +119,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         segmentView.addSubview(segmentRightBtn)
     
     }
-    
-    
+
     
     //スクロールビューの生成
     func setScrollView(){
@@ -142,36 +141,30 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         
             let scrollYPos:CGFloat! = viewWidth*CGFloat(i/6)
     
-            let pictureImageView:UIImageView = UIImageView()
-            pictureImageView.image = myImage
-            pictureImageView.layer.cornerRadius = 30
-            pictureImageView.clipsToBounds = true
+            let pictureImageBtn:UIButton = UIButton()
+            pictureImageBtn.layer.cornerRadius = 30
+            pictureImageBtn.clipsToBounds = true
             
             if ((i/6)%2 == 0){
                 
                 switch i%6 {
                 case 0:
-                    pictureImageView.frame = CGRect(x: 0, y: scrollYPos, width: picImageWidth*2, height: picImageWidth*2)
+                    pictureImageBtn.frame = CGRect(x: 0, y: scrollYPos, width: picImageWidth*2, height: picImageWidth*2)
                     break
                 case 1:
-                    
-                    pictureImageView.frame = CGRect(x: picImageWidth*2, y: scrollYPos, width: picImageWidth, height: picImageWidth)
+                    pictureImageBtn.frame = CGRect(x: picImageWidth*2, y: scrollYPos, width: picImageWidth, height: picImageWidth)
                     break
-                    
                 case 2:
-                    pictureImageView.frame = CGRect(x: picImageWidth*2, y: picImageWidth+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    pictureImageBtn.frame = CGRect(x: picImageWidth*2, y: picImageWidth+scrollYPos, width: picImageWidth, height: picImageWidth)
                     break
-                    
                 case 3:
-                    pictureImageView.frame = CGRect(x: 0, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    pictureImageBtn.frame = CGRect(x: 0, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
                     break
-                    
                 case 4:
-                    pictureImageView.frame = CGRect(x: picImageWidth, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    pictureImageBtn.frame = CGRect(x: picImageWidth, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
                     break
-                    
                 case 5:
-                    pictureImageView.frame = CGRect(x: picImageWidth*2, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    pictureImageBtn.frame = CGRect(x: picImageWidth*2, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
                     break
                 default:
                     break
@@ -180,33 +173,34 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
                 
                 switch i%6 {
                 case 0:
-                    pictureImageView.frame = CGRect(x: 0, y: scrollYPos, width: picImageWidth, height: picImageWidth)
+                    pictureImageBtn.frame = CGRect(x: 0, y: scrollYPos, width: picImageWidth, height: picImageWidth)
                     break
                 case 1:
-                    pictureImageView.frame = CGRect(x: 0, y: picImageWidth+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    pictureImageBtn.frame = CGRect(x: 0, y: picImageWidth+scrollYPos, width: picImageWidth, height: picImageWidth)
                     break
                 case 2:
-                    pictureImageView.frame = CGRect(x: picImageWidth, y: scrollYPos, width: picImageWidth*2, height: picImageWidth*2)
+                    pictureImageBtn.frame = CGRect(x: picImageWidth, y: scrollYPos, width: picImageWidth*2, height: picImageWidth*2)
                     break
                     
                 case 3:
-                    pictureImageView.frame = CGRect(x: 0, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    pictureImageBtn.frame = CGRect(x: 0, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
                     break
                     
                 case 4:
-                    pictureImageView.frame = CGRect(x: picImageWidth, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    pictureImageBtn.frame = CGRect(x: picImageWidth, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
                     break
                     
                 case 5:
-                    pictureImageView.frame = CGRect(x: picImageWidth*2, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
+                    pictureImageBtn.frame = CGRect(x: picImageWidth*2, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
                     break
                 default:
                     break
                 }
 
             }
-            
-            imageViewAry.append(pictureImageView)
+            pictureImageBtn.setBackgroundImage(myImage, for: UIControlState.normal)
+            pictureImageBtn.addTarget(self, action: #selector(pictureSelected(sender:)), for:.touchUpInside)
+            imageViewAry.append(pictureImageBtn)
             
             
             for imgView in imageViewAry{
@@ -278,6 +272,16 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     //左側のボタンが押されたら呼ばれる
     internal func leftBarBtnClicked(sender: UIButton){
         print("leftBarBtnClicked")
+    }
+    
+    
+    //
+    internal func pictureSelected(sender: UIButton){
+        
+        // 遷移するViewを定義する.
+        let picDetailView: PictureDetailViewController = PictureDetailViewController()
+        picDetailView.modalTransitionStyle = .crossDissolve
+        self.present(picDetailView, animated: true, completion: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
