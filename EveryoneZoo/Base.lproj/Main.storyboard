@@ -67,23 +67,40 @@
             <point key="canvasLocation" x="15" y="666"/>
         </scene>
         <!--タイムライン-->
-        <scene sceneID="qVH-hn-w8t">
+        <scene sceneID="CF8-bu-fGL">
             <objects>
-                <viewController id="WqF-PM-LmS" customClass="TimeLineViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="q0l-de-MK4" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="タイムライン" image="tab_timeline" id="K5E-IR-AvB"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wjs-cT-4qO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="TDJ-YT-9P4" kind="relationship" relationship="rootViewController" id="h6m-sr-G9E"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PmT-xg-Gwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-60" y="-97"/>
+        </scene>
+        <!--Time Line View Controller-->
+        <scene sceneID="1cD-n1-dgD">
+            <objects>
+                <viewController id="TDJ-YT-9P4" customClass="TimeLineViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="heL-GJ-Z6Q"/>
-                        <viewControllerLayoutGuide type="bottom" id="1Om-1f-GzM"/>
+                        <viewControllerLayoutGuide type="top" id="iff-jp-7uC"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hpx-6U-A5c"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TAt-Lp-w2F">
+                    <view key="view" contentMode="scaleToFill" id="pkz-mc-IQE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="タイムライン" image="tab_timeline" id="1VB-JX-Rlp"/>
+                    <navigationItem key="navigationItem" id="Yc4-JU-wcp"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cNa-8x-7e2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JbX-rW-ekb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="681" y="79"/>
+            <point key="canvasLocation" x="1083" y="-102"/>
         </scene>
         <!--Picture View Controller-->
         <scene sceneID="qBL-za-jVZ">
@@ -107,7 +124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2v0-ld-uSS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1163" y="-594"/>
+            <point key="canvasLocation" x="1086" y="-805"/>
         </scene>
         <!--ひろば-->
         <scene sceneID="trP-hc-QYO">
@@ -124,7 +141,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EJY-8f-KzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-40" y="-532"/>
+            <point key="canvasLocation" x="-95" y="-804"/>
         </scene>
         <!--Zoo Tab Bar Controller-->
         <scene sceneID="5kq-oP-oNt">
@@ -137,7 +154,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="KG4-ab-G7O" kind="relationship" relationship="viewControllers" id="1mK-7E-g06"/>
-                        <segue destination="WqF-PM-LmS" kind="relationship" relationship="viewControllers" id="WdN-Uk-Emp"/>
+                        <segue destination="q0l-de-MK4" kind="relationship" relationship="viewControllers" id="6n0-4J-hzW"/>
                         <segue destination="prJ-Gc-YTA" kind="relationship" relationship="viewControllers" id="d3Z-vs-9JK"/>
                         <segue destination="qKR-ST-zao" kind="relationship" relationship="viewControllers" id="iy4-rn-0GJ"/>
                         <segue destination="vYg-Yy-Lye" kind="relationship" relationship="viewControllers" id="EqS-PD-xfH"/>
@@ -149,10 +166,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tab_field" width="37" height="30"/>
-        <image name="tab_mypage" width="30" height="30"/>
-        <image name="tab_notice" width="28" height="30"/>
-        <image name="tab_post" width="30" height="30"/>
-        <image name="tab_timeline" width="30" height="30"/>
+        <image name="tab_field" width="31" height="25"/>
+        <image name="tab_mypage" width="25" height="25"/>
+        <image name="tab_notice" width="23" height="25"/>
+        <image name="tab_post" width="25" height="25"/>
+        <image name="tab_timeline" width="25" height="25"/>
     </resources>
 </document>

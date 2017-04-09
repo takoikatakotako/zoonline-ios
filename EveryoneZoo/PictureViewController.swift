@@ -25,7 +25,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     private var segmentView:UIView!
     private var pictureScrollView: UIScrollView!
     
-    
     @IBOutlet weak var serchNavBtn: UIBarButtonItem!
     
     //imageViews
@@ -41,7 +40,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         //各部品の高さを取得
         statusHeight = UIApplication.shared.statusBarFrame.height
         navBarHeight =  self.navigationController?.navigationBar.frame.height
-        segmentViewHeight = 40
+        segmentViewHeight = self.navigationController?.navigationBar.frame.height
         tabBarHeight = UITabBar.appearance().frame.size.height
         scrollViewHeight = viewHeight-(statusHeight+navBarHeight+segmentViewHeight+tabBarHeight+tabBarHeight)
         

@@ -10,15 +10,16 @@ import UIKit
 
 class TimeLineViewController: UIViewController {
     
-    var statusHeight:CGFloat!
-    var navBarHeight:CGFloat!
-    var tabBarHeight:CGFloat!
-    
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
-    
+    private var statusHeight:CGFloat!
+    private var navBarHeight:CGFloat!
+    private var segmentViewHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
+    private var viewWidth:CGFloat!
+    private var viewHeight:CGFloat!
     var scrollViewHeight:CGFloat!
     
+    //view parts
+    private var segmentView:UIView!
     var pictureScrollView: UIScrollView!
 
     override func viewDidLoad() {
@@ -33,17 +34,21 @@ class TimeLineViewController: UIViewController {
         statusHeight = UIApplication.shared.statusBarFrame.height
         
         //ナビゲーションバーのサイズの取得
-        navBarHeight = 40
+        navBarHeight =  self.navigationController?.navigationBar.frame.height
         
+        segmentViewHeight = self.navigationController?.navigationBar.frame.height
         //タブバーの高さの取得
-        tabBarHeight = 40
+        tabBarHeight = UITabBar.appearance().frame.size.height
         
         //スクロルビュー
         scrollViewHeight = viewHeight-(statusHeight+navBarHeight+tabBarHeight)
         
         setView()
         
+        setSegmentView()
+
         
+        /*
         
         // ScrollViewを生成.
         pictureScrollView = UIScrollView()
@@ -80,8 +85,7 @@ class TimeLineViewController: UIViewController {
         // ViewにScrollViewをAddする.
         self.view.addSubview(pictureScrollView)
 
-        
-        // Do any additional setup after loading the view.
+        */
     }
 
 
@@ -90,22 +94,23 @@ class TimeLineViewController: UIViewController {
         
         //背景色を変更
         self.view.backgroundColor = UIColor.mainAppColor()
-        
-        //UINavigationBarを作成
-        let myNavBar = UINavigationBar()
-        
+
         //UINavigationBarの位置とサイズを指定
-        myNavBar.frame = CGRect(x: 0, y: statusHeight, width: viewWidth, height: navBarHeight)
+        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusHeight, width: viewWidth, height: navBarHeight)
         
         //ナビゲーションバーの色を変える
-        myNavBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
         
         //ハイライトを消す
-        myNavBar.isTranslucent = false
+        self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションボタンの色を変更する
         UINavigationBar.appearance().tintColor = UIColor.white
         
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.title = "タイムライン"
+        
+        /*
         //ナビゲーションアイテムを作成
         let myNavItems = UINavigationItem()
         myNavItems.title = "タイムライン"
@@ -117,9 +122,52 @@ class TimeLineViewController: UIViewController {
         //作成したNavItemをNavBarに追加する
         myNavBar.pushItem(myNavItems, animated: true)
         self.view.addSubview(myNavBar)
-        
+        */
     }
     
+    
+    func setSegmentView(){
+        
+        // MARK: - segmentView
+        segmentView = UIView()
+        segmentView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: segmentViewHeight)
+        segmentView.backgroundColor = UIColor.white
+        self.view.addSubview(segmentView)
+        
+        //スクロールビューとの区切り線
+        let segmentLine = UIView()
+        segmentLine.frame = CGRect(x: 0, y: segmentViewHeight - 2, width: viewWidth, height: 2)
+        segmentLine.backgroundColor = UIColor.gray
+        segmentView.addSubview(segmentLine)
+        
+        //セグメントビューの左
+        let segmentLeftBtn = UIButton()
+        segmentLeftBtn.frame = CGRect(x: viewWidth*0.03, y: segmentViewHeight*0.1, width: viewWidth*0.3, height: segmentViewHeight*0.7)
+        segmentLeftBtn.setTitle("すべて", for: UIControlState.normal)
+        segmentLeftBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
+        //segmentLeftBtn.backgroundColor = UIColor.blue
+        segmentView.addSubview(segmentLeftBtn)
+        
+        //セグメントビューの真ん中
+        let segmentCenterBtn = UIButton()
+        segmentCenterBtn.frame = CGRect(x: viewWidth*0.36, y: segmentViewHeight*0.1, width: viewWidth*0.3, height: segmentViewHeight*0.7)
+        segmentCenterBtn.setTitle("ユーザー", for: UIControlState.normal)
+        segmentCenterBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
+        segmentView.addSubview(segmentCenterBtn)
+        
+        //セグメントビューの右
+        let segmentRightBtn = UIButton()
+        segmentRightBtn.frame = CGRect(x: viewWidth*0.69, y: segmentViewHeight*0.1, width: viewWidth*0.3, height: segmentViewHeight*0.7)
+        segmentRightBtn.setTitle("タグ", for: UIControlState.normal)
+        segmentRightBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
+        //segmentRightBtn.backgroundColor = UIColor.blue
+        segmentView.addSubview(segmentRightBtn)
+        
+        //下線
+        let leftUnderBar = UIView()
+        leftUnderBar.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
+        leftUnderBar.backgroundColor = UIColor.segmetRightBlue()
+    }
     
     //左側のボタンが押されたら呼ばれる
     internal func leftBarBtnClicked(sender: UIButton){
