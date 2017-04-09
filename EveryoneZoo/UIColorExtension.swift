@@ -28,4 +28,9 @@ extension UIColor {
     class func tabNonIconSelected() -> UIColor {
         return UIColor(red: (89.0/256), green: (89.0/256), blue: (89.0/256), alpha: 1.0)
     }
+    
+    class func categoryBg() -> UIColor {
+        return UIColor(red: (110.0/256), green: (194.0/256), blue: (241.0/256), alpha: 1.0)
+    }
+    
 }

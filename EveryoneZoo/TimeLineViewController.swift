@@ -189,11 +189,10 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate {
         timelineScrollView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
         
         // Scrollの高さを計算しておく.
-        timelineScrollView.backgroundColor = UIColor.red
         // ScrollViewにcontentSizeを設定する.
-        timelineScrollView.contentSize = CGSize(width:viewWidth, height:viewHeight*2)
+        timelineScrollView.contentSize = CGSize(width:viewWidth, height:viewHeight*4)
         
-        timelineScrollView.backgroundColor = UIColor.red
+        timelineScrollView.backgroundColor = UIColor.white
         
         // ViewにScrollViewをAddする.
         self.view.addSubview(timelineScrollView)
@@ -201,6 +200,30 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
         timelineScrollView.refreshControl = refreshControl
+        
+        
+        //
+        let myBun = UIButton()
+        myBun.addTarget(self, action: #selector(testButtonClicked(sender:)), for:.touchUpInside)
+        
+        //一つ目
+        let postDetails = PostDetailView(viewWidth: viewWidth,viewHeight: viewHeight)
+        postDetails.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*1.6)
+        postDetails.backgroundColor = UIColor.white
+        timelineScrollView.addSubview(postDetails)
+        
+        //2つ目
+        let postDetails2 = PostDetailView(viewWidth: viewWidth,viewHeight: viewHeight)
+        postDetails2.frame = CGRect(x: 0, y: viewWidth*1.7, width: viewWidth, height: viewWidth*1.6)
+        postDetails2.backgroundColor = UIColor.white
+        timelineScrollView.addSubview(postDetails2)
+        
+        //3つ目
+        let postDetails3 = PostDetailView(viewWidth: viewWidth,viewHeight: viewHeight)
+        postDetails3.frame = CGRect(x: 0, y: viewWidth*3.4, width: viewWidth, height: viewWidth*1.6)
+        postDetails3.backgroundColor = UIColor.white
+        timelineScrollView.addSubview(postDetails3)
+    
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
@@ -248,6 +271,11 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate {
         animator.startAnimation()
     }
     
+    
+    func testButtonClicked(sender: UIButton) {
+        
+        
+    }
     
     
     func scrollReflesh(sender : UIRefreshControl) {

@@ -68,14 +68,15 @@ class PictureDetailViewController: UIViewController,UIScrollViewDelegate {
         detailScrollView.delegate = self
         detailScrollView.frame = CGRect(x: 0, y:0, width: viewWidth, height: scrollViewHeight)
         detailScrollView.backgroundColor = UIColor.white
+        detailScrollView.contentSize = CGSize(width:viewWidth, height:viewHeight*2)
         self.view.addSubview(detailScrollView)
         
         
-        let sampleImg:UIImage = UIImage(named: "sample_detail")!
-        let sampleImgView = UIImageView()
-        sampleImgView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: scrollViewHeight)
-        sampleImgView.image = sampleImg
-        detailScrollView.addSubview(sampleImgView)
+        //一つ目
+        let postDetails = PostDetailView(viewWidth: viewWidth,viewHeight: viewHeight)
+        postDetails.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*1.6)
+        postDetails.backgroundColor = UIColor.white
+        detailScrollView.addSubview(postDetails)
 
     }
 
