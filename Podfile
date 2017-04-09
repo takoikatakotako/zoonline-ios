@@ -6,6 +6,7 @@ target 'EveryoneZoo' do
   use_frameworks!
 
   # Pods for EveryoneZoo
+  pod 'SCLAlertView'
 
   target 'EveryoneZooTests' do
     inherit! :search_paths

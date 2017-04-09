@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 
 class PictureViewController: UIViewController,UIScrollViewDelegate {
@@ -221,6 +222,10 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         
         // ViewにScrollViewをAddする.
         self.view.addSubview(pictureScrollView)
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
+        pictureScrollView.refreshControl = refreshControl
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
@@ -274,6 +279,12 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         print("leftBarBtnClicked")
     }
     
+    
+    func scrollReflesh(sender : UIRefreshControl) {
+        
+        SCLAlertView().showInfo("スクロールイベントが実行された", subTitle: "close")
+        sender.endRefreshing()
+    }
     
     //
     internal func pictureSelected(sender: UIButton){
