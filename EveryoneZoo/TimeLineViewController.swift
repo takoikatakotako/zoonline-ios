@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SCLAlertView
 
-class TimeLineViewController: UIViewController {
+class TimeLineViewController: UIViewController,UIScrollViewDelegate {
     
     private var statusHeight:CGFloat!
     private var navBarHeight:CGFloat!
@@ -20,7 +21,7 @@ class TimeLineViewController: UIViewController {
     
     //view parts
     private var segmentView:UIView!
-    var pictureScrollView: UIScrollView!
+    var timelineScrollView: UIScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,7 @@ class TimeLineViewController: UIViewController {
         
         setSegmentView()
 
-        
+        setScrollView()
         /*
         
         // ScrollViewを生成.
@@ -94,6 +95,12 @@ class TimeLineViewController: UIViewController {
         
         //背景色を変更
         self.view.backgroundColor = UIColor.mainAppColor()
+        
+        //ステータスバー部分の背景
+        let statusBackColor = UIView()
+        statusBackColor.frame = CGRect(x: 0, y: -(statusHeight+navBarHeight), width: viewWidth, height: navBarHeight*2)
+        statusBackColor.backgroundColor = UIColor.mainAppColor()
+        self.view.addSubview(statusBackColor)
 
         //UINavigationBarの位置とサイズを指定
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusHeight, width: viewWidth, height: navBarHeight)
@@ -167,6 +174,86 @@ class TimeLineViewController: UIViewController {
         let leftUnderBar = UIView()
         leftUnderBar.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
         leftUnderBar.backgroundColor = UIColor.segmetRightBlue()
+    }
+    
+    
+    //スクロールビューの生成
+    func setScrollView(){
+        
+        // ScrollViewを生成.
+        timelineScrollView = UIScrollView()
+        self.timelineScrollView.delegate = self
+
+        
+        // ScrollViewの大きさを設定する.
+        timelineScrollView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
+        
+        // Scrollの高さを計算しておく.
+        timelineScrollView.backgroundColor = UIColor.red
+        // ScrollViewにcontentSizeを設定する.
+        timelineScrollView.contentSize = CGSize(width:viewWidth, height:viewHeight*2)
+        
+        timelineScrollView.backgroundColor = UIColor.red
+        
+        // ViewにScrollViewをAddする.
+        self.view.addSubview(timelineScrollView)
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
+        timelineScrollView.refreshControl = refreshControl
+    }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
+        
+        
+        if (velocity.y > 0) {
+            // 上下のバーを隠す
+            print("上")
+            
+            hidesBarsWithScrollView(hidden: true, hiddenTop: true, hiddenBottom: true)
+            
+            // 上下のバーを表示する
+        } else {
+            // 上下のバーを表示する
+            print("した")
+            hidesBarsWithScrollView(hidden: false, hiddenTop: true, hiddenBottom: true)
+        }
+    }
+    
+    
+    func hidesBarsWithScrollView( hidden:Bool, hiddenTop:Bool, hiddenBottom:Bool) {
+        
+        let timing = UICubicTimingParameters(animationCurve: .easeInOut)
+        let animator = UIViewPropertyAnimator(duration: 0.2, timingParameters: timing)
+        
+        
+        if hidden {
+            animator.addAnimations {
+                // animation
+                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: -self.navBarHeight, width: self.viewWidth, height: self.navBarHeight)
+                self.segmentView.frame = CGRect(x: 0, y: -self.segmentViewHeight, width: self.viewWidth, height: self.segmentViewHeight)
+                self.timelineScrollView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.viewHeight)
+                
+            }
+        }else{
+            animator.addAnimations {
+                // animation
+                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.navBarHeight)
+                self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.segmentViewHeight)
+                self.timelineScrollView.frame = CGRect(x: 0, y: self.segmentViewHeight!, width: self.viewWidth, height: self.scrollViewHeight)
+                
+            }
+        }
+        
+        animator.startAnimation()
+    }
+    
+    
+    
+    func scrollReflesh(sender : UIRefreshControl) {
+        
+        SCLAlertView().showInfo("スクロールイベントが実行された", subTitle: "close")
+        sender.endRefreshing()
     }
     
     //左側のボタンが押されたら呼ばれる

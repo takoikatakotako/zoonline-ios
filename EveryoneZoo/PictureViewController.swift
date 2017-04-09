@@ -103,11 +103,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         //segmentLeftBtn.backgroundColor = UIColor.blue
         segmentView.addSubview(segmentLeftBtn)
         
-        //下線
-        let leftUnderBar = UIView()
-        leftUnderBar.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
-        leftUnderBar.backgroundColor = UIColor.segmetRightBlue()
-        
         //セグメントビューの右
         let segmentRightBtn = UIButton()
         segmentRightBtn.frame = CGRect(x: viewWidth*0.55, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
@@ -116,6 +111,10 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         //segmentRightBtn.backgroundColor = UIColor.blue
         segmentView.addSubview(segmentRightBtn)
     
+        //下線
+        let leftUnderBar = UIView()
+        leftUnderBar.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
+        leftUnderBar.backgroundColor = UIColor.segmetRightBlue()
     }
 
     
