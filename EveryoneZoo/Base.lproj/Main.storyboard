@@ -85,24 +85,46 @@
             </objects>
             <point key="canvasLocation" x="681" y="79"/>
         </scene>
-        <!--ひろば-->
-        <scene sceneID="t6q-zQ-dUp">
+        <!--Picture View Controller-->
+        <scene sceneID="qBL-za-jVZ">
             <objects>
-                <viewController id="WKI-q4-4Xn" customClass="PictureViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4vJ-MG-yTB" customClass="PictureViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dka-iS-5iN"/>
-                        <viewControllerLayoutGuide type="bottom" id="jrY-Wn-gDI"/>
+                        <viewControllerLayoutGuide type="top" id="fWt-ne-MW5"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ecn-3W-Fcw"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ex7-yY-IL3">
+                    <view key="view" contentMode="scaleToFill" id="afo-Jb-oVc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="ひろば" image="tab_field" id="abn-T6-VUk"/>
+                    <navigationItem key="navigationItem" id="sRh-Mt-6Re">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ZPz-2W-hgS"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="serchNavBtn" destination="ZPz-2W-hgS" id="pxF-Hm-2oV"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SMG-4W-IBX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2v0-ld-uSS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-38" y="-280"/>
+            <point key="canvasLocation" x="1163" y="-594"/>
+        </scene>
+        <!--ひろば-->
+        <scene sceneID="trP-hc-QYO">
+            <objects>
+                <navigationController id="KG4-ab-G7O" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="ひろば" image="tab_field" id="h1Q-2L-hGk"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fWk-NG-uFO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="4vJ-MG-yTB" kind="relationship" relationship="rootViewController" id="fe3-Xz-SiY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EJY-8f-KzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-40" y="-532"/>
         </scene>
         <!--Zoo Tab Bar Controller-->
         <scene sceneID="5kq-oP-oNt">
@@ -114,7 +136,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="WKI-q4-4Xn" kind="relationship" relationship="viewControllers" id="ipY-ay-8sh"/>
+                        <segue destination="KG4-ab-G7O" kind="relationship" relationship="viewControllers" id="1mK-7E-g06"/>
                         <segue destination="WqF-PM-LmS" kind="relationship" relationship="viewControllers" id="WdN-Uk-Emp"/>
                         <segue destination="prJ-Gc-YTA" kind="relationship" relationship="viewControllers" id="d3Z-vs-9JK"/>
                         <segue destination="qKR-ST-zao" kind="relationship" relationship="viewControllers" id="iy4-rn-0GJ"/>
@@ -127,9 +149,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tab_field" width="30" height="30"/>
+        <image name="tab_field" width="37" height="30"/>
         <image name="tab_mypage" width="30" height="30"/>
-        <image name="tab_notice" width="30" height="30"/>
+        <image name="tab_notice" width="28" height="30"/>
         <image name="tab_post" width="30" height="30"/>
         <image name="tab_timeline" width="30" height="30"/>
     </resources>

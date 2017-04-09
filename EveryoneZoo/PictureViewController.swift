@@ -22,13 +22,15 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     private var scrollViewHeight:CGFloat!
     
     //view parts
-    private var myNavBar:UINavigationBar!
     private var segmentView:UIView!
     private var pictureScrollView: UIScrollView!
     
+    
+    @IBOutlet weak var serchNavBtn: UIBarButtonItem!
+    
     //imageViews
     var imageViewAry:Array<UIButton> = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,11 +40,10 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         
         //各部品の高さを取得
         statusHeight = UIApplication.shared.statusBarFrame.height
-        navBarHeight =  40
+        navBarHeight =  self.navigationController?.navigationBar.frame.height
         segmentViewHeight = 40
         tabBarHeight = UITabBar.appearance().frame.size.height
         scrollViewHeight = viewHeight-(statusHeight+navBarHeight+segmentViewHeight+tabBarHeight+tabBarHeight)
-        
         
         setView()
         
@@ -58,29 +59,26 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         //背景色を変更
         self.view.backgroundColor = UIColor.mainAppColor()
         
+        //ステータスバー部分の背景
+        let statusBackColor = UIView()
+        statusBackColor.frame = CGRect(x: 0, y: -(statusHeight+navBarHeight), width: viewWidth, height: navBarHeight*2)
+        statusBackColor.backgroundColor = UIColor.mainAppColor()
+        self.view.addSubview(statusBackColor)
+        
         // MARK: - UINavigationBar
-        myNavBar = UINavigationBar()
-        myNavBar.frame = CGRect(x: 0, y: statusHeight, width: viewWidth, height: navBarHeight)
-        myNavBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
         
         //ハイライトを消す
-        myNavBar.isTranslucent = false
+        self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションボタンの色を変更する
         UINavigationBar.appearance().tintColor = UIColor.white
         
-        
-        //ナビゲーションアイテムを作成
-        let myNavItems = UINavigationItem()
-        myNavItems.title = "ひろば"
-        
-        //バーの左側に設置するボタンの作成
-        let leftNavBtn =  UIBarButtonItem(barButtonSystemItem:  .search, target: self, action: #selector(leftBarBtnClicked(sender:)))
-        myNavItems.leftBarButtonItem = leftNavBtn
-        
-        //作成したNavItemをNavBarに追加する
-        myNavBar.pushItem(myNavItems, animated: true)
-        self.view.addSubview(myNavBar)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationItem.title = "ひろば"
+
+        serchNavBtn.tintColor = UIColor.white
+        serchNavBtn.action = #selector(rightBarBtnClicked(sender:))
     }
     
     //セグメントビューの生成
@@ -88,7 +86,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         
         // MARK: - segmentView
         segmentView = UIView()
-        segmentView.frame = CGRect(x: 0, y: statusHeight+navBarHeight, width: viewWidth, height: segmentViewHeight)
+        segmentView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: segmentViewHeight)
         segmentView.backgroundColor = UIColor.white
         self.view.addSubview(segmentView)
         
@@ -210,7 +208,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         }
         
         // ScrollViewの大きさを設定する.
-        pictureScrollView.frame = CGRect(x: 0, y: statusHeight+navBarHeight+segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
+        pictureScrollView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
         
         // Scrollの高さを計算しておく.
         let scroll_height = viewWidth*CGFloat((imageCount/6))+picImageWidth
@@ -255,17 +253,17 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         if hidden {
             animator.addAnimations {
                 // animation
-                self.myNavBar.frame = CGRect(x: 0, y: -(self.statusHeight+self.navBarHeight), width: self.viewWidth, height: self.navBarHeight)
-                self.segmentView.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.segmentViewHeight)
-                self.pictureScrollView.frame = CGRect(x: 0, y: self.statusHeight+self.segmentViewHeight, width: self.viewWidth, height: self.viewHeight)
+                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: -self.navBarHeight, width: self.viewWidth, height: self.navBarHeight)
+                self.segmentView.frame = CGRect(x: 0, y: -self.segmentViewHeight, width: self.viewWidth, height: self.segmentViewHeight)
+                self.pictureScrollView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.viewHeight)
 
             }
         }else{
             animator.addAnimations {
                 // animation
-                self.myNavBar.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.navBarHeight)
-                self.segmentView.frame = CGRect(x: 0, y: self.statusHeight+self.navBarHeight, width: self.viewWidth, height: self.segmentViewHeight)
-                self.pictureScrollView.frame = CGRect(x: 0, y: self.statusHeight+self.navBarHeight+self.segmentViewHeight!, width: self.viewWidth, height: self.scrollViewHeight)
+                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.navBarHeight)
+                self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.segmentViewHeight)
+                self.pictureScrollView.frame = CGRect(x: 0, y: self.segmentViewHeight!, width: self.viewWidth, height: self.scrollViewHeight)
 
             }
         }
@@ -290,10 +288,16 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     internal func pictureSelected(sender: UIButton){
         
         // 遷移するViewを定義する.
-        let picDetailView: PictureDetailViewController = PictureDetailViewController()
-        picDetailView.modalTransitionStyle = .crossDissolve
-        self.present(picDetailView, animated: true, completion: nil)
+
+        let second = PictureDetailViewController()
+        navigationController?.pushViewController(second as UIViewController, animated: true)
     }
+    
+    internal func rightBarBtnClicked(sender: UIButton){
+        print("rightBarBtnClicked")
+
+    }
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

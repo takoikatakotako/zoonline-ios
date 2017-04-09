@@ -19,7 +19,6 @@ class PictureDetailViewController: UIViewController,UIScrollViewDelegate {
     private var scrollViewHeight:CGFloat!
     
     //view parts
-    private var myNavBar:UINavigationBar!
     
     private var detailScrollView: UIScrollView!
 
@@ -32,13 +31,13 @@ class PictureDetailViewController: UIViewController,UIScrollViewDelegate {
         
         //各部品の高さを取得
         statusHeight = UIApplication.shared.statusBarFrame.height
-        navBarHeight =  40
+        navBarHeight =  self.navigationController?.navigationBar.frame.height
         scrollViewHeight = viewHeight-(statusHeight+navBarHeight)
+        
         
         setView()
         
         setScrollView()
-        
     }
     
     //Viewへの配置
@@ -48,26 +47,17 @@ class PictureDetailViewController: UIViewController,UIScrollViewDelegate {
         self.view.backgroundColor = UIColor.mainAppColor()
         
         // MARK: - UINavigationBar
-        myNavBar = UINavigationBar()
-        myNavBar.frame = CGRect(x: 0, y: statusHeight, width: viewWidth, height: navBarHeight)
-        myNavBar.barTintColor = UIColor.mainAppColor()
+        //myNavBar = UINavigationBar()
+        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusHeight, width: viewWidth, height: navBarHeight)
+        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
         
         //ハイライトを消す
-        myNavBar.isTranslucent = false
+        self.navigationController?.navigationBar.isTranslucent = false
         
+    
         //ナビゲーションボタンの色を変更する
         UINavigationBar.appearance().tintColor = UIColor.white
         
-        //ナビゲーションアイテムを作成
-        let myNavItems = UINavigationItem()
-        
-        //バーの左側に設置するボタンの作成
-        let leftNavBtn =  UIBarButtonItem(barButtonSystemItem:  .stop, target: self, action: #selector(leftBarBtnClicked(sender:)))
-        myNavItems.leftBarButtonItem = leftNavBtn
-        
-        //作成したNavItemをNavBarに追加する
-        myNavBar.pushItem(myNavItems, animated: true)
-        self.view.addSubview(myNavBar)
     }
     
     //スクロールビューの生成
@@ -76,7 +66,7 @@ class PictureDetailViewController: UIViewController,UIScrollViewDelegate {
         // ScrollViewを生成.
         detailScrollView = UIScrollView()
         detailScrollView.delegate = self
-        detailScrollView.frame = CGRect(x: 0, y: statusHeight+navBarHeight!, width: viewWidth, height: scrollViewHeight)
+        detailScrollView.frame = CGRect(x: 0, y:0, width: viewWidth, height: scrollViewHeight)
         detailScrollView.backgroundColor = UIColor.white
         self.view.addSubview(detailScrollView)
         
