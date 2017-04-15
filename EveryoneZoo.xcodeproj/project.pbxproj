@@ -13,6 +13,7 @@
 		8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */; };
 		8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */; };
 		8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4591E8031800008D997 /* ZooListViewController.swift */; };
+		8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D6888781E9E7C2E00140508 /* Localizable.strings */; };
 		8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */; };
 		8D73B42A1E7AE08F00E3B301 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B4281E7AE08F00E3B301 /* Main.storyboard */; };
 		8D73B42C1E7AE08F00E3B301 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */; };
@@ -54,6 +55,10 @@
 		8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityLibrary.swift; sourceTree = "<group>"; };
 		8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		8D0FB4591E8031800008D997 /* ZooListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZooListViewController.swift; sourceTree = "<group>"; };
+		8D6888771E9E7C2E00140508 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8D68887B1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		8D68887C1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		8D68887D1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneZoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D73B4291E7AE08F00E3B301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -118,6 +123,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8D68887E1E9E7EF000140508 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */,
+				8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */,
+				8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */,
+				8DD7A5501E9A4BB700662481 /* PostDetailView.swift */,
+				8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */,
+				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 		8D73B4181E7AE08F00E3B301 = {
 			isa = PBXGroup;
 			children = (
@@ -146,14 +164,10 @@
 				8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */,
 				8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */,
 				8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */,
-				8DD7A5501E9A4BB700662481 /* PostDetailView.swift */,
 				8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */,
-				8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */,
-				8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */,
-				8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */,
-				8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */,
-				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
+				8D68887E1E9E7EF000140508 /* ViewController */,
 				8D73B4281E7AE08F00E3B301 /* Main.storyboard */,
+				8D6888781E9E7C2E00140508 /* Localizable.strings */,
 				8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */,
 				8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */,
 				8D73B4301E7AE08F00E3B301 /* Info.plist */,
@@ -288,8 +302,8 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ja,
 			);
 			mainGroup = 8D73B4181E7AE08F00E3B301;
 			productRefGroup = 8D73B4221E7AE08F00E3B301 /* Products */;
@@ -309,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D73B42F1E7AE08F00E3B301 /* LaunchScreen.storyboard in Resources */,
+				8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */,
 				8D73B42C1E7AE08F00E3B301 /* Assets.xcassets in Resources */,
 				8D73B42A1E7AE08F00E3B301 /* Main.storyboard in Resources */,
 			);
@@ -518,10 +533,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8D6888781E9E7C2E00140508 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8D6888771E9E7C2E00140508 /* Base */,
+				8D68887D1E9E7CBA00140508 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		8D73B4281E7AE08F00E3B301 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8D73B4291E7AE08F00E3B301 /* Base */,
+				8D68887B1E9E7CBA00140508 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -530,6 +555,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8D73B42E1E7AE08F00E3B301 /* Base */,
+				8D68887C1E9E7CBA00140508 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -541,6 +567,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -591,6 +618,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

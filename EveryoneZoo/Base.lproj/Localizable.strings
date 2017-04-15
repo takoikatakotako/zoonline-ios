@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  EveryoneZoo
+
+  Created by junpei ono on 2017/04/13.
+  Copyright © 2017年 junpei ono. All rights reserved.
+*/
+
+//Field画面
+"KEY_field" = "Field";
+"KEY_popularity" = "Popularity";
+"KEY_new" = "New!!";

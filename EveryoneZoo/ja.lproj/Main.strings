@@ -1,0 +1,15 @@
+
+/* Class = "UITabBarItem"; title = "動物園"; ObjectID = "5BP-NF-QO9"; */
+"5BP-NF-QO9.title" = "動物園";
+
+/* Class = "UITabBarItem"; title = "おうち"; ObjectID = "Gyj-XE-EqV"; */
+"Gyj-XE-EqV.title" = "おうち";
+
+/* Class = "UITabBarItem"; title = "タイムライン"; ObjectID = "K5E-IR-AvB"; */
+"K5E-IR-AvB.title" = "タイムライン";
+
+/* Class = "UITabBarItem"; title = "投稿"; ObjectID = "edl-dL-8Uc"; */
+"edl-dL-8Uc.title" = "投稿";
+
+/* Class = "UITabBarItem"; title = "ひろば"; ObjectID = "h1Q-2L-hGk"; */
+"h1Q-2L-hGk.title" = "ひろば";

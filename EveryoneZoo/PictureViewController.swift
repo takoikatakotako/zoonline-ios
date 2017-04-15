@@ -22,10 +22,16 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     private var scrollViewHeight:CGFloat!
     
     //view parts
-    private var segmentView:UIView!
     private var pictureScrollView: UIScrollView!
-    
     @IBOutlet weak var serchNavBtn: UIBarButtonItem!
+    
+    //segment view parts
+    private var segmentView:UIView!
+    private var segmentLeftBtn:UIButton!
+    private var leftSegUnderLine:UIView!
+    private var segmentRightBtn:UIButton!
+    private var rightSegUnderLine:UIView!
+    
     
     //imageViews
     var imageViewAry:Array<UIButton> = []
@@ -74,7 +80,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        self.navigationItem.title = "ひろば"
+        self.navigationItem.title = NSLocalizedString("KEY_field", comment: "ひろば")
 
         serchNavBtn.tintColor = UIColor.white
         serchNavBtn.action = #selector(rightBarBtnClicked(sender:))
@@ -96,27 +102,80 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         segmentView.addSubview(segmentLine)
         
         //セグメントビューの左
-        let segmentLeftBtn = UIButton()
+        segmentLeftBtn = UIButton()
+        segmentLeftBtn.tag = 0
         segmentLeftBtn.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
-        segmentLeftBtn.setTitle("人気", for: UIControlState.normal)
-        segmentLeftBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
-        //segmentLeftBtn.backgroundColor = UIColor.blue
+        segmentLeftBtn.setTitle(NSLocalizedString("KEY_popularity", comment: "人気"), for: UIControlState.normal)
+        segmentLeftBtn.addTarget(self, action: #selector(segmentBtnClicked(sender:)), for:.touchUpInside)
         segmentView.addSubview(segmentLeftBtn)
         
+        //セグメント左の下線
+        leftSegUnderLine = UIView()
+        leftSegUnderLine.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.8, width: viewWidth*0.4, height: 2)
+        segmentView.addSubview(leftSegUnderLine)
+        
+        
         //セグメントビューの右
-        let segmentRightBtn = UIButton()
+        segmentRightBtn = UIButton()
+        segmentRightBtn.tag = 1
         segmentRightBtn.frame = CGRect(x: viewWidth*0.55, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
-        segmentRightBtn.setTitle("新着", for: UIControlState.normal)
-        segmentRightBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
-        //segmentRightBtn.backgroundColor = UIColor.blue
+        segmentRightBtn.setTitle(NSLocalizedString("KEY_new", comment: "新着"), for: UIControlState.normal)
+        segmentRightBtn.addTarget(self, action: #selector(segmentBtnClicked(sender:)), for:.touchUpInside)
         segmentView.addSubview(segmentRightBtn)
-    
-        //下線
-        let leftUnderBar = UIView()
-        leftUnderBar.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
-        leftUnderBar.backgroundColor = UIColor.segmetRightBlue()
+        
+        
+        //セグメント左の下線
+        rightSegUnderLine = UIView()
+        rightSegUnderLine.frame = CGRect(x: viewWidth*0.55, y: segmentViewHeight*0.8, width: viewWidth*0.4, height: 2)
+        segmentView.addSubview(rightSegUnderLine)
+        
+        //セグメントを左選択状態に
+        segmentLeftSelected()
     }
 
+    
+    //セグメントの切り替えが呼ばれた呼ばれる
+    func segmentBtnClicked(sender: UIButton){
+
+        switch sender.tag {
+        case 0:
+            //左側が押された
+            segmentLeftSelected()
+            
+            break
+        case 1:
+            //右側が押された
+            segmentRightSelected()
+            
+            break
+        default:
+            break // do nothing
+        }
+    }
+    
+    //左側が押されてる
+    func segmentLeftSelected(){
+    
+        //色を変更する
+        segmentLeftBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
+        leftSegUnderLine.backgroundColor = UIColor.segmetRightBlue()
+        
+        segmentRightBtn.setTitleColor(UIColor.gray, for: UIControlState.normal)
+        rightSegUnderLine.backgroundColor = UIColor.white
+        
+    }
+    
+    //右側が押されてる
+    func segmentRightSelected(){
+        
+        //色を変更する
+        segmentRightBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
+        rightSegUnderLine.backgroundColor = UIColor.segmetRightBlue()
+        
+        segmentLeftBtn.setTitleColor(UIColor.gray, for: UIControlState.normal)
+        leftSegUnderLine.backgroundColor = UIColor.white
+    }
+    
     
     //スクロールビューの生成
     func setScrollView(){
