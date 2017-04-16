@@ -8,6 +8,9 @@
 
 import UIKit
 import SCLAlertView
+import Alamofire
+import AlamofireImage
+import SwiftyJSON
 
 
 class PictureViewController: UIViewController,UIScrollViewDelegate {
@@ -54,8 +57,31 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         
         setSegmentView()
         
-        setScrollView()
-        
+        let apiURL :String = "http://minzoo.herokuapp.com/api/v0/plaza/new/18"
+        Alamofire.request(apiURL).responseJSON{ response in
+            
+            
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                
+                // TODO: ここを修正、メソッド分割とか
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                
+                
+                self.setScrollView(json: json)
+
+
+            case .failure(let error):
+                print(error)
+                
+                //エラー
+                SCLAlertView().showInfo("エラー", subTitle: "天気情報の取に失敗しました。インターネットに接続されているかご確認ください。")
+            }
+        }
+    
     }
     
     //Viewへの配置
@@ -178,7 +204,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     
     
     //スクロールビューの生成
-    func setScrollView(){
+    func setScrollView(json:JSON){
         
         // ScrollViewを生成.
         pictureScrollView = UIScrollView()
@@ -191,7 +217,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         let myImage: UIImage = UIImage(named: "sample_kabi1")!
 
         //表示数
-        let imageCount:NSInteger = 24
+        let imageCount:NSInteger = json.count
         
         for i in 0..<imageCount {
         
@@ -254,6 +280,8 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
                 }
 
             }
+            
+            pictureImageBtn.tag = i
             pictureImageBtn.setBackgroundImage(myImage, for: UIControlState.normal)
             pictureImageBtn.addTarget(self, action: #selector(pictureSelected(sender:)), for:.touchUpInside)
             imageViewAry.append(pictureImageBtn)
@@ -262,6 +290,23 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
             for imgView in imageViewAry{
                 pictureScrollView.addSubview(imgView)
             }
+            
+            
+            let imageURL:String = json[i]["itemImage"].stringValue
+            print(imageURL)
+            
+            Alamofire.request(imageURL).responseImage { response in
+                
+                
+                if let image = response.result.value {
+                    //当てはめていく
+                    
+                    self.imageViewAry[i].setBackgroundImage(image, for: UIControlState.normal)
+                    
+                }
+            }
+            
+            
         }
         
         // ScrollViewの大きさを設定する.
@@ -281,6 +326,17 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
         pictureScrollView.refreshControl = refreshControl
+        
+        
+        
+        
+        
+        
+        
+            //let downloadImg = json[j]["itemImage"].stringValue
+        
+        
+    
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
@@ -359,4 +415,5 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
 }
