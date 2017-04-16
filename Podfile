@@ -7,6 +7,8 @@ target 'EveryoneZoo' do
 
   # Pods for EveryoneZoo
   pod 'SCLAlertView'
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
 
   target 'EveryoneZooTests' do
     inherit! :search_paths
