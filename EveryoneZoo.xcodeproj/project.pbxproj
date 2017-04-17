@@ -14,6 +14,7 @@
 		8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */; };
 		8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4591E8031800008D997 /* ZooListViewController.swift */; };
 		8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D6888781E9E7C2E00140508 /* Localizable.strings */; };
+		8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */; };
 		8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */; };
 		8D73B42A1E7AE08F00E3B301 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B4281E7AE08F00E3B301 /* Main.storyboard */; };
 		8D73B42C1E7AE08F00E3B301 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		8D68887B1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		8D68887C1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8D68887D1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiLibrary.swift; sourceTree = "<group>"; };
 		8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneZoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D73B4291E7AE08F00E3B301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */,
 				8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */,
 				8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */,
+				8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */,
 				8D68887E1E9E7EF000140508 /* ViewController */,
 				8D73B4281E7AE08F00E3B301 /* Main.storyboard */,
 				8D6888781E9E7C2E00140508 /* Localizable.strings */,
@@ -491,6 +494,7 @@
 				8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */,
 				8DD7A5511E9A4BB700662481 /* PostDetailView.swift in Sources */,
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
+				8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */,
 				8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */,
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,

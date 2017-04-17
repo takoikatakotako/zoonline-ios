@@ -35,13 +35,30 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     private var segmentRightBtn:UIButton!
     private var rightSegUnderLine:UIView!
     
-    
-    //imageViews
+    //imageButton
     var imageViewAry:Array<UIButton> = []
+    var netWorkErrorImgView:UIImageView = UIImageView()
+    var ActivityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        calcHeight()
+        
+        //views
+        setView()
+        setSegmentView()
+        setScrollView()
+        setNetworkError()
+        
+        //network
+        startActivityIndicator()
+        dowonloadJsons()
+        
+    }
+    
+    // MARK: - ClalcHeight
+    func calcHeight(){
         //画面横サイズを取得
         viewWidth = self.view.frame.width
         viewHeight = self.view.frame.height
@@ -52,39 +69,11 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         segmentViewHeight = self.navigationController?.navigationBar.frame.height
         tabBarHeight = UITabBar.appearance().frame.size.height
         scrollViewHeight = viewHeight-(statusHeight+navBarHeight+segmentViewHeight+tabBarHeight+tabBarHeight)
-        
-        setView()
-        
-        setSegmentView()
-        
-        let apiURL :String = "http://minzoo.herokuapp.com/api/v0/plaza/new/18"
-        Alamofire.request(apiURL).responseJSON{ response in
-            
-            
-            
-            switch response.result {
-            case .success:
-                print("Validation Successful")
-                
-                // TODO: ここを修正、メソッド分割とか
-                let json:JSON = JSON(response.result.value ?? kill)
-                print(json)
-                
-                
-                self.setScrollView(json: json)
-
-
-            case .failure(let error):
-                print(error)
-                
-                //エラー
-                SCLAlertView().showInfo("エラー", subTitle: "天気情報の取に失敗しました。インターネットに接続されているかご確認ください。")
-            }
-        }
-    
     }
+
     
-    //Viewへの配置
+
+    // MARK: - View関連
     func setView() {
         
         //背景色を変更
@@ -112,7 +101,17 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         serchNavBtn.action = #selector(rightBarBtnClicked(sender:))
     }
     
-    //セグメントビューの生成
+    //左側のボタンが押されたら呼ばれる
+    internal func leftBarBtnClicked(sender: UIButton){
+        print("leftBarBtnClicked")
+    }
+    
+    internal func rightBarBtnClicked(sender: UIButton){
+        print("rightBarBtnClicked")
+        
+    }
+    
+    // MARK: - セグメントビュー関連
     func setSegmentView(){
         
         // MARK: - segmentView
@@ -140,7 +139,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         leftSegUnderLine.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.8, width: viewWidth*0.4, height: 2)
         segmentView.addSubview(leftSegUnderLine)
         
-        
         //セグメントビューの右
         segmentRightBtn = UIButton()
         segmentRightBtn.tag = 1
@@ -148,7 +146,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         segmentRightBtn.setTitle(NSLocalizedString("KEY_new", comment: "新着"), for: UIControlState.normal)
         segmentRightBtn.addTarget(self, action: #selector(segmentBtnClicked(sender:)), for:.touchUpInside)
         segmentView.addSubview(segmentRightBtn)
-        
         
         //セグメント左の下線
         rightSegUnderLine = UIView()
@@ -203,26 +200,49 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     }
     
     
-    //スクロールビューの生成
-    func setScrollView(json:JSON){
+    // MARK: - スクロールビューの生成
+    func setScrollView(){
         
         // ScrollViewを生成.
         pictureScrollView = UIScrollView()
         self.pictureScrollView.delegate = self
+        pictureScrollView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
+        pictureScrollView.backgroundColor = UIColor.white
+
+        // はじめはコンテンツビューのサイズは画面と同じ
+        pictureScrollView.contentSize = CGSize(width:viewWidth, height:scrollViewHeight)
+        
+        self.view.addSubview(pictureScrollView)
+        
+        //リフレッシュコントロールの追加
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
+        pictureScrollView.refreshControl = refreshControl
+    }
+    
+    func setNetworkError(){
+        
+        netWorkErrorImgView.image = UIImage(named: "sample_neterror")!
+        netWorkErrorImgView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: scrollViewHeight)
+    }
+    
+    func setImageBtns(json:JSON){
+        
+        imageViewAry = Array()
         
         //一つあたりの画像サイズ
         let picImageWidth = viewWidth/3.0
-
-        //設定画像
-        let myImage: UIImage = UIImage(named: "sample_kabi1")!
-
+        
+        //初期設定画像
+        let myImage: UIImage = UIImage(named: "sample_loading")!
+        
         //表示数
         let imageCount:NSInteger = json.count
         
         for i in 0..<imageCount {
-        
+            
             let scrollYPos:CGFloat! = viewWidth*CGFloat(i/6)
-    
+            
             let pictureImageBtn:UIButton = UIButton()
             pictureImageBtn.layer.cornerRadius = 30
             pictureImageBtn.clipsToBounds = true
@@ -278,7 +298,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
                 default:
                     break
                 }
-
+                
             }
             
             pictureImageBtn.tag = i
@@ -309,35 +329,15 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
             
         }
         
-        // ScrollViewの大きさを設定する.
-        pictureScrollView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
-        
         // Scrollの高さを計算しておく.
         let scroll_height = viewWidth*CGFloat((imageCount/6))+picImageWidth
         
         // ScrollViewにcontentSizeを設定する.
         pictureScrollView.contentSize = CGSize(width:viewWidth, height:scroll_height)
-        
-        pictureScrollView.backgroundColor = UIColor.white
-        
-        // ViewにScrollViewをAddする.
-        self.view.addSubview(pictureScrollView)
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
-        pictureScrollView.refreshControl = refreshControl
-        
-        
-        
-        
-        
-        
-        
-            //let downloadImg = json[j]["itemImage"].stringValue
-        
-        
-    
+
     }
+    
+    
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
         
@@ -384,16 +384,18 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         animator.startAnimation()
     }
     
-    
-    //左側のボタンが押されたら呼ばれる
-    internal func leftBarBtnClicked(sender: UIButton){
-        print("leftBarBtnClicked")
-    }
-    
-    
     func scrollReflesh(sender : UIRefreshControl) {
         
-        SCLAlertView().showInfo("スクロールイベントが実行された", subTitle: "close")
+        for button in imageViewAry{
+        
+            button.removeFromSuperview()
+        }
+        netWorkErrorImgView.removeFromSuperview()
+
+        //network
+        startActivityIndicator()
+        dowonloadJsons()
+        
         sender.endRefreshing()
     }
     
@@ -406,12 +408,61 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
         navigationController?.pushViewController(second as UIViewController, animated: true)
     }
     
-    internal func rightBarBtnClicked(sender: UIButton){
-        print("rightBarBtnClicked")
-
-    }
-
     
+    // MARK: - NetWork
+    func startActivityIndicator(){
+        
+        // ActivityIndicatorを作成＆中央に配置
+        ActivityIndicator = UIActivityIndicatorView()
+        ActivityIndicator.frame = CGRect(x: viewWidth/2-viewWidth*0.1, y: viewHeight*0.2, width: viewWidth*0.1, height: viewWidth*0.1)
+        ActivityIndicator.center = self.view.center
+        
+        // クルクルをストップした時に非表示する
+        ActivityIndicator.hidesWhenStopped = true
+        
+        // 色を設定
+        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        
+        //Viewに追加
+        self.view.addSubview(ActivityIndicator)
+        ActivityIndicator.startAnimating()
+    }
+    
+    func dowonloadJsons(){
+        
+        Alamofire.request(ApiLibrary.getAPIURL()).responseJSON{ response in
+            
+            
+            self.ActivityIndicator.stopAnimating()
+
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                
+                // TODO: ここを修正、メソッド分割とか
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                
+                
+                self.setImageBtns(json: json)
+                
+                
+            case .failure(let error):
+                print(error)
+                
+                
+                //エラー
+                self.view.addSubview(self.netWorkErrorImgView)
+            }
+            
+        }
+    }
+    
+    
+
+
+
+    // MARK: - Others
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
