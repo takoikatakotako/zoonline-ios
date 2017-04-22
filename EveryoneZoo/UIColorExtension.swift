@@ -33,4 +33,12 @@ extension UIColor {
         return UIColor(red: (110.0/256), green: (194.0/256), blue: (241.0/256), alpha: 1.0)
     }
     
+    class func followColor() -> UIColor {
+        return UIColor(red: (251.0/256), green: (123.0/256), blue: (158.0/256), alpha: 1.0)
+    }
+    
+    class func tagBGColor() -> UIColor {
+        return UIColor(red: (109.0/256), green: (195.0/256), blue: (241.0/256), alpha: 1.0)
+    }
+    
 }

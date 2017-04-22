@@ -21,6 +21,7 @@
 		8D73B42F1E7AE08F00E3B301 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */; };
 		8D73B43A1E7AE09000E3B301 /* EveryoneZooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */; };
 		8D73B4451E7AE09000E3B301 /* EveryoneZooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */; };
+		8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */; };
 		8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */; };
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
 		8DD7A5511E9A4BB700662481 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD7A5501E9A4BB700662481 /* PostDetailView.swift */; };
@@ -73,6 +74,7 @@
 		8D73B4401E7AE09000E3B301 /* EveryoneZooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EveryoneZooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryoneZooUITests.swift; sourceTree = "<group>"; };
 		8D73B4461E7AE09000E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableCell.swift; sourceTree = "<group>"; };
 		8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZooTabBarController.swift; path = ../ZooTabBarController.swift; sourceTree = "<group>"; };
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		8DD7A5501E9A4BB700662481 /* PostDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */,
 				8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */,
 				8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */,
+				8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */,
 				8D68887E1E9E7EF000140508 /* ViewController */,
 				8D73B4281E7AE08F00E3B301 /* Main.storyboard */,
 				8D6888781E9E7C2E00140508 /* Localizable.strings */,
@@ -496,6 +499,7 @@
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
 				8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */,
 				8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */,
+				8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */,
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,

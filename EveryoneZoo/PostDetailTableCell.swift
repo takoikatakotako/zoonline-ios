@@ -1,0 +1,144 @@
+//
+//  PostDetailTableCell.swift
+//  EveryoneZoo
+//
+//  Created by junpei ono on 2017/04/22.
+//  Copyright © 2017年 junpei ono. All rights reserved.
+//
+
+import UIKit
+
+class PostDetailTableCell: UITableViewCell {
+
+    var thumbnailImgView:UIImageView!
+    var userNameTextView:UILabel!
+    var followImgView:UIImageView!
+    var followLabel:UILabel!
+    var postImgView:UIImageView!
+    var favImageBtn:UIButton!
+    var favCountLabel:UILabel!
+    var commentImageBtn:UIButton!
+    var commentLabel:UILabel!
+    var menuBtn:UIButton!
+    var dateLabel:UILabel!
+    var descriptionTextView:UITextView!
+    var tag1Label:UILabel!
+    var tag2Label:UILabel!
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        thumbnailImgView = UIImageView()
+        thumbnailImgView.clipsToBounds = true
+        thumbnailImgView.image = UIImage(named:"tab_kabi")
+        contentView.addSubview(thumbnailImgView)
+
+        userNameTextView = UILabel()
+        userNameTextView.textAlignment =  NSTextAlignment.left
+        userNameTextView.text = "いろはにほへと"
+        contentView.addSubview(userNameTextView)
+        
+        followImgView = UIImageView()
+        followImgView.image = UIImage(named: "userIcon")!
+        contentView.addSubview(followImgView)
+        
+        followLabel = UILabel()
+        followLabel.text = "フォロー"
+        contentView.addSubview(followLabel)
+        
+        postImgView = UIImageView()
+        postImgView.image = UIImage(named: "sample_postImage")!
+        contentView.addSubview(postImgView)
+        
+        favImageBtn = UIButton()
+        favImageBtn.setBackgroundImage(UIImage(named: "fav_off")!, for: UIControlState.normal)
+        contentView.addSubview(favImageBtn)
+        
+        favCountLabel = UILabel()
+        favCountLabel.text = "10"
+        favCountLabel.textAlignment =  NSTextAlignment.left
+        favCountLabel.textColor = UIColor.followColor()
+        favCountLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        contentView.addSubview(favCountLabel)
+        
+        commentImageBtn = UIButton()
+        commentImageBtn.setBackgroundImage(UIImage(named: "comment")!, for: UIControlState.normal)
+        contentView.addSubview(commentImageBtn)
+
+        commentLabel = UILabel()
+        commentLabel.text = "5"
+        commentLabel.textAlignment =  NSTextAlignment.left
+        commentLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        contentView.addSubview(commentLabel)
+        
+        menuBtn = UIButton()
+        menuBtn.setBackgroundImage(UIImage(named: "action")!, for: UIControlState.normal)
+        contentView.addSubview(menuBtn)
+        
+        dateLabel = UILabel()
+        dateLabel.text = "2017年5月5日"
+        dateLabel.font = UIFont.systemFont(ofSize: 16)
+        dateLabel.textColor = UIColor.gray
+        contentView.addSubview(dateLabel)
+        
+        descriptionTextView = UITextView()
+        descriptionTextView.text = "天王寺動物園にサイをみました。思ったよりも大きかったです"
+        descriptionTextView.textColor = UIColor.black
+        descriptionTextView.font = UIFont.systemFont(ofSize: 16)
+        descriptionTextView.isEditable = false
+        //descriptionTextView.isScrollEnabled = false
+        contentView.addSubview(descriptionTextView)
+        
+        tag1Label = UILabel()
+        tag1Label.text = "#天王寺動物園"
+        tag1Label.textColor = UIColor.white
+        tag1Label.backgroundColor = UIColor.tagBGColor()
+        tag1Label.textAlignment = NSTextAlignment.center
+        contentView.addSubview(tag1Label)
+
+        tag2Label = UILabel()
+        tag2Label.text = "#サイ"
+        tag2Label.textColor = UIColor.white
+        tag2Label.backgroundColor = UIColor.tagBGColor()
+        tag2Label.textAlignment = NSTextAlignment.center
+        contentView.addSubview(tag2Label)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder: ) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let cellWidth:CGFloat = self.frame.width
+        let cellHeight:CGFloat = self.frame.height
+
+        thumbnailImgView.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.015, width: cellWidth*0.1, height: cellWidth*0.1)
+        thumbnailImgView.layer.cornerRadius = thumbnailImgView.frame.size.width * 0.5
+        
+        userNameTextView.frame = CGRect(x: cellWidth*0.18, y: cellHeight*0.015, width: cellWidth*0.5, height: cellWidth*0.1)
+        followImgView.frame = CGRect(x: cellWidth*0.68, y: cellHeight*0.015, width: cellWidth*0.08, height: cellWidth*0.08)
+        followLabel.frame = CGRect(x: cellWidth*0.77, y: cellHeight*0.015, width: cellWidth*0.2, height: cellWidth*0.1)
+        
+        postImgView.frame = CGRect(x: 0, y: cellHeight*0.09, width: cellWidth, height: cellWidth)
+
+        favImageBtn.frame = CGRect(x: cellWidth*0.06, y: cellHeight*0.73, width: cellWidth*0.09, height: cellHeight*0.05)
+        favCountLabel.frame = CGRect(x: cellWidth*0.17, y: cellHeight*0.73, width: cellWidth*0.15, height: cellHeight*0.05)
+        
+        commentImageBtn.frame = CGRect(x: cellWidth*0.29, y: cellHeight*0.73, width: cellWidth*0.09, height: cellHeight*0.05)
+        commentLabel.frame = CGRect(x: cellWidth*0.40, y: cellHeight*0.73, width: cellWidth*0.09, height: cellHeight*0.05)
+        
+        menuBtn.frame = CGRect(x: cellWidth*0.84, y: cellHeight*0.73, width: cellWidth*0.09, height: cellHeight*0.05)
+        
+        dateLabel.frame = CGRect(x: cellWidth*0.06, y: cellHeight*0.8, width: cellWidth*0.5, height: cellHeight*0.03)
+
+        descriptionTextView.frame = CGRect(x: cellWidth*0.04, y: cellHeight*0.83, width: cellWidth*0.92, height: cellHeight*0.1)
+
+        tag1Label.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.93, width: cellWidth*0.4, height: cellHeight*0.04)
+        tag2Label.frame = CGRect(x: cellWidth*0.55, y: cellHeight*0.93, width: cellWidth*0.4, height: cellHeight*0.04)
+    }
+}
