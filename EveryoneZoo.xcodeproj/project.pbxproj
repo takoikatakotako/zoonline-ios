@@ -24,7 +24,6 @@
 		8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */; };
 		8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */; };
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
-		8DD7A5511E9A4BB700662481 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD7A5501E9A4BB700662481 /* PostDetailView.swift */; };
 		8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */; };
 		8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */; };
 		EAAB25067CF3061B46797FE0 /* Pods_EveryoneZooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22ADCE5CE831A681A93AECC6 /* Pods_EveryoneZooTests.framework */; };
@@ -77,7 +76,6 @@
 		8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableCell.swift; sourceTree = "<group>"; };
 		8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZooTabBarController.swift; path = ../ZooTabBarController.swift; sourceTree = "<group>"; };
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		8DD7A5501E9A4BB700662481 /* PostDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDetailViewController.swift; sourceTree = "<group>"; };
 		A53C8612E552A7E943C79BF7 /* Pods-EveryoneZoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZoo.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo.release.xcconfig"; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 				8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */,
 				8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */,
 				8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */,
-				8DD7A5501E9A4BB700662481 /* PostDetailView.swift */,
 				8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */,
 				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
 			);
@@ -495,7 +492,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */,
-				8DD7A5511E9A4BB700662481 /* PostDetailView.swift in Sources */,
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
 				8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */,
 				8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */,

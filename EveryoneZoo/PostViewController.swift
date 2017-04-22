@@ -13,14 +13,9 @@ class PostViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     //テーブルビューインスタンス
     private var myTableView: UITableView!
     
-    //テーブルビューに表示する配列
-    private var myItems: NSArray = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //テーブルビューに表示する配列
-        myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
         
         //Viewの大きさを取得
         let viewWidth = self.view.frame.size.width
@@ -47,7 +42,7 @@ class PostViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return self.myItems.count
+        return 5
     }
     
     //MARK: テーブルビューのセルの中身を設定する

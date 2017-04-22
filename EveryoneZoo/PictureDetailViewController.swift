@@ -8,36 +8,51 @@
 
 import UIKit
 
-class PictureDetailViewController: UIViewController,UIScrollViewDelegate {
+class PictureDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
-    
     //width, height
     private var statusHeight:CGFloat!
     private var navBarHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
-    private var scrollViewHeight:CGFloat!
+    private var tableViewHeight:CGFloat!
     
     //view parts
-    
-    private var detailScrollView: UIScrollView!
-
+    private var postDetailTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //画面横サイズを取得
-        viewWidth = self.view.frame.width
-        viewHeight = self.view.frame.height
+        let viewWidth:CGFloat = self.view.frame.width
+        let viewHeight:CGFloat  = self.view.frame.height
         
         //各部品の高さを取得
         statusHeight = UIApplication.shared.statusBarFrame.height
         navBarHeight =  self.navigationController?.navigationBar.frame.height
-        scrollViewHeight = viewHeight-(statusHeight+navBarHeight)
-        
+        tabBarHeight = 50
+        tableViewHeight = viewHeight-(statusHeight+navBarHeight+tabBarHeight)
         
         setView()
+
         
-        setScrollView()
+        //テーブルビューの初期化
+        postDetailTableView = UITableView()
+        
+        //デリゲートの設定
+        postDetailTableView.delegate = self
+        postDetailTableView.dataSource = self
+        
+        //テーブルビューの大きさの指定
+        postDetailTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
+        
+        //テーブルビューの設置
+        postDetailTableView.register(PostDetailTableCell.self, forCellReuseIdentifier: NSStringFromClass(PostDetailTableCell.self))
+        postDetailTableView.rowHeight = viewWidth*1.65
+        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
+        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
+        self.view.addSubview(postDetailTableView)
+        
     }
     
     //Viewへの配置
@@ -47,40 +62,14 @@ class PictureDetailViewController: UIViewController,UIScrollViewDelegate {
         self.view.backgroundColor = UIColor.mainAppColor()
         
         // MARK: - UINavigationBar
-        //myNavBar = UINavigationBar()
-        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusHeight, width: viewWidth, height: navBarHeight)
         self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
         
         //ハイライトを消す
         self.navigationController?.navigationBar.isTranslucent = false
         
-    
         //ナビゲーションボタンの色を変更する
         UINavigationBar.appearance().tintColor = UIColor.white
-        
     }
-    
-    //スクロールビューの生成
-    func setScrollView(){
-        
-        // ScrollViewを生成.
-        detailScrollView = UIScrollView()
-        detailScrollView.delegate = self
-        detailScrollView.frame = CGRect(x: 0, y:0, width: viewWidth, height: scrollViewHeight)
-        detailScrollView.backgroundColor = UIColor.white
-        detailScrollView.contentSize = CGSize(width:viewWidth, height:viewHeight*2)
-        self.view.addSubview(detailScrollView)
-        
-        
-        //一つ目
-        let postDetails = PostDetailView(viewWidth: viewWidth,viewHeight: viewHeight)
-        postDetails.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*1.6)
-        postDetails.backgroundColor = UIColor.white
-        detailScrollView.addSubview(postDetails)
-
-    }
-
-    
 
     //左側のボタンが押されたら呼ばれる
     func leftBarBtnClicked(sender: UIButton){
@@ -90,6 +79,27 @@ class PictureDetailViewController: UIViewController,UIScrollViewDelegate {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    
+    //MARK: テーブルビューのセルの数を設定する
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //テーブルビューのセルの数はmyItems配列の数とした
+        return 1
+    }
+    
+    //MARK: テーブルビューのセルの中身を設定する
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //myItems配列の中身をテキストにして登録した
+        let cell:PostDetailTableCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostDetailTableCell.self), for: indexPath) as! PostDetailTableCell
+        cell.layoutMargins = UIEdgeInsets.zero
+        
+        return cell
+    }
+    
+    //Mark: テーブルビューのセルが押されたら呼ばれる
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(indexPath.row)番のセルを選択しました！ ")
     }
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class TimeLineViewController: UIViewController,UIScrollViewDelegate {
+class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource {
     
     private var statusHeight:CGFloat!
     private var navBarHeight:CGFloat!
@@ -17,11 +17,11 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate {
     private var tabBarHeight:CGFloat!
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
-    var scrollViewHeight:CGFloat!
+    var tableViewHeight:CGFloat!
     
     //view parts
     private var segmentView:UIView!
-    var timelineScrollView: UIScrollView!
+    private var postDetailTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,51 +42,29 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate {
         tabBarHeight = UITabBar.appearance().frame.size.height
         
         //スクロルビュー
-        scrollViewHeight = viewHeight-(statusHeight+navBarHeight+tabBarHeight)
+        tableViewHeight = viewHeight-(statusHeight+navBarHeight+tabBarHeight)
         
         setView()
         
         setSegmentView()
+        
+        //テーブルビューの初期化
+        postDetailTableView = UITableView()
+        
+        //デリゲートの設定
+        postDetailTableView.delegate = self
+        postDetailTableView.dataSource = self
+        
+        //テーブルビューの大きさの指定
+        postDetailTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
+        
+        //テーブルビューの設置
+        postDetailTableView.register(PostDetailTableCell.self, forCellReuseIdentifier: NSStringFromClass(PostDetailTableCell.self))
+        postDetailTableView.rowHeight = viewWidth*1.65
+        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
+        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
+        self.view.addSubview(postDetailTableView)
 
-        setScrollView()
-        /*
-        
-        // ScrollViewを生成.
-        pictureScrollView = UIScrollView()
-        
-        // ScrollViewの大きさを設定する.
-        pictureScrollView.frame = CGRect(x: 0, y: statusHeight+navBarHeight, width: viewWidth, height: scrollViewHeight)
-        
-        // UIImageに画像を設定する.
-        let examplePic = UIImage(named: "example_timeline")!
-        
-        // UIImageViewを生成する.
-        let exampleImageView = UIImageView()
-        
-        // myImageViewのimageにmyImageを設定する.
-        exampleImageView.image = examplePic
-        
-        // frameの値を設定する.
-        exampleImageView.frame = pictureScrollView.frame
-        
-        // 画像のアスペクト比を設定.
-        exampleImageView.contentMode = UIViewContentMode.scaleAspectFill
-        
-        // ScrollViewにmyImageViewを追加する.
-        pictureScrollView.addSubview(exampleImageView)
-        
-        // Scrollの高さを計算しておく.
-        let scroll_height = examplePic.size.height*(viewWidth/examplePic.size.width)
-        
-        // ScrollViewにcontentSizeを設定する.
-        pictureScrollView.contentSize = CGSize(width:viewWidth, height:scroll_height)
-        
-        
-        pictureScrollView.backgroundColor = UIColor.red
-        // ViewにScrollViewをAddする.
-        self.view.addSubview(pictureScrollView)
-
-        */
     }
 
 
@@ -176,55 +154,7 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate {
         leftUnderBar.backgroundColor = UIColor.segmetRightBlue()
     }
     
-    
-    //スクロールビューの生成
-    func setScrollView(){
-        
-        // ScrollViewを生成.
-        timelineScrollView = UIScrollView()
-        self.timelineScrollView.delegate = self
 
-        
-        // ScrollViewの大きさを設定する.
-        timelineScrollView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
-        
-        // Scrollの高さを計算しておく.
-        // ScrollViewにcontentSizeを設定する.
-        timelineScrollView.contentSize = CGSize(width:viewWidth, height:viewHeight*4)
-        
-        timelineScrollView.backgroundColor = UIColor.white
-        
-        // ViewにScrollViewをAddする.
-        self.view.addSubview(timelineScrollView)
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
-        timelineScrollView.refreshControl = refreshControl
-        
-        
-        //
-        let myBun = UIButton()
-        myBun.addTarget(self, action: #selector(testButtonClicked(sender:)), for:.touchUpInside)
-        
-        //一つ目
-        let postDetails = PostDetailView(viewWidth: viewWidth,viewHeight: viewHeight)
-        postDetails.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*1.6)
-        postDetails.backgroundColor = UIColor.white
-        timelineScrollView.addSubview(postDetails)
-        
-        //2つ目
-        let postDetails2 = PostDetailView(viewWidth: viewWidth,viewHeight: viewHeight)
-        postDetails2.frame = CGRect(x: 0, y: viewWidth*1.7, width: viewWidth, height: viewWidth*1.6)
-        postDetails2.backgroundColor = UIColor.white
-        timelineScrollView.addSubview(postDetails2)
-        
-        //3つ目
-        let postDetails3 = PostDetailView(viewWidth: viewWidth,viewHeight: viewHeight)
-        postDetails3.frame = CGRect(x: 0, y: viewWidth*3.4, width: viewWidth, height: viewWidth*1.6)
-        postDetails3.backgroundColor = UIColor.white
-        timelineScrollView.addSubview(postDetails3)
-    
-    }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
         
@@ -255,7 +185,7 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate {
                 // animation
                 self.navigationController?.navigationBar.frame = CGRect(x: 0, y: -self.navBarHeight, width: self.viewWidth, height: self.navBarHeight)
                 self.segmentView.frame = CGRect(x: 0, y: -self.segmentViewHeight, width: self.viewWidth, height: self.segmentViewHeight)
-                self.timelineScrollView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.viewHeight)
+                self.postDetailTableView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.viewHeight)
                 
             }
         }else{
@@ -263,7 +193,7 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate {
                 // animation
                 self.navigationController?.navigationBar.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.navBarHeight)
                 self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.segmentViewHeight)
-                self.timelineScrollView.frame = CGRect(x: 0, y: self.segmentViewHeight!, width: self.viewWidth, height: self.scrollViewHeight)
+                self.postDetailTableView.frame = CGRect(x: 0, y: self.segmentViewHeight!, width: self.viewWidth, height: self.tableViewHeight)
                 
             }
         }
@@ -289,4 +219,24 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate {
         print("leftBarBtnClicked")
     }
 
+    
+    //MARK: テーブルビューのセルの数を設定する
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //テーブルビューのセルの数はmyItems配列の数とした
+        return 10
+    }
+    
+    //MARK: テーブルビューのセルの中身を設定する
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //myItems配列の中身をテキストにして登録した
+        let cell:PostDetailTableCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostDetailTableCell.self), for: indexPath) as! PostDetailTableCell
+        cell.layoutMargins = UIEdgeInsets.zero
+        
+        return cell
+    }
+    
+    //Mark: テーブルビューのセルが押されたら呼ばれる
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(indexPath.row)番のセルを選択しました！ ")
+    }
 }
