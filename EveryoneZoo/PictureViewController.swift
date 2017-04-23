@@ -12,7 +12,6 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-
 class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource {
     
     //width, height
@@ -22,7 +21,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     private var tabBarHeight:CGFloat!
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
-    private var scrollViewHeight:CGFloat!
+    private var tableViewHeight:CGFloat!
     
     //view parts
     private var pictureTableView: UITableView!
@@ -37,9 +36,8 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     
     //APIから取得したデーター
     var imageURLs:Array<String> = Array()
-    
-    var netWorkErrorImgView:UIImageView = UIImageView()
     var ActivityIndicator: UIActivityIndicatorView!
+    var isNetWorkConnect:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +49,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         setView()
         setSegmentView()
         setTableView()
-        //setNetworkError()
-        
+
         //network
         startActivityIndicator()
         dowonloadJsons()
@@ -70,7 +67,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         navBarHeight =  self.navigationController?.navigationBar.frame.height
         segmentViewHeight = self.navigationController?.navigationBar.frame.height
         tabBarHeight = UITabBar.appearance().frame.size.height
-        scrollViewHeight = viewHeight-(statusHeight+navBarHeight+segmentViewHeight+tabBarHeight+tabBarHeight)
+        tableViewHeight = viewHeight-(statusHeight+navBarHeight+segmentViewHeight+tabBarHeight+tabBarHeight)
     }
 
     
@@ -209,15 +206,16 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         pictureTableView = UITableView()
         pictureTableView.delegate = self
         pictureTableView.dataSource = self
-        pictureTableView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
+        pictureTableView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: tableViewHeight)
         pictureTableView.backgroundColor = UIColor.white
 
         // はじめはコンテンツビューのサイズは画面と同じ
-        pictureTableView.contentSize = CGSize(width:viewWidth, height:scrollViewHeight)
+        pictureTableView.contentSize = CGSize(width:viewWidth, height:tableViewHeight)
         
         //テーブルビューの設置
         pictureTableView.register(LeftPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self))
         pictureTableView.register(RightPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(RightPicturesTableViewCell.self))
+        pictureTableView.register(NetWorkErrorTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self))
         pictureTableView.rowHeight = viewWidth
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
@@ -229,20 +227,12 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         pictureTableView.refreshControl = refreshControl
     }
     
-    func setNetworkError(){
-        
-        netWorkErrorImgView.image = UIImage(named: "sample_neterror")!
-        netWorkErrorImgView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: scrollViewHeight)
-    }
     
     func setImageBtns(json:JSON){
-        
-        //
         for i in 0..<json.count {
-            
             imageURLs.append(json[i]["itemImage"].stringValue)
         }
-        pictureTableView.reloadData()
+        self.pictureTableView.reloadData()
     }
     
     
@@ -277,14 +267,13 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
                 self.navigationController?.navigationBar.frame = CGRect(x: 0, y: -self.navBarHeight, width: self.viewWidth, height: self.navBarHeight)
                 self.segmentView.frame = CGRect(x: 0, y: -self.segmentViewHeight, width: self.viewWidth, height: self.segmentViewHeight)
                 self.pictureTableView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.viewHeight)
-
             }
         }else{
             animator.addAnimations {
                 // animation
                 self.navigationController?.navigationBar.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.navBarHeight)
                 self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.segmentViewHeight)
-                self.pictureTableView.frame = CGRect(x: 0, y: self.segmentViewHeight!, width: self.viewWidth, height: self.scrollViewHeight)
+                self.pictureTableView.frame = CGRect(x: 0, y: self.segmentViewHeight!, width: self.viewWidth, height: self.tableViewHeight)
 
             }
         }
@@ -294,8 +283,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     
     func scrollReflesh(sender : UIRefreshControl) {
         
-        netWorkErrorImgView.removeFromSuperview()
-
         //network
         startActivityIndicator()
         dowonloadJsons()
@@ -307,7 +294,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     internal func pictureSelected(sender: UIButton){
         
         // 遷移するViewを定義する.
-
         let second = PictureDetailViewController()
         navigationController?.pushViewController(second as UIViewController, animated: true)
     }
@@ -343,34 +329,38 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             case .success:
                 print("Validation Successful")
                 
-                // TODO: ここを修正、メソッド分割とか
+                self.isNetWorkConnect = true
                 let json:JSON = JSON(response.result.value ?? kill)
-                print(json)
-                
-                
                 self.setImageBtns(json: json)
-                
                 
             case .failure(let error):
                 print(error)
-                
-                
-                //エラー
-                self.view.addSubview(self.netWorkErrorImgView)
+                self.isNetWorkConnect = false
+                //テーブルの再読み込み
+                self.pictureTableView.reloadData()
             }
         }
     }
     
     
-    
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
+        if !isNetWorkConnect {
+            return 1
+        }
         return imageURLs.count/6
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //ネットワークエラの処理
+        if !isNetWorkConnect {
+            let cell:NetWorkErrorTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self), for: indexPath) as! NetWorkErrorTableViewCell
+            cell.errorImgView.image = UIImage(named: "sample_neterror")!
+            return cell
+        }
         
         if indexPath.row % 2 == 0 {
             let cell:LeftPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self), for: indexPath) as! LeftPicturesTableViewCell
@@ -411,9 +401,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             return cell
         }
     }
-
-    
-        
         
     
     // タッチイベントの検出

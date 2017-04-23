@@ -16,7 +16,6 @@ class LeftPicturesTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         for i in 0..<6 {
-            
             let picturesImg:UIImageView = UIImageView()
             picturesImg.clipsToBounds = true
             picturesImgs.append(picturesImg)
@@ -35,12 +34,19 @@ class LeftPicturesTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         let cellWidth:CGFloat = self.frame.width
+        let cellWidthThird:CGFloat = cellWidth/3
+        let paddingWidth:CGFloat = cellWidth*0.01
+        let cellBigWidth:CGFloat = cellWidth*2/3-paddingWidth*2
+        let cellSmallWidth:CGFloat = cellWidth*1/3-paddingWidth*2
 
-        picturesImgs[0].frame = CGRect(x: 0, y: 0, width: cellWidth*2/3, height: cellWidth*2/3)
-        picturesImgs[1].frame = CGRect(x: cellWidth*2/3, y: 0, width: cellWidth*1/3, height: cellWidth*1/3)
-        picturesImgs[2].frame = CGRect(x: cellWidth*2/3, y: cellWidth*1/3, width: cellWidth*1/3, height: cellWidth*1/3)
-        picturesImgs[3].frame = CGRect(x: 0, y: cellWidth*2/3, width: cellWidth*1/3, height: cellWidth*1/3)
-        picturesImgs[4].frame = CGRect(x: cellWidth*1/3, y: cellWidth*2/3, width: cellWidth*1/3, height: cellWidth*1/3)
-        picturesImgs[5].frame = CGRect(x: cellWidth*2/3, y: cellWidth*2/3, width: cellWidth*1/3, height: cellWidth*1/3)
+        for i in 0..<6 {
+            picturesImgs[i].layer.cornerRadius = cellWidth*0.05
+        }
+        picturesImgs[0].frame = CGRect(x: paddingWidth, y: paddingWidth, width: cellBigWidth, height: cellBigWidth)
+        picturesImgs[1].frame = CGRect(x: cellWidthThird*2+paddingWidth, y: paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
+        picturesImgs[2].frame = CGRect(x: cellWidthThird*2+paddingWidth, y: cellWidthThird+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
+        picturesImgs[3].frame = CGRect(x: paddingWidth, y: cellWidthThird*2+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
+        picturesImgs[4].frame = CGRect(x: cellWidthThird+paddingWidth, y: cellWidthThird*2+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
+        picturesImgs[5].frame = CGRect(x: cellWidthThird*2+paddingWidth, y: cellWidthThird*2+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
     }
 }
