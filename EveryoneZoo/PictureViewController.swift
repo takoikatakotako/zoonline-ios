@@ -42,7 +42,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         calcHeight()
         
         //views
@@ -53,7 +52,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         //network
         startActivityIndicator()
         dowonloadJsons()
-        
     }
     
     // MARK: - ClalcHeight
@@ -70,12 +68,9 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         tableViewHeight = viewHeight-(statusHeight+navBarHeight+segmentViewHeight+tabBarHeight+tabBarHeight)
     }
 
-    
-
     // MARK: - View関連
     func setView() {
         
-        //背景色を変更
         self.view.backgroundColor = UIColor.mainAppColor()
         
         //ステータスバー部分の背景
@@ -86,11 +81,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         
         // MARK: - UINavigationBar
         self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
-        
-        //ハイライトを消す
         self.navigationController?.navigationBar.isTranslucent = false
-        
-        //ナビゲーションボタンの色を変更する
         UINavigationBar.appearance().tintColor = UIColor.white
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
@@ -100,7 +91,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         serchNavBtn.action = #selector(rightBarBtnClicked(sender:))
     }
     
-    //左側のボタンが押されたら呼ばれる
     internal func leftBarBtnClicked(sender: UIButton){
         print("leftBarBtnClicked")
     }
@@ -239,27 +229,20 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
         
-
         if (velocity.y > 0) {
-            // 上下のバーを隠す
-            print("上")
-            
+            // 上下のバーを隠す、上にスライド
             hidesBarsWithScrollView(hidden: true, hiddenTop: true, hiddenBottom: true)
             
-            // 上下のバーを表示する
         } else {
-            // 上下のバーを表示する
-            print("した")
+            // 上下のバーを表示する、下にスライド
             hidesBarsWithScrollView(hidden: false, hiddenTop: true, hiddenBottom: true)
         }
     }
-    
     
     func hidesBarsWithScrollView( hidden:Bool, hiddenTop:Bool, hiddenBottom:Bool) {
         
         let timing = UICubicTimingParameters(animationCurve: .easeInOut)
         let animator = UIViewPropertyAnimator(duration: 0.2, timingParameters: timing)
-        
         
         if hidden {
             animator.addAnimations {
@@ -274,10 +257,8 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
                 self.navigationController?.navigationBar.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.navBarHeight)
                 self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.segmentViewHeight)
                 self.pictureTableView.frame = CGRect(x: 0, y: self.segmentViewHeight!, width: self.viewWidth, height: self.tableViewHeight)
-
             }
         }
-        
         animator.startAnimation()
     }
     
@@ -290,14 +271,11 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         sender.endRefreshing()
     }
     
-    //
     internal func pictureSelected(sender: UIButton){
         
-        // 遷移するViewを定義する.
-        let second = PictureDetailViewController()
-        navigationController?.pushViewController(second as UIViewController, animated: true)
+        let picDetailView:PictureDetailViewController = PictureDetailViewController()
+        navigationController?.pushViewController(picDetailView as UIViewController, animated: true)
     }
-    
     
     // MARK: - NetWork
     func startActivityIndicator(){
@@ -401,16 +379,12 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             return cell
         }
     }
-        
     
     // タッチイベントの検出
     /// シングルタップ時に実行される
     func tapSingle(sender: UITapGestureRecognizer) {
         print(sender.view?.tag ?? 400)
-        //let picDetailView: PictureDetailViewController = PictureDetailViewController()
-        //picDetailView.modalTransitionStyle = .crossDissolve
-        //self.present(picDetailView, animated: true, completion: nil)
-        
+
         // 移動先のViewを定義する.
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
         
