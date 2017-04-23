@@ -372,31 +372,63 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:LeftPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self), for: indexPath) as! LeftPicturesTableViewCell
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.layoutMargins = UIEdgeInsets.zero
-
-        let loadImg = UIImage(named: "sample_loading")!
-        let url = URL(string: imageURLs[indexPath.row])!
-        
-        for i in 0..<6 {
-            cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
-            cell.picturesImgs[i].isUserInteractionEnabled = true
-            cell.picturesImgs[i].tag = indexPath.row*6+i
+        if indexPath.row % 2 == 0 {
+            let cell:LeftPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self), for: indexPath) as! LeftPicturesTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.layoutMargins = UIEdgeInsets.zero
             
-            let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
-            singleTap.numberOfTapsRequired = 1
-            cell.picturesImgs[i].addGestureRecognizer(singleTap)
+            let loadImg = UIImage(named: "sample_loading")!
+            let url = URL(string: imageURLs[indexPath.row])!
+            
+            for i in 0..<6 {
+                cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
+                cell.picturesImgs[i].isUserInteractionEnabled = true
+                cell.picturesImgs[i].tag = indexPath.row*6+i
+                
+                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
+                singleTap.numberOfTapsRequired = 1
+                cell.picturesImgs[i].addGestureRecognizer(singleTap)
+            }
+            return cell
+        }else{
+            
+            let cell:RightPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(RightPicturesTableViewCell.self), for: indexPath) as! RightPicturesTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.layoutMargins = UIEdgeInsets.zero
+            
+            let loadImg = UIImage(named: "sample_loading")!
+            let url = URL(string: imageURLs[indexPath.row])!
+            
+            for i in 0..<6 {
+                cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
+                cell.picturesImgs[i].isUserInteractionEnabled = true
+                cell.picturesImgs[i].tag = indexPath.row*6+i
+                
+                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
+                singleTap.numberOfTapsRequired = 1
+                cell.picturesImgs[i].addGestureRecognizer(singleTap)
+            }
+            return cell
         }
-        return cell
     }
+
+    
+        
+        
     
     // タッチイベントの検出
-
-    
     /// シングルタップ時に実行される
     func tapSingle(sender: UITapGestureRecognizer) {
         print(sender.view?.tag ?? 400)
+        //let picDetailView: PictureDetailViewController = PictureDetailViewController()
+        //picDetailView.modalTransitionStyle = .crossDissolve
+        //self.present(picDetailView, animated: true, completion: nil)
+        
+        // 移動先のViewを定義する.
+        let picDetailView: PictureDetailViewController = PictureDetailViewController()
+        
+        // SecondViewに移動する.
+        self.navigationController?.pushViewController(picDetailView, animated: true)
     }
 
     // MARK: - Others

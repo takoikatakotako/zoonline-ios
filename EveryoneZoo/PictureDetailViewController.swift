@@ -28,6 +28,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let viewHeight:CGFloat  = self.view.frame.height
         
         //各部品の高さを取得
+        
         statusHeight = UIApplication.shared.statusBarFrame.height
         navBarHeight =  self.navigationController?.navigationBar.frame.height
         tabBarHeight = 50

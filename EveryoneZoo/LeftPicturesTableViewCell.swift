@@ -9,16 +9,8 @@
 import UIKit
 
 class LeftPicturesTableViewCell: UITableViewCell {
-
-    var picturesImgView0:UIImageView!
-    var picturesImgView1:UIImageView!
-    var picturesImgView2:UIImageView!
-    var picturesImgView3:UIImageView!
-    var picturesImgView4:UIImageView!
-    var picturesImgView5:UIImageView!
-    
+ 
     var picturesImgs:Array<UIImageView> = Array()
-    
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
