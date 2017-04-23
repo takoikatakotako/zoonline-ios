@@ -13,7 +13,7 @@ import AlamofireImage
 import SwiftyJSON
 
 
-class PictureViewController: UIViewController,UIScrollViewDelegate {
+class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource {
     
     //width, height
     private var statusHeight:CGFloat!
@@ -25,7 +25,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     private var scrollViewHeight:CGFloat!
     
     //view parts
-    private var pictureScrollView: UIScrollView!
+    private var pictureTableView: UITableView!
     @IBOutlet weak var serchNavBtn: UIBarButtonItem!
     
     //segment view parts
@@ -35,21 +35,23 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     private var segmentRightBtn:UIButton!
     private var rightSegUnderLine:UIView!
     
-    //imageButton
-    var imageViewAry:Array<UIButton> = []
+    //APIから取得したデーター
+    var imageURLs:Array<String> = Array()
+    
     var netWorkErrorImgView:UIImageView = UIImageView()
     var ActivityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         calcHeight()
         
         //views
         setView()
         setSegmentView()
-        setScrollView()
-        setNetworkError()
+        setTableView()
+        //setNetworkError()
         
         //network
         startActivityIndicator()
@@ -200,24 +202,31 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     }
     
     
-    // MARK: - スクロールビューの生成
-    func setScrollView(){
+    // MARK: - テーブリュビューの生成
+    func setTableView(){
         
         // ScrollViewを生成.
-        pictureScrollView = UIScrollView()
-        self.pictureScrollView.delegate = self
-        pictureScrollView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
-        pictureScrollView.backgroundColor = UIColor.white
+        pictureTableView = UITableView()
+        pictureTableView.delegate = self
+        pictureTableView.dataSource = self
+        pictureTableView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: scrollViewHeight)
+        pictureTableView.backgroundColor = UIColor.white
 
         // はじめはコンテンツビューのサイズは画面と同じ
-        pictureScrollView.contentSize = CGSize(width:viewWidth, height:scrollViewHeight)
+        pictureTableView.contentSize = CGSize(width:viewWidth, height:scrollViewHeight)
         
-        self.view.addSubview(pictureScrollView)
+        //テーブルビューの設置
+        pictureTableView.register(LeftPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self))
+        pictureTableView.register(RightPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(RightPicturesTableViewCell.self))
+        pictureTableView.rowHeight = viewWidth
+        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
+        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
+        self.view.addSubview(pictureTableView)
         
         //リフレッシュコントロールの追加
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
-        pictureScrollView.refreshControl = refreshControl
+        pictureTableView.refreshControl = refreshControl
     }
     
     func setNetworkError(){
@@ -228,113 +237,12 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     
     func setImageBtns(json:JSON){
         
-        imageViewAry = Array()
-        
-        //一つあたりの画像サイズ
-        let picImageWidth = viewWidth/3.0
-        
-        //初期設定画像
-        let myImage: UIImage = UIImage(named: "sample_loading")!
-        
-        //表示数
-        let imageCount:NSInteger = json.count
-        
-        for i in 0..<imageCount {
+        //
+        for i in 0..<json.count {
             
-            let scrollYPos:CGFloat! = viewWidth*CGFloat(i/6)
-            
-            let pictureImageBtn:UIButton = UIButton()
-            pictureImageBtn.layer.cornerRadius = 30
-            pictureImageBtn.clipsToBounds = true
-            
-            if ((i/6)%2 == 0){
-                
-                switch i%6 {
-                case 0:
-                    pictureImageBtn.frame = CGRect(x: 0, y: scrollYPos, width: picImageWidth*2, height: picImageWidth*2)
-                    break
-                case 1:
-                    pictureImageBtn.frame = CGRect(x: picImageWidth*2, y: scrollYPos, width: picImageWidth, height: picImageWidth)
-                    break
-                case 2:
-                    pictureImageBtn.frame = CGRect(x: picImageWidth*2, y: picImageWidth+scrollYPos, width: picImageWidth, height: picImageWidth)
-                    break
-                case 3:
-                    pictureImageBtn.frame = CGRect(x: 0, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
-                    break
-                case 4:
-                    pictureImageBtn.frame = CGRect(x: picImageWidth, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
-                    break
-                case 5:
-                    pictureImageBtn.frame = CGRect(x: picImageWidth*2, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
-                    break
-                default:
-                    break
-                }
-            }else{
-                
-                switch i%6 {
-                case 0:
-                    pictureImageBtn.frame = CGRect(x: 0, y: scrollYPos, width: picImageWidth, height: picImageWidth)
-                    break
-                case 1:
-                    pictureImageBtn.frame = CGRect(x: 0, y: picImageWidth+scrollYPos, width: picImageWidth, height: picImageWidth)
-                    break
-                case 2:
-                    pictureImageBtn.frame = CGRect(x: picImageWidth, y: scrollYPos, width: picImageWidth*2, height: picImageWidth*2)
-                    break
-                    
-                case 3:
-                    pictureImageBtn.frame = CGRect(x: 0, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
-                    break
-                    
-                case 4:
-                    pictureImageBtn.frame = CGRect(x: picImageWidth, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
-                    break
-                    
-                case 5:
-                    pictureImageBtn.frame = CGRect(x: picImageWidth*2, y: picImageWidth*2+scrollYPos, width: picImageWidth, height: picImageWidth)
-                    break
-                default:
-                    break
-                }
-                
-            }
-            
-            pictureImageBtn.tag = i
-            pictureImageBtn.setBackgroundImage(myImage, for: UIControlState.normal)
-            pictureImageBtn.addTarget(self, action: #selector(pictureSelected(sender:)), for:.touchUpInside)
-            imageViewAry.append(pictureImageBtn)
-            
-            
-            for imgView in imageViewAry{
-                pictureScrollView.addSubview(imgView)
-            }
-            
-            
-            let imageURL:String = json[i]["itemImage"].stringValue
-            print(imageURL)
-            
-            Alamofire.request(imageURL).responseImage { response in
-                
-                
-                if let image = response.result.value {
-                    //当てはめていく
-                    
-                    self.imageViewAry[i].setBackgroundImage(image, for: UIControlState.normal)
-                    
-                }
-            }
-            
-            
+            imageURLs.append(json[i]["itemImage"].stringValue)
         }
-        
-        // Scrollの高さを計算しておく.
-        let scroll_height = viewWidth*CGFloat((imageCount/6))+picImageWidth
-        
-        // ScrollViewにcontentSizeを設定する.
-        pictureScrollView.contentSize = CGSize(width:viewWidth, height:scroll_height)
-
+        pictureTableView.reloadData()
     }
     
     
@@ -368,7 +276,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
                 // animation
                 self.navigationController?.navigationBar.frame = CGRect(x: 0, y: -self.navBarHeight, width: self.viewWidth, height: self.navBarHeight)
                 self.segmentView.frame = CGRect(x: 0, y: -self.segmentViewHeight, width: self.viewWidth, height: self.segmentViewHeight)
-                self.pictureScrollView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.viewHeight)
+                self.pictureTableView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.viewHeight)
 
             }
         }else{
@@ -376,7 +284,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
                 // animation
                 self.navigationController?.navigationBar.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.navBarHeight)
                 self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.segmentViewHeight)
-                self.pictureScrollView.frame = CGRect(x: 0, y: self.segmentViewHeight!, width: self.viewWidth, height: self.scrollViewHeight)
+                self.pictureTableView.frame = CGRect(x: 0, y: self.segmentViewHeight!, width: self.viewWidth, height: self.scrollViewHeight)
 
             }
         }
@@ -386,10 +294,6 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
     
     func scrollReflesh(sender : UIRefreshControl) {
         
-        for button in imageViewAry{
-        
-            button.removeFromSuperview()
-        }
         netWorkErrorImgView.removeFromSuperview()
 
         //network
@@ -454,13 +358,46 @@ class PictureViewController: UIViewController,UIScrollViewDelegate {
                 //エラー
                 self.view.addSubview(self.netWorkErrorImgView)
             }
-            
         }
     }
     
     
+    
+    //MARK: テーブルビューのセルの数を設定する
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
+        return imageURLs.count/6
+    }
+    
+    //MARK: テーブルビューのセルの中身を設定する
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell:LeftPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self), for: indexPath) as! LeftPicturesTableViewCell
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.layoutMargins = UIEdgeInsets.zero
 
+        let loadImg = UIImage(named: "sample_loading")!
+        let url = URL(string: imageURLs[indexPath.row])!
+        
+        for i in 0..<6 {
+            cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
+            cell.picturesImgs[i].isUserInteractionEnabled = true
+            cell.picturesImgs[i].tag = indexPath.row*6+i
+            
+            let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
+            singleTap.numberOfTapsRequired = 1
+            cell.picturesImgs[i].addGestureRecognizer(singleTap)
+        }
+        return cell
+    }
+    
+    // タッチイベントの検出
+
+    
+    /// シングルタップ時に実行される
+    func tapSingle(sender: UITapGestureRecognizer) {
+        print(sender.view?.tag ?? 400)
+    }
 
     // MARK: - Others
     override var preferredStatusBarStyle: UIStatusBarStyle {

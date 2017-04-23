@@ -95,19 +95,6 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.title = "タイムライン"
         
-        /*
-        //ナビゲーションアイテムを作成
-        let myNavItems = UINavigationItem()
-        myNavItems.title = "タイムライン"
-        
-        //バーの左側に設置するボタンの作成
-        let leftNavBtn =  UIBarButtonItem(barButtonSystemItem:  .search, target: self, action: #selector(leftBarBtnClicked(sender:)))
-        myNavItems.leftBarButtonItem = leftNavBtn
-        
-        //作成したNavItemをNavBarに追加する
-        myNavBar.pushItem(myNavItems, animated: true)
-        self.view.addSubview(myNavBar)
-        */
     }
     
     
@@ -229,9 +216,11 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
+
         let cell:PostDetailTableCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostDetailTableCell.self), for: indexPath) as! PostDetailTableCell
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.layoutMargins = UIEdgeInsets.zero
-        
+
         return cell
     }
     

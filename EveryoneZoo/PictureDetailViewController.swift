@@ -93,7 +93,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         //myItems配列の中身をテキストにして登録した
         let cell:PostDetailTableCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostDetailTableCell.self), for: indexPath) as! PostDetailTableCell
         cell.layoutMargins = UIEdgeInsets.zero
-        
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+
         return cell
     }
     
