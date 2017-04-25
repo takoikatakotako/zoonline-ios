@@ -66,6 +66,7 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         segmentViewHeight = self.navigationController?.navigationBar.frame.height
         tabBarHeight = UITabBar.appearance().frame.size.height
         tableViewHeight = viewHeight-(statusHeight+navBarHeight+segmentViewHeight+tabBarHeight+tabBarHeight)
+        
     }
 
     // MARK: - View関連
@@ -198,7 +199,8 @@ class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         pictureTableView.dataSource = self
         pictureTableView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: tableViewHeight)
         pictureTableView.backgroundColor = UIColor.white
-
+        pictureTableView.separatorStyle = .none
+        
         // はじめはコンテンツビューのサイズは画面と同じ
         pictureTableView.contentSize = CGSize(width:viewWidth, height:tableViewHeight)
         
