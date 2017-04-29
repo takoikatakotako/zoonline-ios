@@ -13,6 +13,7 @@
 		8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */; };
 		8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */; };
 		8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4591E8031800008D997 /* ZooListViewController.swift */; };
+		8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */; };
 		8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D6888781E9E7C2E00140508 /* Localizable.strings */; };
 		8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */; };
 		8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */; };
@@ -60,6 +61,7 @@
 		8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityLibrary.swift; sourceTree = "<group>"; };
 		8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		8D0FB4591E8031800008D997 /* ZooListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZooListViewController.swift; sourceTree = "<group>"; };
+		8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		8D6888771E9E7C2E00140508 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D68887B1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		8D68887C1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				8D7E86081EABBC6200C4049B /* LeftPicturesTableViewCell.swift */,
 				8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */,
 				8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */,
+				8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */,
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
+				8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
 				8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */,
 				8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */,
