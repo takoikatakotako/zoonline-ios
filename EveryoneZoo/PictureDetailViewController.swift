@@ -95,6 +95,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let cell:PostDetailTableCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostDetailTableCell.self), for: indexPath) as! PostDetailTableCell
         cell.layoutMargins = UIEdgeInsets.zero
         cell.selectionStyle = UITableViewCellSelectionStyle.none
+        
+        cell.menuBtn.addTarget(self, action: #selector(showActionShert(sender:)), for:.touchUpInside)
 
         return cell
     }
@@ -103,5 +105,39 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
     }
+    
+    //Mark: コメント投稿画面への遷移
+    func showActionShert(sender: UIButton){
+        // インスタンス生成　styleはActionSheet.
+        let myAlert = UIAlertController(title: "アクション", message: "アクションを選んでください。", preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        // アクションを生成.
+        let myAction_1 = UIAlertAction(title: "コメント", style: UIAlertActionStyle.default, handler: {
+            (action: UIAlertAction!) in
+            print("Hello")
+            // 移動先のViewを定義する.
+            let commentListlView: CommentListViewController = CommentListViewController()
+            // SecondViewに移動する.
+            self.navigationController?.pushViewController(commentListlView, animated: true)
+        })
+        
+        let myAction_2 = UIAlertAction(title: "共有する", style: UIAlertActionStyle.default, handler: {
+            (action: UIAlertAction!) in
+            print("yes")
+        })
+        
+        let myAction_3 = UIAlertAction(title: "マイアルバムへの追加", style: UIAlertActionStyle.default, handler: {
+            (action: UIAlertAction!) in
+            print("no")
+        })
+        
+        // アクションを追加.
+        myAlert.addAction(myAction_1)
+        myAlert.addAction(myAction_2)
+        myAlert.addAction(myAction_3)
+        
+        self.present(myAlert, animated: true, completion: nil)
+    }
+
 
 }
