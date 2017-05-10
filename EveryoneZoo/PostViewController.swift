@@ -11,18 +11,11 @@ import UIKit
 class PostViewController: UIViewController {
     
     //width, height
-    private var statusHeight:CGFloat!
-    private var navBarHeight:CGFloat!
-    private var segmentViewHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
-    private var tableViewHeight:CGFloat!
+    private var scrollViewHeight:CGFloat!
     
-    //view parts
-    private var pictureTableView: UITableView!
-    @IBOutlet weak var serchNavBtn: UIBarButtonItem!
-    
+
 
     //テーブルビューインスタンス
     private var myTableView: UITableView!
@@ -34,71 +27,54 @@ class PostViewController: UIViewController {
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
+        scrollViewHeight = viewHeight - PARTS_HEIGHT_STATUS_BAR - PARTS_HEIGHT_NAVIGATION_BAR
         
-        
-        //各部品の高さを取得
-        statusHeight = UIApplication.shared.statusBarFrame.height
-        navBarHeight =  self.navigationController?.navigationBar.frame.height
-        segmentViewHeight = self.navigationController?.navigationBar.frame.height
-        tabBarHeight = UITabBar.appearance().frame.size.height
-        //tableViewHeight = viewHeight-(statusHeight+navBarHeight+segmentViewHeight+tabBarHeight+tabBarHeight)
-        
-        
-        
-        //ステータスバー部分の背景
-        let statusBackColor = UIView()
-        statusBackColor.frame = CGRect(x: 0, y: 0, width: viewWidth, height: 60)
-        statusBackColor.backgroundColor = UIColor.mainAppColor()
-        self.view.addSubview(statusBackColor)
-        
-
         setView()
+        
+        let postScrollView:PostViewScrollView = PostViewScrollView(frame:CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR, width: viewWidth, height: scrollViewHeight))
+        self.view.addSubview(postScrollView)
+        
     }
     
     func setView() {
         
+        //ステータスバー背景
+        let statusBackColor = UIView()
+        statusBackColor.frame = CGRect(x: 0, y: 0, width: viewWidth, height: PARTS_HEIGHT_STATUS_BAR)
+        statusBackColor.backgroundColor = UIColor.mainAppColor()
+        self.view.addSubview(statusBackColor)
+        
         //ナビゲーションバーの作成
-        let myNavBar:ZooNavigationBar = ZooNavigationBar()
+        UINavigationBar.appearance().tintColor = UIColor.white
+        let myNavBar = UINavigationBar()
         myNavBar.frame = CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR)
-        
-        
-        
-        myNavBar.myView.backgroundColor = UIColor.blue
-        
-        
-        //ナビゲーションボタンの色を変更する
-        //UINavigationBar.appearance().tintColor = UIColor.white
+        myNavBar.barTintColor = UIColor.mainAppColor()
+        myNavBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
         let myNavItems = UINavigationItem()
-        //myNavItems.titleLabe.text = "バーのタイトル"
+        let titleLabel:UILabel = UILabel()
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.textAlignment = NSTextAlignment.center
+        titleLabel.text = "投稿する"
+        titleLabel.textColor = UIColor.white
+        myNavItems.titleView = titleLabel
         
         //バーの左側に設置するボタンの作成
-        let leftNavBtn =  UIBarButtonItem(barButtonSystemItem:  .add, target: self, action: #selector(leftBarBtnClicked(sender:)))
+        let leftNavBtn =  UIBarButtonItem(title: "リセット", style: .plain, target: self, action:  #selector(leftBarBtnClicked(sender:)))
         myNavItems.leftBarButtonItem = leftNavBtn
         
         //バーの右側に設置するボタンの作成
-        let rightNavBtn = UIBarButtonItem()
-        
-        //ボタンにする画像を選択する
-        let rightNavBtnImg:UIImage = UIImage(named:"tab_kabi")!
-        rightNavBtn.image = rightNavBtnImg
-        
-        //ボタンが押され時のアクションを設定する
-        rightNavBtn.action = #selector(rightBarBtnClicked(sender:))
+        let rightNavBtn = UIBarButtonItem(title: "投稿", style: .plain, target: self, action:  #selector(rightBarBtnClicked(sender:)))
         myNavItems.rightBarButtonItem = rightNavBtn;
         
         //作成したNavItemをNavBarに追加する
         myNavBar.pushItem(myNavItems, animated: true)
         self.view.addSubview(myNavBar)
-        
-        
-        //UIScrollView
-        let scrollView:UIScrollView = UIScrollView()
-        scrollView.frame =  CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR, width: viewWidth, height: 300)
-        scrollView.backgroundColor = UIColor.gray
-        //self.view.addSubview(scrollView)
     }
+    
+
+    
     
     //左側のボタンが押されたら呼ばれる
     internal func leftBarBtnClicked(sender: UIButton){
