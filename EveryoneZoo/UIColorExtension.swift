@@ -9,10 +9,7 @@
 import UIKit
 
 extension UIColor {
-    /*class func rgb(#r: Int, g: Int, b: Int, alpha: CGFloat) -> UIColor{
-        return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: alpha)
-    }*/
-    
+
     class func segmetRightBlue() -> UIColor {
         return UIColor.init(red: (18.0/256), green: (138.0/256), blue: (220/256), alpha: 1.0)
     }
@@ -39,6 +36,12 @@ extension UIColor {
     
     class func tagBGColor() -> UIColor {
         return UIColor(red: (109.0/256), green: (195.0/256), blue: (241.0/256), alpha: 1.0)
+    }
+    
+    
+    //MYPAGE
+    class func MyPageTableBGColor() -> UIColor {
+        return UIColor(red: (235.0/256), green: (235.0/256), blue: (240.0/256), alpha: 1.0)
     }
     
 }

@@ -30,10 +30,12 @@
 		8D7E860B1EABBC7400C4049B /* RightPicturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */; };
 		8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */; };
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
+		8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */; };
 		8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */; };
 		8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */; };
 		8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */; };
 		8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */; };
+		8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */; };
 		EAAB25067CF3061B46797FE0 /* Pods_EveryoneZooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22ADCE5CE831A681A93AECC6 /* Pods_EveryoneZooTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,10 +92,12 @@
 		8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightPicturesTableViewCell.swift; sourceTree = "<group>"; };
 		8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZooTabBarController.swift; path = ../ZooTabBarController.swift; sourceTree = "<group>"; };
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListViewController.swift; sourceTree = "<group>"; };
 		8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkErrorTableViewCell.swift; sourceTree = "<group>"; };
 		8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDetailViewController.swift; sourceTree = "<group>"; };
+		8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageUserCellBtn.swift; sourceTree = "<group>"; };
 		A53C8612E552A7E943C79BF7 /* Pods-EveryoneZoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZoo.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo.release.xcconfig"; sourceTree = "<group>"; };
 		B6E6153F1CF883E44B3F5A09 /* Pods-EveryoneZoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZoo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo.debug.xcconfig"; sourceTree = "<group>"; };
 		E15B20675E61512C92B15E98 /* Pods-EveryoneZooUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				8D6215AC1EC3689600593E55 /* MyPageViewController.swift */,
+				8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */,
 			);
 			name = MyPage;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 				8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */,
 				8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */,
 				8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */,
+				8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -559,10 +565,12 @@
 				8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */,
 				8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */,
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
+				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
 				8D6215AA1EC35EAA00593E55 /* PostViewScrollView.swift in Sources */,
 				8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
+				8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */,
 				8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */,
 				8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */,
 				8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */,
