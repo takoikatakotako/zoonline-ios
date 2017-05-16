@@ -48,5 +48,11 @@ class MyPageUserCellBtn: UIButton {
         userMailAdressLabel.font = UIFont.systemFont(ofSize: 14)
         userMailAdressLabel.frame = CGRect(x: viewHeight*1.1, y: viewHeight*0.6, width: viewWidth*0.6, height: viewHeight*0.3)
         self.addSubview(userMailAdressLabel)
+        
+        //プロフィール画面の矢印
+        let profielArrow:UIImageView = UIImageView()
+        profielArrow.image = UIImage(named:"mypage_profiel")
+        profielArrow.frame = CGRect(x: viewWidth*0.9, y: 0, width: viewWidth*0.1, height: viewHeight)
+        self.addSubview(profielArrow)
     }
 }

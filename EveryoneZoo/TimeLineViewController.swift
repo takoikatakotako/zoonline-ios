@@ -124,6 +124,11 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         self.view.addSubview(postDetailTableView)
+        
+        //リフレッシュコントロールの追加
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
+        postDetailTableView.refreshControl = refreshControl
     }
     
     
@@ -191,7 +196,7 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         animator.startAnimation()
     }
     
-    
+    //Mark:　リフレッシュ更新が走った時に呼ばれる
     func scrollReflesh(sender : UIRefreshControl) {
         
         SCLAlertView().showInfo("スクロールイベントが実行された", subTitle: "close")
