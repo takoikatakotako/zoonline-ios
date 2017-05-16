@@ -39,6 +39,12 @@ extension UIColor {
     }
     
     
+    
+    //POST
+    class func PostScrollBGColor() -> UIColor {
+        return UIColor(red: (224.0/256), green: (224.0/256), blue: (224.0/256), alpha: 1.0)
+    }
+    
     //MYPAGE
     class func MyPageTableBGColor() -> UIColor {
         return UIColor(red: (235.0/256), green: (235.0/256), blue: (240.0/256), alpha: 1.0)

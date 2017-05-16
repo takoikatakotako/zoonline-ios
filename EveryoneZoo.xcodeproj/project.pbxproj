@@ -178,7 +178,7 @@
 				8D6215AB1EC3685200593E55 /* MyPage */,
 				8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */,
 				8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */,
-				8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */,
+				8DA0AB701ECB032C00D75B1A /* TimeLine */,
 				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
 			);
 			name = ViewController;
@@ -256,6 +256,14 @@
 				8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */,
 			);
 			name = TableViewCell;
+			sourceTree = "<group>";
+		};
+		8DA0AB701ECB032C00D75B1A /* TimeLine */ = {
+			isa = PBXGroup;
+			children = (
+				8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */,
+			);
+			name = TimeLine;
 			sourceTree = "<group>";
 		};
 		AD036EBAB48E2DEE51E63AD4 /* Frameworks */ = {
