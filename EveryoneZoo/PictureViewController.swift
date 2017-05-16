@@ -12,7 +12,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-class PictureViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource {
+class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource {
     
     //width, height
     private var statusHeight:CGFloat!

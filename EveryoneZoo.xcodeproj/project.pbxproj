@@ -173,8 +173,8 @@
 		8D68887E1E9E7EF000140508 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8DA0AB711ECB0A0000D75B1A /* FieldView */,
 				8D6215A51EC2014200593E55 /* PostView */,
-				8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */,
 				8D6215AB1EC3685200593E55 /* MyPage */,
 				8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */,
 				8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */,
@@ -264,6 +264,14 @@
 				8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */,
 			);
 			name = TimeLine;
+			sourceTree = "<group>";
+		};
+		8DA0AB711ECB0A0000D75B1A /* FieldView */ = {
+			isa = PBXGroup;
+			children = (
+				8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */,
+			);
+			name = FieldView;
 			sourceTree = "<group>";
 		};
 		AD036EBAB48E2DEE51E63AD4 /* Frameworks */ = {

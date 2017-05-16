@@ -102,10 +102,10 @@
             </objects>
             <point key="canvasLocation" x="1083" y="-102"/>
         </scene>
-        <!--Picture View Controller-->
+        <!--Field View Controller-->
         <scene sceneID="qBL-za-jVZ">
             <objects>
-                <viewController id="4vJ-MG-yTB" customClass="PictureViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4vJ-MG-yTB" customClass="FieldViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fWt-ne-MW5"/>
                         <viewControllerLayoutGuide type="bottom" id="Ecn-3W-Fcw"/>
