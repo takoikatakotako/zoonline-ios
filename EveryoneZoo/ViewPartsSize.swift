@@ -21,7 +21,6 @@ let PARTS_TABBAR_HEIGHT:CGFloat! = 50
 let HEIGHT_USER_CELL:CGFloat! = 80
 
 
-
 let ARRAY_MYPAGE_SCTION_TITLE: NSArray = ["ユーザー情報", "設定・その他"]
 let ARRAY_MYPAGE_USER_INFOS: NSArray = ["投稿","フォロー", "いいね", "クリップ"]
 let ARRAY_MYPAGE_CONFIS: NSArray = ["通知設定","シェアの設定", "Web連携"]

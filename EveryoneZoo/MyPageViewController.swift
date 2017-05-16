@@ -18,6 +18,9 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //テーブルビューインスタンス
     private var myPageTableView: UITableView!
     
+    let userInfoThumbnails:NSArray = [UIImage(named:"mypage_post_icon")!, UIImage(named:"mypage_follow_icon")!,UIImage(named:"mypage_favo_icon")!, UIImage(named:"mypage_clip_icon")!]
+    let configThumbnails:NSArray = [UIImage(named:"mypage_notification_icon")!, UIImage(named:"mypage_share_icon")!,UIImage(named:"tab_kabi")!]
+    
     // Sectionで使用する配列を定義する.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +28,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR + HEIGHT_USER_CELL)
+        tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR + HEIGHT_USER_CELL + PARTS_TABBAR_HEIGHT)
         
         
         
@@ -77,7 +80,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myNavBar.pushItem(myNavItems, animated: true)
         self.view.addSubview(myNavBar)
     }
-      
     
     
     //セクションの数を返す.
@@ -137,8 +139,13 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if indexPath.section == 0 {
           //  cell.textLabel?.text = "\(ARRAY_MYPAGE_USER_INFOS[indexPath.row])"
+            cell.textCellLabel.text =  "\(ARRAY_MYPAGE_USER_INFOS[indexPath.row])"
+            cell.thumbnailImgView.image = userInfoThumbnails[indexPath.row] as? UIImage
         } else if indexPath.section == 1 {
           //  cell.textLabel?.text = "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
+            cell.textCellLabel.text =  "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
+
+            cell.thumbnailImgView.image = configThumbnails[indexPath.row] as? UIImage
         }
         
        // cell.imageView?.image = UIImage(named: "sample_kabi1")
