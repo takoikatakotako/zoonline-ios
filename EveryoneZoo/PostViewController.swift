@@ -79,6 +79,8 @@ class PostViewController: UIViewController {
     //左側のボタンが押されたら呼ばれる
     internal func leftBarBtnClicked(sender: UIButton){
         print("leftBarBtnClicked")
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     //右側のボタンが押されたら呼ばれる

@@ -16,6 +16,9 @@ let PARTS_HEIGHT_SEGMENT_BAR:CGFloat! = 44
 let PARTS_TABBAR_HEIGHT:CGFloat! = 50
 
 
+//広場画面
+let FIELD_BUTTON_WIDTH:CGFloat! = 80
+
 
 //マイページ画面
 

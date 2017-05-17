@@ -52,7 +52,30 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         //network
         startActivityIndicator()
         dowonloadJsons()
+        
+        
+        //投稿ボタンをつける
+        let postBtn:UIButton = UIButton()
+        postBtn.frame = CGRect(x: viewWidth-FIELD_BUTTON_WIDTH*1.5, y: viewHeight-FIELD_BUTTON_WIDTH*2-PARTS_TABBAR_HEIGHT, width: FIELD_BUTTON_WIDTH, height: FIELD_BUTTON_WIDTH)
+        postBtn.backgroundColor = UIColor.gray
+        postBtn.layer.cornerRadius = FIELD_BUTTON_WIDTH/2
+        postBtn.layer.masksToBounds = true
+        postBtn.setBackgroundImage(UIImage(named:"tab_post"), for: UIControlState.normal)
+        postBtn.addTarget(self, action: #selector(imageButtonClicked(sender:)), for:.touchUpInside)
+
+        self.view.addSubview(postBtn)
     }
+    
+    //basicボタンが押されたら呼ばれます
+    internal func imageButtonClicked(sender: UIButton){
+        print("basicButtonBtnClicked")
+        
+        let nextView:PostViewController = PostViewController() 
+        self.present(nextView, animated: true, completion: nil)
+    }
+    
+    
+    
     
     // MARK: - ClalcHeight
     func calcHeight(){

@@ -125,7 +125,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         //区切りラベルを追加する
         let headerView:UIView = UIView(frame: CGRect(x:0, y:0, width: headerFrame.size.width, height: headerFrame.size.height))
+        
+        
         headerView.addSubview(headerLabel)
+       // headerView.backgroundColor = UIColor.red
         
         return headerView
 
@@ -153,7 +156,4 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         return cell
     }
-
-
-    
 }
