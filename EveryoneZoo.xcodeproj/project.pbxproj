@@ -32,6 +32,7 @@
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
 		8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */; };
 		8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */; };
+		8DB4FD391ECD21D7008F560D /* MyPageProfilelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */; };
 		8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */; };
 		8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */; };
 		8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */; };
@@ -94,6 +95,7 @@
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListViewController.swift; sourceTree = "<group>"; };
+		8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageProfilelViewController.swift; sourceTree = "<group>"; };
 		8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkErrorTableViewCell.swift; sourceTree = "<group>"; };
 		8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDetailViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				8D6215AC1EC3689600593E55 /* MyPageViewController.swift */,
 				8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */,
+				8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */,
 			);
 			name = MyPage;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 			files = (
 				8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */,
 				8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */,
+				8DB4FD391ECD21D7008F560D /* MyPageProfilelViewController.swift in Sources */,
 				8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */,
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
 				8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */,

@@ -30,30 +30,21 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         viewHeight = self.view.frame.size.height
         tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR + HEIGHT_USER_CELL + PARTS_TABBAR_HEIGHT)
         
+        self.navigationController?.isNavigationBarHidden = true
         
+        setNavigationBar()
         
-        setView()
+        setUserCellBtn()
         
-        //user用のセル
-        let userCellBtn:MyPageUserCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR), width: viewWidth, height: HEIGHT_USER_CELL))
-        userCellBtn.backgroundColor = UIColor.white
-        self.view.addSubview(userCellBtn)
-        
-        
-        //table
-        myPageTableView = UITableView(frame: CGRect(x: 0, y: (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR + HEIGHT_USER_CELL!), width: viewWidth, height: tableViewHeight))
-        myPageTableView.dataSource = self
-        myPageTableView.delegate = self
-        myPageTableView.backgroundColor = UIColor.MyPageTableBGColor()
-        myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(MyPageTableViewCell.self))
-        myPageTableView.rowHeight = 48
-        self.view.addSubview(myPageTableView)
-    }
+        setTableView()
 
+    }
     
-    func setView() {
+    // MARK: - Viewにパーツの設置
+
+    // MARK: ステータスバー背景
+    func setNavigationBar() {
         
-        //ステータスバー背景
         let statusBackColor = UIView()
         statusBackColor.frame = CGRect(x: 0, y: 0, width: viewWidth, height: PARTS_HEIGHT_STATUS_BAR)
         statusBackColor.backgroundColor = UIColor.mainAppColor()
@@ -75,12 +66,33 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         titleLabel.textColor = UIColor.white
         myNavItems.titleView = titleLabel
         
-
         //作成したNavItemをNavBarに追加する
         myNavBar.pushItem(myNavItems, animated: true)
         self.view.addSubview(myNavBar)
     }
+
+    //user用のセル
+    func setUserCellBtn() {
+        
+        let userCellBtn:MyPageUserCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR), width: viewWidth, height: HEIGHT_USER_CELL))
+        userCellBtn.backgroundColor = UIColor.white
+        userCellBtn.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for:.touchUpInside)
+        self.view.addSubview(userCellBtn)
+    }
     
+    //TableViewの設置
+    func setTableView(){
+    
+        myPageTableView = UITableView(frame: CGRect(x: 0, y: (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR + HEIGHT_USER_CELL!), width: viewWidth, height: tableViewHeight))
+        myPageTableView.dataSource = self
+        myPageTableView.delegate = self
+        myPageTableView.backgroundColor = UIColor.MyPageTableBGColor()
+        myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(MyPageTableViewCell.self))
+        myPageTableView.rowHeight = 48
+        self.view.addSubview(myPageTableView)
+    }
+    
+    // MARK: - TableViewのデリゲートメソッド
     
     //セクションの数を返す.
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -151,9 +163,18 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.thumbnailImgView.image = configThumbnails[indexPath.row] as? UIImage
         }
         
-       // cell.imageView?.image = UIImage(named: "sample_kabi1")
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         
         return cell
     }
+    
+    // MARK: - アクションの設定
+    
+    //basicボタンが押されたら呼ばれます
+    internal func goMyProfile(sender: UIButton){
+
+        let vc:MyPageProfilelViewController = MyPageProfilelViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
