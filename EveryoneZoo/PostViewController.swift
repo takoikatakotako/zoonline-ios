@@ -23,7 +23,7 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height

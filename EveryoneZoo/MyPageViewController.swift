@@ -28,16 +28,13 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR + HEIGHT_USER_CELL + PARTS_TABBAR_HEIGHT)
-        
-        self.navigationController?.isNavigationBarHidden = true
+        tableViewHeight = viewHeight - (HEIGHT_USER_CELL + PARTS_TABBAR_HEIGHT)
         
         setNavigationBar()
         
         setUserCellBtn()
         
         setTableView()
-
     }
     
     // MARK: - Viewにパーツの設置
@@ -45,36 +42,23 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: ステータスバー背景
     func setNavigationBar() {
         
-        let statusBackColor = UIView()
-        statusBackColor.frame = CGRect(x: 0, y: 0, width: viewWidth, height: PARTS_HEIGHT_STATUS_BAR)
-        statusBackColor.backgroundColor = UIColor.mainAppColor()
-        self.view.addSubview(statusBackColor)
-        
-        //ナビゲーションバーの作成
-        UINavigationBar.appearance().tintColor = UIColor.white
-        let myNavBar = UINavigationBar()
-        myNavBar.frame = CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR)
-        myNavBar.barTintColor = UIColor.mainAppColor()
-        myNavBar.isTranslucent = false
+        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let myNavItems = UINavigationItem()
         let titleLabel:UILabel = UILabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "マイページ"
         titleLabel.textColor = UIColor.white
-        myNavItems.titleView = titleLabel
         
-        //作成したNavItemをNavBarに追加する
-        myNavBar.pushItem(myNavItems, animated: true)
-        self.view.addSubview(myNavBar)
+        self.navigationItem.titleView = titleLabel
     }
 
     //user用のセル
     func setUserCellBtn() {
         
-        let userCellBtn:MyPageUserCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR), width: viewWidth, height: HEIGHT_USER_CELL))
+        let userCellBtn:MyPageUserCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: 0, width: viewWidth, height: HEIGHT_USER_CELL))
         userCellBtn.backgroundColor = UIColor.white
         userCellBtn.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for:.touchUpInside)
         self.view.addSubview(userCellBtn)
@@ -83,7 +67,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //TableViewの設置
     func setTableView(){
     
-        myPageTableView = UITableView(frame: CGRect(x: 0, y: (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR + HEIGHT_USER_CELL!), width: viewWidth, height: tableViewHeight))
+        myPageTableView = UITableView(frame: CGRect(x: 0, y: HEIGHT_USER_CELL, width: viewWidth, height: tableViewHeight))
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
         myPageTableView.backgroundColor = UIColor.MyPageTableBGColor()

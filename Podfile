@@ -11,6 +11,7 @@ target 'EveryoneZoo' do
   pod 'SwiftyJSON'
   pod 'AlamofireImage', '~> 3.1'
 
+
   target 'EveryoneZooTests' do
     inherit! :search_paths
     # Pods for testing

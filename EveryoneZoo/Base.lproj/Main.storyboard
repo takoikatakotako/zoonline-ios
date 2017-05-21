@@ -49,7 +49,7 @@
         <!--投稿-->
         <scene sceneID="dU7-6a-kIm">
             <objects>
-                <viewController id="prJ-Gc-YTA" customClass="PostViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="prJ-Gc-YTA" customClass="PostViewBubleViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PUj-lI-kZk"/>
                         <viewControllerLayoutGuide type="bottom" id="cz6-Jt-enA"/>
