@@ -91,11 +91,33 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //Cellが選択された際に呼び出される.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if indexPath.section == 0 {
+            
+            switch indexPath.row {
+            case 0:
+                let vc:MyPagePostViewController = MyPagePostViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            break
+            case 1:
+                let vc:MyPageFollowViewController = MyPageFollowViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                break
+            case 2:
+                let vc:MyPageFavoriteViewController = MyPageFavoriteViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                break
+            default:
+                break
+                
+            }
+            
             print("Value: \(ARRAY_MYPAGE_USER_INFOS[indexPath.row])")
         } else if indexPath.section == 1 {
             print("Value: \(ARRAY_MYPAGE_CONFIS[indexPath.row])")
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //テーブルに表示する配列の総数を返す.

@@ -35,6 +35,9 @@
 		8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */; };
 		8DB4FD391ECD21D7008F560D /* MyPageProfilelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */; };
 		8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */; };
+		8DDAF0DB1ED183E00079D443 /* MyPagePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */; };
+		8DDAF0DD1ED184790079D443 /* MyPageFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DC1ED184790079D443 /* MyPageFollowViewController.swift */; };
+		8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */; };
 		8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */; };
 		8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */; };
 		8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */; };
@@ -99,6 +102,9 @@
 		8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListViewController.swift; sourceTree = "<group>"; };
 		8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageProfilelViewController.swift; sourceTree = "<group>"; };
 		8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkErrorTableViewCell.swift; sourceTree = "<group>"; };
+		8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPagePostViewController.swift; sourceTree = "<group>"; };
+		8DDAF0DC1ED184790079D443 /* MyPageFollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageFollowViewController.swift; sourceTree = "<group>"; };
+		8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageFavoriteViewController.swift; sourceTree = "<group>"; };
 		8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDetailViewController.swift; sourceTree = "<group>"; };
 		8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageUserCellBtn.swift; sourceTree = "<group>"; };
@@ -172,6 +178,9 @@
 				8D6215AC1EC3689600593E55 /* MyPageViewController.swift */,
 				8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */,
 				8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */,
+				8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */,
+				8DDAF0DC1ED184790079D443 /* MyPageFollowViewController.swift */,
+				8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */,
 			);
 			name = MyPage;
 			sourceTree = "<group>";
@@ -584,6 +593,7 @@
 				8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */,
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
 				8D7E860B1EABBC7400C4049B /* RightPicturesTableViewCell.swift in Sources */,
+				8DDAF0DB1ED183E00079D443 /* MyPagePostViewController.swift in Sources */,
 				8D7E86091EABBC6200C4049B /* LeftPicturesTableViewCell.swift in Sources */,
 				8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */,
 				8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */,
@@ -591,9 +601,11 @@
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
+				8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */,
 				8D6215AA1EC35EAA00593E55 /* PostViewScrollView.swift in Sources */,
 				8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
+				8DDAF0DD1ED184790079D443 /* MyPageFollowViewController.swift in Sources */,
 				8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */,
 				8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */,
 				8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */,
