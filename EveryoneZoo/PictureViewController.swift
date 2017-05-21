@@ -15,12 +15,9 @@ import SwiftyJSON
 class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource {
     
     //width, height
-    private var statusHeight:CGFloat!
-    private var navBarHeight:CGFloat!
-    private var segmentViewHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var navigationBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
     
     //view parts
@@ -42,57 +39,125 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        calcHeight()
+        //画面横サイズを取得
+        self.viewWidth = self.view.frame.width
+        self.viewHeight = self.view.frame.height
+        self.navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        self.tableViewHeight = viewHeight-(navigationBarHeight+PARTS_HEIGHT_SEGMENT_BAR+PARTS_TABBAR_HEIGHT)
         
         //views
-        setView()
+        setNavigationBar()
         setSegmentView()
         setTableView()
 
         //network
         startActivityIndicator()
         dowonloadJsons()
-        
     }
     
-
-    // MARK: - ClalcHeight
-    func calcHeight(){
-        //画面横サイズを取得
-        viewWidth = self.view.frame.width
-        viewHeight = self.view.frame.height
+    // MARK: - Viewにパーツの設置
+    // MARK: ナビゲーションバー
+    func setNavigationBar() {
         
-        //各部品の高さを取得
-        statusHeight = UIApplication.shared.statusBarFrame.height
-        navBarHeight =  self.navigationController?.navigationBar.frame.height
-        segmentViewHeight = self.navigationController?.navigationBar.frame.height
-        tabBarHeight = UITabBar.appearance().frame.size.height
-        tableViewHeight = viewHeight-(statusHeight+navBarHeight+segmentViewHeight+tabBarHeight+tabBarHeight)
+        //ステータスバー部分の覆い
+        let aadView:UIView = UIView()
+        aadView.frame = CGRect(x: 0, y: -PARTS_HEIGHT_NAVIGATION_BAR*2, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR*2)
+        aadView.backgroundColor = UIColor.mainAppColor()
+        self.view.addSubview(aadView)
         
-    }
-
-    // MARK: - View関連
-    func setView() {
-        
-        self.view.backgroundColor = UIColor.mainAppColor()
-        
-        //ステータスバー部分の背景
-        let statusBackColor = UIView()
-        statusBackColor.frame = CGRect(x: 0, y: -(statusHeight+navBarHeight), width: viewWidth, height: navBarHeight*2)
-        statusBackColor.backgroundColor = UIColor.mainAppColor()
-        self.view.addSubview(statusBackColor)
-        
-        // MARK: - UINavigationBar
+        //ナビゲーションコントローラーの色の変更
         self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
         self.navigationController?.navigationBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        self.navigationItem.title = NSLocalizedString("KEY_field", comment: "ひろば")
-
+        //ナビゲーションアイテムを作成
+        let titleLabel:UILabel = UILabel()
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.textAlignment = NSTextAlignment.center
+        titleLabel.text = NSLocalizedString("KEY_field", comment: "ひろば")
+        titleLabel.textColor = UIColor.white
+        self.navigationItem.titleView = titleLabel
+        
         serchNavBtn.tintColor = UIColor.white
         serchNavBtn.action = #selector(rightBarBtnClicked(sender:))
     }
+
+    // MARK: セグメントビュー関連
+    func setSegmentView(){
+        
+        segmentView = UIView()
+        segmentView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: PARTS_HEIGHT_SEGMENT_BAR)
+        segmentView.backgroundColor = UIColor.white
+        self.view.addSubview(segmentView)
+        
+        //スクロールビューとの区切り線
+        let segmentLine = UIView()
+        segmentLine.frame = CGRect(x: 0, y: PARTS_HEIGHT_SEGMENT_BAR - 2, width: viewWidth, height: 2)
+        segmentLine.backgroundColor = UIColor.gray
+        segmentView.addSubview(segmentLine)
+        
+        //セグメントビューの左
+        segmentLeftBtn = UIButton()
+        segmentLeftBtn.tag = 0
+        segmentLeftBtn.frame = CGRect(x: viewWidth*0.05, y: PARTS_HEIGHT_SEGMENT_BAR*0.1, width: viewWidth*0.4, height: PARTS_HEIGHT_SEGMENT_BAR*0.7)
+        segmentLeftBtn.setTitle(NSLocalizedString("KEY_popularity", comment: "人気"), for: UIControlState.normal)
+        segmentLeftBtn.addTarget(self, action: #selector(segmentBtnClicked(sender:)), for:.touchUpInside)
+        segmentView.addSubview(segmentLeftBtn)
+        
+        //セグメント左の下線
+        leftSegUnderLine = UIView()
+        leftSegUnderLine.frame = CGRect(x: viewWidth*0.05, y: PARTS_HEIGHT_SEGMENT_BAR*0.8, width: viewWidth*0.4, height: 2)
+        segmentView.addSubview(leftSegUnderLine)
+        
+        //セグメントビューの右
+        segmentRightBtn = UIButton()
+        segmentRightBtn.tag = 1
+        segmentRightBtn.frame = CGRect(x: viewWidth*0.55, y: PARTS_HEIGHT_SEGMENT_BAR*0.1, width: viewWidth*0.4, height: PARTS_HEIGHT_SEGMENT_BAR*0.7)
+        segmentRightBtn.setTitle(NSLocalizedString("KEY_new", comment: "新着"), for: UIControlState.normal)
+        segmentRightBtn.addTarget(self, action: #selector(segmentBtnClicked(sender:)), for:.touchUpInside)
+        segmentView.addSubview(segmentRightBtn)
+        
+        //セグメント左の下線
+        rightSegUnderLine = UIView()
+        rightSegUnderLine.frame = CGRect(x: viewWidth*0.55, y: PARTS_HEIGHT_SEGMENT_BAR*0.8, width: viewWidth*0.4, height: 2)
+        segmentView.addSubview(rightSegUnderLine)
+        
+        //セグメントを左選択状態に
+        segmentLeftSelected()
+    }
+    
+    
+    // MARK: テーブルビューの生成
+    func setTableView(){
+        
+        // ScrollViewを生成.
+        pictureTableView = UITableView()
+        pictureTableView.delegate = self
+        pictureTableView.dataSource = self
+        pictureTableView.frame = CGRect(x: 0, y: PARTS_HEIGHT_SEGMENT_BAR, width: viewWidth, height: self.tableViewHeight)
+        pictureTableView.backgroundColor = UIColor.white
+        pictureTableView.separatorStyle = .none
+        
+        // はじめはコンテンツビューのサイズは画面と同じ
+        pictureTableView.contentSize = CGSize(width:viewWidth, height:self.tableViewHeight)
+        
+        //テーブルビューの設置
+        pictureTableView.register(LeftPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self))
+        pictureTableView.register(RightPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(RightPicturesTableViewCell.self))
+        pictureTableView.register(NetWorkErrorTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self))
+        pictureTableView.rowHeight = viewWidth
+        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
+        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
+        self.view.addSubview(pictureTableView)
+        
+        //リフレッシュコントロールの追加
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
+        pictureTableView.refreshControl = refreshControl
+    }
+    
+
+
     
     internal func leftBarBtnClicked(sender: UIButton){
         print("leftBarBtnClicked")
@@ -103,50 +168,6 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         
     }
     
-    // MARK: - セグメントビュー関連
-    func setSegmentView(){
-        
-        // MARK: - segmentView
-        segmentView = UIView()
-        segmentView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: segmentViewHeight)
-        segmentView.backgroundColor = UIColor.white
-        self.view.addSubview(segmentView)
-        
-        //スクロールビューとの区切り線
-        let segmentLine = UIView()
-        segmentLine.frame = CGRect(x: 0, y: segmentViewHeight - 2, width: viewWidth, height: 2)
-        segmentLine.backgroundColor = UIColor.gray
-        segmentView.addSubview(segmentLine)
-        
-        //セグメントビューの左
-        segmentLeftBtn = UIButton()
-        segmentLeftBtn.tag = 0
-        segmentLeftBtn.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
-        segmentLeftBtn.setTitle(NSLocalizedString("KEY_popularity", comment: "人気"), for: UIControlState.normal)
-        segmentLeftBtn.addTarget(self, action: #selector(segmentBtnClicked(sender:)), for:.touchUpInside)
-        segmentView.addSubview(segmentLeftBtn)
-        
-        //セグメント左の下線
-        leftSegUnderLine = UIView()
-        leftSegUnderLine.frame = CGRect(x: viewWidth*0.05, y: segmentViewHeight*0.8, width: viewWidth*0.4, height: 2)
-        segmentView.addSubview(leftSegUnderLine)
-        
-        //セグメントビューの右
-        segmentRightBtn = UIButton()
-        segmentRightBtn.tag = 1
-        segmentRightBtn.frame = CGRect(x: viewWidth*0.55, y: segmentViewHeight*0.1, width: viewWidth*0.4, height: segmentViewHeight*0.7)
-        segmentRightBtn.setTitle(NSLocalizedString("KEY_new", comment: "新着"), for: UIControlState.normal)
-        segmentRightBtn.addTarget(self, action: #selector(segmentBtnClicked(sender:)), for:.touchUpInside)
-        segmentView.addSubview(segmentRightBtn)
-        
-        //セグメント左の下線
-        rightSegUnderLine = UIView()
-        rightSegUnderLine.frame = CGRect(x: viewWidth*0.55, y: segmentViewHeight*0.8, width: viewWidth*0.4, height: 2)
-        segmentView.addSubview(rightSegUnderLine)
-        
-        //セグメントを左選択状態に
-        segmentLeftSelected()
-    }
 
     
     //セグメントの切り替えが呼ばれた呼ばれる
@@ -192,34 +213,6 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     }
     
     
-    // MARK: - テーブリュビューの生成
-    func setTableView(){
-        
-        // ScrollViewを生成.
-        pictureTableView = UITableView()
-        pictureTableView.delegate = self
-        pictureTableView.dataSource = self
-        pictureTableView.frame = CGRect(x: 0, y: segmentViewHeight!, width: viewWidth, height: tableViewHeight)
-        pictureTableView.backgroundColor = UIColor.white
-        pictureTableView.separatorStyle = .none
-        
-        // はじめはコンテンツビューのサイズは画面と同じ
-        pictureTableView.contentSize = CGSize(width:viewWidth, height:tableViewHeight)
-        
-        //テーブルビューの設置
-        pictureTableView.register(LeftPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self))
-        pictureTableView.register(RightPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(RightPicturesTableViewCell.self))
-        pictureTableView.register(NetWorkErrorTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self))
-        pictureTableView.rowHeight = viewWidth
-        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
-        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
-        self.view.addSubview(pictureTableView)
-        
-        //リフレッシュコントロールの追加
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
-        pictureTableView.refreshControl = refreshControl
-    }
     
     
     func setImageBtns(json:JSON){
@@ -250,17 +243,19 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         
         if hidden {
             animator.addAnimations {
-                // animation
-                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: -self.navBarHeight, width: self.viewWidth, height: self.navBarHeight)
-                self.segmentView.frame = CGRect(x: 0, y: -self.segmentViewHeight, width: self.viewWidth, height: self.segmentViewHeight)
-                self.pictureTableView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.viewHeight)
+                // 上
+                self.tableViewHeight = self.viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_SEGMENT_BAR+PARTS_TABBAR_HEIGHT)
+                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: -self.navigationBarHeight, width: self.viewWidth, height: self.navigationBarHeight)
+                self.segmentView.frame = CGRect(x: 0, y: -PARTS_HEIGHT_SEGMENT_BAR, width: self.viewWidth, height: PARTS_HEIGHT_SEGMENT_BAR)
+                self.pictureTableView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.tableViewHeight)
             }
         }else{
             animator.addAnimations {
-                // animation
-                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: self.statusHeight, width: self.viewWidth, height: self.navBarHeight)
-                self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.segmentViewHeight)
-                self.pictureTableView.frame = CGRect(x: 0, y: self.segmentViewHeight!, width: self.viewWidth, height: self.tableViewHeight)
+                // 下
+                self.tableViewHeight  = self.viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_SEGMENT_BAR+PARTS_TABBAR_HEIGHT)
+                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR, width: self.viewWidth, height: self.navigationBarHeight)
+                self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: PARTS_HEIGHT_SEGMENT_BAR)
+                self.pictureTableView.frame = CGRect(x: 0, y: PARTS_HEIGHT_SEGMENT_BAR, width: self.viewWidth, height: self.tableViewHeight)
             }
         }
         animator.startAnimation()

@@ -14,8 +14,6 @@ class PostViewController: UIViewController {
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
     private var scrollViewHeight:CGFloat!
-    
-
 
     //テーブルビューインスタンス
     private var myTableView: UITableView!
