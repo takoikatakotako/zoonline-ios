@@ -11,36 +11,50 @@ import UIKit
 class PictureDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
     //width, height
-    private var statusHeight:CGFloat!
-    private var navBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var tableViewHeight:CGFloat!
+    var viewWidth:CGFloat!
+    var viewHeight:CGFloat!
+    var tableViewHeight:CGFloat!
     
     //view parts
     private var postDetailTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //画面横サイズを取得
-        let viewWidth:CGFloat = self.view.frame.width
-        let viewHeight:CGFloat  = self.view.frame.height
         
-        //各部品の高さを取得
-        
-        statusHeight = UIApplication.shared.statusBarFrame.height
-        navBarHeight =  self.navigationController?.navigationBar.frame.height
-        tabBarHeight = 50
-        tableViewHeight = viewHeight-(statusHeight+navBarHeight+tabBarHeight)
-        
-        setView()
+        self.view.backgroundColor = UIColor.white
 
+        viewWidth = self.view.frame.width
+        viewHeight = self.view.frame.height
+        tableViewHeight = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_TABBAR_HEIGHT)
+        
+        setNavigationBar()
+        setTableView()
+    }
+    
+    // MARK: - Viewにパーツの設置
+    
+    // MARK: NavigationBar
+    func setNavigationBar() {
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.isTranslucent = false
+        UINavigationBar.appearance().tintColor = UIColor.white
+        
+        //ナビゲーションアイテムを作成
+        let titleLabel:UILabel = UILabel()
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.textAlignment = NSTextAlignment.center
+        titleLabel.text = "サイさんだー"
+        titleLabel.textColor = UIColor.white
+        
+        self.navigationItem.titleView = titleLabel
+    }
+    
+    // MARK: TableView
+    func setTableView() {
         
         //テーブルビューの初期化
         postDetailTableView = UITableView()
-        
-        //デリゲートの設定
         postDetailTableView.delegate = self
         postDetailTableView.dataSource = self
         
@@ -53,45 +67,20 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         self.view.addSubview(postDetailTableView)
-        
     }
     
-    //Viewへの配置
-    func setView() {
-        
-        //背景色を変更
-        self.view.backgroundColor = UIColor.mainAppColor()
-        
-        // MARK: - UINavigationBar
-        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
-        
-        //ハイライトを消す
-        self.navigationController?.navigationBar.isTranslucent = false
-        
-        //ナビゲーションボタンの色を変更する
-        UINavigationBar.appearance().tintColor = UIColor.white
-    }
 
-    //左側のボタンが押されたら呼ばれる
-    func leftBarBtnClicked(sender: UIButton){
-        print("leftBarBtnClicked")
-        self.dismiss(animated: true, completion: nil)
-    }
+    
+    // MARK: - TableView Delegate Method
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //テーブルビューのセルの数はmyItems配列の数とした
         return 1
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //myItems配列の中身をテキストにして登録した
+
         let cell:PostDetailTableCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostDetailTableCell.self), for: indexPath) as! PostDetailTableCell
         cell.layoutMargins = UIEdgeInsets.zero
         cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -140,4 +129,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     }
 
 
+    // MARK: - Others
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

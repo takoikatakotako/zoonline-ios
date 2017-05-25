@@ -156,20 +156,17 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         pictureTableView.refreshControl = refreshControl
     }
     
-
-
-    
+    // MARK: - ナビゲーションバーのアクション
     internal func leftBarBtnClicked(sender: UIButton){
         print("leftBarBtnClicked")
     }
     
     internal func rightBarBtnClicked(sender: UIButton){
         print("rightBarBtnClicked")
-        
     }
     
 
-    
+    // MARK: - セグメントバーのアクション
     //セグメントの切り替えが呼ばれた呼ばれる
     func segmentBtnClicked(sender: UIButton){
 
@@ -198,7 +195,6 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         
         segmentRightBtn.setTitleColor(UIColor.gray, for: UIControlState.normal)
         rightSegUnderLine.backgroundColor = UIColor.white
-        
     }
     
     //右側が押されてる
@@ -212,18 +208,83 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         leftSegUnderLine.backgroundColor = UIColor.white
     }
     
-    
-    
-    
-    func setImageBtns(json:JSON){
-        for i in 0..<json.count {
-            imageURLs.append(json[i]["itemImage"].stringValue)
+    // MARK: - TableViewのデリゲートメソッド
+    //MARK: テーブルビューのセルの数を設定する
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if !isNetWorkConnect {
+            return 1
         }
-        self.pictureTableView.reloadData()
+        return imageURLs.count/6
+    }
+    
+    //MARK: テーブルビューのセルの中身を設定する
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //ネットワークエラの処理
+        if !isNetWorkConnect {
+            let cell:NetWorkErrorTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self), for: indexPath) as! NetWorkErrorTableViewCell
+            cell.errorImgView.image = UIImage(named: "sample_neterror")!
+            return cell
+        }
+        
+        if indexPath.row % 2 == 0 {
+            let cell:LeftPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self), for: indexPath) as! LeftPicturesTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.layoutMargins = UIEdgeInsets.zero
+            
+            let loadImg = UIImage(named: "sample_loading")!
+            
+            for i in 0..<6 {
+                let url = URL(string: imageURLs[i])!
+                cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
+                cell.picturesImgs[i].isUserInteractionEnabled = true
+                cell.picturesImgs[i].tag = indexPath.row*6+i
+                
+                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
+                singleTap.numberOfTapsRequired = 1
+                cell.picturesImgs[i].addGestureRecognizer(singleTap)
+            }
+            return cell
+        }else{
+            
+            let cell:RightPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(RightPicturesTableViewCell.self), for: indexPath) as! RightPicturesTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.layoutMargins = UIEdgeInsets.zero
+            
+            let loadImg = UIImage(named: "sample_loading")!
+            
+            for i in 0..<6 {
+                let url = URL(string: imageURLs[i])!
+                cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
+                cell.picturesImgs[i].isUserInteractionEnabled = true
+                cell.picturesImgs[i].tag = indexPath.row*6+i
+                
+                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
+                singleTap.numberOfTapsRequired = 1
+                cell.picturesImgs[i].addGestureRecognizer(singleTap)
+            }
+            return cell
+        }
+    }
+    
+    // タッチイベントの検出
+    //MARK: シングルタップ時に実行される
+    func tapSingle(sender: UITapGestureRecognizer) {
+        print(sender.view?.tag ?? 400)
+        
+        let picDetailView: PictureDetailViewController = PictureDetailViewController()
+        self.navigationController?.pushViewController(picDetailView, animated: true)
+    }
+    
+    internal func pictureSelected(sender: UIButton){
+        
+        let picDetailView:PictureDetailViewController = PictureDetailViewController()
+        navigationController?.pushViewController(picDetailView as UIViewController, animated: true)
     }
     
     
-    
+    // MARK: - TableViewの拡張メソッド
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
         
         if (velocity.y > 0) {
@@ -269,13 +330,8 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         
         sender.endRefreshing()
     }
-    
-    internal func pictureSelected(sender: UIButton){
-        
-        let picDetailView:PictureDetailViewController = PictureDetailViewController()
-        navigationController?.pushViewController(picDetailView as UIViewController, animated: true)
-    }
-    
+
+
     // MARK: - NetWork
     func startActivityIndicator(){
         
@@ -299,7 +355,6 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         
         Alamofire.request(ApiLibrary.getAPIURL()).responseJSON{ response in
             
-            
             self.ActivityIndicator.stopAnimating()
 
             switch response.result {
@@ -320,76 +375,16 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     }
     
     
-    //MARK: テーブルビューのセルの数を設定する
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        if !isNetWorkConnect {
-            return 1
+    func setImageBtns(json:JSON){
+        imageURLs = []
+        for i in 0..<json.count {
+            imageURLs.append(json[i]["itemImage"].stringValue)
         }
-        return imageURLs.count/6
+        
+        
+        self.pictureTableView.reloadData()
     }
     
-    //MARK: テーブルビューのセルの中身を設定する
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        //ネットワークエラの処理
-        if !isNetWorkConnect {
-            let cell:NetWorkErrorTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self), for: indexPath) as! NetWorkErrorTableViewCell
-            cell.errorImgView.image = UIImage(named: "sample_neterror")!
-            return cell
-        }
-        
-        if indexPath.row % 2 == 0 {
-            let cell:LeftPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self), for: indexPath) as! LeftPicturesTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.layoutMargins = UIEdgeInsets.zero
-            
-            let loadImg = UIImage(named: "sample_loading")!
-            let url = URL(string: imageURLs[indexPath.row])!
-            
-            for i in 0..<6 {
-                cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
-                cell.picturesImgs[i].isUserInteractionEnabled = true
-                cell.picturesImgs[i].tag = indexPath.row*6+i
-                
-                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
-                singleTap.numberOfTapsRequired = 1
-                cell.picturesImgs[i].addGestureRecognizer(singleTap)
-            }
-            return cell
-        }else{
-            
-            let cell:RightPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(RightPicturesTableViewCell.self), for: indexPath) as! RightPicturesTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.layoutMargins = UIEdgeInsets.zero
-            
-            let loadImg = UIImage(named: "sample_loading")!
-            let url = URL(string: imageURLs[indexPath.row])!
-            
-            for i in 0..<6 {
-                cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
-                cell.picturesImgs[i].isUserInteractionEnabled = true
-                cell.picturesImgs[i].tag = indexPath.row*6+i
-                
-                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
-                singleTap.numberOfTapsRequired = 1
-                cell.picturesImgs[i].addGestureRecognizer(singleTap)
-            }
-            return cell
-        }
-    }
-    
-    // タッチイベントの検出
-    /// シングルタップ時に実行される
-    func tapSingle(sender: UITapGestureRecognizer) {
-        print(sender.view?.tag ?? 400)
-
-        // 移動先のViewを定義する.
-        let picDetailView: PictureDetailViewController = PictureDetailViewController()
-        
-        // SecondViewに移動する.
-        self.navigationController?.pushViewController(picDetailView, animated: true)
-    }
 
     // MARK: - Others
     override var preferredStatusBarStyle: UIStatusBarStyle {
