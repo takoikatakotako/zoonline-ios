@@ -33,6 +33,7 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     
     //APIから取得したデーター
     var imageURLs:Array<String> = Array()
+    var postIds:Array<Int> = Array()
     var ActivityIndicator: UIActivityIndicatorView!
     var isNetWorkConnect:Bool = true
     
@@ -239,7 +240,7 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
                 let url = URL(string: imageURLs[i])!
                 cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
                 cell.picturesImgs[i].isUserInteractionEnabled = true
-                cell.picturesImgs[i].tag = indexPath.row*6+i
+                cell.picturesImgs[i].tag = postIds[i]
                 
                 let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
                 singleTap.numberOfTapsRequired = 1
@@ -258,7 +259,7 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
                 let url = URL(string: imageURLs[i])!
                 cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
                 cell.picturesImgs[i].isUserInteractionEnabled = true
-                cell.picturesImgs[i].tag = indexPath.row*6+i
+                cell.picturesImgs[i].tag = postIds[i]
                 
                 let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
                 singleTap.numberOfTapsRequired = 1
@@ -274,6 +275,7 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         print(sender.view?.tag ?? 400)
         
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
+        picDetailView.postID = sender.view?.tag
         self.navigationController?.pushViewController(picDetailView, animated: true)
     }
     
@@ -377,10 +379,11 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     
     func setImageBtns(json:JSON){
         imageURLs = []
+        postIds = []
         for i in 0..<json.count {
             imageURLs.append(json[i]["itemImage"].stringValue)
+            postIds.append(json[i]["id"].intValue)
         }
-        
         
         self.pictureTableView.reloadData()
     }

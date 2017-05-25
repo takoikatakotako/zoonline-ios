@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+import SwiftyJSON
+
 
 class PictureDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
@@ -14,6 +18,16 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     var viewWidth:CGFloat!
     var viewHeight:CGFloat!
     var tableViewHeight:CGFloat!
+    
+    //Post ID
+    public var postID:Int!
+    
+    //Post Datas
+    var postUserName:String = ""
+    var postTitle:String = ""
+    var postCaption:String = ""
+    var postImgUrl:URL = URL(string: "http://www.tokyo-zoo.net/Topics/upfiles/24152_top.jpg")!
+    
     
     //view parts
     private var postDetailTableView: UITableView!
@@ -27,8 +41,30 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         viewHeight = self.view.frame.height
         tableViewHeight = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_TABBAR_HEIGHT)
         
-        setNavigationBar()
-        setTableView()
+        let urlStr:String = "http://minzoo.herokuapp.com/api/v0/plaza/detail/"+String(postID)
+        Alamofire.request(urlStr).responseJSON{
+            response in
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                let json:JSON = JSON(response.result.value ?? kill)
+
+                self.postUserName = json[0]["userName"].stringValue
+                self.postTitle = json[0]["title"].stringValue
+                self.postCaption = json[0]["caption"].stringValue
+                self.postImgUrl = URL(string: json[0]["itemImage"].stringValue)!
+                
+                self.setNavigationBar()
+                self.setTableView()
+                
+            case .failure(let error):
+                print(error)
+
+                
+            }
+        }
+        
     }
     
     // MARK: - Viewにパーツの設置
@@ -44,7 +80,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let titleLabel:UILabel = UILabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
         titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "サイさんだー"
+        titleLabel.text = self.postTitle
         titleLabel.textColor = UIColor.white
         
         self.navigationItem.titleView = titleLabel
@@ -85,6 +121,14 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.layoutMargins = UIEdgeInsets.zero
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
+        //ダウンロードしたパーツ
+        cell.userNameTextView.text = postUserName
+        cell.descriptionTextView.text = self.postCaption
+        
+        let loadImg = UIImage(named: "sample_loading")!
+        cell.postImgView.af_setImage(withURL: self.postImgUrl, placeholderImage: loadImg)
+        
+
         cell.menuBtn.addTarget(self, action: #selector(showActionShert(sender:)), for:.touchUpInside)
 
         return cell
