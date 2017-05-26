@@ -15,6 +15,7 @@
 		8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4591E8031800008D997 /* ZooListViewController.swift */; };
 		8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */; };
 		8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586711ED848F400802F54 /* UserInfoViewController.swift */; };
+		8D1586741ED8565300802F54 /* FollowUserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586731ED8565300802F54 /* FollowUserButton.swift */; };
 		8D3CAF891ED09907007961BF /* PostDraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3CAF881ED09907007961BF /* PostDraftViewController.swift */; };
 		8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */; };
 		8D6215AA1EC35EAA00593E55 /* PostViewScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215A91EC35EAA00593E55 /* PostViewScrollView.swift */; };
@@ -74,6 +75,7 @@
 		8D0FB4591E8031800008D997 /* ZooListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZooListViewController.swift; sourceTree = "<group>"; };
 		8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		8D1586711ED848F400802F54 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		8D1586731ED8565300802F54 /* FollowUserButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowUserButton.swift; sourceTree = "<group>"; };
 		8D3CAF881ED09907007961BF /* PostDraftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDraftViewController.swift; sourceTree = "<group>"; };
 		8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPartsSize.swift; sourceTree = "<group>"; };
 		8D6215A91EC35EAA00593E55 /* PostViewScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewScrollView.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */,
 				8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */,
 				8D1586711ED848F400802F54 /* UserInfoViewController.swift */,
+				8D1586731ED8565300802F54 /* FollowUserButton.swift */,
 			);
 			name = FieldView;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */,
 				8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */,
 				8DB4FD391ECD21D7008F560D /* MyPageProfilelViewController.swift in Sources */,
+				8D1586741ED8565300802F54 /* FollowUserButton.swift in Sources */,
 				8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */,
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
 				8D3CAF891ED09907007961BF /* PostDraftViewController.swift in Sources */,

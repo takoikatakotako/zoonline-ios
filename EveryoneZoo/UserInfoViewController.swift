@@ -28,12 +28,10 @@ class UserInfoViewController: UIViewController {
         setNavigationBar()
         
         
-        
         let profileSample:UIImageView = UIImageView()
         profileSample.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth)
         profileSample.image = UIImage(named:"sample_profile")
         self.view.addSubview(profileSample)
-        
     }
     
     // MARK: NavigationBar

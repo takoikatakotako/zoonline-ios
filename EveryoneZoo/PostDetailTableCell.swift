@@ -13,8 +13,9 @@ class PostDetailTableCell: UITableViewCell {
     var userInfoBtn:UIButton!
     var thumbnailImgView:UIImageView!
     var userNameTextView:UILabel!
-    var followImgView:UIImageView!
-    var followLabel:UILabel!
+    
+    var followBtn:FollowUserButton!
+
     var postImgView:UIImageView!
     var favImageBtn:UIButton!
     var favCountLabel:UILabel!
@@ -29,7 +30,8 @@ class PostDetailTableCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        //Userに関する情報ボタン
+
+        //UserInfoBtn
         userInfoBtn = UIButton()
         contentView.addSubview(userInfoBtn)
         
@@ -42,15 +44,8 @@ class PostDetailTableCell: UITableViewCell {
         userNameTextView.textAlignment =  NSTextAlignment.left
         userNameTextView.text = "いろはにほへと"
         userInfoBtn.addSubview(userNameTextView)
-        
-        
-        followImgView = UIImageView()
-        followImgView.image = UIImage(named: "userIcon")!
-        contentView.addSubview(followImgView)
-        
-        followLabel = UILabel()
-        followLabel.text = "フォロー"
-        contentView.addSubview(followLabel)
+    
+        followBtn = FollowUserButton()
         
         postImgView = UIImageView()
         postImgView.image = UIImage(named: "sample_postImage")!
@@ -125,15 +120,14 @@ class PostDetailTableCell: UITableViewCell {
 
         //UserInfoBtn
         userInfoBtn.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.015, width: cellWidth*0.5, height: cellWidth*0.1)
-
         thumbnailImgView.frame = CGRect(x: 0, y: 0, width: cellWidth*0.1, height: cellWidth*0.1)
         thumbnailImgView.layer.cornerRadius = thumbnailImgView.frame.size.width * 0.5
-        
         userNameTextView.frame = CGRect(x: cellWidth*0.13, y: 0, width: cellWidth*0.4, height: cellWidth*0.1)
         
+        //FollowBtn
+        followBtn.frame = CGRect(x: cellWidth*0.65, y: cellHeight*0.015, width: cellWidth*0.33, height: cellWidth*0.1)
+        contentView.addSubview(followBtn)
         
-        followImgView.frame = CGRect(x: cellWidth*0.68, y: cellHeight*0.015, width: cellWidth*0.08, height: cellWidth*0.08)
-        followLabel.frame = CGRect(x: cellWidth*0.77, y: cellHeight*0.015, width: cellWidth*0.2, height: cellWidth*0.1)
         
         postImgView.frame = CGRect(x: 0, y: cellHeight*0.09, width: cellWidth, height: cellWidth)
 

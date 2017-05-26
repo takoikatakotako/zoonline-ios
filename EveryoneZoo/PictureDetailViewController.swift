@@ -101,8 +101,9 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.layoutMargins = UIEdgeInsets.zero
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
-        //カスタムパーツ
+        //カスタムテーブルのボタン
         cell.userInfoBtn.addTarget(self, action: #selector(userInfoBtnClicked(sender:)), for:.touchUpInside)
+        cell.followBtn.addTarget(self, action: #selector(followBtnClicked(sender:)), for:.touchUpInside)
         
         cell.userNameTextView.text = postUserName
         cell.descriptionTextView.text = self.postCaption
@@ -116,14 +117,24 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         return cell
     }
     
-    //Mark: コメント投稿画面への遷移
+    //Mark: - TableViewのボタンが押されたら呼ばれる
+    //フォローボタンが押されたら呼ばれる
+    func followBtnClicked(sender: FollowUserButton){
+        
+        sender.followImgView.image = UIImage(named: "tab_kabi")!
+        //followImgView.image = UIImage(named: "userIcon")!
+ 
+
+    }
+    
+    //ユーザー情報が押されたら呼ばれる
     func userInfoBtnClicked(sender: UIButton){
         
-        //画面遷移、投稿詳細画面へ
-        let picDetailView: UserInfoViewController = UserInfoViewController()
-        picDetailView.postUserID = self.postUserID
-        picDetailView.postUserName = self.postUserName
-        self.navigationController?.pushViewController(picDetailView, animated: true)        
+        //画面遷移、ユーザー情報画面へ
+        let userInfoView: UserInfoViewController = UserInfoViewController()
+        userInfoView.postUserID = self.postUserID
+        userInfoView.postUserName = self.postUserName
+        self.navigationController?.pushViewController(userInfoView, animated: true)
     }
     
     //Mark: コメント投稿画面への遷移
