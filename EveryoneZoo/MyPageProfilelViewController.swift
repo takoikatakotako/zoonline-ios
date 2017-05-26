@@ -24,7 +24,7 @@ class MyPageProfilelViewController: UIViewController {
         setNavigationBar()
         
         self.view.backgroundColor = UIColor.white
-        
+
         
         
         let profileSample:UIImageView = UIImageView()

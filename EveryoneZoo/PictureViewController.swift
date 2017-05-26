@@ -229,18 +229,23 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
             return cell
         }
         
+        
+        //エラーが起こっていない時
+        let loadImg = UIImage(named: "sample_loading")!
+        
         if indexPath.row % 2 == 0 {
             let cell:LeftPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self), for: indexPath) as! LeftPicturesTableViewCell
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.layoutMargins = UIEdgeInsets.zero
             
-            let loadImg = UIImage(named: "sample_loading")!
             
             for i in 0..<6 {
-                let url = URL(string: imageURLs[i])!
+                
+                let cellNum:Int = indexPath.row*6+i
+                let url = URL(string: imageURLs[cellNum])!
                 cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
                 cell.picturesImgs[i].isUserInteractionEnabled = true
-                cell.picturesImgs[i].tag = postIds[i]
+                cell.picturesImgs[i].tag = postIds[cellNum]
                 
                 let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
                 singleTap.numberOfTapsRequired = 1
@@ -253,13 +258,13 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.layoutMargins = UIEdgeInsets.zero
             
-            let loadImg = UIImage(named: "sample_loading")!
-            
             for i in 0..<6 {
-                let url = URL(string: imageURLs[i])!
+                
+                let cellNum:Int = indexPath.row*6+i
+                let url = URL(string: imageURLs[cellNum])!
                 cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
                 cell.picturesImgs[i].isUserInteractionEnabled = true
-                cell.picturesImgs[i].tag = postIds[i]
+                cell.picturesImgs[i].tag = postIds[cellNum]
                 
                 let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
                 singleTap.numberOfTapsRequired = 1
@@ -274,16 +279,19 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     func tapSingle(sender: UITapGestureRecognizer) {
         print(sender.view?.tag ?? 400)
         
+        //ナビゲーションバーの高さを元に戻す
+        self.tableViewHeight  = self.viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_SEGMENT_BAR+PARTS_TABBAR_HEIGHT)
+        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR, width: self.viewWidth, height: self.navigationBarHeight)
+        self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: PARTS_HEIGHT_SEGMENT_BAR)
+        self.pictureTableView.frame = CGRect(x: 0, y: PARTS_HEIGHT_SEGMENT_BAR, width: self.viewWidth, height: self.tableViewHeight)
+        
+        //画面遷移、投稿詳細画面へ
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
         picDetailView.postID = sender.view?.tag
         self.navigationController?.pushViewController(picDetailView, animated: true)
     }
     
-    internal func pictureSelected(sender: UIButton){
-        
-        let picDetailView:PictureDetailViewController = PictureDetailViewController()
-        navigationController?.pushViewController(picDetailView as UIViewController, animated: true)
-    }
+
     
     
     // MARK: - TableViewの拡張メソッド

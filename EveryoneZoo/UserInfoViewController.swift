@@ -1,54 +1,57 @@
 //
-//  MyPagePostViewController.swift
+//  UserInfoViewController.swift
 //  EveryoneZoo
 //
-//  Created by junpei ono on 2017/05/21.
+//  Created by junpei ono on 2017/05/26.
 //  Copyright © 2017年 junpei ono. All rights reserved.
 //
 
 import UIKit
 
-class MyPagePostViewController: UIViewController {
+class UserInfoViewController: UIViewController {
 
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
+    var viewWidth:CGFloat!
+    var viewHeight:CGFloat!
+    
+    //UserInfo
+    var postUserID:Int!
+    var postUserName:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //Viewの大きさを取得
-        viewWidth = self.view.frame.size.width
-        viewHeight = self.view.frame.size.height
-        
-        self.view.backgroundColor = UIColor.white
-
-        
+        viewWidth = self.view.frame.width
+        viewHeight = self.view.frame.height
+    
+        self.view.backgroundColor = UIColor.red
         setNavigationBar()
         
-
+        
+        
+        let profileSample:UIImageView = UIImageView()
+        profileSample.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth)
+        profileSample.image = UIImage(named:"sample_profile")
+        self.view.addSubview(profileSample)
+        
     }
     
-    
-    
-    // MARK: - Viewにパーツの設置
-    // MARK: ナビゲーションバーの設定
+    // MARK: NavigationBar
     func setNavigationBar() {
         
         self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
         self.navigationController?.navigationBar.isTranslucent = false
+        UINavigationBar.appearance().tintColor = UIColor.white
         
         //ナビゲーションアイテムを作成
         let titleLabel:UILabel = UILabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
         titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "投稿一覧"
+        titleLabel.text = self.postUserName
         titleLabel.textColor = UIColor.white
         
         self.navigationItem.titleView = titleLabel
     }
-    
-    
-    
+
 
 }

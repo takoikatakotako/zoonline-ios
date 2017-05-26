@@ -23,8 +23,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     public var postID:Int!
     
     //Post Datas
-    var postUserName:String = ""
     var postUserID:Int!
+    var postUserName:String = ""
     var iconUrl:URL!
     var postTitle:String = ""
     var postCaption:String = ""
@@ -49,7 +49,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     }
     
     // MARK: - Viewにパーツの設置
-    
     // MARK: NavigationBar
     func setNavigationBar() {
         
@@ -102,7 +101,9 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.layoutMargins = UIEdgeInsets.zero
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
-        //ダウンロードしたパーツ
+        //カスタムパーツ
+        cell.userInfoBtn.addTarget(self, action: #selector(userInfoBtnClicked(sender:)), for:.touchUpInside)
+        
         cell.userNameTextView.text = postUserName
         cell.descriptionTextView.text = self.postCaption
         cell.thumbnailImgView.af_setImage(withURL: self.iconUrl, placeholderImage:  UIImage(named:"tab_kabi")!)
@@ -115,9 +116,14 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         return cell
     }
     
-    //Mark: テーブルビューのセルが押されたら呼ばれる
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
+    //Mark: コメント投稿画面への遷移
+    func userInfoBtnClicked(sender: UIButton){
+        
+        //画面遷移、投稿詳細画面へ
+        let picDetailView: UserInfoViewController = UserInfoViewController()
+        picDetailView.postUserID = self.postUserID
+        picDetailView.postUserName = self.postUserName
+        self.navigationController?.pushViewController(picDetailView, animated: true)        
     }
     
     //Mark: コメント投稿画面への遷移
