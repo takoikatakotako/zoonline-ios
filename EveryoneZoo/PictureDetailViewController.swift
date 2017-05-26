@@ -24,6 +24,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     
     //Post Datas
     var postUserName:String = ""
+    var postUserID:Int!
+    var iconUrl:URL!
     var postTitle:String = ""
     var postCaption:String = ""
     var postImgUrl:URL = URL(string: "http://www.tokyo-zoo.net/Topics/upfiles/24152_top.jpg")!
@@ -41,29 +43,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         viewHeight = self.view.frame.height
         tableViewHeight = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_TABBAR_HEIGHT)
         
-        let urlStr:String = "http://minzoo.herokuapp.com/api/v0/plaza/detail/"+String(postID)
-        Alamofire.request(urlStr).responseJSON{
-            response in
-            
-            switch response.result {
-            case .success:
-                print("Validation Successful")
-                let json:JSON = JSON(response.result.value ?? kill)
-
-                self.postUserName = json[0]["userName"].stringValue
-                self.postTitle = json[0]["title"].stringValue
-                self.postCaption = json[0]["caption"].stringValue
-                self.postImgUrl = URL(string: json[0]["itemImage"].stringValue)!
-                
-                self.setNavigationBar()
-                self.setTableView()
-                
-            case .failure(let error):
-                print(error)
-
-                
-            }
-        }
+        //投稿の情報の取得
+        getPostInfo(postID: self.postID)
         
     }
     
@@ -124,10 +105,10 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         //ダウンロードしたパーツ
         cell.userNameTextView.text = postUserName
         cell.descriptionTextView.text = self.postCaption
+        cell.thumbnailImgView.af_setImage(withURL: self.iconUrl, placeholderImage:  UIImage(named:"tab_kabi")!)
         
         let loadImg = UIImage(named: "sample_loading")!
         cell.postImgView.af_setImage(withURL: self.postImgUrl, placeholderImage: loadImg)
-        
 
         cell.menuBtn.addTarget(self, action: #selector(showActionShert(sender:)), for:.touchUpInside)
 
@@ -172,6 +153,61 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         self.present(myAlert, animated: true, completion: nil)
     }
 
+    // MARK: - NetWorks
+    func getPostInfo(postID:Int){
+        
+        let urlStr:String = "http://minzoo.herokuapp.com/api/v0/plaza/detail/"+String(postID)
+
+        Alamofire.request(urlStr).responseJSON{
+            response in
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                let json:JSON = JSON(response.result.value ?? kill)
+                
+                self.postUserName = json[0]["userName"].stringValue
+                self.postUserID = json[0]["userId"].intValue
+                self.postTitle = json[0]["title"].stringValue
+                self.postCaption = json[0]["caption"].stringValue
+                self.postImgUrl = URL(string: json[0]["itemImage"].stringValue)!
+                
+                self.getUserInfo(userID:self.postUserID)
+                
+            case .failure(let error):
+                print(error)
+                
+            }
+        }
+    }
+    
+    
+    func getUserInfo(userID:Int){
+        
+        let urlStr:String = "http://minzoo.herokuapp.com/api/v0/users/"+String(userID)
+
+        
+        Alamofire.request(urlStr).responseJSON{
+            response in
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                let json:JSON = JSON(response.result.value ?? kill)
+                
+                self.iconUrl = URL(string: json["iconUrl"].stringValue)!
+                self.setNavigationBar()
+                self.setTableView()
+                
+            case .failure(let error):
+                print(error)
+                
+                
+            }
+        }
+        
+    }
+    
 
     // MARK: - Others
     override var preferredStatusBarStyle: UIStatusBarStyle {
