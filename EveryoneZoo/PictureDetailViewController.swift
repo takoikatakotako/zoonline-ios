@@ -140,34 +140,50 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //Mark: コメント投稿画面への遷移
     func showActionShert(sender: UIButton){
         // インスタンス生成　styleはActionSheet.
-        let myAlert = UIAlertController(title: "アクション", message: "アクションを選んでください。", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let actionAlert = UIAlertController(title: "アクション", message: "アクションを選んでください。", preferredStyle: UIAlertControllerStyle.actionSheet)
         
         // アクションを生成.
-        let myAction_1 = UIAlertAction(title: "コメント", style: UIAlertActionStyle.default, handler: {
+        let commentAction = UIAlertAction(title: "コメント", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
-            print("Hello")
             // 移動先のViewを定義する.
             let commentListlView: CommentListViewController = CommentListViewController()
-            // SecondViewに移動する.
             self.navigationController?.pushViewController(commentListlView, animated: true)
         })
         
-        let myAction_2 = UIAlertAction(title: "共有する", style: UIAlertActionStyle.default, handler: {
+        let shareAction = UIAlertAction(title: "共有する", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
-            print("yes")
         })
         
-        let myAction_3 = UIAlertAction(title: "マイアルバムへの追加", style: UIAlertActionStyle.default, handler: {
+        let editTagAction = UIAlertAction(title: "タグの編集", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
-            print("no")
         })
         
+        let addAlbumAction = UIAlertAction(title: "アルバムへの追加", style: UIAlertActionStyle.default, handler: {
+            (action: UIAlertAction!) in
+        })
+        
+        let reportAction = UIAlertAction(title: "レポート", style: UIAlertActionStyle.default, handler: {
+            (action: UIAlertAction!) in
+        })
+        
+        let otherAction = UIAlertAction(title: "その他", style: UIAlertActionStyle.default, handler: {
+            (action: UIAlertAction!) in
+        })
+        
+        let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler: {
+            (action: UIAlertAction!) in
+            print("キャンセルをタップした時の処理")
+        })
         // アクションを追加.
-        myAlert.addAction(myAction_1)
-        myAlert.addAction(myAction_2)
-        myAlert.addAction(myAction_3)
+        actionAlert.addAction(commentAction)
+        actionAlert.addAction(shareAction)
+        actionAlert.addAction(editTagAction)
+        actionAlert.addAction(addAlbumAction)
+        actionAlert.addAction(reportAction)
+        actionAlert.addAction(otherAction)
+        actionAlert.addAction(cancelAction)
         
-        self.present(myAlert, animated: true, completion: nil)
+        self.present(actionAlert, animated: true, completion: nil)
     }
 
     // MARK: - NetWorks
