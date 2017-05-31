@@ -79,9 +79,8 @@ class PostDraftViewController: UIViewController,UITableViewDelegate, UITableView
         draftTableView.delegate = self
         draftTableView.dataSource = self
         draftTableView.frame = CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR, width: viewWidth, height: tableViewHeight)
-        
-        //テーブルビューの設置
-        draftTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        draftTableView.rowHeight = viewWidth*0.4
+        draftTableView.register(PostDraftTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostDraftTableViewCell.self))
         self.view.addSubview(draftTableView)
     }
     
@@ -97,14 +96,18 @@ class PostDraftViewController: UIViewController,UITableViewDelegate, UITableView
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.textLabel?.text = String(indexPath.row)
+        let cell:PostDraftTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostDraftTableViewCell.self), for: indexPath) as! PostDraftTableViewCell
+        
         return cell
     }
     
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
+        
+        flug = false
+        showPostView()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
