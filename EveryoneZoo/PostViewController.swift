@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class PostViewController: UIViewController {
     
@@ -27,14 +29,16 @@ class PostViewController: UIViewController {
         viewHeight = self.view.frame.size.height
         scrollViewHeight = viewHeight - PARTS_HEIGHT_STATUS_BAR - PARTS_HEIGHT_NAVIGATION_BAR
         
-        setView()
+        setNavigationBar()
         
         let postScrollView:PostViewScrollView = PostViewScrollView(frame:CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR, width: viewWidth, height: scrollViewHeight))
         self.view.addSubview(postScrollView)
         
     }
     
-    func setView() {
+
+    
+    func setNavigationBar() {
         
         //ステータスバー背景
         let statusBackColor = UIView()
@@ -63,14 +67,13 @@ class PostViewController: UIViewController {
         myNavItems.leftBarButtonItem = leftNavBtn
         
         //バーの右側に設置するボタンの作成
-        let rightNavBtn = UIBarButtonItem(title: "投稿", style: .plain, target: self, action:  #selector(rightBarBtnClicked(sender:)))
+        let rightNavBtn = UIBarButtonItem(title: "投稿", style: .plain, target: self, action:  #selector(postBtnClicked(sender:)))
         myNavItems.rightBarButtonItem = rightNavBtn;
         
         //作成したNavItemをNavBarに追加する
         myNavBar.pushItem(myNavItems, animated: true)
         self.view.addSubview(myNavBar)
     }
-    
 
     
     
@@ -82,8 +85,31 @@ class PostViewController: UIViewController {
     }
     
     //右側のボタンが押されたら呼ばれる
-    internal func rightBarBtnClicked(sender: UIButton){
-        print("rightBarBtnClicked")
+    internal func postBtnClicked(sender: UIButton){
+        
+        let parameters: Parameters = [
+            "foo": [1,2,3],
+            "bar": [
+                "baz": "qux"
+            ]
+        ]
+        
+        
+        Alamofire.request("http://minzoo.herokuapp.com/api/v0/example", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+        
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+
+        }
+
     }
 
 }
