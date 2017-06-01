@@ -128,9 +128,12 @@ class PostDetailTableCell: UITableViewCell {
         followBtn.frame = CGRect(x: cellWidth*0.65, y: cellHeight*0.015, width: cellWidth*0.33, height: cellWidth*0.1)
         contentView.addSubview(followBtn)
         
-        
+        //PostImg
         postImgView.frame = CGRect(x: 0, y: cellHeight*0.09, width: cellWidth, height: cellWidth)
+        postImgView.contentMode = UIViewContentMode.scaleAspectFit
+        postImgView.backgroundColor = UIColor.white
 
+        //
         favImageBtn.frame = CGRect(x: cellWidth*0.06, y: cellHeight*0.73, width: cellWidth*0.09, height: cellHeight*0.05)
         favCountLabel.frame = CGRect(x: cellWidth*0.17, y: cellHeight*0.73, width: cellWidth*0.15, height: cellHeight*0.05)
         

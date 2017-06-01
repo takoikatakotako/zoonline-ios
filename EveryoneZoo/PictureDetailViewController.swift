@@ -79,7 +79,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         //テーブルビューの設置
         postDetailTableView.register(PostDetailTableCell.self, forCellReuseIdentifier: NSStringFromClass(PostDetailTableCell.self))
-        postDetailTableView.rowHeight = viewWidth*1.65
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         self.view.addSubview(postDetailTableView)
@@ -115,6 +114,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.menuBtn.addTarget(self, action: #selector(showActionShert(sender:)), for:.touchUpInside)
 
         return cell
+    }
+    
+    //高さの設定
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // セルの高さを設定
+        return 70
     }
     
     //Mark: - TableViewのボタンが押されたら呼ばれる
