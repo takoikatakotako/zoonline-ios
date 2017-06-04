@@ -84,10 +84,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         self.view.addSubview(postDetailTableView)
     }
     
-
     
     // MARK: - TableView Delegate Method
-
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -105,7 +103,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         //UserInfoBtn
         let userInfoBtnWidth:CGFloat = viewWidth*0.65
         let userInfoBtnHeight:CGFloat = viewWidth*0.16
-        
         cell.userInfoBtn.frame = CGRect(x: 0, y: 0, width: userInfoBtnWidth, height: userInfoBtnHeight)
         cell.userInfoBtn.addTarget(self, action: #selector(userInfoBtnClicked(sender:)), for:.touchUpInside)
         cell.thumbnailImgView.frame = CGRect(x: userInfoBtnHeight*0.15, y: userInfoBtnHeight*0.15, width: userInfoBtnHeight*0.7, height: userInfoBtnHeight*0.7)
@@ -126,7 +123,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.postImgView.frame = CGRect(x: 0, y: userInfoBtnHeight, width: viewWidth, height: postImgHeight)
         cell.postImgView.af_setImage(withURL: self.postImgUrl, placeholderImage: UIImage(named: "sample_loading")!)
 
-        
         //FavBtn
         let favComentMenuBtnHeight:CGFloat = viewWidth * 0.15
         let favBtnSpace:CGFloat = viewWidth*0.05
@@ -149,9 +145,9 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
 
         //DescriptionLabel
         let descriptionTextViewWidth:CGFloat = viewWidth*0.92
-        let descriptionTextViewHeight:CGFloat = viewWidth*0.2
+        cell.descriptionTextView.frame = CGRect(x: viewWidth*0.04, y: userInfoBtnHeight+postImgHeight+favComentMenuBtnHeight+dateLabelHeigt, width: descriptionTextViewWidth, height: 5)
         cell.descriptionTextView.text = self.postCaption
-        cell.descriptionTextView.frame = CGRect(x: viewWidth*0.04, y: userInfoBtnHeight+postImgHeight+favComentMenuBtnHeight+dateLabelHeigt, width: descriptionTextViewWidth, height: descriptionTextViewHeight)
+        cell.descriptionTextView.sizeToFit()
 
         
         return cell
@@ -160,7 +156,19 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //高さの設定
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // セルの高さを設定
-        return viewWidth*1.65
+        //ユーザーの高さ、viewWidth*0.16
+        //投稿画像の高さ、可変、現在はviewWidth
+        //コメントボタンなどの高さ、viewWidth * 0.15
+        //日時のラベルの高さ、viewHeight*0.05
+        //解説の高さ、可変
+        //お尻に余白、viewHeight*0.05
+        
+        var cellHeight:CGFloat = viewWidth*(0.16+1+0.15+0.05+0.05)
+        //高さを追加
+        cellHeight += UtilityLibrary.calcTextViewHeight(text: self.postCaption, width: viewWidth*0.92, font: UIFont.systemFont(ofSize: 16))
+
+        
+        return cellHeight
     }
     
     //Mark: - Actions

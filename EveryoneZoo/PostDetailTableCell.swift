@@ -62,6 +62,7 @@ class PostDetailTableCell: UITableViewCell {
         //PostImg
         postImgView = UIImageView()
         postImgView.image = UIImage(named: "sample_postImage")!
+        postImgView.backgroundColor = UIColor.white
         contentView.addSubview(postImgView)
         
         //FavImg
@@ -96,7 +97,7 @@ class PostDetailTableCell: UITableViewCell {
         descriptionTextView.textColor = UIColor.black
         descriptionTextView.font = UIFont.systemFont(ofSize: 16)
         descriptionTextView.isEditable = false
-        //descriptionTextView.isScrollEnabled = false
+        descriptionTextView.isScrollEnabled = false
         contentView.addSubview(descriptionTextView)
         
         tag1Label = UILabel()
@@ -127,32 +128,9 @@ class PostDetailTableCell: UITableViewCell {
         //let cellWidth:CGFloat = self.frame.width
         //let cellHeight:CGFloat = self.frame.height
 
-        //UserInfoBtn
         
-        
-        
-        
-        //PostImg
-        //postImgView.contentMode = UIViewContentMode.scaleAspectFit
-        postImgView.backgroundColor = UIColor.white
-
-        //
-        
-        
-
         
         /*
-        favCountLabel.frame = CGRect(x: cellWidth*0.17, y: cellHeight*0.73, width: cellWidth*0.15, height: cellHeight*0.05)
-        
-        commentImageBtn.frame = CGRect(x: cellWidth*0.29, y: cellHeight*0.73, width: cellWidth*0.09, height: cellHeight*0.05)
-        commentLabel.frame = CGRect(x: cellWidth*0.40, y: cellHeight*0.73, width: cellWidth*0.09, height: cellHeight*0.05)
-        
-        menuBtn.frame = CGRect(x: cellWidth*0.84, y: cellHeight*0.73, width: cellWidth*0.09, height: cellHeight*0.05)
-        
-        dateLabel.frame = CGRect(x: cellWidth*0.06, y: cellHeight*0.8, width: cellWidth*0.5, height: cellHeight*0.03)
-
-        descriptionTextView.frame = CGRect(x: cellWidth*0.04, y: cellHeight*0.83, width: cellWidth*0.92, height: cellHeight*0.1)
-
         tag1Label.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.93, width: cellWidth*0.4, height: cellHeight*0.04)
         tag2Label.frame = CGRect(x: cellWidth*0.55, y: cellHeight*0.93, width: cellWidth*0.4, height: cellHeight*0.04)
  
