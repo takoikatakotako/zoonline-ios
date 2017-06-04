@@ -175,15 +175,15 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //フォローボタンが押されたら呼ばれる
     func followBtnClicked(sender: FollowUserButton){
         
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
         if sender.followImgView.image == UIImage(named:"follow_icon") {
             sender.followImgView.image = UIImage(named: "follow_icon_on")!
-            
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.networkManager?.followUser(myUserId: 1, followUserId: 2)
-            
             
         }else{
             sender.followImgView.image = UIImage(named: "follow_icon")!
+            appDelegate.networkManager?.unfollowUser(myUserId: 1, followUserId: 2)
         }
     }
     
