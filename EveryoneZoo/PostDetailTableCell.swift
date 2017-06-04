@@ -10,18 +10,26 @@ import UIKit
 
 class PostDetailTableCell: UITableViewCell {
 
+    //UserInfoBtn
     var userInfoBtn:UIButton!
     var thumbnailImgView:UIImageView!
     var userNameTextView:UILabel!
     
+    //FollowBtn
     var followBtn:FollowUserButton!
 
+    //PostView
     var postImgView:UIImageView!
-    var favImageBtn:UIButton!
-    var favCountLabel:UILabel!
-    var commentImageBtn:UIButton!
-    var commentLabel:UILabel!
-    var menuBtn:UIButton!
+    
+    //FavImgBtn
+    var favBtn:FavCommentButton!
+    
+    //CommentBtn
+    var commentBtn:FavCommentButton!
+
+    //MunuButton
+    var menuBtn:MenuButton!
+    
     var dateLabel:UILabel!
     var descriptionTextView:UITextView!
     var tag1Label:UILabel!
@@ -45,35 +53,36 @@ class PostDetailTableCell: UITableViewCell {
         userNameTextView.text = "いろはにほへと"
         userInfoBtn.addSubview(userNameTextView)
     
-        followBtn = FollowUserButton()
         
+        //FollowBtn
+        followBtn = FollowUserButton()
+        contentView.addSubview(followBtn)
+        
+
+        //PostImg
         postImgView = UIImageView()
         postImgView.image = UIImage(named: "sample_postImage")!
         contentView.addSubview(postImgView)
         
-        favImageBtn = UIButton()
-        favImageBtn.setBackgroundImage(UIImage(named: "fav_off")!, for: UIControlState.normal)
-        contentView.addSubview(favImageBtn)
-        
-        favCountLabel = UILabel()
-        favCountLabel.text = "10"
-        favCountLabel.textAlignment =  NSTextAlignment.left
-        favCountLabel.textColor = UIColor.followColor()
-        favCountLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        contentView.addSubview(favCountLabel)
-        
-        commentImageBtn = UIButton()
-        commentImageBtn.setBackgroundImage(UIImage(named: "comment")!, for: UIControlState.normal)
-        contentView.addSubview(commentImageBtn)
+        //FavImg
+        favBtn = FavCommentButton()
+        favBtn.imgView.image = UIImage(named: "fav_on")!
+        favBtn.countLabel.textAlignment =  NSTextAlignment.left
+        favBtn.countLabel.textColor = UIColor.followColor()
+        favBtn.countLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        favBtn.countLabel.text = "24"
+        contentView.addSubview(favBtn)
 
-        commentLabel = UILabel()
-        commentLabel.text = "5"
-        commentLabel.textAlignment =  NSTextAlignment.left
-        commentLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        contentView.addSubview(commentLabel)
-        
-        menuBtn = UIButton()
-        menuBtn.setBackgroundImage(UIImage(named: "action")!, for: UIControlState.normal)
+        //CommentBtn
+        commentBtn = FavCommentButton()
+        commentBtn.imgView.image = UIImage(named: "comment")!
+        commentBtn.countLabel.textAlignment =  NSTextAlignment.left
+        commentBtn.countLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        commentBtn.countLabel.text = "24"
+        contentView.addSubview(commentBtn)
+
+        //MenuBtn
+        menuBtn = MenuButton()
         contentView.addSubview(menuBtn)
         
         dateLabel = UILabel()
@@ -115,26 +124,24 @@ class PostDetailTableCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let cellWidth:CGFloat = self.frame.width
-        let cellHeight:CGFloat = self.frame.height
+        //let cellWidth:CGFloat = self.frame.width
+        //let cellHeight:CGFloat = self.frame.height
 
         //UserInfoBtn
-        userInfoBtn.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.015, width: cellWidth*0.5, height: cellWidth*0.1)
-        thumbnailImgView.frame = CGRect(x: 0, y: 0, width: cellWidth*0.1, height: cellWidth*0.1)
-        thumbnailImgView.layer.cornerRadius = thumbnailImgView.frame.size.width * 0.5
-        userNameTextView.frame = CGRect(x: cellWidth*0.13, y: 0, width: cellWidth*0.4, height: cellWidth*0.1)
         
-        //FollowBtn
-        followBtn.frame = CGRect(x: cellWidth*0.65, y: cellHeight*0.015, width: cellWidth*0.33, height: cellWidth*0.1)
-        contentView.addSubview(followBtn)
+        
+        
         
         //PostImg
-        postImgView.frame = CGRect(x: 0, y: cellHeight*0.09, width: cellWidth, height: cellWidth)
-        postImgView.contentMode = UIViewContentMode.scaleAspectFit
+        //postImgView.contentMode = UIViewContentMode.scaleAspectFit
         postImgView.backgroundColor = UIColor.white
 
         //
-        favImageBtn.frame = CGRect(x: cellWidth*0.06, y: cellHeight*0.73, width: cellWidth*0.09, height: cellHeight*0.05)
+        
+        
+
+        
+        /*
         favCountLabel.frame = CGRect(x: cellWidth*0.17, y: cellHeight*0.73, width: cellWidth*0.15, height: cellHeight*0.05)
         
         commentImageBtn.frame = CGRect(x: cellWidth*0.29, y: cellHeight*0.73, width: cellWidth*0.09, height: cellHeight*0.05)
@@ -148,5 +155,7 @@ class PostDetailTableCell: UITableViewCell {
 
         tag1Label.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.93, width: cellWidth*0.4, height: cellHeight*0.04)
         tag2Label.frame = CGRect(x: cellWidth*0.55, y: cellHeight*0.93, width: cellWidth*0.4, height: cellHeight*0.04)
+ 
+ */
     }
 }

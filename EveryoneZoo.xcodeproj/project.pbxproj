@@ -33,6 +33,8 @@
 		8D7E860B1EABBC7400C4049B /* RightPicturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */; };
 		8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */; };
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
+		8D9DE17A1EE3EA3900121FC1 /* FavCommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9DE1791EE3EA3900121FC1 /* FavCommentButton.swift */; };
+		8D9DE17C1EE3F5B500121FC1 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9DE17B1EE3F5B500121FC1 /* MenuButton.swift */; };
 		8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */; };
 		8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */; };
 		8DB4FD391ECD21D7008F560D /* MyPageProfilelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */; };
@@ -103,6 +105,8 @@
 		8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightPicturesTableViewCell.swift; sourceTree = "<group>"; };
 		8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZooTabBarController.swift; path = ../ZooTabBarController.swift; sourceTree = "<group>"; };
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		8D9DE1791EE3EA3900121FC1 /* FavCommentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavCommentButton.swift; sourceTree = "<group>"; };
+		8D9DE17B1EE3F5B500121FC1 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListViewController.swift; sourceTree = "<group>"; };
 		8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageProfilelViewController.swift; sourceTree = "<group>"; };
@@ -302,6 +306,8 @@
 				8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */,
 				8D1586711ED848F400802F54 /* UserInfoViewController.swift */,
 				8D1586731ED8565300802F54 /* FollowUserButton.swift */,
+				8D9DE1791EE3EA3900121FC1 /* FavCommentButton.swift */,
+				8D9DE17B1EE3F5B500121FC1 /* MenuButton.swift */,
 			);
 			name = FieldView;
 			sourceTree = "<group>";
@@ -608,6 +614,7 @@
 				8D1586741ED8565300802F54 /* FollowUserButton.swift in Sources */,
 				8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */,
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
+				8D9DE17A1EE3EA3900121FC1 /* FavCommentButton.swift in Sources */,
 				8D3CAF891ED09907007961BF /* PostDraftViewController.swift in Sources */,
 				8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */,
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
@@ -620,6 +627,7 @@
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
+				8D9DE17C1EE3F5B500121FC1 /* MenuButton.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */,
 				8D6215AA1EC35EAA00593E55 /* PostViewScrollView.swift in Sources */,
 				8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */,

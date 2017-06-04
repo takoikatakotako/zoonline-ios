@@ -10,18 +10,15 @@ import UIKit
 
 class FollowUserButton: UIButton {
     
-    var followBtn:UIButton!
     var followImgView:UIImageView!
     var followLabel:UILabel!
 
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         //アイコン
         followImgView = UIImageView()
-        followImgView.image = UIImage(named: "userIcon")!
-
+        followImgView.image = UIImage(named: "follow_icon")!
         self.addSubview(followImgView)
         
         //ラベル
@@ -38,9 +35,8 @@ class FollowUserButton: UIButton {
         
         let viewWidth:CGFloat = frame.width
         let viewHeight:CGFloat = frame.height
-        followImgView.frame = CGRect(x: 0, y: viewHeight*0.1, width: viewWidth*0.25, height: viewHeight*0.8)
-        followLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.7, height: viewHeight)
+        followImgView.frame = CGRect(x: 0, y: viewHeight*0.25, width: viewHeight*0.5, height: viewHeight*0.5)
+        followLabel.frame = CGRect(x: viewHeight*0.6, y: 0, width: viewWidth-viewHeight*0.6, height: viewHeight)
     }
-
 }
 
