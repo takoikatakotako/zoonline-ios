@@ -177,6 +177,11 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         if sender.followImgView.image == UIImage(named:"follow_icon") {
             sender.followImgView.image = UIImage(named: "follow_icon_on")!
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.networkManager?.followUser(myUserId: 1, followUserId: 2)
+            
+            
         }else{
             sender.followImgView.image = UIImage(named: "follow_icon")!
         }
@@ -275,7 +280,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 self.postTitle = json[0]["title"].stringValue
                 self.postCaption = json[0]["caption"].stringValue
                 self.postImgUrl = URL(string: json[0]["itemImage"].stringValue)!
-                
                 self.getUserInfo(userID:self.postUserID)
                 
             case .failure(let error):
