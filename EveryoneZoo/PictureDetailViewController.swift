@@ -180,10 +180,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         if sender.followImgView.image == UIImage(named:"follow_icon") {
             sender.followImgView.image = UIImage(named: "follow_icon_on")!
             appDelegate.networkManager?.followUser(myUserId: 1, followUserId: 2)
+            sender.followLabel.text = "フレンズ"
             
         }else{
             sender.followImgView.image = UIImage(named: "follow_icon")!
             appDelegate.networkManager?.unfollowUser(myUserId: 1, followUserId: 2)
+            sender.followLabel.text = "フォロー"
         }
     }
     
