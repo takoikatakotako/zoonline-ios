@@ -101,7 +101,7 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         //セグメントビューの左
         segmentLeftBtn = UIButton()
         segmentLeftBtn.tag = 0
-        segmentLeftBtn.frame = CGRect(x: viewWidth*0.05, y: PARTS_HEIGHT_SEGMENT_BAR*0.1, width: viewWidth*0.4, height: PARTS_HEIGHT_SEGMENT_BAR*0.7)
+        segmentLeftBtn.frame = CGRect(x: viewWidth*0.05, y: PARTS_HEIGHT_SEGMENT_BAR*0.05, width: viewWidth*0.45, height: PARTS_HEIGHT_SEGMENT_BAR*0.95)
         segmentLeftBtn.setTitle(NSLocalizedString("KEY_popularity", comment: "人気"), for: UIControlState.normal)
         segmentLeftBtn.addTarget(self, action: #selector(segmentBtnClicked(sender:)), for:.touchUpInside)
         segmentView.addSubview(segmentLeftBtn)
@@ -114,7 +114,7 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         //セグメントビューの右
         segmentRightBtn = UIButton()
         segmentRightBtn.tag = 1
-        segmentRightBtn.frame = CGRect(x: viewWidth*0.55, y: PARTS_HEIGHT_SEGMENT_BAR*0.1, width: viewWidth*0.4, height: PARTS_HEIGHT_SEGMENT_BAR*0.7)
+        segmentRightBtn.frame = CGRect(x: viewWidth*0.55, y: PARTS_HEIGHT_SEGMENT_BAR*0.05, width: viewWidth*0.45, height: PARTS_HEIGHT_SEGMENT_BAR*0.95)
         segmentRightBtn.setTitle(NSLocalizedString("KEY_new", comment: "新着"), for: UIControlState.normal)
         segmentRightBtn.addTarget(self, action: #selector(segmentBtnClicked(sender:)), for:.touchUpInside)
         segmentView.addSubview(segmentRightBtn)

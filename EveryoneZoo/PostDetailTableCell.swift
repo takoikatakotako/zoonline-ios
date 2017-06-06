@@ -71,7 +71,7 @@ class PostDetailTableCell: UITableViewCell {
         favBtn.countLabel.textAlignment =  NSTextAlignment.left
         favBtn.countLabel.textColor = UIColor.followColor()
         favBtn.countLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        favBtn.countLabel.text = "24"
+        favBtn.countLabel.text = "25"
         contentView.addSubview(favBtn)
 
         //CommentBtn

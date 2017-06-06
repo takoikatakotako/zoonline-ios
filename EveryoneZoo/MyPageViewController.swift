@@ -28,7 +28,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        tableViewHeight = viewHeight - (HEIGHT_USER_CELL + PARTS_TABBAR_HEIGHT)
+        tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+HEIGHT_USER_CELL + PARTS_TABBAR_HEIGHT)
         
         setNavigationBar()
         

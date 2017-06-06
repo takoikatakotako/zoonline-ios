@@ -128,6 +128,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let favBtnSpace:CGFloat = viewWidth*0.05
         let favBtnWidth:CGFloat = viewWidth * 0.25
         cell.favBtn.frame = CGRect(x: favBtnSpace, y: userInfoBtnHeight+postImgHeight, width: favBtnWidth, height: favComentMenuBtnHeight)
+        cell.favBtn.addTarget(self, action: #selector(favBtnClicked(sender:)), for:.touchUpInside)
         
         //CommentBtn
         let commentBtn:CGFloat = favBtnWidth
@@ -188,6 +189,22 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             sender.followLabel.text = "フォロー"
         }
     }
+    
+    //ファボボタンが押されたら呼ばれる
+    func favBtnClicked(sender: FavCommentButton){
+        
+        if sender.imgView.image == UIImage(named:"fav_on") {
+            sender.imgView.image = UIImage(named: "fav_off")!
+            sender.countLabel.text = "24"
+            sender.countLabel.textColor = UIColor.black
+            
+        }else{
+            sender.imgView.image = UIImage(named: "fav_on")!
+            sender.countLabel.text = "25"
+            sender.countLabel.textColor = UIColor.followColor()
+        }
+    }
+    
     
     //コメントボタンが押されたら呼ばれる
     func commentBtnClicked(sender: FavCommentButton){
