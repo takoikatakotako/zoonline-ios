@@ -121,7 +121,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         //PostImgView
         let postImgHeight:CGFloat = viewWidth
         cell.postImgView.frame = CGRect(x: 0, y: userInfoBtnHeight, width: viewWidth, height: postImgHeight)
-        cell.postImgView.af_setImage(withURL: self.postImgUrl, placeholderImage: UIImage(named: "sample_loading")!)
+        cell.postImgView.sd_setImage(with: self.postImgUrl, placeholderImage: UIImage(named: "sample_loading"))
+        //cell.postImgView.af_setImage(withURL: self.postImgUrl, placeholderImage: UIImage(named: "sample_loading")!)
 
         //FavBtn
         let favComentMenuBtnHeight:CGFloat = viewWidth * 0.15

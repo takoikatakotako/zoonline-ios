@@ -115,6 +115,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print("Value: \(ARRAY_MYPAGE_USER_INFOS[indexPath.row])")
         } else if indexPath.section == 1 {
             print("Value: \(ARRAY_MYPAGE_CONFIS[indexPath.row])")
+            let contactView:ContactViewController = ContactViewController()
+            self.present(contactView, animated: true, completion: nil)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

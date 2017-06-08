@@ -47,6 +47,7 @@
 		8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */; };
 		8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */; };
 		8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */; };
+		8DF9CFE41EE959F9002B8459 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF9CFE31EE959F9002B8459 /* ContactViewController.swift */; };
 		8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */; };
 		EAAB25067CF3061B46797FE0 /* Pods_EveryoneZooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22ADCE5CE831A681A93AECC6 /* Pods_EveryoneZooTests.framework */; };
 /* End PBXBuildFile section */
@@ -121,6 +122,7 @@
 		8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageFavoriteViewController.swift; sourceTree = "<group>"; };
 		8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDetailViewController.swift; sourceTree = "<group>"; };
+		8DF9CFE31EE959F9002B8459 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageUserCellBtn.swift; sourceTree = "<group>"; };
 		A53C8612E552A7E943C79BF7 /* Pods-EveryoneZoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZoo.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo.release.xcconfig"; sourceTree = "<group>"; };
 		B6E6153F1CF883E44B3F5A09 /* Pods-EveryoneZoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZoo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */,
 				8DDAF0DC1ED184790079D443 /* MyPageFollowViewController.swift */,
 				8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */,
+				8DF9CFE31EE959F9002B8459 /* ContactViewController.swift */,
 			);
 			name = MyPage;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				8DD1C2BD1EDDD4A40008FE14 /* PostDraftTableViewCell.swift in Sources */,
 				8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */,
 				8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */,
+				8DF9CFE41EE959F9002B8459 /* ContactViewController.swift in Sources */,
 				8DB4FD391ECD21D7008F560D /* MyPageProfilelViewController.swift in Sources */,
 				8D1586741ED8565300802F54 /* FollowUserButton.swift in Sources */,
 				8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */,

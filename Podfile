@@ -10,7 +10,7 @@ target 'EveryoneZoo' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'AlamofireImage', '~> 3.1'
-
+  pod 'SDWebImage/GIF'
 
   target 'EveryoneZooTests' do
     inherit! :search_paths

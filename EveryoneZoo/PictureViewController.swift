@@ -11,6 +11,7 @@ import SCLAlertView
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
+import SDWebImage
 
 class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource {
     
