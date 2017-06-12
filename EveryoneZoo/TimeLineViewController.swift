@@ -19,7 +19,9 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
     //view parts
     private var segmentView:UIView!
     private var postDetailTableView: UITableView!
-
+    private var noLoginView:NoLoginView! = NoLoginView()
+    
+    // MARK: - OverRideMethod
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,30 +34,39 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         
         //Viewにパーツを追加
         setNavigationBarBar()
-        setSegmentBar()
-        setTableVIew()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            setSegmentBar()
+            setTableVIew()
+        }else{
+            setLoginView()
+        }
+        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //postDetailTableView.reloadData()
+    }
+    
 
     // MARK: - Viewにパーツの設置
-    
     // MARK: NavigationBarの設置
     func setNavigationBarBar(){
         
         //ステータスバー部分の背景
         let statusBackColor = UIView()
-        statusBackColor.frame = CGRect(x: 0, y: -(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR), width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR*2)
+        statusBackColor.frame =
+            CGRect(x: 0, y: -(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR), width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR*2)
         statusBackColor.backgroundColor = UIColor.mainAppColor()
         self.view.addSubview(statusBackColor)
         
         //UINavigationBarの位置とサイズを指定
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR)
-        
         self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
-        
-        //ハイライトを消す
         self.navigationController?.navigationBar.isTranslucent = false
-        
-        //ナビゲーションボタンの色を変更する
         UINavigationBar.appearance().tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.title = "タイムライン"
@@ -131,6 +142,27 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         postDetailTableView.refreshControl = refreshControl
     }
     
+    // MARK: showLoginView
+    func setLoginView()  {
+        
+        let noLoginViewHeight:CGFloat = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_TABBAR_HEIGHT)
+        noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
+        self.view.addSubview(noLoginView)
+        
+        let loginBtn:UIButton = UIButton()
+        loginBtn.frame = CGRect(x: viewWidth*0.2, y: noLoginViewHeight*0.75, width: viewWidth*0.6, height: noLoginViewHeight*0.1)
+        loginBtn.setTitle("ログイン", for: UIControlState.normal)
+        loginBtn.backgroundColor = UIColor.orange
+        self.view.addSubview(loginBtn)
+        loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+    }
+    
+    //basicボタンが押されたら呼ばれます
+    func loginBtnClicked(sender: UIButton){
+
+        let loginView:LoginViewController = LoginViewController()
+        self.present(loginView, animated: true, completion: nil)
+    }
     
     // MARK: - TableView関連のメソッド
     //MARK: セルの数の設定

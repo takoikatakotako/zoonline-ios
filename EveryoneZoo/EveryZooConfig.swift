@@ -10,3 +10,5 @@ import UIKit
 
 
 let APP_URL_STRING: String = "http://minzoo.herokuapp.com"
+
+let CONTACT_PAGE_URL_STRING:String = "http://swiswiswift.sakura.ne.jp/zoonline/"

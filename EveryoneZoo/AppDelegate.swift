@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var networkManager:NetWorkManager?
+    var userDefaultsManager:UserDefaultsManager?
     
     var userScore:Int?
 
@@ -26,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
         
         self.networkManager = NetWorkManager()
+        self.userDefaultsManager = UserDefaultsManager()
 
         return true
     }

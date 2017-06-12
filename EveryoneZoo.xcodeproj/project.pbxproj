@@ -16,6 +16,9 @@
 		8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */; };
 		8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586711ED848F400802F54 /* UserInfoViewController.swift */; };
 		8D1586741ED8565300802F54 /* FollowUserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586731ED8565300802F54 /* FollowUserButton.swift */; };
+		8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */; };
+		8D35113D1EEECFC8004BA744 /* NoLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113C1EEECFC8004BA744 /* NoLoginView.swift */; };
+		8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113E1EEED5E6004BA744 /* LoginViewController.swift */; };
 		8D3CAF891ED09907007961BF /* PostDraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3CAF881ED09907007961BF /* PostDraftViewController.swift */; };
 		8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */; };
 		8D6215AA1EC35EAA00593E55 /* PostViewScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215A91EC35EAA00593E55 /* PostViewScrollView.swift */; };
@@ -82,6 +85,9 @@
 		8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		8D1586711ED848F400802F54 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		8D1586731ED8565300802F54 /* FollowUserButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowUserButton.swift; sourceTree = "<group>"; };
+		8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		8D35113C1EEECFC8004BA744 /* NoLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoLoginView.swift; sourceTree = "<group>"; };
+		8D35113E1EEED5E6004BA744 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D3CAF881ED09907007961BF /* PostDraftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDraftViewController.swift; sourceTree = "<group>"; };
 		8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPartsSize.swift; sourceTree = "<group>"; };
 		8D6215A91EC35EAA00593E55 /* PostViewScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewScrollView.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */,
+				8D35113E1EEED5E6004BA744 /* LoginViewController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -182,6 +189,7 @@
 		8D6215A41EC2011100593E55 /* ComoonParts */ = {
 			isa = PBXGroup;
 			children = (
+				8D35113C1EEECFC8004BA744 /* NoLoginView.swift */,
 			);
 			name = ComoonParts;
 			sourceTree = "<group>";
@@ -304,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				8D9DE17D1EE4145E00121FC1 /* NetWorkManager.swift */,
+				8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -648,6 +657,7 @@
 				8D9DE17E1EE4145E00121FC1 /* NetWorkManager.swift in Sources */,
 				8D9DE17C1EE3F5B500121FC1 /* MenuButton.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */,
+				8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */,
 				8D6215AA1EC35EAA00593E55 /* PostViewScrollView.swift in Sources */,
 				8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
@@ -655,7 +665,9 @@
 				8DDAF0DD1ED184790079D443 /* MyPageFollowViewController.swift in Sources */,
 				8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */,
 				8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */,
+				8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */,
 				8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */,
+				8D35113D1EEECFC8004BA744 /* NoLoginView.swift in Sources */,
 				8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */,
 				8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */,
 			);

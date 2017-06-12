@@ -13,10 +13,6 @@ import SwiftyJSON
 class NetWorkManager: NSObject {
     
     static let sharedInstance = NetWorkManager()
-    
-    func testtest()  {
-        print("aaaa")
-    }
 
     //push:/api/v0/users/{:自分のuser_id}/following/{:フォローしたいuser_id}
     func followUser(myUserId:Int,followUserId:Int){
@@ -51,7 +47,5 @@ class NetWorkManager: NSObject {
             }
         }
     }
-    
-    
     
 }

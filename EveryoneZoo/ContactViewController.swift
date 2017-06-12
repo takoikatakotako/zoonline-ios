@@ -13,6 +13,7 @@ class ContactViewController: UIViewController , UIWebViewDelegate{
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var webViewHeight:CGFloat!
     
     var webview : UIWebView!
 
@@ -22,14 +23,15 @@ class ContactViewController: UIViewController , UIWebViewDelegate{
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
+        webViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR)
         
+        //WebView
         webview = UIWebView()
-        webview.frame = self.view.bounds
+        webview.frame = CGRect(x: 0, y: (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR), width: viewWidth, height: webViewHeight)
         self.view.addSubview(webview)
         
-        
         // URLを設定.
-        let url: URL = URL(string: "http://jmatome.sakura.ne.jp/science/contact.php")!
+        let url: URL = URL(string: CONTACT_PAGE_URL_STRING)!
         
         // リエストを発行する.
         let request: NSURLRequest = NSURLRequest(url: url)
