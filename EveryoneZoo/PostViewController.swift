@@ -87,28 +87,6 @@ class PostViewController: UIViewController {
     //右側のボタンが押されたら呼ばれる
     internal func postBtnClicked(sender: UIButton){
         
-        let parameters: Parameters = [
-            "foo": [1,2,3],
-            "bar": [
-                "baz": "qux"
-            ]
-        ]
-        
-        
-        Alamofire.request("http://minzoo.herokuapp.com/api/v0/example", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
-        
-            switch response.result {
-            case .success:
-                print("Validation Successful")
-                
-                let json:JSON = JSON(response.result.value ?? kill)
-                print(json)
-            case .failure(let error):
-                print(error)
-                //テーブルの再読み込み
-            }
-
-        }
 
     }
 

@@ -49,7 +49,7 @@
         <!--投稿-->
         <scene sceneID="dU7-6a-kIm">
             <objects>
-                <viewController id="prJ-Gc-YTA" customClass="PostDraftViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="prJ-Gc-YTA" customClass="PostViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PUj-lI-kZk"/>
                         <viewControllerLayoutGuide type="bottom" id="cz6-Jt-enA"/>
@@ -63,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ld-YG-Z1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-700" y="1556"/>
+            <point key="canvasLocation" x="-17" y="1459"/>
         </scene>
         <!--動物園-->
         <scene sceneID="yNV-z2-Lkw">
