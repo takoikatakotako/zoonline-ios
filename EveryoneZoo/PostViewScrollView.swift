@@ -15,6 +15,7 @@ class PostViewScrollView: UIScrollView {
     
     //タイトルのView
     var titleBaseView:UIView! = UIView()
+    var titleTextField:UITextField = UITextField()
     
     //コメント
     //コメントのView
@@ -52,7 +53,6 @@ class PostViewScrollView: UIScrollView {
         titleBaseView.addSubview(titleLogo)
         
         //TitleTextField
-        let titleTextField:UITextField = UITextField()
         titleTextField.frame = CGRect(x: viewWidth*0.05+titleHeight, y: 0, width: viewWidth-(titleHeight+viewWidth*0.05), height: titleHeight)
         titleTextField.text = "タイトルをつけてみよう"
         titleTextField.textColor = UIColor.gray
@@ -71,14 +71,14 @@ class PostViewScrollView: UIScrollView {
         commentBaseView.addSubview(commentLogo)
         
         //CommnetTextField
-        let commentTextField:UITextField = UITextField()
-        commentTextField.frame = CGRect(x: viewWidth*0.05+titleHeight, y: titleHeight*0.2, width: viewWidth-(titleHeight+viewWidth*0.05), height: commentHeight-titleHeight*0.2)
-        commentTextField.text = "コメントを書いてみよう"
-        commentTextField.textColor = UIColor.gray
-        commentTextField.textAlignment = NSTextAlignment.left
-        commentTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.top
+        let commentTextView:UITextView = UITextView()
+        commentTextView.frame = CGRect(x: viewWidth*0.05+titleHeight, y: titleHeight*0.2, width: viewWidth-(titleHeight+viewWidth*0.05), height: commentHeight-titleHeight*0.2)
+        commentTextView.text = "コメントを書いてみよう"
+        commentTextView.textColor = UIColor.gray
+        commentTextView.textAlignment = NSTextAlignment.left
+        //commentTextView.contentVerticalAlignment = UIControlContentVerticalAlignment.top
         //titleTextField.borderStyle = UITextBorderStyle.roundedRect
-        commentBaseView.addSubview(commentTextField)
+        commentBaseView.addSubview(commentTextView)
         
         
                         /*
@@ -101,4 +101,11 @@ class PostViewScrollView: UIScrollView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //タッチイベントを有効にする
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        superview?.touchesBegan(touches, with: event)
+        
+    }
+    
 }

@@ -24,7 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        //ナビゲーションアイテムの色を変更
         UINavigationBar.appearance().tintColor = UIColor.white
+        //ナビゲーションバーの背景を変更
+        UINavigationBar.appearance().barTintColor = UIColor.mainAppColor()
+        //ナビゲーションのタイトル文字列の色を変更
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
         
         self.networkManager = NetWorkManager()
         self.userDefaultsManager = UserDefaultsManager()
