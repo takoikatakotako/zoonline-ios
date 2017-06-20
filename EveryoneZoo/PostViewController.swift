@@ -115,9 +115,11 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate,UINav
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-            postScrollView.imgSelectBtn.setBackgroundImage(image, for: UIControlState.normal)
+            postScrollView.imgSelectBtn.setImage(image, for: UIControlState.normal)
+            postScrollView.imgSelectBtn.imageView!.contentMode = UIViewContentMode.scaleAspectFit
+
         } else{
-            print("Error")
+            print("Error:Class name : \(NSStringFromClass(type(of: self))) ")
         }
         
         self.dismiss(animated: true, completion: nil)
@@ -136,6 +138,9 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate,UINav
     //UITextFieldが編集された直前に呼ばれる
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textFieldDidBeginEditing: \(textField.text!)")
+ 
+        self.postScrollView.setContentOffset(CGPoint(x: 0, y: 210), animated: true)
+        
         if postScrollView.titleTextField.text == "タイトルをつけてみよう" {
             postScrollView.titleTextField.text = ""
         }
