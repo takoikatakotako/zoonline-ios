@@ -59,7 +59,7 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         //ステータスバー部分の背景
         let statusBackColor = UIView()
         statusBackColor.frame =
-            CGRect(x: 0, y: -(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR), width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR*2)
+            CGRect(x: 0, y: -(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR), width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR)
         statusBackColor.backgroundColor = UIColor.mainAppColor()
         self.view.addSubview(statusBackColor)
         
@@ -147,14 +147,8 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         
         let noLoginViewHeight:CGFloat = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_TABBAR_HEIGHT)
         noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
+        noLoginView.loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
         self.view.addSubview(noLoginView)
-        
-        let loginBtn:UIButton = UIButton()
-        loginBtn.frame = CGRect(x: viewWidth*0.2, y: noLoginViewHeight*0.75, width: viewWidth*0.6, height: noLoginViewHeight*0.1)
-        loginBtn.setTitle("ログイン", for: UIControlState.normal)
-        loginBtn.backgroundColor = UIColor.orange
-        self.view.addSubview(loginBtn)
-        loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
     }
     
     //basicボタンが押されたら呼ばれます

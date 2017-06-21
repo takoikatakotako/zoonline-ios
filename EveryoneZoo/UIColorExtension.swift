@@ -38,7 +38,14 @@ extension UIColor {
         return UIColor(red: (109.0/256), green: (195.0/256), blue: (241.0/256), alpha: 1.0)
     }
     
+    //LoginPage
+    class func LoginBtnRightBlue() -> UIColor {
+        return UIColor(red: (20.0/256), green: (163.0/256), blue: (254.0/256), alpha: 1.0)
+    }
     
+    class func NewRegisBtnPink() -> UIColor {
+        return UIColor(red: (234.0/256), green: (52.0/256), blue: (109.0/256), alpha: 1.0)
+    }
     
     //POST
     class func PostScrollBGColor() -> UIColor {
