@@ -147,15 +147,21 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         
         let noLoginViewHeight:CGFloat = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_TABBAR_HEIGHT)
         noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
-        noLoginView.loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+        noLoginView.loginBtn.addTarget(nil, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+        noLoginView.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
         self.view.addSubview(noLoginView)
     }
-    
     //basicボタンが押されたら呼ばれます
     func loginBtnClicked(sender: UIButton){
 
         let loginView:LoginViewController = LoginViewController()
         self.present(loginView, animated: true, completion: nil)
+    }
+    //basicボタンが押されたら呼ばれます
+    func resistBtnClicked(sender: UIButton){
+        
+        let resistView:NewResistViewController = NewResistViewController()
+        self.present(resistView, animated: true, completion: nil)
     }
     
     // MARK: - TableView関連のメソッド

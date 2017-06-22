@@ -17,6 +17,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     
     //ViewParts
     private var contentsScrollView:UIScrollView!
+    var logoImgView:UIImageView!
     var mailTextField:UITextField! = nil
     
     override func viewDidLoad() {
@@ -78,9 +79,9 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         self.view.addSubview(contentsScrollView)
         
         //Logo
-        let logoImgView:UIImageView = UIImageView()
+        logoImgView = UIImageView()
         logoImgView.image = UIImage(named:"logo")
-        logoImgView.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.1, width: viewWidth*0.8, height: loginViewHeight*0.2)
+        logoImgView.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.07, width: viewWidth*0.8, height: loginViewHeight*0.2)
         logoImgView.contentMode = UIViewContentMode.scaleAspectFit
         contentsScrollView.addSubview(logoImgView)
         
@@ -143,11 +144,15 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textFieldDidBeginEditing: \(textField.text!)")
-        self.contentsScrollView.setContentOffset(CGPoint(x: 0, y: 210), animated: true)
+        
+        let timing = UICubicTimingParameters(animationCurve: .easeInOut)
+        let animator = UIViewPropertyAnimator(duration: 0.2, timingParameters: timing)
+        
+        animator.addAnimations {
+            self.contentsScrollView.setContentOffset(CGPoint(x: 0, y: 200), animated: true)
+        }
+        animator.startAnimation()
     }
-    
-    
-    
     
     //UITextFieldが編集された直後に呼ばれる
     func textFieldDidEndEditing(_ textField: UITextField) {
