@@ -83,7 +83,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         //Logo
         logoImgView = UIImageView()
         logoImgView.image = UIImage(named:"logo")
-        logoImgView.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.07, width: viewWidth*0.8, height: resistViewHeight*0.2)
+        logoImgView.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.05, width: viewWidth*0.8, height: resistViewHeight*0.2)
         logoImgView.contentMode = UIViewContentMode.scaleAspectFit
         contentsScrollView.addSubview(logoImgView)
         
@@ -91,7 +91,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         let resistFailed:UILabel = UILabel()
         resistFailed.text = "そのユーザー名は使用できません"
         resistFailed.textAlignment = NSTextAlignment.center
-        resistFailed.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.28, width: viewWidth*0.8, height: resistViewHeight*0.1)
+        resistFailed.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.25, width: viewWidth*0.8, height: resistViewHeight*0.1)
         resistFailed.textColor = UIColor.LogInPinkColor()
         resistFailed.sizeToFit()
         contentsScrollView.addSubview(resistFailed)

@@ -74,14 +74,14 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         //BaseScrollView
         contentsScrollView = UIScrollView()
         contentsScrollView.frame =  CGRect(x: 0, y: (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR), width: viewWidth, height: loginViewHeight)
-        contentsScrollView.contentSize = CGSize(width:viewWidth, height:loginViewHeight*2)
+        //contentsScrollView.contentSize = CGSize(width:viewWidth, height:loginViewHeight*2)
         
         self.view.addSubview(contentsScrollView)
         
         //Logo
         logoImgView = UIImageView()
         logoImgView.image = UIImage(named:"logo")
-        logoImgView.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.07, width: viewWidth*0.8, height: loginViewHeight*0.2)
+        logoImgView.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.05, width: viewWidth*0.8, height: loginViewHeight*0.2)
         logoImgView.contentMode = UIViewContentMode.scaleAspectFit
         contentsScrollView.addSubview(logoImgView)
         
@@ -89,7 +89,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         let loginFailed:UILabel = UILabel()
         loginFailed.text = "ログインできませんでした"
         loginFailed.textAlignment = NSTextAlignment.center
-        loginFailed.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.28, width: viewWidth*0.8, height: loginViewHeight*0.1)
+        loginFailed.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.25, width: viewWidth*0.8, height: loginViewHeight*0.1)
         loginFailed.textColor = UIColor.LogInPinkColor()
         contentsScrollView.addSubview(loginFailed)
         
