@@ -145,11 +145,11 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textFieldDidBeginEditing: \(textField.text!)")
         
+        //ロゴの位置までViewを上げる
         let timing = UICubicTimingParameters(animationCurve: .easeInOut)
-        let animator = UIViewPropertyAnimator(duration: 0.2, timingParameters: timing)
-        
+        let animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: timing)
         animator.addAnimations {
-            self.contentsScrollView.setContentOffset(CGPoint(x: 0, y: 200), animated: true)
+            self.contentsScrollView.setContentOffset(CGPoint(x: 0, y: self.logoImgView.frame.minY), animated: true)
         }
         animator.startAnimation()
     }
@@ -166,6 +166,14 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         
         // 改行ボタンが押されたらKeyboardを閉じる処理.
         mailTextField.resignFirstResponder()
+        
+        //元の位置までViewを戻す
+        let timing = UICubicTimingParameters(animationCurve: .easeInOut)
+        let animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: timing)
+        animator.addAnimations {
+            self.contentsScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
+        animator.startAnimation()
         
         return true
     }
