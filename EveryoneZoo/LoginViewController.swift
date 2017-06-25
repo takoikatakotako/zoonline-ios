@@ -18,7 +18,10 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     //ViewParts
     private var contentsScrollView:UIScrollView!
     var logoImgView:UIImageView!
-    var mailTextField:UITextField! = nil
+    var mailTextField:UITextField! = UITextField()
+    var passWordTextField:UITextField! = UITextField()
+    var loginBtn:UIButton! = UIButton()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +97,6 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         contentsScrollView.addSubview(loginFailed)
         
         //MailTest
-        mailTextField = UITextField()
         mailTextField.delegate = self
         mailTextField.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.38, width: viewWidth*0.8, height: loginViewHeight*0.1)
         mailTextField.text = "ユーザー名またはメールアドレス"
@@ -111,7 +113,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         contentsScrollView.addSubview(mailTextFieldLine)
         
         //MailTest
-        let passWordTextField:UITextField = UITextField()
+        passWordTextField.delegate = self
         passWordTextField.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.48, width: viewWidth*0.8, height: loginViewHeight*0.1)
         passWordTextField.text = "パスワード"
         passWordTextField.textColor = UIColor.gray
@@ -125,10 +127,13 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         contentsScrollView.addSubview(passWordTextFieldLine)
         
         //LoginButton
-        let loginBtn:UIButton = UIButton()
         loginBtn.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.65, width: viewWidth*0.8, height: viewWidth*0.15)
         loginBtn.backgroundColor = UIColor.gray
         loginBtn.setTitle("ログイン", for: UIControlState.normal)
+        loginBtn.layer.masksToBounds = true
+        loginBtn.layer.cornerRadius = 4.0
+        loginBtn.isEnabled = false
+        loginBtn.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
         contentsScrollView.addSubview(loginBtn)
         
         //ForgetPassWordButton
@@ -152,6 +157,10 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
             self.contentsScrollView.setContentOffset(CGPoint(x: 0, y: self.logoImgView.frame.minY), animated: true)
         }
         animator.startAnimation()
+        
+        if textField.text == "ユーザー名またはメールアドレス" || textField.text == "パスワード" {
+            textField.text = ""
+        }
     }
     
     //UITextFieldが編集された直後に呼ばれる
@@ -165,7 +174,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         print("textFieldShouldReturn \(textField.text!)")
         
         // 改行ボタンが押されたらKeyboardを閉じる処理.
-        mailTextField.resignFirstResponder()
+        textField.resignFirstResponder()
         
         //元の位置までViewを戻す
         let timing = UICubicTimingParameters(animationCurve: .easeInOut)
@@ -175,12 +184,25 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         }
         animator.startAnimation()
         
+        //ChangeLoginBtn
+        if self.passWordTextField.text != "" || self.mailTextField.text != "" {
+            loginBtn.isEnabled = false
+            loginBtn.backgroundColor = UIColor.LoginBtnRightBlue()
+        }else{
+            loginBtn.isEnabled = true
+            loginBtn.backgroundColor = UIColor.gray
+        }
         return true
+    }
+    
+    //ログインボタンが押されたら呼ばれる
+    func loginBtnClicked(sender: UIButton){
+        print("touped")
+        
     }
     
     //左側のボタンが押されたら呼ばれる
     func leftBarBtnClicked(sender: UIButton){
-
         self.dismiss(animated: true, completion: nil)
     }
 
