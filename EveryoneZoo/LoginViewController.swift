@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import SCLAlertView
+import Alamofire
+import SwiftyJSON
 
 class LoginViewController: UIViewController ,UITextFieldDelegate{
 
@@ -133,7 +136,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         loginBtn.layer.masksToBounds = true
         loginBtn.layer.cornerRadius = 4.0
         loginBtn.isEnabled = false
-        loginBtn.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
+        loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
         contentsScrollView.addSubview(loginBtn)
         
         //ForgetPassWordButton
@@ -186,10 +189,10 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         
         //ChangeLoginBtn
         if self.passWordTextField.text != "" || self.mailTextField.text != "" {
-            loginBtn.isEnabled = false
+            loginBtn.isEnabled = true
             loginBtn.backgroundColor = UIColor.LoginBtnRightBlue()
         }else{
-            loginBtn.isEnabled = true
+            loginBtn.isEnabled = false
             loginBtn.backgroundColor = UIColor.gray
         }
         return true
@@ -198,12 +201,40 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     //ログインボタンが押されたら呼ばれる
     func loginBtnClicked(sender: UIButton){
         print("touped")
+        //
         
+        //post:http://minzoo.herokuapp.com/api/v0/login
+        
+        
+        let parameters: Parameters = [
+            "email": "onojun@sommelier.com",
+            "password": "password"]
+        
+        Alamofire.request("http://minzoo.herokuapp.com/api/v0/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json["result"])
+                
+                if json["result"].boolValue{
+                    //ログイン成功
+                    self.dismiss(animated: true, completion: nil)
+                }else{
+                    //メールなどが違うと判断
+                }
+                
+            case .failure(let error):
+                print(error)
+               //通信に失敗と判断
+                SCLAlertView().showInfo("Important info", subTitle: "You are great")
+            }
+        }
     }
     
     //左側のボタンが押されたら呼ばれる
     func leftBarBtnClicked(sender: UIButton){
+        
         self.dismiss(animated: true, completion: nil)
     }
-
 }

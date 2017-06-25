@@ -49,6 +49,10 @@ class NetWorkManager: NSObject {
     }
     
     
+    // MARK: - Login
+    //非同期処理なので、VCに記述
+    
+    
     //post:http://minzoo.herokuapp.com/api/v0/example
     func postSample(){
         
@@ -71,8 +75,6 @@ class NetWorkManager: NSObject {
                 print(error)
                 //テーブルの再読み込み
             }
-            
         }
-
     }
 }
