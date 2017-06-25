@@ -205,10 +205,11 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         
         //post:http://minzoo.herokuapp.com/api/v0/login
         
-        
+        //onojun@sommelier.com
+        //password
         let parameters: Parameters = [
-            "email": "onojun@sommelier.com",
-            "password": "password"]
+            "email": self.mailTextField.text ?? "",
+            "password": self.passWordTextField.text ?? ""]
         
         Alamofire.request("http://minzoo.herokuapp.com/api/v0/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             
@@ -222,12 +223,13 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                     self.dismiss(animated: true, completion: nil)
                 }else{
                     //メールなどが違うと判断
+                    SCLAlertView().showInfo("Important info", subTitle: "ログインに失敗しますた。たぶんパスとか違う")
                 }
                 
             case .failure(let error):
                 print(error)
                //通信に失敗と判断
-                SCLAlertView().showInfo("Important info", subTitle: "You are great")
+                SCLAlertView().showInfo("Important info", subTitle: "ログインに失敗しますた。たぶんネットワークエラー")
             }
         }
     }
