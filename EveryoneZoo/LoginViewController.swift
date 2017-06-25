@@ -35,7 +35,6 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         loginViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR)
         
         self.view.backgroundColor = UIColor.white
-        
         //Viewにパーツを追加
         setNavigationBar()
         setView()
@@ -161,6 +160,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         }
         animator.startAnimation()
         
+        //初期入力値の場合は空にする
         if textField.text == "ユーザー名またはメールアドレス" || textField.text == "パスワード" {
             textField.text = ""
         }
@@ -188,7 +188,10 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         animator.startAnimation()
         
         //ChangeLoginBtn
-        if self.passWordTextField.text != "" || self.mailTextField.text != "" {
+        if self.passWordTextField.text != "ユーザー名またはメールアドレス" || self.mailTextField.text != "パスワード" {
+            loginBtn.isEnabled = false
+            loginBtn.backgroundColor = UIColor.gray
+        }else if self.passWordTextField.text != "" && self.mailTextField.text != "" {
             loginBtn.isEnabled = true
             loginBtn.backgroundColor = UIColor.LoginBtnRightBlue()
         }else{
