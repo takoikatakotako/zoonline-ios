@@ -26,6 +26,8 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     var passWordTextField:UITextField! = UITextField()
     var loginBtn:UIButton! = UIButton()
     
+    //
+    let indicator:UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,17 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         //Viewにパーツを追加
         setNavigationBar()
         setView()
+        
+        
+        indicator.activityIndicatorViewStyle = .whiteLarge
+        indicator.center = self.view.center
+        indicator.hidesWhenStopped = true
+        self.view.addSubview(indicator)
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.mainAppColor()
+        
+ 
+        
     }
     
     // MARK: - Viewにパーツの設置
@@ -218,6 +231,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         print("touped")
         
         self.loginFailed.isHidden = true
+        indicator.startAnimating()
         
         //post:http://minzoo.herokuapp.com/api/v0/login
         
@@ -235,6 +249,9 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         }
         
         Alamofire.request("http://minzoo.herokuapp.com/api/v0/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+            
+            self.indicator.stopAnimating()
+            
             
             switch response.result {
             case .success:
