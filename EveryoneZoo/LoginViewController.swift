@@ -20,6 +20,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     
     //ViewParts
     private var contentsScrollView:UIScrollView!
+    let loginFailed:UILabel = UILabel()
     var logoImgView:UIImageView!
     var mailTextField:UITextField! = UITextField()
     var passWordTextField:UITextField! = UITextField()
@@ -91,16 +92,17 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         contentsScrollView.addSubview(logoImgView)
         
         //Login failed
-        let loginFailed:UILabel = UILabel()
         loginFailed.text = "ログインできませんでした"
         loginFailed.textAlignment = NSTextAlignment.center
         loginFailed.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.25, width: viewWidth*0.8, height: loginViewHeight*0.1)
+        loginFailed.isHidden = true
         loginFailed.textColor = UIColor.LogInPinkColor()
         contentsScrollView.addSubview(loginFailed)
         
         //MailTest
         mailTextField.delegate = self
         mailTextField.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.38, width: viewWidth*0.8, height: loginViewHeight*0.1)
+        mailTextField.tag = 100
         mailTextField.text = "ユーザー名またはメールアドレス"
         mailTextField.textColor = UIColor.gray
         mailTextField.borderStyle = UITextBorderStyle.none
@@ -117,6 +119,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         //MailTest
         passWordTextField.delegate = self
         passWordTextField.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.48, width: viewWidth*0.8, height: loginViewHeight*0.1)
+        passWordTextField.tag = 101
         passWordTextField.text = "パスワード"
         passWordTextField.textColor = UIColor.gray
         passWordTextField.borderStyle = UITextBorderStyle.none
@@ -169,7 +172,15 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     //UITextFieldが編集された直後に呼ばれる
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textFieldDidEndEditing: \(textField.text!)")
-        
+        //passWordTestの場合
+        /*
+        if textField.tag == 101{
+            
+            var hideChara:String = ""
+            (0 ..< textField.text!.count).forEach { _ in hideChara+="*" }
+            textField.text = hideChara
+        }
+ */
     }
     
     //改行ボタンが押された際に呼ばれる
@@ -188,31 +199,40 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         animator.startAnimation()
         
         //ChangeLoginBtn
-        if self.passWordTextField.text != "ユーザー名またはメールアドレス" || self.mailTextField.text != "パスワード" {
+        if self.mailTextField.text == "ユーザー名またはメールアドレス" || self.passWordTextField.text == "パスワード" {
             loginBtn.isEnabled = false
             loginBtn.backgroundColor = UIColor.gray
-        }else if self.passWordTextField.text != "" && self.mailTextField.text != "" {
+        }else if self.mailTextField.text != "" && self.passWordTextField.text != ""{
             loginBtn.isEnabled = true
             loginBtn.backgroundColor = UIColor.LoginBtnRightBlue()
-        }else{
+        } else{
             loginBtn.isEnabled = false
             loginBtn.backgroundColor = UIColor.gray
         }
+        
         return true
     }
     
     //ログインボタンが押されたら呼ばれる
     func loginBtnClicked(sender: UIButton){
         print("touped")
-        //
+        
+        self.loginFailed.isHidden = true
         
         //post:http://minzoo.herokuapp.com/api/v0/login
         
         //onojun@sommelier.com
         //password
-        let parameters: Parameters = [
-            "email": self.mailTextField.text ?? "",
-            "password": self.passWordTextField.text ?? ""]
+        let parameters: Parameters!
+        if self.mailTextField.text == "ero" {
+            parameters = [
+                "email": "onojun@sommelier.com",
+                "password": "password"]
+        }else{
+            parameters = [
+                "email": self.mailTextField.text ?? "",
+                "password": self.passWordTextField.text ?? ""]
+        }
         
         Alamofire.request("http://minzoo.herokuapp.com/api/v0/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             
@@ -226,12 +246,14 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                     self.dismiss(animated: true, completion: nil)
                 }else{
                     //メールなどが違うと判断
+                    self.loginFailed.isHidden = false
                     SCLAlertView().showInfo("Important info", subTitle: "ログインに失敗しますた。たぶんパスとか違う")
                 }
                 
             case .failure(let error):
                 print(error)
                //通信に失敗と判断
+                self.loginFailed.isHidden = false
                 SCLAlertView().showInfo("Important info", subTitle: "ログインに失敗しますた。たぶんネットワークエラー")
             }
         }
