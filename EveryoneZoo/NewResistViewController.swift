@@ -91,13 +91,14 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         let resistFailed:UILabel = UILabel()
         resistFailed.text = "そのユーザー名は使用できません"
         resistFailed.textAlignment = NSTextAlignment.center
-        resistFailed.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.25, width: viewWidth*0.8, height: resistViewHeight*0.1)
+        resistFailed.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.28, width: viewWidth*0.8, height: resistViewHeight*0.1)
         resistFailed.textColor = UIColor.LogInPinkColor()
         resistFailed.sizeToFit()
         contentsScrollView.addSubview(resistFailed)
         
         //MailTest
         userNameTextField.delegate = self
+        userNameTextField.tag = 100
         userNameTextField.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.38, width: viewWidth*0.8, height: resistViewHeight*0.1)
         userNameTextField.text = "ユーザー名"
         userNameTextField.textColor = UIColor.gray
@@ -113,6 +114,8 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         contentsScrollView.addSubview(userNameTextFieldLine)
         
         //MailTest
+        mailTextField.delegate = self
+        mailTextField.tag = 101
         mailTextField.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.48, width: viewWidth*0.8, height: resistViewHeight*0.1)
         mailTextField.text = "メールアドレス"
         mailTextField.textColor = UIColor.gray
@@ -126,6 +129,8 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         contentsScrollView.addSubview(mailTextFieldLine)
         
         //MailTest
+        passWordTextField.delegate = self
+        passWordTextField.tag = 102
         passWordTextField.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.58, width: viewWidth*0.8, height: resistViewHeight*0.1)
         passWordTextField.text = "パスワード"
         passWordTextField.textColor = UIColor.gray
@@ -142,12 +147,15 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         let resistBtn:UIButton = UIButton()
         resistBtn.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.75, width: viewWidth*0.8, height: viewWidth*0.15)
         resistBtn.backgroundColor = UIColor.gray
+        resistBtn.layer.masksToBounds = true
+        resistBtn.layer.cornerRadius = 4.0
+        resistBtn.isEnabled = false
         resistBtn.setTitle("登録する", for: UIControlState.normal)
         contentsScrollView.addSubview(resistBtn)
         
-        //ForgetPassWordButton
+        //利用規約ボタン
         let termOfServiceBtn:UIButton = UIButton()
-        termOfServiceBtn.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.85, width: viewWidth*0.8, height: viewWidth*0.15)
+        termOfServiceBtn.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.86, width: viewWidth*0.8, height: viewWidth*0.15)
         termOfServiceBtn.backgroundColor = UIColor.white
         termOfServiceBtn.setTitleColor(UIColor.blue, for: UIControlState.normal)
         termOfServiceBtn.setTitle("利用規約", for: UIControlState.normal)
@@ -156,14 +164,23 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
     
     
     
+    //編集が始まったら呼ばれる
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textFieldDidBeginEditing: \(textField.text!)")
         
         let timing = UICubicTimingParameters(animationCurve: .easeInOut)
         let animator = UIViewPropertyAnimator(duration: 0.2, timingParameters: timing)
         
+        //テキストフィールドの位置によって上げる位置も変更する
+        var textPos:CGFloat = 0
+        if textField.tag == 101{
+            textPos += textField.frame.height
+        }else if textField.tag == 102{
+            textPos += textField.frame.height*2
+        }
         animator.addAnimations {
-            self.contentsScrollView.setContentOffset(CGPoint(x: 0, y: 200), animated: true)
+            //テキストフィールドの位置に合わせてちょっと動かす
+            self.contentsScrollView.setContentOffset(CGPoint(x: 0, y: self.logoImgView.frame.minY+textPos), animated: true)
         }
         animator.startAnimation()
     }
@@ -179,7 +196,15 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         print("textFieldShouldReturn \(textField.text!)")
         
         // 改行ボタンが押されたらKeyboardを閉じる処理.
-        userNameTextField.resignFirstResponder()
+        textField.resignFirstResponder()
+        
+        //元の位置までViewを戻す
+        let timing = UICubicTimingParameters(animationCurve: .easeInOut)
+        let animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: timing)
+        animator.addAnimations {
+            self.contentsScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
+        animator.startAnimation()
         
         return true
     }
