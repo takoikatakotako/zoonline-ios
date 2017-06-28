@@ -83,7 +83,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return ARRAY_MYPAGE_SCTION_TITLE.count
     }
     
-    
     //セクションのタイトルを返す.
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return ARRAY_MYPAGE_SCTION_TITLE[section] as? String

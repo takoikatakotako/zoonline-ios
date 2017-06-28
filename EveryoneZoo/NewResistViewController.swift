@@ -159,9 +159,16 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         termOfServiceBtn.backgroundColor = UIColor.white
         termOfServiceBtn.setTitleColor(UIColor.blue, for: UIControlState.normal)
         termOfServiceBtn.setTitle("利用規約", for: UIControlState.normal)
+        termOfServiceBtn.addTarget(self, action: #selector(showWebTOS(sender:)), for: .touchUpInside)
         contentsScrollView.addSubview(termOfServiceBtn)
     }
     
+    
+    //TosのwebViewを開く
+    func showWebTOS(sender: UIButton){
+        let contactView:ContactViewController = ContactViewController()
+        self.present(contactView, animated: true, completion: nil)
+    }
     
     
     //編集が始まったら呼ばれる
