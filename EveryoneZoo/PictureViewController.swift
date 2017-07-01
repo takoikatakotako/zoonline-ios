@@ -35,12 +35,11 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     //APIから取得したデーター
     var imageURLs:Array<String> = Array()
     var postIds:Array<Int> = Array()
-    var ActivityIndicator: UIActivityIndicatorView!
+    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var isNetWorkConnect:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         //画面横サイズを取得
         self.viewWidth = self.view.frame.width
@@ -52,9 +51,9 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         setNavigationBar()
         setSegmentView()
         setTableView()
+        setActivityIndicator()
 
         //network
-        startActivityIndicator()
         dowonloadJsons()
     }
     
@@ -63,10 +62,10 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     func setNavigationBar() {
         
         //ステータスバー部分の覆い
-        let aadView:UIView = UIView()
-        aadView.frame = CGRect(x: 0, y: -PARTS_HEIGHT_NAVIGATION_BAR*2, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR*2)
-        aadView.backgroundColor = UIColor.mainAppColor()
-        self.view.addSubview(aadView)
+        let statusBgView:UIView = UIView()
+        statusBgView.frame = CGRect(x: 0, y: -PARTS_HEIGHT_NAVIGATION_BAR*2, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR*2)
+        statusBgView.backgroundColor = UIColor.mainAppColor()
+        self.view.addSubview(statusBgView)
         
         //ナビゲーションコントローラーの色の変更
         self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
@@ -81,6 +80,7 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
         
+        //右上の検索ボタン
         serchNavBtn.tintColor = UIColor.white
         serchNavBtn.action = #selector(rightBarBtnClicked(sender:))
     }
@@ -129,7 +129,6 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         segmentLeftSelected()
     }
     
-    
     // MARK: テーブルビューの生成
     func setTableView(){
         
@@ -158,6 +157,18 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
         pictureTableView.refreshControl = refreshControl
     }
+    
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        indicator.activityIndicatorViewStyle = .whiteLarge
+        indicator.center = self.view.center
+        indicator.hidesWhenStopped = true
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.mainAppColor()
+        self.view.addSubview(indicator)
+    }
+    
+    
     
     // MARK: - ナビゲーションバーのアクション
     internal func leftBarBtnClicked(sender: UIButton){
@@ -227,35 +238,33 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         //ネットワークエラの処理
         if !isNetWorkConnect {
             let cell:NetWorkErrorTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self), for: indexPath) as! NetWorkErrorTableViewCell
-            cell.errorImgView.image = UIImage(named: "sample_neterror")!
             return cell
         }
-        
         
         //エラーが起こっていない時
         let loadImg = UIImage(named: "sample_loading")!
         
         if indexPath.row % 2 == 0 {
+            //左上に大きい四角があるCell
             let cell:LeftPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self), for: indexPath) as! LeftPicturesTableViewCell
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.layoutMargins = UIEdgeInsets.zero
             
-            
             for i in 0..<6 {
-                
                 let cellNum:Int = indexPath.row*6+i
                 let url = URL(string: imageURLs[cellNum])!
                 cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
                 cell.picturesImgs[i].isUserInteractionEnabled = true
                 cell.picturesImgs[i].tag = postIds[cellNum]
                 
-                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
+                //画像にタッチイベントを追加
+                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
                 singleTap.numberOfTapsRequired = 1
                 cell.picturesImgs[i].addGestureRecognizer(singleTap)
             }
             return cell
         }else{
-            
+            //右上に大きい四角があるCell
             let cell:RightPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(RightPicturesTableViewCell.self), for: indexPath) as! RightPicturesTableViewCell
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.layoutMargins = UIEdgeInsets.zero
@@ -268,7 +277,7 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
                 cell.picturesImgs[i].isUserInteractionEnabled = true
                 cell.picturesImgs[i].tag = postIds[cellNum]
                 
-                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))  //Swift3
+                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
                 singleTap.numberOfTapsRequired = 1
                 cell.picturesImgs[i].addGestureRecognizer(singleTap)
             }
@@ -293,8 +302,6 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         self.navigationController?.pushViewController(picDetailView, animated: true)
     }
     
-
-    
     
     // MARK: - TableViewの拡張メソッド
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
@@ -309,6 +316,7 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         }
     }
     
+    //ナビゲーションバーを隠したり出したり
     func hidesBarsWithScrollView( hidden:Bool, hiddenTop:Bool, hiddenBottom:Bool) {
         
         let timing = UICubicTimingParameters(animationCurve: .easeInOut)
@@ -337,37 +345,17 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     func scrollReflesh(sender : UIRefreshControl) {
         
         //network
-        startActivityIndicator()
+        indicator.startAnimating()
         dowonloadJsons()
-        
-        sender.endRefreshing()
     }
 
-
-    // MARK: - NetWork
-    func startActivityIndicator(){
-        
-        // ActivityIndicatorを作成＆中央に配置
-        ActivityIndicator = UIActivityIndicatorView()
-        ActivityIndicator.frame = CGRect(x: viewWidth/2-viewWidth*0.1, y: viewHeight*0.2, width: viewWidth*0.1, height: viewWidth*0.1)
-        ActivityIndicator.center = self.view.center
-        
-        // クルクルをストップした時に非表示する
-        ActivityIndicator.hidesWhenStopped = true
-        
-        // 色を設定
-        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        
-        //Viewに追加
-        self.view.addSubview(ActivityIndicator)
-        ActivityIndicator.startAnimating()
-    }
     
     func dowonloadJsons(){
         
         Alamofire.request(ApiLibrary.getAPIURL()).responseJSON{ response in
             
-            self.ActivityIndicator.stopAnimating()
+            self.pictureTableView.refreshControl?.endRefreshing()
+            self.indicator.stopAnimating()
 
             switch response.result {
             case .success:
@@ -394,14 +382,8 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
             imageURLs.append(json[i]["itemImage"].stringValue)
             postIds.append(json[i]["id"].intValue)
         }
-        
         self.pictureTableView.reloadData()
     }
     
-
-    // MARK: - Others
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
 }

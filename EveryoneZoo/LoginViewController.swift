@@ -51,7 +51,6 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         indicator.color = UIColor.mainAppColor()
         
  
-        
     }
     
     // MARK: - Viewにパーツの設置

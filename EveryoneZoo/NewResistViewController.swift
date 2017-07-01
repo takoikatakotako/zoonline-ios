@@ -166,6 +166,8 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
     
     //TosのwebViewを開く
     func showWebTOS(sender: UIButton){
+        
+        //今だとコンタクト開いてしまうので、のちに修正必要
         let contactView:ContactViewController = ContactViewController()
         self.present(contactView, animated: true, completion: nil)
     }

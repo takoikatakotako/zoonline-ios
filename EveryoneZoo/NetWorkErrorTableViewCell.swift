@@ -30,7 +30,22 @@ class NetWorkErrorTableViewCell: UITableViewCell {
         super.layoutSubviews()
         let cellWidth:CGFloat = self.frame.width
         let cellHeight:CGFloat = self.frame.height
-
+        
+        //NetErrorLabel
+        let errorLabel:UILabel = UILabel()
+        errorLabel.frame = CGRect(x: cellWidth*0.1, y: 0, width: cellWidth*0.8, height: cellHeight*0.1)
+        errorLabel.text = "ネットワークエラー"
+        self.addSubview(errorLabel)
+        
+        //Conform Label
+        let conformLabel:UILabel = UILabel()
+        conformLabel.frame = CGRect(x: cellWidth*0.1, y: 0, width: cellWidth*0.8, height: cellHeight*0.1)
+        conformLabel.text = "通信を確認してください"
+        self.addSubview(conformLabel)
+        
+        errorImgView.image = UIImage(named:"chara_penpen")
+        errorImgView.contentMode = UIViewContentMode.scaleAspectFit
+        //errorImgView.a
         errorImgView.frame = CGRect(x: 0, y: 0, width: cellWidth, height: cellHeight)
     }
 }
