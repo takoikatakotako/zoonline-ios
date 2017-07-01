@@ -29,7 +29,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     var postTitle:String = ""
     var postCaption:String = ""
     var postImgUrl:URL = URL(string: "http://www.tokyo-zoo.net/Topics/upfiles/24152_top.jpg")!
-    
+    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     //view parts
     private var postDetailTableView: UITableView!
@@ -42,6 +42,11 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         viewWidth = self.view.frame.width
         viewHeight = self.view.frame.height
         tableViewHeight = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_TABBAR_HEIGHT)
+        
+        //
+        setNavigationBar()
+        setActivityIndicator()
+        indicator.startAnimating()
         
         //投稿の情報の取得
         getPostInfo(postID: self.postID)
@@ -82,6 +87,16 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         self.view.addSubview(postDetailTableView)
+    }
+    
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        indicator.activityIndicatorViewStyle = .whiteLarge
+        indicator.center = self.view.center
+        indicator.hidesWhenStopped = true
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.mainAppColor()
+        self.view.addSubview(indicator)
     }
     
     
@@ -334,11 +349,5 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             }
         }
         
-    }
-    
-
-    // MARK: - Others
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
 }
