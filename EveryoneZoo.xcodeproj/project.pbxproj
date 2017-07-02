@@ -44,6 +44,11 @@
 		8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */; };
 		8DB4FD391ECD21D7008F560D /* MyPageProfilelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */; };
 		8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */; };
+		8DC7190D1F08A0F3003C5E00 /* PostImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7190C1F08A0F3003C5E00 /* PostImageTableViewCell.swift */; };
+		8DC7190F1F08A3FB003C5E00 /* PostSpaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7190E1F08A3FB003C5E00 /* PostSpaceTableViewCell.swift */; };
+		8DC719111F08A580003C5E00 /* PostTextsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC719101F08A580003C5E00 /* PostTextsTableViewCell.swift */; };
+		8DC719131F08BC3F003C5E00 /* WritePostTextsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC719121F08BC3F003C5E00 /* WritePostTextsViewController.swift */; };
+		8DC719151F08F189003C5E00 /* PostTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC719141F08F189003C5E00 /* PostTagTableViewCell.swift */; };
 		8DD1C2BD1EDDD4A40008FE14 /* PostDraftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD1C2BC1EDDD4A40008FE14 /* PostDraftTableViewCell.swift */; };
 		8DDAF0DB1ED183E00079D443 /* MyPagePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */; };
 		8DDAF0DD1ED184790079D443 /* MyPageFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DC1ED184790079D443 /* MyPageFollowViewController.swift */; };
@@ -123,6 +128,11 @@
 		8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListViewController.swift; sourceTree = "<group>"; };
 		8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageProfilelViewController.swift; sourceTree = "<group>"; };
 		8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkErrorTableViewCell.swift; sourceTree = "<group>"; };
+		8DC7190C1F08A0F3003C5E00 /* PostImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImageTableViewCell.swift; sourceTree = "<group>"; };
+		8DC7190E1F08A3FB003C5E00 /* PostSpaceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostSpaceTableViewCell.swift; sourceTree = "<group>"; };
+		8DC719101F08A580003C5E00 /* PostTextsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTextsTableViewCell.swift; sourceTree = "<group>"; };
+		8DC719121F08BC3F003C5E00 /* WritePostTextsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritePostTextsViewController.swift; sourceTree = "<group>"; };
+		8DC719141F08F189003C5E00 /* PostTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTagTableViewCell.swift; sourceTree = "<group>"; };
 		8DD1C2BC1EDDD4A40008FE14 /* PostDraftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDraftTableViewCell.swift; sourceTree = "<group>"; };
 		8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPagePostViewController.swift; sourceTree = "<group>"; };
 		8DDAF0DC1ED184790079D443 /* MyPageFollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageFollowViewController.swift; sourceTree = "<group>"; };
@@ -200,9 +210,11 @@
 		8D6215A51EC2014200593E55 /* PostView */ = {
 			isa = PBXGroup;
 			children = (
+				8DC7190B1F08A032003C5E00 /* PostTableCells */,
 				8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */,
 				8D6215A91EC35EAA00593E55 /* PostViewScrollView.swift */,
 				8D3CAF881ED09907007961BF /* PostDraftViewController.swift */,
+				8DC719121F08BC3F003C5E00 /* WritePostTextsViewController.swift */,
 			);
 			name = PostView;
 			sourceTree = "<group>";
@@ -339,6 +351,17 @@
 				8D9DE17B1EE3F5B500121FC1 /* MenuButton.swift */,
 			);
 			name = FieldView;
+			sourceTree = "<group>";
+		};
+		8DC7190B1F08A032003C5E00 /* PostTableCells */ = {
+			isa = PBXGroup;
+			children = (
+				8DC7190C1F08A0F3003C5E00 /* PostImageTableViewCell.swift */,
+				8DC7190E1F08A3FB003C5E00 /* PostSpaceTableViewCell.swift */,
+				8DC719101F08A580003C5E00 /* PostTextsTableViewCell.swift */,
+				8DC719141F08F189003C5E00 /* PostTagTableViewCell.swift */,
+			);
+			name = PostTableCells;
 			sourceTree = "<group>";
 		};
 		AD036EBAB48E2DEE51E63AD4 /* Frameworks */ = {
@@ -637,6 +660,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD1C2BD1EDDD4A40008FE14 /* PostDraftTableViewCell.swift in Sources */,
+				8DC719131F08BC3F003C5E00 /* WritePostTextsViewController.swift in Sources */,
 				8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */,
 				8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */,
 				8DF9CFE41EE959F9002B8459 /* ContactViewController.swift in Sources */,
@@ -646,9 +670,12 @@
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
 				8D9DE17A1EE3EA3900121FC1 /* FavCommentButton.swift in Sources */,
 				8D3CAF891ED09907007961BF /* PostDraftViewController.swift in Sources */,
+				8DC719111F08A580003C5E00 /* PostTextsTableViewCell.swift in Sources */,
 				8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */,
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
+				8DC7190F1F08A3FB003C5E00 /* PostSpaceTableViewCell.swift in Sources */,
 				8D7E860B1EABBC7400C4049B /* RightPicturesTableViewCell.swift in Sources */,
+				8DC719151F08F189003C5E00 /* PostTagTableViewCell.swift in Sources */,
 				8DDAF0DB1ED183E00079D443 /* MyPagePostViewController.swift in Sources */,
 				8D7E86091EABBC6200C4049B /* LeftPicturesTableViewCell.swift in Sources */,
 				8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */,
@@ -657,6 +684,7 @@
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
+				8DC7190D1F08A0F3003C5E00 /* PostImageTableViewCell.swift in Sources */,
 				8D9DE17E1EE4145E00121FC1 /* NetWorkManager.swift in Sources */,
 				8D9DE17C1EE3F5B500121FC1 /* MenuButton.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */,

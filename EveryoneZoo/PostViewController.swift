@@ -10,16 +10,28 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class PostViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate {
+class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate{
+
+
     
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
-    private var scrollViewHeight:CGFloat!
+    private var tableViewHeight:CGFloat!
 
-    //テーブルビューインスタンス
-    var postScrollView:PostViewScrollView!
+    //views
+    private var postTableView: UITableView!
     var myImagePicker: UIImagePickerController!
+
+
+    //datas
+    public var postImage:UIImage! = UIImage(named:"photoimage")
+    public var postImageWidth:CGFloat! = 100
+    public var postImageHeight:CGFloat! = 62
+    public var titleStr: String! = "タイトルをつけてみよう"
+    public var commentStr: String! = "コメントを書いてみよう"
+
+    //
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,96 +39,181 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate,UINav
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        scrollViewHeight = viewHeight - PARTS_HEIGHT_STATUS_BAR - PARTS_HEIGHT_NAVIGATION_BAR
-        
-        
-        self.view.isUserInteractionEnabled = true
+        tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR + PARTS_TABBAR_HEIGHT!)
         
         setNavigationBar()
+        setTableView()
         
-        postScrollView = PostViewScrollView(frame:CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR, width: viewWidth, height: scrollViewHeight))
-        postScrollView.imgSelectBtn.addTarget(self, action: #selector(imageSelectBtnClicked(sender:)), for: .touchUpInside)
-        postScrollView.titleTextField.delegate = self
-        postScrollView.titleTextField.keyboardType = UIKeyboardType.twitter
-        self.view.addSubview(postScrollView)
     }
     
-    //MARK: Viewの設定
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("こっち")
+        
+       postTableView.reloadData()
+    }
+    
+    // MARK: - Viewにパーツの設置
+    // MARK: ナビゲーションバー
     func setNavigationBar() {
         
-        //ステータスバー背景
-        let statusBackColor = UIView()
-        statusBackColor.frame = CGRect(x: 0, y: 0, width: viewWidth, height: PARTS_HEIGHT_STATUS_BAR)
-        statusBackColor.backgroundColor = UIColor.mainAppColor()
-        self.view.addSubview(statusBackColor)
+        //ステータスバー部分の覆い
+        let statusBgView:UIView = UIView()
+        statusBgView.frame = CGRect(x: 0, y: -PARTS_HEIGHT_NAVIGATION_BAR*2, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR*2)
+        statusBgView.backgroundColor = UIColor.mainAppColor()
+        self.view.addSubview(statusBgView)
         
-        //ナビゲーションバーの作成
+        //ナビゲーションコントローラーの色の変更
+        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
-        let myNavBar = UINavigationBar()
-        myNavBar.frame = CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR)
-        myNavBar.barTintColor = UIColor.mainAppColor()
-        myNavBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let myNavItems = UINavigationItem()
         let titleLabel:UILabel = UILabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "投稿する"
         titleLabel.textColor = UIColor.white
-        myNavItems.titleView = titleLabel
+        self.navigationItem.titleView = titleLabel
         
-        //バーの左側に設置するボタンの作成
-        let leftNavBtn =  UIBarButtonItem(title: "リセット", style: .plain, target: self, action:  #selector(leftBarBtnClicked(sender:)))
-        myNavItems.leftBarButtonItem = leftNavBtn
-        
-        //バーの右側に設置するボタンの作成
-        let rightNavBtn = UIBarButtonItem(title: "投稿", style: .plain, target: self, action:  #selector(postBtnClicked(sender:)))
-        myNavItems.rightBarButtonItem = rightNavBtn;
-        
-        //作成したNavItemをNavBarに追加する
-        myNavBar.pushItem(myNavItems, animated: true)
-        self.view.addSubview(myNavBar)
+        //右上の検索ボタン
+        //serchNavBtn.tintColor = UIColor.white
+        //serchNavBtn.action = #selector(rightBarBtnClicked(sender:))
     }
+    
+    //TableViewの設置
+    func setTableView(){
+        
+        postTableView = UITableView(frame: CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight))
+        postTableView.dataSource = self
+        postTableView.delegate = self
+        postTableView.separatorStyle = .none
+        postTableView.backgroundColor = UIColor.MyPageTableBGColor()
+        postTableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostImageTableViewCell.self))
+        postTableView.register(PostSpaceTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostSpaceTableViewCell.self))
+        postTableView.register(PostTextsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTextsTableViewCell.self))
+        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
+        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
+        self.view.addSubview(postTableView)
+    }
+    
+    
+    //MARK: テーブルビューのセルの高さを計算する
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+            //投稿画像のView
+            return viewWidth*(postImageHeight/postImageWidth)
+        }else if indexPath.row == 2{
+            //タイトルのセル
+            return viewWidth*0.15
+        }else if indexPath.row == 4{
+            //コメントのセル
+            //コメントの高さを計算して、規定の値と比較。高い方を返す
+            var testHeight:CGFloat = UtilityLibrary.calcTextViewHeight(text: commentStr, width: viewWidth*0.8, font: UIFont.systemFont(ofSize: 14))
+            testHeight += viewWidth*0.03
+            if testHeight >  viewWidth*0.3{
+                return testHeight
+            }
+            return viewWidth*0.3
+        }else{
+            //スペース部分
+            return viewWidth*0.04
+        }
+    }
+    
+    
+    //MARK: テーブルビューのセルの数を設定する
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //テーブルビューのセルの数はmyItems配列の数とした
+        return 6
+    }
+    
+    //MARK: テーブルビューのセルの中身を設定する
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == 0 {
+            //画像選択View
+            let cell:PostImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostImageTableViewCell.self), for: indexPath) as! PostImageTableViewCell
+            cell.postImageView.image = postImage
+            return cell
+        }else if indexPath.row == 2 {
+            //画像選択View
+            let cell:PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
+            cell.iconImageView.image = UIImage(named:"title_logo")
+            cell.postTextView.text = titleStr
+            return cell
+        }else if indexPath.row == 4 {
+            //画像選択View
+            let cell:PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
+            cell.iconImageView.image = UIImage(named:"comment_blue")
+            cell.postTextView.text = commentStr
+            return cell
+        }else{
+        
+            //スペーサーView
+            let cell:PostSpaceTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostSpaceTableViewCell.self), for: indexPath) as! PostSpaceTableViewCell
+            return cell
+        }
+        
 
-    //MARK: ButtonActions
-    
-    //左側のボタンが押されたら呼ばれる
-    internal func leftBarBtnClicked(sender: UIButton){
-        print("leftBarBtnClicked")
-        
-        self.dismiss(animated: true, completion: nil)
     }
     
-    //右側のボタンが押されたら呼ばれる
-    internal func postBtnClicked(sender: UIButton){
+    //Mark: テーブルビューのセルが押されたら呼ばれる
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(indexPath.row)番のセルを選択しました！ ")
+        
+        
+        //画面遷移、投稿詳細画面へ
+        if indexPath.row == 0{
+            
+            // インスタンス生成
+            myImagePicker = UIImagePickerController()
+            myImagePicker.delegate = self
+            myImagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            myImagePicker.navigationBar.barTintColor = UIColor.mainAppColor()
+            myImagePicker.navigationBar.tintColor = UIColor.white
+            myImagePicker.navigationBar.isTranslucent = false
+            //myImagePicker.allowsEditing = false
+            self.present(myImagePicker, animated: true, completion: nil)
+            
+        }else if indexPath.row == 2 {
+            let writePosTextsVC:WritePostTextsViewController = WritePostTextsViewController()
+            writePosTextsVC.text = titleStr
+            writePosTextsVC.isTitle = true
+            writePosTextsVC.navTitle = "タイトル"
+            writePosTextsVC.delegate = self
+            self.navigationController?.pushViewController(writePosTextsVC, animated: true)
+        }else if indexPath.row == 4 {
+            let writePosTextsVC:WritePostTextsViewController = WritePostTextsViewController()
+            writePosTextsVC.text = commentStr
+            writePosTextsVC.isTitle = false
+            writePosTextsVC.navTitle = "コメント"
+            writePosTextsVC.delegate = self
+            self.navigationController?.pushViewController(writePosTextsVC, animated: true)
+        }
         
     }
-
-    //imageSelectボタンが押されたら呼ばれます
-    func imageSelectBtnClicked(sender: UIButton){
-        
-        // インスタンス生成
-        myImagePicker = UIImagePickerController()
-        myImagePicker.delegate = self
-        myImagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        myImagePicker.navigationBar.barTintColor = UIColor.mainAppColor()
-        myImagePicker.navigationBar.tintColor = UIColor.white
-        myImagePicker.navigationBar.isTranslucent = false
-        //myImagePicker.allowsEditing = false
-        self.present(myImagePicker, animated: true, completion: nil)
+    
+    func setTitle(str:String){
+        titleStr = str
+    }
+    
+    func setComment(str:String) {
+        commentStr = str
     }
     
     
-    //MARK: imagePickerControllerDelegateMethod
-
     //画像が選択された時に呼ばれる.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-            postScrollView.imgSelectBtn.setImage(image, for: UIControlState.normal)
-            postScrollView.imgSelectBtn.imageView!.contentMode = UIViewContentMode.scaleAspectFit
+            postImage = image
+            postImageWidth = postImage.size.width
+            postImageHeight = postImage.size.height
+            postTableView.reloadData()
 
         } else{
             print("Error:Class name : \(NSStringFromClass(type(of: self))) ")
@@ -130,45 +227,6 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate,UINav
         
         self.dismiss(animated: true, completion: nil)
     }
-
-    
-    //MARK: UITextFieldDelegateMethod
-
-    
-    //UITextFieldが編集された直前に呼ばれる
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("textFieldDidBeginEditing: \(textField.text!)")
- 
-        self.postScrollView.setContentOffset(CGPoint(x: 0, y: 210), animated: true)
-        
-        if postScrollView.titleTextField.text == "タイトルをつけてみよう" {
-            postScrollView.titleTextField.text = ""
-        }
-    }
-    
-    //UITextFieldが編集された直後に呼ばれる
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("textFieldDidEndEditing: \(textField.text!)")
-    }
-    
-    //改行ボタンが押された際に呼ばれる
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("textFieldShouldReturn \(textField.text!)")
-        
-        // 改行ボタンが押されたらKeyboardを閉じる処理.
-        postScrollView.titleTextField.resignFirstResponder()
-        
-        return true
-    }
-    
-    
-    // 画面にタッチで呼ばれる
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        if (postScrollView.titleTextField.isFirstResponder) {
-            postScrollView.titleTextField.resignFirstResponder()
-        }
-    }
-
 }
+
+
