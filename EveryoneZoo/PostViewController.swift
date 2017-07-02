@@ -114,6 +114,41 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let imageData = UIImagePNGRepresentation(postImage)!
         
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append("0".data(using: String.Encoding.utf8)!, withName: "user_id")
+            multipartFormData.append(imageData, withName: "picture", fileName: "swift_file.png", mimeType: "image/png")
+        }, to:"http://minzoo.herokuapp.com/api/v0/picture")
+        { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                
+                upload.uploadProgress(closure: { (Progress) in
+                    print("Upload Progress: \(Progress.fractionCompleted)")
+                })
+                
+                upload.responseJSON { response in
+                    //self.delegate?.showSuccessAlert()
+                    print(response.request)  // original URL request
+                    print(response.response) // URL response
+                    print(response.data)     // server data
+                    print(response.result)   // result of response serialization
+                    //                        self.showSuccesAlert()
+                    //self.removeImage("frame", fileExtension: "txt")
+                    if let JSON = response.result.value {
+                        print("JSON: \(JSON)")
+                    }
+                }
+                
+            case .failure(let encodingError):
+                //self.delegate?.showFailAlert()
+                print(encodingError)
+            }
+            
+        }
+        
+        
+        
+        /*
         Alamofire.upload(
             multipartFormData: { multipartFormData in
                 multipartFormData.append("0".data(using: String.Encoding.utf8)!, withName: "user_id")
@@ -124,15 +159,20 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
+                        
+                        print("Success")
+                        print(response)
                         debugPrint(response)
+                        
                     }
                 case .failure(let encodingError):
+                    print("Error Reason")
                     print(encodingError)
                 }
         }
         )
         
-        
+        */
         
     
     
