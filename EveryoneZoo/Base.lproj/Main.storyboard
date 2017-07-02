@@ -60,10 +60,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="投稿" image="tab_post" id="edl-dL-8Uc"/>
+                    <navigationItem key="navigationItem" id="Ipb-l6-VXR"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ld-YG-Z1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-17" y="1459"/>
+            <point key="canvasLocation" x="332" y="1459"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="R34-eL-eSi">
+            <objects>
+                <navigationController id="VdR-G2-gEF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="NIC-lN-0MN"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hyl-p3-NBd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="prJ-Gc-YTA" kind="relationship" relationship="rootViewController" id="tpC-7H-UB1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3QG-t0-3ad" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-540" y="1459"/>
         </scene>
         <!--動物園-->
         <scene sceneID="yNV-z2-Lkw">
@@ -82,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMx-Jh-jJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-700" y="726"/>
+            <point key="canvasLocation" x="222" y="729"/>
         </scene>
         <!--タイムライン-->
         <scene sceneID="CF8-bu-fGL">
@@ -173,7 +191,7 @@
                     <connections>
                         <segue destination="KG4-ab-G7O" kind="relationship" relationship="viewControllers" id="1mK-7E-g06"/>
                         <segue destination="q0l-de-MK4" kind="relationship" relationship="viewControllers" id="6n0-4J-hzW"/>
-                        <segue destination="prJ-Gc-YTA" kind="relationship" relationship="viewControllers" id="d3Z-vs-9JK"/>
+                        <segue destination="VdR-G2-gEF" kind="relationship" relationship="viewControllers" id="MFm-9n-EqA"/>
                         <segue destination="qKR-ST-zao" kind="relationship" relationship="viewControllers" id="iy4-rn-0GJ"/>
                         <segue destination="8n0-Kd-oaH" kind="relationship" relationship="viewControllers" id="66W-xR-QqZ"/>
                     </connections>
