@@ -24,7 +24,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 
     //datas
-    public var postImage:UIImage! = UIImage(named:"sample_post")
+    public var postImage:UIImage! = UIImage(named:"photoimage")
     public var postImageWidth:CGFloat! = 100
     public var postImageHeight:CGFloat! = 62
     public var titleStr: String! = "タイトルをつけてみよう"
@@ -111,12 +111,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         print("leftBarBtnClicked")
         
-        
         let imageData = UIImagePNGRepresentation(postImage)!
-        
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append("0".data(using: String.Encoding.utf8)!, withName: "user_id")
             multipartFormData.append(imageData, withName: "picture", fileName: "swift_file.png", mimeType: "image/png")
+            multipartFormData.append("1".data(using: String.Encoding.utf8)!, withName: "user_id")
         }, to:"http://minzoo.herokuapp.com/api/v0/picture")
         { (result) in
             switch result {
@@ -128,12 +126,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 upload.responseJSON { response in
                     //self.delegate?.showSuccessAlert()
-                    print(response.request)  // original URL request
-                    print(response.response) // URL response
-                    print(response.data)     // server data
+                    print(response.request ?? "response.request")  // original URL request
+                    print(response.response ?? "response.response") // URL response
+                    print(response.data ?? "response.data")     // server data
                     print(response.result)   // result of response serialization
-                    //                        self.showSuccesAlert()
-                    //self.removeImage("frame", fileExtension: "txt")
                     if let JSON = response.result.value {
                         print("JSON: \(JSON)")
                     }
@@ -143,85 +139,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 //self.delegate?.showFailAlert()
                 print(encodingError)
             }
-            
         }
-        
-        
-        
-        /*
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append("0".data(using: String.Encoding.utf8)!, withName: "user_id")
-                multipartFormData.append(imageData, withName: "picture",mimeType: "image/png")
-        },
-            to: "http://minzoo.herokuapp.com/api/v0/picture",
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseJSON { response in
-                        
-                        print("Success")
-                        print(response)
-                        debugPrint(response)
-                        
-                    }
-                case .failure(let encodingError):
-                    print("Error Reason")
-                    print(encodingError)
-                }
-        }
-        )
-        
-        */
-        
-    
-    
-       
-    
-    
-    /*
-        //let out: String = String(data:(imageData as NSData) as Data, encoding:String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as String
-
-        //print(out)
-        
-        
-        let parameters: Parameters = [
-            "user_id": "1",
-            "picture": String(strBase64) ?? <#default value#>
-            
-            
-        ]
-        
-        
-        Alamofire.request("http://minzoo.herokuapp.com/api/v0/picture", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
-            
-            switch response.result {
-                
-                
-            case .success:
-                print("Validation Successful")
-                
-                let json:JSON = JSON(response.result.value ?? kill)
-                print(json)
-                
-                
-            case .failure(let error):
-                print(error)
-                //テーブルの再読み込み
-            }
-        }
- 
- 
- */
-        
-        
-        
-        /*
-
-        Alamofire.upload(imageData, to: "http://minzoo.herokuapp.com/api/v0/picture").responseJSON { response in
-            debugPrint(response)
-        }
-    */
         
     }
     
