@@ -12,7 +12,6 @@ import SwiftyJSON
 
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate{
 
-
     
     //width, height
     private var viewWidth:CGFloat!
@@ -25,7 +24,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 
     //datas
-    public var postImage:UIImage! = UIImage(named:"photoimage")
+    public var postImage:UIImage! = UIImage(named:"sample_post")
     public var postImageWidth:CGFloat! = 100
     public var postImageHeight:CGFloat! = 62
     public var titleStr: String! = "タイトルをつけてみよう"
@@ -77,10 +76,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
         
-        //右上の検索ボタン
-        //serchNavBtn.tintColor = UIColor.white
-        //serchNavBtn.action = #selector(rightBarBtnClicked(sender:))
+        
+        
+        //バーの左側に設置するボタンの作成
+        let leftNavBtn =  UIBarButtonItem(barButtonSystemItem:  .add, target: self, action: #selector(postBarBtnClicked(sender:)))
+        self.navigationItem.rightBarButtonItem = leftNavBtn
+        
     }
+    
     
     //TableViewの設置
     func setTableView(){
@@ -97,6 +100,89 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         self.view.addSubview(postTableView)
+    }
+    
+    //MARK: ButtonActions
+
+    
+    //左側のボタンが押されたら呼ばれる
+    internal func postBarBtnClicked(sender: UIButton){
+        
+        
+        print("leftBarBtnClicked")
+        
+        
+        let imageData = UIImagePNGRepresentation(postImage)!
+        
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append("0".data(using: String.Encoding.utf8)!, withName: "user_id")
+                multipartFormData.append(imageData, withName: "picture",mimeType: "image/png")
+        },
+            to: "http://minzoo.herokuapp.com/api/v0/picture",
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        debugPrint(response)
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+        }
+        )
+        
+        
+        
+    
+    
+       
+    
+    
+    /*
+        //let out: String = String(data:(imageData as NSData) as Data, encoding:String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as String
+
+        //print(out)
+        
+        
+        let parameters: Parameters = [
+            "user_id": "1",
+            "picture": String(strBase64) ?? <#default value#>
+            
+            
+        ]
+        
+        
+        Alamofire.request("http://minzoo.herokuapp.com/api/v0/picture", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+            
+            switch response.result {
+                
+                
+            case .success:
+                print("Validation Successful")
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                
+                
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+ 
+ 
+ */
+        
+        
+        
+        /*
+
+        Alamofire.upload(imageData, to: "http://minzoo.herokuapp.com/api/v0/picture").responseJSON { response in
+            debugPrint(response)
+        }
+    */
+        
     }
     
     
