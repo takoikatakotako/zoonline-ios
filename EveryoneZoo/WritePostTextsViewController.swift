@@ -114,5 +114,8 @@ class WritePostTextsViewController: UIViewController,UITextViewDelegate {
 
         return true
     }
+    
+    
+    
 
 }

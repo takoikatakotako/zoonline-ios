@@ -1,5 +1,5 @@
 //
-//  PostTagTableViewCell.swift
+//  TagListTableViewCell.swift
 //  EveryoneZoo
 //
 //  Created by junpei ono on 2017/07/02.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-class PostTagTableViewCell: UITableViewCell {
-
-    var iconImageView:UIImageView = UIImageView()
+class TagListTableViewCell: UITableViewCell {
     
+    var tagLabel:UILabel = UILabel()
+    var deleateBtn:UIButton = UIButton()
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        iconImageView.isUserInteractionEnabled = false
-        iconImageView.image = UIImage(named:"tag_blue")
-        self.contentView.addSubview(iconImageView)
+        self.contentView.addSubview(tagLabel)
         
+        self.contentView.addSubview(deleateBtn)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -33,9 +33,11 @@ class PostTagTableViewCell: UITableViewCell {
         super.layoutSubviews()
         
         let cellWidth:CGFloat = self.frame.width
-        //let cellHeight:CGFloat = self.frame.height
+        let cellHeight:CGFloat = self.frame.height
+        tagLabel.frame =  CGRect(x: cellWidth*0, y: cellWidth*0.03, width: cellWidth*0.08, height: cellWidth*0.08)
         
-        iconImageView.frame =  CGRect(x: cellWidth*0.06, y: cellWidth*0.03, width: cellWidth*0.08, height: cellWidth*0.08)
+        deleateBtn.frame =  CGRect(x: cellWidth-cellHeight, y:0, width: cellHeight, height: cellHeight)
+
     }
 
 }

@@ -93,6 +93,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         postTableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostImageTableViewCell.self))
         postTableView.register(PostSpaceTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostSpaceTableViewCell.self))
         postTableView.register(PostTextsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTextsTableViewCell.self))
+        postTableView.register(PostTagTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTagTableViewCell.self))
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         self.view.addSubview(postTableView)
@@ -117,6 +118,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 return testHeight
             }
             return viewWidth*0.3
+        }else if indexPath.row == 6{
+            //コメントのセル
+            return viewWidth*0.3
         }else{
             //スペース部分
             return viewWidth*0.04
@@ -127,7 +131,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return 6
+        return 8
     }
     
     //MARK: テーブルビューのセルの中身を設定する
@@ -149,6 +153,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell:PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
             cell.iconImageView.image = UIImage(named:"comment_blue")
             cell.postTextView.text = commentStr
+            return cell
+        }else if indexPath.row == 6 {
+            //タグの選択View
+            let cell:PostTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTagTableViewCell.self), for: indexPath) as! PostTagTableViewCell
             return cell
         }else{
         
@@ -192,6 +200,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             writePosTextsVC.navTitle = "コメント"
             writePosTextsVC.delegate = self
             self.navigationController?.pushViewController(writePosTextsVC, animated: true)
+        }else if indexPath.row == 6{
+            let SetPostTagsVC:SetPostTagsViewController = SetPostTagsViewController()
+            self.navigationController?.pushViewController(SetPostTagsVC, animated: true)
         }
         
     }
