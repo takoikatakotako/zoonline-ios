@@ -239,6 +239,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.navigationController?.pushViewController(writePosTextsVC, animated: true)
         }else if indexPath.row == 6{
             let SetPostTagsVC:SetPostTagsViewController = SetPostTagsViewController()
+            SetPostTagsVC.tagsAry = []
             self.navigationController?.pushViewController(SetPostTagsVC, animated: true)
         }
         

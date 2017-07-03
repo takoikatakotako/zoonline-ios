@@ -19,7 +19,7 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     var tagTableViewHeight:CGFloat!
 
     //segue
-    var tagsAry:Array = ["天王寺動物園","サーバルキャット","カビゴン","ポケモン"]
+    var tagsAry:Array<String>!
     
     //ViewParts
     var setTagTextField:UITextField = UITextField()
@@ -114,9 +114,7 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     
     
     
-    /*
-     UITextFieldが編集された直前に呼ばれる
-     */
+     //UITextFieldが編集された直前に呼ばれる
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textFieldDidBeginEditing: \(textField.text!)")
         
@@ -163,11 +161,20 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         cell.layoutMargins = UIEdgeInsets.zero
         cell.tagLabel.text = tagsAry[tagsAry.count-indexPath.row-1]
         
+        cell.deleateBtn.tag = tagsAry.count-indexPath.row-1
+        cell.deleateBtn.addTarget(self, action:  #selector(deleatBtnClicked(sender:)), for: .touchUpInside)
         return cell
     }
     
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
+    }
+    
+    //角丸ボタンが押されたら呼ばれます
+    func deleatBtnClicked(sender: UIButton){
+
+        tagsAry.remove(at: sender.tag)
+        tagTableView.reloadData()
     }
 }
