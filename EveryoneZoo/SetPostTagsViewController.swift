@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol SetTagsDelegate: class {
+    
+    func setTags(ary:Array<String>)
+}
+
 class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource {
     
     //width, height
@@ -24,6 +29,9 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     //ViewParts
     var setTagTextField:UITextField = UITextField()
     var tagTableView:UITableView = UITableView()
+    
+    //delegate
+    weak var delegate: SetTagsDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +50,12 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         setTableView()
     }
 
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        delegate?.setTags(ary:tagsAry)
+    }
     
     // MARK: - Viewにパーツの設置
     // MARK: ナビゲーションバー

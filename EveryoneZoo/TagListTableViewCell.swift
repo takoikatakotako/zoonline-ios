@@ -38,17 +38,18 @@ class TagListTableViewCell: UITableViewCell {
         let cellWidth:CGFloat = self.frame.width
         let cellHeight:CGFloat = self.frame.height
         
-        let frame:CGSize = CGSize(width: cellWidth*0.8, height: cellHeight*0.6)
-        let rect:CGSize = tagLabel.sizeThatFits(frame)
-        
-        tagLabel.frame =  CGRect(x: 0, y: cellHeight*0.2, width: rect.width+cellWidth*0.1, height:cellHeight*0.6)
+        //#を先頭に追加
+        tagLabel.text = "#"+tagLabel.text!
         tagLabel.textColor = UIColor.white
         tagLabel.font = UIFont.boldSystemFont(ofSize: 16)
         tagLabel.backgroundColor = UIColor.tagBGColor()
-        tagLabel.text = "#"+tagLabel.text!
+
+        //サイズの計算
+        let frame:CGSize = CGSize(width: cellWidth*0.8, height: cellHeight*0.6)
+        let rect:CGSize = tagLabel.sizeThatFits(frame)
         
+        tagLabel.frame =  CGRect(x: 0, y: cellHeight*0.2, width: rect.width+cellWidth*0.05, height:cellHeight*0.6)
+
         deleateBtn.frame =  CGRect(x: cellWidth-cellHeight, y:0, width: cellHeight, height: cellHeight)
     }
-    
-
 }

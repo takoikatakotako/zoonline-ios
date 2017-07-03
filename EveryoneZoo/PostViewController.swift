@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate{
+class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate,SetTagsDelegate{
 
     
     //width, height
@@ -29,9 +29,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     public var postImageHeight:CGFloat! = 62
     public var titleStr: String! = "タイトルをつけてみよう"
     public var commentStr: String! = "コメントを書いてみよう"
-
-    //
+    var tagsAry:Array<String> = ["上野動物園","平田牧場","平田牧場","平田牧場"]
     
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -158,7 +158,21 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             return viewWidth*0.3
         }else if indexPath.row == 6{
-            //コメントのセル
+            //タグのセル
+            //タグのセルの高さを計算して、規定の値と比較。高い方を返す
+            let calcLabel:UILabel = UILabel()
+            calcLabel.text = "#SampleTag"
+            calcLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            
+            //サイズの計算
+            let frame:CGSize = CGSize(width: viewWidth*0.6, height: 0)
+            let rect:CGSize = calcLabel.sizeThatFits(frame)
+            //タグ自体は70%、そして上下に0.5個分のマージン
+            let tagCellHeoght:CGFloat = rect.height*CGFloat(tagsAry.count+1)*(10/7)
+
+            if tagCellHeoght > viewWidth*0.3{
+                return tagCellHeoght
+            }
             return viewWidth*0.3
         }else{
             //スペース部分
@@ -196,6 +210,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }else if indexPath.row == 6 {
             //タグの選択View
             let cell:PostTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTagTableViewCell.self), for: indexPath) as! PostTagTableViewCell
+            cell.tagsAry = tagsAry
+            cell.tagLabel.text = "タグをつけてみよう"
+
             return cell
         }else{
         
@@ -239,7 +256,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.navigationController?.pushViewController(writePosTextsVC, animated: true)
         }else if indexPath.row == 6{
             let SetPostTagsVC:SetPostTagsViewController = SetPostTagsViewController()
-            SetPostTagsVC.tagsAry = []
+            SetPostTagsVC.tagsAry = self.tagsAry
+            SetPostTagsVC.delegate = self
             self.navigationController?.pushViewController(SetPostTagsVC, animated: true)
         }
         
@@ -251,6 +269,11 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func setComment(str:String) {
         commentStr = str
+    }
+    
+    func setTags(ary:Array<String>){
+        tagsAry = ary
+        
     }
     
     

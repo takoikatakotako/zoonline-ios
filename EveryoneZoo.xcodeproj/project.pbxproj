@@ -19,9 +19,7 @@
 		8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */; };
 		8D35113D1EEECFC8004BA744 /* NoLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113C1EEECFC8004BA744 /* NoLoginView.swift */; };
 		8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113E1EEED5E6004BA744 /* LoginViewController.swift */; };
-		8D3CAF891ED09907007961BF /* PostDraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3CAF881ED09907007961BF /* PostDraftViewController.swift */; };
 		8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */; };
-		8D6215AA1EC35EAA00593E55 /* PostViewScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215A91EC35EAA00593E55 /* PostViewScrollView.swift */; };
 		8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215AC1EC3689600593E55 /* MyPageViewController.swift */; };
 		8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D6888781E9E7C2E00140508 /* Localizable.strings */; };
 		8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */; };
@@ -96,9 +94,7 @@
 		8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		8D35113C1EEECFC8004BA744 /* NoLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoLoginView.swift; sourceTree = "<group>"; };
 		8D35113E1EEED5E6004BA744 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		8D3CAF881ED09907007961BF /* PostDraftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDraftViewController.swift; sourceTree = "<group>"; };
 		8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPartsSize.swift; sourceTree = "<group>"; };
-		8D6215A91EC35EAA00593E55 /* PostViewScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewScrollView.swift; sourceTree = "<group>"; };
 		8D6215AC1EC3689600593E55 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		8D6888771E9E7C2E00140508 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D68887B1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
@@ -216,8 +212,6 @@
 			children = (
 				8DC7190B1F08A032003C5E00 /* PostTableCells */,
 				8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */,
-				8D6215A91EC35EAA00593E55 /* PostViewScrollView.swift */,
-				8D3CAF881ED09907007961BF /* PostDraftViewController.swift */,
 				8DC719161F08F3A4003C5E00 /* SetPostTagsViewController.swift */,
 				8DC719121F08BC3F003C5E00 /* WritePostTextsViewController.swift */,
 			);
@@ -675,7 +669,6 @@
 				8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */,
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
 				8D9DE17A1EE3EA3900121FC1 /* FavCommentButton.swift in Sources */,
-				8D3CAF891ED09907007961BF /* PostDraftViewController.swift in Sources */,
 				8DC719111F08A580003C5E00 /* PostTextsTableViewCell.swift in Sources */,
 				8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */,
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
@@ -696,7 +689,6 @@
 				8D9DE17C1EE3F5B500121FC1 /* MenuButton.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */,
 				8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */,
-				8D6215AA1EC35EAA00593E55 /* PostViewScrollView.swift in Sources */,
 				8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */,
 				8DC719191F08FDA5003C5E00 /* TagListTableViewCell.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
