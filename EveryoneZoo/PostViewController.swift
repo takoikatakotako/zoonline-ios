@@ -42,13 +42,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         setNavigationBar()
         setTableView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        print("こっち")
         
        postTableView.reloadData()
     }
@@ -76,12 +73,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
         
-        
-        
         //バーの左側に設置するボタンの作成
         let leftNavBtn =  UIBarButtonItem(barButtonSystemItem:  .add, target: self, action: #selector(postBarBtnClicked(sender:)))
         self.navigationItem.rightBarButtonItem = leftNavBtn
-        
     }
     
     
@@ -93,6 +87,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         postTableView.delegate = self
         postTableView.separatorStyle = .none
         postTableView.backgroundColor = UIColor.MyPageTableBGColor()
+        postTableView.separatorStyle = .none
+
         postTableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostImageTableViewCell.self))
         postTableView.register(PostSpaceTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostSpaceTableViewCell.self))
         postTableView.register(PostTextsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTextsTableViewCell.self))
@@ -103,7 +99,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //MARK: ButtonActions
-
     
     //左側のボタンが押されたら呼ばれる
     internal func postBarBtnClicked(sender: UIButton){
@@ -208,8 +203,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell:PostSpaceTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostSpaceTableViewCell.self), for: indexPath) as! PostSpaceTableViewCell
             return cell
         }
-        
-
     }
     
     //Mark: テーブルビューのセルが押されたら呼ばれる

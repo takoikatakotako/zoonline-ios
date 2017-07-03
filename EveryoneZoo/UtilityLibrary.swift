@@ -20,6 +20,8 @@ class UtilityLibrary: NSObject {
         
         return calcTextView.frame.size.height
     }
+    
+
 }
 
 

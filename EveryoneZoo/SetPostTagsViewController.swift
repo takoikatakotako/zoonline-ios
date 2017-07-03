@@ -18,6 +18,8 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     var setTagTextFieldHeight:CGFloat!
     var tagTableViewHeight:CGFloat!
 
+    //segue
+    var tagsAry:Array = ["天王寺動物園","サーバルキャット","カビゴン","ポケモン"]
     
     //ViewParts
     var setTagTextField:UITextField = UITextField()
@@ -31,7 +33,7 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         postTagLabelHeight = viewWidth*0.14
         setTagTextFieldSpaceHeight = viewWidth*0.02
         setTagTextFieldHeight = viewWidth*0.15
-        tagTableViewHeight = viewWidth-(postTagLabelHeight+setTagTextFieldSpaceHeight+setTagTextFieldHeight)
+        tagTableViewHeight = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+postTagLabelHeight+setTagTextFieldSpaceHeight+setTagTextFieldHeight+PARTS_TABBAR_HEIGHT)
         
         self.view.backgroundColor = UIColor.white
 
@@ -101,7 +103,12 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         tagTableView.delegate = self
         tagTableView.dataSource = self
         tagTableView.frame = CGRect(x: viewWidth*0.1, y: (postTagLabelHeight+setTagTextFieldSpaceHeight+setTagTextFieldHeight!)+2, width: viewWidth*0.8, height: tagTableViewHeight)
-        tagTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tagTableView.register(TagListTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TagListTableViewCell.self))
+        tagTableView.separatorInset = UIEdgeInsets.zero
+        tagTableView.separatorInset = .zero
+        tagTableView.separatorColor = UIColor.white
+        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
+        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         self.view.addSubview(tagTableView)
     }
     
@@ -112,23 +119,31 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
      */
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textFieldDidBeginEditing: \(textField.text!)")
+        
+        if textField.text == "登録するタグ名"{
+            textField.text = ""
+        }
     }
     
-    /*
-     UITextFieldが編集された直後に呼ばれる
-     */
+     //UITextFieldが編集された直後に呼ばれる
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textFieldDidEndEditing: \(textField.text!)")
     }
     
-    /*
-     改行ボタンが押された際に呼ばれる
-     */
+     //改行ボタンが押された際に呼ばれる
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn \(textField.text!)")
         
         // 改行ボタンが押されたらKeyboardを閉じる処理.
         textField.resignFirstResponder()
+        
+        if  textField.text == ""{
+            return true
+        }
+        
+        tagsAry.append(textField.text!)
+        tagTableView.reloadData()
+        textField.text = "登録するタグ名"
         
         return true
     }
@@ -137,14 +152,17 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return 10
+        return tagsAry.count
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.textLabel?.text = "adadadadada"
+        let cell:TagListTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(TagListTableViewCell.self), for: indexPath) as! TagListTableViewCell
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.layoutMargins = UIEdgeInsets.zero
+        cell.tagLabel.text = tagsAry[tagsAry.count-indexPath.row-1]
+        
         return cell
     }
     

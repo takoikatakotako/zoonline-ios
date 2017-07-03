@@ -16,8 +16,11 @@ class TagListTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        //self.contentView.backgroundColor = UIColor.blue
+        tagLabel.textAlignment = NSTextAlignment.center
         self.contentView.addSubview(tagLabel)
         
+        deleateBtn.setBackgroundImage(UIImage(named:"sample_kabi1"), for: UIControlState.normal)
         self.contentView.addSubview(deleateBtn)
     }
     
@@ -34,10 +37,18 @@ class TagListTableViewCell: UITableViewCell {
         
         let cellWidth:CGFloat = self.frame.width
         let cellHeight:CGFloat = self.frame.height
-        tagLabel.frame =  CGRect(x: cellWidth*0, y: cellWidth*0.03, width: cellWidth*0.08, height: cellWidth*0.08)
+        
+        let frame:CGSize = CGSize(width: cellWidth*0.8, height: cellHeight*0.6)
+        let rect:CGSize = tagLabel.sizeThatFits(frame)
+        
+        tagLabel.frame =  CGRect(x: 0, y: cellHeight*0.2, width: rect.width+cellWidth*0.1, height:cellHeight*0.6)
+        tagLabel.textColor = UIColor.white
+        tagLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        tagLabel.backgroundColor = UIColor.tagBGColor()
+        tagLabel.text = "#"+tagLabel.text!
         
         deleateBtn.frame =  CGRect(x: cellWidth-cellHeight, y:0, width: cellHeight, height: cellHeight)
-
     }
+    
 
 }
