@@ -42,10 +42,14 @@ class PostTagTableViewCell: UITableViewCell {
         let cellWidth:CGFloat = self.frame.width
         let cellHeight:CGFloat = self.frame.height
         
+        
+        //self.contentView.removeAll
+        
         if tagsAry.count == 0 {
             tagLabel.frame = CGRect(x: cellWidth*0.18, y: cellWidth*0.04, width: cellWidth*0.8, height: 0)
             tagLabel.sizeToFit()
         }else{
+            tagLabel.removeFromSuperview()
             var count:CGFloat = 0
             let separatedHeight:CGFloat = cellHeight/CGFloat(tagsAry.count+1)
             for tag in tagsAry{
@@ -64,6 +68,5 @@ class PostTagTableViewCell: UITableViewCell {
         }
 
         iconImageView.frame =  CGRect(x: cellWidth*0.06, y: cellWidth*0.03, width: cellWidth*0.08, height: cellWidth*0.08)
-        
     }
 }

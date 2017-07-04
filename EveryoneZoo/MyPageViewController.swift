@@ -114,7 +114,9 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print("Value: \(ARRAY_MYPAGE_USER_INFOS[indexPath.row])")
         } else if indexPath.section == 1 {
             print("Value: \(ARRAY_MYPAGE_CONFIS[indexPath.row])")
-            let contactView:ContactViewController = ContactViewController()
+            let contactView:WebViewController = WebViewController()
+            contactView.url = CONTACT_PAGE_URL_STRING
+            contactView.navTitle = "お問い合わせ"
             self.present(contactView, animated: true, completion: nil)
         }
         

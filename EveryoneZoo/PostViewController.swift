@@ -29,7 +29,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     public var postImageHeight:CGFloat! = 62
     public var titleStr: String! = "タイトルをつけてみよう"
     public var commentStr: String! = "コメントを書いてみよう"
-    var tagsAry:Array<String> = ["上野動物園","平田牧場","平田牧場","平田牧場"]
+    var tagsAry:Array<String> = []
     
     //
     override func viewDidLoad() {
@@ -93,6 +93,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         postTableView.register(PostSpaceTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostSpaceTableViewCell.self))
         postTableView.register(PostTextsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTextsTableViewCell.self))
         postTableView.register(PostTagTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTagTableViewCell.self))
+        postTableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         self.view.addSubview(postTableView)
@@ -174,7 +175,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 return tagCellHeoght
             }
             return viewWidth*0.3
-        }else{
+        }else if indexPath.row == 8{
+            //サブミッションポリシーのボタン
+            return viewWidth*0.15
+        }
+        
+        else{
             //スペース部分
             return viewWidth*0.04
         }
@@ -184,7 +190,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return 8
+        return 10
     }
     
     //MARK: テーブルビューのセルの中身を設定する
@@ -213,6 +219,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.tagsAry = tagsAry
             cell.tagLabel.text = "タグをつけてみよう"
 
+            return cell
+        }else if indexPath.row == 8 {
+            //サブミットポリシーの選択View
+            let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UITableViewCell.self), for: indexPath) 
+            cell.textLabel?.text = "Submission Policy"
+            cell.textLabel?.textAlignment = NSTextAlignment.center
+            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            cell.textLabel?.textColor = UIColor.mainAppColor()
             return cell
         }else{
         
@@ -259,8 +273,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             SetPostTagsVC.tagsAry = self.tagsAry
             SetPostTagsVC.delegate = self
             self.navigationController?.pushViewController(SetPostTagsVC, animated: true)
+        }else if indexPath.row == 8{
+            //今は利用規約なのでサブミッションポリシーにする
+            let submissionWebView:WebViewController = WebViewController()
+            submissionWebView.navTitle = "あとでサブミッションポリシーページ作る"
+            submissionWebView.url = TOS_PAGE_URL_STRING
+            self.present(submissionWebView, animated: true, completion: nil)
+            
         }
-        
     }
     
     func setTitle(str:String){

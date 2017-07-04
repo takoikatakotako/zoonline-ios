@@ -8,13 +8,18 @@
 
 import UIKit
 
-class ContactViewController: UIViewController , UIWebViewDelegate{
+class WebViewController: UIViewController , UIWebViewDelegate{
     
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
     private var webViewHeight:CGFloat!
     
+    //
+    var url:String!
+    var navTitle:String!
+    
+    //
     var webview : UIWebView!
 
     override func viewDidLoad() {
@@ -31,7 +36,7 @@ class ContactViewController: UIViewController , UIWebViewDelegate{
         self.view.addSubview(webview)
         
         // URLを設定.
-        let url: URL = URL(string: CONTACT_PAGE_URL_STRING)!
+        let url: URL = URL(string: self.url)!
         
         // リエストを発行する.
         let request: NSURLRequest = NSURLRequest(url: url)
@@ -70,7 +75,7 @@ class ContactViewController: UIViewController , UIWebViewDelegate{
         let titleLabel:UILabel = UILabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
         titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "お問い合わせ"
+        titleLabel.text = navTitle
         titleLabel.textColor = UIColor.white
         navItems.titleView = titleLabel
         navBar.pushItem(navItems, animated: true)

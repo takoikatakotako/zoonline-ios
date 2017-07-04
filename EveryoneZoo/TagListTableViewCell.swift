@@ -49,7 +49,6 @@ class TagListTableViewCell: UITableViewCell {
         let rect:CGSize = tagLabel.sizeThatFits(frame)
         
         tagLabel.frame =  CGRect(x: 0, y: cellHeight*0.2, width: rect.width+cellWidth*0.05, height:cellHeight*0.6)
-
         deleateBtn.frame =  CGRect(x: cellWidth-cellHeight, y:0, width: cellHeight, height: cellHeight)
     }
 }

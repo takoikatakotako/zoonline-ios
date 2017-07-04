@@ -168,8 +168,10 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
     func showWebTOS(sender: UIButton){
         
         //今だとコンタクト開いてしまうので、のちに修正必要
-        let contactView:ContactViewController = ContactViewController()
-        self.present(contactView, animated: true, completion: nil)
+        let tosWebView:WebViewController = WebViewController()
+        tosWebView.navTitle = "利用規約"
+        tosWebView.url = TOS_PAGE_URL_STRING
+        self.present(tosWebView, animated: true, completion: nil)
     }
     
     
