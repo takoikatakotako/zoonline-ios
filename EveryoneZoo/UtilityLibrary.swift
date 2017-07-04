@@ -21,6 +21,16 @@ class UtilityLibrary: NSObject {
         return calcTextView.frame.size.height
     }
     
+    
+    class func calcLabelSize(text:String,font:UIFont)->CGSize{
+        
+        let calcLabel:UILabel = UILabel()
+        calcLabel.text = text
+        calcLabel.font = font
+        let rect:CGSize = calcLabel.sizeThatFits(CGSize.zero)
+
+        return rect
+    }
 
 }
 

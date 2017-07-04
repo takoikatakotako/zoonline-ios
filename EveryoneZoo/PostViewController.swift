@@ -160,21 +160,19 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             return viewWidth*0.3
         }else if indexPath.row == 6{
             //タグのセル
-            //タグのセルの高さを計算して、規定の値と比較。高い方を返す
-            let calcLabel:UILabel = UILabel()
-            calcLabel.text = "#SampleTag"
-            calcLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            
+            //タグに何も入っていないときは最初の規定値を返す
+            if tagsAry.count == 0 {
+                return viewWidth*0.3
+            }
             
             //サイズの計算
-            let frame:CGSize = CGSize(width: viewWidth*0.6, height: 0)
-            let rect:CGSize = calcLabel.sizeThatFits(frame)
-            //タグ自体は70%、そして上下に0.5個分のマージン
-            let tagCellHeoght:CGFloat = rect.height*CGFloat(tagsAry.count+1)*(10/7)
+            let rect:CGSize = UtilityLibrary.calcLabelSize(text: "#SampleTag", font: UIFont.boldSystemFont(ofSize: 16))
 
-            if tagCellHeoght > viewWidth*0.3{
-                return tagCellHeoght
-            }
-            return viewWidth*0.3
+            //タグ自体は80%、そして上下に0.5個分のマージン
+            let tagCellHeoght:CGFloat = rect.height*CGFloat(tagsAry.count+1)*(10/8)
+            return tagCellHeoght
+            
         }else if indexPath.row == 8{
             //サブミッションポリシーのボタン
             return viewWidth*0.15
@@ -217,7 +215,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             //タグの選択View
             let cell:PostTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTagTableViewCell.self), for: indexPath) as! PostTagTableViewCell
             cell.tagsAry = tagsAry
-            cell.tagLabel.text = "タグをつけてみよう"
 
             return cell
         }else if indexPath.row == 8 {
