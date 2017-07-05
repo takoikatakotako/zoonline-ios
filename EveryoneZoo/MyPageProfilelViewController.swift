@@ -8,11 +8,19 @@
 
 import UIKit
 
-class MyPageProfilelViewController: UIViewController {
+class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITableViewDataSource   {
 
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var userConfigTableViewHeight:CGFloat!
+
+    
+    //テーブルビューインスタンス
+    var userConfigTableView: UITableView!
+    
+    //表示するもの
+    let changeUserInfoAry:Array<String> = ["ユーザー名","自己紹介","メールアドレス","パスワードの変更"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,17 +28,32 @@ class MyPageProfilelViewController: UIViewController {
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-
+        userConfigTableViewHeight = viewHeight - (viewWidth*0.56+PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_TABBAR_HEIGHT)
         setNavigationBar()
         
         self.view.backgroundColor = UIColor.white
 
+        //自分の情報
+        let myProfielView:UIView = UIView()
+        myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.56)
+        myProfielView.backgroundColor = UIColor.gray
+        self.view.addSubview(myProfielView)
+
+        //卵アイコン
+        let eggIcon:UIButton = UIButton()
+        eggIcon.frame =  CGRect(x: viewWidth/2-myProfielView.frame.height*0.44/3, y: myProfielView.frame.height*0.1, width: viewWidth, height: myProfielView.frame.height*0.44)
+        eggIcon.setBackgroundImage(UIImage(named:"sample_kabi1"), for: UIControlState.normal)
+        myProfielView.addSubview(eggIcon)
         
         
-        let profileSample:UIImageView = UIImageView()
-        profileSample.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth)
-        profileSample.image = UIImage(named:"sample_profile")
-        self.view.addSubview(profileSample)
+        //テーブルビューの初期化
+        userConfigTableView = UITableView()
+        userConfigTableView.delegate = self
+        userConfigTableView.dataSource = self
+        //userConfigTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: userConfigTableView)
+        userConfigTableView.frame = CGRect(x: 0, y:(viewWidth*0.56), width: viewWidth, height: userConfigTableViewHeight)
+        userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(userConfigTableView)
         
     }
 
@@ -49,6 +72,45 @@ class MyPageProfilelViewController: UIViewController {
         titleLabel.textColor = UIColor.white
         
         self.navigationItem.titleView = titleLabel
+    }
+    
+    //セクションの数を返す.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+     //セクションのタイトルを返す.
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return " "
+    }
+    
+    //MARK: テーブルビューのセルの数を設定する
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //テーブルビューのセルの数はmyItems配列の数とした
+        if section == 0 {
+            return 4
+        }else{
+            return 1
+        }
+    }
+    
+    //MARK: テーブルビューのセルの中身を設定する
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+
+        if indexPath.section == 0{
+            cell.textLabel?.text = changeUserInfoAry[indexPath.row] 
+        }else{
+            cell.textLabel?.text = "プロフィールのプレビュー"
+            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: (cell.textLabel?.font.pointSize)!)
+            cell.textLabel?.textColor = UIColor.mainAppColor()
+        }
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        return cell
+    }
+    
+    //Mark: テーブルビューのセルが押されたら呼ばれる
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(indexPath.row)番のセルを選択しました！ ")
     }
 
 }

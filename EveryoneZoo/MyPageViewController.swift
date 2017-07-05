@@ -103,8 +103,12 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.navigationController?.pushViewController(vc, animated: true)
                 break
             case 2:
+                //設定その他
                 let vc:MyPageFavoriteViewController = MyPageFavoriteViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
+                break
+            case 3:
+                //ログアウト
                 break
             default:
                 break
@@ -129,7 +133,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return ARRAY_MYPAGE_USER_INFOS.count
         } else if section == 1 {
             return ARRAY_MYPAGE_CONFIS.count
-        } else {
+        } else if section == 2{
+            //ログアウト
+            return 1
+        }else {
             return 0
         }
     }
@@ -168,8 +175,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else if indexPath.section == 1 {
           //  cell.textLabel?.text = "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
             cell.textCellLabel.text =  "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
-
             cell.thumbnailImgView.image = configThumbnails[indexPath.row] as? UIImage
+        } else if indexPath.row == 2{
+            cell.textCellLabel.text =  "ログラウト"
+            cell.thumbnailImgView.image = UIImage(named:"sample_kabi1")
         }
         
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
