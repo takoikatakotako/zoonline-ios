@@ -27,7 +27,6 @@ class UserInfoViewController: UIViewController {
         self.view.backgroundColor = UIColor.red
         setNavigationBar()
         
-        
         let profileSample:UIImageView = UIImageView()
         profileSample.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth)
         profileSample.image = UIImage(named:"sample_profile")

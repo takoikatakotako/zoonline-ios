@@ -13,6 +13,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    var myProfielViewHeight:CGFloat!
     private var userConfigTableViewHeight:CGFloat!
 
     
@@ -28,7 +29,8 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        userConfigTableViewHeight = viewHeight - (viewWidth*0.56+PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_TABBAR_HEIGHT)
+        myProfielViewHeight = viewWidth*0.56
+        userConfigTableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+myProfielViewHeight+PARTS_TABBAR_HEIGHT)
         setNavigationBar()
         
         self.view.backgroundColor = UIColor.white
@@ -36,21 +38,40 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         //自分の情報
         let myProfielView:UIView = UIView()
         myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.56)
-        myProfielView.backgroundColor = UIColor.gray
+        //myProfielView.backgroundColor = UIColor.gray
         self.view.addSubview(myProfielView)
 
         //卵アイコン
-        let eggIcon:UIButton = UIButton()
-        eggIcon.frame =  CGRect(x: viewWidth/2-myProfielView.frame.height*0.44/3, y: myProfielView.frame.height*0.1, width: viewWidth, height: myProfielView.frame.height*0.44)
-        eggIcon.setBackgroundImage(UIImage(named:"sample_kabi1"), for: UIControlState.normal)
-        myProfielView.addSubview(eggIcon)
+        let iconBaseBtn:UIButton = UIButton()
+        let iconBaseBtnHeight:CGFloat = myProfielView.frame.height*0.44
+        iconBaseBtn.frame =  CGRect(x: viewWidth/2-iconBaseBtnHeight/2, y: myProfielView.frame.height*0.1, width: iconBaseBtnHeight, height:iconBaseBtnHeight)
+        iconBaseBtn.layer.cornerRadius = iconBaseBtnHeight/2
+        iconBaseBtn.layer.masksToBounds = true
+        iconBaseBtn.setBackgroundImage(UIImage(named:"sample_kabi1"), for: UIControlState.normal)
+        myProfielView.addSubview(iconBaseBtn)
+        
+        // 名前
+        let nameLabel:UILabel = UILabel()
+        nameLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.6, width: viewWidth, height:myProfielView.frame.height*0.2)
+        nameLabel.text = "道券カビゴン"
+        nameLabel.textAlignment = NSTextAlignment.center
+        nameLabel.font = UIFont.systemFont(ofSize: 28)
+        self.view.addSubview(nameLabel)
+        
+        // Mail
+        let mailLabel:UILabel = UILabel()
+        mailLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.75, width: viewWidth, height:myProfielView.frame.height*0.2)
+        mailLabel.text = "d.uiji.snorlax.love.grass@gmail.com"
+        mailLabel.textAlignment = NSTextAlignment.center
+        mailLabel.font = UIFont.systemFont(ofSize: 14)
+        mailLabel.textColor = UIColor.gray
+        self.view.addSubview(mailLabel)
         
         
         //テーブルビューの初期化
         userConfigTableView = UITableView()
         userConfigTableView.delegate = self
         userConfigTableView.dataSource = self
-        //userConfigTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: userConfigTableView)
         userConfigTableView.frame = CGRect(x: 0, y:(viewWidth*0.56), width: viewWidth, height: userConfigTableViewHeight)
         userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(userConfigTableView)
@@ -87,9 +108,9 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
         if section == 0 {
-            return 4
-        }else{
             return 1
+        }else{
+            return changeUserInfoAry.count
         }
     }
     
@@ -98,11 +119,11 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
 
         if indexPath.section == 0{
-            cell.textLabel?.text = changeUserInfoAry[indexPath.row] 
-        }else{
             cell.textLabel?.text = "プロフィールのプレビュー"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: (cell.textLabel?.font.pointSize)!)
             cell.textLabel?.textColor = UIColor.mainAppColor()
+        }else{
+            cell.textLabel?.text = changeUserInfoAry[indexPath.row]
         }
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         return cell
@@ -111,6 +132,9 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
+        let vc:ProfielViewController = ProfielViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
 
 }
