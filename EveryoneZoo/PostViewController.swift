@@ -69,13 +69,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         let titleLabel:UILabel = UILabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
         titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "投稿コメント"
+        titleLabel.text = "投稿する"
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
         
-        //バーの左側に設置するボタンの作成
-        let leftNavBtn =  UIBarButtonItem(barButtonSystemItem:  .add, target: self, action: #selector(postBarBtnClicked(sender:)))
-        self.navigationItem.rightBarButtonItem = leftNavBtn
+        //バーの右側に設置するボタンの作成
+        let rightNavBtn = UIBarButtonItem()
+        rightNavBtn.image = UIImage(named:"submit_nav_btn")!
+        self.navigationItem.rightBarButtonItem = rightNavBtn
     }
     
     

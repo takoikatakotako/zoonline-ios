@@ -19,8 +19,6 @@ class TagListTableViewCell: UITableViewCell {
         //self.contentView.backgroundColor = UIColor.blue
         tagLabel.textAlignment = NSTextAlignment.center
         self.contentView.addSubview(tagLabel)
-        
-        deleateBtn.setBackgroundImage(UIImage(named:"sample_kabi1"), for: UIControlState.normal)
         self.contentView.addSubview(deleateBtn)
     }
     
@@ -50,5 +48,12 @@ class TagListTableViewCell: UITableViewCell {
         
         tagLabel.frame =  CGRect(x: 0, y: cellHeight*0.2, width: rect.width+cellWidth*0.05, height:cellHeight*0.6)
         deleateBtn.frame =  CGRect(x: cellWidth-cellHeight, y:0, width: cellHeight, height: cellHeight)
+        
+        //削除ボタンの追加
+        let removeImg:UIImageView = UIImageView()
+        removeImg.image = UIImage(named:"remove")
+        removeImg.frame = CGRect(x: deleateBtn.frame.width*0.2, y:deleateBtn.frame.height*0.2, width: deleateBtn.frame.width*0.6, height: deleateBtn.frame.height*0.6)
+        deleateBtn.addSubview(removeImg)
+        
     }
 }
