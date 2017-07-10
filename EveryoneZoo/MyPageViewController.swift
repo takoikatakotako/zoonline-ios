@@ -21,6 +21,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let userInfoThumbnails:NSArray = [UIImage(named:"mypage_post_icon")!, UIImage(named:"mypage_follow_icon")!,UIImage(named:"mypage_favo_icon")!, UIImage(named:"mypage_clip_icon")!]
     let configThumbnails:NSArray = [UIImage(named:"mypage_notification_icon")!, UIImage(named:"mypage_share_icon")!,UIImage(named:"tab_kabi")!]
     
+    let ARRAY_MYPAGE_SCTION_TITLE: NSArray = ["ユーザー情報", "設定・その他", "ログアウト"]
+    let ARRAY_MYPAGE_USER_INFOS: NSArray = ["投稿","フォロー", "いいね", "クリップ"]
+    let ARRAY_MYPAGE_CONFIS: NSArray = ["お問い合わせ","シェアの設定", "Web連携"]
+    
     // Sectionで使用する配列を定義する.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +71,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //TableViewの設置
     func setTableView(){
     
-        myPageTableView = UITableView(frame: CGRect(x: 0, y: HEIGHT_USER_CELL, width: viewWidth, height: tableViewHeight))
+        myPageTableView = UITableView(frame: CGRect(x: 0, y: HEIGHT_USER_CELL, width: viewWidth, height: tableViewHeight),style: UITableViewStyle.grouped)
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
         myPageTableView.backgroundColor = UIColor.MyPageTableBGColor()
@@ -86,6 +90,68 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //セクションのタイトルを返す.
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return ARRAY_MYPAGE_SCTION_TITLE[section] as? String
+    }
+    
+    
+    //セクションの高さ
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 40
+        }else{
+            return 20
+        }
+    }
+    
+    //セクションの中身
+    /*
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        //セクション区切りのラベル
+        let headerLabel = UILabel()
+        headerLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+        headerLabel.font = UIFont.systemFont(ofSize: 16)
+        headerLabel.frame = CGRect(x: 0, y: 20, width: 100, height: 20)
+    
+        return headerLabel
+     }
+    */
+    
+    //テーブルに表示する配列の総数を返す.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return ARRAY_MYPAGE_USER_INFOS.count
+        } else if section == 1 {
+            return ARRAY_MYPAGE_CONFIS.count
+        } else if section == 2{
+            //ログアウト
+            return 1
+        }else {
+            return 0
+        }
+    }
+    
+    //Cellに値を設定する.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell:MyPageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPageTableViewCell.self), for: indexPath) as! MyPageTableViewCell
+        
+        
+        if indexPath.section == 0 {
+            //  cell.textLabel?.text = "\(ARRAY_MYPAGE_USER_INFOS[indexPath.row])"
+            cell.textCellLabel.text =  "\(ARRAY_MYPAGE_USER_INFOS[indexPath.row])"
+            cell.thumbnailImgView.image = userInfoThumbnails[indexPath.row] as? UIImage
+        } else if indexPath.section == 1 {
+            //  cell.textLabel?.text = "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
+            cell.textCellLabel.text =  "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
+            cell.thumbnailImgView.image = configThumbnails[indexPath.row] as? UIImage
+        } else if indexPath.section == 2{
+            cell.textCellLabel.text =  "ログラウト"
+            cell.thumbnailImgView.image = UIImage(named:"sample_kabi1")
+        }
+        
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        
+        return cell
     }
     
     //Cellが選択された際に呼び出される.
@@ -122,68 +188,12 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             contactView.url = CONTACT_PAGE_URL_STRING
             contactView.navTitle = "お問い合わせ"
             self.present(contactView, animated: true, completion: nil)
+        }else{
+        
+        
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    //テーブルに表示する配列の総数を返す.
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return ARRAY_MYPAGE_USER_INFOS.count
-        } else if section == 1 {
-            return ARRAY_MYPAGE_CONFIS.count
-        } else if section == 2{
-            //ログアウト
-            return 1
-        }else {
-            return 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let headerFrame = tableView.frame
-        
-        //セクション区切りのラベル
-        let headerLabel = UILabel()
-        headerLabel.frame = CGRect(x: 16, y: 5, width: headerFrame.size.width-20, height: 20)
-        headerLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
-        headerLabel.font = UIFont.systemFont(ofSize: 16)
-        
-        //区切りラベルを追加する
-        let headerView:UIView = UIView(frame: CGRect(x:0, y:0, width: headerFrame.size.width, height: headerFrame.size.height))
-        
-        
-        headerView.addSubview(headerLabel)
-       // headerView.backgroundColor = UIColor.red
-        
-        return headerView
-
-    }
-    
-    //Cellに値を設定する.
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell:MyPageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPageTableViewCell.self), for: indexPath) as! MyPageTableViewCell
-        
-        
-        if indexPath.section == 0 {
-          //  cell.textLabel?.text = "\(ARRAY_MYPAGE_USER_INFOS[indexPath.row])"
-            cell.textCellLabel.text =  "\(ARRAY_MYPAGE_USER_INFOS[indexPath.row])"
-            cell.thumbnailImgView.image = userInfoThumbnails[indexPath.row] as? UIImage
-        } else if indexPath.section == 1 {
-          //  cell.textLabel?.text = "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
-            cell.textCellLabel.text =  "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
-            cell.thumbnailImgView.image = configThumbnails[indexPath.row] as? UIImage
-        } else if indexPath.row == 2{
-            cell.textCellLabel.text =  "ログラウト"
-            cell.thumbnailImgView.image = UIImage(named:"sample_kabi1")
-        }
-        
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        
-        return cell
     }
     
     // MARK: - アクションの設定

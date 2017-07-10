@@ -69,10 +69,10 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         
         
         //テーブルビューの初期化
-        userConfigTableView = UITableView()
+        userConfigTableView = UITableView(frame: CGRect(x: 0, y:(viewWidth*0.56), width: viewWidth, height: userConfigTableViewHeight),style: UITableViewStyle.grouped)
         userConfigTableView.delegate = self
         userConfigTableView.dataSource = self
-        userConfigTableView.frame = CGRect(x: 0, y:(viewWidth*0.56), width: viewWidth, height: userConfigTableViewHeight)
+        //userConfigTableView.frame = CGRect(x: 0, y:(viewWidth*0.56), width: viewWidth, height: userConfigTableViewHeight)
         userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(userConfigTableView)
         
@@ -112,6 +112,13 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         }else{
             return changeUserInfoAry.count
         }
+    }
+    
+    
+    //セクションの高さ
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 0
     }
     
     //MARK: テーブルビューのセルの中身を設定する

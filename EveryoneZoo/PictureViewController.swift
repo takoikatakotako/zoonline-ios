@@ -166,6 +166,8 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         self.view.bringSubview(toFront: indicator)
         indicator.color = UIColor.mainAppColor()
         self.view.addSubview(indicator)
+        indicator.startAnimating()
+        indicator.backgroundColor = UIColor.gray
     }
     
     

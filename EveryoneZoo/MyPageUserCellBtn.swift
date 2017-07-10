@@ -51,8 +51,8 @@ class MyPageUserCellBtn: UIButton {
         
         //プロフィール画面の矢印
         let profielArrow:UIImageView = UIImageView()
-        profielArrow.image = UIImage(named:"mypage_profiel")
-        profielArrow.frame = CGRect(x: viewWidth*0.9, y: 0, width: viewWidth*0.1, height: viewHeight)
+        profielArrow.image = UIImage(named:"arrow_rignt")
+        profielArrow.frame = CGRect(x: viewWidth*0.9, y: viewHeight*0.4, width: viewWidth*0.03, height: viewHeight*0.2)
         self.addSubview(profielArrow)
     }
 }
