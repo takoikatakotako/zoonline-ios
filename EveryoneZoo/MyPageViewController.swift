@@ -34,6 +34,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         viewHeight = self.view.frame.size.height
         tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+HEIGHT_USER_CELL + PARTS_TABBAR_HEIGHT)
         
+        self.view.backgroundColor = UIColor.MyPageTableBGColor()
+        
         setNavigationBar()
         
         setUserCellBtn()
@@ -50,12 +52,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = UILabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
-        titleLabel.textAlignment = NSTextAlignment.center
+        let titleLabel:NavigationBarLabel = NavigationBarLabel(frame: CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR))
         titleLabel.text = "マイページ"
-        titleLabel.textColor = UIColor.white
-        
         self.navigationItem.titleView = titleLabel
     }
 

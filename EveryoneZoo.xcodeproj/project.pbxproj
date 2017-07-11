@@ -31,6 +31,7 @@
 		8D73B43A1E7AE09000E3B301 /* EveryoneZooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */; };
 		8D73B4451E7AE09000E3B301 /* EveryoneZooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */; };
 		8D7CDC371F14DD8F00C3844E /* EditUserNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */; };
+		8D7CDC3C1F14F12D00C3844E /* NavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CDC3B1F14F12D00C3844E /* NavigationBarLabel.swift */; };
 		8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */; };
 		8D7E86091EABBC6200C4049B /* LeftPicturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86081EABBC6200C4049B /* LeftPicturesTableViewCell.swift */; };
 		8D7E860B1EABBC7400C4049B /* RightPicturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */; };
@@ -117,6 +118,7 @@
 		8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryoneZooUITests.swift; sourceTree = "<group>"; };
 		8D73B4461E7AE09000E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserNameViewController.swift; sourceTree = "<group>"; };
+		8D7CDC3B1F14F12D00C3844E /* NavigationBarLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarLabel.swift; sourceTree = "<group>"; };
 		8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableCell.swift; sourceTree = "<group>"; };
 		8D7E86081EABBC6200C4049B /* LeftPicturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftPicturesTableViewCell.swift; sourceTree = "<group>"; };
 		8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightPicturesTableViewCell.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */,
 				8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */,
 				8D9DE17F1EE4147500121FC1 /* Manager */,
+				8D7CDC3A1F14F0E100C3844E /* ViewsParts */,
 				8D7E86051EABADAF00C4049B /* TableViewCell */,
 				8D68887E1E9E7EF000140508 /* ViewController */,
 				8D73B4281E7AE08F00E3B301 /* Main.storyboard */,
@@ -336,6 +339,14 @@
 				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
 			);
 			name = Zoo;
+			sourceTree = "<group>";
+		};
+		8D7CDC3A1F14F0E100C3844E /* ViewsParts */ = {
+			isa = PBXGroup;
+			children = (
+				8D7CDC3B1F14F12D00C3844E /* NavigationBarLabel.swift */,
+			);
+			name = ViewsParts;
 			sourceTree = "<group>";
 		};
 		8D7E86051EABADAF00C4049B /* TableViewCell */ = {
@@ -717,6 +728,7 @@
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
 				8DC7190D1F08A0F3003C5E00 /* PostImageTableViewCell.swift in Sources */,
+				8D7CDC3C1F14F12D00C3844E /* NavigationBarLabel.swift in Sources */,
 				8D9DE17E1EE4145E00121FC1 /* NetWorkManager.swift in Sources */,
 				8D9DE17C1EE3F5B500121FC1 /* MenuButton.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */,
