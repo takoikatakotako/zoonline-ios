@@ -23,10 +23,7 @@ class MyPagePostViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.white
 
-        
         setNavigationBar()
-        
-
     }
     
     

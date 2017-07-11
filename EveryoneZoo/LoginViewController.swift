@@ -42,7 +42,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         setNavigationBar()
         setView()
         
-        
+        //Indicator
         indicator.activityIndicatorViewStyle = .whiteLarge
         indicator.center = self.view.center
         indicator.hidesWhenStopped = true

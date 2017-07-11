@@ -30,6 +30,7 @@
 		8D73B42F1E7AE08F00E3B301 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */; };
 		8D73B43A1E7AE09000E3B301 /* EveryoneZooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */; };
 		8D73B4451E7AE09000E3B301 /* EveryoneZooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */; };
+		8D7CDC371F14DD8F00C3844E /* EditUserNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */; };
 		8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */; };
 		8D7E86091EABBC6200C4049B /* LeftPicturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86081EABBC6200C4049B /* LeftPicturesTableViewCell.swift */; };
 		8D7E860B1EABBC7400C4049B /* RightPicturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */; };
@@ -115,6 +116,7 @@
 		8D73B4401E7AE09000E3B301 /* EveryoneZooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EveryoneZooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryoneZooUITests.swift; sourceTree = "<group>"; };
 		8D73B4461E7AE09000E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserNameViewController.swift; sourceTree = "<group>"; };
 		8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableCell.swift; sourceTree = "<group>"; };
 		8D7E86081EABBC6200C4049B /* LeftPicturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftPicturesTableViewCell.swift; sourceTree = "<group>"; };
 		8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightPicturesTableViewCell.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */,
 				8D5121251F0D405B00C6D774 /* UserInfo */,
 				8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */,
+				8D7CDC381F14DD9500C3844E /* EditUserInfo */,
 			);
 			name = MyPage;
 			sourceTree = "<group>";
@@ -317,6 +320,14 @@
 				8D73B4461E7AE09000E3B301 /* Info.plist */,
 			);
 			path = EveryoneZooUITests;
+			sourceTree = "<group>";
+		};
+		8D7CDC381F14DD9500C3844E /* EditUserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */,
+			);
+			name = EditUserInfo;
 			sourceTree = "<group>";
 		};
 		8D7E86051EABADAF00C4049B /* TableViewCell */ = {
@@ -676,6 +687,7 @@
 				8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */,
 				8DF9CFE41EE959F9002B8459 /* WebViewController.swift in Sources */,
 				8DB4FD391ECD21D7008F560D /* MyPageProfilelViewController.swift in Sources */,
+				8D7CDC371F14DD8F00C3844E /* EditUserNameViewController.swift in Sources */,
 				8D1586741ED8565300802F54 /* FollowUserButton.swift in Sources */,
 				8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */,
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,

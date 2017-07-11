@@ -230,6 +230,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
             //スペーサーView
             let cell:PostSpaceTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostSpaceTableViewCell.self), for: indexPath) as! PostSpaceTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }
     }

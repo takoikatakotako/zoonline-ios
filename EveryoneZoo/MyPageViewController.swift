@@ -135,7 +135,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let cell:MyPageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPageTableViewCell.self), for: indexPath) as! MyPageTableViewCell
         
-        
         if indexPath.section == 0 {
             //  cell.textLabel?.text = "\(ARRAY_MYPAGE_USER_INFOS[indexPath.row])"
             cell.textCellLabel.text =  "\(ARRAY_MYPAGE_USER_INFOS[indexPath.row])"

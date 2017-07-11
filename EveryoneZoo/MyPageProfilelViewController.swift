@@ -182,9 +182,26 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
-        let vc:ProfielViewController = ProfielViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        switch indexPath.row {
+        case 0:
+            //プロフィールのプレビューが押された
+            let vc:ProfielViewController = ProfielViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 2:
+            //ユーザー名の編集
+            let vc:EditUserNameViewController = EditUserNameViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        
+        default:
+            
+            break
+        }
+        
+        
+
         
     }
 

@@ -65,6 +65,7 @@ class ProfielViewController: UIViewController {
         introduceLabel.textColor = UIColor.black
         introduceLabel.numberOfLines = 0
         profielView.addSubview(introduceLabel)
-        
     }
+    
+    
 }
