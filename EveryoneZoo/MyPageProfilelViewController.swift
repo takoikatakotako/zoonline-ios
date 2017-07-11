@@ -21,61 +21,24 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     var userConfigTableView: UITableView!
     
     //表示するもの
-    let changeUserInfoAry:Array<String> = ["ユーザー名","自己紹介","メールアドレス","パスワードの変更"]
+    let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名","自己紹介","メールアドレス","パスワードの変更",""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.MyPageTableBGColor()
         
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
         myProfielViewHeight = viewWidth*0.56
         userConfigTableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+myProfielViewHeight+PARTS_TABBAR_HEIGHT)
+        
         setNavigationBar()
         
-        self.view.backgroundColor = UIColor.white
-
-        //自分の情報
-        let myProfielView:UIView = UIView()
-        myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.56)
-        //myProfielView.backgroundColor = UIColor.gray
-        self.view.addSubview(myProfielView)
-
-        //卵アイコン
-        let iconBaseBtn:UIButton = UIButton()
-        let iconBaseBtnHeight:CGFloat = myProfielView.frame.height*0.44
-        iconBaseBtn.frame =  CGRect(x: viewWidth/2-iconBaseBtnHeight/2, y: myProfielView.frame.height*0.1, width: iconBaseBtnHeight, height:iconBaseBtnHeight)
-        iconBaseBtn.layer.cornerRadius = iconBaseBtnHeight/2
-        iconBaseBtn.layer.masksToBounds = true
-        iconBaseBtn.setBackgroundImage(UIImage(named:"sample_kabi1"), for: UIControlState.normal)
-        myProfielView.addSubview(iconBaseBtn)
+        setProfielView()
         
-        // 名前
-        let nameLabel:UILabel = UILabel()
-        nameLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.6, width: viewWidth, height:myProfielView.frame.height*0.2)
-        nameLabel.text = "道券カビゴン"
-        nameLabel.textAlignment = NSTextAlignment.center
-        nameLabel.font = UIFont.systemFont(ofSize: 28)
-        self.view.addSubview(nameLabel)
-        
-        // Mail
-        let mailLabel:UILabel = UILabel()
-        mailLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.75, width: viewWidth, height:myProfielView.frame.height*0.2)
-        mailLabel.text = "d.uiji.snorlax.love.grass@gmail.com"
-        mailLabel.textAlignment = NSTextAlignment.center
-        mailLabel.font = UIFont.systemFont(ofSize: 14)
-        mailLabel.textColor = UIColor.gray
-        self.view.addSubview(mailLabel)
-        
-        
-        //テーブルビューの初期化
-        userConfigTableView = UITableView(frame: CGRect(x: 0, y:(viewWidth*0.56), width: viewWidth, height: userConfigTableViewHeight),style: UITableViewStyle.grouped)
-        userConfigTableView.delegate = self
-        userConfigTableView.dataSource = self
-        //userConfigTableView.frame = CGRect(x: 0, y:(viewWidth*0.56), width: viewWidth, height: userConfigTableViewHeight)
-        userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        self.view.addSubview(userConfigTableView)
-        
+        setTableView()
     }
 
     // MARK: - Viewにパーツの設置
@@ -95,44 +58,126 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         self.navigationItem.titleView = titleLabel
     }
     
-    //セクションの数を返す.
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+    // MARK: プロフィールビュー
+    func setProfielView() {
+        
+        //自分の情報
+        let myProfielView:UIView = UIView()
+        myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.56)
+        myProfielView.backgroundColor = UIColor.MyPageTableBGColor()
+        self.view.addSubview(myProfielView)
+        
+        //アイコン選択ボタン
+        let iconChoseBtn:UIButton = UIButton()
+        let iconChoseBtnHeight:CGFloat = myProfielView.frame.height*0.44
+        iconChoseBtn.frame =  CGRect(x: viewWidth/2-iconChoseBtnHeight/2, y: myProfielView.frame.height*0.1, width: iconChoseBtnHeight, height:iconChoseBtnHeight)
+        iconChoseBtn.addTarget(self, action: #selector(choseIconBtnClicked(sender:)), for: .touchUpInside)
+        //iconChoseBtn.backgroundColor = UIColor.red
+        myProfielView.addSubview(iconChoseBtn)
+        
+        //卵アイコン
+        let icon:UIImageView = UIImageView()
+        icon.frame = CGRect(x: 0, y: 0, width: iconChoseBtn.frame.size.width, height:iconChoseBtn.frame.size.height)
+        icon.layer.cornerRadius = iconChoseBtn.frame.size.width/2
+        icon.layer.masksToBounds = true
+        icon.isUserInteractionEnabled = false
+        icon.image = UIImage(named:"sample_kabi1")
+        iconChoseBtn.addSubview(icon)
+ 
+        //プラスのボタン
+        let iconPlusImg:UIImageView = UIImageView()
+        iconPlusImg.isUserInteractionEnabled = false
+        iconPlusImg.frame = CGRect(x: iconChoseBtn.frame.size.width*0.7, y: iconChoseBtn.frame.size.width*0.7, width: iconChoseBtn.frame.size.width*0.3, height:iconChoseBtn.frame.size.height*0.3)
+        iconPlusImg.image = UIImage(named:"iconChange")
+        iconChoseBtn.addSubview(iconPlusImg)
+
+        
+        // 名前
+        let nameLabel:UILabel = UILabel()
+        nameLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.58, width: viewWidth, height:myProfielView.frame.height*0.2)
+        nameLabel.text = "道券カビゴン"
+        nameLabel.textAlignment = NSTextAlignment.center
+        nameLabel.font = UIFont.systemFont(ofSize: 28)
+        self.view.addSubview(nameLabel)
+        
+        // Mail
+        let mailLabel:UILabel = UILabel()
+        mailLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.75, width: viewWidth, height:myProfielView.frame.height*0.2)
+        mailLabel.text = "d.uiji.snorlax.love.grass@gmail.com"
+        mailLabel.textAlignment = NSTextAlignment.center
+        mailLabel.font = UIFont.systemFont(ofSize: 14)
+        mailLabel.textColor = UIColor.gray
+        self.view.addSubview(mailLabel)
     }
-     //セクションのタイトルを返す.
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return " "
+    
+    func setTableView() {
+        
+        //テーブルビューの初期化
+        userConfigTableView = UITableView()
+        userConfigTableView.delegate = self
+        userConfigTableView.dataSource = self
+        userConfigTableView.frame = CGRect(x: 0, y:myProfielViewHeight, width: viewWidth, height: userConfigTableViewHeight)
+        userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        userConfigTableView.backgroundColor = UIColor.MyPageTableBGColor()
+        //userConfigTableView.isScrollEnabled = false
+        self.view.addSubview(userConfigTableView)
     }
+    
+    
+    //
+    func choseIconBtnClicked(sender: UIButton){
+        
+        // インスタンス生成
+       let myImagePicker = UIImagePickerController()
+        //myImagePicker.delegate = self
+        myImagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        myImagePicker.navigationBar.barTintColor = UIColor.mainAppColor()
+        myImagePicker.navigationBar.tintColor = UIColor.white
+        myImagePicker.navigationBar.isTranslucent = false
+        //myImagePicker.allowsEditing = false
+        self.present(myImagePicker, animated: true, completion: nil)
+    }
+    
+    
+    
+    // MARK: - TableViewのデリゲートメリット
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //テーブルビューのセルの数はmyItems配列の数とした
-        if section == 0 {
-            return 1
-        }else{
-            return changeUserInfoAry.count
-        }
+
+        return changeUserInfoAry.count
     }
     
-    
-    //セクションの高さ
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    //MARK: テーブルビューのセルの高さを計算する
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 0
+        if changeUserInfoAry[indexPath.row] == "" {
+            return 24
+        }else{
+            return 44
+        }
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
 
-        if indexPath.section == 0{
-            cell.textLabel?.text = "プロフィールのプレビュー"
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: (cell.textLabel?.font.pointSize)!)
+        if indexPath.row == 0{
+            cell.textLabel?.text = changeUserInfoAry[indexPath.row]
+            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
             cell.textLabel?.textColor = UIColor.mainAppColor()
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        }else if indexPath.row == 1{
+            cell.backgroundColor = UIColor.MyPageTableBGColor()
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+        }else if indexPath.row == 6{
+            cell.backgroundColor = UIColor.MyPageTableBGColor()
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
         }else{
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         }
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        
         return cell
     }
     
