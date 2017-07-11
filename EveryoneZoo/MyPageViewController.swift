@@ -145,7 +145,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.textCellLabel.text =  "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
             cell.thumbnailImgView.image = configThumbnails[indexPath.row] as? UIImage
         } else if indexPath.section == 2{
-            cell.textCellLabel.text =  "ログラウト"
+            cell.textCellLabel.text =  "ログアウト"
             cell.thumbnailImgView.image = UIImage(named:"sample_kabi1")
         }
         

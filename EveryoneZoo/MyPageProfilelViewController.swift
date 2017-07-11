@@ -91,7 +91,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         iconPlusImg.image = UIImage(named:"iconChange")
         iconChoseBtn.addSubview(iconPlusImg)
 
-        
         // 名前
         let nameLabel:UILabel = UILabel()
         nameLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.58, width: viewWidth, height:myProfielView.frame.height*0.2)
