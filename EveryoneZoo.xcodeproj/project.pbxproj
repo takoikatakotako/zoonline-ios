@@ -253,9 +253,9 @@
 				8D1586701ED8027900802F54 /* Common */,
 				8DA0AB711ECB0A0000D75B1A /* FieldView */,
 				8D6215A51EC2014200593E55 /* PostView */,
-				8D6215AB1EC3685200593E55 /* MyPage */,
 				8DA0AB701ECB032C00D75B1A /* TimeLine */,
-				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
+				8D7CDC391F14E74500C3844E /* Zoo */,
+				8D6215AB1EC3685200593E55 /* MyPage */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -289,9 +289,9 @@
 				8D9DE1801EE41D6E00121FC1 /* EveryZooConfig.swift */,
 				8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */,
 				8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */,
-				8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */,
 				8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */,
 				8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */,
+				8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */,
 				8D9DE17F1EE4147500121FC1 /* Manager */,
 				8D7E86051EABADAF00C4049B /* TableViewCell */,
 				8D68887E1E9E7EF000140508 /* ViewController */,
@@ -328,6 +328,14 @@
 				8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */,
 			);
 			name = EditUserInfo;
+			sourceTree = "<group>";
+		};
+		8D7CDC391F14E74500C3844E /* Zoo */ = {
+			isa = PBXGroup;
+			children = (
+				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
+			);
+			name = Zoo;
 			sourceTree = "<group>";
 		};
 		8D7E86051EABADAF00C4049B /* TableViewCell */ = {

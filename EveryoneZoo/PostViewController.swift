@@ -11,7 +11,6 @@ import Alamofire
 import SwiftyJSON
 
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate,SetTagsDelegate{
-
     
     //width, height
     private var viewWidth:CGFloat!
@@ -32,6 +31,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var tagsAry:Array<String> = []
     
     //
+    private var noLoginView:NoLoginView! = NoLoginView()
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,13 +44,29 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR + PARTS_TABBAR_HEIGHT!)
         
         setNavigationBar()
-        setTableView()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            
+            setTableView()
+
+
+        }else{
+
+            //
+            setLoginView()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-       postTableView.reloadData()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            postTableView.reloadData()
+
+        
+        }
     }
     
     // MARK: - Viewにパーツの設置
@@ -73,11 +92,19 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
         
-        //バーの右側に設置するボタンの作成
-        let rightNavBtn = UIBarButtonItem()
-        rightNavBtn.image = UIImage(named:"submit_nav_btn")!
-        self.navigationItem.rightBarButtonItem = rightNavBtn
+        
+        //ログインしている場合はボタンをつける
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            
+            //バーの右側に設置するボタンの作成
+            let rightNavBtn = UIBarButtonItem()
+            rightNavBtn.image = UIImage(named:"submit_nav_btn")!
+            self.navigationItem.rightBarButtonItem = rightNavBtn
+            
+        }
     }
+    
     
     
     //TableViewの設置
@@ -317,6 +344,36 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
+    //Mark: 未ログイン関係の処理
+
+    // MARK: setLoginView
+    func setLoginView()  {
+        
+        let noLoginViewHeight:CGFloat = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_TABBAR_HEIGHT)
+        noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
+        noLoginView.loginBtn.addTarget(nil, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+        noLoginView.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
+        self.view.addSubview(noLoginView)
+    }
+    
+    //ログインボタンが押されたら呼ばれます
+    func loginBtnClicked(sender: UIButton){
+        
+        let loginView:LoginViewController = LoginViewController()
+        self.present(loginView, animated: true, completion: nil)
+    }
+    
+    //登録ボタンが押されたら呼ばれます
+    func resistBtnClicked(sender: UIButton){
+        
+        let resistView:NewResistViewController = NewResistViewController()
+        self.present(resistView, animated: true, completion: nil)
     }
 }
 

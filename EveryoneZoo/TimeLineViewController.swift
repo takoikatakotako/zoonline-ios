@@ -42,7 +42,6 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         }else{
             setLoginView()
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -142,27 +141,6 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         postDetailTableView.refreshControl = refreshControl
     }
     
-    // MARK: showLoginView
-    func setLoginView()  {
-        
-        let noLoginViewHeight:CGFloat = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_TABBAR_HEIGHT)
-        noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
-        noLoginView.loginBtn.addTarget(nil, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
-        noLoginView.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
-        self.view.addSubview(noLoginView)
-    }
-    //basicボタンが押されたら呼ばれます
-    func loginBtnClicked(sender: UIButton){
-
-        let loginView:LoginViewController = LoginViewController()
-        self.present(loginView, animated: true, completion: nil)
-    }
-    //basicボタンが押されたら呼ばれます
-    func resistBtnClicked(sender: UIButton){
-        
-        let resistView:NewResistViewController = NewResistViewController()
-        self.present(resistView, animated: true, completion: nil)
-    }
     
     // MARK: - TableView関連のメソッド
     //MARK: セルの数の設定
@@ -233,6 +211,33 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         
         SCLAlertView().showInfo("スクロールイベントが実行された", subTitle: "close")
         sender.endRefreshing()
+    }
+    
+    
+    //Mark: 未ログイン関係の処理
+    
+    // MARK: setLoginView
+    func setLoginView()  {
+        
+        let noLoginViewHeight:CGFloat = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_TABBAR_HEIGHT)
+        noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
+        noLoginView.loginBtn.addTarget(nil, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+        noLoginView.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
+        self.view.addSubview(noLoginView)
+    }
+    
+    //ログインボタンが押されたら呼ばれます
+    func loginBtnClicked(sender: UIButton){
+        
+        let loginView:LoginViewController = LoginViewController()
+        self.present(loginView, animated: true, completion: nil)
+    }
+    
+    //登録ボタンが押されたら呼ばれます
+    func resistBtnClicked(sender: UIButton){
+        
+        let resistView:NewResistViewController = NewResistViewController()
+        self.present(resistView, animated: true, completion: nil)
     }
 
     
