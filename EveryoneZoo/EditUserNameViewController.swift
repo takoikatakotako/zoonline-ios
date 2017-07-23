@@ -51,6 +51,16 @@ class EditUserNameViewController: UIViewController {
         userNameTextFIeld.textColor = UIColor.gray
         self.view.addSubview(userNameTextFIeld)
         
+        
+        //userNameTextFIeldUnderLine
+        let userNameTextFIeldLine:UIView = UIView()
+        userNameTextFIeldLine.frame = CGRect(x: viewWidth*0.05, y: viewHeight*0.3+40+2, width: viewWidth*0.9, height: 1)
+        userNameTextFIeldLine.backgroundColor = UIColor.gray
+        self.view.addSubview(userNameTextFIeldLine)
+        
+        
+        
+        
         //LoginButton
         let changeUserNameBtn:UIButton = UIButton()
         changeUserNameBtn.frame = CGRect(x: viewWidth*0.1, y: viewHeight*0.4, width: viewWidth*0.8, height: viewWidth*0.15)
