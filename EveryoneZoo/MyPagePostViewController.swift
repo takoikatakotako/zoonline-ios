@@ -8,11 +8,20 @@
 
 import UIKit
 
-class MyPagePostViewController: UIViewController {
+class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    
+    
+    //テーブルビューインスタンス
+    private var myTableView: UITableView!
+    
+    //テーブルビューに表示する配列
+    private var myItems: NSArray = []
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +33,25 @@ class MyPagePostViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
 
         setNavigationBar()
+        
+        //テーブルビューに表示する配列
+        myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
+        
+        
+        //テーブルビューの初期化
+        myTableView = UITableView()
+        
+        //デリゲートの設定
+        myTableView.delegate = self
+        myTableView.dataSource = self
+        
+        //テーブルビューの大きさの指定
+        myTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
+        myTableView.rowHeight = viewWidth*0.28
+        
+        //テーブルビューの設置
+        myTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
+        self.view.addSubview(myTableView)
     }
     
     
@@ -46,6 +74,23 @@ class MyPagePostViewController: UIViewController {
     }
     
     
+    //MARK: テーブルビューのセルの数を設定する
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //テーブルビューのセルの数はmyItems配列の数とした
+        return self.myItems.count
+    }
     
+    //MARK: テーブルビューのセルの中身を設定する
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //myItems配列の中身をテキストにして登録した
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self))! as UITableViewCell
+        cell.textLabel?.text = self.myItems[indexPath.row] as? String
+        return cell
+    }
+    
+    //Mark: テーブルビューのセルが押されたら呼ばれる
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(indexPath.row)番のセルを選択しました！ ")
+    }
 
 }

@@ -64,8 +64,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if (appDelegate.userDefaultsManager?.isLogin())! {
             postTableView.reloadData()
-
-        
         }
     }
     
@@ -164,7 +162,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print(encodingError)
             }
         }
-        
     }
     
     
@@ -319,7 +316,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func setTags(ary:Array<String>){
         tagsAry = ary
-        
     }
     
     

@@ -241,47 +241,48 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     
     //Mark: コメント投稿画面への遷移
     func showActionShert(sender: UIButton){
+        
         // インスタンス生成　styleはActionSheet.
-        let actionAlert = UIAlertController(title: "アクション", message: "アクションを選んでください。", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let actionAlert = UIAlertController(title: "操作メニュー", message: "操作を選んでください。", preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        // アクションを生成.
-        let commentAction = UIAlertAction(title: "コメント", style: UIAlertActionStyle.default, handler: {
-            (action: UIAlertAction!) in
-            // コメント画面へ遷移
-            self.goCommentView()
-        })
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            
+            // アクションを生成.
+            let commentAction = UIAlertAction(title: "コメント", style: UIAlertActionStyle.default, handler: {
+                (action: UIAlertAction!) in
+                // コメント画面へ遷移
+                self.goCommentView()
+            })
+            actionAlert.addAction(commentAction)
+
+            
+            let addAlbumAction = UIAlertAction(title: "アルバムへの追加", style: UIAlertActionStyle.default, handler: {
+                (action: UIAlertAction!) in
+            })
+            actionAlert.addAction(addAlbumAction)
+        }
+
         
-        let shareAction = UIAlertAction(title: "共有する", style: UIAlertActionStyle.default, handler: {
-            (action: UIAlertAction!) in
-        })
-        
-        let editTagAction = UIAlertAction(title: "タグの編集", style: UIAlertActionStyle.default, handler: {
-            (action: UIAlertAction!) in
-        })
-        
-        let addAlbumAction = UIAlertAction(title: "アルバムへの追加", style: UIAlertActionStyle.default, handler: {
-            (action: UIAlertAction!) in
-        })
         
         let reportAction = UIAlertAction(title: "レポート", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
         })
+        actionAlert.addAction(reportAction)
+
         
-        let otherAction = UIAlertAction(title: "その他", style: UIAlertActionStyle.default, handler: {
+        let shareAction = UIAlertAction(title: "共有する", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
         })
+        actionAlert.addAction(shareAction)
+
+
         
         let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler: {
             (action: UIAlertAction!) in
             print("キャンセルをタップした時の処理")
         })
         // アクションを追加.
-        actionAlert.addAction(commentAction)
-        actionAlert.addAction(shareAction)
-        actionAlert.addAction(editTagAction)
-        actionAlert.addAction(addAlbumAction)
-        actionAlert.addAction(reportAction)
-        actionAlert.addAction(otherAction)
         actionAlert.addAction(cancelAction)
         
         self.present(actionAlert, animated: true, completion: nil)

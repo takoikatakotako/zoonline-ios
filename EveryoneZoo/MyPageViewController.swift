@@ -22,8 +22,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let configThumbnails:NSArray = [UIImage(named:"mypage_notification_icon")!, UIImage(named:"mypage_share_icon")!,UIImage(named:"tab_kabi")!]
     
     let ARRAY_MYPAGE_SCTION_TITLE: NSArray = ["ユーザー情報", "設定・その他", "ログアウト"]
-    let ARRAY_MYPAGE_USER_INFOS: NSArray = ["投稿","フォロー", "いいね", "クリップ"]
-    let ARRAY_MYPAGE_CONFIS: NSArray = ["お問い合わせ","シェアの設定", "Web連携"]
+    let ARRAY_MYPAGE_USER_INFOS: NSArray = ["投稿","フレンズ", "フォロワー", "お気に入り"]
+    let ARRAY_MYPAGE_CONFIS: NSArray = ["お問い合わせ","シェア"]
     
     // Sectionで使用する配列を定義する.
     override func viewDidLoad() {
@@ -158,6 +158,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             switch indexPath.row {
             case 0:
+                
                 let vc:MyPagePostViewController = MyPagePostViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             break
