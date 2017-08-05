@@ -13,6 +13,7 @@
 		8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */; };
 		8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */; };
 		8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4591E8031800008D997 /* ZooListViewController.swift */; };
+		8D104D391F364D24007F1AF1 /* FriendsFollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D104D381F364D24007F1AF1 /* FriendsFollowTableViewCell.swift */; };
 		8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */; };
 		8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586711ED848F400802F54 /* UserInfoViewController.swift */; };
 		8D1586741ED8565300802F54 /* FollowUserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586731ED8565300802F54 /* FollowUserButton.swift */; };
@@ -92,6 +93,7 @@
 		8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityLibrary.swift; sourceTree = "<group>"; };
 		8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		8D0FB4591E8031800008D997 /* ZooListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZooListViewController.swift; sourceTree = "<group>"; };
+		8D104D381F364D24007F1AF1 /* FriendsFollowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsFollowTableViewCell.swift; sourceTree = "<group>"; };
 		8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		8D1586711ED848F400802F54 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		8D1586731ED8565300802F54 /* FollowUserButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowUserButton.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				8D46EFBB1F2DEC3100FFD8D7 /* MyPagePostCell.swift */,
+				8D104D381F364D24007F1AF1 /* FriendsFollowTableViewCell.swift */,
 			);
 			name = MyPageCustumCell;
 			sourceTree = "<group>";
@@ -735,6 +738,7 @@
 				8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */,
 				8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */,
 				8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */,
+				8D104D391F364D24007F1AF1 /* FriendsFollowTableViewCell.swift in Sources */,
 				8D5121271F0EAB8100C6D774 /* ProfielViewController.swift in Sources */,
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,

@@ -84,7 +84,7 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self))! as UITableViewCell
-        cell.textLabel?.text = self.myItems[indexPath.row] as? String
+        //cell.textLabel?.text = self.myItems[indexPath.row] as? String
         return cell
     }
     
