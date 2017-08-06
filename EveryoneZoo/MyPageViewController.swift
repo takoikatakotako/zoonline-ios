@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import SwiftShareBubbles
-
-
 
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 

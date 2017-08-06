@@ -13,12 +13,10 @@ class MyPageFollowViewController: UIViewController,UITableViewDelegate, UITableV
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var tableViewHeight:CGFloat!
     
     //テーブルビューインスタンス
-    private var myTableViews: UITableView!
-    
-    //テーブルビューに表示する配列
-    private var myItems: NSArray = []
+    private var friendsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,32 +24,36 @@ class MyPageFollowViewController: UIViewController,UITableViewDelegate, UITableV
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        
+        tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_TABBAR_HEIGHT)
+
         self.view.backgroundColor = UIColor.white
         
         setNavigationBar()
         
-        
-        //テーブルビューに表示する配列
-        myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
-        
-        
         //テーブルビューの初期化
-        myTableViews = UITableView()
-        
-        //デリゲートの設定
-        myTableViews.delegate = self
-        myTableViews.dataSource = self
-        
-        //テーブルビューの大きさの指定
-        myTableViews.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
-        
-        //テーブルビューの設置
-        myTableViews.register(FriendsFollowTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(FriendsFollowTableViewCell.self))
-        myTableViews.rowHeight = viewWidth*0.4
-        self.view.addSubview(myTableViews)
+        friendsTableView = UITableView()
+        friendsTableView.delegate = self
+        friendsTableView.dataSource = self
+        friendsTableView.separatorStyle = .none
+        friendsTableView.allowsSelection = false
+        friendsTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
+        friendsTableView.delaysContentTouches = true
+        friendsTableView.canCancelContentTouches = true
+
+        friendsTableView.register(FriendsFollowTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(FriendsFollowTableViewCell.self))
+        friendsTableView.rowHeight = viewWidth*0.4
+        self.view.addSubview(friendsTableView)
     }
 
+    
+    //basicボタンが押されたら呼ばれます
+    func userBtnClicked(sender: UIButton){
+        print("basicButtonBtnClicked")
+        print(sender.tag)
+    }
+    
+    
+    
     // MARK: - Viewにパーツの設置
     // MARK: ナビゲーションバーの設定
     func setNavigationBar() {
@@ -78,9 +80,17 @@ class MyPageFollowViewController: UIViewController,UITableViewDelegate, UITableV
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(FriendsFollowTableViewCell.self))! as UITableViewCell
+        let cell:FriendsFollowTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(FriendsFollowTableViewCell.self))! as! FriendsFollowTableViewCell
 
-        //cell.textLabel?.text = self.myItems[indexPath.row] as? String
+
+        cell.userBtnLeft.addTarget(self, action: #selector(userBtnClicked(sender:)), for:.touchUpInside)
+        cell.userBtnCenter.addTarget(self, action: #selector(userBtnClicked(sender:)), for:.touchUpInside)
+        cell.userBtnRight.addTarget(self, action: #selector(userBtnClicked(sender:)), for:.touchUpInside)
+        
+        cell.userBtnLeft.tag = indexPath.row*3
+        cell.userBtnCenter.tag = indexPath.row*3+1
+        cell.userBtnRight.tag = indexPath.row*3+2
+
         return cell
     }
     

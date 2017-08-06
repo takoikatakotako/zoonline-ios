@@ -171,7 +171,6 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     }
     
     
-    
     // MARK: - ナビゲーションバーのアクション
     internal func leftBarBtnClicked(sender: UIButton){
         print("leftBarBtnClicked")

@@ -55,7 +55,7 @@ class MyPagePostCell: UITableViewCell {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         //titleLabel.backgroundColor = UIColor.red
         
-        dateLabel.frame = CGRect(x: cellWidth*0.7, y: cellHeight*0.15, width: cellWidth*0.3, height: 10)
+        dateLabel.frame = CGRect(x: cellWidth*0.7, y: cellHeight*0.15, width: cellWidth*0.3, height: 0)
         dateLabel.text = "2017年7月30日"
         dateLabel.sizeToFit()
         dateLabel.font = UIFont.systemFont(ofSize: 12)

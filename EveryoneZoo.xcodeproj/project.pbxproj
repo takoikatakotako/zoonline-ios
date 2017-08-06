@@ -225,6 +225,7 @@
 		8D5121251F0D405B00C6D774 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */,
 				8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */,
 				8DDAF0DC1ED184790079D443 /* MyPageFollowViewController.swift */,
 				8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */,
@@ -257,7 +258,6 @@
 				8D6215AC1EC3689600593E55 /* MyPageViewController.swift */,
 				8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */,
 				8D5121251F0D405B00C6D774 /* UserInfo */,
-				8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */,
 				8D7CDC381F14DD9500C3844E /* EditUserInfo */,
 			);
 			name = MyPage;

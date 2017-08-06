@@ -19,10 +19,12 @@ class UserBtn: UIButton {
         //アイコン
         iconImgView = UIImageView()
         iconImgView.image = UIImage(named:"action")
+        iconImgView.isUserInteractionEnabled = false
         self.addSubview(iconImgView)
         
         //ユーザー名
         userNameLabel = UILabel()
+        userNameLabel.isUserInteractionEnabled = false
         self.addSubview(userNameLabel)
     }
     
@@ -51,16 +53,16 @@ class UserBtn: UIButton {
 class FriendsFollowTableViewCell: UITableViewCell {
 
     //icons
-    var baseViewLeft:UserBtn! = UserBtn()
-    var baseViewCenter:UserBtn! = UserBtn()
-    var baseViewRight:UserBtn! = UserBtn()
+    var userBtnLeft:UserBtn! = UserBtn()
+    var userBtnCenter:UserBtn! = UserBtn()
+    var userBtnRight:UserBtn! = UserBtn()
 
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.contentView.addSubview(baseViewLeft)
-        self.contentView.addSubview(baseViewCenter)
-        self.contentView.addSubview(baseViewRight)
+        self.contentView.addSubview(userBtnLeft)
+        self.contentView.addSubview(userBtnCenter)
+        self.contentView.addSubview(userBtnRight)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -76,9 +78,9 @@ class FriendsFollowTableViewCell: UITableViewCell {
         
         let cellWidth:CGFloat = self.frame.size.width
         let cellHeight:CGFloat = self.frame.size.height
-      
-        baseViewLeft.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.05, width: cellWidth*0.3, height: cellHeight*0.9)
-        baseViewCenter.frame = CGRect(x: cellWidth*0.35, y: cellHeight*0.05, width: cellWidth*0.3, height: cellHeight*0.9)
-        baseViewRight.frame = CGRect(x: cellWidth*0.65, y: cellHeight*0.05, width: cellWidth*0.3, height: cellHeight*0.9)
+        
+        userBtnLeft.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.05, width: cellWidth*0.3, height: cellHeight*0.9)
+        userBtnCenter.frame = CGRect(x: cellWidth*0.35, y: cellHeight*0.05, width: cellWidth*0.3, height: cellHeight*0.9)
+        userBtnRight.frame = CGRect(x: cellWidth*0.65, y: cellHeight*0.05, width: cellWidth*0.3, height: cellHeight*0.9)
     }
 }

@@ -13,15 +13,10 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
-    
+    private var tableViewHeight:CGFloat!
     
     //テーブルビューインスタンス
-    private var myTableView: UITableView!
-    
-    //テーブルビューに表示する配列
-    private var myItems: NSArray = []
-    
-    
+    private var postListTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,32 +24,22 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
+        tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_TABBAR_HEIGHT)
         
         self.view.backgroundColor = UIColor.white
 
         setNavigationBar()
         
-        //テーブルビューに表示する配列
-        myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
-        
-        
-        //テーブルビューの初期化
-        myTableView = UITableView()
-        
-        //デリゲートの設定
-        myTableView.delegate = self
-        myTableView.dataSource = self
-        
-        //テーブルビューの大きさの指定
-        myTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
-        myTableView.rowHeight = viewWidth*0.28
+        postListTableView = UITableView()
+        postListTableView.delegate = self
+        postListTableView.dataSource = self
+        postListTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
+        postListTableView.rowHeight = viewWidth*0.28
         
         //テーブルビューの設置
-        myTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
-        self.view.addSubview(myTableView)
+        postListTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
+        self.view.addSubview(postListTableView)
     }
-    
-    
     
     // MARK: - Viewにパーツの設置
     // MARK: ナビゲーションバーの設定
@@ -77,14 +62,13 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return self.myItems.count
+        return 12
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self))! as UITableViewCell
-        //cell.textLabel?.text = self.myItems[indexPath.row] as? String
         return cell
     }
     
@@ -92,5 +76,4 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
     }
-
 }
