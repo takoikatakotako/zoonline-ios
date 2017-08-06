@@ -14,14 +14,11 @@ class MyPageFollowViewController: UIViewController,UITableViewDelegate, UITableV
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
     
-    
     //テーブルビューインスタンス
-    private var myTableView: UITableView!
+    private var myTableViews: UITableView!
     
     //テーブルビューに表示する配列
     private var myItems: NSArray = []
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,18 +37,19 @@ class MyPageFollowViewController: UIViewController,UITableViewDelegate, UITableV
         
         
         //テーブルビューの初期化
-        myTableView = UITableView()
+        myTableViews = UITableView()
         
         //デリゲートの設定
-        myTableView.delegate = self
-        myTableView.dataSource = self
+        myTableViews.delegate = self
+        myTableViews.dataSource = self
         
         //テーブルビューの大きさの指定
-        myTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
+        myTableViews.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
         
         //テーブルビューの設置
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        self.view.addSubview(myTableView)
+        myTableViews.register(FriendsFollowTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(FriendsFollowTableViewCell.self))
+        myTableViews.rowHeight = viewWidth*0.4
+        self.view.addSubview(myTableViews)
     }
 
     // MARK: - Viewにパーツの設置
@@ -74,14 +72,15 @@ class MyPageFollowViewController: UIViewController,UITableViewDelegate, UITableV
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return self.myItems.count
+        return 8
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.textLabel?.text = self.myItems[indexPath.row] as? String
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(FriendsFollowTableViewCell.self))! as UITableViewCell
+
+        //cell.textLabel?.text = self.myItems[indexPath.row] as? String
         return cell
     }
     
