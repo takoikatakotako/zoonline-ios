@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import SwiftShareBubbles
+
+
 
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -24,7 +27,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let ARRAY_MYPAGE_SCTION_TITLE: NSArray = ["ユーザー情報", "設定・その他", "ログアウト"]
     let ARRAY_MYPAGE_USER_INFOS: NSArray = ["投稿","フレンズ", "フォロワー", "お気に入り"]
     let ARRAY_MYPAGE_CONFIS: NSArray = ["お問い合わせ","シェア"]
-    
+        
     // Sectionで使用する配列を定義する.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,9 +159,9 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if indexPath.section == 0 {
             
+            //ユーザー情報
             switch indexPath.row {
             case 0:
-                
                 let vc:MyPagePostViewController = MyPagePostViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             break
@@ -176,16 +179,29 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 break
             default:
                 break
-                
             }
-            
             print("Value: \(ARRAY_MYPAGE_USER_INFOS[indexPath.row])")
         } else if indexPath.section == 1 {
-            print("Value: \(ARRAY_MYPAGE_CONFIS[indexPath.row])")
-            let contactView:WebViewController = WebViewController()
-            contactView.url = CONTACT_PAGE_URL_STRING
-            contactView.navTitle = "お問い合わせ"
-            self.present(contactView, animated: true, completion: nil)
+            
+            //設定、その他
+            switch indexPath.row {
+            case 0:
+                //contact
+                print("Value: \(ARRAY_MYPAGE_CONFIS[indexPath.row])")
+                let contactView:WebViewController = WebViewController()
+                contactView.url = CONTACT_PAGE_URL_STRING
+                contactView.navTitle = "お問い合わせ"
+                self.present(contactView, animated: true, completion: nil)
+                break
+            case 1:
+                //ShareBubbles
+                break
+            default:
+                break
+            }
+        }else if indexPath.section == 2 {
+            //login
+        
         }else{
         
         
@@ -193,6 +209,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    
     
     // MARK: - アクションの設定
     

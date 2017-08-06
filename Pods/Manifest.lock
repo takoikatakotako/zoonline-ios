@@ -8,6 +8,7 @@ PODS:
   - SDWebImage/GIF (4.0.0):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - SwiftShareBubbles (0.1.1)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - AlamofireImage (~> 3.1)
   - SCLAlertView
   - SDWebImage/GIF
+  - SwiftShareBubbles
   - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -23,8 +25,9 @@ SPEC CHECKSUMS:
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SwiftShareBubbles: 21dd0e1dd6d2b8386f2816d49e51399859798b48
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 0eee618ed8816c281c3904877ac38d20d3ff718e
+PODFILE CHECKSUM: aa1e84b559c369ef3b884029a80df1c41090ac84
 
 COCOAPODS: 1.2.0

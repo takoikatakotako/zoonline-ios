@@ -78,9 +78,7 @@ class FriendsFollowTableViewCell: UITableViewCell {
         let cellHeight:CGFloat = self.frame.size.height
       
         baseViewLeft.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.05, width: cellWidth*0.3, height: cellHeight*0.9)
-        
         baseViewCenter.frame = CGRect(x: cellWidth*0.35, y: cellHeight*0.05, width: cellWidth*0.3, height: cellHeight*0.9)
-        
         baseViewRight.frame = CGRect(x: cellWidth*0.65, y: cellHeight*0.05, width: cellWidth*0.3, height: cellHeight*0.9)
     }
 }
