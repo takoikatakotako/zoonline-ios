@@ -27,6 +27,8 @@
 		8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215AC1EC3689600593E55 /* MyPageViewController.swift */; };
 		8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D6888781E9E7C2E00140508 /* Localizable.strings */; };
 		8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */; };
+		8D7343631F3A1CB700EB232E /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7343621F3A1CB700EB232E /* NewsListViewController.swift */; };
+		8D7343651F3A1D5D00EB232E /* OfficialListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7343641F3A1D5D00EB232E /* OfficialListViewController.swift */; };
 		8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */; };
 		8D73B42A1E7AE08F00E3B301 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B4281E7AE08F00E3B301 /* Main.storyboard */; };
 		8D73B42C1E7AE08F00E3B301 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */; };
@@ -111,6 +113,8 @@
 		8D68887C1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8D68887D1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiLibrary.swift; sourceTree = "<group>"; };
+		8D7343621F3A1CB700EB232E /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
+		8D7343641F3A1D5D00EB232E /* OfficialListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficialListViewController.swift; sourceTree = "<group>"; };
 		8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneZoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D73B4291E7AE08F00E3B301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -354,6 +358,8 @@
 			isa = PBXGroup;
 			children = (
 				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
+				8D7343621F3A1CB700EB232E /* NewsListViewController.swift */,
+				8D7343641F3A1D5D00EB232E /* OfficialListViewController.swift */,
 			);
 			name = Zoo;
 			sourceTree = "<group>";
@@ -729,6 +735,7 @@
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
 				8D46EFBC1F2DEC3100FFD8D7 /* MyPagePostCell.swift in Sources */,
 				8D9DE17A1EE3EA3900121FC1 /* FavCommentButton.swift in Sources */,
+				8D7343651F3A1D5D00EB232E /* OfficialListViewController.swift in Sources */,
 				8DC719111F08A580003C5E00 /* PostTextsTableViewCell.swift in Sources */,
 				8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */,
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
@@ -742,6 +749,7 @@
 				8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */,
 				8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */,
 				8D104D391F364D24007F1AF1 /* FriendsFollowTableViewCell.swift in Sources */,
+				8D7343631F3A1CB700EB232E /* NewsListViewController.swift in Sources */,
 				8D5121271F0EAB8100C6D774 /* ProfielViewController.swift in Sources */,
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
