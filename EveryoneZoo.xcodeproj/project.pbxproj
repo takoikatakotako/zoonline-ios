@@ -22,6 +22,7 @@
 		8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113E1EEED5E6004BA744 /* LoginViewController.swift */; };
 		8D46EFBC1F2DEC3100FFD8D7 /* MyPagePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D46EFBB1F2DEC3100FFD8D7 /* MyPagePostCell.swift */; };
 		8D5121271F0EAB8100C6D774 /* ProfielViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5121261F0EAB8100C6D774 /* ProfielViewController.swift */; };
+		8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D53FD611F375DA800809E7F /* FollowerListViewController.swift */; };
 		8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */; };
 		8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215AC1EC3689600593E55 /* MyPageViewController.swift */; };
 		8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D6888781E9E7C2E00140508 /* Localizable.strings */; };
@@ -56,7 +57,7 @@
 		8DC719191F08FDA5003C5E00 /* TagListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC719181F08FDA5003C5E00 /* TagListTableViewCell.swift */; };
 		8DD1C2BD1EDDD4A40008FE14 /* PostDraftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD1C2BC1EDDD4A40008FE14 /* PostDraftTableViewCell.swift */; };
 		8DDAF0DB1ED183E00079D443 /* MyPagePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */; };
-		8DDAF0DD1ED184790079D443 /* MyPageFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DC1ED184790079D443 /* MyPageFollowViewController.swift */; };
+		8DDAF0DD1ED184790079D443 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */; };
 		8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */; };
 		8DE541771EFAB3010085F916 /* NewResistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE541761EFAB3010085F916 /* NewResistViewController.swift */; };
 		8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */; };
@@ -102,6 +103,7 @@
 		8D35113E1EEED5E6004BA744 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D46EFBB1F2DEC3100FFD8D7 /* MyPagePostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPagePostCell.swift; sourceTree = "<group>"; };
 		8D5121261F0EAB8100C6D774 /* ProfielViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfielViewController.swift; sourceTree = "<group>"; };
+		8D53FD611F375DA800809E7F /* FollowerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
 		8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPartsSize.swift; sourceTree = "<group>"; };
 		8D6215AC1EC3689600593E55 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		8D6888771E9E7C2E00140508 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -145,7 +147,7 @@
 		8DC719181F08FDA5003C5E00 /* TagListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListTableViewCell.swift; sourceTree = "<group>"; };
 		8DD1C2BC1EDDD4A40008FE14 /* PostDraftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDraftTableViewCell.swift; sourceTree = "<group>"; };
 		8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPagePostViewController.swift; sourceTree = "<group>"; };
-		8DDAF0DC1ED184790079D443 /* MyPageFollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageFollowViewController.swift; sourceTree = "<group>"; };
+		8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageFavoriteViewController.swift; sourceTree = "<group>"; };
 		8DE541761EFAB3010085F916 /* NewResistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewResistViewController.swift; sourceTree = "<group>"; };
 		8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -227,8 +229,9 @@
 			children = (
 				8DB4FD381ECD21D7008F560D /* MyPageProfilelViewController.swift */,
 				8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */,
-				8DDAF0DC1ED184790079D443 /* MyPageFollowViewController.swift */,
+				8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */,
 				8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */,
+				8D53FD611F375DA800809E7F /* FollowerListViewController.swift */,
 			);
 			name = UserInfo;
 			sourceTree = "<group>";
@@ -745,6 +748,7 @@
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
 				8DC7190D1F08A0F3003C5E00 /* PostImageTableViewCell.swift in Sources */,
 				8D7CDC3C1F14F12D00C3844E /* NavigationBarLabel.swift in Sources */,
+				8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */,
 				8D9DE17E1EE4145E00121FC1 /* NetWorkManager.swift in Sources */,
 				8D9DE17C1EE3F5B500121FC1 /* MenuButton.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */,
@@ -753,7 +757,7 @@
 				8DC719191F08FDA5003C5E00 /* TagListTableViewCell.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
 				8D9DE1811EE41D6E00121FC1 /* EveryZooConfig.swift in Sources */,
-				8DDAF0DD1ED184790079D443 /* MyPageFollowViewController.swift in Sources */,
+				8DDAF0DD1ED184790079D443 /* FriendsListViewController.swift in Sources */,
 				8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */,
 				8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */,
 				8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */,

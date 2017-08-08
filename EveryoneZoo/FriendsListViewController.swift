@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyPageFollowViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class FriendsListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
     //width, height
     private var viewWidth:CGFloat!

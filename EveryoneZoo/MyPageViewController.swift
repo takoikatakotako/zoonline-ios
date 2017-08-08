@@ -159,20 +159,24 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //ユーザー情報
             switch indexPath.row {
             case 0:
+                //投稿一覧
                 let vc:MyPagePostViewController = MyPagePostViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             break
             case 1:
-                let vc:MyPageFollowViewController = MyPageFollowViewController()
+                //フレンズ一覧
+                let vc:FriendsListViewController = FriendsListViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 break
             case 2:
-                //設定その他
-                let vc:MyPageFavoriteViewController = MyPageFavoriteViewController()
+                //フォロワー一覧
+                let vc:FollowerListViewController = FollowerListViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 break
             case 3:
-                //ログアウト
+                //お気に入り
+                let vc:MyPageFavoriteViewController = MyPageFavoriteViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
                 break
             default:
                 break
