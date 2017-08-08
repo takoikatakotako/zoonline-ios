@@ -9,27 +9,32 @@
 import UIKit
 
 class ZooListViewController: UIViewController {
+    
+    //width, height
+    private var viewWidth:CGFloat!
+    private var viewHeight:CGFloat!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Viewの大きさを取得
+        viewWidth = self.view.frame.size.width
+        viewHeight = self.view.frame.size.height
 
-        // Do any additional setup after loading the view.
+        setNavigationBar()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    // MARK: - Viewにパーツの設置
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: ステータスバー背景
+    func setNavigationBar() {
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.isTranslucent = false
+        
+        //ナビゲーションアイテムを作成
+        let titleLabel:NavigationBarLabel = NavigationBarLabel(frame: CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR))
+        titleLabel.text = "オフィシャル"
+        self.navigationItem.titleView = titleLabel
     }
-    */
 
 }

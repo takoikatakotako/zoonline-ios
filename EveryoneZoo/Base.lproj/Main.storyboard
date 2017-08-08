@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dco-yk-reu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dco-yk-reu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -97,10 +97,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="動物園" image="tab_notice" id="5BP-NF-QO9"/>
+                    <navigationItem key="navigationItem" id="dck-8Y-nnt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMx-Jh-jJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="222" y="729"/>
+            <point key="canvasLocation" x="546" y="668"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="YbU-BC-YTG">
+            <objects>
+                <navigationController id="VYI-yt-Prc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="eWF-y8-Vhs"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6PY-hK-Y2F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qKR-ST-zao" kind="relationship" relationship="rootViewController" id="Fko-m2-wMi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uc3-CL-FbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-700" y="668"/>
         </scene>
         <!--タイムライン-->
         <scene sceneID="CF8-bu-fGL">
@@ -192,7 +210,7 @@
                         <segue destination="KG4-ab-G7O" kind="relationship" relationship="viewControllers" id="1mK-7E-g06"/>
                         <segue destination="q0l-de-MK4" kind="relationship" relationship="viewControllers" id="6n0-4J-hzW"/>
                         <segue destination="VdR-G2-gEF" kind="relationship" relationship="viewControllers" id="MFm-9n-EqA"/>
-                        <segue destination="qKR-ST-zao" kind="relationship" relationship="viewControllers" id="iy4-rn-0GJ"/>
+                        <segue destination="VYI-yt-Prc" kind="relationship" relationship="viewControllers" id="yie-qy-Tg3"/>
                         <segue destination="8n0-Kd-oaH" kind="relationship" relationship="viewControllers" id="66W-xR-QqZ"/>
                     </connections>
                 </tabBarController>
