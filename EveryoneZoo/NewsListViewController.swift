@@ -29,7 +29,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         super.viewDidLoad()
         
         //テーブルビューに表示する配列
-        myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
+        myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし", "すいか", "もも", "さくらんぼ", "ぶどう", "なし", "すいか", "もも", "さくらんぼ", "ぶどう", "なし", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
         
         //Viewの大きさを取得
         let viewWidth = self.view.frame.size.width

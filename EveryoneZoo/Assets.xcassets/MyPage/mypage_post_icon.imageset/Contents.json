@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "mypage_post_icon.png",
+      "filename" : "submit.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "submit@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "submit@3x.png",
       "scale" : "3x"
     }
   ],

@@ -20,6 +20,7 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
     private var viewHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
     
     //view parts
     private var pictureTableView: UITableView!
@@ -44,8 +45,10 @@ class FieldViewController: UIViewController,UIScrollViewDelegate,UITableViewDele
         //画面横サイズを取得
         self.viewWidth = self.view.frame.width
         self.viewHeight = self.view.frame.height
+        let statusBarHeight:CGFloat = (self.navigationController?.navigationBar.frame.origin.y)!
         self.navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
-        self.tableViewHeight = viewHeight-(navigationBarHeight+PARTS_HEIGHT_SEGMENT_BAR+PARTS_TABBAR_HEIGHT)
+        self.tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+        self.tableViewHeight = viewHeight-(navigationBarHeight+statusBarHeight+tabBarHeight)
         
         //views
         setNavigationBar()
