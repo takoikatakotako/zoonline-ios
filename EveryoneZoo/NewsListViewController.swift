@@ -14,54 +14,52 @@ protocol SampleDelegate: class  {
 
 class NewsListViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource {
 
+    //
+    var viewWidth:CGFloat!
+    var viewHeight:CGFloat!
+    var statusBarHeight:CGFloat!
+    var navigationBarHeight:CGFloat!
+    var pageMenuHeight:CGFloat!
+    var tabBarHeight:CGFloat!
+    private var tableViewHeight:CGFloat!
     
+
     //delegate
     weak var delegate: SampleDelegate?
     
     
     //テーブルビューインスタンス
-    private var myTableView: UITableView!
+    private var newsTableView: UITableView!
     
-    //テーブルビューに表示する配列
-    private var myItems: NSArray = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //テーブルビューに表示する配列
-        myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし", "すいか", "もも", "さくらんぼ", "ぶどう", "なし", "すいか", "もも", "さくらんぼ", "ぶどう", "なし", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
-        
         //Viewの大きさを取得
-        let viewWidth = self.view.frame.size.width
-        let viewHeight = self.view.frame.size.height
+        viewWidth = self.view.frame.size.width
+        viewHeight = self.view.frame.size.height
+        tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+pageMenuHeight+tabBarHeight)
         
         //テーブルビューの初期化
-        myTableView = UITableView()
-        
-        //デリゲートの設定
-        myTableView.delegate = self
-        myTableView.dataSource = self
-        
-        //テーブルビューの大きさの指定
-        myTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
-        
-        //テーブルビューの設置
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        self.view.addSubview(myTableView)
-        
+        newsTableView = UITableView()
+        newsTableView.delegate = self
+        newsTableView.dataSource = self
+        newsTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
+        newsTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
+        newsTableView.rowHeight = viewWidth*0.28
+        self.view.addSubview(newsTableView)
     }
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return self.myItems.count
+        return 13
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.textLabel?.text = self.myItems[indexPath.row] as? String
+        let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         return cell
     }
     
@@ -72,11 +70,5 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         
         //デリゲートを用いて初めのViewの色をランダムに変える
         delegate?.changeBackgroundColor(color: UIColor.red)
-        /*
-        let contactView:WebViewController = WebViewController()
-        contactView.url = CONTACT_PAGE_URL_STRING
-        contactView.navTitle = "お問い合わせ"
-        self.present(contactView, animated: true, completion: nil)
- */
     }
 }

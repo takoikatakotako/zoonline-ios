@@ -9,12 +9,13 @@
 import UIKit
 import PageMenu
 
-class ZooListViewController: UIViewController,SampleDelegate {
+class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegate {
     
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
+    private var pageMenuHeight:CGFloat!
     private var contentsViewHeight:CGFloat!
     private var tabBarHeight:CGFloat!
     
@@ -29,6 +30,7 @@ class ZooListViewController: UIViewController,SampleDelegate {
         viewHeight = self.view.frame.size.height
         let statusBarHeight:CGFloat = (self.navigationController?.navigationBar.frame.origin.y)!
         navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        pageMenuHeight = navigationBarHeight
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
         contentsViewHeight = viewHeight
         print(contentsViewHeight)
@@ -40,30 +42,46 @@ class ZooListViewController: UIViewController,SampleDelegate {
         let controller : NewsListViewController = NewsListViewController()
         controller.title = "ニュース"
         controller.delegate = self
+        controller.statusBarHeight = statusBarHeight
+        controller.navigationBarHeight = navigationBarHeight
+        controller.tabBarHeight = tabBarHeight
+        controller.pageMenuHeight = pageMenuHeight
         controllerArray.append(controller)
         
         let controller2 : OfficialListViewController = OfficialListViewController()
         controller2.title = "編集部頼り"
         controllerArray.append(controller2)
         
+        
         let parameters: [CAPSPageMenuOption] = [
-            .scrollMenuBackgroundColor(UIColor.gray),
-            .viewBackgroundColor(UIColor.gray),
+            .scrollMenuBackgroundColor(UIColor.white),
             .menuItemSeparatorWidth(4),
+            .menuHeight(pageMenuHeight),
             .useMenuLikeSegmentedControl(true),
             .menuItemSeparatorPercentageHeight(0.1),
             .bottomMenuHairlineColor(UIColor.blue),
             .selectionIndicatorColor(UIColor.segmetRightBlue()),
             .selectedMenuItemLabelColor(UIColor.mainAppColor()),
-            .unselectedMenuItemLabelColor(UIColor.green)
+            .menuItemFont(UIFont.boldSystemFont(ofSize: 16)),
+            .unselectedMenuItemLabelColor(UIColor.gray)
         ]
         
         // Initialize page menu with controller array, frame, and optional parameters
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: 0, width: viewWidth, height: contentsViewHeight), pageMenuOptions: parameters)
         pageMenu!.view.backgroundColor = UIColor.white
+        pageMenu!.delegate = self
 
         self.view.addSubview(pageMenu!.view)
     }
+    
+    func willMoveToPage(_ controller: UIViewController, index: Int){
+    
+    }
+    
+    func didMoveToPage(_ controller: UIViewController, index: Int){}
+    
+    
+    
     // MARK: - Viewにパーツの設置
     func setNavigationBar() {
         
