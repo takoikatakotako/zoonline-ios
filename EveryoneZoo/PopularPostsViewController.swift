@@ -13,8 +13,15 @@ import AlamofireImage
 import SwiftyJSON
 import SDWebImage
 
-class PopularPostViewController: UIViewController,UITableViewDelegate, UITableViewDataSource  {
+protocol PopularPostsDelegate: class  {
+    func goDetailView(postID:Int)
+}
 
+class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource  {
+
+    //delegate
+    weak var delegate: NewPostsDelegate?
+    
     //width, height
     var viewWidth:CGFloat!
     var viewHeight:CGFloat!
@@ -220,18 +227,7 @@ class PopularPostViewController: UIViewController,UITableViewDelegate, UITableVi
     func tapSingle(sender: UITapGestureRecognizer) {
         print(sender.view?.tag ?? 400)
         
-        //ナビゲーションバーの高さを元に戻す
-        /*
-         self.tableViewHeight  = self.viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_SEGMENT_BAR+PARTS_TABBAR_HEIGHT)
-         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR, width: self.viewWidth, height: self.navigationBarHeight)
-         self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: PARTS_HEIGHT_SEGMENT_BAR)
-         self.pictureTableView.frame = CGRect(x: 0, y: PARTS_HEIGHT_SEGMENT_BAR, width: self.viewWidth, height: self.tableViewHeight)
-         */
-        
-        //画面遷移、投稿詳細画面へ
-        let picDetailView: PictureDetailViewController = PictureDetailViewController()
-        picDetailView.postID = sender.view?.tag
-        self.navigationController?.pushViewController(picDetailView, animated: true)
+        delegate?.goDetailView(postID: sender.view?.tag ?? 400)
     }
     
     func scrollReflesh(sender : UIRefreshControl) {

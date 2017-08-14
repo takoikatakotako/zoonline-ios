@@ -9,11 +9,12 @@
 import UIKit
 import PageMenu
 
-class FieldViewController: UIViewController,CAPSPageMenuDelegate {
+class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelegate, PopularPostsDelegate{
     
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
     private var pageMenuHeight:CGFloat!
     private var contentsViewHeight:CGFloat!
@@ -28,53 +29,17 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate {
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        let statusBarHeight:CGFloat = (self.navigationController?.navigationBar.frame.origin.y)!
+        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
         navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
         pageMenuHeight = navigationBarHeight
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
         contentsViewHeight = viewHeight
         print(contentsViewHeight)
+        
+        
         setNavigationBar()
+        setPageMenu()
         
-        // Array to keep track of controllers in page menu
-        var controllerArray : [UIViewController] = []
-        
-        let NewPostsVC : NewPostsViewController = NewPostsViewController()
-        NewPostsVC.title = "人気"
-        NewPostsVC.statusBarHeight = statusBarHeight
-        NewPostsVC.navigationBarHeight = navigationBarHeight
-        NewPostsVC.pageMenuHeight = pageMenuHeight
-        NewPostsVC.tabBarHeight = tabBarHeight
-        controllerArray.append(NewPostsVC)
-        
-        let PopularPostVC : PopularPostViewController = PopularPostViewController()
-        PopularPostVC.title = "新着"
-        PopularPostVC.statusBarHeight = statusBarHeight
-        PopularPostVC.navigationBarHeight = navigationBarHeight
-        PopularPostVC.pageMenuHeight = pageMenuHeight
-        PopularPostVC.tabBarHeight = tabBarHeight
-        controllerArray.append(PopularPostVC)
-        
-        
-        let parameters: [CAPSPageMenuOption] = [
-            .scrollMenuBackgroundColor(UIColor.white),
-            .menuItemSeparatorWidth(4),
-            .menuHeight(pageMenuHeight),
-            .useMenuLikeSegmentedControl(true),
-            .menuItemSeparatorPercentageHeight(0.1),
-            .bottomMenuHairlineColor(UIColor.blue),
-            .selectionIndicatorColor(UIColor.segmetRightBlue()),
-            .selectedMenuItemLabelColor(UIColor.mainAppColor()),
-            .menuItemFont(UIFont.boldSystemFont(ofSize: 16)),
-            .unselectedMenuItemLabelColor(UIColor.gray)
-        ]
-        
-        // Initialize page menu with controller array, frame, and optional parameters
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: 0, width: viewWidth, height: contentsViewHeight), pageMenuOptions: parameters)
-        pageMenu!.view.backgroundColor = UIColor.white
-        pageMenu!.delegate = self
-        
-        self.view.addSubview(pageMenu!.view)
     }
     
     
@@ -99,5 +64,58 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate {
         titleLabel.text = "ひろば"
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
+    }
+    
+    func setPageMenu() {
+        
+        // Array to keep track of controllers in page menu
+        var controllerArray : [UIViewController] = []
+        
+        let NewPostsVC : NewPostsViewController = NewPostsViewController()
+        NewPostsVC.title = "人気"
+        NewPostsVC.delegate = self
+        NewPostsVC.statusBarHeight = statusBarHeight
+        NewPostsVC.navigationBarHeight = navigationBarHeight
+        NewPostsVC.pageMenuHeight = pageMenuHeight
+        NewPostsVC.tabBarHeight = tabBarHeight
+        controllerArray.append(NewPostsVC)
+        
+        let PopularPostsVC : PopularPostsViewController = PopularPostsViewController()
+        PopularPostsVC.title = "新着"
+        PopularPostsVC.delegate = self
+        PopularPostsVC.statusBarHeight = statusBarHeight
+        PopularPostsVC.navigationBarHeight = navigationBarHeight
+        PopularPostsVC.pageMenuHeight = pageMenuHeight
+        PopularPostsVC.tabBarHeight = tabBarHeight
+        controllerArray.append(PopularPostsVC)
+        
+        
+        let parameters: [CAPSPageMenuOption] = [
+            .scrollMenuBackgroundColor(UIColor.white),
+            .menuItemSeparatorWidth(4),
+            .menuHeight(pageMenuHeight),
+            .useMenuLikeSegmentedControl(true),
+            .menuItemSeparatorPercentageHeight(0.1),
+            .bottomMenuHairlineColor(UIColor.blue),
+            .selectionIndicatorColor(UIColor.segmetRightBlue()),
+            .selectedMenuItemLabelColor(UIColor.mainAppColor()),
+            .menuItemFont(UIFont.boldSystemFont(ofSize: 16)),
+            .unselectedMenuItemLabelColor(UIColor.gray)
+        ]
+        
+        // Initialize page menu with controller array, frame, and optional parameters
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: 0, width: viewWidth, height: contentsViewHeight), pageMenuOptions: parameters)
+        pageMenu!.view.backgroundColor = UIColor.white
+        pageMenu!.delegate = self
+        
+        self.view.addSubview(pageMenu!.view)
+    }
+    
+    
+    func goDetailView(postID:Int) {
+        //画面遷移、投稿詳細画面へ
+        let picDetailView: PictureDetailViewController = PictureDetailViewController()
+        picDetailView.postID = postID
+        self.navigationController?.pushViewController(picDetailView, animated: true)
     }
 }
