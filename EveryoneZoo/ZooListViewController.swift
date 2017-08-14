@@ -12,15 +12,15 @@ import PageMenu
 class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegate {
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var pageMenuHeight:CGFloat!
+    var viewWidth:CGFloat!
+    var viewHeight:CGFloat!
+    var statusBarHeight:CGFloat!
+    var navigationBarHeight:CGFloat!
+    var pageMenuHeight:CGFloat!
+    var tabBarHeight:CGFloat!
     private var contentsViewHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
     
     var pageMenu : CAPSPageMenu?
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,7 +103,6 @@ class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegat
         titleLabel.text = "オフィシャル"
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
-        
     }
     
     //Delegateで呼ぶViewの背景色を変えるメソッド

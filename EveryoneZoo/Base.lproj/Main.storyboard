@@ -169,12 +169,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="sRh-Mt-6Re">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ZPz-2W-hgS"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="serchNavBtn" destination="ZPz-2W-hgS" id="pxF-Hm-2oV"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="sRh-Mt-6Re"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2v0-ld-uSS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,18 +13,23 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var navigationBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
+
     
     //テーブルビューインスタンス
     private var myPageTableView: UITableView!
     
-    let userInfoThumbnails:NSArray = [UIImage(named:"mypage_post_icon")!, UIImage(named:"mypage_follow_icon")!,UIImage(named:"mypage_favo_icon")!, UIImage(named:"mypage_clip_icon")!]
-    let configThumbnails:NSArray = [UIImage(named:"mypage_notification_icon")!, UIImage(named:"mypage_share_icon")!,UIImage(named:"tab_kabi")!]
-    
     let ARRAY_MYPAGE_SCTION_TITLE: NSArray = ["ユーザー情報", "設定・その他", "ログアウト"]
+    
+    let userInfoThumbnails:NSArray = [UIImage(named:"mypage_post")!, UIImage(named:"mypage_friends")!,UIImage(named:"mypage_follower")!, UIImage(named:"mypage_favorite")!]
     let ARRAY_MYPAGE_USER_INFOS: NSArray = ["投稿","フレンズ", "フォロワー", "お気に入り"]
+
+    let configThumbnails:NSArray = [UIImage(named:"mypage_contact")!, UIImage(named:"mypage_share")!]
     let ARRAY_MYPAGE_CONFIS: NSArray = ["お問い合わせ","シェア"]
-        
+
+    
     // Sectionで使用する配列を定義する.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +37,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+HEIGHT_USER_CELL + PARTS_TABBAR_HEIGHT)
+        let statusBarHeight:CGFloat = (self.navigationController?.navigationBar.frame.origin.y)!
+        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+        tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+HEIGHT_USER_CELL + tabBarHeight)
         
         self.view.backgroundColor = UIColor.MyPageTableBGColor()
         
@@ -45,7 +53,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - Viewにパーツの設置
 
-    // MARK: ステータスバー背景
     func setNavigationBar() {
         
         self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
@@ -143,7 +150,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.thumbnailImgView.image = configThumbnails[indexPath.row] as? UIImage
         } else if indexPath.section == 2{
             cell.textCellLabel.text =  "ログアウト"
-            cell.thumbnailImgView.image = UIImage(named:"sample_kabi1")
+            cell.thumbnailImgView.image = UIImage(named:"mypage_logout")
         }
         
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
