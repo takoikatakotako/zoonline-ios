@@ -14,6 +14,10 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
     //width,height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var statusBarHeight:CGFloat!
+    private var navigationBarHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
+
     var tableViewHeight:CGFloat!
     
     //view parts
@@ -28,9 +32,12 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         //画面横サイズを取得
         viewWidth = self.view.frame.width
         viewHeight = self.view.frame.height
-        
+        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
+        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+
         //スクロルビューの高さ計算
-        tableViewHeight = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_HEIGHT_SEGMENT_BAR+PARTS_TABBAR_HEIGHT)
+        tableViewHeight = viewHeight-(statusBarHeight+navigationBarHeight+navigationBarHeight+tabBarHeight)
         
         //Viewにパーツを追加
         setNavigationBarBar()
@@ -58,12 +65,12 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         //ステータスバー部分の背景
         let statusBackColor = UIView()
         statusBackColor.frame =
-            CGRect(x: 0, y: -(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR), width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR)
+            CGRect(x: 0, y: -(statusBarHeight+navigationBarHeight), width: viewWidth, height: navigationBarHeight)
         statusBackColor.backgroundColor = UIColor.mainAppColor()
         self.view.addSubview(statusBackColor)
         
         //UINavigationBarの位置とサイズを指定
-        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
         self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
         self.navigationController?.navigationBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -76,19 +83,19 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
     func setSegmentBar(){
         
         segmentView = UIView()
-        segmentView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: PARTS_HEIGHT_SEGMENT_BAR)
+        segmentView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: navigationBarHeight)
         segmentView.backgroundColor = UIColor.white
         self.view.addSubview(segmentView)
         
         //スクロールビューとの区切り線
         let segmentLine = UIView()
-        segmentLine.frame = CGRect(x: 0, y: PARTS_HEIGHT_SEGMENT_BAR - 2, width: viewWidth, height: 2)
+        segmentLine.frame = CGRect(x: 0, y: navigationBarHeight - 2, width: viewWidth, height: 2)
         segmentLine.backgroundColor = UIColor.gray
         segmentView.addSubview(segmentLine)
         
         //セグメントビューの左
         let segmentLeftBtn = UIButton()
-        segmentLeftBtn.frame = CGRect(x: viewWidth*0.03, y: PARTS_HEIGHT_SEGMENT_BAR*0.1, width: viewWidth*0.3, height: PARTS_HEIGHT_SEGMENT_BAR*0.7)
+        segmentLeftBtn.frame = CGRect(x: viewWidth*0.03, y: navigationBarHeight*0.1, width: viewWidth*0.3, height: navigationBarHeight*0.7)
         segmentLeftBtn.setTitle("すべて", for: UIControlState.normal)
         segmentLeftBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
         //segmentLeftBtn.backgroundColor = UIColor.blue
@@ -96,14 +103,14 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         
         //セグメントビューの真ん中
         let segmentCenterBtn = UIButton()
-        segmentCenterBtn.frame = CGRect(x: viewWidth*0.36, y: PARTS_HEIGHT_SEGMENT_BAR*0.1, width: viewWidth*0.3, height: PARTS_HEIGHT_SEGMENT_BAR*0.7)
+        segmentCenterBtn.frame = CGRect(x: viewWidth*0.36, y: navigationBarHeight*0.1, width: viewWidth*0.3, height: navigationBarHeight*0.7)
         segmentCenterBtn.setTitle("ユーザー", for: UIControlState.normal)
         segmentCenterBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
         segmentView.addSubview(segmentCenterBtn)
         
         //セグメントビューの右
         let segmentRightBtn = UIButton()
-        segmentRightBtn.frame = CGRect(x: viewWidth*0.69, y: PARTS_HEIGHT_SEGMENT_BAR*0.1, width: viewWidth*0.3, height: PARTS_HEIGHT_SEGMENT_BAR*0.7)
+        segmentRightBtn.frame = CGRect(x: viewWidth*0.69, y: navigationBarHeight*0.1, width: viewWidth*0.3, height: navigationBarHeight*0.7)
         segmentRightBtn.setTitle("タグ", for: UIControlState.normal)
         segmentRightBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
         //segmentRightBtn.backgroundColor = UIColor.blue
@@ -111,7 +118,7 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         
         //下線
         let leftUnderBar = UIView()
-        leftUnderBar.frame = CGRect(x: viewWidth*0.05, y: PARTS_HEIGHT_SEGMENT_BAR*0.1, width: viewWidth*0.4, height: PARTS_HEIGHT_SEGMENT_BAR*0.7)
+        leftUnderBar.frame = CGRect(x: viewWidth*0.05, y: navigationBarHeight*0.1, width: viewWidth*0.4, height: navigationBarHeight*0.7)
         leftUnderBar.backgroundColor = UIColor.segmetRightBlue()
     }
     
@@ -126,7 +133,7 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         postDetailTableView.dataSource = self
         
         //テーブルビューの大きさの指定
-        postDetailTableView.frame = CGRect(x: 0, y: PARTS_HEIGHT_SEGMENT_BAR, width: viewWidth, height: tableViewHeight)
+        postDetailTableView.frame = CGRect(x: 0, y: navigationBarHeight, width: viewWidth, height: tableViewHeight)
         
         //テーブルビューの設置
         postDetailTableView.register(PostDetailTableCell.self, forCellReuseIdentifier: NSStringFromClass(PostDetailTableCell.self))
@@ -183,22 +190,22 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         
         if hidden {
             //ナビゲーションバーを隠す
-            self.tableViewHeight = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_SEGMENT_BAR+PARTS_TABBAR_HEIGHT)
+            self.tableViewHeight = viewHeight-(statusBarHeight+navigationBarHeight+tabBarHeight)
             
             animator.addAnimations {
                 // animation
-                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: -PARTS_HEIGHT_NAVIGATION_BAR, width: self.viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR)
-                self.segmentView.frame = CGRect(x: 0, y: -PARTS_HEIGHT_SEGMENT_BAR, width: self.viewWidth, height: PARTS_HEIGHT_SEGMENT_BAR)
+                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: -self.navigationBarHeight, width: self.viewWidth, height: self.navigationBarHeight)
+                self.segmentView.frame = CGRect(x: 0, y: -self.navigationBarHeight, width: self.viewWidth, height: self.navigationBarHeight)
                 self.postDetailTableView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.tableViewHeight)
             }
         }else{
             //ナビゲーションバーを出す
-            self.tableViewHeight = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_HEIGHT_SEGMENT_BAR+PARTS_TABBAR_HEIGHT)
+            self.tableViewHeight = viewHeight-(navigationBarHeight+navigationBarHeight+navigationBarHeight+navigationBarHeight)
             animator.addAnimations {
                 // animation
-                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: PARTS_HEIGHT_STATUS_BAR, width: self.viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR)
-                self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: PARTS_HEIGHT_SEGMENT_BAR)
-                self.postDetailTableView.frame = CGRect(x: 0, y: PARTS_HEIGHT_SEGMENT_BAR, width: self.viewWidth, height: self.tableViewHeight)
+                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: self.navigationBarHeight, width: self.viewWidth, height: self.navigationBarHeight)
+                self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.navigationBarHeight)
+                self.postDetailTableView.frame = CGRect(x: 0, y: self.navigationBarHeight, width: self.viewWidth, height: self.tableViewHeight)
                 
             }
         }
@@ -219,7 +226,7 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
     // MARK: setLoginView
     func setLoginView()  {
         
-        let noLoginViewHeight:CGFloat = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_TABBAR_HEIGHT)
+        let noLoginViewHeight:CGFloat = viewHeight-(statusBarHeight+tabBarHeight)
         noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
         noLoginView.loginBtn.addTarget(nil, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
         noLoginView.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)

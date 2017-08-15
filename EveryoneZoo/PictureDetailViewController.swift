@@ -15,8 +15,12 @@ import SwiftyJSON
 class PictureDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
     //width, height
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
+    private var viewWidth:CGFloat!
+    private var viewHeight:CGFloat!
+    private var statusBarHeight:CGFloat!
+    private var navigationBarHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
+
     var tableViewHeight:CGFloat!
     
     //Post ID
@@ -41,7 +45,10 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
 
         viewWidth = self.view.frame.width
         viewHeight = self.view.frame.height
-        tableViewHeight = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_TABBAR_HEIGHT)
+        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
+        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+        tableViewHeight = viewHeight-(statusBarHeight+navigationBarHeight+tabBarHeight)
         
         //
         setNavigationBar()
@@ -63,7 +70,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         //ナビゲーションアイテムを作成
         let titleLabel:UILabel = UILabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = self.postTitle
         titleLabel.textColor = UIColor.white

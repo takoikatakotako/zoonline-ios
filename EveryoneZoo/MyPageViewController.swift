@@ -13,6 +13,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
     private var tabBarHeight:CGFloat!
@@ -59,7 +60,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let titleLabel:NavigationBarLabel = NavigationBarLabel(frame: CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR))
+        let titleLabel:NavigationBarLabel = NavigationBarLabel(frame: CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight))
         titleLabel.text = "マイページ"
         self.navigationItem.titleView = titleLabel
     }

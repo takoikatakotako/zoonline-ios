@@ -15,6 +15,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var statusBarHeight:CGFloat!
+    private var navigationBarHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
+
     private var tableViewHeight:CGFloat!
 
     //views
@@ -41,7 +45,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR + PARTS_HEIGHT_NAVIGATION_BAR + PARTS_TABBAR_HEIGHT!)
+        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
+        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+
+        
+        tableViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + tabBarHeight!)
         
         setNavigationBar()
         
@@ -73,7 +82,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //ステータスバー部分の覆い
         let statusBgView:UIView = UIView()
-        statusBgView.frame = CGRect(x: 0, y: -PARTS_HEIGHT_NAVIGATION_BAR*2, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR*2)
+        statusBgView.frame = CGRect(x: 0, y: -navigationBarHeight*2, width: viewWidth, height: navigationBarHeight*2)
         statusBgView.backgroundColor = UIColor.mainAppColor()
         self.view.addSubview(statusBgView)
         
@@ -84,7 +93,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //ナビゲーションアイテムを作成
         let titleLabel:UILabel = UILabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "投稿する"
         titleLabel.textColor = UIColor.white
@@ -351,7 +360,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: setLoginView
     func setLoginView()  {
         
-        let noLoginViewHeight:CGFloat = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_TABBAR_HEIGHT)
+        let noLoginViewHeight:CGFloat = viewHeight-(statusBarHeight+tabBarHeight)
         noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
         noLoginView.loginBtn.addTarget(nil, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
         noLoginView.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)

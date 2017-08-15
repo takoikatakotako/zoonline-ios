@@ -18,6 +18,11 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var statusBarHeight:CGFloat!
+    private var navigationBarHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
+
+    
     var postTagLabelHeight:CGFloat!
     var setTagTextFieldSpaceHeight:CGFloat!
     var setTagTextFieldHeight:CGFloat!
@@ -38,10 +43,14 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         
         viewWidth = self.view.frame.width
         viewHeight =  self.view.frame.height
+        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
+        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+        
         postTagLabelHeight = viewWidth*0.14
         setTagTextFieldSpaceHeight = viewWidth*0.02
         setTagTextFieldHeight = viewWidth*0.15
-        tagTableViewHeight = viewHeight-(PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+postTagLabelHeight+setTagTextFieldSpaceHeight+setTagTextFieldHeight+PARTS_TABBAR_HEIGHT)
+        tagTableViewHeight = viewHeight-(statusBarHeight+navigationBarHeight+postTagLabelHeight+setTagTextFieldSpaceHeight+setTagTextFieldHeight+tabBarHeight)
         
         self.view.backgroundColor = UIColor.white
 
@@ -69,7 +78,7 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         navigationController!.navigationBar.topItem!.title = " "
         //ナビゲーションアイテムを作成
         let titleLabel:UILabel = UILabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "タグの編集"
         titleLabel.textColor = UIColor.white

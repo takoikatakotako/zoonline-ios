@@ -12,8 +12,12 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
 
     
     //width, height
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
+    private var viewWidth:CGFloat!
+    private var viewHeight:CGFloat!
+    private var statusBarHeight:CGFloat!
+    private var navigationBarHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
+    
     var tableViewHeight:CGFloat!
     
     //テーブルビューインスタンス
@@ -27,7 +31,11 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        tableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+PARTS_TABBAR_HEIGHT)
+        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
+        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+        
+        tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+tabBarHeight)
         
         setNavigationBar()
         setTableView()
@@ -43,7 +51,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         
         //ナビゲーションアイテムを作成
         let titleLabel:UILabel = UILabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "コメント一覧画面"
         titleLabel.textColor = UIColor.white

@@ -67,7 +67,6 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         
-        
         //デリゲートを用いて初めのViewの色をランダムに変える
         delegate?.changeBackgroundColor(color: UIColor.red)
     }

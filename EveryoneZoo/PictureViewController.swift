@@ -16,9 +16,10 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
     private var viewHeight:CGFloat!
     private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
+
     private var pageMenuHeight:CGFloat!
     private var contentsViewHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
     
     var pageMenu : CAPSPageMenu?
     
@@ -39,16 +40,14 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         
         setNavigationBar()
         setPageMenu()
-        
     }
-    
     
     // MARK: - Viewにパーツの設置
     func setNavigationBar() {
         
         //ステータスバー部分の覆い
         let statusBgView:UIView = UIView()
-        statusBgView.frame = CGRect(x: 0, y: -PARTS_HEIGHT_NAVIGATION_BAR*2, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR*2)
+        statusBgView.frame = CGRect(x: 0, y: -navigationBarHeight*2, width: viewWidth, height: navigationBarHeight*2)
         statusBgView.backgroundColor = UIColor.mainAppColor()
         self.view.addSubview(statusBgView)
         
@@ -59,7 +58,7 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         
         //ナビゲーションアイテムを作成
         let titleLabel:NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "ひろば"
         titleLabel.textColor = UIColor.white

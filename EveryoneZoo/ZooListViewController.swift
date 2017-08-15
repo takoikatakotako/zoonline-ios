@@ -87,7 +87,7 @@ class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegat
         
         //ステータスバー部分の覆い
         let statusBgView:UIView = UIView()
-        statusBgView.frame = CGRect(x: 0, y: -PARTS_HEIGHT_NAVIGATION_BAR*2, width: viewWidth, height: PARTS_HEIGHT_NAVIGATION_BAR*2)
+        statusBgView.frame = CGRect(x: 0, y: -navigationBarHeight*2, width: viewWidth, height: navigationBarHeight*2)
         statusBgView.backgroundColor = UIColor.mainAppColor()
         self.view.addSubview(statusBgView)
         
@@ -98,7 +98,7 @@ class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegat
         
         //ナビゲーションアイテムを作成
         let titleLabel:NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "オフィシャル"
         titleLabel.textColor = UIColor.white
@@ -110,10 +110,9 @@ class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegat
         
         print(color)
         
-
- let contactView:WebViewController = WebViewController()
- contactView.url = CONTACT_PAGE_URL_STRING
- contactView.navTitle = "お問い合わせ"
- self.present(contactView, animated: true, completion: nil)
+        let contactView:WebViewController = WebViewController()
+        contactView.url = CONTACT_PAGE_URL_STRING
+        contactView.navTitle = "お問い合わせ"
+        self.present(contactView, animated: true, completion: nil)
     }
 }

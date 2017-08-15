@@ -13,6 +13,9 @@ class UserInfoViewController: UIViewController {
     //width, height
     var viewWidth:CGFloat!
     var viewHeight:CGFloat!
+    private var statusBarHeight:CGFloat!
+    private var navigationBarHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
     
     //UserInfo
     var postUserID:Int!
@@ -23,6 +26,9 @@ class UserInfoViewController: UIViewController {
 
         viewWidth = self.view.frame.width
         viewHeight = self.view.frame.height
+        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
+        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
     
         self.view.backgroundColor = UIColor.red
         setNavigationBar()
@@ -42,13 +48,11 @@ class UserInfoViewController: UIViewController {
         
         //ナビゲーションアイテムを作成
         let titleLabel:UILabel = UILabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = self.postUserName
         titleLabel.textColor = UIColor.white
         
         self.navigationItem.titleView = titleLabel
     }
-
-
 }

@@ -8,13 +8,6 @@
 
 import UIKit
 
-//共通部分
-//let PARTS_HEIGHT_STATUS_BAR:CGFloat! = UIApplication.shared.statusBarFrame.height
-let PARTS_HEIGHT_STATUS_BAR:CGFloat! = 22
-let PARTS_HEIGHT_NAVIGATION_BAR:CGFloat! = 44
-let PARTS_HEIGHT_SEGMENT_BAR:CGFloat! = 44
-let PARTS_TABBAR_HEIGHT:CGFloat! = 50
-
 
 //広場画面
 let FIELD_BUTTON_WIDTH:CGFloat! = 80

@@ -13,8 +13,11 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
+    private var statusBarHeight:CGFloat!
+    private var navigationBarHeight:CGFloat!
     var myProfielViewHeight:CGFloat!
     private var userConfigTableViewHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
 
     
     //テーブルビューインスタンス
@@ -31,8 +34,12 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
+        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
+        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+
         myProfielViewHeight = viewWidth*0.56
-        userConfigTableViewHeight = viewHeight - (PARTS_HEIGHT_STATUS_BAR+PARTS_HEIGHT_NAVIGATION_BAR+myProfielViewHeight+PARTS_TABBAR_HEIGHT)
+        userConfigTableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+myProfielViewHeight+tabBarHeight)
         
         setNavigationBar()
         
@@ -50,7 +57,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         
         //ナビゲーションアイテムを作成
         let titleLabel:UILabel = UILabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: PARTS_HEIGHT_NAVIGATION_BAR)
+        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "プロフィール"
         titleLabel.textColor = UIColor.white
