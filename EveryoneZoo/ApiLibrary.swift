@@ -9,7 +9,9 @@
 import UIKit
 
 class ApiLibrary: NSObject {
-    class func getAPIURL() -> String {
+    
+    /*class func getAPIURL() -> String {
         return "http://minzoo.herokuapp.com/api/v0/plaza/new/18"
     }
+ */
 }

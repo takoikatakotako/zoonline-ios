@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import PageMenu
 import SCLAlertView
 
-class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource {
+class TimeLineViewController: UIViewController,CAPSPageMenuDelegate {
     
     //width,height
     private var viewWidth:CGFloat!
@@ -17,11 +18,16 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
     private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
     private var tabBarHeight:CGFloat!
+    
+    
+    private var pageMenuHeight:CGFloat!
+    private var contentsViewHeight:CGFloat!
 
-    var tableViewHeight:CGFloat!
+    
+    var pageMenu : CAPSPageMenu?
+
     
     //view parts
-    private var segmentView:UIView!
     private var postDetailTableView: UITableView!
     private var noLoginView:NoLoginView! = NoLoginView()
     
@@ -35,17 +41,19 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
         navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
-
-        //スクロルビューの高さ計算
-        tableViewHeight = viewHeight-(statusBarHeight+navigationBarHeight+navigationBarHeight+tabBarHeight)
+        
+        pageMenuHeight = navigationBarHeight
+        contentsViewHeight = viewHeight
         
         //Viewにパーツを追加
         setNavigationBarBar()
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
-            setSegmentBar()
-            setTableVIew()
+        //if (appDelegate.userDefaultsManager?.isLogin())! {
+        if !(appDelegate.userDefaultsManager?.isLogin())! {
+
+            setPageMenu()
+            
         }else{
             setLoginView()
         }
@@ -62,13 +70,6 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
     // MARK: NavigationBarの設置
     func setNavigationBarBar(){
         
-        //ステータスバー部分の背景
-        let statusBackColor = UIView()
-        statusBackColor.frame =
-            CGRect(x: 0, y: -(statusBarHeight+navigationBarHeight), width: viewWidth, height: navigationBarHeight)
-        statusBackColor.backgroundColor = UIColor.mainAppColor()
-        self.view.addSubview(statusBackColor)
-        
         //UINavigationBarの位置とサイズを指定
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
         self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
@@ -77,147 +78,47 @@ class TimeLineViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.title = "タイムライン"
     }
+    
+    
+    func setPageMenu() {
+        
+        // Array to keep track of controllers in page menu
+        var controllerArray : [UIViewController] = []
+        
+        let vc0:UIViewController = UIViewController()
+        vc0.title = "すべて"
+        vc0.view.backgroundColor = UIColor.red
+        controllerArray.append(vc0)
 
-    
-    // MARK: SegmentBarの設置
-    func setSegmentBar(){
+        let vc1:UIViewController = UIViewController()
+        vc1.title = "ユーザー"
+        vc1.view.backgroundColor = UIColor.green
+        controllerArray.append(vc1)
         
-        segmentView = UIView()
-        segmentView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: navigationBarHeight)
-        segmentView.backgroundColor = UIColor.white
-        self.view.addSubview(segmentView)
+        let vc2:UIViewController = UIViewController()
+        vc2.title = "タグ"
+        vc2.view.backgroundColor = UIColor.blue
+        controllerArray.append(vc2)
         
-        //スクロールビューとの区切り線
-        let segmentLine = UIView()
-        segmentLine.frame = CGRect(x: 0, y: navigationBarHeight - 2, width: viewWidth, height: 2)
-        segmentLine.backgroundColor = UIColor.gray
-        segmentView.addSubview(segmentLine)
+        let parameters: [CAPSPageMenuOption] = [
+            .scrollMenuBackgroundColor(UIColor.white),
+            .menuItemSeparatorWidth(4),
+            .menuHeight(pageMenuHeight),
+            .useMenuLikeSegmentedControl(true),
+            .menuItemSeparatorPercentageHeight(0.1),
+            .bottomMenuHairlineColor(UIColor.blue),
+            .selectionIndicatorColor(UIColor.segmetRightBlue()),
+            .selectedMenuItemLabelColor(UIColor.mainAppColor()),
+            .menuItemFont(UIFont.boldSystemFont(ofSize: 16)),
+            .unselectedMenuItemLabelColor(UIColor.gray)
+        ]
         
-        //セグメントビューの左
-        let segmentLeftBtn = UIButton()
-        segmentLeftBtn.frame = CGRect(x: viewWidth*0.03, y: navigationBarHeight*0.1, width: viewWidth*0.3, height: navigationBarHeight*0.7)
-        segmentLeftBtn.setTitle("すべて", for: UIControlState.normal)
-        segmentLeftBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
-        //segmentLeftBtn.backgroundColor = UIColor.blue
-        segmentView.addSubview(segmentLeftBtn)
+        // Initialize page menu with controller array, frame, and optional parameters
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: 0, width: viewWidth, height: contentsViewHeight), pageMenuOptions: parameters)
+        pageMenu!.view.backgroundColor = UIColor.white
+        pageMenu!.delegate = self
         
-        //セグメントビューの真ん中
-        let segmentCenterBtn = UIButton()
-        segmentCenterBtn.frame = CGRect(x: viewWidth*0.36, y: navigationBarHeight*0.1, width: viewWidth*0.3, height: navigationBarHeight*0.7)
-        segmentCenterBtn.setTitle("ユーザー", for: UIControlState.normal)
-        segmentCenterBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
-        segmentView.addSubview(segmentCenterBtn)
-        
-        //セグメントビューの右
-        let segmentRightBtn = UIButton()
-        segmentRightBtn.frame = CGRect(x: viewWidth*0.69, y: navigationBarHeight*0.1, width: viewWidth*0.3, height: navigationBarHeight*0.7)
-        segmentRightBtn.setTitle("タグ", for: UIControlState.normal)
-        segmentRightBtn.setTitleColor(UIColor.segmetRightBlue(), for: UIControlState.normal)
-        //segmentRightBtn.backgroundColor = UIColor.blue
-        segmentView.addSubview(segmentRightBtn)
-        
-        //下線
-        let leftUnderBar = UIView()
-        leftUnderBar.frame = CGRect(x: viewWidth*0.05, y: navigationBarHeight*0.1, width: viewWidth*0.4, height: navigationBarHeight*0.7)
-        leftUnderBar.backgroundColor = UIColor.segmetRightBlue()
-    }
-    
-    // MARK: TableViewの設置
-    func setTableVIew(){
-        
-        //テーブルビューの初期化
-        postDetailTableView = UITableView()
-        
-        //デリゲートの設定
-        postDetailTableView.delegate = self
-        postDetailTableView.dataSource = self
-        
-        //テーブルビューの大きさの指定
-        postDetailTableView.frame = CGRect(x: 0, y: navigationBarHeight, width: viewWidth, height: tableViewHeight)
-        
-        //テーブルビューの設置
-        postDetailTableView.register(PostDetailTableCell.self, forCellReuseIdentifier: NSStringFromClass(PostDetailTableCell.self))
-        postDetailTableView.rowHeight = viewWidth*1.65
-        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
-        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
-        self.view.addSubview(postDetailTableView)
-        
-        //リフレッシュコントロールの追加
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
-        postDetailTableView.refreshControl = refreshControl
-    }
-    
-    
-    // MARK: - TableView関連のメソッド
-    //MARK: セルの数の設定
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    //MARK: テーブルビューのセルの中身の設定する
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell:PostDetailTableCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostDetailTableCell.self), for: indexPath) as! PostDetailTableCell
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.layoutMargins = UIEdgeInsets.zero
-        
-        return cell
-    }
-    
-    //Mark: テーブルビューのセルが押されたら呼ばれる
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
-    }
-    
-    //Mark: テーブルビューがスクロールされた時に呼ばれる
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
-        
-        if (velocity.y > 0) {
-            // 上にスクロールされた時
-            hidesBarsWithScrollView(hidden: true, hiddenTop: true, hiddenBottom: true)
-        } else {
-            // 下にスクロールされた時
-            hidesBarsWithScrollView(hidden: false, hiddenTop: true, hiddenBottom: true)
-        }
-    }
-    
-    //Mark:　ナビゲーションバーを出し入れする
-    func hidesBarsWithScrollView( hidden:Bool, hiddenTop:Bool, hiddenBottom:Bool) {
-        
-        let timing = UICubicTimingParameters(animationCurve: .easeInOut)
-        let animator = UIViewPropertyAnimator(duration: 0.2, timingParameters: timing)
-        
-        if hidden {
-            //ナビゲーションバーを隠す
-            self.tableViewHeight = viewHeight-(statusBarHeight+navigationBarHeight+tabBarHeight)
-            
-            animator.addAnimations {
-                // animation
-                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: -self.navigationBarHeight, width: self.viewWidth, height: self.navigationBarHeight)
-                self.segmentView.frame = CGRect(x: 0, y: -self.navigationBarHeight, width: self.viewWidth, height: self.navigationBarHeight)
-                self.postDetailTableView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.tableViewHeight)
-            }
-        }else{
-            //ナビゲーションバーを出す
-            self.tableViewHeight = viewHeight-(navigationBarHeight+navigationBarHeight+navigationBarHeight+navigationBarHeight)
-            animator.addAnimations {
-                // animation
-                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: self.navigationBarHeight, width: self.viewWidth, height: self.navigationBarHeight)
-                self.segmentView.frame = CGRect(x: 0, y: 0, width: self.viewWidth, height: self.navigationBarHeight)
-                self.postDetailTableView.frame = CGRect(x: 0, y: self.navigationBarHeight, width: self.viewWidth, height: self.tableViewHeight)
-                
-            }
-        }
-        
-        animator.startAnimation()
-    }
-    
-    //Mark:　リフレッシュ更新が走った時に呼ばれる
-    func scrollReflesh(sender : UIRefreshControl) {
-        
-        SCLAlertView().showInfo("スクロールイベントが実行された", subTitle: "close")
-        sender.endRefreshing()
+        self.view.addSubview(pageMenu!.view)
     }
     
     

@@ -9,7 +9,7 @@
 import UIKit
 
 
-let APP_URL_STRING: String = "http://minzoo.herokuapp.com"
+let APP_URL: String = "http://minzoo.herokuapp.com"
 
 let CONTACT_PAGE_URL_STRING:String = "http://swiswiswift.sakura.ne.jp/zoonline/"
 let TOS_PAGE_URL_STRING:String = "http://swiswiswift.sakura.ne.jp/zoonline/tos.html"
@@ -23,6 +23,13 @@ let GET_RECENT_POSTS:String! = "/api/v0/posts/recent"
 
 //人気取得
 let GET_POPULAR_POSTS:String! = "/api/v0/plaza/popular"
+
+//詳細取得
+let GET_POSTS_DATAILS:String! = "/api/v0/plaza/detail/" //+postID
+
+
+//ユーザー情報
+let GET_USER_INFO:String = "/api/v0/users/" //+userID
 
 
 //http://minzoo.herokuapp.com/api/v0/plaza/popular

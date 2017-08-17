@@ -49,7 +49,7 @@ class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegat
         controllerArray.append(controller)
         
         let controller2 : OfficialListViewController = OfficialListViewController()
-        controller2.title = "編集部頼り"
+        controller2.title = "編集部便り"
         controllerArray.append(controller2)
         
         

@@ -308,9 +308,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     // MARK: - NetWorks
     func getPostInfo(postID:Int){
         
-        let urlStr:String = "http://minzoo.herokuapp.com/api/v0/plaza/detail/"+String(postID)
-
-        Alamofire.request(urlStr).responseJSON{
+        Alamofire.request(APP_URL+GET_POSTS_DATAILS+String(postID)).responseJSON{
             response in
             
             switch response.result {
@@ -323,39 +321,15 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 self.postTitle = json[0]["title"].stringValue
                 self.postCaption = json[0]["caption"].stringValue
                 self.postImgUrl = URL(string: json[0]["itemImage"].stringValue)!
-                self.getUserInfo(userID:self.postUserID)
-                
-            case .failure(let error):
-                print(error)
-                
-            }
-        }
-    }
-    
-    
-    func getUserInfo(userID:Int){
-        
-        let urlStr:String = "http://minzoo.herokuapp.com/api/v0/users/"+String(userID)
+                self.iconUrl = URL(string: json[0]["iconUrl"].stringValue)!
 
-        
-        Alamofire.request(urlStr).responseJSON{
-            response in
-            
-            switch response.result {
-            case .success:
-                print("Validation Successful")
-                let json:JSON = JSON(response.result.value ?? kill)
-                
-                self.iconUrl = URL(string: json["iconUrl"].stringValue)!
                 self.setNavigationBar()
                 self.setTableView()
                 
             case .failure(let error):
                 print(error)
                 
-                
             }
         }
-        
     }
 }

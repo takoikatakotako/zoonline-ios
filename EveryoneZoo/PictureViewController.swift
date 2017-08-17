@@ -71,7 +71,7 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         var controllerArray : [UIViewController] = []
         
         let NewPostsVC : NewPostsViewController = NewPostsViewController()
-        NewPostsVC.title = "人気"
+        NewPostsVC.title = "新着"
         NewPostsVC.delegate = self
         NewPostsVC.statusBarHeight = statusBarHeight
         NewPostsVC.navigationBarHeight = navigationBarHeight
@@ -80,7 +80,7 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         controllerArray.append(NewPostsVC)
         
         let PopularPostsVC : PopularPostsViewController = PopularPostsViewController()
-        PopularPostsVC.title = "新着"
+        PopularPostsVC.title = "人気"
         PopularPostsVC.delegate = self
         PopularPostsVC.statusBarHeight = statusBarHeight
         PopularPostsVC.navigationBarHeight = navigationBarHeight
@@ -106,7 +106,6 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: 0, width: viewWidth, height: contentsViewHeight), pageMenuOptions: parameters)
         pageMenu!.view.backgroundColor = UIColor.white
         pageMenu!.delegate = self
-        
         self.view.addSubview(pageMenu!.view)
     }
     
