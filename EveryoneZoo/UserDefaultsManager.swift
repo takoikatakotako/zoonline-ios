@@ -14,7 +14,7 @@ class UserDefaultsManager: NSObject {
     var userDefaults:UserDefaults = UserDefaults.standard
     
     override init() {
-        userDefaults.register(defaults: ["KEY_login": "false"])
+        userDefaults.register(defaults: ["KEY_login": false])
         userDefaults.register(defaults: ["KEY_MyUserID": ""])
         userDefaults.register(defaults: ["KEY_MyUserName": ""])
     }
@@ -28,12 +28,18 @@ class UserDefaultsManager: NSObject {
         var isLogin:Bool = false
         
         if (userDefaults.object(forKey: "KEY_login") != nil) {
-            isLogin = Bool(userDefaults.string(forKey: "KEY_login")!)!
+            isLogin = userDefaults.bool(forKey: "KEY_login")
         }else{
             print("Error")
         }
         
         return isLogin
+    }
+    
+    
+    func doLogin() {
+        userDefaults.set(true, forKey: "KEY_login")
+        
     }
     
     func doLogout(){

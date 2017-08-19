@@ -16,9 +16,8 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     //width,height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
+    var statusBarHeight:CGFloat!
+    var navigationBarHeight:CGFloat!
     
     private var loginViewHeight:CGFloat!
     
@@ -39,9 +38,6 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         //画面横サイズを取得
         viewWidth = self.view.frame.width
         viewHeight = self.view.frame.height
-        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
-        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
-        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
         loginViewHeight = viewHeight - (statusBarHeight+navigationBarHeight)
         
         self.view.backgroundColor = UIColor.white
@@ -56,8 +52,6 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         self.view.addSubview(indicator)
         self.view.bringSubview(toFront: indicator)
         indicator.color = UIColor.mainAppColor()
-        
- 
     }
     
     // MARK: - Viewにパーツの設置
@@ -79,7 +73,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         
         //ナビゲーションアイテムを作成
         let navItems = UINavigationItem()
-        let titleLabel:UILabel = UILabel()
+        let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "ログイン"
@@ -254,7 +248,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                 "password": self.passWordTextField.text ?? ""]
         }
         
-        Alamofire.request("http://minzoo.herokuapp.com/api/v0/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+        Alamofire.request(APP_URL+POST_LOGIN, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             
             self.indicator.stopAnimating()
             
@@ -266,6 +260,10 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                 
                 if json["result"].boolValue{
                     //ログイン成功
+                    print(json)
+                    
+                    //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    
                     self.dismiss(animated: true, completion: nil)
                 }else{
                     //メールなどが違うと判断

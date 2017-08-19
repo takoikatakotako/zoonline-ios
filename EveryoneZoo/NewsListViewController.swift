@@ -22,7 +22,6 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     var pageMenuHeight:CGFloat!
     var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
-    
 
     //delegate
     weak var delegate: SampleDelegate?

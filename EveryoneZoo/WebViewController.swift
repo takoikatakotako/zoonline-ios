@@ -13,8 +13,8 @@ class WebViewController: UIViewController , UIWebViewDelegate{
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
+    var statusBarHeight:CGFloat!
+    var navigationBarHeight:CGFloat!
     
     private var webViewHeight:CGFloat!
     
@@ -31,8 +31,6 @@ class WebViewController: UIViewController , UIWebViewDelegate{
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
-        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
         webViewHeight = viewHeight - (statusBarHeight+navigationBarHeight)
         
         //WebView

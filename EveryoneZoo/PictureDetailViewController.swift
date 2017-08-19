@@ -33,8 +33,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     var iconUrl:URL!
     var postTitle:String = ""
     var postCaption:String = ""
-    var commentList:Array = [String]()
-    var favList:Array = [String]()
+    var commentList:Array<Any>!
+    var favList:Array<Any>!
     var postImgUrl:URL!
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -338,14 +338,16 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 //print("投稿JSON取得成功")
                 let json:JSON = JSON(response.result.value ?? kill)
                 
+                print(json)
+                
                 self.postUserName = json[0]["userName"].stringValue
                 self.postUserID = json[0]["userId"].intValue
                 self.postTitle = json[0]["title"].stringValue
                 self.postCaption = json[0]["caption"].stringValue
                 self.postImgUrl = URL(string: json[0]["itemImage"].stringValue)!
                 self.iconUrl = URL(string: json[0]["iconUrl"].stringValue)!
-                self.commentList = json[0]["commentList"].arrayObject as! [String]
-                self.favList = json[0]["favList"].arrayObject as! [String]
+                self.commentList = json[0]["commentList"].arrayValue
+                self.favList = json[0]["favList"].arrayValue
 
                 self.setNavigationBar()
                 self.setTableView()

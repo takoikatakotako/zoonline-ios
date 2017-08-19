@@ -22,13 +22,17 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //テーブルビューインスタンス
     private var myPageTableView: UITableView!
     
-    let ARRAY_MYPAGE_SCTION_TITLE: NSArray = ["ユーザー情報", "設定・その他", "ログアウト"]
-    
-    let userInfoThumbnails:NSArray = [UIImage(named:"mypage_post")!, UIImage(named:"mypage_friends")!,UIImage(named:"mypage_follower")!, UIImage(named:"mypage_favorite")!]
-    let ARRAY_MYPAGE_USER_INFOS: NSArray = ["投稿","フレンズ", "フォロワー", "お気に入り"]
-
-    let configThumbnails:NSArray = [UIImage(named:"mypage_contact")!, UIImage(named:"mypage_share")!]
-    let ARRAY_MYPAGE_CONFIS: NSArray = ["お問い合わせ","シェア"]
+    //
+    var loginedSectionTitle:[String] = ["ユーザー情報", "設定・その他", "ログアウト"]
+    var unloginedSectionTitle:[String] = ["設定・その他", "ログアウト"]
+    var userInfoTitle:[String] = ["投稿","フレンズ","フォロワー","お気に入り"]
+    var userInfoIcon:[String] = ["mypage_post","mypage_friends","mypage_follower","mypage_favorite"]
+    var configsTitle:[String] = ["お問い合わせ","シェア"]
+    var configsIcon:[String] = ["mypage_contact","mypage_share"]
+    var logoutTitle:[String] = ["ログアウト"]
+    var logoutIcon:[String] = ["mypage_logout"]
+    var loginTitle:[String] = ["ログイン"]
+    var loginIcon:[String] = ["mypage_logout"]
 
     
     // Sectionで使用する配列を定義する.
@@ -38,7 +42,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
-        let statusBarHeight:CGFloat = (self.navigationController?.navigationBar.frame.origin.y)!
+        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
         navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
         tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+HEIGHT_USER_CELL + tabBarHeight)
@@ -90,12 +94,26 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //セクションの数を返す.
     func numberOfSections(in tableView: UITableView) -> Int {
-        return ARRAY_MYPAGE_SCTION_TITLE.count
+        
+        //ログインしている場合はボタンをつける
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            return loginedSectionTitle.count
+        }else{
+            return unloginedSectionTitle.count
+        }
     }
     
     //セクションのタイトルを返す.
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ARRAY_MYPAGE_SCTION_TITLE[section] as? String
+        
+        //ログインしている場合はボタンをつける
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            return loginedSectionTitle[section]
+        }else{
+            return unloginedSectionTitle[section]
+        }
     }
     
     
@@ -108,31 +126,30 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    //セクションの中身
-    /*
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        //セクション区切りのラベル
-        let headerLabel = UILabel()
-        headerLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
-        headerLabel.font = UIFont.systemFont(ofSize: 16)
-        headerLabel.frame = CGRect(x: 0, y: 20, width: 100, height: 20)
-    
-        return headerLabel
-     }
-    */
-    
     //テーブルに表示する配列の総数を返す.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return ARRAY_MYPAGE_USER_INFOS.count
-        } else if section == 1 {
-            return ARRAY_MYPAGE_CONFIS.count
-        } else if section == 2{
-            //ログアウト
-            return 1
-        }else {
-            return 0
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            switch section {
+            case 0:
+                return userInfoTitle.count
+            case 1:
+                return configsTitle.count
+            case 2:
+                return logoutTitle.count
+            default:
+                return 0
+            }
+        }else{
+            switch section {
+            case 0:
+                return configsTitle.count
+            case 1:
+                return logoutTitle.count
+            default:
+                return 0
+            }
         }
     }
     
@@ -141,17 +158,33 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let cell:MyPageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPageTableViewCell.self), for: indexPath) as! MyPageTableViewCell
         
-        if indexPath.section == 0 {
-            //  cell.textLabel?.text = "\(ARRAY_MYPAGE_USER_INFOS[indexPath.row])"
-            cell.textCellLabel.text =  "\(ARRAY_MYPAGE_USER_INFOS[indexPath.row])"
-            cell.thumbnailImgView.image = userInfoThumbnails[indexPath.row] as? UIImage
-        } else if indexPath.section == 1 {
-            //  cell.textLabel?.text = "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
-            cell.textCellLabel.text =  "\(ARRAY_MYPAGE_CONFIS[indexPath.row])"
-            cell.thumbnailImgView.image = configThumbnails[indexPath.row] as? UIImage
-        } else if indexPath.section == 2{
-            cell.textCellLabel.text =  "ログアウト"
-            cell.thumbnailImgView.image = UIImage(named:"mypage_logout")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            switch indexPath.section {
+            case 0:
+                cell.textCellLabel.text =  userInfoTitle[indexPath.row]
+                cell.thumbnailImgView.image = UIImage(named:userInfoIcon[indexPath.row])
+            case 1:
+                cell.textCellLabel.text =  configsTitle[indexPath.row]
+                cell.thumbnailImgView.image = UIImage(named:configsIcon[indexPath.row])
+            case 2:
+                cell.textCellLabel.text =  logoutTitle[indexPath.row]
+                cell.thumbnailImgView.image = UIImage(named:loginIcon[indexPath.row])
+            default: break
+
+            }
+        }else{
+        
+            switch indexPath.section {
+            case 0:
+                cell.textCellLabel.text =  configsTitle[indexPath.row]
+                cell.thumbnailImgView.image = UIImage(named:configsIcon[indexPath.row])
+            case 1:
+                cell.textCellLabel.text =  loginTitle[indexPath.row]
+                cell.thumbnailImgView.image = UIImage(named:loginIcon[indexPath.row])
+            default: break
+
+            }
         }
         
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
@@ -162,59 +195,87 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //Cellが選択された際に呼び出される.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
-            
-            //ユーザー情報
-            switch indexPath.row {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            switch indexPath.section {
             case 0:
-                //投稿一覧
-                let vc:MyPagePostViewController = MyPagePostViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-            break
-            case 1:
-                //フレンズ一覧
-                let vc:FriendsListViewController = FriendsListViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                //ユーザー情報
+                switch indexPath.row {
+                case 0:
+                    //投稿一覧
+                    let vc:MyPagePostViewController = MyPagePostViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    break
+                case 1:
+                    //フレンズ一覧
+                    let vc:FriendsListViewController = FriendsListViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    break
+                case 2:
+                    //フォロワー一覧
+                    let vc:FollowerListViewController = FollowerListViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    break
+                case 3:
+                    //お気に入り
+                    let vc:MyPageFavoriteViewController = MyPageFavoriteViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    break
+                default:
+                    break
+                }
                 break
+            case 1:
+                switch indexPath.row {
+                case 0:
+                    //お問い合わせ
+                    let contactView:WebViewController = WebViewController()
+                    contactView.statusBarHeight = self.statusBarHeight
+                    contactView.navigationBarHeight = self.navigationBarHeight
+                    contactView.url = CONTACT_PAGE_URL_STRING
+                    contactView.navTitle = "お問い合わせ"
+                    self.present(contactView, animated: true, completion: nil)
+                    break
+                case 1:
+                    //アプリシェア
+                    break
+                default:
+                    break
+                }
             case 2:
-                //フォロワー一覧
-                let vc:FollowerListViewController = FollowerListViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                //ログアウト
                 break
-            case 3:
-                //お気に入り
-                let vc:MyPageFavoriteViewController = MyPageFavoriteViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-                break
-            default:
-                break
+            default: break
+                
             }
-            print("Value: \(ARRAY_MYPAGE_USER_INFOS[indexPath.row])")
-        } else if indexPath.section == 1 {
-            
-            //設定、その他
-            switch indexPath.row {
-            case 0:
-                //contact
-                print("Value: \(ARRAY_MYPAGE_CONFIS[indexPath.row])")
-                let contactView:WebViewController = WebViewController()
-                contactView.url = CONTACT_PAGE_URL_STRING
-                contactView.navTitle = "お問い合わせ"
-                self.present(contactView, animated: true, completion: nil)
-                break
-            case 1:
-                //ShareBubbles
-                break
-            default:
-                break
-            }
-        }else if indexPath.section == 2 {
-            //login
-        
         }else{
-        
-        
+            
+            switch indexPath.section {
+            case 0:
+                switch indexPath.row {
+                case 0:
+                    //お問い合わせ
+                    let contactView:WebViewController = WebViewController()
+                    contactView.statusBarHeight = self.statusBarHeight
+                    contactView.navigationBarHeight = self.navigationBarHeight
+                    contactView.url = CONTACT_PAGE_URL_STRING
+                    contactView.navTitle = "お問い合わせ"
+                    self.present(contactView, animated: true, completion: nil)
+                    break
+                case 1:
+                    //アプリシェア
+                    break
+                default:
+                    break
+                }
+            case 1:
+                //ログイン
+                break
+            default: break
+                
+            }
         }
+        
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -225,6 +286,17 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //basicボタンが押されたら呼ばれます
     internal func goMyProfile(sender: UIButton){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if !(appDelegate.userDefaultsManager?.isLogin())! {
+
+            let loginView:LoginViewController = LoginViewController()
+            loginView.statusBarHeight = self.statusBarHeight
+            loginView.navigationBarHeight = self.navigationBarHeight
+            self.present(loginView, animated: true, completion: nil)
+            return
+        
+        }
 
         let vc:MyPageProfilelViewController = MyPageProfilelViewController()
         self.navigationController?.pushViewController(vc, animated: true)

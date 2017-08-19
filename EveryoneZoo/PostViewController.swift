@@ -92,7 +92,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         UINavigationBar.appearance().tintColor = UIColor.white
         
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = UILabel()
+        let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "投稿する"
@@ -371,6 +371,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loginBtnClicked(sender: UIButton){
         
         let loginView:LoginViewController = LoginViewController()
+        loginView.statusBarHeight = self.statusBarHeight
+        loginView.navigationBarHeight = self.navigationBarHeight
         self.present(loginView, animated: true, completion: nil)
     }
     
@@ -381,5 +383,3 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.present(resistView, animated: true, completion: nil)
     }
 }
-
-
