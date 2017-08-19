@@ -67,11 +67,11 @@ class PostDetailTableCell: UITableViewCell {
         
         //FavImg
         favBtn = FavCommentButton()
-        favBtn.imgView.image = UIImage(named: "fav_on")!
+        favBtn.imgView.image = UIImage(named: "fav_off")!
         favBtn.countLabel.textAlignment =  NSTextAlignment.left
         favBtn.countLabel.textColor = UIColor.followColor()
         favBtn.countLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        favBtn.countLabel.text = "25"
+        //favBtn.countLabel.text = "0"
         contentView.addSubview(favBtn)
 
         //CommentBtn
@@ -79,7 +79,7 @@ class PostDetailTableCell: UITableViewCell {
         commentBtn.imgView.image = UIImage(named: "comment")!
         commentBtn.countLabel.textAlignment =  NSTextAlignment.left
         commentBtn.countLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        commentBtn.countLabel.text = "24"
+        //commentBtn.countLabel.text = "0"
         contentView.addSubview(commentBtn)
 
         //MenuBtn

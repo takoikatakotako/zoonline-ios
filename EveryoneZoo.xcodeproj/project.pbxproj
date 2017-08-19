@@ -215,12 +215,21 @@
 				8D6215A41EC2011100593E55 /* ComoonParts */,
 				8DF9CFE31EE959F9002B8459 /* WebViewController.swift */,
 				8D35113C1EEECFC8004BA744 /* NoLoginView.swift */,
-				8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */,
+				8D1BD6DC1F47D4EA001A6D64 /* FieldRelations */,
 				8D35113E1EEED5E6004BA744 /* LoginViewController.swift */,
 				8DE541761EFAB3010085F916 /* NewResistViewController.swift */,
 				8D5121261F0EAB8100C6D774 /* ProfielViewController.swift */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		8D1BD6DC1F47D4EA001A6D64 /* FieldRelations */ = {
+			isa = PBXGroup;
+			children = (
+				8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */,
+				8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */,
+			);
+			name = FieldRelations;
 			sourceTree = "<group>";
 		};
 		8D46EFBA1F2DEB6D00FFD8D7 /* MyPageCustumCell */ = {
@@ -421,7 +430,6 @@
 			isa = PBXGroup;
 			children = (
 				8D48576C1F40455200608A56 /* Field */,
-				8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */,
 				8D1586711ED848F400802F54 /* UserInfoViewController.swift */,
 				8D1586731ED8565300802F54 /* FollowUserButton.swift */,
 				8D9DE1791EE3EA3900121FC1 /* FavCommentButton.swift */,

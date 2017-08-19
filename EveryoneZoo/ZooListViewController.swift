@@ -110,9 +110,7 @@ class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegat
         
         print(color)
         
-        let contactView:WebViewController = WebViewController()
-        contactView.url = CONTACT_PAGE_URL_STRING
-        contactView.navTitle = "お問い合わせ"
-        self.present(contactView, animated: true, completion: nil)
+        
+        //ここでニュースページに飛ぶ
     }
 }

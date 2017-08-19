@@ -30,7 +30,7 @@ class MyPageUserCellBtn: UIButton {
         let viewHeight:CGFloat = self.frame.size.height
 
         //アイコン
-        iconImgView.image = UIImage(named:"sample_kabi1")
+        iconImgView.image = UIImage(named:"icon_default")
         iconImgView.frame = CGRect(x: viewHeight*0.1, y: viewHeight*0.1, width: viewHeight*0.8, height: viewHeight*0.8)
         iconImgView.backgroundColor = UIColor.white
         iconImgView.layer.cornerRadius = viewHeight*0.8/2

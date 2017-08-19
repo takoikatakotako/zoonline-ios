@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
+import SCLAlertView
 
 
 class PictureDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
@@ -32,7 +33,9 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     var iconUrl:URL!
     var postTitle:String = ""
     var postCaption:String = ""
-    var postImgUrl:URL = URL(string: "http://www.tokyo-zoo.net/Topics/upfiles/24152_top.jpg")!
+    var commentList:Array = [String]()
+    var favList:Array = [String]()
+    var postImgUrl:URL!
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     //view parts
@@ -57,7 +60,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         //投稿の情報の取得
         getPostInfo(postID: self.postID)
-        
     }
     
     // MARK: - Viewにパーツの設置
@@ -69,7 +71,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         UINavigationBar.appearance().tintColor = UIColor.white
         
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = UILabel()
+        let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = self.postTitle
@@ -129,7 +131,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.userInfoBtn.addTarget(self, action: #selector(userInfoBtnClicked(sender:)), for:.touchUpInside)
         cell.thumbnailImgView.frame = CGRect(x: userInfoBtnHeight*0.15, y: userInfoBtnHeight*0.15, width: userInfoBtnHeight*0.7, height: userInfoBtnHeight*0.7)
         cell.thumbnailImgView.layer.cornerRadius = cell.thumbnailImgView.frame.height * 0.5
-        cell.thumbnailImgView.af_setImage(withURL: self.iconUrl, placeholderImage:  UIImage(named:"tab_kabi")!)
+        cell.thumbnailImgView.af_setImage(withURL: self.iconUrl, placeholderImage:  UIImage(named:"icon_default")!)
         cell.userNameTextView.frame = CGRect(x: userInfoBtnHeight, y: 0, width: userInfoBtnWidth-userInfoBtnHeight, height: userInfoBtnHeight)
         cell.userNameTextView.text = postUserName
 
@@ -144,18 +146,19 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let postImgHeight:CGFloat = viewWidth
         cell.postImgView.frame = CGRect(x: 0, y: userInfoBtnHeight, width: viewWidth, height: postImgHeight)
         cell.postImgView.sd_setImage(with: self.postImgUrl, placeholderImage: UIImage(named: "sample_loading"))
-        //cell.postImgView.af_setImage(withURL: self.postImgUrl, placeholderImage: UIImage(named: "sample_loading")!)
 
         //FavBtn
         let favComentMenuBtnHeight:CGFloat = viewWidth * 0.15
         let favBtnSpace:CGFloat = viewWidth*0.05
         let favBtnWidth:CGFloat = viewWidth * 0.25
         cell.favBtn.frame = CGRect(x: favBtnSpace, y: userInfoBtnHeight+postImgHeight, width: favBtnWidth, height: favComentMenuBtnHeight)
+        cell.favBtn.countLabel.text = String(self.favList.count)
         cell.favBtn.addTarget(self, action: #selector(favBtnClicked(sender:)), for:.touchUpInside)
         
         //CommentBtn
         let commentBtn:CGFloat = favBtnWidth
         cell.commentBtn.frame = CGRect(x: favBtnSpace+favBtnWidth, y: userInfoBtnHeight+postImgHeight, width: commentBtn, height: favComentMenuBtnHeight)
+        cell.commentBtn.countLabel.text = String(self.commentList.count)
         cell.commentBtn.addTarget(self, action: #selector(commentBtnClicked(sender:)), for:.touchUpInside)
         
         //MenuBtn
@@ -200,6 +203,11 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     func followBtnClicked(sender: FollowUserButton){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if !(appDelegate.userDefaultsManager?.isLogin())! {
+            //ログインしていない
+            SCLAlertView().showInfo("ログインしてね", subTitle: "フォロー機能を使うにはログインが必要だよ！")
+            return
+        }
         
         if sender.followImgView.image == UIImage(named:"follow_icon") {
             sender.followImgView.image = UIImage(named: "follow_icon_on")!
@@ -216,6 +224,13 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //ファボボタンが押されたら呼ばれる
     func favBtnClicked(sender: FavCommentButton){
         
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if !(appDelegate.userDefaultsManager?.isLogin())! {
+            //ログインしていない
+            SCLAlertView().showInfo("ログインしてね", subTitle: "お気に入り機能を使うにはログインが必要だよ！")
+            return
+        }
+        
         if sender.imgView.image == UIImage(named:"fav_on") {
             sender.imgView.image = UIImage(named: "fav_off")!
             sender.countLabel.text = "24"
@@ -231,6 +246,13 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     
     //コメントボタンが押されたら呼ばれる
     func commentBtnClicked(sender: FavCommentButton){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if !(appDelegate.userDefaultsManager?.isLogin())! {
+            //ログインしていない
+            SCLAlertView().showInfo("ログインしてね", subTitle: "コメント機能を使うにはログインが必要だよ！")
+            return
+        }
         
         goCommentView()
     }
@@ -313,7 +335,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             
             switch response.result {
             case .success:
-                print("Validation Successful")
+                //print("投稿JSON取得成功")
                 let json:JSON = JSON(response.result.value ?? kill)
                 
                 self.postUserName = json[0]["userName"].stringValue
@@ -322,6 +344,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 self.postCaption = json[0]["caption"].stringValue
                 self.postImgUrl = URL(string: json[0]["itemImage"].stringValue)!
                 self.iconUrl = URL(string: json[0]["iconUrl"].stringValue)!
+                self.commentList = json[0]["commentList"].arrayObject as! [String]
+                self.favList = json[0]["favList"].arrayObject as! [String]
 
                 self.setNavigationBar()
                 self.setTableView()

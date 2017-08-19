@@ -61,6 +61,8 @@ class CommentTableViewCell: UITableViewCell {
         commentLabel.frame = CGRect(x: cellWidth*0.18, y: cellHeight*0.35, width: cellWidth*0.8, height: cellHeight*0.6)
         commentLabel.font = UIFont.systemFont(ofSize: 12)
         commentLabel.text = "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ"
+        commentLabel.isEditable = false
+        commentLabel.isScrollEnabled = false
         commentLabel.textColor = UIColor.gray
         
     }

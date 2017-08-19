@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class CommentListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource  {
 
@@ -38,6 +40,10 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+tabBarHeight)
         
         setNavigationBar()
+        
+        
+        
+        
         setTableView()
     }
 
@@ -50,10 +56,10 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         UINavigationBar.appearance().tintColor = UIColor.white
         
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = UILabel()
+        let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "コメント一覧画面"
+        titleLabel.text = "コメント一覧"
         titleLabel.textColor = UIColor.white
         
         self.navigationItem.titleView = titleLabel
