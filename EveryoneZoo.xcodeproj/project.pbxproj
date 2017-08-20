@@ -63,6 +63,7 @@
 		8DDAF0DB1ED183E00079D443 /* MyPagePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */; };
 		8DDAF0DD1ED184790079D443 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */; };
 		8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */; };
+		8DDCD3211F49B953004C91C9 /* TempTimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDCD3201F49B953004C91C9 /* TempTimeLineViewController.swift */; };
 		8DE541771EFAB3010085F916 /* NewResistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE541761EFAB3010085F916 /* NewResistViewController.swift */; };
 		8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */; };
 		8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */; };
@@ -157,6 +158,7 @@
 		8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPagePostViewController.swift; sourceTree = "<group>"; };
 		8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageFavoriteViewController.swift; sourceTree = "<group>"; };
+		8DDCD3201F49B953004C91C9 /* TempTimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempTimeLineViewController.swift; sourceTree = "<group>"; };
 		8DE541761EFAB3010085F916 /* NewResistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewResistViewController.swift; sourceTree = "<group>"; };
 		8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDetailViewController.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 		8DA0AB701ECB032C00D75B1A /* TimeLine */ = {
 			isa = PBXGroup;
 			children = (
+				8DDCD3201F49B953004C91C9 /* TempTimeLineViewController.swift */,
 				8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */,
 			);
 			name = TimeLine;
@@ -782,6 +785,7 @@
 				8D7CDC3C1F14F12D00C3844E /* NavigationBarLabel.swift in Sources */,
 				8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */,
 				8D9DE17E1EE4145E00121FC1 /* NetWorkManager.swift in Sources */,
+				8DDCD3211F49B953004C91C9 /* TempTimeLineViewController.swift in Sources */,
 				8D9DE17C1EE3F5B500121FC1 /* MenuButton.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */,
 				8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */,

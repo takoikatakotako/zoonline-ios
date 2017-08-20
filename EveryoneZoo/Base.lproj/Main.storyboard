@@ -137,10 +137,10 @@
             </objects>
             <point key="canvasLocation" x="-700" y="-35"/>
         </scene>
-        <!--Time Line View Controller-->
+        <!--Temp Time Line View Controller-->
         <scene sceneID="1cD-n1-dgD">
             <objects>
-                <viewController id="TDJ-YT-9P4" customClass="TimeLineViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="TDJ-YT-9P4" customClass="TempTimeLineViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iff-jp-7uC"/>
                         <viewControllerLayoutGuide type="bottom" id="Hpx-6U-A5c"/>

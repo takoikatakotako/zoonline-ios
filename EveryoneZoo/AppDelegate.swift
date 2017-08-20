@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
         //ナビゲーションバーの背景を変更
         UINavigationBar.appearance().barTintColor = UIColor.mainAppColor()
+        UINavigationBar.appearance().isTranslucent = false
+
         //ナビゲーションのタイトル文字列の色を変更
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         

@@ -112,5 +112,9 @@ class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegat
         
         
         //ここでニュースページに飛ぶ
+        let url = URL(string:"http://blog.team-sommelier.com/")
+        if( UIApplication.shared.canOpenURL(url!) ) {
+            UIApplication.shared.open(url!)
+        }
     }
 }

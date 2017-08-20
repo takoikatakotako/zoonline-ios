@@ -66,10 +66,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     // MARK: NavigationBar
     func setNavigationBar() {
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
-        self.navigationController?.navigationBar.isTranslucent = false
-        UINavigationBar.appearance().tintColor = UIColor.white
-        
         //ナビゲーションアイテムを作成
         let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
