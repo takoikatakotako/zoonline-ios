@@ -24,7 +24,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //
     var loginedSectionTitle:[String] = ["ユーザー情報", "設定・その他", "ログアウト"]
-    var unloginedSectionTitle:[String] = ["設定・その他", "ログアウト"]
+    var unloginedSectionTitle:[String] = ["設定・その他", "ログイン"]
     var userInfoTitle:[String] = ["投稿","フレンズ","フォロワー","お気に入り"]
     var userInfoIcon:[String] = ["mypage_post","mypage_friends","mypage_follower","mypage_favorite"]
     var configsTitle:[String] = ["お問い合わせ","シェア"]
@@ -146,7 +146,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             case 0:
                 return configsTitle.count
             case 1:
-                return logoutTitle.count
+                return loginTitle.count
             default:
                 return 0
             }

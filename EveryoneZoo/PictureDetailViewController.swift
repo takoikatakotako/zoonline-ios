@@ -264,7 +264,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         //画面遷移、ユーザー情報画面へ
         let userInfoView: UserInfoViewController = UserInfoViewController()
         userInfoView.postUserID = self.postUserID
-        userInfoView.postUserName = self.postUserName
         self.navigationController?.pushViewController(userInfoView, animated: true)
     }
     
