@@ -32,7 +32,7 @@ let GET_POSTS_DATAILS:String! = "/api/v0/plaza/detail/" //+postID
 let GET_USER_INFO:String = "/api/v0/users/" //+userID
 
 //ログイン
-let POST_LOGIN:String = "/api/v0/login"
+let POST_LOGIN:String = "/api/v0/auth/sign_in"
 
 //ニュース
 let GET_NEWS:String = "/api/v0/zoo_news"

@@ -45,7 +45,7 @@ class PostDetailTableCell: UITableViewCell {
         
         thumbnailImgView = UIImageView()
         thumbnailImgView.clipsToBounds = true
-        thumbnailImgView.image = UIImage(named:"tab_kabi")
+        thumbnailImgView.image = UIImage(named:"icon_default")
         userInfoBtn.addSubview(thumbnailImgView)
 
         userNameTextView = UILabel()

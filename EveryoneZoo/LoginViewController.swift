@@ -250,12 +250,18 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         
         Alamofire.request(APP_URL+POST_LOGIN, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             
+            print(APP_URL+POST_LOGIN)
+            
             self.indicator.stopAnimating()
             
             
             switch response.result {
             case .success:
                 let json:JSON = JSON(response.result.value ?? kill)
+                
+                
+                print(json)
+
                 print(json["result"])
                 
                 if json["result"].boolValue{

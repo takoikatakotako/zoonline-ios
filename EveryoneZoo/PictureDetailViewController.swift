@@ -30,7 +30,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //Post Datas
     var postUserID:Int!
     var postUserName:String = ""
-    var iconUrl:URL!
+    var iconUrl:String = ""
     var postTitle:String = ""
     var postCaption:String = ""
     var commentList:Array<Any>!
@@ -127,7 +127,10 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.userInfoBtn.addTarget(self, action: #selector(userInfoBtnClicked(sender:)), for:.touchUpInside)
         cell.thumbnailImgView.frame = CGRect(x: userInfoBtnHeight*0.15, y: userInfoBtnHeight*0.15, width: userInfoBtnHeight*0.7, height: userInfoBtnHeight*0.7)
         cell.thumbnailImgView.layer.cornerRadius = cell.thumbnailImgView.frame.height * 0.5
-        cell.thumbnailImgView.af_setImage(withURL: self.iconUrl, placeholderImage:  UIImage(named:"icon_default")!)
+        if !self.iconUrl.isEmpty{
+            cell.thumbnailImgView.af_setImage(withURL: URL(string:self.iconUrl)!, placeholderImage:  UIImage(named:"icon_default")!)
+        }
+        
         cell.userNameTextView.frame = CGRect(x: userInfoBtnHeight, y: 0, width: userInfoBtnWidth-userInfoBtnHeight, height: userInfoBtnHeight)
         cell.userNameTextView.text = postUserName
 
@@ -340,7 +343,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 self.postTitle = json[0]["title"].stringValue
                 self.postCaption = json[0]["caption"].stringValue
                 self.postImgUrl = URL(string: json[0]["itemImage"].stringValue)!
-                self.iconUrl = URL(string: json[0]["iconUrl"].stringValue)!
+                
+                if !json[0]["iconUrl"].stringValue.isEmpty{
+                    self.iconUrl = json[0]["iconUrl"].stringValue
+                }
+                
+
                 self.commentList = json[0]["commentList"].arrayValue
                 self.favList = json[0]["favList"].arrayValue
 
