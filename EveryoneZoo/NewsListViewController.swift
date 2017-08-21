@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+import SwiftyJSON
+import SDWebImage
 
-protocol SampleDelegate: class  {
-    func changeBackgroundColor(color:UIColor)
+
+protocol NewsDelegate: class  {
+    func openNews(newsUrl:String)
 }
 
 class NewsListViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource {
@@ -22,9 +27,12 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     var pageMenuHeight:CGFloat!
     var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
+    
+    
+    var newsContents:JSON = []
 
     //delegate
-    weak var delegate: SampleDelegate?
+    weak var delegate: NewsDelegate?
     
     
     //テーブルビューインスタンス
@@ -39,6 +47,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         viewHeight = self.view.frame.size.height
         tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+pageMenuHeight+tabBarHeight)
         
+        getNews()
         //テーブルビューの初期化
         newsTableView = UITableView()
         newsTableView.delegate = self
@@ -49,16 +58,45 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         self.view.addSubview(newsTableView)
     }
     
+    func getNews() {
+        
+        Alamofire.request(APP_URL+GET_NEWS).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                //print(json)
+                print(json["is_success"].stringValue)
+                print(json["content"].arrayValue)
+                self.newsContents = json["content"]
+                
+                self.newsTableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+        
+    }
+    
+    
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return 13
+        return self.newsContents.count
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
+        cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
+        cell.dateLabel.text = self.newsContents[indexPath.row]["posted_at"].stringValue
+        cell.commentLabel.text = self.newsContents[indexPath.row]["content"].stringValue
+        let imageUrl = URL(string:self.newsContents[indexPath.row]["image_url"].stringValue)!
+        cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
         return cell
     }
     
@@ -67,6 +105,6 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         print("\(indexPath.row)番のセルを選択しました！ ")
         
         //デリゲートを用いて初めのViewの色をランダムに変える
-        delegate?.changeBackgroundColor(color: UIColor.red)
+        delegate?.openNews(newsUrl: self.newsContents[indexPath.row]["article_url"].stringValue)
     }
 }

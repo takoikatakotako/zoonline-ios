@@ -9,7 +9,7 @@
 import UIKit
 import PageMenu
 
-class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegate {
+class ZooListViewController: UIViewController,NewsDelegate,CAPSPageMenuDelegate {
     
     //width, height
     var viewWidth:CGFloat!
@@ -106,13 +106,9 @@ class ZooListViewController: UIViewController,SampleDelegate,CAPSPageMenuDelegat
     }
     
     //Delegateで呼ぶViewの背景色を変えるメソッド
-    func changeBackgroundColor(color:UIColor){
-        
-        print(color)
-        
-        
+    func openNews(newsUrl:String){
         //ここでニュースページに飛ぶ
-        let url = URL(string:"http://blog.team-sommelier.com/")
+        let url = URL(string:newsUrl)
         if( UIApplication.shared.canOpenURL(url!) ) {
             UIApplication.shared.open(url!)
         }
