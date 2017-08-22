@@ -93,7 +93,12 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         //myItems配列の中身をテキストにして登録した
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
-        cell.dateLabel.text = self.newsContents[indexPath.row]["posted_at"].stringValue
+        
+        var dateText:String = self.newsContents[indexPath.row]["posted_at"].stringValue
+        dateText = dateText.substring(to: dateText.index(dateText.startIndex, offsetBy: 10))
+
+        
+        cell.dateLabel.text = dateText
         cell.commentLabel.text = self.newsContents[indexPath.row]["content"].stringValue
         let imageUrl = URL(string:self.newsContents[indexPath.row]["image_url"].stringValue)!
         cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))

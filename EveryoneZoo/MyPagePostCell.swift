@@ -30,9 +30,10 @@ class MyPagePostCell: UITableViewCell {
         self.contentView.addSubview(thumbnailImg)
         
         titleLabel = UILabel()
-        titleLabel.text = "タイトル"
+        titleLabel.text = "タイトルタイトルタイトルタイトルたい凸たいタイトルタイトルタイトルたい凸たい凸タイトタイトルタイトルタイトルたい凸たい凸タイト凸タイトル"
+        titleLabel.numberOfLines = 0
         titleLabel.textColor = UIColor.mainAppColor()
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
         self.contentView.addSubview(titleLabel)
         
         dateLabel  = UILabel()
@@ -61,15 +62,15 @@ class MyPagePostCell: UITableViewCell {
         let cellWidth:CGFloat = self.frame.size.width
         let cellHeight:CGFloat = self.frame.size.height
         
-        thumbnailImg.frame =  CGRect(x: cellHeight*0.05, y: cellHeight*0.05, width: cellHeight*0.9, height: cellHeight*0.9)
-        
-        titleLabel.frame =  CGRect(x: cellHeight, y: cellHeight*0.1, width: cellWidth-cellHeight, height: 0)
-        titleLabel.sizeToFit()
+        thumbnailImg.frame =  CGRect(x: cellHeight*0.03, y: cellHeight*0.05, width: cellHeight*0.9, height: cellHeight*0.9)
 
-        
-        dateLabel.frame = CGRect(x: cellWidth*0.7, y: cellHeight*0.15, width: cellWidth*0.3, height: 0)
+        dateLabel.frame = CGRect(x: cellWidth*0.7, y: cellHeight*0.05, width: cellWidth*0.3, height: 0)
         dateLabel.sizeToFit()
+        
+        titleLabel.frame =  CGRect(x: cellHeight, y: cellHeight*0.18, width: cellWidth-cellHeight, height: cellHeight*0.35)
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.8
 
-        commentLabel.frame =  CGRect(x: cellHeight, y: cellHeight*0.3, width: cellWidth-cellHeight, height: cellHeight*0.7)
+        commentLabel.frame =  CGRect(x: cellHeight, y: cellHeight*0.5, width: cellWidth-cellHeight, height: cellHeight*0.5)
     }
 }
