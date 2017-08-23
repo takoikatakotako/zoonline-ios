@@ -27,8 +27,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     var pageMenuHeight:CGFloat!
     var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
-    
-    
+
     var newsContents:JSON = []
 
     //delegate

@@ -38,7 +38,9 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
         myTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
         
         //テーブルビューの設置
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        myTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
+        myTableView.rowHeight = viewWidth*0.28
+
         self.view.addSubview(myTableView)
         
     }
@@ -52,8 +54,7 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.textLabel?.text = self.myItems[indexPath.row] as? String
+        let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         return cell
     }
     

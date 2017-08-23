@@ -27,6 +27,7 @@ class MyPagePostCell: UITableViewCell {
         
         thumbnailImg = UIImageView()
         thumbnailImg.image = UIImage(named:"sample_kabi1")
+        thumbnailImg.contentMode = UIViewContentMode.scaleAspectFit
         self.contentView.addSubview(thumbnailImg)
         
         titleLabel = UILabel()
@@ -39,6 +40,8 @@ class MyPagePostCell: UITableViewCell {
         dateLabel  = UILabel()
         dateLabel.text = "2017年7月30日"
         dateLabel.font = UIFont.systemFont(ofSize: 12)
+        dateLabel.textAlignment = NSTextAlignment.right
+        dateLabel.adjustsFontSizeToFitWidth = true
         self.contentView.addSubview(dateLabel)
         
         commentLabel = UILabel()
@@ -64,8 +67,7 @@ class MyPagePostCell: UITableViewCell {
         
         thumbnailImg.frame =  CGRect(x: cellHeight*0.03, y: cellHeight*0.05, width: cellHeight*0.9, height: cellHeight*0.9)
 
-        dateLabel.frame = CGRect(x: cellWidth*0.7, y: cellHeight*0.05, width: cellWidth*0.3, height: 0)
-        dateLabel.sizeToFit()
+        dateLabel.frame = CGRect(x: cellWidth*0.7, y: cellHeight*0.03, width: cellWidth*0.28, height: cellHeight*0.15)
         
         titleLabel.frame =  CGRect(x: cellHeight, y: cellHeight*0.18, width: cellWidth-cellHeight, height: cellHeight*0.35)
         titleLabel.adjustsFontSizeToFitWidth = true

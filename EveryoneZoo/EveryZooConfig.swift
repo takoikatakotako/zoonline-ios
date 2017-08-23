@@ -31,6 +31,15 @@ let GET_POSTS_DATAILS:String! = "/api/v0/plaza/detail/" //+postID
 //ユーザー情報
 let GET_USER_INFO:String = "/api/v0/users/" //+userID
 
+//ユーザーの投稿一覧
+let POSTS:String = "/posts"
+//http://minzoo.herokuapp.com/api/v0/users/1/posts
+
+//フォローしているユーザーの最新の投稿を取得
+let FOLLOWING_POSTS:String = "/following/posts"
+//http://minzoo.herokuapp.com/api/v0/users/1/following/posts
+
+
 //ログイン
 let POST_LOGIN:String = "/api/v0/auth/sign_in"
 
