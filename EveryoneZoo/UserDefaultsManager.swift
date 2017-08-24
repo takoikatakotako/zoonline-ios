@@ -14,9 +14,17 @@ class UserDefaultsManager: NSObject {
     var userDefaults:UserDefaults = UserDefaults.standard
     
     override init() {
+        //UserInfo
         userDefaults.register(defaults: ["KEY_login": false])
         userDefaults.register(defaults: ["KEY_MyUserID": ""])
         userDefaults.register(defaults: ["KEY_MyUserName": ""])
+        userDefaults.register(defaults: ["KEY_MyUserEmail": ""])
+        userDefaults.register(defaults: ["KEY_MyUserIconUrl": ""])
+        userDefaults.register(defaults: ["KEY_MyUserProfile": ""])
+        
+        //Tokens
+        userDefaults.register(defaults: ["KEY_MyAccessToken": ""])
+        userDefaults.register(defaults: ["KEY_MyClientToken": ""])
     }
     
     func setInitValues(){
@@ -37,12 +45,28 @@ class UserDefaultsManager: NSObject {
     }
     
     
-    func doLogin() {
+    func doLogin(userID:String, userName:String, email:String, iconUrl:String, profile:String, accessToken:String, clientToken:String) {
         userDefaults.set(true, forKey: "KEY_login")
+        userDefaults.set(userID, forKey: "KEY_MyUserID")
+        userDefaults.set(userName, forKey: "KEY_MyUserName")
+        userDefaults.set(email, forKey: "KEY_MyUserEmail")
+        userDefaults.set(iconUrl, forKey: "KEY_MyUserIconUrl")
+        userDefaults.set(profile, forKey: "KEY_MyUserProfile")
         
+        userDefaults.set(accessToken, forKey: "KEY_MyAccessToken")
+        userDefaults.set(clientToken, forKey: "KEY_MyClientToken")
     }
     
     func doLogout(){
-    
+        
+        userDefaults.set(false, forKey: "KEY_login")
+        userDefaults.set("", forKey: "KEY_MyUserID")
+        userDefaults.set("", forKey: "KEY_MyUserName")
+        userDefaults.set("", forKey: "KEY_MyUserEmail")
+        userDefaults.set("", forKey: "KEY_MyUserIconUrl")
+        userDefaults.set("", forKey: "KEY_MyUserProfile")
+        
+        userDefaults.set("", forKey: "KEY_MyAccessToken")
+        userDefaults.set("", forKey: "KEY_MyClientToken")
     }
 }

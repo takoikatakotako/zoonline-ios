@@ -261,21 +261,68 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                 
                 
                 print(json)
-
-                print(json["result"])
                 
-                if json["result"].boolValue{
-                    //ログイン成功
-                    print(json)
+                if json["data"].isEmpty{
                     
-                    //let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    
-                    self.dismiss(animated: true, completion: nil)
-                }else{
                     //メールなどが違うと判断
                     self.loginFailed.isHidden = false
                     SCLAlertView().showInfo("Important info", subTitle: "ログインに失敗しますた。たぶんパスとか違う")
+                
+                }else{
+                    
+                    //ログイン成功
+
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+                    var myUserID:String = ""
+                    var myUserName:String = ""
+                    var myUserEmail:String = ""
+                    var myUserIconUrl:String = ""
+                    var myUserProfile:String = ""
+
+                    var myAccessToken:String = ""
+                    var myClientToken:String = ""
+                    
+                    
+                    myUserID = String(json["id"].intValue)
+                    
+                    if !json["data"]["name"].isEmpty {
+                        myUserName = json["data"]["name"].stringValue
+                    }
+                    
+                    if !json["data"]["email"].isEmpty {
+                        myUserEmail = json["data"]["email"].stringValue
+                    }
+                    
+                    if !json["data"]["icon_url"].isEmpty {
+                        myUserIconUrl = json["data"]["icon_url"].stringValue
+                    }
+                    
+                    
+                    if !json["data"]["icon_url"].isEmpty {
+                        myUserIconUrl = json["data"]["icon_url"].stringValue
+                    }
+                    
+                    if !json["data"]["profile"].isEmpty {
+                        myUserProfile = json["data"]["profile"].stringValue
+                    }
+
+                
+                    if let accessToken = response.response?.allHeaderFields["Access-Token"] as? String {
+                        myAccessToken = accessToken
+                    }
+                    
+                    if let clientToken = response.response?.allHeaderFields["Client"] as? String {
+                        myClientToken = clientToken
+                    }
+                    
+                    
+                    appDelegate.userDefaultsManager?.doLogin(userID: myUserID, userName: myUserName, email: myUserEmail, iconUrl: myUserIconUrl, profile: myUserProfile, accessToken: myAccessToken, clientToken: myClientToken)
+                
+                    self.dismiss(animated: true, completion: nil)
+
                 }
+
                 
             case .failure(let error):
                 print(error)

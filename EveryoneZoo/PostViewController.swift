@@ -72,7 +72,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if (appDelegate.userDefaultsManager?.isLogin())! {
-            postTableView.reloadData()
+            //postTableView.reloadData()
         }
     }
     

@@ -56,6 +56,12 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         setTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.myPageTableView.reloadData()
+    }
+    
     // MARK: - Viewにパーツの設置
 
     func setNavigationBar() {
@@ -244,6 +250,9 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             case 2:
                 //ログアウト
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.userDefaultsManager?.doLogout()
+                self.myPageTableView.reloadData()
                 break
             default: break
                 
@@ -270,6 +279,13 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             case 1:
                 //ログイン
+                
+                let loginView:LoginViewController = LoginViewController()
+                loginView.statusBarHeight = self.statusBarHeight
+                loginView.navigationBarHeight = self.navigationBarHeight
+                self.present(loginView, animated: true, completion: nil)
+                
+                
                 break
             default: break
                 
