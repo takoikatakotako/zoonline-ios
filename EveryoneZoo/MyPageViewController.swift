@@ -18,6 +18,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     private var tableViewHeight:CGFloat!
     private var tabBarHeight:CGFloat!
 
+    //ユーザー数の
+    var userCellBtn:MyPageUserCellBtn!
     
     //テーブルビューインスタンス
     private var myPageTableView: UITableView!
@@ -25,10 +27,13 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //
     var loginedSectionTitle:[String] = ["ユーザー情報", "設定・その他", "ログアウト"]
     var unloginedSectionTitle:[String] = ["設定・その他", "ログイン"]
+    
     var userInfoTitle:[String] = ["投稿","フレンズ","フォロワー","お気に入り"]
     var userInfoIcon:[String] = ["mypage_post","mypage_friends","mypage_follower","mypage_favorite"]
-    var configsTitle:[String] = ["お問い合わせ","シェア"]
-    var configsIcon:[String] = ["mypage_contact","mypage_share"]
+    
+    var configsTitle:[String] = ["お問い合わせ", "シェア", "サビミッションポリシー"]
+    var configsIcon:[String] = ["mypage_contact","mypage_share","mypage_share"]
+    
     var logoutTitle:[String] = ["ログアウト"]
     var logoutIcon:[String] = ["mypage_logout"]
     var loginTitle:[String] = ["ログイン"]
@@ -78,10 +83,18 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //user用のセル
     func setUserCellBtn() {
         
-        let userCellBtn:MyPageUserCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: 0, width: viewWidth, height: HEIGHT_USER_CELL))
+        userCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: 0, width: viewWidth, height: HEIGHT_USER_CELL))
         userCellBtn.backgroundColor = UIColor.white
         userCellBtn.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for:.touchUpInside)
         self.view.addSubview(userCellBtn)
+        
+        //ログイン
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+
+            userCellBtn.userNameLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID")
+            userCellBtn.userMailAdressLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserEmail")
+        }
     }
     
     //TableViewの設置
@@ -317,5 +330,4 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let vc:MyPageProfilelViewController = MyPageProfilelViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
 }

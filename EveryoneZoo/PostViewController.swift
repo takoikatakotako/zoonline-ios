@@ -222,7 +222,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return 10
+        return 8
     }
     
     //MARK: テーブルビューのセルの中身を設定する
@@ -250,14 +250,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell:PostTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTagTableViewCell.self), for: indexPath) as! PostTagTableViewCell
             cell.tagsAry = tagsAry
 
-            return cell
-        }else if indexPath.row == 8 {
-            //サブミットポリシーの選択View
-            let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UITableViewCell.self), for: indexPath) 
-            cell.textLabel?.text = "Submission Policy"
-            cell.textLabel?.textAlignment = NSTextAlignment.center
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-            cell.textLabel?.textColor = UIColor.mainAppColor()
             return cell
         }else{
         
@@ -305,13 +297,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             SetPostTagsVC.tagsAry = self.tagsAry
             SetPostTagsVC.delegate = self
             self.navigationController?.pushViewController(SetPostTagsVC, animated: true)
-        }else if indexPath.row == 8{
-            //今は利用規約なのでサブミッションポリシーにする
-            let submissionWebView:WebViewController = WebViewController()
-            submissionWebView.navTitle = "あとでサブミッションポリシーページ作る"
-            submissionWebView.url = TOS_PAGE_URL_STRING
-            self.present(submissionWebView, animated: true, completion: nil)
-            
         }
     }
     
