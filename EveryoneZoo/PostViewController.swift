@@ -35,7 +35,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var tagsAry:Array<String> = []
     
     //
-    private var noLoginView:NoLoginView! = NoLoginView()
+    private var noLoginView:NoLoginView!
 
     
     
@@ -49,30 +49,42 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
 
-        
         tableViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + tabBarHeight!)
         
         setNavigationBar()
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
-            
-            setTableView()
-
-
-        }else{
-
-            //
-            setLoginView()
-        }
+        noLoginView = NoLoginView()
+        postTableView = UITableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationItem.rightBarButtonItem = nil
+        
+        if (postTableView.isDescendant(of: self.view)) {
+            postTableView.removeFromSuperview()
+        }
+        
+        if (noLoginView.isDescendant(of: self.view)){
+            noLoginView.removeFromSuperview()
+        }
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if (appDelegate.userDefaultsManager?.isLogin())! {
-            //postTableView.reloadData()
+            
+            //バーの右側に設置するボタンの作成
+            let rightNavBtn = UIBarButtonItem()
+            rightNavBtn.image = UIImage(named:"submit_nav_btn")!
+            rightNavBtn.action = #selector(postBarBtnClicked(sender:))
+            rightNavBtn.target = self
+            self.navigationItem.rightBarButtonItem = rightNavBtn
+            
+            setTableView()
+            self.postTableView.reloadData()
+        }else{
+            //
+            setLoginView()
         }
     }
     
@@ -98,26 +110,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         titleLabel.text = "投稿する"
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
-        
-        
-        //ログインしている場合はボタンをつける
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
-            
-            //バーの右側に設置するボタンの作成
-            let rightNavBtn = UIBarButtonItem()
-            rightNavBtn.image = UIImage(named:"submit_nav_btn")!
-            self.navigationItem.rightBarButtonItem = rightNavBtn
-            
-        }
     }
-    
-    
     
     //TableViewの設置
     func setTableView(){
         
-        postTableView = UITableView(frame: CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight))
+        postTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
         postTableView.dataSource = self
         postTableView.delegate = self
         postTableView.separatorStyle = .none
@@ -335,9 +333,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
-    
     
     
     //Mark: 未ログイン関係の処理

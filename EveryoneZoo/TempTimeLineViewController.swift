@@ -22,6 +22,8 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     private var tableViewHeight:CGFloat!
 
     private var timeLineTableView: UITableView!
+    private var noLoginView:NoLoginView!
+
 
     var newsContents:JSON = []
 
@@ -40,24 +42,42 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         
         setNavigationBarBar()
         
-        
-        
-        //テーブルビューの初期化
         timeLineTableView = UITableView()
-        timeLineTableView.delegate = self
-        timeLineTableView.dataSource = self
-        timeLineTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
-        timeLineTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
-        timeLineTableView.rowHeight = viewWidth*0.28
-        self.view.addSubview(timeLineTableView)
-        
-        getNews()
+        noLoginView = NoLoginView()
+
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if (timeLineTableView.isDescendant(of: self.view)) {
+            timeLineTableView.removeFromSuperview()
+        }
+        
+        if (noLoginView.isDescendant(of: self.view)){
+            noLoginView.removeFromSuperview()
+        }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.userDefaultsManager?.isLogin())! {
+            
+            //
+            setTableView()
+            getNews()
+            
+        }else{
+            
+            setLoginView()
+        }
+    }
     
     func getNews() {
         
-        Alamofire.request(APP_URL+GET_USER_INFO + "1" + FOLLOWING_POSTS).responseJSON{ response in
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let userID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
+        
+        Alamofire.request(APP_URL+GET_USER_INFO + userID + FOLLOWING_POSTS).responseJSON{ response in
             
             switch response.result {
             case .success:
@@ -91,6 +111,17 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         UINavigationBar.appearance().tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.title = "タイムライン"
+    }
+    
+    func setTableView() {
+        
+        //テーブルビューの初期化
+        timeLineTableView.delegate = self
+        timeLineTableView.dataSource = self
+        timeLineTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
+        timeLineTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
+        timeLineTableView.rowHeight = viewWidth*0.28
+        self.view.addSubview(timeLineTableView)
     }
     
 
@@ -134,4 +165,36 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         picDetailView.postID = postID
         self.navigationController?.pushViewController(picDetailView, animated: true)
     }
+    
+    
+    
+    //Mark: 未ログイン関係の処理
+    
+    // MARK: setLoginView
+    func setLoginView()  {
+        
+        let noLoginViewHeight:CGFloat = viewHeight-(statusBarHeight+tabBarHeight)
+        noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
+        noLoginView.loginBtn.addTarget(nil, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+        noLoginView.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
+        self.view.addSubview(noLoginView)
+    }
+    
+    //ログインボタンが押されたら呼ばれます
+    func loginBtnClicked(sender: UIButton){
+        
+        let loginView:LoginViewController = LoginViewController()
+        loginView.statusBarHeight = self.statusBarHeight
+        loginView.navigationBarHeight = self.navigationBarHeight
+        self.present(loginView, animated: true, completion: nil)
+    }
+    
+    //登録ボタンが押されたら呼ばれます
+    func resistBtnClicked(sender: UIButton){
+        
+        let resistView:NewResistViewController = NewResistViewController()
+        self.present(resistView, animated: true, completion: nil)
+    }
+    
+    
 }
