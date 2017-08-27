@@ -31,7 +31,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var userInfoTitle:[String] = ["投稿","フレンズ","フォロワー","お気に入り"]
     var userInfoIcon:[String] = ["mypage_post","mypage_friends","mypage_follower","mypage_favorite"]
     
-    var configsTitle:[String] = ["お問い合わせ", "シェア", "サビミッションポリシー"]
+    var configsTitle:[String] = ["お問い合わせ", "シェア", "サブミッションポリシー"]
     var configsIcon:[String] = ["mypage_contact","mypage_share","mypage_share"]
     
     var logoutTitle:[String] = ["ログアウト"]
@@ -64,11 +64,11 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setUserCellText()
         self.myPageTableView.reloadData()
     }
     
     // MARK: - Viewにパーツの設置
-
     func setNavigationBar() {
         
         self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
@@ -88,12 +88,19 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         userCellBtn.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for:.touchUpInside)
         self.view.addSubview(userCellBtn)
         
-        //ログイン
+    }
+    
+    //UserCellに文字を
+    func setUserCellText() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if (appDelegate.userDefaultsManager?.isLogin())! {
-
-            userCellBtn.userNameLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID")
+            //ログイン
+            userCellBtn.userNameLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName")
             userCellBtn.userMailAdressLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserEmail")
+        }else{
+            //ログイン
+            userCellBtn.userNameLabel.text = "未ログイン"
+            userCellBtn.userMailAdressLabel.text = "ログインしてください"
         }
     }
     
@@ -266,6 +273,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.userDefaultsManager?.doLogout()
                 self.myPageTableView.reloadData()
+                setUserCellText()
                 break
             default: break
                 
@@ -324,7 +332,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             loginView.navigationBarHeight = self.navigationBarHeight
             self.present(loginView, animated: true, completion: nil)
             return
-        
         }
 
         let vc:MyPageProfilelViewController = MyPageProfilelViewController()

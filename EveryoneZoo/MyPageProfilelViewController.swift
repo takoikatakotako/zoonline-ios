@@ -68,6 +68,8 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     // MARK: プロフィールビュー
     func setProfielView() {
         
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
         //自分の情報
         let myProfielView:UIView = UIView()
         myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.56)
@@ -101,7 +103,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         // 名前
         let nameLabel:UILabel = UILabel()
         nameLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.58, width: viewWidth, height:myProfielView.frame.height*0.2)
-        nameLabel.text = "道券カビゴン"
+        nameLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName")
         nameLabel.textAlignment = NSTextAlignment.center
         nameLabel.font = UIFont.systemFont(ofSize: 28)
         self.view.addSubview(nameLabel)
@@ -109,7 +111,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         // Mail
         let mailLabel:UILabel = UILabel()
         mailLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.75, width: viewWidth, height:myProfielView.frame.height*0.2)
-        mailLabel.text = "d.uiji.snorlax.love.grass@gmail.com"
+        mailLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserEmail")
         mailLabel.textAlignment = NSTextAlignment.center
         mailLabel.font = UIFont.systemFont(ofSize: 14)
         mailLabel.textColor = UIColor.gray
@@ -147,7 +149,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     
     
     // MARK: - TableViewのデリゲートメリット
-    
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -192,9 +193,11 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         
         switch indexPath.row {
         case 0:
-            //プロフィールのプレビューが押された
-            let vc:ProfielViewController = ProfielViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            //プロフィールのプレビューが押された、ユーザー情報画面へ
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let userInfoView: UserInfoViewController = UserInfoViewController()
+            userInfoView.postUserID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+            self.navigationController?.pushViewController(userInfoView, animated: true)
             break
         case 2:
             //ユーザー名の編集
@@ -206,10 +209,5 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             
             break
         }
-        
-        
-
-        
     }
-
 }

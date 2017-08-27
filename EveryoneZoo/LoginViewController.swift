@@ -284,26 +284,21 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                     var myClientToken:String = ""
                     
                     
-                    myUserID = String(json["id"].intValue)
+                    myUserID = String(json["data"]["id"].intValue)
                     
-                    if !json["data"]["name"].isEmpty {
+                    if !json["data"]["name"].stringValue.isEmpty {
                         myUserName = json["data"]["name"].stringValue
                     }
                     
-                    if !json["data"]["email"].isEmpty {
+                    if !json["data"]["email"].stringValue.isEmpty {
                         myUserEmail = json["data"]["email"].stringValue
                     }
                     
-                    if !json["data"]["icon_url"].isEmpty {
+                    if !json["data"]["icon_url"].stringValue.isEmpty {
                         myUserIconUrl = json["data"]["icon_url"].stringValue
                     }
                     
-                    
-                    if !json["data"]["icon_url"].isEmpty {
-                        myUserIconUrl = json["data"]["icon_url"].stringValue
-                    }
-                    
-                    if !json["data"]["profile"].isEmpty {
+                    if !json["data"]["profile"].stringValue.isEmpty {
                         myUserProfile = json["data"]["profile"].stringValue
                     }
 
@@ -320,7 +315,6 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                     appDelegate.userDefaultsManager?.doLogin(userID: myUserID, userName: myUserName, email: myUserEmail, iconUrl: myUserIconUrl, profile: myUserProfile, accessToken: myAccessToken, clientToken: myClientToken)
                 
                     self.dismiss(animated: true, completion: nil)
-
                 }
 
                 
