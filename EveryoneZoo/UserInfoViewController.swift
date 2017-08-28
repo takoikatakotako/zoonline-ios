@@ -12,14 +12,10 @@ import SwiftyJSON
 import SDWebImage
 
 class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
-
     
     
     //テーブルビューインスタンス
     private var myTableView: UITableView!
-    
-    //テーブルビューに表示する配列
-    private var myItems: NSArray = []
     
     //width, height
     var viewWidth:CGFloat!
@@ -54,11 +50,11 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         
         
         getUserInfo()
+        getPosts()
         
         //テーブルビューに表示する配列
-        myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
-        
-        setTableView()
+        self.setTableView()
+
     }
     
     func getUserInfo() {
@@ -92,15 +88,16 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func getPosts() {
         
-        Alamofire.request(APP_URL+GET_USER_INFO + String(postUserID)).responseJSON{ response in
+        Alamofire.request(APP_URL+GET_USER_INFO + String(postUserID) + POSTS).responseJSON{ response in
             
             switch response.result {
             case .success:
                 
-                
-                
-                print("")
-                
+                let json:JSON = JSON(response.result.value ?? kill)
+
+                print(json)
+                self.postsInfos = json
+                self.myTableView.reloadData()
                 
             case .failure(let error):
                 print(error)
@@ -181,20 +178,37 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //テーブルビューのセルの数はmyItems配列の数とした
-        return self.myItems.count
+
+        print(self.postsInfos.count)
+        
+        return self.postsInfos.count
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
+        
+        var dateText:String = self.postsInfos[indexPath.row]["updated_at"].stringValue
+        dateText = dateText.substring(to: dateText.index(dateText.startIndex, offsetBy: 10))
+        cell.dateLabel.text = dateText
+        cell.titleLabel.text = self.postsInfos[indexPath.row]["title"].stringValue
+        cell.commentLabel.text = self.postsInfos[indexPath.row]["caption"].stringValue
+        let imageUrl = URL(string:self.postsInfos[indexPath.row]["image_url"].stringValue)!
+        cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
+        
         return cell
     }
     
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
+        
+        //画面遷移、投稿詳細画面へ
+        let picDetailView: PictureDetailViewController = PictureDetailViewController()
+        picDetailView.postID = self.postsInfos[indexPath.row]["id"].intValue
+        self.navigationController?.pushViewController(picDetailView, animated: true)
+        
     }
     
 }

@@ -28,7 +28,6 @@
 		8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */; };
 		8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215AC1EC3689600593E55 /* MyPageViewController.swift */; };
 		8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D6888781E9E7C2E00140508 /* Localizable.strings */; };
-		8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */; };
 		8D7343631F3A1CB700EB232E /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7343621F3A1CB700EB232E /* NewsListViewController.swift */; };
 		8D7343651F3A1D5D00EB232E /* OfficialListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7343641F3A1D5D00EB232E /* OfficialListViewController.swift */; };
 		8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */; };
@@ -117,7 +116,6 @@
 		8D68887B1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		8D68887C1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8D68887D1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiLibrary.swift; sourceTree = "<group>"; };
 		8D7343621F3A1CB700EB232E /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
 		8D7343641F3A1D5D00EB232E /* OfficialListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficialListViewController.swift; sourceTree = "<group>"; };
 		8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneZoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,14 +215,14 @@
 				8D6215A41EC2011100593E55 /* ComoonParts */,
 				8DF9CFE31EE959F9002B8459 /* WebViewController.swift */,
 				8D35113C1EEECFC8004BA744 /* NoLoginView.swift */,
-				8D1BD6DC1F47D4EA001A6D64 /* FieldRelations */,
+				8D1BD6DC1F47D4EA001A6D64 /* PostsRelations */,
 				8D35113E1EEED5E6004BA744 /* LoginViewController.swift */,
 				8DE541761EFAB3010085F916 /* NewResistViewController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
 		};
-		8D1BD6DC1F47D4EA001A6D64 /* FieldRelations */ = {
+		8D1BD6DC1F47D4EA001A6D64 /* PostsRelations */ = {
 			isa = PBXGroup;
 			children = (
 				8D1586711ED848F400802F54 /* UserInfoViewController.swift */,
@@ -232,7 +230,7 @@
 				8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */,
 				8D5121261F0EAB8100C6D774 /* ProfielViewController.swift */,
 			);
-			name = FieldRelations;
+			name = PostsRelations;
 			sourceTree = "<group>";
 		};
 		8D46EFBA1F2DEB6D00FFD8D7 /* MyPageCustumCell */ = {
@@ -339,7 +337,6 @@
 				8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */,
 				8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */,
 				8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */,
-				8D6AB35B1EA4FE4F00C5987F /* ApiLibrary.swift */,
 				8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */,
 				8D9DE17F1EE4147500121FC1 /* Manager */,
 				8D7CDC3A1F14F0E100C3844E /* ViewsParts */,
@@ -762,7 +759,6 @@
 				8D9DE17A1EE3EA3900121FC1 /* FavCommentButton.swift in Sources */,
 				8D7343651F3A1D5D00EB232E /* OfficialListViewController.swift in Sources */,
 				8DC719111F08A580003C5E00 /* PostTextsTableViewCell.swift in Sources */,
-				8D6AB35C1EA4FE4F00C5987F /* ApiLibrary.swift in Sources */,
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
 				8DC7190F1F08A3FB003C5E00 /* PostSpaceTableViewCell.swift in Sources */,
 				8D48576E1F40457F00608A56 /* NewPostsViewController.swift in Sources */,
