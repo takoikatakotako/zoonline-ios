@@ -63,9 +63,9 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
             
             switch response.result {
             case .success:
-                
-
+            
                 let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
                 if !json["userName"].stringValue.isEmpty {
                     self.userName = json["userName"].stringValue
                 }
@@ -76,7 +76,6 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
                     self.userIconUrl = json["iconUrl"].stringValue
                 }
                 
-                print("")
                 self.setProfileView()
 
             case .failure(let error):
@@ -208,7 +207,5 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
         picDetailView.postID = self.postsInfos[indexPath.row]["id"].intValue
         self.navigationController?.pushViewController(picDetailView, animated: true)
-        
     }
-    
 }

@@ -60,7 +60,6 @@ class FriendsListViewController: UIViewController,UITableViewDelegate, UITableVi
     }
     
     
-    
     // MARK: - Viewにパーツの設置
     // MARK: ナビゲーションバーの設定
     func setNavigationBar() {

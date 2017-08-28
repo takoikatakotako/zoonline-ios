@@ -214,7 +214,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        
         return cell
     }
     
@@ -229,7 +228,9 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 switch indexPath.row {
                 case 0:
                     //投稿一覧
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let vc:MyPagePostViewController = MyPagePostViewController()
+                    vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 case 1:
@@ -333,8 +334,5 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.present(loginView, animated: true, completion: nil)
             return
         }
-
-        let vc:MyPageProfilelViewController = MyPageProfilelViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
