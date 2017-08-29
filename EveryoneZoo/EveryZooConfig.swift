@@ -44,8 +44,13 @@ let FAVORITE_POSTS:String = "/favorite_posts"
 //http://minzoo.herokuapp.com/api/v0/users/1/favorite_posts
 
 
+//投稿のコメントを取得
+let GETS_POSTS:String = "/api/v0/posts/"
+//http://minzoo.herokuapp.com/api/v0/posts/2
 
-
+//投稿のコメントを取得
+let COMMENTS:String = "/comments"
+//http://minzoo.herokuapp.com/api/v0/posts/2/comments
 
 //フォローしているユーザーの最新の投稿を取得
 let FOLLOWING_POSTS:String = "/following/posts"

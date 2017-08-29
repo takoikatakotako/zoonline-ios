@@ -12,8 +12,9 @@ import AlamofireImage
 import SwiftyJSON
 import SCLAlertView
 
-
 class PictureDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+    
+    var postsID:Int!
 
     //width, height
     private var viewWidth:CGFloat!
@@ -103,6 +104,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         indicator.color = UIColor.mainAppColor()
         self.view.addSubview(indicator)
     }
+    
     
     
     // MARK: - TableView Delegate Method
@@ -246,16 +248,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //コメントボタンが押されたら呼ばれる
     func commentBtnClicked(sender: FavCommentButton){
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if !(appDelegate.userDefaultsManager?.isLogin())! {
-            //ログインしていない
-            SCLAlertView().showInfo("ログインしてね", subTitle: "コメント機能を使うにはログインが必要だよ！")
-            return
-        }
-        
         goCommentView()
     }
-    
     
     //ユーザー情報が押されたら呼ばれる
     func userInfoBtnClicked(sender: UIButton){
@@ -320,6 +314,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     func goCommentView(){
         // 移動先のViewを定義する.
         let commentListlView: CommentListViewController = CommentListViewController()
+        commentListlView.postsID = postID
         self.navigationController?.pushViewController(commentListlView, animated: true)
     }
     
