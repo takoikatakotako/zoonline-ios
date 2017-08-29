@@ -236,16 +236,19 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 case 1:
                     //フレンズ一覧
                     let vc:FriendsListViewController = FriendsListViewController()
+                    vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 case 2:
                     //フォロワー一覧
                     let vc:FollowerListViewController = FollowerListViewController()
+                    vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 case 3:
                     //お気に入り
                     let vc:MyPageFavoriteViewController = MyPageFavoriteViewController()
+                    vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 default:
@@ -314,10 +317,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
     
     
     // MARK: - アクションの設定

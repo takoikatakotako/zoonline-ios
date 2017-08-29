@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+import SwiftyJSON
+import SDWebImage
 
 class FriendsListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+    
+    var userID:Int!
     
     //width, height
     private var viewWidth:CGFloat!
@@ -21,6 +27,8 @@ class FriendsListViewController: UIViewController,UITableViewDelegate, UITableVi
     
     //テーブルビューインスタンス
     private var friendsTableView: UITableView!
+    private var frindsList:JSON = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +58,31 @@ class FriendsListViewController: UIViewController,UITableViewDelegate, UITableVi
         friendsTableView.register(FriendsFollowTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(FriendsFollowTableViewCell.self))
         friendsTableView.rowHeight = viewWidth*0.4
         self.view.addSubview(friendsTableView)
+        
+        
+        getMyFriends()
     }
 
+    
+    func getMyFriends() {
+        
+        Alamofire.request(APP_URL+GET_USER_INFO + String(userID) + FOLLOWING).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                self.frindsList = json["followers"]
+                self.friendsTableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+    }
+    
     
     //basicボタンが押されたら呼ばれます
     func userBtnClicked(sender: UIButton){
@@ -79,12 +110,17 @@ class FriendsListViewController: UIViewController,UITableViewDelegate, UITableVi
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //テーブルビューのセルの数はmyItems配列の数とした
-        return 8
+        
+        if self.frindsList.count%3 == 0 {
+            return self.frindsList.count/3
+        }else{
+            return self.frindsList.count/3 + 1
+        }
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         //myItems配列の中身をテキストにして登録した
         let cell:FriendsFollowTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(FriendsFollowTableViewCell.self))! as! FriendsFollowTableViewCell
 

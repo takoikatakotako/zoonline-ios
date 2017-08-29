@@ -10,6 +10,8 @@ import UIKit
 
 class FollowerListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
+    var userID:Int!
+    
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!

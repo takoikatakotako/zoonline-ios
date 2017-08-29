@@ -35,6 +35,18 @@ let GET_USER_INFO:String = "/api/v0/users/" //+userID
 let POSTS:String = "/posts"
 //http://minzoo.herokuapp.com/api/v0/users/1/posts
 
+//ユーザーのフォロー一覧
+let FOLLOWING:String = "/following"
+//http://minzoo.herokuapp.com/api/v0/users/1/following
+
+//ユーザーのお気に入りの取得
+let FAVORITE_POSTS:String = "/favorite_posts"
+//http://minzoo.herokuapp.com/api/v0/users/1/favorite_posts
+
+
+
+
+
 //フォローしているユーザーの最新の投稿を取得
 let FOLLOWING_POSTS:String = "/following/posts"
 //http://minzoo.herokuapp.com/api/v0/users/1/following/posts
