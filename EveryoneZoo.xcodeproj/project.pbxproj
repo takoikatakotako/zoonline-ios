@@ -58,6 +58,7 @@
 		8DC719171F08F3A4003C5E00 /* SetPostTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC719161F08F3A4003C5E00 /* SetPostTagsViewController.swift */; };
 		8DC719191F08FDA5003C5E00 /* TagListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC719181F08FDA5003C5E00 /* TagListTableViewCell.swift */; };
 		8DD1C2BD1EDDD4A40008FE14 /* PostDraftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD1C2BC1EDDD4A40008FE14 /* PostDraftTableViewCell.swift */; };
+		8DD2A0DD1F556609002048B4 /* MyPageProfilelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD2A0DC1F556609002048B4 /* MyPageProfilelViewController.swift */; };
 		8DDAF0DB1ED183E00079D443 /* MyPagePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */; };
 		8DDAF0DD1ED184790079D443 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */; };
 		8DDAF0DF1ED184AF0079D443 /* MyPageFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */; };
@@ -151,6 +152,7 @@
 		8DC719161F08F3A4003C5E00 /* SetPostTagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPostTagsViewController.swift; sourceTree = "<group>"; };
 		8DC719181F08FDA5003C5E00 /* TagListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListTableViewCell.swift; sourceTree = "<group>"; };
 		8DD1C2BC1EDDD4A40008FE14 /* PostDraftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDraftTableViewCell.swift; sourceTree = "<group>"; };
+		8DD2A0DC1F556609002048B4 /* MyPageProfilelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageProfilelViewController.swift; sourceTree = "<group>"; };
 		8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPagePostViewController.swift; sourceTree = "<group>"; };
 		8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageFavoriteViewController.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 		8D5121251F0D405B00C6D774 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				8DD2A0DC1F556609002048B4 /* MyPageProfilelViewController.swift */,
 				8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */,
 				8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */,
 				8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */,
@@ -758,6 +761,7 @@
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
 				8DC7190F1F08A3FB003C5E00 /* PostSpaceTableViewCell.swift in Sources */,
 				8D48576E1F40457F00608A56 /* NewPostsViewController.swift in Sources */,
+				8DD2A0DD1F556609002048B4 /* MyPageProfilelViewController.swift in Sources */,
 				8D7E860B1EABBC7400C4049B /* RightPicturesTableViewCell.swift in Sources */,
 				8D4857701F40A02500608A56 /* PopularPostsViewController.swift in Sources */,
 				8DC719151F08F189003C5E00 /* PostTagTableViewCell.swift in Sources */,

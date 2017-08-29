@@ -334,5 +334,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.present(loginView, animated: true, completion: nil)
             return
         }
+        
+        let vc:MyPageProfilelViewController = MyPageProfilelViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
