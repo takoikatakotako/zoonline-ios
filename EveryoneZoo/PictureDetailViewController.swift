@@ -288,12 +288,22 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         let reportAction = UIAlertAction(title: "レポート", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
+            
+            //お問い合わせ
+            let contactView:WebViewController = WebViewController()
+            contactView.statusBarHeight = self.statusBarHeight
+            contactView.navigationBarHeight = self.navigationBarHeight
+            contactView.url = CONTACT_PAGE_URL_STRING
+            contactView.navTitle = "お問い合わせ"
+            self.present(contactView, animated: true, completion: nil)
         })
         actionAlert.addAction(reportAction)
 
         
         let shareAction = UIAlertAction(title: "シェアする", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
+            
+            SCLAlertView().showInfo("シェアする", subTitle: "シェアだウェイ")
         })
         actionAlert.addAction(shareAction)
 

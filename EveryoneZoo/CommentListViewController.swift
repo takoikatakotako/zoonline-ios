@@ -11,6 +11,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 import SDWebImage
+import SCLAlertView
 
 class CommentListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource  {
 
@@ -141,5 +142,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     // MARK: -
     func goWriteCommentView(sender: UIButton){
         
+        let wirtePostComments: WritePostsCommentsViewController = WritePostsCommentsViewController()
+        self.navigationController?.pushViewController(wirtePostComments, animated: true)
     }
 }
