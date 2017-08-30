@@ -292,7 +292,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         actionAlert.addAction(reportAction)
 
         
-        let shareAction = UIAlertAction(title: "共有する", style: UIAlertActionStyle.default, handler: {
+        let shareAction = UIAlertAction(title: "シェアする", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
         })
         actionAlert.addAction(shareAction)

@@ -65,6 +65,20 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         titleLabel.textColor = UIColor.white
         
         self.navigationItem.titleView = titleLabel
+        
+
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if !(appDelegate.userDefaultsManager?.isLogin())! {
+            //ログインしていない
+            return
+        }else{
+            //バーの右側に設置するボタンの作成
+            let rightNavBtn = UIBarButtonItem()
+            rightNavBtn.image = UIImage(named:"submit_nav_btn")!
+            rightNavBtn.action = #selector(goWriteCommentView(sender:))
+            rightNavBtn.target = self
+            self.navigationItem.rightBarButtonItem = rightNavBtn
+        }
     }
     
     // MARK: TableView
@@ -121,5 +135,11 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
+    }
+    
+    
+    // MARK: -
+    func goWriteCommentView(sender: UIButton){
+        
     }
 }
