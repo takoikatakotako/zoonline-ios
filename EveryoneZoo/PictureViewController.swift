@@ -40,7 +40,7 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         
         setNavigationBar()
         setPageMenu()
-    }
+    }    
     
     // MARK: - Viewにパーツの設置
     func setNavigationBar() {

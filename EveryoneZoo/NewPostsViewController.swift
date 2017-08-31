@@ -40,6 +40,11 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
     var postIds:Array<Int> = Array()
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var isNetWorkConnect:Bool = true
+    
+    
+    
+    let vc = UIButton()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +60,22 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
         
         //network
         dowonloadJsons()
+        
+        //サポート
+        vc.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
+        vc.setImage(UIImage(named:"support_sample"), for: UIControlState.normal)
+        vc.imageView?.contentMode = .scaleAspectFit
+        vc.contentHorizontalAlignment = .fill
+        vc.contentVerticalAlignment = .fill
+        vc.backgroundColor = UIColor.clear
+        vc.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
+        self.view.addSubview(vc)
     }
 
+    func supportBtnClicked(sender: UIButton){
+        vc.removeFromSuperview()
+    }
+    
     
     // MARK: - Viewにパーツの設置
     
@@ -70,7 +89,6 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
         pictureTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
         pictureTableView.backgroundColor = UIColor.white
         pictureTableView.separatorStyle = .none
-        
         
         // はじめはコンテンツビューのサイズは画面と同じ
         pictureTableView.contentSize = CGSize(width:viewWidth, height:self.tableViewHeight)

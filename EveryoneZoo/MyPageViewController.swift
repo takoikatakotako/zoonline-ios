@@ -31,8 +31,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var userInfoTitle:[String] = ["投稿","フレンズ","フォロワー","お気に入り"]
     var userInfoIcon:[String] = ["mypage_post","mypage_friends","mypage_follower","mypage_favorite"]
     
-    var configsTitle:[String] = ["お問い合わせ", "シェア", "サブミッションポリシー"]
-    var configsIcon:[String] = ["mypage_contact","mypage_share","mypage_share"]
+    var configsTitle:[String] = ["お問い合わせ", "シェア", "利用規約", "プライバシーポリシー"]
+    var configsIcon:[String] = ["mypage_contact","mypage_share","mypage_share","mypage_share"]
     
     var logoutTitle:[String] = ["ログアウト"]
     var logoutIcon:[String] = ["mypage_logout"]
@@ -268,6 +268,24 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     break
                 case 1:
                     //アプリシェア
+                    break
+                case 2:
+                    //利用規約
+                    let contactView:WebViewController = WebViewController()
+                    contactView.statusBarHeight = self.statusBarHeight
+                    contactView.navigationBarHeight = self.navigationBarHeight
+                    contactView.url = TOS_PAGE_URL_STRING
+                    contactView.navTitle = "利用規約"
+                    self.present(contactView, animated: true, completion: nil)
+                    break
+                case 3:
+                    //プライバシーポリシー
+                    let contactView:WebViewController = WebViewController()
+                    contactView.statusBarHeight = self.statusBarHeight
+                    contactView.navigationBarHeight = self.navigationBarHeight
+                    contactView.url = PRIVACY_PAGE_URL
+                    contactView.navTitle = "プライバシーポリシー"
+                    self.present(contactView, animated: true, completion: nil)
                     break
                 default:
                     break
