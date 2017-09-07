@@ -333,7 +333,9 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     // MARK: - NetWorks
     func getPostInfo(postID:Int){
         
-        Alamofire.request(APP_URL+GET_POSTS_DATAILS+String(postID)).responseJSON{
+        
+        
+        Alamofire.request(API_URL+API_VERSION+POSTS+String(postID)).responseJSON{
             response in
             
             switch response.result {
@@ -353,7 +355,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                     self.iconUrl = json[0]["iconUrl"].stringValue
                 }
                 
-
                 self.commentList = json[0]["commentList"].arrayValue
                 self.favList = json[0]["favList"].arrayValue
 

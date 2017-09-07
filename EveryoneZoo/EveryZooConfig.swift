@@ -10,6 +10,11 @@
 //URL
 
 let APP_URL: String = "http://minzoo.herokuapp.com"
+let API_URL:String = "http://minzoo.herokuapp.com/api/"
+let API_VERSION:String = "v0/"
+
+let POSTS:String = "posts/"
+
 
 let CONTACT_PAGE_URL_STRING:String = "http://swiswiswift.sakura.ne.jp/zoonline/"
 let TOS_PAGE_URL_STRING:String = "http://minzoo.team-sommelier.com/tos.html"
@@ -33,7 +38,6 @@ let GET_POSTS_DATAILS:String! = "/api/v0/plaza/detail/" //+postID
 let GET_USER_INFO:String = "/api/v0/users/" //+userID
 
 //ユーザーの投稿一覧
-let POSTS:String = "/posts"
 //http://minzoo.herokuapp.com/api/v0/users/1/posts
 
 //ユーザーのフォロー一覧
