@@ -134,7 +134,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: ButtonActions
     
-    //左側のボタンが押されたら呼ばれる
+    //投稿ボタンが押されたら呼ばれる
     internal func postBarBtnClicked(sender: UIButton){
         
         
@@ -159,9 +159,70 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                     print(response.response ?? "response.response") // URL response
                     print(response.data ?? "response.data")     // server data
                     print(response.result)   // result of response serialization
-                    if let JSON = response.result.value {
-                        print("JSON: \(JSON)")
+                    
+                    switch response.result {
+                    case .success:
+                        print("Validation Successful")
+                        let json:JSON = JSON(response.result.value ?? kill)
+                        
+                        if json["is_success"].boolValue  {
+                            let pic_id:String = json["picture"]["pic_id"].stringValue
+                            
+                            print(pic_id)
+                            //{"title":<投稿の表題>, "caption":<投稿の説明>, "pic_id":<画像ID>, "tags":[<tag1>,<tag2>,...]}
+                            
+                            
+                            
+                            let parameters: Parameters = [
+                                "title": "反映されろ",
+                                "caption": "頼むからどうかこの投稿が反映されますように",
+                                "pic_id":pic_id,
+                                "tags":[
+                                    "カビゴン","大好き","クラブ"
+                                ]
+                            ]
+                            
+                            Alamofire.request("http://minzoo.herokuapp.com/api/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+                                
+                                switch response.result {
+                                case .success:
+                                    print("Validation Successful")
+                                    
+                                    let json:JSON = JSON(response.result.value ?? kill)
+                                    print(json)
+                                case .failure(let error):
+                                    print(error)
+                                    //テーブルの再読み込み
+                                }
+                            }
+
+                            
+                            
+                            
+                            
+                            
+                        }
+
+                        
+                    case .failure(let error):
+                        print(error)
+
                     }
+                    
+                    
+                    /*
+                    let json = response.result.value
+
+
+                    if json["is_success"].boolValue  {
+                            let pic_id:String = json["picture"]["pic_id"].stringValue
+                            
+                            print(pic_id)
+                            //{"title":<投稿の表題>, "caption":<投稿の説明>, "pic_id":<画像ID>, "tags":[<tag1>,<tag2>,...]}
+
+                        }
+                        
+                        */
                 }
                 
             case .failure(let encodingError):
@@ -170,6 +231,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
+    
+
+    
     
     
     //MARK: テーブルビューのセルの高さを計算する
