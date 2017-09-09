@@ -62,7 +62,7 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
     
     func getMyPosts() {
         
-        Alamofire.request(APP_URL+GET_USER_INFO + String(userID) + POSTS).responseJSON{ response in
+        Alamofire.request(API_URL+API_VERSION+USERS+String(userID)+SLASH+POSTS).responseJSON{ response in
             
             switch response.result {
             case .success:

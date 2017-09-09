@@ -202,7 +202,7 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func dowonloadJsons(){
         
-        Alamofire.request(APP_URL+GET_RECENT_POSTS).responseJSON{ response in
+        Alamofire.request(API_URL+API_VERSION+POSTS+RECENT).responseJSON{ response in
             
             self.pictureTableView.refreshControl?.endRefreshing()
             self.indicator.stopAnimating()

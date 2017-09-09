@@ -59,7 +59,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     
     func getNews() {
         
-        Alamofire.request(APP_URL+GET_NEWS).responseJSON{ response in
+        Alamofire.request(API_URL+API_VERSION+ZOO_NEWS).responseJSON{ response in
             
             switch response.result {
             case .success:

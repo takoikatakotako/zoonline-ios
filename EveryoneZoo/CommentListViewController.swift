@@ -97,7 +97,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     
     func getPostsComments() {
         
-        Alamofire.request(APP_URL + GETS_POSTS + String(postsID) + COMMENTS).responseJSON{ response in
+        Alamofire.request(API_URL+API_VERSION+POSTS+String(postsID)+SLASH+COMMENTS).responseJSON{ response in
             
             switch response.result {
             case .success:

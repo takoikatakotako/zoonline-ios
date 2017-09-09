@@ -248,9 +248,8 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                 "password": self.passWordTextField.text ?? ""]
         }
         
-        Alamofire.request(APP_URL+POST_LOGIN, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+        Alamofire.request(API_URL+API_VERSION+AUTH+SIGN_IN, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             
-            print(APP_URL+POST_LOGIN)
             
             self.indicator.stopAnimating()
             

@@ -66,7 +66,7 @@ class FriendsListViewController: UIViewController,UITableViewDelegate, UITableVi
     
     func getMyFriends() {
         
-        Alamofire.request(APP_URL+GET_USER_INFO + String(userID) + FOLLOWING).responseJSON{ response in
+        Alamofire.request(API_URL + API_VERSION + USERS + String(userID) + FOLLOWING).responseJSON{ response in
             
             switch response.result {
             case .success:
