@@ -87,7 +87,7 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func getPosts() {
         
-        Alamofire.request(API_URL+API_VERSION+USERS+String(postUserID)+POSTS).responseJSON{ response in
+        Alamofire.request(API_URL+API_VERSION+USERS+String(postUserID)+SLASH+POSTS).responseJSON{ response in
             
             switch response.result {
             case .success:

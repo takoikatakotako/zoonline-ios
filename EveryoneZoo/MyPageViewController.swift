@@ -32,7 +32,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var userInfoIcon:[String] = ["mypage_post","mypage_friends","mypage_follower","mypage_favorite"]
     
     var configsTitle:[String] = ["お問い合わせ", "シェア", "利用規約", "プライバシーポリシー"]
-    var configsIcon:[String] = ["mypage_contact","mypage_share","mypage_share","mypage_share"]
+    var configsIcon:[String] = ["mypage_contact","mypage_share","mypage_info","mypage_caution"]
     
     var logoutTitle:[String] = ["ログアウト"]
     var logoutIcon:[String] = ["mypage_logout"]
