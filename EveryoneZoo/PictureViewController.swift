@@ -108,6 +108,10 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         //画面遷移、投稿詳細画面へ
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
         picDetailView.postID = postID
+        
+        let btn_back = UIBarButtonItem()
+        btn_back.title = ""
+        self.navigationItem.backBarButtonItem = btn_back
         self.navigationController?.pushViewController(picDetailView, animated: true)
     }
 }

@@ -275,6 +275,10 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         //画面遷移、ユーザー情報画面へ
         let userInfoView: UserInfoViewController = UserInfoViewController()
         userInfoView.postUserID = self.postUserID
+        
+        let btn_back = UIBarButtonItem()
+        btn_back.title = ""
+        self.navigationItem.backBarButtonItem = btn_back
         self.navigationController?.pushViewController(userInfoView, animated: true)
     }
     
@@ -343,15 +347,16 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         // 移動先のViewを定義する.
         let commentListlView: CommentListViewController = CommentListViewController()
         commentListlView.postsID = postID
+        
+        let btn_back = UIBarButtonItem()
+        btn_back.title = ""
+        self.navigationItem.backBarButtonItem = btn_back
         self.navigationController?.pushViewController(commentListlView, animated: true)
     }
-    
     
 
     // MARK: - NetWorks
     func getPostInfo(postID:Int){
-        
-        
         
         Alamofire.request(API_URL+API_VERSION+POSTS+String(postID)).responseJSON{
             response in

@@ -56,7 +56,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = UILabel()
+        let titleLabel:UILabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "プロフィール"
@@ -202,6 +202,19 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         case 2:
             //ユーザー名の編集
             let vc:EditUserNameViewController = EditUserNameViewController()
+            
+            let btn_back = UIBarButtonItem()
+            btn_back.title = ""
+            self.navigationItem.backBarButtonItem = btn_back
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 3:
+            //ユーザー名の編集
+            let vc:EditUserProfileVC = EditUserProfileVC()
+            
+            let btn_back = UIBarButtonItem()
+            btn_back.title = ""
+            self.navigationItem.backBarButtonItem = btn_back
             self.navigationController?.pushViewController(vc, animated: true)
             break
             

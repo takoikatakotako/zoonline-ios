@@ -17,6 +17,7 @@
 		8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */; };
 		8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586711ED848F400802F54 /* UserInfoViewController.swift */; };
 		8D1586741ED8565300802F54 /* FollowUserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586731ED8565300802F54 /* FollowUserButton.swift */; };
+		8D2533BE1F64FB4F00DB9C96 /* EditUserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2533BD1F64FB4F00DB9C96 /* EditUserProfileVC.swift */; };
 		8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */; };
 		8D35113D1EEECFC8004BA744 /* NoLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113C1EEECFC8004BA744 /* NoLoginView.swift */; };
 		8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113E1EEED5E6004BA744 /* LoginViewController.swift */; };
@@ -104,6 +105,7 @@
 		8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		8D1586711ED848F400802F54 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		8D1586731ED8565300802F54 /* FollowUserButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowUserButton.swift; sourceTree = "<group>"; };
+		8D2533BD1F64FB4F00DB9C96 /* EditUserProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserProfileVC.swift; sourceTree = "<group>"; };
 		8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		8D35113C1EEECFC8004BA744 /* NoLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoLoginView.swift; sourceTree = "<group>"; };
 		8D35113E1EEED5E6004BA744 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -260,7 +262,6 @@
 		8D5121251F0D405B00C6D774 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
-				8DD2A0DC1F556609002048B4 /* MyPageProfilelViewController.swift */,
 				8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */,
 				8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */,
 				8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */,
@@ -293,6 +294,7 @@
 				8D46EFBA1F2DEB6D00FFD8D7 /* MyPageCustumCell */,
 				8D6215AC1EC3689600593E55 /* MyPageViewController.swift */,
 				8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */,
+				8DD2A0DC1F556609002048B4 /* MyPageProfilelViewController.swift */,
 				8D5121251F0D405B00C6D774 /* UserInfo */,
 				8D7CDC381F14DD9500C3844E /* EditUserInfo */,
 			);
@@ -379,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */,
+				8D2533BD1F64FB4F00DB9C96 /* EditUserProfileVC.swift */,
 			);
 			name = EditUserInfo;
 			sourceTree = "<group>";
@@ -784,6 +787,7 @@
 				8DDAF0DB1ED183E00079D443 /* MyPagePostViewController.swift in Sources */,
 				8DC719171F08F3A4003C5E00 /* SetPostTagsViewController.swift in Sources */,
 				8D7E86091EABBC6200C4049B /* LeftPicturesTableViewCell.swift in Sources */,
+				8D2533BE1F64FB4F00DB9C96 /* EditUserProfileVC.swift in Sources */,
 				8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */,
 				8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */,
 				8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */,

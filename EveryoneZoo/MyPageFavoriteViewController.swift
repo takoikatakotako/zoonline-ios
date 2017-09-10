@@ -60,7 +60,7 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
     
     func getMyFavoritePosts() {
         
-        Alamofire.request(API_URL+API_VERSION+USERS+String(userID)+FAVORITE_POSTS).responseJSON{ response in
+        Alamofire.request(API_URL+API_VERSION+USERS+String(userID)+SLASH+FAVORITE_POSTS).responseJSON{ response in
             
             switch response.result {
             case .success:

@@ -1,21 +1,22 @@
 //
-//  EditUserNameViewController.swift
+//  EditUserProfileVC.swift
 //  EveryoneZoo
 //
-//  Created by junpei ono on 2017/07/11.
+//  Created by junpei ono on 2017/09/10.
 //  Copyright © 2017年 junpei ono. All rights reserved.
 //
 
 import UIKit
 
-class EditUserNameViewController: UIViewController {
+class EditUserProfileVC: UIViewController {
+
     
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
     private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,7 +25,7 @@ class EditUserNameViewController: UIViewController {
         viewHeight = self.view.frame.size.height
         statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
         navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
-
+        
         self.view.backgroundColor = UIColor.white
         
         setNavigationBar()
@@ -78,7 +79,7 @@ class EditUserNameViewController: UIViewController {
         let titleLabel:UILabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "ユーザー名の変更"
+        titleLabel.text = "プロフィールの変更"
         titleLabel.textColor = UIColor.white
         
         self.navigationItem.titleView = titleLabel

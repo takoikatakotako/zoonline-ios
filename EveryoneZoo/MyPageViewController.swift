@@ -231,12 +231,20 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let vc:MyPagePostViewController = MyPagePostViewController()
                     vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+                    
+                    let btn_back = UIBarButtonItem()
+                    btn_back.title = ""
+                    self.navigationItem.backBarButtonItem = btn_back
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 case 1:
                     //フレンズ一覧
                     let vc:FriendsListViewController = FriendsListViewController()
                     vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+                    
+                    let btn_back = UIBarButtonItem()
+                    btn_back.title = ""
+                    self.navigationItem.backBarButtonItem = btn_back
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 case 2:
@@ -249,6 +257,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     //お気に入り
                     let vc:MyPageFavoriteViewController = MyPageFavoriteViewController()
                     vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+                    
+                    let btn_back = UIBarButtonItem()
+                    btn_back.title = ""
+                    self.navigationItem.backBarButtonItem = btn_back
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 default:
@@ -355,6 +367,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         let vc:MyPageProfilelViewController = MyPageProfilelViewController()
+        
+        let btn_back = UIBarButtonItem()
+        btn_back.title = ""
+        self.navigationItem.backBarButtonItem = btn_back
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
