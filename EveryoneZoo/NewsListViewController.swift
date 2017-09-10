@@ -58,7 +58,11 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         newsTableView.rowHeight = viewWidth*0.28
         self.view.addSubview(newsTableView)
         
-        setSupportBtn()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Zoo"))!
+        if !didSupport {
+            setSupportBtn()
+        }
     }
     
     
@@ -76,6 +80,9 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     
     //MARK: ButtonActions
     func supportBtnClicked(sender: UIButton){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Zoo")
         supportBtn.removeFromSuperview()
     }
     

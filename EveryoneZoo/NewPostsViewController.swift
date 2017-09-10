@@ -53,14 +53,17 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
         self.tableViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + pageMenuHeight + tabBarHeight)
 
         setTableView()
-        setSupportBtn()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Field"))!
+        if !didSupport {
+            setSupportBtn()
+        }
         
         setActivityIndicator()
         
         //network
         dowonloadJsons()
-        
-
     }
 
     func setSupportBtn() {
@@ -76,6 +79,8 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
     
     func supportBtnClicked(sender: UIButton){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Field")
         supportBtn.removeFromSuperview()
     }
     
@@ -254,6 +259,4 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
         indicator.startAnimating()
         dowonloadJsons()
     }
-    
-    
 }

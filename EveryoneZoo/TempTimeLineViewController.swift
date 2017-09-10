@@ -63,7 +63,14 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
             
             //
             setTableView()
-            setSupportBtn()
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_TimeLine"))!
+            
+            if !didSupport {
+                setSupportBtn()
+
+            }
             getNews()
             
         }else{
@@ -139,6 +146,9 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     }
 
     func supportBtnClicked(sender: UIButton){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_TimeLine")
         supportBtn.removeFromSuperview()
     }
     
@@ -179,7 +189,6 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     }
     
     
-    
     //Mark: 未ログイン関係の処理
     
     // MARK: setLoginView
@@ -207,6 +216,4 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         let resistView:NewResistViewController = NewResistViewController()
         self.present(resistView, animated: true, completion: nil)
     }
-    
-    
 }

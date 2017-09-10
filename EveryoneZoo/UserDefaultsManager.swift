@@ -82,6 +82,5 @@ class UserDefaultsManager: NSObject {
         userDefaults.set(false, forKey: "KEY_SUPPORT_PostDetail")
         userDefaults.set(false, forKey: "KEY_SUPPORT_Zoo")
         userDefaults.set(false, forKey: "KEY_SUPPORT_PostDetail")
-
     }
 }

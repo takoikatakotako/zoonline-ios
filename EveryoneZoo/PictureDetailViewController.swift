@@ -122,6 +122,9 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     
     //MARK: ButtonActions
     func supportBtnClicked(sender: UIButton){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_PostDetail")
         supportBtn.removeFromSuperview()
     }
     
@@ -383,7 +386,13 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
 
                 self.setNavigationBar()
                 self.setTableView()
-                self.setSupportBtn()
+                
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_PostDetail"))!
+                if !didSupport {
+
+                    self.setSupportBtn()
+                }
                 
             case .failure(let error):
                 print(error)

@@ -82,7 +82,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.navigationItem.rightBarButtonItem = rightNavBtn
             
             setTableView()
-            setSupportBtn()
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Post"))!
+            if !didSupport {
+                setSupportBtn()
+            }
             self.postTableView.reloadData()
         }else{
             //
@@ -149,6 +154,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: ButtonActions
     func supportBtnClicked(sender: UIButton){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Post")
         supportBtn.removeFromSuperview()
     }
     
