@@ -31,7 +31,6 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
     var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
 
-    
     //view parts
     private var pictureTableView: UITableView!
     
@@ -41,9 +40,8 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var isNetWorkConnect:Bool = true
     
-    
-    
-    let vc = UIButton()
+    //サポートボタン
+    let supportBtn:UIButton = UIButton()
 
 
     override func viewDidLoad() {
@@ -55,25 +53,30 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
         self.tableViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + pageMenuHeight + tabBarHeight)
 
         setTableView()
+        setSupportBtn()
         
         setActivityIndicator()
         
         //network
         dowonloadJsons()
         
-        //サポート
-        vc.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
-        vc.setImage(UIImage(named:"support_sample"), for: UIControlState.normal)
-        vc.imageView?.contentMode = .scaleAspectFit
-        vc.contentHorizontalAlignment = .fill
-        vc.contentVerticalAlignment = .fill
-        vc.backgroundColor = UIColor.clear
-        vc.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
-        self.view.addSubview(vc)
+
     }
 
+    func setSupportBtn() {
+        //サポート
+        supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
+        supportBtn.setImage(UIImage(named:"support_sample"), for: UIControlState.normal)
+        supportBtn.imageView?.contentMode = .scaleAspectFit
+        supportBtn.contentHorizontalAlignment = .fill
+        supportBtn.contentVerticalAlignment = .fill
+        supportBtn.backgroundColor = UIColor.clear
+        supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
+        self.view.addSubview(supportBtn)
+    }
+    
     func supportBtnClicked(sender: UIButton){
-        vc.removeFromSuperview()
+        supportBtn.removeFromSuperview()
     }
     
     

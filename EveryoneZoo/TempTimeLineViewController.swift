@@ -21,13 +21,15 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     private var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
 
-    private var timeLineTableView: UITableView!
+    private var timeLineTableView:UITableView = UITableView()
     private var noLoginView:NoLoginView!
 
 
     var newsContents:JSON = []
 
-
+    //サポートボタン
+    let supportBtn:UIButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,9 +44,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         
         setNavigationBarBar()
         
-        timeLineTableView = UITableView()
         noLoginView = NoLoginView()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +63,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
             
             //
             setTableView()
+            setSupportBtn()
             getNews()
             
         }else{
@@ -125,7 +126,22 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         self.view.addSubview(timeLineTableView)
     }
     
+    func setSupportBtn() {
+        //サポート
+        supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
+        supportBtn.setImage(UIImage(named:"support_sample"), for: UIControlState.normal)
+        supportBtn.imageView?.contentMode = .scaleAspectFit
+        supportBtn.contentHorizontalAlignment = .fill
+        supportBtn.contentVerticalAlignment = .fill
+        supportBtn.backgroundColor = UIColor.clear
+        supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
+        self.view.addSubview(supportBtn)
+    }
 
+    func supportBtnClicked(sender: UIButton){
+        supportBtn.removeFromSuperview()
+    }
+    
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした

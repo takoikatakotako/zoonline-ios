@@ -42,6 +42,9 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //view parts
     private var postDetailTableView: UITableView!
     
+    //サポートボタン
+    let supportBtn:UIButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -105,7 +108,22 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         self.view.addSubview(indicator)
     }
     
+    func setSupportBtn() {
+        //サポート
+        supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
+        supportBtn.setImage(UIImage(named:"support_sample"), for: UIControlState.normal)
+        supportBtn.imageView?.contentMode = .scaleAspectFit
+        supportBtn.contentHorizontalAlignment = .fill
+        supportBtn.contentVerticalAlignment = .fill
+        supportBtn.backgroundColor = UIColor.clear
+        supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
+        self.view.addSubview(supportBtn)
+    }
     
+    //MARK: ButtonActions
+    func supportBtnClicked(sender: UIButton){
+        supportBtn.removeFromSuperview()
+    }
     
     // MARK: - TableView Delegate Method
     //MARK: テーブルビューのセルの数を設定する
@@ -360,6 +378,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
 
                 self.setNavigationBar()
                 self.setTableView()
+                self.setSupportBtn()
                 
             case .failure(let error):
                 print(error)

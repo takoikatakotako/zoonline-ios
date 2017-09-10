@@ -37,6 +37,8 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     //テーブルビューインスタンス
     private var newsTableView: UITableView!
     
+    //サポートボタン
+    let supportBtn:UIButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +57,26 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         newsTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         newsTableView.rowHeight = viewWidth*0.28
         self.view.addSubview(newsTableView)
+        
+        setSupportBtn()
+    }
+    
+    
+    func setSupportBtn() {
+        //サポート
+        supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
+        supportBtn.setImage(UIImage(named:"support_sample"), for: UIControlState.normal)
+        supportBtn.imageView?.contentMode = .scaleAspectFit
+        supportBtn.contentHorizontalAlignment = .fill
+        supportBtn.contentVerticalAlignment = .fill
+        supportBtn.backgroundColor = UIColor.clear
+        supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
+        self.view.addSubview(supportBtn)
+    }
+    
+    //MARK: ButtonActions
+    func supportBtnClicked(sender: UIButton){
+        supportBtn.removeFromSuperview()
     }
     
     func getNews() {

@@ -25,6 +25,13 @@ class UserDefaultsManager: NSObject {
         //Tokens
         userDefaults.register(defaults: ["KEY_MyAccessToken": ""])
         userDefaults.register(defaults: ["KEY_MyClientToken": ""])
+        
+        //Supports
+        userDefaults.register(defaults: ["KEY_SUPPORT_Field": false])
+        userDefaults.register(defaults: ["KEY_SUPPORT_TimeLine": false])
+        userDefaults.register(defaults: ["KEY_SUPPORT_Post": false])
+        userDefaults.register(defaults: ["KEY_SUPPORT_PostDetail": false])
+        userDefaults.register(defaults: ["KEY_SUPPORT_Zoo": false])
     }
     
     func setInitValues(){
@@ -68,5 +75,13 @@ class UserDefaultsManager: NSObject {
         
         userDefaults.set("", forKey: "KEY_MyAccessToken")
         userDefaults.set("", forKey: "KEY_MyClientToken")
+        
+        userDefaults.set(false, forKey: "KEY_SUPPORT_Field")
+        userDefaults.set(false, forKey: "KEY_SUPPORT_TimeLine")
+        userDefaults.set(false, forKey: "KEY_SUPPORT_Post")
+        userDefaults.set(false, forKey: "KEY_SUPPORT_PostDetail")
+        userDefaults.set(false, forKey: "KEY_SUPPORT_Zoo")
+        userDefaults.set(false, forKey: "KEY_SUPPORT_PostDetail")
+
     }
 }

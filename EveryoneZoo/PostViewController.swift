@@ -37,7 +37,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //
     private var noLoginView:NoLoginView!
 
-    
+    //サポートボタン
+    let supportBtn:UIButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +82,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.navigationItem.rightBarButtonItem = rightNavBtn
             
             setTableView()
+            setSupportBtn()
             self.postTableView.reloadData()
         }else{
             //
@@ -132,7 +134,23 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(postTableView)
     }
     
+    func setSupportBtn() {
+        //サポート
+        supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
+        supportBtn.setImage(UIImage(named:"support_sample"), for: UIControlState.normal)
+        supportBtn.imageView?.contentMode = .scaleAspectFit
+        supportBtn.contentHorizontalAlignment = .fill
+        supportBtn.contentVerticalAlignment = .fill
+        supportBtn.backgroundColor = UIColor.clear
+        supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
+        self.view.addSubview(supportBtn)
+    }
+    
+    
     //MARK: ButtonActions
+    func supportBtnClicked(sender: UIButton){
+        supportBtn.removeFromSuperview()
+    }
     
     //投稿ボタンが押されたら呼ばれる
     internal func postBarBtnClicked(sender: UIButton){
