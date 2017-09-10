@@ -222,7 +222,6 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 self.isNetWorkConnect = true
                 let json:JSON = JSON(response.result.value ?? kill)
                 self.setImageBtns(json: json)
-                
             case .failure(let error):
                 print(error)
                 self.isNetWorkConnect = false

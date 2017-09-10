@@ -163,14 +163,11 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //投稿ボタンが押されたら呼ばれる
     internal func postBarBtnClicked(sender: UIButton){
         
-        
-        print("leftBarBtnClicked")
-        
         let imageData = UIImagePNGRepresentation(postImage)!
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "swift_file.png", mimeType: "image/png")
             multipartFormData.append("1".data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to:"http://minzoo.herokuapp.com/api/v0/picture")
+        }, to:API_URL+"v0/picture")
         { (result) in
             switch result {
             case .success(let upload, _, _):
@@ -197,6 +194,19 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                             print(pic_id)
                             //{"title":<投稿の表題>, "caption":<投稿の説明>, "pic_id":<画像ID>, "tags":[<tag1>,<tag2>,...]}
                             
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
+                            let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
+                            let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
+                            let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
+                            
+                        
+                            let headers: HTTPHeaders = [
+                                "access-token": myAccessToken,
+                                "client": myClientToken,
+                                "expiry": myExpiry,
+                                "uid": myUniqID
+                            ]
                             
                             
                             let parameters: Parameters = [
@@ -208,7 +218,15 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 ]
                             ]
                             
-                            Alamofire.request("http://minzoo.herokuapp.com/api/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+                            print("---------")
+                            print(headers)
+                            
+                            
+                            Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+                                
+                                print("---------")
+                                print(response)
+ 
                                 
                                 switch response.result {
                                 case .success:
@@ -220,12 +238,16 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                     print(error)
                                     //テーブルの再読み込み
                                 }
+ 
                             }
-
                             
+                            /*
+                            let request = Alamofire.request("http://google.es", method: .post, parameters: parameters, headers: headers).responseJSON { response in
+                                debugPrint(response)
+                            }
+                            print(request.response!)
                             
-                            
-                            
+                            */
                             
                         }
 

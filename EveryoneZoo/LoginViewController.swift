@@ -248,6 +248,8 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                 "password": self.passWordTextField.text ?? ""]
         }
         
+        print(API_URL+API_VERSION+AUTH+SIGN_IN)
+        
         Alamofire.request(API_URL+API_VERSION+AUTH+SIGN_IN, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             
             
@@ -271,8 +273,6 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                     
                     //ログイン成功
 
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
                     var myUserID:String = ""
                     var myUserName:String = ""
                     var myUserEmail:String = ""
@@ -281,7 +281,8 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
 
                     var myAccessToken:String = ""
                     var myClientToken:String = ""
-                    
+                    var myExpiry:String = ""
+                    var myUniqID:String = ""
                     
                     myUserID = String(json["data"]["id"].intValue)
                     
@@ -300,8 +301,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                     if !json["data"]["profile"].stringValue.isEmpty {
                         myUserProfile = json["data"]["profile"].stringValue
                     }
-
-                
+                    
                     if let accessToken = response.response?.allHeaderFields["Access-Token"] as? String {
                         myAccessToken = accessToken
                     }
@@ -310,12 +310,19 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                         myClientToken = clientToken
                     }
                     
+                    if let expiry = response.response?.allHeaderFields["Expiry"] as? String {
+                        myExpiry = expiry
+                    }
                     
-                    appDelegate.userDefaultsManager?.doLogin(userID: myUserID, userName: myUserName, email: myUserEmail, iconUrl: myUserIconUrl, profile: myUserProfile, accessToken: myAccessToken, clientToken: myClientToken)
+                    if let uid = response.response?.allHeaderFields["Uid"] as? String {
+                        myUniqID = uid
+                    }
+                    
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.userDefaultsManager?.doLogin(userID: myUserID, userName: myUserName, email: myUserEmail, iconUrl: myUserIconUrl, profile: myUserProfile, accessToken: myAccessToken, clientToken: myClientToken,expiry:myExpiry, uniqID:myUniqID)
                 
                     self.dismiss(animated: true, completion: nil)
                 }
-
                 
             case .failure(let error):
                 print(error)

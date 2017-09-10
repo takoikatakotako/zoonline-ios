@@ -34,7 +34,6 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     var userIconUrl:String = ""
     var postsInfos:JSON = []
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -25,6 +25,8 @@ class UserDefaultsManager: NSObject {
         //Tokens
         userDefaults.register(defaults: ["KEY_MyAccessToken": ""])
         userDefaults.register(defaults: ["KEY_MyClientToken": ""])
+        userDefaults.register(defaults: ["KEY_MyExpiry": ""])
+        userDefaults.register(defaults: ["KEY_MyUniqID": ""])
         
         //Supports
         userDefaults.register(defaults: ["KEY_SUPPORT_Field": false])
@@ -52,7 +54,7 @@ class UserDefaultsManager: NSObject {
     }
     
     
-    func doLogin(userID:String, userName:String, email:String, iconUrl:String, profile:String, accessToken:String, clientToken:String) {
+    func doLogin(userID:String, userName:String, email:String, iconUrl:String, profile:String, accessToken:String, clientToken:String, expiry:String, uniqID:String) {
         userDefaults.set(true, forKey: "KEY_login")
         userDefaults.set(userID, forKey: "KEY_MyUserID")
         userDefaults.set(userName, forKey: "KEY_MyUserName")
@@ -62,6 +64,8 @@ class UserDefaultsManager: NSObject {
         
         userDefaults.set(accessToken, forKey: "KEY_MyAccessToken")
         userDefaults.set(clientToken, forKey: "KEY_MyClientToken")
+        userDefaults.set(accessToken, forKey: "KEY_MyExpiry")
+        userDefaults.set(uniqID, forKey: "KEY_MyUniqID")
     }
     
     func doLogout(){
@@ -75,6 +79,8 @@ class UserDefaultsManager: NSObject {
         
         userDefaults.set("", forKey: "KEY_MyAccessToken")
         userDefaults.set("", forKey: "KEY_MyClientToken")
+        userDefaults.set("", forKey: "KEY_MyExpiry")
+        userDefaults.set("", forKey: "KEY_MyUniqID")
         
         userDefaults.set(false, forKey: "KEY_SUPPORT_Field")
         userDefaults.set(false, forKey: "KEY_SUPPORT_TimeLine")
