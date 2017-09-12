@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SCLAlertView
 
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate,SetTagsDelegate{
     
@@ -18,13 +19,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
     private var tabBarHeight:CGFloat!
-
     private var tableViewHeight:CGFloat!
 
     //views
     private var postTableView: UITableView!
     var myImagePicker: UIImagePickerController!
-
+    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
 
     //datas
     public var postImage:UIImage! = UIImage(named:"photoimage")
@@ -39,6 +39,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     //サポートボタン
     let supportBtn:UIButton = UIButton()
+    
+    //投稿フラグ
+    var isSelectedImage = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +85,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.navigationItem.rightBarButtonItem = rightNavBtn
             
             setTableView()
+            setActivityIndicator()
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Post"))!
@@ -139,6 +143,22 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(postTableView)
     }
     
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewWidth*0.5, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.clipsToBounds = true
+        indicator.layer.cornerRadius = viewWidth*0.3*0.3
+        indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        
+        indicator.center = self.view.center
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.white
+        self.view.addSubview(indicator)
+    }
+    
     func setSupportBtn() {
         //サポート
         supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
@@ -151,7 +171,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(supportBtn)
     }
     
-    
     //MARK: ButtonActions
     func supportBtnClicked(sender: UIButton){
         
@@ -163,21 +182,56 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //投稿ボタンが押されたら呼ばれる
     internal func postBarBtnClicked(sender: UIButton){
         
+        if !isSelectedImage {
+            SCLAlertView().showInfo("エラー", subTitle: "画像が選択されていません。")
+            return
+        }
+        
+        if titleStr == "タイトルをつけてみよう" {
+            SCLAlertView().showInfo("エラー", subTitle: "タイトルを入力して下さい。")
+            return
+        }
+        
+        if titleStr.isEmpty {
+            SCLAlertView().showInfo("エラー", subTitle: "タイトルが空です。")
+            return
+        }
+
+        if commentStr == "コメントを書いてみよう" {
+            SCLAlertView().showInfo("エラー", subTitle: "タイトルを入力して下さい。")
+            return
+        }
+        
+        if commentStr.isEmpty {
+            SCLAlertView().showInfo("エラー", subTitle: "コメントを入力してください。")
+            return
+        }
+        
+        doImageUpload()
+        self.indicator.startAnimating()
+
+    }
+    
+    
+    func doImageUpload() {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let userID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
+        
         let imageData = UIImagePNGRepresentation(postImage)!
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(imageData, withName: "picture", fileName: "swift_file.png", mimeType: "image/png")
-            multipartFormData.append("1".data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to:API_URL+"v0/picture")
+            multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
+            multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
+        }, to:API_URL+API_VERSION+PICTURE)
         { (result) in
             switch result {
             case .success(let upload, _, _):
                 
                 upload.uploadProgress(closure: { (Progress) in
-                    print("Upload Progress: \(Progress.fractionCompleted)")
+                    //print("Upload Progress: \(Progress.fractionCompleted)")
                 })
                 
                 upload.responseJSON { response in
-                    //self.delegate?.showSuccessAlert()
                     print(response.request ?? "response.request")  // original URL request
                     print(response.response ?? "response.response") // URL response
                     print(response.data ?? "response.data")     // server data
@@ -191,98 +245,59 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                         if json["is_success"].boolValue  {
                             let pic_id:String = json["picture"]["pic_id"].stringValue
                             
-                            print(pic_id)
-                            //{"title":<投稿の表題>, "caption":<投稿の説明>, "pic_id":<画像ID>, "tags":[<tag1>,<tag2>,...]}
-                            
-                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                            let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
-                            let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
-                            let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
-                            let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
-                            
-                        
-                            let headers: HTTPHeaders = [
-                                "access-token": myAccessToken,
-                                "client": myClientToken,
-                                "expiry": myExpiry,
-                                "uid": myUniqID
-                            ]
-                            
-                            
-                            let parameters: Parameters = [
-                                "title": "反映されろ",
-                                "caption": "頼むからどうかこの投稿が反映されますように",
-                                "pic_id":pic_id,
-                                "tags":[
-                                    "カビゴン","大好き","クラブ"
-                                ]
-                            ]
-                            
-                            print("---------")
-                            print(headers)
-                            
-                            
-                            Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
-                                
-                                print("---------")
-                                print(response)
- 
-                                
-                                switch response.result {
-                                case .success:
-                                    print("Validation Successful")
-                                    
-                                    let json:JSON = JSON(response.result.value ?? kill)
-                                    print(json)
-                                case .failure(let error):
-                                    print(error)
-                                    //テーブルの再読み込み
-                                }
- 
-                            }
-                            
-                            /*
-                            let request = Alamofire.request("http://google.es", method: .post, parameters: parameters, headers: headers).responseJSON { response in
-                                debugPrint(response)
-                            }
-                            print(request.response!)
-                            
-                            */
-                            
+                            self.doPost(pic_id: pic_id)
                         }
-
                         
                     case .failure(let error):
                         print(error)
-
-                    }
-                    
-                    
-                    /*
-                    let json = response.result.value
-
-
-                    if json["is_success"].boolValue  {
-                            let pic_id:String = json["picture"]["pic_id"].stringValue
-                            
-                            print(pic_id)
-                            //{"title":<投稿の表題>, "caption":<投稿の説明>, "pic_id":<画像ID>, "tags":[<tag1>,<tag2>,...]}
-
-                        }
                         
-                        */
+                    }
                 }
                 
             case .failure(let encodingError):
-                //self.delegate?.showFailAlert()
                 print(encodingError)
             }
         }
     }
     
-    
+    func doPost(pic_id:String) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
+        let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
+        let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
+        let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
+        
+        let headers: HTTPHeaders = [
+            "access-token": myAccessToken,
+            "client": myClientToken,
+            "expiry": myExpiry,
+            "uid": myUniqID
+        ]
+        
+        let parameters: Parameters = [
+            "title": titleStr,
+            "caption": commentStr,
+            "pic_id":pic_id,
+            "tags":tagsAry
+        ]
+        
+        Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                self.indicator.stopAnimating()
 
-    
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+    }
     
     
     //MARK: テーブルビューのセルの高さを計算する
@@ -423,7 +438,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         tagsAry = ary
     }
     
-    
     //画像が選択された時に呼ばれる.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
@@ -433,6 +447,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             postImageWidth = postImage.size.width
             postImageHeight = postImage.size.height
             postTableView.reloadData()
+            
+            isSelectedImage = true
 
         } else{
             print("Error:Class name : \(NSStringFromClass(type(of: self))) ")

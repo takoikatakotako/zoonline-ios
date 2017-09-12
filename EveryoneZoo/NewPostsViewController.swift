@@ -121,19 +121,21 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
         pictureTableView.refreshControl = refreshControl
     }
     
-
-    
-    
     // MARK: くるくるの生成
     func setActivityIndicator(){
-        indicator.activityIndicatorViewStyle = .whiteLarge
-        indicator.center = self.view.center
+        
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewWidth*0.5, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.clipsToBounds = true
+        indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        
+        indicator.center = self.view.center
         self.view.bringSubview(toFront: indicator)
-        indicator.color = UIColor.mainAppColor()
+        indicator.color = UIColor.white
         self.view.addSubview(indicator)
         indicator.startAnimating()
-        indicator.backgroundColor = UIColor.gray
     }
     
     
