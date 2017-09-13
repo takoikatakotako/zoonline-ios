@@ -14,19 +14,18 @@ import SCLAlertView
 
 class PictureDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
-    var postsID:Int!
-
+    //Post ID
+    public var postID:Int!
+    
+    private var myUserID:String = ""
+    
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
     private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
     private var tabBarHeight:CGFloat!
-
     var tableViewHeight:CGFloat!
-    
-    //Post ID
-    public var postID:Int!
     
     //Post Datas
     var postUserID:Int!
@@ -61,6 +60,9 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         setNavigationBar()
         setActivityIndicator()
         indicator.startAnimating()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        myUserID = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
         
         //投稿の情報の取得
         getPostInfo(postID: self.postID)
@@ -141,8 +143,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.layoutMargins = UIEdgeInsets.zero
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
-        //カスタムテーブルのボタン
-        
         //UserInfoBtn
         let userInfoBtnWidth:CGFloat = viewWidth*0.65
         let userInfoBtnHeight:CGFloat = viewWidth*0.16
@@ -153,7 +153,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         if !self.iconUrl.isEmpty{
             cell.thumbnailImgView.af_setImage(withURL: URL(string:self.iconUrl)!, placeholderImage:  UIImage(named:"icon_default")!)
         }
-        
+
         cell.userNameTextView.frame = CGRect(x: userInfoBtnHeight, y: 0, width: userInfoBtnWidth-userInfoBtnHeight, height: userInfoBtnHeight)
         cell.userNameTextView.text = postUserName
 
@@ -168,14 +168,22 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let postImgHeight:CGFloat = viewWidth
         cell.postImgView.frame = CGRect(x: 0, y: userInfoBtnHeight, width: viewWidth, height: postImgHeight)
         cell.postImgView.sd_setImage(with: self.postImgUrl, placeholderImage: UIImage(named: "sample_loading"))
-
+        
         //FavBtn
-        let favComentMenuBtnHeight:CGFloat = viewWidth * 0.15
+        let favComentMenuBtnHeight:CGFloat = viewWidth*0.15
         let favBtnSpace:CGFloat = viewWidth*0.05
-        let favBtnWidth:CGFloat = viewWidth * 0.25
+        let favBtnWidth:CGFloat = viewWidth*0.25
         cell.favBtn.frame = CGRect(x: favBtnSpace, y: userInfoBtnHeight+postImgHeight, width: favBtnWidth, height: favComentMenuBtnHeight)
         cell.favBtn.countLabel.text = String(self.favList.count)
         cell.favBtn.addTarget(self, action: #selector(favBtnClicked(sender:)), for:.touchUpInside)
+        //お気に入りの投稿の中に含まれている場合は色を変える
+        for id in favList{
+
+            if String(describing: id) == myUserID {
+                cell.favBtn.imgView.image = UIImage(named: "fav_on")!
+                break
+            }
+        }
         
         //CommentBtn
         let commentBtn:CGFloat = favBtnWidth
@@ -197,7 +205,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.descriptionTextView.frame = CGRect(x: viewWidth*0.04, y: userInfoBtnHeight+postImgHeight+favComentMenuBtnHeight+dateLabelHeigt, width: descriptionTextViewWidth, height: 5)
         cell.descriptionTextView.text = self.postCaption
         cell.descriptionTextView.sizeToFit()
-
         
         return cell
     }
@@ -215,7 +222,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         var cellHeight:CGFloat = viewWidth*(0.16+1+0.15+0.05+0.05)
         //高さを追加
         cellHeight += UtilityLibrary.calcTextViewHeight(text: self.postCaption, width: viewWidth*0.92, font: UIFont.systemFont(ofSize: 16))
-
         
         return cellHeight
     }
@@ -255,16 +261,33 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         if sender.imgView.image == UIImage(named:"fav_on") {
             sender.imgView.image = UIImage(named: "fav_off")!
-            sender.countLabel.text = "24"
             sender.countLabel.textColor = UIColor.black
-            
+            let favCount:String = sender.countLabel.text!
+            sender.countLabel.text = String(Int(favCount)!-1)
         }else{
             sender.imgView.image = UIImage(named: "fav_on")!
-            sender.countLabel.text = "25"
             sender.countLabel.textColor = UIColor.followColor()
+            let favCount:String = sender.countLabel.text!
+            sender.countLabel.text = String(Int(favCount)!+1)
+            print(API_URL+API_VERSION+USERS+String(myUserID)+"favorite_post/"+String(postID))
+            
+            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+"favorite_post/"+String(postID), method: .post, encoding: JSONEncoding.default).responseJSON{ response in
+                
+                switch response.result {
+                case .success:
+                    
+                    let json:JSON = JSON(response.result.value ?? kill)
+                    print(json)
+                    
+                case .failure(let error):
+                    print(error)
+                    //テーブルの再読み込み
+                }
+            }
+
         }
     }
-    
+
     
     //コメントボタンが押されたら呼ばれる
     func commentBtnClicked(sender: FavCommentButton){

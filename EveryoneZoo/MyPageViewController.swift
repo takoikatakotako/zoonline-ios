@@ -251,6 +251,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     //フォロワー一覧
                     let vc:FollowerListViewController = FollowerListViewController()
                     vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+                    
+                    let btn_back = UIBarButtonItem()
+                    btn_back.title = ""
+                    self.navigationItem.backBarButtonItem = btn_back
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 case 3:

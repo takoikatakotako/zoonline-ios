@@ -63,7 +63,7 @@ class FollowerListViewController: UIViewController,UITableViewDelegate, UITableV
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = UILabel()
+        let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "フォロワー"

@@ -59,7 +59,6 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
         getMyPosts()
     }
     
-    
     func getMyPosts() {
         
         Alamofire.request(API_URL+API_VERSION+USERS+String(userID)+SLASH+POSTS).responseJSON{ response in

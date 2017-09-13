@@ -59,14 +59,12 @@ class FriendsListViewController: UIViewController,UITableViewDelegate, UITableVi
         friendsTableView.rowHeight = viewWidth*0.4
         self.view.addSubview(friendsTableView)
         
-        
         getMyFriends()
     }
-
     
     func getMyFriends() {
         
-        Alamofire.request(API_URL + API_VERSION + USERS + String(userID) + FOLLOWING).responseJSON{ response in
+        Alamofire.request(API_URL+API_VERSION+USERS + String(userID)+SLASH+FOLLOWING).responseJSON{ response in
             
             switch response.result {
             case .success:
@@ -99,7 +97,7 @@ class FriendsListViewController: UIViewController,UITableViewDelegate, UITableVi
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = UILabel()
+        let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "フレンズ"
