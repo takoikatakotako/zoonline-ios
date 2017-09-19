@@ -264,6 +264,32 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             sender.countLabel.textColor = UIColor.black
             let favCount:String = sender.countLabel.text!
             sender.countLabel.text = String(Int(favCount)!-1)
+            
+            let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
+            let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
+            let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
+            let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
+            
+            let headers: HTTPHeaders = [
+                "access-token": myAccessToken,
+                "client": myClientToken,
+                "expiry": myExpiry,
+                "uid": myUniqID
+            ]
+
+            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POSTS+String(postID), method: .delete, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+                
+                switch response.result {
+                case .success:
+                    
+                    let json:JSON = JSON(response.result.value ?? kill)
+                    print(json)
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            }
+
         }else{
             sender.imgView.image = UIImage(named: "fav_on")!
             sender.countLabel.textColor = UIColor.followColor()
@@ -271,7 +297,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             sender.countLabel.text = String(Int(favCount)!+1)
             print(API_URL+API_VERSION+USERS+String(myUserID)+"favorite_post/"+String(postID))
             
-            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+"favorite_post/"+String(postID), method: .post, encoding: JSONEncoding.default).responseJSON{ response in
+            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POSTS+String(postID), method: .post, encoding: JSONEncoding.default).responseJSON{ response in
                 
                 switch response.result {
                 case .success:
@@ -284,7 +310,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                     //テーブルの再読み込み
                 }
             }
-
         }
     }
 
@@ -394,18 +419,18 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 
                 print(json)
                 
-                self.postUserName = json[0]["userName"].stringValue
-                self.postUserID = json[0]["userId"].intValue
-                self.postTitle = json[0]["title"].stringValue
-                self.postCaption = json[0]["caption"].stringValue
-                self.postImgUrl = URL(string: json[0]["itemImage"].stringValue)!
+                self.postUserName = json["responce"]["userName"].stringValue
+                self.postUserID = json["responce"]["userId"].intValue
+                self.postTitle = json["responce"]["title"].stringValue
+                self.postCaption = json["responce"]["caption"].stringValue
+                self.postImgUrl = URL(string: json["responce"]["itemImage"].stringValue)!
                 
-                if !json[0]["iconUrl"].stringValue.isEmpty{
-                    self.iconUrl = json[0]["iconUrl"].stringValue
+                if !json["responce"]["iconUrl"].stringValue.isEmpty{
+                    self.iconUrl = json["responce"]["iconUrl"].stringValue
                 }
                 
-                self.commentList = json[0]["commentList"].arrayValue
-                self.favList = json[0]["favList"].arrayValue
+                self.commentList = json["responce"]["commentList"].arrayValue
+                self.favList = json["responce"]["favList"].arrayValue
 
                 self.setNavigationBar()
                 self.setTableView()

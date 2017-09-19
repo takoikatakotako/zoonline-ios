@@ -142,7 +142,12 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     // MARK: -
     func goWriteCommentView(sender: UIButton){
         
-        let wirtePostComments: WritePostsCommentsViewController = WritePostsCommentsViewController()
-        self.navigationController?.pushViewController(wirtePostComments, animated: true)
+        let wirtePostCommentsVC: WritePostsCommentsViewController = WritePostsCommentsViewController()
+        wirtePostCommentsVC.postsID = postsID
+
+        let btn_back = UIBarButtonItem()
+        btn_back.title = ""
+        self.navigationItem.backBarButtonItem = btn_back
+        self.navigationController?.pushViewController(wirtePostCommentsVC, animated: true)
     }
 }
