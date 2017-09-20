@@ -11,6 +11,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 import SDWebImage
+import SCLAlertView
 
 class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITableViewDataSource  {
     
@@ -67,8 +68,15 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
                 
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
-                self.favoritePosts = json
-                self.favoriteListTableView.reloadData()
+                
+                if json["is_success"].boolValue {
+                
+                    self.favoritePosts = json["responce"]
+                    self.favoriteListTableView.reloadData()
+                }else{
+                    SCLAlertView().showInfo("エラー", subTitle: "お気に入りの投稿の取得に失敗しました。")
+                }
+                
                 
             case .failure(let error):
                 print(error)

@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import SCLAlertView
 
 class WritePostsCommentsViewController: UIViewController {
+    
+    var postsID:Int!
     
     //width, height
     private var viewWidth:CGFloat!
@@ -82,7 +87,34 @@ class WritePostsCommentsViewController: UIViewController {
     // MARK: -
     func postNavBtnClicked(sender: UIButton){
         
+        if commentTextView.text.isEmpty {
+            SCLAlertView().showInfo("エラー", subTitle: "コメントに文字の入力必要だよ")
+            return
+        }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let myUserID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
+        
+        let parameters: Parameters = [
+            "post_id": String(postsID),
+            "user_id": myUserID,
+            "comments": commentTextView.text
+        ]
+
+        print(parameters)
 
         
+        Alamofire.request(API_URL+API_VERSION+COMMENTS, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
