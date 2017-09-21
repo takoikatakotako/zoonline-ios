@@ -277,7 +277,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 "uid": myUniqID
             ]
 
-            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POSTS+String(postID), method: .delete, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID), method: .delete, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
                 
                 switch response.result {
                 case .success:
@@ -295,9 +295,22 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             sender.countLabel.textColor = UIColor.followColor()
             let favCount:String = sender.countLabel.text!
             sender.countLabel.text = String(Int(favCount)!+1)
-            print(API_URL+API_VERSION+USERS+String(myUserID)+"favorite_post/"+String(postID))
+            print(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID))
             
-            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POSTS+String(postID), method: .post, encoding: JSONEncoding.default).responseJSON{ response in
+            
+            let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
+            let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
+            let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
+            let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
+            
+            let headers: HTTPHeaders = [
+                "access-token": myAccessToken,
+                "client": myClientToken,
+                "expiry": myExpiry,
+                "uid": myUniqID
+            ]
+            
+            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID), method: .post, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
                 
                 switch response.result {
                 case .success:
