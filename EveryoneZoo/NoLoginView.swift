@@ -46,7 +46,6 @@ class NoLoginView: UIView {
         newResisterBtn.layer.masksToBounds = true
         newResisterBtn.layer.cornerRadius = 4.0
         self.addSubview(newResisterBtn)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

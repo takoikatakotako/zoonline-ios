@@ -74,7 +74,6 @@ class WritePostsCommentsViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightNavBtn
     }
     
-    
     func setTextView(){
         
         // TextView生成する.
@@ -92,18 +91,16 @@ class WritePostsCommentsViewController: UIViewController {
     // MARK: くるくるの生成
     func setActivityIndicator(){
         
-        indicator.frame = CGRect(x: viewWidth*0.35, y: viewWidth*0.5, width: viewWidth*0.3, height: viewWidth*0.3)
+        let indicaterSize:CGFloat = viewWidth*0.3
+        indicator.frame = CGRect(x: (viewWidth-indicaterSize)/2, y: viewWidth*0.25, width: indicaterSize, height: indicaterSize)
         indicator.clipsToBounds = true
-        indicator.layer.cornerRadius = viewWidth*0.3*0.3
+        indicator.layer.cornerRadius = indicaterSize*0.3
         indicator.hidesWhenStopped = true
         indicator.backgroundColor = UIColor.mainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        
-        indicator.center = self.view.center
-        self.view.bringSubview(toFront: indicator)
         indicator.color = UIColor.white
+        self.view.bringSubview(toFront: indicator)
         self.view.addSubview(indicator)
-    
     }
     
     // MARK: -
@@ -133,6 +130,7 @@ class WritePostsCommentsViewController: UIViewController {
                 
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
+                self.navigationController?.popViewController(animated: true)
                 
             case .failure(let error):
                 print(error)
