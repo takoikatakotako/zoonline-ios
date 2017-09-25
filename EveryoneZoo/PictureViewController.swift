@@ -37,7 +37,6 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         contentsViewHeight = viewHeight
         print(contentsViewHeight)
         
-        
         setNavigationBar()
         setPageMenu()
     }    

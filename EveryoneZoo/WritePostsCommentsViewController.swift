@@ -26,6 +26,9 @@ class WritePostsCommentsViewController: UIViewController {
     //テーブルビューインスタンス
     private var commentTextView: UITextView!
     
+    //Indicater
+    private var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +44,8 @@ class WritePostsCommentsViewController: UIViewController {
         setNavigationBar()
         
         setTextView()
+        
+        setActivityIndicator()
     }
     
     
@@ -84,6 +89,23 @@ class WritePostsCommentsViewController: UIViewController {
         commentTextView.becomeFirstResponder()
     }
     
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewWidth*0.5, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.clipsToBounds = true
+        indicator.layer.cornerRadius = viewWidth*0.3*0.3
+        indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        
+        indicator.center = self.view.center
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.white
+        self.view.addSubview(indicator)
+    
+    }
+    
     // MARK: -
     func postNavBtnClicked(sender: UIButton){
         
@@ -91,6 +113,9 @@ class WritePostsCommentsViewController: UIViewController {
             SCLAlertView().showInfo("エラー", subTitle: "コメントに文字の入力必要だよ")
             return
         }
+        
+        //indicatrer
+        indicator.startAnimating()
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let myUserID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
@@ -100,9 +125,6 @@ class WritePostsCommentsViewController: UIViewController {
             "user_id": myUserID,
             "comments": commentTextView.text
         ]
-
-        print(parameters)
-
         
         Alamofire.request(API_URL+API_VERSION+COMMENTS, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             
@@ -115,6 +137,8 @@ class WritePostsCommentsViewController: UIViewController {
             case .failure(let error):
                 print(error)
             }
+            
+            self.indicator.stopAnimating()
         }
     }
 }

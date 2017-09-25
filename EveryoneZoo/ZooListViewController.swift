@@ -50,6 +50,10 @@ class ZooListViewController: UIViewController,NewsDelegate,CAPSPageMenuDelegate 
         
         let controller2 : OfficialListViewController = OfficialListViewController()
         controller2.title = "編集部便り"
+        controller2.statusBarHeight = statusBarHeight
+        controller2.navigationBarHeight = navigationBarHeight
+        controller2.tabBarHeight = tabBarHeight
+        controller2.pageMenuHeight = pageMenuHeight
         controllerArray.append(controller2)
         
         

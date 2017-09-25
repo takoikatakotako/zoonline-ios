@@ -26,9 +26,7 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
     
     //テーブルビューインスタンス
     private var postListTableView: UITableView!
-    
     private var postsContents:JSON = []
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

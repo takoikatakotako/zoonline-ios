@@ -10,6 +10,15 @@ import UIKit
 
 class OfficialListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
+    //heights
+    var viewWidth:CGFloat!
+    var viewHeight:CGFloat!
+    var statusBarHeight:CGFloat!
+    var navigationBarHeight:CGFloat!
+    var pageMenuHeight:CGFloat!
+    var tabBarHeight:CGFloat!
+    
+    private var tableViewHeight:CGFloat!
     
     //テーブルビューインスタンス
     private var myTableView: UITableView!
@@ -24,8 +33,9 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
         myItems = ["sdfsdfs", "gfdsf", "sdfsfも", "dfsdfsdfsfd", "sdfsdf", "なし"]
         
         //Viewの大きさを取得
-        let viewWidth = self.view.frame.size.width
-        let viewHeight = self.view.frame.size.height
+        viewWidth = self.view.frame.size.width
+        viewHeight = self.view.frame.size.height
+        tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+pageMenuHeight+tabBarHeight)
         
         //テーブルビューの初期化
         myTableView = UITableView()
@@ -35,14 +45,13 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
         myTableView.dataSource = self
         
         //テーブルビューの大きさの指定
-        myTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
+        myTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
         
         //テーブルビューの設置
         myTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         myTableView.rowHeight = viewWidth*0.28
 
         self.view.addSubview(myTableView)
-        
     }
     
     //MARK: テーブルビューのセルの数を設定する
@@ -62,6 +71,4 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
     }
-
-
 }
