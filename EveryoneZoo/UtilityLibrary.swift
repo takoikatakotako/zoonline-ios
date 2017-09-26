@@ -30,4 +30,11 @@ class UtilityLibrary: NSObject {
 
         return rect
     }
+    
+    class func getUserName()->String{
+    
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let userName:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName"))!
+        return userName
+    }
 }

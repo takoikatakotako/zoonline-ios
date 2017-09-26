@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
-class EditUserNameViewController: UIViewController {
+class EditUserNameViewController: UIViewController,UITextFieldDelegate {
     
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
     private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
+    
+    let userNameTextFIeld:UITextField = UITextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +42,12 @@ class EditUserNameViewController: UIViewController {
         self.view.addSubview(nameLabel)
         
         //ユーザー名入力欄
-        let userNameTextFIeld:UITextField = UITextField()
-        userNameTextFIeld.text = "新しいユーザー名"
+        userNameTextFIeld.text = UtilityLibrary.getUserName()
+        userNameTextFIeld.delegate = self
         userNameTextFIeld.textAlignment = NSTextAlignment.center
         userNameTextFIeld.frame = CGRect(x: viewWidth*0.05, y: viewHeight*0.18, width: viewWidth*0.9, height: 40)
         userNameTextFIeld.textColor = UIColor.gray
         self.view.addSubview(userNameTextFIeld)
-        
         
         //userNameTextFIeldUnderLine
         let userNameTextFIeldLine:UIView = UIView()
@@ -52,8 +55,7 @@ class EditUserNameViewController: UIViewController {
         userNameTextFIeldLine.backgroundColor = UIColor.gray
         self.view.addSubview(userNameTextFIeldLine)
         
-        
-        //LoginButton
+        //ChangeButton
         let changeUserNameBtn:UIButton = UIButton()
         changeUserNameBtn.frame = CGRect(x: viewWidth*0.1, y: viewHeight*0.3, width: viewWidth*0.8, height: viewWidth*0.15)
         changeUserNameBtn.backgroundColor = UIColor.mainAppColor()
@@ -61,8 +63,7 @@ class EditUserNameViewController: UIViewController {
         changeUserNameBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         changeUserNameBtn.layer.masksToBounds = true
         changeUserNameBtn.layer.cornerRadius = 4.0
-        changeUserNameBtn.isEnabled = false
-        //changeUserNameBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+        changeUserNameBtn.addTarget(self, action: #selector(changeUserNameBtn(sender:)), for: .touchUpInside)
         self.view.addSubview(changeUserNameBtn)
         
     }
@@ -83,4 +84,70 @@ class EditUserNameViewController: UIViewController {
         
         self.navigationItem.titleView = titleLabel
     }
+    
+    //角丸ボタンが押されたら呼ばれます
+    internal func changeUserNameBtn(sender: UIButton){
+        
+        
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
+        let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
+        let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
+        let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
+        
+        let headers: HTTPHeaders = [
+            "access-token": myAccessToken,
+            "client": myClientToken,
+            "expiry": myExpiry,
+            "uid": myUniqID
+        ]
+        
+        let parameters: Parameters = [
+            "name":"ONOJUN"
+        ]
+        
+        print(API_URL+"v0/auth/")
+        
+        Alamofire.request(API_URL+"v0/auth/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+
+                
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+        
+
+    }
+    
+    
+    // MARK: - TextFieldのDelegateメソッド
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("textFieldDidBeginEditing: \(textField.text!)")
+        textField.text = ""
+        
+
+    }
+    
+    //UITextFieldが編集された直後に呼ばれる
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("textFieldDidEndEditing: \(textField.text!)")
+
+    }
+    
+    //改行ボタンが押された際に呼ばれる
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn \(textField.text!)")
+    
+        return true
+    }
+
+    
 }
