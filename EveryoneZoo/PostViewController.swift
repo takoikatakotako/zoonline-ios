@@ -262,19 +262,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func doPost(pic_id:String) {
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
-        let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
-        let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
-        let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
-        
-        let headers: HTTPHeaders = [
-            "access-token": myAccessToken,
-            "client": myClientToken,
-            "expiry": myExpiry,
-            "uid": myUniqID
-        ]
-        
         let parameters: Parameters = [
             "title": titleStr,
             "caption": commentStr,
@@ -282,7 +269,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             "tags":tagsAry
         ]
         
-        Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+        Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
             
             switch response.result {
             case .success:
