@@ -19,12 +19,11 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     private var userConfigTableViewHeight:CGFloat!
     private var tabBarHeight:CGFloat!
     
-    
     //テーブルビューインスタンス
     var userConfigTableView: UITableView!
     
     //表示するもの
-    let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名","自己紹介","メールアドレス","パスワードの変更",""]
+    let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","自己紹介の変更","メールアドレスの変更","パスワードの変更",""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,6 +167,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        cell.selectionStyle = .none
         
         if indexPath.row == 0{
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]

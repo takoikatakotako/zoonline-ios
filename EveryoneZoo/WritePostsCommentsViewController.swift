@@ -107,7 +107,7 @@ class WritePostsCommentsViewController: UIViewController {
     func postNavBtnClicked(sender: UIButton){
         
         if commentTextView.text.isEmpty {
-            SCLAlertView().showInfo("エラー", subTitle: "コメントに文字の入力必要だよ")
+            SCLAlertView().showInfo("エラー", subTitle: "コメントの入力必要です。")
             return
         }
         

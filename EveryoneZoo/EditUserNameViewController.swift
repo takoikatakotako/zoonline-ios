@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SCLAlertView
 
 class EditUserNameViewController: UIViewController,UITextFieldDelegate {
     
@@ -85,46 +86,32 @@ class EditUserNameViewController: UIViewController,UITextFieldDelegate {
         self.navigationItem.titleView = titleLabel
     }
     
-    //角丸ボタンが押されたら呼ばれます
+    //名前の変更ボタン押されたら呼ばれます
     internal func changeUserNameBtn(sender: UIButton){
         
-        
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
-        let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
-        let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
-        let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
-        
-        let headers: HTTPHeaders = [
-            "access-token": myAccessToken,
-            "client": myClientToken,
-            "expiry": myExpiry,
-            "uid": myUniqID
-        ]
+        if (userNameTextFIeld.text?.isEmpty)! {
+            SCLAlertView().showInfo("エラー", subTitle: "ユーザー名の入力が必要です。")
+            return
+        }
         
         let parameters: Parameters = [
-            "name":"ONOJUN"
+            "name":userNameTextFIeld.text!
         ]
         
-        print(API_URL+"v0/auth/")
-        
-        Alamofire.request(API_URL+"v0/auth/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+        //print(API_URL+"v0/auth/")
+        Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
             
             switch response.result {
             case .success:
                 print("Validation Successful")
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
-
                 
             case .failure(let error):
                 print(error)
                 //テーブルの再読み込み
             }
         }
-        
-
     }
     
     

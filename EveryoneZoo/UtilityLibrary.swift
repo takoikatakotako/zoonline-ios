@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class UtilityLibrary: NSObject {
 
@@ -36,5 +37,24 @@ class UtilityLibrary: NSObject {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let userName:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName"))!
         return userName
+    }
+    
+    
+    class func getAPIAccessHeader()->HTTPHeaders{
+    
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
+        let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
+        let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
+        let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
+        
+        let headers: HTTPHeaders = [
+            "access-token": myAccessToken,
+            "client": myClientToken,
+            "expiry": myExpiry,
+            "uid": myUniqID
+        ]
+        
+        return headers
     }
 }
