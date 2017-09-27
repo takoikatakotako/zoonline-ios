@@ -32,6 +32,13 @@ class UtilityLibrary: NSObject {
         return rect
     }
     
+    class func getUserID()->String{
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let userID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
+        return userID
+    }
+    
     class func getUserName()->String{
     
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -39,6 +46,26 @@ class UtilityLibrary: NSObject {
         return userName
     }
     
+    class func setUserName(userName:String){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.userDefaultsManager?.userDefaults.set(userName, forKey: "KEY_MyUserName")
+        return
+    }
+    
+    class func setUserProfile(userProfile:String){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.userDefaultsManager?.userDefaults.set(userProfile, forKey: "KEY_MyUserProfile")
+        return
+    }
+    
+    class func setUserIconUrl(userIconUrl:String){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.userDefaultsManager?.userDefaults.set(userIconUrl, forKey: "KEY_MyUserIconUrl")
+        return
+    }
     
     class func getAPIAccessHeader()->HTTPHeaders{
     

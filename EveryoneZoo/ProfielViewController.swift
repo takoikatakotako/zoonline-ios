@@ -14,10 +14,7 @@ class ProfielViewController: UIViewController {
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
     private var profielViewHeight:CGFloat!
-    
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

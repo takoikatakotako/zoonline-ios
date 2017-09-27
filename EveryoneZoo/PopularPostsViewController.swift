@@ -83,7 +83,6 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
         //added
         pictureTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-        
         pictureTableView.rowHeight = viewWidth
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
@@ -96,18 +95,20 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     
-    
-    
     // MARK: くるくるの生成
     func setActivityIndicator(){
-        indicator.activityIndicatorViewStyle = .whiteLarge
-        indicator.center = self.view.center
+
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.clipsToBounds = true
+        indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         self.view.bringSubview(toFront: indicator)
-        indicator.color = UIColor.mainAppColor()
+        indicator.color = UIColor.white
         self.view.addSubview(indicator)
         indicator.startAnimating()
-        indicator.backgroundColor = UIColor.gray
+        
     }
     
     

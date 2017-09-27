@@ -124,14 +124,12 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
     // MARK: くるくるの生成
     func setActivityIndicator(){
         
-        indicator.frame = CGRect(x: viewWidth*0.35, y: viewWidth*0.5, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.clipsToBounds = true
         indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
         indicator.backgroundColor = UIColor.mainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        
-        indicator.center = self.view.center
         self.view.bringSubview(toFront: indicator)
         indicator.color = UIColor.white
         self.view.addSubview(indicator)

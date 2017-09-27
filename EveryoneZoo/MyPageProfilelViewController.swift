@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITableViewDataSource   {
     
@@ -18,6 +20,8 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     var myProfielViewHeight:CGFloat!
     private var userConfigTableViewHeight:CGFloat!
     private var tabBarHeight:CGFloat!
+    
+    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     //テーブルビューインスタンス
     var userConfigTableView: UITableView!
@@ -41,10 +45,8 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         userConfigTableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+myProfielViewHeight+tabBarHeight)
         
         setNavigationBar()
-        
-        setProfielView()
-        
-        setTableView()
+        setActivityIndicator()
+        getUserInfo()
     }
     
     // MARK: - Viewにパーツの設置
@@ -64,6 +66,21 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         self.navigationItem.titleView = titleLabel
     }
     
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.clipsToBounds = true
+        indicator.layer.cornerRadius = viewWidth*0.3*0.3
+        indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.white
+        self.view.addSubview(indicator)
+        indicator.startAnimating()
+    }
+    
     // MARK: プロフィールビュー
     func setProfielView() {
         
@@ -80,7 +97,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         let iconChoseBtnHeight:CGFloat = myProfielView.frame.height*0.44
         iconChoseBtn.frame =  CGRect(x: viewWidth/2-iconChoseBtnHeight/2, y: myProfielView.frame.height*0.1, width: iconChoseBtnHeight, height:iconChoseBtnHeight)
         iconChoseBtn.addTarget(self, action: #selector(choseIconBtnClicked(sender:)), for: .touchUpInside)
-        //iconChoseBtn.backgroundColor = UIColor.red
         myProfielView.addSubview(iconChoseBtn)
         
         //卵アイコン
@@ -129,7 +145,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         //userConfigTableView.isScrollEnabled = false
         self.view.addSubview(userConfigTableView)
     }
-    
+
     
     //
     func choseIconBtnClicked(sender: UIButton){
@@ -145,6 +161,32 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         self.present(myImagePicker, animated: true, completion: nil)
     }
     
+    //
+    
+    func getUserInfo() {
+        //ユーザーの情報を取得する
+        Alamofire.request(API_URL+API_VERSION+USERS+UtilityLibrary.getUserID()).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                
+                UtilityLibrary.setUserName(userName: json["userName"].stringValue)
+                UtilityLibrary.setUserProfile(userProfile: json["profile"].stringValue)
+                UtilityLibrary.setUserIconUrl(userIconUrl: json["iconUrl"].stringValue)
+
+                self.indicator.stopAnimating()
+                
+                self.setProfielView()
+                self.setTableView()
+       
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     
     // MARK: - TableViewのデリゲートメリット
@@ -167,7 +209,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.selectionStyle = .none
         
         if indexPath.row == 0{
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]
@@ -191,12 +232,17 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         switch indexPath.row {
         case 0:
             //プロフィールのプレビューが押された、ユーザー情報画面へ
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let userInfoView: UserInfoViewController = UserInfoViewController()
             userInfoView.postUserID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+            let btn_back = UIBarButtonItem()
+            btn_back.title = ""
+            self.navigationItem.backBarButtonItem = btn_back
             self.navigationController?.pushViewController(userInfoView, animated: true)
             break
         case 2:
