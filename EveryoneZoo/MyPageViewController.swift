@@ -388,8 +388,16 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
+    var myComposeView : SLComposeViewController!
+
     func tweet() {
+        
+        myComposeView = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+        myComposeView.setInitialText("#みんなの動物園")
+        myComposeView.add(UIImage(named: "login_sample"))
+        self.present(myComposeView, animated: true, completion: nil)
+        
+        /*
         
         // ツイート処理が可能かチェック
         if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
@@ -420,5 +428,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             SCLAlertView().showWarning("エラー", subTitle: "Twitterの設定を確認してください。") // Warning
         }
+ */
     }
 }
