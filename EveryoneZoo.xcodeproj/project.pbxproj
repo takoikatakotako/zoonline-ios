@@ -42,6 +42,7 @@
 		8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */; };
 		8D7E86091EABBC6200C4049B /* LeftPicturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86081EABBC6200C4049B /* LeftPicturesTableViewCell.swift */; };
 		8D7E860B1EABBC7400C4049B /* RightPicturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */; };
+		8D8A43301F7D421700F79C0F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8A432F1F7D421700F79C0F /* Social.framework */; };
 		8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */; };
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
 		8D9DE17A1EE3EA3900121FC1 /* FavCommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9DE1791EE3EA3900121FC1 /* FavCommentButton.swift */; };
@@ -139,6 +140,7 @@
 		8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableCell.swift; sourceTree = "<group>"; };
 		8D7E86081EABBC6200C4049B /* LeftPicturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftPicturesTableViewCell.swift; sourceTree = "<group>"; };
 		8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightPicturesTableViewCell.swift; sourceTree = "<group>"; };
+		8D8A432F1F7D421700F79C0F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZooTabBarController.swift; path = ../ZooTabBarController.swift; sourceTree = "<group>"; };
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		8D9DE1791EE3EA3900121FC1 /* FavCommentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavCommentButton.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D8A43301F7D421700F79C0F /* Social.framework in Frameworks */,
 				72F50AA25E9B21009A0C6FAD /* Pods_EveryoneZoo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,6 +473,7 @@
 		AD036EBAB48E2DEE51E63AD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D8A432F1F7D421700F79C0F /* Social.framework */,
 				6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */,
 				22ADCE5CE831A681A93AECC6 /* Pods_EveryoneZooTests.framework */,
 				600BCE0ECEDD3B35A3B6B9B9 /* Pods_EveryoneZooUITests.framework */,

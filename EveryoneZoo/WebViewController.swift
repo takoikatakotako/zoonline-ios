@@ -24,6 +24,8 @@ class WebViewController: UIViewController , UIWebViewDelegate{
     
     //
     var webview : UIWebView!
+    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,7 @@ class WebViewController: UIViewController , UIWebViewDelegate{
         //WebView
         webview = UIWebView()
         webview.frame = CGRect(x: 0, y: (statusBarHeight+navigationBarHeight), width: viewWidth, height: webViewHeight)
+        webview.delegate = self
         self.view.addSubview(webview)
         
         // URLを設定.
@@ -51,6 +54,8 @@ class WebViewController: UIViewController , UIWebViewDelegate{
         self.view.addSubview(webview)
         
         setNavigationBar()
+        
+        setActivityIndicator()
     }
     
     
@@ -73,7 +78,7 @@ class WebViewController: UIViewController , UIWebViewDelegate{
         
         //ナビゲーションアイテムを作成
         let navItems = UINavigationItem()
-        let titleLabel:UILabel = UILabel()
+        let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = navTitle
@@ -89,6 +94,21 @@ class WebViewController: UIViewController , UIWebViewDelegate{
     }
     
     
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.clipsToBounds = true
+        indicator.layer.cornerRadius = viewWidth*0.3*0.3
+        indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.white
+        self.view.addSubview(indicator)
+        indicator.startAnimating()
+    }
+    
     func doClose(sender: UIButton){
     
         self.dismiss(animated: true, completion: nil)
@@ -98,6 +118,7 @@ class WebViewController: UIViewController , UIWebViewDelegate{
 
     func webViewDidFinishLoad(_ webView: UIWebView) {
         print("webViewDidFinishLoad")
+        indicator.stopAnimating()
     }
     
     /*

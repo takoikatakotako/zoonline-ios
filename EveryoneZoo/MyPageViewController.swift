@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Social
+import SCLAlertView
 
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -23,6 +25,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //テーブルビューインスタンス
     private var myPageTableView: UITableView!
+
     
     //
     var loginedSectionTitle:[String] = ["ユーザー情報", "設定・その他", "ログアウト"]
@@ -59,6 +62,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         setUserCellBtn()
         
         setTableView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -284,6 +288,12 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     break
                 case 1:
                     //アプリシェア
+                    let alertView = SCLAlertView()
+                    alertView.addButton("Twitter") {
+                        self.tweet()
+                    }
+                    alertView.showInfo("シェア", subTitle: "投稿を共有する")
+                    
                     break
                 case 2:
                     //利用規約
@@ -376,5 +386,39 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         btn_back.title = ""
         self.navigationItem.backBarButtonItem = btn_back
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    func tweet() {
+        
+        // ツイート処理が可能かチェック
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
+            // make controller to share on twitter
+            let slc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            
+            slc?.setInitialText("ツイートしちゃうよ！")
+            
+            // ツイート入力画面表示
+            present(slc!, animated: true, completion: {
+            })
+            
+            // 事後処理
+            slc?.completionHandler = {
+                (result:SLComposeViewControllerResult) -> () in
+                switch (result) {
+                    
+                // 投稿した
+                case SLComposeViewControllerResult.done:
+                    print("tweeted")
+                    
+                // キャンセルした
+                case SLComposeViewControllerResult.cancelled:
+                    print("tweet cancel")
+                    
+                }
+            }
+        } else {
+            SCLAlertView().showWarning("エラー", subTitle: "Twitterの設定を確認してください。") // Warning
+        }
     }
 }

@@ -102,12 +102,17 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     
     // MARK: くるくるの生成
     func setActivityIndicator(){
-        indicator.activityIndicatorViewStyle = .whiteLarge
-        indicator.center = self.view.center
+        
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.clipsToBounds = true
+        indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         self.view.bringSubview(toFront: indicator)
-        indicator.color = UIColor.mainAppColor()
+        indicator.color = UIColor.white
         self.view.addSubview(indicator)
+        indicator.startAnimating()
     }
     
     func setSupportBtn() {
@@ -150,6 +155,9 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.userInfoBtn.addTarget(self, action: #selector(userInfoBtnClicked(sender:)), for:.touchUpInside)
         cell.thumbnailImgView.frame = CGRect(x: userInfoBtnHeight*0.15, y: userInfoBtnHeight*0.15, width: userInfoBtnHeight*0.7, height: userInfoBtnHeight*0.7)
         cell.thumbnailImgView.layer.cornerRadius = cell.thumbnailImgView.frame.height * 0.5
+        
+        print(self.iconUrl)
+        
         if !self.iconUrl.isEmpty{
             cell.thumbnailImgView.af_setImage(withURL: URL(string:self.iconUrl)!, placeholderImage:  UIImage(named:"icon_default")!)
         }
@@ -264,20 +272,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             sender.countLabel.textColor = UIColor.black
             let favCount:String = sender.countLabel.text!
             sender.countLabel.text = String(Int(favCount)!-1)
-            
-            let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
-            let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
-            let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
-            let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
-            
-            let headers: HTTPHeaders = [
-                "access-token": myAccessToken,
-                "client": myClientToken,
-                "expiry": myExpiry,
-                "uid": myUniqID
-            ]
 
-            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID), method: .delete, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID), method: .delete, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
                 
                 switch response.result {
                 case .success:
@@ -297,20 +293,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             sender.countLabel.text = String(Int(favCount)!+1)
             print(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID))
             
-            
-            let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
-            let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
-            let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
-            let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
-            
-            let headers: HTTPHeaders = [
-                "access-token": myAccessToken,
-                "client": myClientToken,
-                "expiry": myExpiry,
-                "uid": myUniqID
-            ]
-            
-            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID), method: .post, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID), method: .post, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
                 
                 switch response.result {
                 case .success:
@@ -362,7 +345,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 self.goCommentView()
             })
             actionAlert.addAction(commentAction)
-
             
             let addAlbumAction = UIAlertAction(title: "アルバムへの追加", style: UIAlertActionStyle.default, handler: {
                 (action: UIAlertAction!) in
@@ -388,11 +370,14 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         let shareAction = UIAlertAction(title: "シェアする", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
+            let alertView = SCLAlertView()
+            alertView.addButton("Second Button") {
+                print("Second button tapped")
+            }
+            alertView.showInfo("シェア", subTitle: "投稿を共有する")
             
-            SCLAlertView().showInfo("シェアする", subTitle: "シェアだウェイ")
         })
         actionAlert.addAction(shareAction)
-
 
         
         let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler: {
@@ -437,11 +422,11 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 self.postTitle = json["responce"]["title"].stringValue
                 self.postCaption = json["responce"]["caption"].stringValue
                 self.postImgUrl = URL(string: json["responce"]["itemImage"].stringValue)!
+                self.iconUrl = json["responce"]["iconUrl"].stringValue
                 
-                if !json["responce"]["iconUrl"].stringValue.isEmpty{
-                    self.iconUrl = json["responce"]["iconUrl"].stringValue
-                }
                 
+                print(json["responce"]["iconUrl"].stringValue)
+
                 self.commentList = json["responce"]["commentList"].arrayValue
                 self.favList = json["responce"]["favList"].arrayValue
 

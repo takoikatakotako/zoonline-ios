@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITableViewDataSource   {
+class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate ,UINavigationControllerDelegate {
     
     //width, height
     private var viewWidth:CGFloat!
@@ -23,11 +23,16 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
+    //プロフィール
+    let icon:UIImageView = UIImageView()
+    let nameLabel:UILabel = UILabel()
+    let mailLabel:UILabel = UILabel()
+
     //テーブルビューインスタンス
     var userConfigTableView: UITableView!
     
     //表示するもの
-    let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","自己紹介の変更","メールアドレスの変更","パスワードの変更",""]
+    let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","プロフィールの変更","メールアドレスの変更","パスワードの変更",""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +105,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         myProfielView.addSubview(iconChoseBtn)
         
         //卵アイコン
-        let icon:UIImageView = UIImageView()
         icon.frame = CGRect(x: 0, y: 0, width: iconChoseBtn.frame.size.width, height:iconChoseBtn.frame.size.height)
         icon.layer.cornerRadius = iconChoseBtn.frame.size.width/2
         icon.layer.masksToBounds = true
@@ -116,7 +120,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         iconChoseBtn.addSubview(iconPlusImg)
         
         // 名前
-        let nameLabel:UILabel = UILabel()
         nameLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.58, width: viewWidth, height:myProfielView.frame.height*0.2)
         nameLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName")
         nameLabel.textAlignment = NSTextAlignment.center
@@ -124,7 +127,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         self.view.addSubview(nameLabel)
         
         // Mail
-        let mailLabel:UILabel = UILabel()
         mailLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.75, width: viewWidth, height:myProfielView.frame.height*0.2)
         mailLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserEmail")
         mailLabel.textAlignment = NSTextAlignment.center
@@ -145,24 +147,120 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         //userConfigTableView.isScrollEnabled = false
         self.view.addSubview(userConfigTableView)
     }
-
+    
     
     //
     func choseIconBtnClicked(sender: UIButton){
         
         // インスタンス生成
         let myImagePicker = UIImagePickerController()
-        //myImagePicker.delegate = self
+        myImagePicker.delegate = self
         myImagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         myImagePicker.navigationBar.barTintColor = UIColor.mainAppColor()
         myImagePicker.navigationBar.tintColor = UIColor.white
         myImagePicker.navigationBar.isTranslucent = false
-        //myImagePicker.allowsEditing = false
         self.present(myImagePicker, animated: true, completion: nil)
     }
     
-    //
     
+    // MARK: - UIImagePickerのDelgate
+    
+    //画像が選択された時に呼ばれる.
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            self.view.bringSubview(toFront: self.indicator)
+            self.indicator.startAnimating()
+            self.doImageUpload(postImage: image)
+            
+        } else{
+            print("Error:Class name : \(NSStringFromClass(type(of: self))) ")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+ 
+    }
+    
+    //画像選択がキャンセルされた時に呼ばれる.
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func doImageUpload(postImage:UIImage) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let userID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
+        
+        let imageData = UIImagePNGRepresentation(postImage)!
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
+            multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
+        }, to:API_URL+API_VERSION+PICTURE)
+        { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                
+                upload.uploadProgress(closure: { (Progress) in
+                    //print("Upload Progress: \(Progress.fractionCompleted)")
+                })
+                
+                upload.responseJSON { response in
+                    print(response.request ?? "response.request")  // original URL request
+                    print(response.response ?? "response.response") // URL response
+                    print(response.data ?? "response.data")     // server data
+                    print(response.result)   // result of response serialization
+                    
+                    switch response.result {
+                    case .success:
+                        print("Validation Successful")
+                        let json:JSON = JSON(response.result.value ?? kill)
+                        
+                        if json["is_success"].boolValue  {
+                            let pic_id:String = json["picture"]["pic_id"].stringValue
+                            
+                            self.doPost(pic_id: pic_id)
+                        }
+                        
+                    case .failure(let error):
+                        print(error)
+                        
+                    }
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+        }
+    }
+
+    
+    
+    func doPost(pic_id:String) {
+        
+        let parameters: Parameters = [
+            "pic_id":pic_id
+        ]
+
+        Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                self.indicator.stopAnimating()
+//icon
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //
     func getUserInfo() {
         //ユーザーの情報を取得する
         Alamofire.request(API_URL+API_VERSION+USERS+UtilityLibrary.getUserID()).responseJSON{ response in
