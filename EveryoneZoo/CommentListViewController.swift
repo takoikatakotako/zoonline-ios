@@ -29,6 +29,8 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     private var commentTableView: UITableView!
     private var postsComments:JSON = []
     
+    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,8 +49,16 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         
         setTableView()
         
+        setActivityIndicator()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        indicator.startAnimating()
         getPostsComments()
     }
+    
 
     // MARK: - Viewにパーツの設置
     // MARK: NavigationBar
@@ -66,7 +76,6 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         titleLabel.textColor = UIColor.white
         
         self.navigationItem.titleView = titleLabel
-        
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if !(appDelegate.userDefaultsManager?.isLogin())! {
@@ -94,6 +103,19 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         self.view.addSubview(commentTableView)
     }
     
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.clipsToBounds = true
+        indicator.layer.cornerRadius = viewWidth*0.3*0.3
+        indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.white
+        self.view.addSubview(indicator)
+    }
     
     func getPostsComments() {
         
@@ -106,7 +128,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
                 print(json)
                 self.postsComments = json["comments"]
                 
-                //print(self.postsComments)
+                self.indicator.stopAnimating()
                 self.commentTableView.reloadData()
                 
             case .failure(let error):
@@ -127,7 +149,8 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         //myItems配列の中身をテキストにして登録した
         let cell:CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self), for: indexPath) as! CommentTableViewCell
         cell.thumbnailImgView.image = UIImage(named:"sample_kabi1")
-        print(self.postsComments["comment"])
+        cell.commentUser.text = self.postsComments[indexPath.row]["username"].stringValue
+        cell.dateLabel.text = self.postsComments[indexPath.row]["updated_at"].stringValue
         cell.commentLabel.text = self.postsComments[indexPath.row]["comment"].stringValue
         
         return cell

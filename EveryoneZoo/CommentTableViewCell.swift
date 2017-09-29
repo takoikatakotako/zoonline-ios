@@ -15,15 +15,17 @@ class CommentTableViewCell: UITableViewCell {
     var dateLabel:UILabel = UILabel()
     var commentLabel:UITextView = UITextView()
 
-
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(thumbnailImgView)
         contentView.addSubview(commentUser)
         contentView.addSubview(dateLabel)
-        commentLabel.text = "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ"
         contentView.addSubview(commentLabel)
+        
+        commentUser.text = "いろはにほへと"
+        commentLabel.text = "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ"
+        dateLabel.text = "2017年4月26日"
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -49,15 +51,12 @@ class CommentTableViewCell: UITableViewCell {
         //CommentLabel
         commentUser.frame = CGRect(x: cellWidth*0.18, y: cellHeight*0.08, width: cellWidth*0.5, height: cellHeight*0.35)
         commentUser.font = UIFont.boldSystemFont(ofSize: 14)
-        commentUser.text = "いろはにほへと"
         commentUser.textColor = UIColor.mainAppColor()
         
         //dateLabel
         dateLabel.frame = CGRect(x: cellWidth*0.7, y: cellHeight*0.08, width: cellWidth*0.3, height: cellHeight*0.35)
         dateLabel.font = UIFont.systemFont(ofSize: 12)
-        dateLabel.text = "2017年4月26日"
         dateLabel.textColor = UIColor.gray
-        
         
         commentLabel.frame = CGRect(x: cellWidth*0.18, y: cellHeight*0.35, width: cellWidth*0.8, height: cellHeight*0.6)
         commentLabel.font = UIFont.systemFont(ofSize: 12)
