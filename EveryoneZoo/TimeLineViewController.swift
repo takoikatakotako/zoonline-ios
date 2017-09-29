@@ -48,9 +48,7 @@ class TimeLineViewController: UIViewController,CAPSPageMenuDelegate {
         //Viewにパーツを追加
         setNavigationBarBar()
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        //if (appDelegate.userDefaultsManager?.isLogin())! {
-        if !(appDelegate.userDefaultsManager?.isLogin())! {
+        if !UtilityLibrary.isLogin() {
 
             setPageMenu()
             

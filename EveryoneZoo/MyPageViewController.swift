@@ -97,11 +97,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //UserCellに文字を
     func setUserCellText() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
+        if (UtilityLibrary.isLogin()) {
             //ログイン
-            userCellBtn.userNameLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName")
-            userCellBtn.userMailAdressLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserEmail")
+            userCellBtn.userNameLabel.text = UtilityLibrary.getUserName()
+            userCellBtn.userMailAdressLabel.text = UtilityLibrary.getUserEmail()
         }else{
             //ログイン
             userCellBtn.userNameLabel.text = "未ログイン"
@@ -127,8 +126,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func numberOfSections(in tableView: UITableView) -> Int {
         
         //ログインしている場合はボタンをつける
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
+        if UtilityLibrary.isLogin() {
             return loginedSectionTitle.count
         }else{
             return unloginedSectionTitle.count
@@ -139,8 +137,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         //ログインしている場合はボタンをつける
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
+        if UtilityLibrary.isLogin() {
             return loginedSectionTitle[section]
         }else{
             return unloginedSectionTitle[section]
@@ -160,8 +157,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //テーブルに表示する配列の総数を返す.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
+        if UtilityLibrary.isLogin() {
             switch section {
             case 0:
                 return userInfoTitle.count
@@ -189,8 +185,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let cell:MyPageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPageTableViewCell.self), for: indexPath) as! MyPageTableViewCell
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
+        if (UtilityLibrary.isLogin()) {
             switch indexPath.section {
             case 0:
                 cell.textCellLabel.text =  userInfoTitle[indexPath.row]
@@ -225,17 +220,15 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //Cellが選択された際に呼び出される.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
+        if UtilityLibrary.isLogin() {
             switch indexPath.section {
             case 0:
                 //ユーザー情報
                 switch indexPath.row {
                 case 0:
                     //投稿一覧
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let vc:MyPagePostViewController = MyPagePostViewController()
-                    vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+                    vc.userID = Int(UtilityLibrary.getUserID())
                     
                     let btn_back = UIBarButtonItem()
                     btn_back.title = ""
@@ -245,7 +238,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 case 1:
                     //フレンズ一覧
                     let vc:FriendsListViewController = FriendsListViewController()
-                    vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+                    vc.userID = Int(UtilityLibrary.getUserID())
                     
                     let btn_back = UIBarButtonItem()
                     btn_back.title = ""
@@ -255,7 +248,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 case 2:
                     //フォロワー一覧
                     let vc:FollowerListViewController = FollowerListViewController()
-                    vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+                    vc.userID = Int(UtilityLibrary.getUserID())
                     
                     let btn_back = UIBarButtonItem()
                     btn_back.title = ""
@@ -265,7 +258,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 case 3:
                     //お気に入り
                     let vc:MyPageFavoriteViewController = MyPageFavoriteViewController()
-                    vc.userID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+                    vc.userID = Int(UtilityLibrary.getUserID())
                     
                     let btn_back = UIBarButtonItem()
                     btn_back.title = ""
@@ -371,8 +364,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //basicボタンが押されたら呼ばれます
     internal func goMyProfile(sender: UIButton){
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if !(appDelegate.userDefaultsManager?.isLogin())! {
+        if !(UtilityLibrary.isLogin()){
 
             let loginView:LoginViewController = LoginViewController()
             loginView.statusBarHeight = self.statusBarHeight

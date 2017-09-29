@@ -241,13 +241,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //フォローボタンが押されたら呼ばれる
     func followBtnClicked(sender: FollowUserButton){
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if !(appDelegate.userDefaultsManager?.isLogin())! {
-            //ログインしていない
+        if !(UtilityLibrary.isLogin()){
             SCLAlertView().showInfo("ログインしてね", subTitle: "フォロー機能を使うにはログインが必要だよ！")
             return
         }
         
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if sender.followImgView.image == UIImage(named:"follow_icon") {
             sender.followImgView.image = UIImage(named: "follow_icon_on")!
             appDelegate.networkManager?.followUser(myUserId: 1, followUserId: 2)
@@ -263,8 +262,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //ファボボタンが押されたら呼ばれる
     func favBtnClicked(sender: FavCommentButton){
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if !(appDelegate.userDefaultsManager?.isLogin())! {
+        if !(UtilityLibrary.isLogin()) {
             //ログインしていない
             SCLAlertView().showInfo("ログインしてね", subTitle: "お気に入り機能を使うにはログインが必要だよ！")
             return
@@ -338,8 +336,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         // インスタンス生成　styleはActionSheet.
         let actionAlert = UIAlertController(title: "操作メニュー", message: "操作を選んでください。", preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
+        if UtilityLibrary.isLogin() {
             
             // アクションを生成.
             let commentAction = UIAlertAction(title: "コメント", style: UIAlertActionStyle.default, handler: {

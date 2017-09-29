@@ -36,24 +36,6 @@ class UserDefaultsManager: NSObject {
         userDefaults.register(defaults: ["KEY_SUPPORT_Zoo": false])
     }
     
-    func setInitValues(){
-    
-    }
-    
-    func isLogin()->Bool{
-        
-        var isLogin:Bool = false
-        
-        if (userDefaults.object(forKey: "KEY_login") != nil) {
-            isLogin = userDefaults.bool(forKey: "KEY_login")
-        }else{
-            print("Error")
-        }
-        
-        return isLogin
-    }
-    
-    
     func doLogin(userID:String, userName:String, email:String, iconUrl:String, profile:String, accessToken:String, clientToken:String, expiry:String, uniqID:String) {
         userDefaults.set(true, forKey: "KEY_login")
         userDefaults.set(userID, forKey: "KEY_MyUserID")

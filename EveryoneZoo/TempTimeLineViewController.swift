@@ -58,8 +58,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
             noLoginView.removeFromSuperview()
         }
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.userDefaultsManager?.isLogin())! {
+        if UtilityLibrary.isLogin() {
             
             //
             setTableView()

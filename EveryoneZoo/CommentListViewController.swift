@@ -77,8 +77,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         
         self.navigationItem.titleView = titleLabel
 
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if !(appDelegate.userDefaultsManager?.isLogin())! {
+        if !(UtilityLibrary.isLogin()) {
             //ログインしていない
             return
         }else{
