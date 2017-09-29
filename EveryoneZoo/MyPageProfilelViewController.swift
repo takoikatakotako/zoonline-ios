@@ -24,7 +24,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     //プロフィール
-    let icon:UIImageView = UIImageView()
+    var icon:UIImageView = UIImageView()
     let nameLabel:UILabel = UILabel()
     let mailLabel:UILabel = UILabel()
 
@@ -51,6 +51,13 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         
         setNavigationBar()
         setActivityIndicator()
+        getUserInfo()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        indicator.startAnimating()
         getUserInfo()
     }
     
@@ -83,7 +90,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         self.view.bringSubview(toFront: indicator)
         indicator.color = UIColor.white
         self.view.addSubview(indicator)
-        indicator.startAnimating()
     }
     
     // MARK: プロフィールビュー
@@ -109,7 +115,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         icon.layer.cornerRadius = iconChoseBtn.frame.size.width/2
         icon.layer.masksToBounds = true
         icon.isUserInteractionEnabled = false
-        icon.image = UIImage(named:"sample_kabi1")
         iconChoseBtn.addSubview(icon)
         
         //プラスのボタン
@@ -220,8 +225,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
                         
                         if json["is_success"].boolValue  {
                             let pic_id:String = json["picture"]["pic_id"].stringValue
-                            
-                            self.doPost(pic_id: pic_id)
+                            self.doPost(pic_id: pic_id, postImage: postImage)
                         }
                         
                     case .failure(let error):
@@ -235,10 +239,8 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             }
         }
     }
-
     
-    
-    func doPost(pic_id:String) {
+    func doPost(pic_id:String, postImage:UIImage) {
         
         let parameters: Parameters = [
             "pic_id":pic_id
@@ -251,8 +253,8 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
                 print("Validation Successful")
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
+                self.icon.image = postImage
                 self.indicator.stopAnimating()
-//icon
                 
             case .failure(let error):
                 print(error)
@@ -274,7 +276,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
                 UtilityLibrary.setUserName(userName: json["userName"].stringValue)
                 UtilityLibrary.setUserProfile(userProfile: json["profile"].stringValue)
                 UtilityLibrary.setUserIconUrl(userIconUrl: json["iconUrl"].stringValue)
-
+                
                 self.indicator.stopAnimating()
                 
                 self.setProfielView()

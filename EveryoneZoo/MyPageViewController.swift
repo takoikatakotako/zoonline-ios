@@ -26,6 +26,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //テーブルビューインスタンス
     private var myPageTableView: UITableView!
 
+    var myComposeView : SLComposeViewController!
     
     //
     var loginedSectionTitle:[String] = ["ユーザー情報", "設定・その他", "ログアウト"]
@@ -292,7 +293,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     alertView.addButton("Twitter") {
                         self.tweet()
                     }
-                    alertView.showInfo("シェア", subTitle: "投稿を共有する")
+                    alertView.showInfo("シェア", subTitle: "みんなの動物園を広める")
                     
                     break
                 case 2:
@@ -388,46 +389,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    var myComposeView : SLComposeViewController!
-
     func tweet() {
         
         myComposeView = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         myComposeView.setInitialText("#みんなの動物園")
-        myComposeView.add(UIImage(named: "login_sample"))
         self.present(myComposeView, animated: true, completion: nil)
-        
-        /*
-        
-        // ツイート処理が可能かチェック
-        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
-            // make controller to share on twitter
-            let slc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            
-            slc?.setInitialText("ツイートしちゃうよ！")
-            
-            // ツイート入力画面表示
-            present(slc!, animated: true, completion: {
-            })
-            
-            // 事後処理
-            slc?.completionHandler = {
-                (result:SLComposeViewControllerResult) -> () in
-                switch (result) {
-                    
-                // 投稿した
-                case SLComposeViewControllerResult.done:
-                    print("tweeted")
-                    
-                // キャンセルした
-                case SLComposeViewControllerResult.cancelled:
-                    print("tweet cancel")
-                    
-                }
-            }
-        } else {
-            SCLAlertView().showWarning("エラー", subTitle: "Twitterの設定を確認してください。") // Warning
-        }
- */
     }
 }

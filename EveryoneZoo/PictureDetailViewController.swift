@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
@@ -43,6 +44,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     
     //サポートボタン
     let supportBtn:UIButton = UIButton()
+    
+    var myComposeView : SLComposeViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -371,10 +374,10 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let shareAction = UIAlertAction(title: "シェアする", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
             let alertView = SCLAlertView()
-            alertView.addButton("Second Button") {
-                print("Second button tapped")
+            alertView.addButton("Twitter") {
+                self.tweet()
             }
-            alertView.showInfo("シェア", subTitle: "投稿を共有する")
+            alertView.showInfo("シェア", subTitle: "投稿を広める")
             
         })
         actionAlert.addAction(shareAction)
@@ -445,5 +448,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 
             }
         }
+    }
+    
+    func tweet() {
+        
+        myComposeView = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+        myComposeView.setInitialText("#みんなの動物園")
+        self.present(myComposeView, animated: true, completion: nil)
     }
 }
