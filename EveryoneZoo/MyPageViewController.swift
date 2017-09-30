@@ -91,8 +91,16 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         userCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: 0, width: viewWidth, height: HEIGHT_USER_CELL))
         userCellBtn.backgroundColor = UIColor.white
         userCellBtn.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for:.touchUpInside)
-        self.view.addSubview(userCellBtn)
         
+        let defaultIcon = UIImage(named:"icon_default")
+        if UtilityLibrary.getUserIconUrl().isEmpty {
+            userCellBtn.iconImgView.image = defaultIcon
+        }else{
+            let url = URL(string: UtilityLibrary.getUserIconUrl())
+            userCellBtn.iconImgView.af_setImage(withURL: url!, placeholderImage: defaultIcon)
+        }
+        
+        self.view.addSubview(userCellBtn)
     }
     
     //UserCellに文字を

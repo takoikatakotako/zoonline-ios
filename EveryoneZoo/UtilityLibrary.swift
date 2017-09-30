@@ -47,6 +47,13 @@ class UtilityLibrary: NSObject {
         return userEmail
     }
     
+    class func getUserIconUrl()->String{
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let userIconUrl:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserIconUrl"))!
+        return userIconUrl
+    }
+    
     class func setUserName(userName:String){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

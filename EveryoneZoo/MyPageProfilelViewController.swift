@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import AlamofireImage
 
 class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate ,UINavigationControllerDelegate {
     
@@ -57,6 +58,14 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
+        let defaultIcon = UIImage(named:"icon_default")
+        if UtilityLibrary.getUserIconUrl().isEmpty {
+            icon.image = defaultIcon
+        }else{
+            let url = URL(string: UtilityLibrary.getUserIconUrl())
+            icon.af_setImage(withURL: url!, placeholderImage: defaultIcon)
+        }
+        
         indicator.startAnimating()
         getUserInfo()
     }
