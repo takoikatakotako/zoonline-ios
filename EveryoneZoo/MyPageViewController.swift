@@ -93,11 +93,11 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         userCellBtn.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for:.touchUpInside)
         
         let defaultIcon = UIImage(named:"icon_default")
-        if UtilityLibrary.getUserIconUrl().isEmpty {
-            userCellBtn.iconImgView.image = defaultIcon
+        if let url = URL(string: UtilityLibrary.getUserIconUrl()){
+            userCellBtn.iconImgView.af_setImage(withURL: url, placeholderImage: defaultIcon)
+
         }else{
-            let url = URL(string: UtilityLibrary.getUserIconUrl())
-            userCellBtn.iconImgView.af_setImage(withURL: url!, placeholderImage: defaultIcon)
+            userCellBtn.iconImgView.image = defaultIcon
         }
         
         self.view.addSubview(userCellBtn)

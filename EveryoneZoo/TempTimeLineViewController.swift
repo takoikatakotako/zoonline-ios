@@ -24,11 +24,12 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     private var timeLineTableView:UITableView = UITableView()
     private var noLoginView:NoLoginView!
 
-
     var newsContents:JSON = []
 
     //サポートボタン
     let supportBtn:UIButton = UIButton()
+    
+    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+tabBarHeight!)
         
         setNavigationBarBar()
+        setActivityIndicator()
         
         noLoginView = NoLoginView()
     }
@@ -68,14 +70,32 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
             
             if !didSupport {
                 setSupportBtn()
-
             }
+            
+            self.view.bringSubview(toFront: indicator)
+            indicator.startAnimating()
             getNews()
             
         }else{
             
             setLoginView()
         }
+    }
+    
+    
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.clipsToBounds = true
+        indicator.layer.cornerRadius = viewWidth*0.3*0.3
+        indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.white
+        self.view.addSubview(indicator)
+        indicator.startAnimating()
     }
     
     func getNews() {
@@ -98,12 +118,13 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
                     
                     self.timeLineTableView.reloadData()
                 }
-  
                 
             case .failure(let error):
                 print(error)
                 //テーブルの再読み込み
             }
+            
+            self.indicator.stopAnimating()
         }
     }
 

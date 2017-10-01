@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import SCLAlertView
 
 class EditUserProfileVC: UIViewController {
-
     
     //width, height
     private var viewWidth:CGFloat!
     private var viewHeight:CGFloat!
     private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
+    
+    private var userProfileTexView:UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,27 +36,31 @@ class EditUserProfileVC: UIViewController {
         
         // 名前
         let nameLabel:UILabel = UILabel()
-        nameLabel.frame = CGRect(x: viewWidth*0.05, y:  viewHeight*0.1, width: viewWidth*0.9, height:24)
-        nameLabel.text = "ユーザー名を変更します"
+        nameLabel.frame = CGRect(x: viewWidth*0.05, y:  viewHeight*0.05, width: viewWidth*0.9, height:24)
+        nameLabel.text = "プロフィールを変更します"
         nameLabel.textAlignment = NSTextAlignment.center
         nameLabel.font = UIFont.systemFont(ofSize: 20)
         self.view.addSubview(nameLabel)
         
         //ユーザー名入力欄
-        let userNameTextFIeld:UITextField = UITextField()
-        userNameTextFIeld.text = "新しいユーザー名"
-        userNameTextFIeld.textAlignment = NSTextAlignment.center
-        userNameTextFIeld.frame = CGRect(x: viewWidth*0.05, y: viewHeight*0.18, width: viewWidth*0.9, height: 40)
-        userNameTextFIeld.textColor = UIColor.gray
-        self.view.addSubview(userNameTextFIeld)
+        userProfileTexView = UITextView()
+        userProfileTexView.textAlignment = NSTextAlignment.left
+        userProfileTexView.frame = CGRect(x: viewWidth*0.05, y: viewHeight*0.13, width: viewWidth*0.9, height: viewWidth*0.2)
+        userProfileTexView.textColor = UIColor.gray
+        self.view.addSubview(userProfileTexView)
         
+        let myProfile = UtilityLibrary.getUserProfile()
+        if myProfile.isEmpty {
+            userProfileTexView.text = "あなたのプロフィールを記入してください。"
+        }else{
+            userProfileTexView.text = myProfile
+        }
         
         //userNameTextFIeldUnderLine
         let userNameTextFIeldLine:UIView = UIView()
-        userNameTextFIeldLine.frame = CGRect(x: viewWidth*0.05, y: viewHeight*0.18+40+2, width: viewWidth*0.9, height: 1)
+        userNameTextFIeldLine.frame = CGRect(x: viewWidth*0.05, y: viewHeight*0.25, width: viewWidth*0.9, height: 1)
         userNameTextFIeldLine.backgroundColor = UIColor.gray
         self.view.addSubview(userNameTextFIeldLine)
-        
         
         //LoginButton
         let changeUserNameBtn:UIButton = UIButton()
@@ -62,10 +70,8 @@ class EditUserProfileVC: UIViewController {
         changeUserNameBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         changeUserNameBtn.layer.masksToBounds = true
         changeUserNameBtn.layer.cornerRadius = 4.0
-        changeUserNameBtn.isEnabled = false
-        //changeUserNameBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+        changeUserNameBtn.addTarget(self, action: #selector(changeUserProfileBtn(sender:)), for: .touchUpInside)
         self.view.addSubview(changeUserNameBtn)
-        
     }
     
     // MARK: - Viewにパーツの設置
@@ -83,5 +89,32 @@ class EditUserProfileVC: UIViewController {
         titleLabel.textColor = UIColor.white
         
         self.navigationItem.titleView = titleLabel
+    }
+    
+    func changeUserProfileBtn(sender: UIButton){
+        
+        if (userProfileTexView.text?.isEmpty)! {
+            SCLAlertView().showInfo("エラー", subTitle: "ユーザー名の入力が必要です。")
+            return
+        }
+        
+        let parameters: Parameters = [
+            "profile":"おっぱいいっぱいゆめいっぱい"
+        ]
+        
+        Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
     }
 }

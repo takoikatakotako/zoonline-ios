@@ -135,6 +135,4 @@ class EditUserNameViewController: UIViewController,UITextFieldDelegate {
     
         return true
     }
-
-    
 }

@@ -47,6 +47,13 @@ class UtilityLibrary: NSObject {
         return userEmail
     }
     
+    class func getUserProfile()->String{
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let userProfile:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserProfile"))!
+        return userProfile
+    }
+    
     class func getUserIconUrl()->String{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

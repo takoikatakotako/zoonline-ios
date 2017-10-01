@@ -59,11 +59,11 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         super.viewWillAppear(animated)
     
         let defaultIcon = UIImage(named:"icon_default")
-        if UtilityLibrary.getUserIconUrl().isEmpty {
-            icon.image = defaultIcon
+        if let url = URL(string: UtilityLibrary.getUserIconUrl()){
+            icon.af_setImage(withURL: url, placeholderImage: defaultIcon)
+
         }else{
-            let url = URL(string: UtilityLibrary.getUserIconUrl())
-            icon.af_setImage(withURL: url!, placeholderImage: defaultIcon)
+            icon.image = defaultIcon
         }
         
         indicator.startAnimating()
@@ -193,7 +193,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         }
         
         self.dismiss(animated: true, completion: nil)
- 
     }
     
     //画像選択がキャンセルされた時に呼ばれる.
