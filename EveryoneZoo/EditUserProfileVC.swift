@@ -99,7 +99,7 @@ class EditUserProfileVC: UIViewController {
         }
         
         let parameters: Parameters = [
-            "profile":"おっぱいいっぱいゆめいっぱい"
+            "profile":userProfileTexView.text
         ]
         
         Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
