@@ -29,6 +29,7 @@
 		8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */; };
 		8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215AC1EC3689600593E55 /* MyPageViewController.swift */; };
 		8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D6888781E9E7C2E00140508 /* Localizable.strings */; };
+		8D6A73EE1F83BE2A00902AFC /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6A73ED1F83BE2A00902AFC /* UserCollectionViewCell.swift */; };
 		8D7343631F3A1CB700EB232E /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7343621F3A1CB700EB232E /* NewsListViewController.swift */; };
 		8D7343651F3A1D5D00EB232E /* OfficialListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7343641F3A1D5D00EB232E /* OfficialListViewController.swift */; };
 		8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */; };
@@ -121,6 +122,7 @@
 		8D68887B1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		8D68887C1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8D68887D1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8D6A73ED1F83BE2A00902AFC /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		8D7343621F3A1CB700EB232E /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
 		8D7343641F3A1D5D00EB232E /* OfficialListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficialListViewController.swift; sourceTree = "<group>"; };
 		8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneZoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,6 +269,7 @@
 			children = (
 				8DDAF0DA1ED183E00079D443 /* MyPagePostViewController.swift */,
 				8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */,
+				8D6A73ED1F83BE2A00902AFC /* UserCollectionViewCell.swift */,
 				8DDAF0DE1ED184AF0079D443 /* MyPageFavoriteViewController.swift */,
 				8D53FD611F375DA800809E7F /* FollowerListViewController.swift */,
 			);
@@ -817,6 +820,7 @@
 				8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */,
 				8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */,
 				8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */,
+				8D6A73EE1F83BE2A00902AFC /* UserCollectionViewCell.swift in Sources */,
 				8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */,
 				8D35113D1EEECFC8004BA744 /* NoLoginView.swift in Sources */,
 				8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */,

@@ -46,14 +46,11 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         self.view.backgroundColor = UIColor.white
     
         setNavigationBar()
-        
-        
         getUserInfo()
         getPosts()
         
         //テーブルビューに表示する配列
         self.setTableView()
-
     }
     
     func getUserInfo() {
