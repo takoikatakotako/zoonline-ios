@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import AlamofireImage
+import SCLAlertView
 
-class FollowerListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class FollowerListViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource {
     
     var userID:Int!
     
@@ -20,9 +24,11 @@ class FollowerListViewController: UIViewController,UITableViewDelegate, UITableV
     private var tableViewHeight:CGFloat!
     private var tabBarHeight:CGFloat!
 
-    
     //テーブルビューインスタンス
-    private var follwerListTableView: UITableView!
+    var followerCollectionView : UICollectionView!
+    private var followerList:JSON = []
+    
+    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,18 +46,13 @@ class FollowerListViewController: UIViewController,UITableViewDelegate, UITableV
         setNavigationBar()
         
         //テーブルビューの初期化
-        follwerListTableView = UITableView()
-        follwerListTableView.delegate = self
-        follwerListTableView.dataSource = self
-        follwerListTableView.separatorStyle = .none
-        follwerListTableView.allowsSelection = false
-        follwerListTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
-        follwerListTableView.delaysContentTouches = true
-        follwerListTableView.canCancelContentTouches = true
+        setCollectionView()
         
-        follwerListTableView.register(FriendsFollowTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(FriendsFollowTableViewCell.self))
-        follwerListTableView.rowHeight = viewWidth*0.4
-        self.view.addSubview(follwerListTableView)
+        setActivityIndicator()
+        
+        indicator.startAnimating()
+        
+        getMyFriends()
     }
 
     
@@ -72,40 +73,98 @@ class FollowerListViewController: UIViewController,UITableViewDelegate, UITableV
         self.navigationItem.titleView = titleLabel
     }
     
+    func setCollectionView() {
+        //テーブルビューの初期化
+        let collectionFrame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
+        
+        // CollectionViewのレイアウトを生成.
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width:viewWidth/3, height:viewWidth/3)
+        layout.sectionInset = UIEdgeInsets.zero
+        layout.minimumInteritemSpacing = 0.0
+        layout.minimumLineSpacing = 0.0
+        layout.headerReferenceSize = CGSize(width:0,height:0)
+        followerCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
+        followerCollectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self))
+        followerCollectionView.delegate = self
+        followerCollectionView.dataSource = self
+        followerCollectionView.backgroundColor = UIColor.white
+        self.view.addSubview(followerCollectionView)
+    }
     
-    //basicボタンが押されたら呼ばれます
-    func userBtnClicked(sender: UIButton){
-        print("basicButtonBtnClicked")
-        print(sender.tag)
+    func setActivityIndicator(){
+        
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.clipsToBounds = true
+        indicator.layer.cornerRadius = viewWidth*0.3*0.3
+        indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.white
+        self.view.addSubview(indicator)
     }
     
     
+    func getMyFriends() {
+        
+        Alamofire.request(API_URL+API_VERSION+USERS + String(userID)+SLASH+FOLLOWING).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                
+                if json["is_success"].boolValue {
+                    self.followerList = json["responce"]
+                    self.indicator.stopAnimating()
+                    self.followerCollectionView.reloadData()
+                }else{
+                    //エラー
+                    SCLAlertView().showInfo("エラー", subTitle: "フレンズの取得に失敗しました。")
+                }
+                
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+    }
     
     //MARK: テーブルビューのセルの数を設定する
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //テーブルビューのセルの数はmyItems配列の数とした
-        return 8
+    //Cellが選択された際に呼び出される
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        print("Num: \(indexPath.row)")
+        
+        //画面遷移、ユーザー情報画面へ
+        let userInfoView: UserInfoViewController = UserInfoViewController()
+        userInfoView.postUserID = followerList[indexPath.row]["user-id"].intValue
+        
+        let btn_back = UIBarButtonItem()
+        btn_back.title = ""
+        self.navigationItem.backBarButtonItem = btn_back
+        self.navigationController?.pushViewController(userInfoView, animated: true)
     }
     
-    //MARK: テーブルビューのセルの中身を設定する
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //myItems配列の中身をテキストにして登録した
-        let cell:FriendsFollowTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(FriendsFollowTableViewCell.self))! as! FriendsFollowTableViewCell
+    //Cellの総数を返す
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //return frindsList.count
+        return followerList.count
+    }
+    
+    //Cellに値を設定する
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        let cell : UserCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self), for: indexPath) as! UserCollectionViewCell
+        cell.userLabel?.textColor = UIColor.black
+        cell.userLabel!.text = followerList[indexPath.row]["user-name"].stringValue
         
-        cell.userBtnLeft.addTarget(self, action: #selector(userBtnClicked(sender:)), for:.touchUpInside)
-        cell.userBtnCenter.addTarget(self, action: #selector(userBtnClicked(sender:)), for:.touchUpInside)
-        cell.userBtnRight.addTarget(self, action: #selector(userBtnClicked(sender:)), for:.touchUpInside)
-        
-        cell.userBtnLeft.tag = indexPath.row*3
-        cell.userBtnCenter.tag = indexPath.row*3+1
-        cell.userBtnRight.tag = indexPath.row*3+2
+        if let url = URL(string:followerList[indexPath.row]["icon-url"].stringValue) {
+            cell.icomImageView.af_setImage(withURL: url)
+        }
         
         return cell
-    }
-    
-    //Mark: テーブルビューのセルが押されたら呼ばれる
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
     }
 }

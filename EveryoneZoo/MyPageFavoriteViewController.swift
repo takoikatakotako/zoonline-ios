@@ -28,7 +28,6 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
     
     var favoriteListTableView: UITableView!
     private var favoritePosts:JSON = []
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
