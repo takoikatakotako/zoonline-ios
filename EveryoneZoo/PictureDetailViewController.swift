@@ -37,6 +37,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     var commentList:Array<Any>!
     var favList:Array<Any>!
     var postImgUrl:URL!
+    var isFriends:Bool!
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     //view parts
@@ -160,9 +161,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.thumbnailImgView.layer.cornerRadius = cell.thumbnailImgView.frame.height * 0.5
         
         print(self.iconUrl)
-        
-        if !self.iconUrl.isEmpty{
-            cell.thumbnailImgView.af_setImage(withURL: URL(string:self.iconUrl)!, placeholderImage:  UIImage(named:"icon_default")!)
+        if let url = URL(string:self.iconUrl) {
+            cell.thumbnailImgView.af_setImage(withURL: url, placeholderImage:  UIImage(named:"icon_default")!)
         }
 
         cell.userNameTextView.frame = CGRect(x: userInfoBtnHeight, y: 0, width: userInfoBtnWidth-userInfoBtnHeight, height: userInfoBtnHeight)
@@ -171,9 +171,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         //FollowBtn
         let followBtnWidth:CGFloat = viewWidth - userInfoBtnWidth
         let followBtnHeight:CGFloat = userInfoBtnHeight
-        
         cell.followBtn.frame = CGRect(x: userInfoBtnWidth, y: 0, width: followBtnWidth, height: followBtnHeight)
         cell.followBtn.addTarget(self, action: #selector(followBtnClicked(sender:)), for:.touchUpInside)
+        if isFriends {
+            cell.followBtn.followImgView.image = UIImage(named: "follow_icon_on")!
+            cell.followBtn.followLabel.text = "フレンズ"
+        }
         
         //PostImgView
         let postImgHeight:CGFloat = viewWidth
@@ -249,12 +252,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if sender.followImgView.image == UIImage(named:"follow_icon") {
             sender.followImgView.image = UIImage(named: "follow_icon_on")!
-            appDelegate.networkManager?.followUser(myUserId: 1, followUserId: 2)
+            appDelegate.networkManager?.followUser(myUserId: Int(UtilityLibrary.getUserID())!, followUserId: postUserID)
             sender.followLabel.text = "フレンズ"
             
         }else{
             sender.followImgView.image = UIImage(named: "follow_icon")!
-            appDelegate.networkManager?.unfollowUser(myUserId: 1, followUserId: 2)
+            appDelegate.networkManager?.unfollowUser(myUserId: Int(UtilityLibrary.getUserID())!, followUserId: postUserID)
             sender.followLabel.text = "フォロー"
         }
     }
@@ -424,21 +427,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 self.postImgUrl = URL(string: json["responce"]["itemImage"].stringValue)!
                 self.iconUrl = json["responce"]["iconUrl"].stringValue
                 
-                
                 print(json["responce"]["iconUrl"].stringValue)
 
                 self.commentList = json["responce"]["commentList"].arrayValue
                 self.favList = json["responce"]["favList"].arrayValue
 
-                self.setNavigationBar()
-                self.setTableView()
-                
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_PostDetail"))!
-                if !didSupport {
-
-                    self.setSupportBtn()
-                }
+                self.getFriends()
                 
             case .failure(let error):
                 print(error)
@@ -446,6 +440,51 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             }
         }
     }
+    
+    func getFriends() {
+        
+        Alamofire.request(API_URL+API_VERSION+USERS + UtilityLibrary.getUserID()+SLASH+FOLLOWING).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                
+                if json["is_success"].boolValue {
+                    
+                    self.isFriends = self.checkIsFriends(friendsList: json["responce"])
+                    
+                    self.setNavigationBar()
+                    self.setTableView()
+                    
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_PostDetail"))!
+                    if !didSupport {
+                        
+                        self.setSupportBtn()
+                    }
+                
+                }else{
+                    //エラー
+                    SCLAlertView().showInfo("エラー", subTitle: " フォローに失敗しました。")
+                }
+                
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+    }
+    
+    func checkIsFriends(friendsList:JSON) -> Bool {
+        
+        for i in 0..<friendsList.count {
+            if friendsList[i]["user-id"].intValue == postUserID { return true }
+        }
+        return false
+    }
+    
     
     func tweet() {
         
