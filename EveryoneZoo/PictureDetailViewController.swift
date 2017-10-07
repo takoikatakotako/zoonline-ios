@@ -173,6 +173,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let followBtnHeight:CGFloat = userInfoBtnHeight
         cell.followBtn.frame = CGRect(x: userInfoBtnWidth, y: 0, width: followBtnWidth, height: followBtnHeight)
         cell.followBtn.addTarget(self, action: #selector(followBtnClicked(sender:)), for:.touchUpInside)
+        
+        // FIXME: 修正する
+        if Int(UtilityLibrary.getUserID()) == Int(postUserID) {
+            cell.followBtn.removeFromSuperview()
+        }
+        
         if isFriends {
             cell.followBtn.followImgView.image = UIImage(named: "follow_icon_on")!
             cell.followBtn.followLabel.text = "フレンズ"
