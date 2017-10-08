@@ -88,7 +88,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     
     func getNews() {
         
-        Alamofire.request(API_URL+API_VERSION+ZOO_NEWS).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getZooNews()).responseJSON{ response in
             
             switch response.result {
             case .success:
@@ -106,7 +106,6 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
                 //テーブルの再読み込み
             }
         }
-        
     }
     
     

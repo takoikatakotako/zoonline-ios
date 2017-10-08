@@ -7,20 +7,20 @@
 //
 
 
+//(deprecated予定)
+
 //URL
 
 let APP_URL: String = "http://minzoo.herokuapp.com"
-let API_URL:String = "http://minzoo.herokuapp.com/api/"
 
 let CONTACT_PAGE_URL_STRING:String = "http://swiswiswift.sakura.ne.jp/zoonline/"
 let TOS_PAGE_URL_STRING:String = "http://minzoo.team-sommelier.com/tos.html"
 let PRIVACY_PAGE_URL:String = "http://minzoo.team-sommelier.com/privacy.html"
 
-let API_VERSION:String = "v0/"
 let SLASH:String = "/"
 
 let POSTS:String = "posts/"
-let RECENT:String = "recent/"
+//let RECENT:String = "recent/"
 let POPULAR:String = "popular/"
 let PICTURE:String = "picture/"
 let PLAZA:String = "plaza/"
@@ -34,14 +34,13 @@ let COMMENTS:String = "comments/"
 
 let AUTH:String = "auth/"
 let SIGN_IN:String = "sign_in/"
-let ZOO_NEWS:String = "zoo_news"
+//let ZOO_NEWS:String = "zoo_news"
 
 
 
 // MARK: - 広場画面
 
-//新着取得
-//let GET_RECENT_POSTS:String! = "/api/v0/posts/recent"
+
 
 //人気取得
 //let GET_POPULAR_POSTS:String! = "/api/v0/plaza/popular"
@@ -79,6 +78,4 @@ let ZOO_NEWS:String = "zoo_news"
 //ログイン
 //let POST_LOGIN:String = "/api/v0/auth/sign_in"
 
-//ニュース
-//let GET_NEWS:String = "/api/v0/zoo_news"
-//http://minzoo.herokuapp.com/api/v0/zoo_news
+

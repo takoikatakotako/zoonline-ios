@@ -11,7 +11,6 @@ import Alamofire
 
 class UtilityLibrary: NSObject {
     
-    
     class func isLogin()->Bool{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

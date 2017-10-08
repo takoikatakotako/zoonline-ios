@@ -13,7 +13,6 @@ class ZooTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         // アイコンの色
         UITabBar.appearance().tintColor = UIColor.tabIconSelected()
         UITabBar.appearance().unselectedItemTintColor = UIColor.tabNonIconSelected()
@@ -23,21 +22,4 @@ class ZooTabBarController: UITabBarController {
         UITabBar.appearance().isTranslucent = false
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

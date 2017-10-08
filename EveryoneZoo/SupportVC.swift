@@ -12,12 +12,5 @@ class SupportVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //self.view.alpha = 0.5
-        
-        //self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-
-
-
     }
 }
