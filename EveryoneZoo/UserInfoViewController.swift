@@ -122,11 +122,13 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         //
         let profileView:UIView = UIView()
         profileView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.65)
-        profileView.backgroundColor = UIColor.lightGray
+        profileView.backgroundColor = UIColor.MyPageTableBGColor()
         self.view.addSubview(profileView)
         
         let profileIconViewWidth:CGFloat = viewWidth*0.24
         let profileIcon:UIImageView = UIImageView()
+        profileIcon.clipsToBounds = true
+        profileIcon.layer.cornerRadius = viewWidth*0.24/2
         profileIcon.frame = CGRect(x: viewWidth/2-profileIconViewWidth/2, y: viewWidth*0.65*0.1, width: profileIconViewWidth, height: profileIconViewWidth)
         
         if self.userIconUrl.isEmpty {
