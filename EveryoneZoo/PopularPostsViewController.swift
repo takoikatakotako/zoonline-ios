@@ -189,7 +189,7 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
     
     func dowonloadJsons(){
         
-        Alamofire.request(API_URL+API_VERSION+PLAZA+POPULAR).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getPopularPosts()).responseJSON{ response in
             
             self.pictureTableView.refreshControl?.endRefreshing()
             self.indicator.stopAnimating()

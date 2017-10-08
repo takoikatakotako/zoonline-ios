@@ -15,12 +15,23 @@ class EveryZooAPI: NSObject {
     
     
     
+    class func getFavoritePosts(userID:Int) -> String {
+    
+        return API_URL+API_VERSION+USERS+String(userID)+"/favorite_posts"
+    }
+    
+    
     class func getRecentPosts() -> String{
         //新着取得を取得
         //let GET_RECENT_POSTS:String! = "/api/v0/posts/recent"
-        return API_URL+API_VERSION+"posts/recent"
+        return API_URL+API_VERSION+"posts/recent/"
     }
     
+    class func getPopularPosts() -> String{
+        //新着取得を取得
+        //let GET_RECENT_POSTS:String! = "/api/v0/posts/recent"
+        return API_URL+API_VERSION+"posts/popular/"
+    }
     
     class func getZooNews()->String{
         //動物園のニュースの取得

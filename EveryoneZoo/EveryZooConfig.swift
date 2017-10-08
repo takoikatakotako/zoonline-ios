@@ -21,14 +21,14 @@ let SLASH:String = "/"
 
 let POSTS:String = "posts/"
 //let RECENT:String = "recent/"
-let POPULAR:String = "popular/"
+//let POPULAR:String = "popular/"
 let PICTURE:String = "picture/"
 let PLAZA:String = "plaza/"
 let DETAIL:String = "detail/"
 let USERS:String = "users/"
 let FOLLOWING:String = "following/"
 let FAVORITE_POST:String = "favorite_post/"
-let FAVORITE_POSTS:String = "favorite_posts/"
+//let FAVORITE_POSTS:String = "favorite_posts/"
 
 let COMMENTS:String = "comments/"
 

@@ -60,7 +60,7 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
     
     func getMyFavoritePosts() {
         
-        Alamofire.request(API_URL+API_VERSION+USERS+String(userID)+SLASH+FAVORITE_POSTS).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getFavoritePosts(userID: userID)).responseJSON{ response in
             
             switch response.result {
             case .success:
@@ -75,7 +75,6 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
                 }else{
                     SCLAlertView().showInfo("エラー", subTitle: "お気に入りの投稿の取得に失敗しました。")
                 }
-                
                 
             case .failure(let error):
                 print(error)
