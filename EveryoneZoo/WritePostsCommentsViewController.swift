@@ -130,7 +130,7 @@ class WritePostsCommentsViewController: UIViewController {
                 
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
-                self.navigationController?.popViewController(animated: true)
+                _ = self.navigationController?.popViewController(animated: true)
                 
             case .failure(let error):
                 print(error)

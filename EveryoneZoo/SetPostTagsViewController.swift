@@ -113,13 +113,14 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         
         let setTagTextFieldLine:UIView = UIView()
         setTagTextFieldLine.backgroundColor = UIColor.gray
-        setTagTextFieldLine.frame = CGRect(x: viewWidth*0.1, y: postTagLabelHeight+setTagTextFieldSpaceHeight+setTagTextFieldHeight!, width: viewWidth*0.8, height: 1)
+        var linePos:CGFloat = postTagLabelHeight + setTagTextFieldSpaceHeight
+        linePos = linePos + setTagTextFieldHeight!
+        setTagTextFieldLine.frame = CGRect(x: viewWidth*0.1, y: linePos, width: viewWidth*0.8, height: 1)
         self.view.addSubview(setTagTextFieldLine)
         
     }
     
 
-    
     func setTableView(){
         
         //デリゲートの設定

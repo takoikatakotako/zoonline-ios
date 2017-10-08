@@ -56,7 +56,7 @@ class WritePostTextsViewController: UIViewController,UITextViewDelegate {
         super.viewWillDisappear(animated)
         // Show the navigation bar on other view controllers
         
-        if isTitle {
+        if isTitle! {
             delegate?.setTitle(str: textView.text)
         }else{
             delegate?.setComment(str: textView.text)

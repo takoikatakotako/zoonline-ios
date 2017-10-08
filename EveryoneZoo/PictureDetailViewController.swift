@@ -179,7 +179,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             cell.followBtn.removeFromSuperview()
         }
         
-        if isFriends {
+        if isFriends! {
             cell.followBtn.followImgView.image = UIImage(named: "follow_icon_on")!
             cell.followBtn.followLabel.text = "フレンズ"
         }
