@@ -24,7 +24,6 @@
 		8D46EFBC1F2DEC3100FFD8D7 /* MyPagePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D46EFBB1F2DEC3100FFD8D7 /* MyPagePostCell.swift */; };
 		8D48576E1F40457F00608A56 /* NewPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D48576D1F40457F00608A56 /* NewPostsViewController.swift */; };
 		8D4857701F40A02500608A56 /* PopularPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D48576F1F40A02500608A56 /* PopularPostsViewController.swift */; };
-		8D5121271F0EAB8100C6D774 /* ProfielViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5121261F0EAB8100C6D774 /* ProfielViewController.swift */; };
 		8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D53FD611F375DA800809E7F /* FollowerListViewController.swift */; };
 		8D57A7941F89D2BA00A85D83 /* EveryZooAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D57A7931F89D2BA00A85D83 /* EveryZooAPI.swift */; };
 		8D5F25A21F8B522C008D6BF1 /* UserInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F25A11F8B522C008D6BF1 /* UserInfoTableViewCell.swift */; };
@@ -116,7 +115,6 @@
 		8D46EFBB1F2DEC3100FFD8D7 /* MyPagePostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPagePostCell.swift; sourceTree = "<group>"; };
 		8D48576D1F40457F00608A56 /* NewPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostsViewController.swift; sourceTree = "<group>"; };
 		8D48576F1F40A02500608A56 /* PopularPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularPostsViewController.swift; sourceTree = "<group>"; };
-		8D5121261F0EAB8100C6D774 /* ProfielViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfielViewController.swift; sourceTree = "<group>"; };
 		8D53FD611F375DA800809E7F /* FollowerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
 		8D57A7931F89D2BA00A85D83 /* EveryZooAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EveryZooAPI.swift; sourceTree = "<group>"; };
 		8D5F25A11F8B522C008D6BF1 /* UserInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -295,7 +293,6 @@
 		8D5F259F1F8B3FD3008D6BF1 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
-				8D5121261F0EAB8100C6D774 /* ProfielViewController.swift */,
 				8D1586711ED848F400802F54 /* UserInfoViewController.swift */,
 				8D5F25A11F8B522C008D6BF1 /* UserInfoTableViewCell.swift */,
 			);
@@ -855,7 +852,6 @@
 				8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */,
 				8D104D391F364D24007F1AF1 /* FriendsFollowTableViewCell.swift in Sources */,
 				8D7343631F3A1CB700EB232E /* NewsListViewController.swift in Sources */,
-				8D5121271F0EAB8100C6D774 /* ProfielViewController.swift in Sources */,
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,

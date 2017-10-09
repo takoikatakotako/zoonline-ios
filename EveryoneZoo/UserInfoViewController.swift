@@ -123,45 +123,6 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
     
     
-    func setProfileView() {
-        
-        //
-        let profileView:UIView = UIView()
-        profileView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.65)
-        profileView.backgroundColor = UIColor.MyPageTableBGColor()
-        self.view.addSubview(profileView)
-        
-        let profileIconViewWidth:CGFloat = viewWidth*0.24
-        let profileIcon:UIImageView = UIImageView()
-        profileIcon.clipsToBounds = true
-        profileIcon.layer.cornerRadius = viewWidth*0.24/2
-        profileIcon.frame = CGRect(x: viewWidth/2-profileIconViewWidth/2, y: viewWidth*0.65*0.1, width: profileIconViewWidth, height: profileIconViewWidth)
-        
-        if self.userIconUrl.isEmpty {
-            profileIcon.image = UIImage(named:"icon_default")
-
-        }else{
-            profileIcon.sd_setImage(with: URL(string:self.userIconUrl), placeholderImage: UIImage(named: "sample_loading"))
-        }
-        self.view.addSubview(profileIcon)
-        
-        let profileName:UILabel = UILabel()
-        profileName.text = self.userName
-        profileName.frame = CGRect(x: 0, y: viewWidth*0.65*0.5, width: viewWidth, height: 40)
-        profileName.textAlignment = NSTextAlignment.center
-        profileName.font = UIFont.systemFont(ofSize: 26)
-        self.view.addSubview(profileName)
-        
-        let profileText:UILabel = UILabel()
-        profileText.text = self.userProfile
-        profileText.frame = CGRect(x: viewWidth*0.05, y: viewWidth*0.65*0.6, width: viewWidth*0.9, height: viewWidth*0.65*0.4)
-        profileText.numberOfLines = 0
-        profileText.textAlignment = NSTextAlignment.center
-        profileText.font = UIFont.systemFont(ofSize: 16)
-        self.view.addSubview(profileText)
-    }
-    
-    
     func setTableView() {
         //テーブルビューの初期化
         profileTableView = UITableView()

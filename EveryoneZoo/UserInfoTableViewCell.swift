@@ -18,7 +18,7 @@ class UserInfoTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
                 
         iconImgView = UIImageView()
-        iconImgView.image = UIImage(named:"sample_loading")
+        iconImgView.image = UIImage(named:"icon_default")
         iconImgView.layer.masksToBounds = true
 
         userNameLabel = UILabel()
