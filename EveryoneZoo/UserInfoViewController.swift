@@ -15,7 +15,7 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     
     //テーブルビューインスタンス
-    private var myTableView: UITableView!
+    private var profileTableView: UITableView!
     
     //width, height
     var viewWidth:CGFloat!
@@ -23,6 +23,8 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
     private var tabBarHeight:CGFloat!
+    private var profileCellHeight:CGFloat!
+    private var postCellHeight:CGFloat!
     
     //UserInfo
     //ユーザーIDとユーザー名は受け取る
@@ -43,14 +45,17 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
         
+        profileCellHeight = viewWidth*0.65
+        postCellHeight = viewWidth*0.28
+        
         self.view.backgroundColor = UIColor.white
     
         setNavigationBar()
         getUserInfo()
-        getPosts()
+        //getPosts()
         
         //テーブルビューに表示する配列
-        self.setTableView()
+        //self.setTableView()
     }
     
     func getUserInfo() {
@@ -72,7 +77,7 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
                     self.userIconUrl = json["iconUrl"].stringValue
                 }
                 
-                self.setProfileView()
+                self.getPosts()
 
             case .failure(let error):
                 print(error)
@@ -92,11 +97,12 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
 
                 print(json)
                 self.postsInfos = json
-                self.myTableView.reloadData()
                 
             case .failure(let error):
                 print(error)
             }
+            
+            self.setTableView()
         }
     }
     
@@ -158,42 +164,62 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func setTableView() {
         //テーブルビューの初期化
-        myTableView = UITableView()
+        profileTableView = UITableView()
         
         //デリゲートの設定
-        myTableView.delegate = self
-        myTableView.dataSource = self
+        profileTableView.delegate = self
+        profileTableView.dataSource = self
         
         //テーブルビューの大きさの指定
-        myTableView.frame = CGRect(x: 0, y: viewWidth*0.65, width: viewWidth, height: viewHeight-viewWidth*0.65-(statusBarHeight+tabBarHeight+navigationBarHeight))
+        profileTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight-(statusBarHeight+tabBarHeight+navigationBarHeight))
         
         //テーブルビューの設置
-        myTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
-        myTableView.rowHeight = viewWidth*0.28
-        self.view.addSubview(myTableView)
+        profileTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
+        profileTableView.register(UserInfoTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UserInfoTableViewCell.self))
+        self.view.addSubview(profileTableView)
     }
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        print(self.postsInfos.count)
         
-        return self.postsInfos.count
+        return self.postsInfos.count+1
     }
+    
+    //MARK: テーブルビューのセルの高さを計算する
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+
+            return profileCellHeight
+        }else {
+            return postCellHeight
+        }
+    }
+    
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
+        
+        if indexPath.row == 0 {
+            let cell:UserInfoTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UserInfoTableViewCell.self), for: indexPath) as! UserInfoTableViewCell
+            cell.backgroundColor = UIColor.MyPageTableBGColor()
+            cell.iconImgView.sd_setImage(with: URL(string:self.userIconUrl), placeholderImage: UIImage(named: "sample_loading"))
+            cell.userNameLabel.text = self.userName
+            cell.profileLabel.text = self.userProfile
+            return cell
+        }
+        
+        
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         
-        var dateText:String = self.postsInfos[indexPath.row]["updated_at"].stringValue
+        var dateText:String = self.postsInfos[indexPath.row-1]["updated_at"].stringValue
         dateText = dateText.substring(to: dateText.index(dateText.startIndex, offsetBy: 10))
         cell.dateLabel.text = dateText
-        cell.titleLabel.text = self.postsInfos[indexPath.row]["title"].stringValue
-        cell.commentLabel.text = self.postsInfos[indexPath.row]["caption"].stringValue
-        let imageUrl = URL(string:self.postsInfos[indexPath.row]["image_url"].stringValue)!
+        cell.titleLabel.text = self.postsInfos[indexPath.row-1]["title"].stringValue
+        cell.commentLabel.text = self.postsInfos[indexPath.row-1]["caption"].stringValue
+        let imageUrl = URL(string:self.postsInfos[indexPath.row-1]["image_url"].stringValue)!
         cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
-        
         return cell
     }
     

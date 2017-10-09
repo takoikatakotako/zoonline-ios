@@ -20,16 +20,24 @@ class EveryZooAPI: NSObject {
         return API_URL+API_VERSION+USERS+String(userID)+"/favorite_posts"
     }
     
+    class func getFriends(userID:Int) -> String{
+        //自分のフレンズ（フォロワーの取得
+        return API_URL+API_VERSION+USERS + String(userID) + "/following/"
+    }
+    
+    class func getTimeLinePosts(userID:Int) -> String{
+        //タイムラインの投稿を取得する
+        return API_URL+API_VERSION+USERS + String(userID) + "/following/posts/"
+    }
+    
     
     class func getRecentPosts() -> String{
         //新着取得を取得
-        //let GET_RECENT_POSTS:String! = "/api/v0/posts/recent"
         return API_URL+API_VERSION+"posts/recent/"
     }
     
     class func getPopularPosts() -> String{
         //新着取得を取得
-        //let GET_RECENT_POSTS:String! = "/api/v0/posts/recent"
         return API_URL+API_VERSION+"posts/popular/"
     }
     

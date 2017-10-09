@@ -7,15 +7,13 @@
 //
 
 
-//(deprecated予定)
-
 //URL
-
 let APP_URL: String = "http://minzoo.herokuapp.com"
 
 let CONTACT_PAGE_URL_STRING:String = "http://swiswiswift.sakura.ne.jp/zoonline/"
 let TOS_PAGE_URL_STRING:String = "http://minzoo.team-sommelier.com/tos.html"
 let PRIVACY_PAGE_URL:String = "http://minzoo.team-sommelier.com/privacy.html"
+
 
 let SLASH:String = "/"
 
@@ -23,10 +21,10 @@ let POSTS:String = "posts/"
 //let RECENT:String = "recent/"
 //let POPULAR:String = "popular/"
 let PICTURE:String = "picture/"
-let PLAZA:String = "plaza/"
+//let PLAZA:String = "plaza/"
 let DETAIL:String = "detail/"
 let USERS:String = "users/"
-let FOLLOWING:String = "following/"
+//let FOLLOWING:String = "following/"
 let FAVORITE_POST:String = "favorite_post/"
 //let FAVORITE_POSTS:String = "favorite_posts/"
 

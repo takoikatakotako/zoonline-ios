@@ -41,5 +41,4 @@ class MyPageTableViewCell: UITableViewCell {
         //TitleText
         textCellLabel.frame = CGRect(x: cellWidth*0.2, y: cellHeight*0.1, width: cellWidth*0.6, height: cellHeight*0.8)
     }
-
 }

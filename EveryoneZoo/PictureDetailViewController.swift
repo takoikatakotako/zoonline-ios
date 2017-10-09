@@ -448,9 +448,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     }
     
     func getFriends() {
-        
-        Alamofire.request(API_URL+API_VERSION+USERS + UtilityLibrary.getUserID()+SLASH+FOLLOWING).responseJSON{ response in
-            
+        let userID = Int(UtilityLibrary.getUserID())
+        Alamofire.request(EveryZooAPI.getFriends(userID: userID!)).responseJSON{ response in
             switch response.result {
             case .success:
                 

@@ -56,7 +56,7 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
     
     func getMyFriends() {
         
-        Alamofire.request(API_URL+API_VERSION+USERS + String(userID)+SLASH+FOLLOWING).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getFriends(userID: userID)).responseJSON{ response in
             
             switch response.result {
             case .success:

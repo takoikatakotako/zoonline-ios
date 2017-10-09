@@ -100,12 +100,8 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     
     func getNews() {
         
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let userID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
-        
-        //print(API_URL+API_VERSION+USERS+userID+FOLLOWING+POSTS)
-        Alamofire.request(API_URL+API_VERSION+USERS+userID+SLASH+FOLLOWING+POSTS).responseJSON{ response in
+        let userID:Int = Int(UtilityLibrary.getUserID())!
+        Alamofire.request(EveryZooAPI.getTimeLinePosts(userID: userID)).responseJSON{ response in
             
             switch response.result {
             case .success:
