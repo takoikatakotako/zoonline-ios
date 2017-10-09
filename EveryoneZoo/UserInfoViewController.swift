@@ -188,9 +188,13 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         
+        if indexPath.row == 0 {
+            return
+        }
+        
         //画面遷移、投稿詳細画面へ
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
-        picDetailView.postID = self.postsInfos[indexPath.row]["id"].intValue
+        picDetailView.postID = self.postsInfos[indexPath.row-1]["id"].intValue
         
         let btn_back = UIBarButtonItem()
         btn_back.title = ""
