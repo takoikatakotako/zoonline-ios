@@ -38,13 +38,32 @@ class EveryZooAPI: NSObject {
     
     class func getPopularPosts() -> String{
         //新着取得を取得
-        return API_URL+API_VERSION+"posts/popular/"
+        return API_URL+API_VERSION+"plaza/popular/"
     }
     
     class func getZooNews()->String{
         //動物園のニュースの取得
         //http://minzoo.herokuapp.com/api/v0/zoo_news
         return API_URL+API_VERSION+"zoo_news"
+    }
+    
+    
+    class func getSignIn() -> String {
+        
+        //サインイン
+        return API_URL+API_VERSION+"auth/sign_in/"
+    }
+    
+    class func getComments(postID:Int) -> String {
+        
+        //投稿に紐づいたコメントを取得する
+        return API_URL+API_VERSION+"posts/" + String(postID) + "/comments/"
+    }
+    
+    class func getDoComments() -> String{
+    
+        //コメントをする
+        return API_URL+API_VERSION+"comments/"
     }
     
 }

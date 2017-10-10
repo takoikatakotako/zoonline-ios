@@ -117,8 +117,8 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     }
     
     func getPostsComments() {
-        
-        Alamofire.request(API_URL+API_VERSION+POSTS+String(postsID)+SLASH+COMMENTS).responseJSON{ response in
+
+        Alamofire.request(EveryZooAPI.getComments(postID: postsID)).responseJSON{ response in
             
             switch response.result {
             case .success:

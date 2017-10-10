@@ -202,6 +202,10 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
                 let json:JSON = JSON(response.result.value ?? kill)
                 self.setImageBtns(json: json)
                 
+                print(json)
+                
+                print(EveryZooAPI.getPopularPosts())
+                
             case .failure(let error):
                 print(error)
                 self.isNetWorkConnect = false
@@ -237,6 +241,4 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
         indicator.startAnimating()
         dowonloadJsons()
     }
-    
-    
 }

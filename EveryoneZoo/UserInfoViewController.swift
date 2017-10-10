@@ -157,7 +157,6 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         }
     }
     
-    
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した

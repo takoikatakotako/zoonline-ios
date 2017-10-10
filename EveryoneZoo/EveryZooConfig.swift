@@ -28,10 +28,10 @@ let USERS:String = "users/"
 let FAVORITE_POST:String = "favorite_post/"
 //let FAVORITE_POSTS:String = "favorite_posts/"
 
-let COMMENTS:String = "comments/"
+//let COMMENTS:String = "comments/"
 
-let AUTH:String = "auth/"
-let SIGN_IN:String = "sign_in/"
+//let AUTH:String = "auth/"
+//let SIGN_IN:String = "sign_in/"
 //let ZOO_NEWS:String = "zoo_news"
 
 
