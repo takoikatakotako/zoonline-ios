@@ -61,5 +61,4 @@ extension UIColor {
     class func LogInPinkColor() -> UIColor {
         return UIColor(red: (234.0/256), green: (52.0/256), blue: (109.0/256), alpha: 1.0)
     }
-    
 }

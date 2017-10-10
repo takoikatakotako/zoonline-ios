@@ -60,7 +60,7 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func getUserInfo() {
         //ユーザーの情報を取得する
-        Alamofire.request(API_URL+API_VERSION+USERS+String(postUserID)).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getUserInfo(userID: postUserID)).responseJSON{ response in
             
             switch response.result {
             case .success:
@@ -88,7 +88,7 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func getPosts() {
         
-        Alamofire.request(API_URL+API_VERSION+USERS+String(postUserID)+SLASH+POSTS).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getUserPosts(userID: postUserID)).responseJSON{ response in
             
             switch response.result {
             case .success:

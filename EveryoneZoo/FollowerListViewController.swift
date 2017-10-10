@@ -108,7 +108,7 @@ class FollowerListViewController: UIViewController,UICollectionViewDelegate, UIC
     
     func getMyFriends() {
         
-        Alamofire.request(API_URL+API_VERSION+USERS + String(userID)+SLASH+"followed").responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getFollower(userID: userID)).responseJSON{ response in
             
             switch response.result {
             case .success:

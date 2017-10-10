@@ -277,13 +277,14 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             return
         }
         
+        let postFavorite:String = EveryZooAPI.getDoFavoritePost(userID: Int(myUserID)!, postID: postID)
         if sender.imgView.image == UIImage(named:"fav_on") {
             sender.imgView.image = UIImage(named: "fav_off")!
             sender.countLabel.textColor = UIColor.black
             let favCount:String = sender.countLabel.text!
             sender.countLabel.text = String(Int(favCount)!-1)
 
-            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID), method: .delete, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
+            Alamofire.request(postFavorite, method: .delete, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
                 
                 switch response.result {
                 case .success:
@@ -301,9 +302,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             sender.countLabel.textColor = UIColor.followColor()
             let favCount:String = sender.countLabel.text!
             sender.countLabel.text = String(Int(favCount)!+1)
-            print(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID))
             
-            Alamofire.request(API_URL+API_VERSION+USERS+String(myUserID)+SLASH+FAVORITE_POST+String(postID), method: .post, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
+            Alamofire.request(postFavorite, method: .post, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
                 
                 switch response.result {
                 case .success:
@@ -416,7 +416,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     // MARK: - NetWorks
     func getPostInfo(postID:Int){
         
-        Alamofire.request(API_URL+API_VERSION+POSTS+String(postID)).responseJSON{
+        Alamofire.request(EveryZooAPI.getPostsInfo(postID: postID)).responseJSON{
             response in
             
             switch response.result {

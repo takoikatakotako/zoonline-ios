@@ -52,7 +52,5 @@ class PostDraftTableViewCell: UITableViewCell {
         postDetail.text = "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ"
         postDetail.numberOfLines = 0
         postDetail.textColor = UIColor.gray
-    }
-    
-    
+    }    
 }

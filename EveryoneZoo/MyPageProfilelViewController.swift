@@ -211,7 +211,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to:API_URL+API_VERSION+PICTURE)
+        }, to:EveryZooAPI.getUploadPicture())
         { (result) in
             switch result {
             case .success(let upload, _, _):
@@ -273,7 +273,9 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     //
     func getUserInfo() {
         //ユーザーの情報を取得する
-        Alamofire.request(API_URL+API_VERSION+USERS+UtilityLibrary.getUserID()).responseJSON{ response in
+        
+        let userID:Int = Int(UtilityLibrary.getUserID())!
+        Alamofire.request(EveryZooAPI.getUserInfo(userID: userID)).responseJSON{ response in
             
             switch response.result {
             case .success:

@@ -221,7 +221,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to:API_URL+API_VERSION+PICTURE)
+        }, to:EveryZooAPI.getUploadPicture())
         { (result) in
             switch result {
             case .success(let upload, _, _):
