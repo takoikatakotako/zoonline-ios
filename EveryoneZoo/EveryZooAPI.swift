@@ -11,6 +11,12 @@ import UIKit
 let API_URL:String = "http://minzoo.herokuapp.com/api/"
 let API_VERSION:String = "v0/"
 
+let APP_URL: String = "http://minzoo.herokuapp.com"
+
+let CONTACT_PAGE_URL_STRING:String = "http://swiswiswift.sakura.ne.jp/zoonline/"
+let TOS_PAGE_URL_STRING:String = "http://minzoo.team-sommelier.com/tos.html"
+let PRIVACY_PAGE_URL:String = "http://minzoo.team-sommelier.com/privacy.html"
+
 class EveryZooAPI: NSObject {
     
     
