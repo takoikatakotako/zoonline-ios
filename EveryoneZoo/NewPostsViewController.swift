@@ -108,8 +108,6 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
         
         //added
         pictureTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-
-        
         pictureTableView.rowHeight = viewWidth
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero

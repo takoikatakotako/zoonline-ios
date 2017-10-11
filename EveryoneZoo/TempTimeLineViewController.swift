@@ -52,34 +52,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if (timeLineTableView.isDescendant(of: self.view)) {
-            timeLineTableView.removeFromSuperview()
-        }
-        
-        if (noLoginView.isDescendant(of: self.view)){
-            noLoginView.removeFromSuperview()
-        }
-        
-        if UtilityLibrary.isLogin() {
-            
-            //
-            setTableView()
-            
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_TimeLine"))!
-            
-            if !didSupport {
-                setSupportBtn()
-            }
-            
-            self.view.bringSubview(toFront: indicator)
-            indicator.startAnimating()
-            getNews()
-            
-        }else{
-            
-            setLoginView()
-        }
+        refleshTableView()
     }
     
     
@@ -147,6 +120,12 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         timeLineTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         timeLineTableView.rowHeight = viewWidth*0.28
         self.view.addSubview(timeLineTableView)
+        
+        
+        //リフレッシュコントロールの追加
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: UIControlEvents.valueChanged)
+        timeLineTableView.refreshControl = refreshControl
     }
     
     func setSupportBtn() {
@@ -167,6 +146,45 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_TimeLine")
         supportBtn.removeFromSuperview()
     }
+    
+    func scrollReflesh(sender : UIRefreshControl) {
+        self.timeLineTableView.refreshControl?.endRefreshing()
+
+        refleshTableView()
+    }
+    
+    func refleshTableView() {
+        
+        if (timeLineTableView.isDescendant(of: self.view)) {
+            timeLineTableView.removeFromSuperview()
+        }
+        
+        if (noLoginView.isDescendant(of: self.view)){
+            noLoginView.removeFromSuperview()
+        }
+        
+        if UtilityLibrary.isLogin() {
+            
+            //
+            setTableView()
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_TimeLine"))!
+            
+            if !didSupport {
+                setSupportBtn()
+            }
+            
+            self.view.bringSubview(toFront: indicator)
+            indicator.startAnimating()
+            getNews()
+            
+        }else{
+            
+            setLoginView()
+        }
+    }
+    
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
