@@ -61,8 +61,9 @@ class PostDetailTableCell: UITableViewCell {
 
         //PostImg
         postImgView = UIImageView()
-        postImgView.image = UIImage(named: "sample_postImage")!
+        postImgView.image = UIImage(named: "sample_loading")!
         postImgView.backgroundColor = UIColor.white
+        postImgView.contentMode = UIViewContentMode.scaleAspectFit
         contentView.addSubview(postImgView)
         
         //FavImg

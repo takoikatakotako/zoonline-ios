@@ -18,7 +18,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //Post ID
     public var postID:Int!
     
-    private var myUserID:String = ""
+    private var myUserID:String!
     
     //width, height
     private var viewWidth:CGFloat!
@@ -28,6 +28,15 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     private var tabBarHeight:CGFloat!
     var tableViewHeight:CGFloat!
     
+
+    //TableViewsHeights
+    private var userInfoBtnHeight:CGFloat!
+    private var postImgHeight:CGFloat!
+    private var favComentMenuBtnHeight:CGFloat!
+    private var dateLabelHeigt:CGFloat!
+        
+
+    
     //Post Datas
     var postUserID:Int!
     var postUserName:String = ""
@@ -36,9 +45,11 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     var postCaption:String = ""
     var commentList:Array<Any>!
     var favList:Array<Any>!
-    var postImgUrl:URL!
+    var postImgUrl:String!
+    var postImgAspect:CGFloat!
+    var pubDate:String!
     var isFriends:Bool!
-    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var indicator: UIActivityIndicatorView!
     
     //view parts
     private var postDetailTableView: UITableView!
@@ -65,8 +76,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         setActivityIndicator()
         indicator.startAnimating()
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        myUserID = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
+        myUserID = UtilityLibrary.getUserID()
         
         //投稿の情報の取得
         getPostInfo(postID: self.postID)
@@ -106,7 +116,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     
     // MARK: くるくるの生成
     func setActivityIndicator(){
-        
+        indicator = UIActivityIndicatorView()
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.clipsToBounds = true
         indicator.layer.cornerRadius = viewWidth*0.3*0.3
@@ -139,6 +149,20 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         supportBtn.removeFromSuperview()
     }
     
+    func calcTableViewHeight() {
+        userInfoBtnHeight = viewWidth*0.16
+        postImgHeight = viewWidth
+        
+        if postImgAspect > 1 {
+            postImgHeight = viewWidth
+        }else {
+            postImgHeight = viewWidth * postImgAspect
+        }
+        
+        favComentMenuBtnHeight = viewWidth * 0.15
+        dateLabelHeigt = viewWidth * 0.05
+    }
+    
     // MARK: - TableView Delegate Method
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -154,17 +178,14 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         //UserInfoBtn
         let userInfoBtnWidth:CGFloat = viewWidth*0.65
-        let userInfoBtnHeight:CGFloat = viewWidth*0.16
+        //let userInfoBtnHeight:CGFloat = viewWidth*0.16
         cell.userInfoBtn.frame = CGRect(x: 0, y: 0, width: userInfoBtnWidth, height: userInfoBtnHeight)
         cell.userInfoBtn.addTarget(self, action: #selector(userInfoBtnClicked(sender:)), for:.touchUpInside)
         cell.thumbnailImgView.frame = CGRect(x: userInfoBtnHeight*0.15, y: userInfoBtnHeight*0.15, width: userInfoBtnHeight*0.7, height: userInfoBtnHeight*0.7)
         cell.thumbnailImgView.layer.cornerRadius = cell.thumbnailImgView.frame.height * 0.5
-        
-        print(self.iconUrl)
         if let url = URL(string:self.iconUrl) {
             cell.thumbnailImgView.af_setImage(withURL: url, placeholderImage:  UIImage(named:"icon_default")!)
         }
-
         cell.userNameTextView.frame = CGRect(x: userInfoBtnHeight, y: 0, width: userInfoBtnWidth-userInfoBtnHeight, height: userInfoBtnHeight)
         cell.userNameTextView.text = postUserName
 
@@ -174,7 +195,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.followBtn.frame = CGRect(x: userInfoBtnWidth, y: 0, width: followBtnWidth, height: followBtnHeight)
         cell.followBtn.addTarget(self, action: #selector(followBtnClicked(sender:)), for:.touchUpInside)
         
-        // FIXME: 修正する
+        // FIXME: 良い感じに修正する
         if Int(UtilityLibrary.getUserID()) == Int(postUserID) {
             cell.followBtn.removeFromSuperview()
         }
@@ -185,12 +206,16 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         }
         
         //PostImgView
-        let postImgHeight:CGFloat = viewWidth
+        //let postImgHeight:CGFloat = viewWidth*2
         cell.postImgView.frame = CGRect(x: 0, y: userInfoBtnHeight, width: viewWidth, height: postImgHeight)
-        cell.postImgView.sd_setImage(with: self.postImgUrl, placeholderImage: UIImage(named: "sample_loading"))
+        
+        
+        if let imageUrl = URL(string: self.postImgUrl){
+            cell.postImgView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
+        }
         
         //FavBtn
-        let favComentMenuBtnHeight:CGFloat = viewWidth*0.15
+        //let favComentMenuBtnHeight:CGFloat = viewWidth*0.15
         let favBtnSpace:CGFloat = viewWidth*0.05
         let favBtnWidth:CGFloat = viewWidth*0.25
         cell.favBtn.frame = CGRect(x: favBtnSpace, y: userInfoBtnHeight+postImgHeight, width: favBtnWidth, height: favComentMenuBtnHeight)
@@ -217,12 +242,18 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.menuBtn.addTarget(self, action: #selector(showActionShert(sender:)), for:.touchUpInside)
 
         //DateLabel
-        let dateLabelHeigt:CGFloat = viewHeight*0.05
-        cell.dateLabel.frame = CGRect(x: viewWidth*0.05, y: userInfoBtnHeight+postImgHeight+favComentMenuBtnHeight, width: viewWidth*0.9, height: dateLabelHeigt)
-
+        //let dateLabelHeigt:CGFloat = viewHeight*0.05
+        var dateLabelYPos:CGFloat = userInfoBtnHeight+postImgHeight
+        dateLabelYPos += favComentMenuBtnHeight
+        cell.dateLabel.frame = CGRect(x: viewWidth*0.05, y: dateLabelYPos, width: viewWidth*0.9, height: dateLabelHeigt)
+        cell.dateLabel.text = pubDate
+        
         //DescriptionLabel
         let descriptionTextViewWidth:CGFloat = viewWidth*0.92
-        cell.descriptionTextView.frame = CGRect(x: viewWidth*0.04, y: userInfoBtnHeight+postImgHeight+favComentMenuBtnHeight+dateLabelHeigt, width: descriptionTextViewWidth, height: 5)
+        var descriptionTextViewYPos:CGFloat = userInfoBtnHeight+postImgHeight
+        descriptionTextViewYPos += favComentMenuBtnHeight
+        descriptionTextViewYPos += dateLabelHeigt
+        cell.descriptionTextView.frame = CGRect(x: viewWidth*0.04, y: descriptionTextViewYPos, width: descriptionTextViewWidth, height: 5)
         cell.descriptionTextView.text = self.postCaption
         cell.descriptionTextView.sizeToFit()
         
@@ -233,14 +264,16 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // セルの高さを設定
         //ユーザーの高さ、viewWidth*0.16
-        //投稿画像の高さ、可変、現在はviewWidth
+        //投稿画像の高さ、可変
         //コメントボタンなどの高さ、viewWidth * 0.15
         //日時のラベルの高さ、viewHeight*0.05
         //解説の高さ、可変
         //お尻に余白、viewHeight*0.05
         
-        var cellHeight:CGFloat = viewWidth*(0.16+1+0.15+0.05+0.05)
-        //高さを追加
+        var cellHeight:CGFloat = userInfoBtnHeight+postImgHeight
+        cellHeight += favComentMenuBtnHeight
+        cellHeight += dateLabelHeigt
+        //高さを計算
         cellHeight += UtilityLibrary.calcTextViewHeight(text: self.postCaption, width: viewWidth*0.92, font: UIFont.systemFont(ofSize: 16))
         
         return cellHeight
@@ -398,8 +431,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         self.present(actionAlert, animated: true, completion: nil)
     }
-    
-    
+  
     // MARK: - GoOtherViews
     func goCommentView(){
         // 移動先のViewを定義する.
@@ -430,14 +462,18 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 self.postUserID = json["responce"]["userId"].intValue
                 self.postTitle = json["responce"]["title"].stringValue
                 self.postCaption = json["responce"]["caption"].stringValue
-                self.postImgUrl = URL(string: json["responce"]["itemImage"].stringValue)!
+                self.postImgUrl = json["responce"]["imageInfo"]["image_url"].stringValue
                 self.iconUrl = json["responce"]["iconUrl"].stringValue
-                
-                print(json["responce"]["iconUrl"].stringValue)
+                self.pubDate = json["responce"]["updated_at"].stringValue
 
                 self.commentList = json["responce"]["commentList"].arrayValue
                 self.favList = json["responce"]["favList"].arrayValue
 
+                //postImageAspecg
+                let height = json["responce"]["imageInfo"]["height"].floatValue
+                let width = json["responce"]["imageInfo"]["width"].floatValue
+                self.postImgAspect = CGFloat(height/width)
+                
                 self.getFriends()
                 
             case .failure(let error):
@@ -460,6 +496,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                     
                     self.isFriends = self.checkIsFriends(friendsList: json["responce"])
                     
+                    self.calcTableViewHeight()
                     self.setNavigationBar()
                     self.setTableView()
                     

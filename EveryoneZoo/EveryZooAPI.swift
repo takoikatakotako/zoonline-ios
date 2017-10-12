@@ -9,6 +9,7 @@
 import UIKit
 
 let API_URL:String = "http://minzoo.herokuapp.com/api/"
+//let API_URL:String = "http://localhost:3000/api/"
 let API_VERSION:String = "v0/"
 
 let APP_URL: String = "http://minzoo.herokuapp.com"
