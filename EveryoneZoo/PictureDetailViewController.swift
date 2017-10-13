@@ -310,13 +310,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             return
         }
         
-        
-        
         let postFavorite:String = EveryZooAPI.getDoFavoritePost(userID: Int(myUserID)!, postID: postID)
-        
-        print(postFavorite)
-        
-        
         if sender.imgView.image == UIImage(named:"fav_on") {
             sender.imgView.image = UIImage(named: "fav_off")!
             sender.countLabel.textColor = UIColor.black

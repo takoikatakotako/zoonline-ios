@@ -214,14 +214,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func doImageUpload() {
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let userID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
-        
+        let userID:String = UtilityLibrary.getUserID()
         let imageData = UIImagePNGRepresentation(postImage)!
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to:EveryZooAPI.getUploadPicture())
+        }, to:EveryZooAPI.getUploadPicture(),  headers: UtilityLibrary.getAPIAccessHeader())
         { (result) in
             switch result {
             case .success(let upload, _, _):
@@ -240,6 +238,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                     case .success:
                         print("Validation Successful")
                         let json:JSON = JSON(response.result.value ?? kill)
+                        print(json)
+                        
                         
                         if json["is_success"].boolValue  {
                             let pic_id:String = json["picture"]["pic_id"].stringValue
