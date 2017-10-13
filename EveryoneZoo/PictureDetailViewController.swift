@@ -310,7 +310,13 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             return
         }
         
+        
+        
         let postFavorite:String = EveryZooAPI.getDoFavoritePost(userID: Int(myUserID)!, postID: postID)
+        
+        print(postFavorite)
+        
+        
         if sender.imgView.image == UIImage(named:"fav_on") {
             sender.imgView.image = UIImage(named: "fav_off")!
             sender.countLabel.textColor = UIColor.black
@@ -472,7 +478,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 //postImageAspecg
                 let height = json["responce"]["imageInfo"]["height"].floatValue
                 let width = json["responce"]["imageInfo"]["width"].floatValue
-                self.postImgAspect = CGFloat(height/width)
+                if width != 0.0 {
+                    self.postImgAspect = CGFloat(height/width)
+                }else{
+                    self.postImgUrl = json["responce"]["itemImage"].stringValue
+                    self.postImgAspect = 1
+                }
                 
                 self.getFriends()
                 

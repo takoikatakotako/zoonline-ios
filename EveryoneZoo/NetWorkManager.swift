@@ -19,7 +19,7 @@ class NetWorkManager: NSObject {
         
         let url:String = APP_URL + "/api/v0/users/" + String(myUserId) + "/following/" + String(followUserId)
         
-        Alamofire.request(url, method: .post).responseJSON{ response in
+        Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
             
             switch response.result {
             case .success:
@@ -36,7 +36,7 @@ class NetWorkManager: NSObject {
         
         let url:String = APP_URL + "/api/v0/users/" + String(myUserId) + "/following/" + String(followUserId)
         
-        Alamofire.request(url, method: .delete).responseJSON{ response in
+        Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
             
             switch response.result {
             case .success:
