@@ -45,7 +45,6 @@
 		8D7E86091EABBC6200C4049B /* LeftPicturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86081EABBC6200C4049B /* LeftPicturesTableViewCell.swift */; };
 		8D7E860B1EABBC7400C4049B /* RightPicturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */; };
 		8D8A43301F7D421700F79C0F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8A432F1F7D421700F79C0F /* Social.framework */; };
-		8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */; };
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
 		8D9DE17A1EE3EA3900121FC1 /* FavCommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9DE1791EE3EA3900121FC1 /* FavCommentButton.swift */; };
 		8D9DE17C1EE3F5B500121FC1 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9DE17B1EE3F5B500121FC1 /* MenuButton.swift */; };
@@ -143,7 +142,6 @@
 		8D7E86081EABBC6200C4049B /* LeftPicturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftPicturesTableViewCell.swift; sourceTree = "<group>"; };
 		8D7E860A1EABBC7400C4049B /* RightPicturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightPicturesTableViewCell.swift; sourceTree = "<group>"; };
 		8D8A432F1F7D421700F79C0F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZooTabBarController.swift; path = ../ZooTabBarController.swift; sourceTree = "<group>"; };
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		8D9DE1791EE3EA3900121FC1 /* FavCommentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavCommentButton.swift; sourceTree = "<group>"; };
 		8D9DE17B1EE3F5B500121FC1 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
@@ -309,7 +307,6 @@
 			isa = PBXGroup;
 			children = (
 				8D7CDC3B1F14F12D00C3844E /* NavigationBarLabel.swift */,
-				8D8EED2B1E97E2000055D8EB /* ZooTabBarController.swift */,
 				8D35113C1EEECFC8004BA744 /* NoLoginView.swift */,
 				8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */,
 			);
@@ -865,7 +862,6 @@
 				8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */,
 				8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */,
 				8D6A73EE1F83BE2A00902AFC /* UserCollectionViewCell.swift in Sources */,
-				8D8EED2C1E97E2000055D8EB /* ZooTabBarController.swift in Sources */,
 				8D35113D1EEECFC8004BA744 /* NoLoginView.swift in Sources */,
 				8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */,
 				8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */,

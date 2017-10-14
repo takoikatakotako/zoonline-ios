@@ -108,9 +108,8 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
         picDetailView.postID = postID
         
-        let btn_back = UIBarButtonItem()
-        btn_back.title = ""
-        self.navigationItem.backBarButtonItem = btn_back
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(picDetailView, animated: true)
     }
 }

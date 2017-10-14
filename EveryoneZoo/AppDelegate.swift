@@ -21,20 +21,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
+
+        //ステータスバー
         UIApplication.shared.statusBarStyle = .lightContent
         
-        //ナビゲーションアイテムの色を変更
+        //ナビゲーションバー
         UINavigationBar.appearance().tintColor = UIColor.white
-        //ナビゲーションバーの背景を変更
         UINavigationBar.appearance().barTintColor = UIColor.MainAppColor()
         UINavigationBar.appearance().isTranslucent = false
-
-        //ナビゲーションのタイトル文字列の色を変更
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         
+        //タブバー
+        UITabBar.appearance().tintColor = UIColor.MainAppColor()
+        UITabBar.appearance().unselectedItemTintColor = UIColor.tabNonIconSelected()
+        UITabBar.appearance().barTintColor = UIColor.white
+        UITabBar.appearance().isTranslucent = false
         
+        
+        //Managers
         self.networkManager = NetWorkManager()
         self.userDefaultsManager = UserDefaultsManager()
 

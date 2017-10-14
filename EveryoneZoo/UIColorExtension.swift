@@ -127,11 +127,12 @@ extension UIColor {
     
     class func mainAppColor() -> UIColor {
         return UIColor(red:0.0,green:0.5,blue:1.0,alpha:1.0)
-    }*/
+    }
     
     class func tabIconSelected() -> UIColor {
         return UIColor(red: (11.0/256), green: (97.0/256), blue: (254.0/256), alpha: 1.0)
     }
+ */
     
     class func tabNonIconSelected() -> UIColor {
         return UIColor(red: (89.0/256), green: (89.0/256), blue: (89.0/256), alpha: 1.0)

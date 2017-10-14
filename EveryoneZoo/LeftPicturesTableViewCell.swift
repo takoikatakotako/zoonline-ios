@@ -10,16 +10,21 @@ import UIKit
 
 class LeftPicturesTableViewCell: UITableViewCell {
  
-    var picturesImgs:Array<UIImageView> = Array()
+    var picturesImgViews:Array<UIImageView>!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        picturesImgViews = Array()
         for i in 0..<6 {
             let picturesImg:UIImageView = UIImageView()
+            picturesImg.image = UIImage(named: "sample_loading")
+            picturesImg.contentMode = UIViewContentMode.scaleAspectFill
             picturesImg.clipsToBounds = true
-            picturesImgs.append(picturesImg)
-            contentView.addSubview(picturesImgs[i])
+            picturesImg.isUserInteractionEnabled = true
+
+            picturesImgViews.append(picturesImg)
+            contentView.addSubview(picturesImgViews[i])
         }
     }
     
@@ -40,13 +45,13 @@ class LeftPicturesTableViewCell: UITableViewCell {
         let cellSmallWidth:CGFloat = cellWidth*1/3-paddingWidth*2
 
         for i in 0..<6 {
-            picturesImgs[i].layer.cornerRadius = cellWidth*0.05
+            picturesImgViews[i].layer.cornerRadius = cellWidth*0.05
         }
-        picturesImgs[0].frame = CGRect(x: paddingWidth, y: paddingWidth, width: cellBigWidth, height: cellBigWidth)
-        picturesImgs[1].frame = CGRect(x: cellWidthThird*2+paddingWidth, y: paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
-        picturesImgs[2].frame = CGRect(x: cellWidthThird*2+paddingWidth, y: cellWidthThird+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
-        picturesImgs[3].frame = CGRect(x: paddingWidth, y: cellWidthThird*2+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
-        picturesImgs[4].frame = CGRect(x: cellWidthThird+paddingWidth, y: cellWidthThird*2+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
-        picturesImgs[5].frame = CGRect(x: cellWidthThird*2+paddingWidth, y: cellWidthThird*2+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
+        picturesImgViews[0].frame = CGRect(x: paddingWidth, y: paddingWidth, width: cellBigWidth, height: cellBigWidth)
+        picturesImgViews[1].frame = CGRect(x: cellWidthThird*2+paddingWidth, y: paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
+        picturesImgViews[2].frame = CGRect(x: cellWidthThird*2+paddingWidth, y: cellWidthThird+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
+        picturesImgViews[3].frame = CGRect(x: paddingWidth, y: cellWidthThird*2+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
+        picturesImgViews[4].frame = CGRect(x: cellWidthThird+paddingWidth, y: cellWidthThird*2+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
+        picturesImgViews[5].frame = CGRect(x: cellWidthThird*2+paddingWidth, y: cellWidthThird*2+paddingWidth, width: cellSmallWidth, height: cellSmallWidth)
     }
 }

@@ -167,14 +167,13 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
             for i in 0..<6 {
                 let cellNum:Int = indexPath.row*6+i
                 let url = URL(string: imageURLs[cellNum])!
-                cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
-                cell.picturesImgs[i].isUserInteractionEnabled = true
-                cell.picturesImgs[i].tag = postIds[cellNum]
+                cell.picturesImgViews[i].af_setImage(withURL: url, placeholderImage: loadImg)
+                cell.picturesImgViews[i].tag = postIds[cellNum]
                 
                 //画像にタッチイベントを追加
                 let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
                 singleTap.numberOfTapsRequired = 1
-                cell.picturesImgs[i].addGestureRecognizer(singleTap)
+                cell.picturesImgViews[i].addGestureRecognizer(singleTap)
             }
             return cell
         }else{
@@ -187,13 +186,13 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 
                 let cellNum:Int = indexPath.row*6+i
                 let url = URL(string: imageURLs[cellNum])!
-                cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
-                cell.picturesImgs[i].isUserInteractionEnabled = true
-                cell.picturesImgs[i].tag = postIds[cellNum]
+                cell.picturesImgViews[i].af_setImage(withURL: url, placeholderImage: loadImg)
+                cell.picturesImgViews[i].isUserInteractionEnabled = true
+                cell.picturesImgViews[i].tag = postIds[cellNum]
                 
                 let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
                 singleTap.numberOfTapsRequired = 1
-                cell.picturesImgs[i].addGestureRecognizer(singleTap)
+                cell.picturesImgViews[i].addGestureRecognizer(singleTap)
             }
             return cell
         }
