@@ -53,11 +53,9 @@ class PostDetailTableCell: UITableViewCell {
         userNameTextView.text = "いろはにほへと"
         userInfoBtn.addSubview(userNameTextView)
     
-        
         //FollowBtn
         followBtn = FollowUserButton()
         contentView.addSubview(followBtn)
-        
 
         //PostImg
         postImgView = UIImageView()

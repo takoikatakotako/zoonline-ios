@@ -123,7 +123,7 @@ class WritePostsCommentsViewController: UIViewController {
             "comments": commentTextView.text
         ]
         
-        Alamofire.request(EveryZooAPI.getDoComments(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getDoComments(), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
             
             switch response.result {
             case .success:

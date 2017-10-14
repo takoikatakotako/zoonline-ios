@@ -147,7 +147,7 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
                 cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
                 cell.picturesImgs[i].isUserInteractionEnabled = true
                 cell.picturesImgs[i].tag = postIds[cellNum]
-                
+                cell.picturesImgs[i].contentMode = UIViewContentMode.scaleAspectFill
                 //画像にタッチイベントを追加
                 let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
                 singleTap.numberOfTapsRequired = 1
@@ -167,6 +167,7 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
                 cell.picturesImgs[i].af_setImage(withURL: url, placeholderImage: loadImg)
                 cell.picturesImgs[i].isUserInteractionEnabled = true
                 cell.picturesImgs[i].tag = postIds[cellNum]
+                cell.picturesImgs[i].contentMode = UIViewContentMode.scaleAspectFill
                 
                 let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
                 singleTap.numberOfTapsRequired = 1
@@ -182,9 +183,6 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
     }
-    
-    
-    
     
     
     func dowonloadJsons(){

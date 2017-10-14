@@ -110,9 +110,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             userCellBtn.userNameLabel.text = UtilityLibrary.getUserName()
             userCellBtn.userMailAdressLabel.text = UtilityLibrary.getUserEmail()
         }else{
-            //ログイン
+            //未ログイン
             userCellBtn.userNameLabel.text = "未ログイン"
             userCellBtn.userMailAdressLabel.text = "ログインしてください"
+            userCellBtn.iconImgView.image = UIImage(named:"icon_default")
         }
     }
     

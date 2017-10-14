@@ -306,7 +306,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         if !(UtilityLibrary.isLogin()) {
             //ログインしていない
-            SCLAlertView().showInfo("ログインしてね", subTitle: "お気に入り機能を使うにはログインが必要だよ！")
+            SCLAlertView().showInfo("ログインが必要です", subTitle: "お気に入り機能を使うにはログインが必要だよ！")
             return
         }
         
@@ -388,7 +388,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             })
             actionAlert.addAction(commentAction)
             
-            let addAlbumAction = UIAlertAction(title: "アルバムへの追加", style: UIAlertActionStyle.default, handler: {
+            let addAlbumAction = UIAlertAction(title: "お気に入りへの追加", style: UIAlertActionStyle.default, handler: {
                 (action: UIAlertAction!) in
             })
             actionAlert.addAction(addAlbumAction)

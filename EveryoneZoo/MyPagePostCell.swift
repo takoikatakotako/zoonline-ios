@@ -27,7 +27,6 @@ class MyPagePostCell: UITableViewCell {
         
         thumbnailImg = UIImageView()
         thumbnailImg.image = UIImage(named:"sample_kabi1")
-        thumbnailImg.contentMode = UIViewContentMode.scaleAspectFit
         self.contentView.addSubview(thumbnailImg)
         
         titleLabel = UILabel()
