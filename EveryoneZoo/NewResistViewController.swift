@@ -48,13 +48,13 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         //ステータスバー部分の覆い
         let statusView:UIView = UIView()
         statusView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: statusBarHeight*2)
-        statusView.backgroundColor = UIColor.mainAppColor()
+        statusView.backgroundColor = UIColor.MainAppColor()
         self.view.addSubview(statusView)
         
         //ナビゲーションコントローラーの色の変更
         let navBar = UINavigationBar()
         navBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
-        navBar.barTintColor = UIColor.mainAppColor()
+        navBar.barTintColor = UIColor.MainAppColor()
         navBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         

@@ -109,7 +109,7 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     // MARK: NavigationBar
     func setNavigationBar() {
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
         self.navigationController?.navigationBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         

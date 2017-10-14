@@ -51,7 +51,7 @@ class CommentTableViewCell: UITableViewCell {
         //CommentLabel
         commentUser.frame = CGRect(x: cellWidth*0.18, y: cellHeight*0.08, width: cellWidth*0.5, height: cellHeight*0.35)
         commentUser.font = UIFont.boldSystemFont(ofSize: 14)
-        commentUser.textColor = UIColor.mainAppColor()
+        commentUser.textColor = UIColor.MainAppColor()
         
         //dateLabel
         dateLabel.frame = CGRect(x: cellWidth*0.7, y: cellHeight*0.08, width: cellWidth*0.3, height: cellHeight*0.35)

@@ -103,8 +103,8 @@ class TimeLineViewController: UIViewController,CAPSPageMenuDelegate {
             .useMenuLikeSegmentedControl(true),
             .menuItemSeparatorPercentageHeight(0.1),
             .bottomMenuHairlineColor(UIColor.blue),
-            .selectionIndicatorColor(UIColor.segmetRightBlue()),
-            .selectedMenuItemLabelColor(UIColor.mainAppColor()),
+            .selectionIndicatorColor(UIColor.MainAppColor()),
+            .selectedMenuItemLabelColor(UIColor.MainAppColor()),
             .menuItemFont(UIFont.boldSystemFont(ofSize: 16)),
             .unselectedMenuItemLabelColor(UIColor.gray)
         ]

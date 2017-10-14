@@ -121,7 +121,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         indicator.clipsToBounds = true
         indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
-        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.backgroundColor = UIColor.MainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         self.view.bringSubview(toFront: indicator)
         indicator.color = UIColor.white

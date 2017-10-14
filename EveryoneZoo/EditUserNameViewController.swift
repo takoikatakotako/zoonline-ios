@@ -59,7 +59,7 @@ class EditUserNameViewController: UIViewController,UITextFieldDelegate {
         //ChangeButton
         let changeUserNameBtn:UIButton = UIButton()
         changeUserNameBtn.frame = CGRect(x: viewWidth*0.1, y: viewHeight*0.3, width: viewWidth*0.8, height: viewWidth*0.15)
-        changeUserNameBtn.backgroundColor = UIColor.mainAppColor()
+        changeUserNameBtn.backgroundColor = UIColor.MainAppColor()
         changeUserNameBtn.setTitle("変更を保存", for: UIControlState.normal)
         changeUserNameBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         changeUserNameBtn.layer.masksToBounds = true
@@ -73,7 +73,7 @@ class EditUserNameViewController: UIViewController,UITextFieldDelegate {
     // MARK: ナビゲーションバーの設定
     func setNavigationBar() {
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成

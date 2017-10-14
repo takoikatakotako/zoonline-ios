@@ -64,8 +64,8 @@ class ZooListViewController: UIViewController,NewsDelegate,CAPSPageMenuDelegate 
             .useMenuLikeSegmentedControl(true),
             .menuItemSeparatorPercentageHeight(0.1),
             .bottomMenuHairlineColor(UIColor.blue),
-            .selectionIndicatorColor(UIColor.segmetRightBlue()),
-            .selectedMenuItemLabelColor(UIColor.mainAppColor()),
+            .selectionIndicatorColor(UIColor.MainAppColor()),
+            .selectedMenuItemLabelColor(UIColor.MainAppColor()),
             .menuItemFont(UIFont.boldSystemFont(ofSize: 16)),
             .unselectedMenuItemLabelColor(UIColor.gray)
         ]
@@ -92,11 +92,11 @@ class ZooListViewController: UIViewController,NewsDelegate,CAPSPageMenuDelegate 
         //ステータスバー部分の覆い
         let statusBgView:UIView = UIView()
         statusBgView.frame = CGRect(x: 0, y: -navigationBarHeight*2, width: viewWidth, height: navigationBarHeight*2)
-        statusBgView.backgroundColor = UIColor.mainAppColor()
+        statusBgView.backgroundColor = UIColor.MainAppColor()
         self.view.addSubview(statusBgView)
         
         //ナビゲーションコントローラーの色の変更
-        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
         self.navigationController?.navigationBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         

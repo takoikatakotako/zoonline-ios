@@ -105,11 +105,11 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         //ステータスバー部分の覆い
         let statusBgView:UIView = UIView()
         statusBgView.frame = CGRect(x: 0, y: -navigationBarHeight*2, width: viewWidth, height: navigationBarHeight*2)
-        statusBgView.backgroundColor = UIColor.mainAppColor()
+        statusBgView.backgroundColor = UIColor.MainAppColor()
         self.view.addSubview(statusBgView)
         
         //ナビゲーションコントローラーの色の変更
-        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
         self.navigationController?.navigationBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         
@@ -149,7 +149,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         indicator.clipsToBounds = true
         indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
-        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.backgroundColor = UIColor.MainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         
         indicator.center = self.view.center
@@ -384,7 +384,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             myImagePicker = UIImagePickerController()
             myImagePicker.delegate = self
             myImagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-            myImagePicker.navigationBar.barTintColor = UIColor.mainAppColor()
+            myImagePicker.navigationBar.barTintColor = UIColor.MainAppColor()
             myImagePicker.navigationBar.tintColor = UIColor.white
             myImagePicker.navigationBar.isTranslucent = false
             //myImagePicker.allowsEditing = false

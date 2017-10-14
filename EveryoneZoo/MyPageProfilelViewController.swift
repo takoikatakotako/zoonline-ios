@@ -74,7 +74,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     // MARK: ナビゲーションバーの設定
     func setNavigationBar() {
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.mainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
@@ -94,7 +94,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         indicator.clipsToBounds = true
         indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
-        indicator.backgroundColor = UIColor.mainAppColor()
+        indicator.backgroundColor = UIColor.MainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         self.view.bringSubview(toFront: indicator)
         indicator.color = UIColor.white
@@ -170,7 +170,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         let myImagePicker = UIImagePickerController()
         myImagePicker.delegate = self
         myImagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        myImagePicker.navigationBar.barTintColor = UIColor.mainAppColor()
+        myImagePicker.navigationBar.barTintColor = UIColor.MainAppColor()
         myImagePicker.navigationBar.tintColor = UIColor.white
         myImagePicker.navigationBar.isTranslucent = false
         self.present(myImagePicker, animated: true, completion: nil)
@@ -323,7 +323,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         if indexPath.row == 0{
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-            cell.textLabel?.textColor = UIColor.mainAppColor()
+            cell.textLabel?.textColor = UIColor.MainAppColor()
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         }else if indexPath.row == 1{
             cell.backgroundColor = UIColor.MyPageTableBGColor()
