@@ -349,7 +349,7 @@
 				8DA0AB711ECB0A0000D75B1A /* FieldView */,
 				8D6215A51EC2014200593E55 /* Post */,
 				8DA0AB701ECB032C00D75B1A /* TimeLine */,
-				8D7CDC391F14E74500C3844E /* Zoo */,
+				8D7CDC391F14E74500C3844E /* Official */,
 				8D6215AB1EC3685200593E55 /* MyPage */,
 			);
 			name = ViewController;
@@ -424,14 +424,14 @@
 			name = EditUserInfo;
 			sourceTree = "<group>";
 		};
-		8D7CDC391F14E74500C3844E /* Zoo */ = {
+		8D7CDC391F14E74500C3844E /* Official */ = {
 			isa = PBXGroup;
 			children = (
 				8D0FB4591E8031800008D997 /* ZooListViewController.swift */,
 				8D7343621F3A1CB700EB232E /* NewsListViewController.swift */,
 				8D7343641F3A1D5D00EB232E /* OfficialListViewController.swift */,
 			);
-			name = Zoo;
+			name = Official;
 			sourceTree = "<group>";
 		};
 		8D7E86051EABADAF00C4049B /* TableViewCell */ = {

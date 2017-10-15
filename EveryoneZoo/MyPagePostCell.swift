@@ -26,7 +26,7 @@ class MyPagePostCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         thumbnailImg = UIImageView()
-        thumbnailImg.image = UIImage(named:"sample_kabi1")
+        thumbnailImg.image = UIImage(named: "sample_loading")
         thumbnailImg.contentMode = UIViewContentMode.scaleAspectFill
         thumbnailImg.clipsToBounds = true
         self.contentView.addSubview(thumbnailImg)

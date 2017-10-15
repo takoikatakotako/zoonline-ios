@@ -126,7 +126,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.newsContents[indexPath.row]["content"].stringValue
         let imageUrl = URL(string:self.newsContents[indexPath.row]["image_url"].stringValue)!
-        cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
+        cell.thumbnailImg.sd_setImage(with: imageUrl)
         return cell
     }
     

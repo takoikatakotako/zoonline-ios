@@ -203,7 +203,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.newsContents[indexPath.row]["caption"].stringValue
         let imageUrl = URL(string:self.newsContents[indexPath.row]["itemImage"].stringValue)!
-        cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
+        cell.thumbnailImg.sd_setImage(with: imageUrl)
         return cell
     }
     
