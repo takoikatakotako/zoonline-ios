@@ -20,16 +20,18 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     private var navigationBarHeight:CGFloat!
     private var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
-
     private var timeLineTableView:UITableView = UITableView()
-    private var noLoginView:NoLoginView!
+    
+    private var isNetWorkConnect:Bool!
 
+
+    //Contents
     var newsContents:JSON = []
 
+    var indicator: UIActivityIndicatorView!
+    
     //サポートボタン
     let supportBtn:UIButton = UIButton()
-    
-    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,67 +45,34 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
         tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+tabBarHeight!)
         
-        setNavigationBarBar()
-        setActivityIndicator()
+        isNetWorkConnect = true
         
-        noLoginView = NoLoginView()
+        setNavigationBarBar()
+        setTableView()
+        setActivityIndicator()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         refleshTableView()
     }
     
-    
+    // MARK: - Viewにパーツの設置
     // MARK: くるくるの生成
     func setActivityIndicator(){
         
-        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
-        indicator.clipsToBounds = true
-        indicator.layer.cornerRadius = viewWidth*0.3*0.3
+        indicator = UIActivityIndicatorView()
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
-        indicator.backgroundColor = UIColor.MainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        self.view.bringSubview(toFront: indicator)
-        indicator.color = UIColor.white
+        indicator.color = UIColor.MainAppColor()
         self.view.addSubview(indicator)
-        indicator.startAnimating()
     }
     
-    func getNews() {
-        
-        let userID:Int = Int(UtilityLibrary.getUserID())!
-        Alamofire.request(EveryZooAPI.getTimeLinePosts(userID: userID)).responseJSON{ response in
-            
-            switch response.result {
-            case .success:
-                
-                let json:JSON = JSON(response.result.value ?? kill)
-                
-                if json["is_success"].boolValue {
-                    print(json["content"].arrayValue)
-                    self.newsContents = json["content"]
-                    
-                    self.timeLineTableView.reloadData()
-                }
-                
-            case .failure(let error):
-                print(error)
-                //テーブルの再読み込み
-            }
-            
-            self.indicator.stopAnimating()
-        }
-    }
-
-    // MARK: - Viewにパーツの設置
     // MARK: NavigationBarの設置
     func setNavigationBarBar(){
-        
-        let myBackButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = myBackButton
-        
+
         //UINavigationBarの位置とサイズを指定
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -118,15 +87,45 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         timeLineTableView.dataSource = self
         timeLineTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
         timeLineTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
-        timeLineTableView.rowHeight = viewWidth*0.28
+        timeLineTableView.register(NoLoginTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NoLoginTableViewCell.self))
+        timeLineTableView.register(NetWorkErrorTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self))
         self.view.addSubview(timeLineTableView)
-        
         
         //リフレッシュコントロールの追加
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: UIControlEvents.valueChanged)
         timeLineTableView.refreshControl = refreshControl
     }
+    
+    
+    // MARK: - インターネット
+    func getNews() {
+        
+        let userID:Int = Int(UtilityLibrary.getUserID())!
+        Alamofire.request(EveryZooAPI.getTimeLinePosts(userID: userID)).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                self.isNetWorkConnect = true
+                
+                if json["is_success"].boolValue {
+                    print(json["content"].arrayValue)
+                    self.newsContents = json["content"]
+                }
+                
+            case .failure(let error):
+                print(error)
+                self.newsContents = []
+                self.isNetWorkConnect = false
+            }
+            self.indicator.stopAnimating()
+            self.timeLineTableView.reloadData()
+        }
+    }
+
+
     
     func setSupportBtn() {
         //サポート
@@ -149,51 +148,54 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     
     func scrollReflesh(sender : UIRefreshControl) {
         self.timeLineTableView.refreshControl?.endRefreshing()
-
+        
         refleshTableView()
     }
     
     func refleshTableView() {
         
-        if (timeLineTableView.isDescendant(of: self.view)) {
-            timeLineTableView.removeFromSuperview()
-        }
-        
-        if (noLoginView.isDescendant(of: self.view)){
-            noLoginView.removeFromSuperview()
-        }
-        
-        if UtilityLibrary.isLogin() {
-            
-            //
-            setTableView()
-            
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_TimeLine"))!
-            
-            if !didSupport {
-                setSupportBtn()
-            }
-            
-            self.view.bringSubview(toFront: indicator)
-            indicator.startAnimating()
-            getNews()
-            
+        if !UtilityLibrary.isLogin() {
+            timeLineTableView.reloadData()
         }else{
-            
-            setLoginView()
+            self.indicator.startAnimating()
+            getNews()
         }
     }
     
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //テーブルビューのセルの数はmyItems配列の数とした
+
+        if !UtilityLibrary.isLogin() { return 1}
+        if !isNetWorkConnect { return 1 }
+        
         return newsContents.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        if !UtilityLibrary.isLogin() { return tableViewHeight }
+        if !isNetWorkConnect { return tableViewHeight }
+        
+        return viewWidth*0.28
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if !UtilityLibrary.isLogin() {
+            let cell:NoLoginTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NoLoginTableViewCell.self), for: indexPath) as! NoLoginTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+            return cell
+        }
+        
+        if !isNetWorkConnect {
+            let cell:NetWorkErrorTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self), for: indexPath) as! NetWorkErrorTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
+        }
+        
         //myItems配列の中身をテキストにして登録した
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
 
@@ -209,11 +211,18 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
+
+        if !UtilityLibrary.isLogin() {
+            return
+        }
         
-        //デリゲートを用いて初めのViewの色をランダムに変える
+        if !isNetWorkConnect {
+            return
+        }
+        
         goDetailView(postID: self.newsContents[indexPath.row]["id"].intValue)
     }
+    
     func goDetailView(postID:Int) {
         //画面遷移、投稿詳細画面へ
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
@@ -223,16 +232,6 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     
     
     //Mark: 未ログイン関係の処理
-    
-    // MARK: setLoginView
-    func setLoginView()  {
-        
-        let noLoginViewHeight:CGFloat = viewHeight-(statusBarHeight+tabBarHeight)
-        noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
-        noLoginView.loginBtn.addTarget(nil, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
-        noLoginView.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
-        self.view.addSubview(noLoginView)
-    }
     
     //ログインボタンが押されたら呼ばれます
     func loginBtnClicked(sender: UIButton){

@@ -10,7 +10,7 @@ import UIKit
 
 
 //広場画面
-let FIELD_BUTTON_WIDTH:CGFloat! = 80
+//let FIELD_BUTTON_WIDTH:CGFloat! = 80
 
 
 //マイページ画面

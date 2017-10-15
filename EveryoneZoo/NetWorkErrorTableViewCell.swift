@@ -9,13 +9,9 @@
 import UIKit
 
 class NetWorkErrorTableViewCell: UITableViewCell {
-
-    var errorImgView:UIImageView = UIImageView()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.addSubview(errorImgView)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -31,9 +27,13 @@ class NetWorkErrorTableViewCell: UITableViewCell {
         let cellWidth:CGFloat = self.frame.width
         let cellHeight:CGFloat = self.frame.height
         
+        let errorLabelHeight = cellHeight*0.1
+        let conformLabelHeight = cellHeight*0.1
+        let errorImgViewHeight = cellWidth-(errorLabelHeight+conformLabelHeight)
+
         //NetErrorLabel
         let errorLabel:UILabel = UILabel()
-        errorLabel.frame = CGRect(x: cellWidth*0.1, y: cellHeight*0.1, width: cellWidth*0.8, height: cellHeight*0.1)
+        errorLabel.frame = CGRect(x: 0, y: errorLabelHeight, width: cellWidth, height: errorLabelHeight)
         errorLabel.text = "ネットワークエラー"
         errorLabel.font = UIFont.boldSystemFont(ofSize: 20)
         errorLabel.textColor = UIColor.PostDetailFavPink()
@@ -42,15 +42,17 @@ class NetWorkErrorTableViewCell: UITableViewCell {
         
         //Conform Label
         let conformLabel:UILabel = UILabel()
-        conformLabel.frame = CGRect(x: cellWidth*0.1, y: cellHeight*0.2, width: cellWidth*0.8, height: cellHeight*0.1)
+        conformLabel.frame = CGRect(x: 0, y: errorLabelHeight*2, width: cellWidth, height: conformLabelHeight)
         conformLabel.text = "通信を確認してください"
         conformLabel.textAlignment = NSTextAlignment.center
         conformLabel.font = UIFont.systemFont(ofSize: 16)
         self.addSubview(conformLabel)
         
+        //Error Img View
+        let errorImgView:UIImageView = UIImageView()
         errorImgView.image = UIImage(named:"chara_penpen")
         errorImgView.contentMode = UIViewContentMode.scaleAspectFit
-        //errorImgView.a
-        errorImgView.frame = CGRect(x: 0, y: cellHeight*0.32, width: cellWidth, height: cellHeight*0.68)
+        errorImgView.frame = CGRect(x: 0, y: errorLabelHeight+conformLabelHeight*2, width: cellWidth, height: errorImgViewHeight)
+        self.addSubview(errorImgView)
     }
 }

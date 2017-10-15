@@ -34,7 +34,7 @@ class NoLoginView: UIView {
         //LoginBtn
         loginBtn = UIButton()
         loginBtn.setTitle("ログイン", for: UIControlState.normal)
-        loginBtn.backgroundColor = UIColor.PostDetailFavPink()
+        loginBtn.backgroundColor = UIColor.AccountRegistErrorPink()
         loginBtn.layer.masksToBounds = true
         loginBtn.layer.cornerRadius = 4.0
         self.addSubview(loginBtn)
@@ -42,7 +42,7 @@ class NoLoginView: UIView {
         //newResist
         newResisterBtn = UIButton()
         newResisterBtn.setTitle("アカウント登録", for: UIControlState.normal)
-        newResisterBtn.backgroundColor = UIColor.PostDetailFavPink()
+        newResisterBtn.backgroundColor = UIColor.AccountRegistErrorPink()
         newResisterBtn.layer.masksToBounds = true
         newResisterBtn.layer.cornerRadius = 4.0
         self.addSubview(newResisterBtn)
@@ -58,7 +58,7 @@ class NoLoginView: UIView {
         let viewWidth:CGFloat = self.frame.width
         let viewHeight:CGFloat = self.frame.height
         
-        claimLoginLabel.frame = CGRect(x: 0, y: viewHeight*0.05, width: viewWidth, height: viewHeight*0.1)
+        claimLoginLabel.frame = CGRect(x: 0, y: viewHeight*0.1, width: viewWidth, height: viewHeight*0.1)
         loginCanDoView.frame = CGRect(x: viewWidth*0.1, y: viewHeight*0.15, width: viewWidth*0.8, height: viewHeight*0.4)
         loginBtn.frame = CGRect(x: viewWidth*0.1, y: viewHeight*0.6, width: viewWidth*0.8, height: viewWidth*0.15)
         newResisterBtn.frame = CGRect(x: viewWidth*0.1, y: viewHeight*0.75, width: viewWidth*0.8, height: viewWidth*0.15)
