@@ -80,7 +80,7 @@
             </objects>
             <point key="canvasLocation" x="-540" y="1459"/>
         </scene>
-        <!--動物園-->
+        <!--オフィシャル-->
         <scene sceneID="yNV-z2-Lkw">
             <objects>
                 <viewController id="qKR-ST-zao" customClass="ZooListViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
@@ -93,7 +93,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="動物園" image="tab_notice" id="5BP-NF-QO9"/>
+                    <tabBarItem key="tabBarItem" title="オフィシャル" image="tab_notice" id="5BP-NF-QO9"/>
                     <navigationItem key="navigationItem" id="dck-8Y-nnt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMx-Jh-jJs" userLabel="First Responder" sceneMemberID="firstResponder"/>

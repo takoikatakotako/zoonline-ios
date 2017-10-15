@@ -117,7 +117,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "投稿する"
+        titleLabel.text = "投稿"
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
     }
