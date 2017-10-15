@@ -15,12 +15,14 @@ import SDWebImage
 
 protocol PopularPostsDelegate: class  {
     func goDetailView(postID:Int)
+    func startIndicator()
+    func stopIndicator()
 }
 
 class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource  {
 
     //delegate
-    weak var delegate: NewPostsDelegate?
+    weak var delegate: PopularPostsDelegate?
     
     //width, height
     var viewWidth:CGFloat!
@@ -38,7 +40,6 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
     //APIから取得したデーター
     var imageURLs:Array<String> = Array()
     var postIds:Array<Int> = Array()
-    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var isNetWorkConnect:Bool = true
     
     
@@ -52,10 +53,10 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
         
         setTableView()
         
-        setActivityIndicator()
-        
         //network
         dowonloadJsons()
+        
+        self.delegate?.startIndicator()
     }
     
     
@@ -95,23 +96,6 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     
-    // MARK: くるくるの生成
-    func setActivityIndicator(){
-
-        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
-        indicator.clipsToBounds = true
-        indicator.layer.cornerRadius = viewWidth*0.3*0.3
-        indicator.hidesWhenStopped = true
-        indicator.backgroundColor = UIColor.MainAppColor()
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        self.view.bringSubview(toFront: indicator)
-        indicator.color = UIColor.white
-        self.view.addSubview(indicator)
-        indicator.startAnimating()
-        
-    }
-    
-    
     //MARK: テーブルビューのセルの数を設定する
     // MARK: - TableViewのデリゲートメソッド
     //MARK: テーブルビューのセルの数を設定する
@@ -132,9 +116,6 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
             return cell
         }
         
-        //エラーが起こっていない時
-        let loadImg = UIImage(named: "sample_loading")!
-        
         if indexPath.row % 2 != 0 {
             //左上に大きい四角があるCell
             let cell:LeftPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self), for: indexPath) as! LeftPicturesTableViewCell
@@ -144,7 +125,7 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
             for i in 0..<6 {
                 let cellNum:Int = indexPath.row*6+i
                 let url = URL(string: imageURLs[cellNum])!
-                cell.picturesImgViews[i].af_setImage(withURL: url, placeholderImage: loadImg)
+                cell.picturesImgViews[i].af_setImage(withURL: url)
                 cell.picturesImgViews[i].tag = postIds[cellNum]
                 //画像にタッチイベントを追加
                 let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
@@ -162,8 +143,7 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
                 
                 let cellNum:Int = indexPath.row*6+i
                 let url = URL(string: imageURLs[cellNum])!
-                cell.picturesImgViews[i].af_setImage(withURL: url, placeholderImage: loadImg)
-                cell.picturesImgViews[i].isUserInteractionEnabled = true
+                cell.picturesImgViews[i].af_setImage(withURL: url)
                 cell.picturesImgViews[i].tag = postIds[cellNum]
                 cell.picturesImgViews[i].contentMode = UIViewContentMode.scaleAspectFill
                 
@@ -188,7 +168,7 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
         Alamofire.request(EveryZooAPI.getPopularPosts()).responseJSON{ response in
             
             self.pictureTableView.refreshControl?.endRefreshing()
-            self.indicator.stopAnimating()
+            self.delegate?.stopIndicator()
             
             switch response.result {
             case .success:
@@ -234,7 +214,7 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
     func scrollReflesh(sender : UIRefreshControl) {
         
         //network
-        indicator.startAnimating()
+        self.delegate?.startIndicator()
         dowonloadJsons()
     }
 }

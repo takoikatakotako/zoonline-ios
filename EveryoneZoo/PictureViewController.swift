@@ -22,6 +22,7 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
     private var contentsViewHeight:CGFloat!
     
     var pageMenu : CAPSPageMenu?
+    var indicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,19 +36,15 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         pageMenuHeight = navigationBarHeight
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
         contentsViewHeight = viewHeight
-        print(contentsViewHeight)
         
         setNavigationBar()
+        setIndicator()
         setPageMenu()
-    }    
+        startIndicator()
+    }
     
     // MARK: - Viewにパーツの設置
     func setNavigationBar() {
-        
-        //ナビゲーションコントローラーの色の変更
-        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
-        self.navigationController?.navigationBar.isTranslucent = false
-        UINavigationBar.appearance().tintColor = UIColor.white
         
         //ナビゲーションアイテムを作成
         let titleLabel:NavigationBarLabel = NavigationBarLabel()
@@ -81,7 +78,6 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         PopularPostsVC.tabBarHeight = tabBarHeight
         controllerArray.append(PopularPostsVC)
         
-        
         let parameters: [CAPSPageMenuOption] = [
             .scrollMenuBackgroundColor(UIColor.white),
             .menuItemSeparatorWidth(4),
@@ -102,6 +98,14 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         self.view.addSubview(pageMenu!.view)
     }
     
+    func setIndicator(){
+        indicator = UIActivityIndicatorView()
+        indicator.frame = CGRect(x: viewWidth*0.3, y: viewHeight*0.4, width: viewWidth*0.4, height: navigationBarHeight)
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        indicator.color = UIColor.MainAppColor()
+        indicator.hidesWhenStopped = true
+        self.view.addSubview(indicator)
+    }
     
     func goDetailView(postID:Int) {
         //画面遷移、投稿詳細画面へ
@@ -111,5 +115,14 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(picDetailView, animated: true)
+    }
+    
+    func startIndicator() {
+        self.view.bringSubview(toFront: indicator)
+        indicator.startAnimating()
+    }
+    
+    func stopIndicator()  {
+        indicator.stopAnimating()
     }
 }
