@@ -40,7 +40,7 @@ class TagListTableViewCell: UITableViewCell {
         tagLabel.text = "#"+tagLabel.text!
         tagLabel.textColor = UIColor.white
         tagLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        tagLabel.backgroundColor = UIColor.tagBGColor()
+        tagLabel.backgroundColor = UIColor.PostDetailFavPink()
 
         //サイズの計算
         let frame:CGSize = CGSize(width: cellWidth*0.8, height: cellHeight*0.6)

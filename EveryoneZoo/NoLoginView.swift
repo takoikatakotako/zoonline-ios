@@ -34,7 +34,7 @@ class NoLoginView: UIView {
         //LoginBtn
         loginBtn = UIButton()
         loginBtn.setTitle("ログイン", for: UIControlState.normal)
-        loginBtn.backgroundColor = UIColor.LoginBtnRightBlue()
+        loginBtn.backgroundColor = UIColor.PostDetailFavPink()
         loginBtn.layer.masksToBounds = true
         loginBtn.layer.cornerRadius = 4.0
         self.addSubview(loginBtn)
@@ -42,7 +42,7 @@ class NoLoginView: UIView {
         //newResist
         newResisterBtn = UIButton()
         newResisterBtn.setTitle("アカウント登録", for: UIControlState.normal)
-        newResisterBtn.backgroundColor = UIColor.NewRegisBtnPink()
+        newResisterBtn.backgroundColor = UIColor.PostDetailFavPink()
         newResisterBtn.layer.masksToBounds = true
         newResisterBtn.layer.cornerRadius = 4.0
         self.addSubview(newResisterBtn)

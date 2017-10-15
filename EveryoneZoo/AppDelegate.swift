@@ -18,8 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var userScore:Int?
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         //ステータスバー
@@ -33,10 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //タブバー
         UITabBar.appearance().tintColor = UIColor.MainAppColor()
-        UITabBar.appearance().unselectedItemTintColor = UIColor.tabNonIconSelected()
+        UITabBar.appearance().unselectedItemTintColor = UIColor.TextColorGray()
         UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().isTranslucent = false
-        
         
         //Managers
         self.networkManager = NetWorkManager()

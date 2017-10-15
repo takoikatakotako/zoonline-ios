@@ -96,7 +96,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         resistFailed.text = "そのユーザー名は使用できません"
         resistFailed.textAlignment = NSTextAlignment.center
         resistFailed.frame = CGRect(x: viewWidth*0.1, y: resistViewHeight*0.28, width: viewWidth*0.8, height: resistViewHeight*0.1)
-        resistFailed.textColor = UIColor.LogInPinkColor()
+        resistFailed.textColor = UIColor.PostDetailFavPink()
         resistFailed.sizeToFit()
         contentsScrollView.addSubview(resistFailed)
         

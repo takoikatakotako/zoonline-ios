@@ -73,7 +73,7 @@ class PostTagTableViewCell: UITableViewCell {
                 let tagsLabel:UILabel = UILabel()
                 tagsLabel.text = "#"+tag
                 tagsLabel.font = UIFont.boldSystemFont(ofSize: 16)
-                tagsLabel.backgroundColor = UIColor.tagBGColor()
+                tagsLabel.backgroundColor = UIColor.PostDetailFavPink()
                 tagsLabel.textColor = UIColor.white
                 tagsLabel.textAlignment = NSTextAlignment.center
                 let labelRect:CGSize = UtilityLibrary.calcLabelSize(text: tagsLabel.text!, font: tagsLabel.font)

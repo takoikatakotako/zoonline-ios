@@ -117,14 +117,11 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     // MARK: くるくるの生成
     func setActivityIndicator(){
         indicator = UIActivityIndicatorView()
-        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
-        indicator.clipsToBounds = true
-        indicator.layer.cornerRadius = viewWidth*0.3*0.3
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4-44, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
-        indicator.backgroundColor = UIColor.MainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         self.view.bringSubview(toFront: indicator)
-        indicator.color = UIColor.white
+        indicator.color = UIColor.MainAppColor()
         self.view.addSubview(indicator)
         indicator.startAnimating()
     }
@@ -178,10 +175,9 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         //UserInfoBtn
         let userInfoBtnWidth:CGFloat = viewWidth*0.65
-        //let userInfoBtnHeight:CGFloat = viewWidth*0.16
         cell.userInfoBtn.frame = CGRect(x: 0, y: 0, width: userInfoBtnWidth, height: userInfoBtnHeight)
         cell.userInfoBtn.addTarget(self, action: #selector(userInfoBtnClicked(sender:)), for:.touchUpInside)
-        cell.thumbnailImgView.frame = CGRect(x: userInfoBtnHeight*0.15, y: userInfoBtnHeight*0.15, width: userInfoBtnHeight*0.7, height: userInfoBtnHeight*0.7)
+        cell.thumbnailImgView.frame = CGRect(x: userInfoBtnHeight*0.2, y: userInfoBtnHeight*0.15, width: userInfoBtnHeight*0.7, height: userInfoBtnHeight*0.7)
         cell.thumbnailImgView.layer.cornerRadius = cell.thumbnailImgView.frame.height * 0.5
         if let url = URL(string:self.iconUrl) {
             cell.thumbnailImgView.af_setImage(withURL: url, placeholderImage:  UIImage(named:"icon_default")!)
@@ -208,8 +204,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         //PostImgView
         //let postImgHeight:CGFloat = viewWidth*2
         cell.postImgView.frame = CGRect(x: 0, y: userInfoBtnHeight, width: viewWidth, height: postImgHeight)
-        
-        
         if let imageUrl = URL(string: self.postImgUrl){
             cell.postImgView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
         }
@@ -332,7 +326,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
 
         }else{
             sender.imgView.image = UIImage(named: "fav_on")!
-            sender.countLabel.textColor = UIColor.followColor()
+            sender.countLabel.textColor = UIColor.PostDetailFavPink()
             let favCount:String = sender.countLabel.text!
             sender.countLabel.text = String(Int(favCount)!+1)
             
@@ -453,10 +447,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             
             switch response.result {
             case .success:
-                //print("投稿JSON取得成功")
                 let json:JSON = JSON(response.result.value ?? kill)
-                
-                print(json)
                 
                 self.postUserName = json["responce"]["userName"].stringValue
                 self.postUserID = json["responce"]["userId"].intValue
@@ -489,6 +480,23 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     }
     
     func getFriends() {
+        
+        //ログインしていないときはすぐ返す
+        if !UtilityLibrary.isLogin() {
+            self.isFriends = false
+            self.calcTableViewHeight()
+            self.setNavigationBar()
+            self.setTableView()
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_PostDetail"))!
+            if !didSupport {
+                
+                self.setSupportBtn()
+            }
+            return
+        }
+        
         let userID = Int(UtilityLibrary.getUserID())
         Alamofire.request(EveryZooAPI.getFriends(userID: userID!)).responseJSON{ response in
             switch response.result {
@@ -514,7 +522,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 
                 }else{
                     //エラー
-                    SCLAlertView().showInfo("エラー", subTitle: " フォローに失敗しました。")
+                    SCLAlertView().showInfo("エラー", subTitle: "ネットワーク接続に失敗しました")
                 }
                 
             case .failure(let error):

@@ -68,9 +68,8 @@ class PostDetailTableCell: UITableViewCell {
         favBtn = FavCommentButton()
         favBtn.imgView.image = UIImage(named: "fav_off")!
         favBtn.countLabel.textAlignment =  NSTextAlignment.left
-        favBtn.countLabel.textColor = UIColor.followColor()
+        favBtn.countLabel.textColor = UIColor.PostDetailFavPink()
         favBtn.countLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        //favBtn.countLabel.text = "0"
         contentView.addSubview(favBtn)
 
         //CommentBtn
@@ -78,7 +77,6 @@ class PostDetailTableCell: UITableViewCell {
         commentBtn.imgView.image = UIImage(named: "comment")!
         commentBtn.countLabel.textAlignment =  NSTextAlignment.left
         commentBtn.countLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        //commentBtn.countLabel.text = "0"
         contentView.addSubview(commentBtn)
 
         //MenuBtn
@@ -102,14 +100,14 @@ class PostDetailTableCell: UITableViewCell {
         tag1Label = UILabel()
         tag1Label.text = "#天王寺動物園"
         tag1Label.textColor = UIColor.white
-        tag1Label.backgroundColor = UIColor.tagBGColor()
+        tag1Label.backgroundColor = UIColor.PostDetailFavPink()
         tag1Label.textAlignment = NSTextAlignment.center
         contentView.addSubview(tag1Label)
 
         tag2Label = UILabel()
         tag2Label.text = "#サイ"
         tag2Label.textColor = UIColor.white
-        tag2Label.backgroundColor = UIColor.tagBGColor()
+        tag2Label.backgroundColor = UIColor.PostDetailFavPink()
         tag2Label.textAlignment = NSTextAlignment.center
         contentView.addSubview(tag2Label)
     }

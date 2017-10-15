@@ -38,7 +38,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.MyPageTableBGColor()
+        self.view.backgroundColor = UIColor.PostDetailFavPink()
         
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
@@ -109,7 +109,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         //自分の情報
         let myProfielView:UIView = UIView()
         myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.56)
-        myProfielView.backgroundColor = UIColor.MyPageTableBGColor()
+        myProfielView.backgroundColor = UIColor.PostDetailFavPink()
         self.view.addSubview(myProfielView)
         
         //アイコン選択ボタン
@@ -157,7 +157,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         userConfigTableView.dataSource = self
         userConfigTableView.frame = CGRect(x: 0, y:myProfielViewHeight, width: viewWidth, height: userConfigTableViewHeight)
         userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        userConfigTableView.backgroundColor = UIColor.MyPageTableBGColor()
+        userConfigTableView.backgroundColor = UIColor.PostDetailFavPink()
         //userConfigTableView.isScrollEnabled = false
         self.view.addSubview(userConfigTableView)
     }
@@ -326,10 +326,10 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             cell.textLabel?.textColor = UIColor.MainAppColor()
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         }else if indexPath.row == 1{
-            cell.backgroundColor = UIColor.MyPageTableBGColor()
+            cell.backgroundColor = UIColor.PostDetailFavPink()
             cell.selectionStyle = UITableViewCellSelectionStyle.none
         }else if indexPath.row == 6{
-            cell.backgroundColor = UIColor.MyPageTableBGColor()
+            cell.backgroundColor = UIColor.PostDetailFavPink()
             cell.selectionStyle = UITableViewCellSelectionStyle.none
         }else{
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]

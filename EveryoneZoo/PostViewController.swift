@@ -129,7 +129,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         postTableView.dataSource = self
         postTableView.delegate = self
         postTableView.separatorStyle = .none
-        postTableView.backgroundColor = UIColor.MyPageTableBGColor()
+        postTableView.backgroundColor = UIColor.PostDetailFavPink()
         postTableView.separatorStyle = .none
 
         postTableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostImageTableViewCell.self))
@@ -277,7 +277,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
                 self.indicator.stopAnimating()
-
+                SCLAlertView().showSuccess("投稿完了", subTitle: "投稿が完了しました。")
+                
             case .failure(let error):
                 print(error)
                 //テーブルの再読み込み

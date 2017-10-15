@@ -109,7 +109,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         loginFailed.textAlignment = NSTextAlignment.center
         loginFailed.frame = CGRect(x: viewWidth*0.1, y: loginViewHeight*0.25, width: viewWidth*0.8, height: loginViewHeight*0.1)
         loginFailed.isHidden = true
-        loginFailed.textColor = UIColor.LogInPinkColor()
+        loginFailed.textColor = UIColor.PostDetailFavPink()
         contentsScrollView.addSubview(loginFailed)
         
         //MailTest
@@ -217,7 +217,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
             loginBtn.backgroundColor = UIColor.gray
         }else if self.mailTextField.text != "" && self.passWordTextField.text != ""{
             loginBtn.isEnabled = true
-            loginBtn.backgroundColor = UIColor.LoginBtnRightBlue()
+            loginBtn.backgroundColor = UIColor.PostDetailFavPink()
         } else{
             loginBtn.isEnabled = false
             loginBtn.backgroundColor = UIColor.gray

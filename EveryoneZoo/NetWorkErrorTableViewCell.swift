@@ -36,7 +36,7 @@ class NetWorkErrorTableViewCell: UITableViewCell {
         errorLabel.frame = CGRect(x: cellWidth*0.1, y: cellHeight*0.1, width: cellWidth*0.8, height: cellHeight*0.1)
         errorLabel.text = "ネットワークエラー"
         errorLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        errorLabel.textColor = UIColor.LogInPinkColor()
+        errorLabel.textColor = UIColor.PostDetailFavPink()
         errorLabel.textAlignment = NSTextAlignment.center
         self.addSubview(errorLabel)
         
