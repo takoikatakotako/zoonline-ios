@@ -34,8 +34,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     public var commentStr: String! = "コメントを書いてみよう"
     var tagsAry:Array<String> = []
     
-    //
-    private var noLoginView:NoLoginView!
 
     //サポートボタン
     let supportBtn:UIButton = UIButton()
@@ -56,9 +54,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + tabBarHeight!)
         
         setNavigationBar()
-        
-        noLoginView = NoLoginView()
-        postTableView = UITableView()
+        setTableView()
+        setActivityIndicator()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,13 +64,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.navigationItem.rightBarButtonItem = nil
         
-        if (postTableView.isDescendant(of: self.view)) {
-            postTableView.removeFromSuperview()
-        }
-        
-        if (noLoginView.isDescendant(of: self.view)){
-            noLoginView.removeFromSuperview()
-        }
         
         if UtilityLibrary.isLogin() {
             
@@ -83,8 +74,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             rightNavBtn.target = self
             self.navigationItem.rightBarButtonItem = rightNavBtn
             
-            setTableView()
-            setActivityIndicator()
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Post"))!
@@ -94,7 +83,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.postTableView.reloadData()
         }else{
             //
-            setLoginView()
+
         }
     }
     
@@ -125,6 +114,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //TableViewの設置
     func setTableView(){
         
+        postTableView = UITableView()
         postTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
         postTableView.dataSource = self
         postTableView.delegate = self
@@ -136,6 +126,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         postTableView.register(PostSpaceTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostSpaceTableViewCell.self))
         postTableView.register(PostTextsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTextsTableViewCell.self))
         postTableView.register(PostTagTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTagTableViewCell.self))
+        postTableView.register(NoLoginTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NoLoginTableViewCell.self))
         postTableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
@@ -146,13 +137,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func setActivityIndicator(){
         
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewWidth*0.5, width: viewWidth*0.3, height: viewWidth*0.3)
-        indicator.clipsToBounds = true
-        indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
-        indicator.backgroundColor = UIColor.MainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        
-        indicator.center = self.view.center
+        indicator.color = UIColor.MainAppColor()
         self.view.bringSubview(toFront: indicator)
         indicator.color = UIColor.white
         self.view.addSubview(indicator)
@@ -208,7 +195,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         doImageUpload()
         self.indicator.startAnimating()
-
     }
     
     
@@ -290,6 +276,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: テーブルビューのセルの高さを計算する
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        if !UtilityLibrary.isLogin() {
+            return tableViewHeight
+        }
+        
         if indexPath.row == 0 {
             //投稿画像のView
             return viewWidth*(postImageHeight/postImageWidth)
@@ -334,12 +324,25 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //テーブルビューのセルの数はmyItems配列の数とした
+        
+        if !UtilityLibrary.isLogin() {
+            return 1
+        }
+        
+        //通常は8
         return 8
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if !UtilityLibrary.isLogin() {
+            let cell:NoLoginTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NoLoginTableViewCell.self), for: indexPath) as! NoLoginTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+            return cell
+        }
+        
         
         if indexPath.row == 0 {
             //画像選択View
@@ -453,15 +456,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //Mark: 未ログイン関係の処理
 
-    // MARK: setLoginView
-    func setLoginView()  {
-        
-        let noLoginViewHeight:CGFloat = viewHeight-(statusBarHeight+tabBarHeight)
-        noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
-        noLoginView.loginBtn.addTarget(nil, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
-        noLoginView.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
-        self.view.addSubview(noLoginView)
-    }
     
     //ログインボタンが押されたら呼ばれます
     func loginBtnClicked(sender: UIButton){

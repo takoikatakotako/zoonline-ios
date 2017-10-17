@@ -29,7 +29,6 @@ class TimeLineViewController: UIViewController,CAPSPageMenuDelegate {
     
     //view parts
     private var postDetailTableView: UITableView!
-    private var noLoginView:NoLoginView! = NoLoginView()
     
     // MARK: - OverRideMethod
     override func viewDidLoad() {
@@ -123,11 +122,7 @@ class TimeLineViewController: UIViewController,CAPSPageMenuDelegate {
     // MARK: setLoginView
     func setLoginView()  {
         
-        let noLoginViewHeight:CGFloat = viewHeight-(statusBarHeight+tabBarHeight)
-        noLoginView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: noLoginViewHeight)
-        noLoginView.loginBtn.addTarget(nil, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
-        noLoginView.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
-        self.view.addSubview(noLoginView)
+
     }
     
     //ログインボタンが押されたら呼ばれます
