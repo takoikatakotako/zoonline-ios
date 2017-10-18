@@ -307,7 +307,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let postFavorite:String = EveryZooAPI.getDoFavoritePost(userID: Int(myUserID)!, postID: postID)
         if sender.imgView.image == UIImage(named:"fav_on") {
             sender.imgView.image = UIImage(named: "fav_off")!
-            sender.countLabel.textColor = UIColor.black
+            sender.countLabel.textColor = UIColor.TextColorGray()
             let favCount:String = sender.countLabel.text!
             sender.countLabel.text = String(Int(favCount)!-1)
 
@@ -455,7 +455,13 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 self.postCaption = json["responce"]["caption"].stringValue
                 self.postImgUrl = json["responce"]["imageInfo"]["image_url"].stringValue
                 self.iconUrl = json["responce"]["iconUrl"].stringValue
-                self.pubDate = json["responce"]["updated_at"].stringValue
+                
+                var dates:String = json["responce"]["updated_dates"]["year"].stringValue + "年"
+                dates += json["responce"]["updated_dates"]["month"].stringValue + "月"
+                dates += json["responce"]["updated_dates"]["day"].stringValue + "日 "
+                dates += json["responce"]["updated_dates"]["hour"].stringValue + "時"
+                dates += json["responce"]["updated_dates"]["minute"].stringValue + "分"
+                self.pubDate = dates
 
                 self.commentList = json["responce"]["commentList"].arrayValue
                 self.favList = json["responce"]["favList"].arrayValue
