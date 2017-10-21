@@ -46,7 +46,7 @@ class CommentTableViewCell: UITableViewCell {
         thumbnailImgView.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.15, width: cellHeight*0.35, height: cellHeight*0.35)
         thumbnailImgView.layer.cornerRadius = cellHeight*0.35/2
         thumbnailImgView.layer.masksToBounds = true
-        thumbnailImgView.image = UIImage(named:"sample_kabi1")
+        thumbnailImgView.image = UIImage(named:"icon_default")
         
         //CommentLabel
         commentUser.frame = CGRect(x: cellWidth*0.18, y: cellHeight*0.08, width: cellWidth*0.5, height: cellHeight*0.35)

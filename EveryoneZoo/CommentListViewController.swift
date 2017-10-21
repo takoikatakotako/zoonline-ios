@@ -106,11 +106,9 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     func setActivityIndicator(){
         
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
-        indicator.clipsToBounds = true
-        indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
-        indicator.backgroundColor = UIColor.MainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        indicator.color = UIColor.MainAppColor()
         self.view.bringSubview(toFront: indicator)
         indicator.color = UIColor.white
         self.view.addSubview(indicator)
@@ -145,10 +143,15 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //myItems配列の中身をテキストにして登録した
+
         let cell:CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self), for: indexPath) as! CommentTableViewCell
-        cell.thumbnailImgView.image = UIImage(named:"sample_kabi1")
-        cell.commentUser.text = self.postsComments[indexPath.row]["username"].stringValue
+        
+        let iconUrlStr:String = self.postsComments[indexPath.row]["icon_url"].stringValue
+        print(iconUrlStr)
+        if let url = URL(string:iconUrlStr) {
+            cell.thumbnailImgView.af_setImage(withURL: url, placeholderImage:  UIImage(named:"icon_default")!)
+        }
+        
         cell.dateLabel.text = self.postsComments[indexPath.row]["updated_at"].stringValue
         cell.commentLabel.text = self.postsComments[indexPath.row]["comment"].stringValue
         
@@ -167,9 +170,8 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         let wirtePostCommentsVC: WritePostsCommentsViewController = WritePostsCommentsViewController()
         wirtePostCommentsVC.postsID = postsID
 
-        let btn_back = UIBarButtonItem()
-        btn_back.title = ""
-        self.navigationItem.backBarButtonItem = btn_back
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(wirtePostCommentsVC, animated: true)
     }
 }
