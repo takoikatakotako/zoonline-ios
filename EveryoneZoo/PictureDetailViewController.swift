@@ -456,6 +456,11 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             case .success:
                 let json:JSON = JSON(response.result.value ?? kill)
                 
+                if !json["is_success"].boolValue{
+                    SCLAlertView().showInfo("エラー", subTitle: "投稿情報の取得に失敗しました。")
+                    _ = self.navigationController?.popViewController(animated: true)
+                }
+                
                 self.postUserName = json["responce"]["userName"].stringValue
                 self.postUserID = json["responce"]["userId"].intValue
                 self.postTitle = json["responce"]["title"].stringValue

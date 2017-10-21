@@ -145,7 +145,6 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell:CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self), for: indexPath) as! CommentTableViewCell
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
 
         let iconUrlStr:String = self.postsComments[indexPath.row]["icon_url"].stringValue
         print(iconUrlStr)
@@ -155,7 +154,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         
         cell.dateLabel.text = self.postsComments[indexPath.row]["updated_at"].stringValue
         cell.commentLabel.text = self.postsComments[indexPath.row]["comment"].stringValue
-        
+     
         //画像にタッチイベントを追加
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
         singleTap.numberOfTapsRequired = 1
@@ -168,6 +167,23 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
+        
+        
+    }
+    
+    
+    //高さの設定
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // セルの高さを設定
+        
+        var cellHeight:CGFloat = viewWidth*0.28 * 0.66
+        cellHeight+=UtilityLibrary.calcTextViewHeight(text: self.postsComments[indexPath.row]["comment"].stringValue, width: viewWidth*0.8, font: UIFont.systemFont(ofSize: 12))
+        
+        if cellHeight > viewWidth * 0.28 {
+            return cellHeight
+        }else{
+            return viewWidth * 0.28
+        }        
     }
     
     
