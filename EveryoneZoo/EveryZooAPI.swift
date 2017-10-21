@@ -60,6 +60,7 @@ class EveryZooAPI: NSObject {
     }
     
     class func getPostsInfo(postID:Int)->String {
+        //投稿の詳細の取得、投稿の削除
         return API_URL+API_VERSION+"posts/"+String(postID)
     }
     

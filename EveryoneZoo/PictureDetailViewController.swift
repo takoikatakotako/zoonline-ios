@@ -360,9 +360,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let userInfoView: UserInfoViewController = UserInfoViewController()
         userInfoView.postUserID = self.postUserID
         
-        let btn_back = UIBarButtonItem()
-        btn_back.title = ""
-        self.navigationItem.backBarButtonItem = btn_back
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(userInfoView, animated: true)
     }
     
@@ -370,7 +369,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     func showActionShert(sender: UIButton){
         
         // インスタンス生成　styleはActionSheet.
-        let actionAlert = UIAlertController(title: "操作メニュー", message: "操作を選んでください。", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let actionAlert = UIAlertController(title: "メニュー", message: "操作を選んでください", preferredStyle: UIAlertControllerStyle.actionSheet)
         
         if UtilityLibrary.isLogin() {
             
@@ -382,13 +381,22 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             })
             actionAlert.addAction(commentAction)
             
-            let addAlbumAction = UIAlertAction(title: "お気に入りへの追加", style: UIAlertActionStyle.default, handler: {
-                (action: UIAlertAction!) in
-            })
-            actionAlert.addAction(addAlbumAction)
+            if postUserID == Int(UtilityLibrary.getUserID()) {
+                
+                let addAlbumAction = UIAlertAction(title: "投稿を削除", style: UIAlertActionStyle.default, handler: {
+                    (action: UIAlertAction!) in
+                    
+                    let alertView = SCLAlertView()
+                    alertView.addButton("削除") {
+                        self.deletePost()
+                    }
+                    alertView.showInfo("投稿削除", subTitle: "投稿を削除しますか？")
+                    
+                })
+                actionAlert.addAction(addAlbumAction)
+            }
         }
 
-        
         
         let reportAction = UIAlertAction(title: "レポート", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) in
@@ -432,9 +440,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         let commentListlView: CommentListViewController = CommentListViewController()
         commentListlView.postsID = postID
         
-        let btn_back = UIBarButtonItem()
-        btn_back.title = ""
-        self.navigationItem.backBarButtonItem = btn_back
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(commentListlView, animated: true)
     }
     
@@ -483,6 +490,38 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 
             }
         }
+    }
+    
+    func deletePost() {
+        
+        
+        let url = EveryZooAPI.getPostsInfo(postID: postID)
+        Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+                if json["is_success"].boolValue {
+                    SCLAlertView().showInfo("投稿の削除", subTitle: "投稿を削除しました。")
+                    _ = self.navigationController?.popViewController(animated: true)
+                }else{
+                
+                    SCLAlertView().showError("投稿の削除", subTitle: "投稿の削除に失敗しました。") // Erro
+                }
+                
+                print(json)
+                
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+
+        
+        
+        
+        
     }
     
     func getFriends() {

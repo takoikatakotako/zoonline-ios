@@ -110,7 +110,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         indicator.color = UIColor.MainAppColor()
         self.view.bringSubview(toFront: indicator)
-        indicator.color = UIColor.white
+        indicator.color = UIColor.MainAppColor()
         self.view.addSubview(indicator)
     }
     
@@ -145,15 +145,22 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell:CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self), for: indexPath) as! CommentTableViewCell
-        
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+
         let iconUrlStr:String = self.postsComments[indexPath.row]["icon_url"].stringValue
         print(iconUrlStr)
         if let url = URL(string:iconUrlStr) {
-            cell.thumbnailImgView.af_setImage(withURL: url, placeholderImage:  UIImage(named:"icon_default")!)
+            cell.thumbnailImgView.sd_setImage(with: url)
         }
         
         cell.dateLabel.text = self.postsComments[indexPath.row]["updated_at"].stringValue
         cell.commentLabel.text = self.postsComments[indexPath.row]["comment"].stringValue
+        
+        //画像にタッチイベントを追加
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
+        singleTap.numberOfTapsRequired = 1
+        cell.thumbnailImgView.tag = self.postsComments[indexPath.row]["user_id"].intValue
+        cell.thumbnailImgView.addGestureRecognizer(singleTap)
         
         return cell
     }
@@ -161,6 +168,21 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
+    }
+    
+    
+    //MARK: シングルタップ時に実行される
+    func tapSingle(sender: UITapGestureRecognizer) {
+        print(sender.view?.tag ?? 1)
+        
+        //画面遷移を行う
+
+        let userInfoView: UserInfoViewController = UserInfoViewController()
+        userInfoView.postUserID = sender.view?.tag
+        
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
+        self.navigationController?.pushViewController(userInfoView, animated: true)
     }
     
     

@@ -10,7 +10,7 @@ import UIKit
 
 class CommentTableViewCell: UITableViewCell {
     
-    var thumbnailImgView:UIImageView = UIImageView()
+    var thumbnailImgView:UIImageView!
     var commentUser:UILabel = UILabel()
     var dateLabel:UILabel = UILabel()
     var commentLabel:UITextView = UITextView()
@@ -18,6 +18,10 @@ class CommentTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        thumbnailImgView = UIImageView()
+        thumbnailImgView.layer.masksToBounds = true
+        thumbnailImgView.isUserInteractionEnabled = true
+        thumbnailImgView.image = UIImage(named:"icon_default")        
         contentView.addSubview(thumbnailImgView)
         contentView.addSubview(commentUser)
         contentView.addSubview(dateLabel)
@@ -45,8 +49,6 @@ class CommentTableViewCell: UITableViewCell {
         //ThumbnailUmg
         thumbnailImgView.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.15, width: cellHeight*0.35, height: cellHeight*0.35)
         thumbnailImgView.layer.cornerRadius = cellHeight*0.35/2
-        thumbnailImgView.layer.masksToBounds = true
-        thumbnailImgView.image = UIImage(named:"icon_default")
         
         //CommentLabel
         commentUser.frame = CGRect(x: cellWidth*0.18, y: cellHeight*0.08, width: cellWidth*0.5, height: cellHeight*0.35)

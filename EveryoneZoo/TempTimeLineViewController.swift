@@ -89,6 +89,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         timeLineTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         timeLineTableView.register(NoLoginTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NoLoginTableViewCell.self))
         timeLineTableView.register(NetWorkErrorTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self))
+        timeLineTableView.rowHeight = viewWidth*0.28
         self.view.addSubview(timeLineTableView)
         
         //リフレッシュコントロールの追加
