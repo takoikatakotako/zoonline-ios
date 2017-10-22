@@ -83,9 +83,17 @@ class WritePostTextsViewController: UIViewController,UITextViewDelegate {
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
         
-        //右上の検索ボタン
-        //serchNavBtn.tintColor = UIColor.white
-        //serchNavBtn.action = #selector(rightBarBtnClicked(sender:))
+        let rightNavBtn = UIBarButtonItem()
+        rightNavBtn.image = UIImage(named:"submit_nav_btn")!
+        rightNavBtn.action = #selector(doClose(sender:))
+        rightNavBtn.target = self
+        self.navigationItem.rightBarButtonItem = rightNavBtn
+    }
+    
+    //投稿ボタンが押されたら呼ばれる
+    internal func doClose(sender: UIButton){
+        
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     func setTextView(){

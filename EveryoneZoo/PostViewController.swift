@@ -119,7 +119,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         postTableView.dataSource = self
         postTableView.delegate = self
         postTableView.separatorStyle = .none
-        postTableView.backgroundColor = UIColor.PostDetailFavPink()
+        postTableView.backgroundColor = UIColor.LiginCushionLightGray()
         postTableView.separatorStyle = .none
 
         postTableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostImageTableViewCell.self))

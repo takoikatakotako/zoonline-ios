@@ -14,7 +14,7 @@ class PostSpaceTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = UIColor.PostDetailFavPink()
+        self.backgroundColor = UIColor.LiginCushionLightGray()
         
     }
     
