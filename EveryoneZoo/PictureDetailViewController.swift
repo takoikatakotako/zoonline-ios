@@ -34,8 +34,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     private var postImgHeight:CGFloat!
     private var favComentMenuBtnHeight:CGFloat!
     private var dateLabelHeigt:CGFloat!
-        
-
     
     //Post Datas
     var postUserID:Int!

@@ -35,6 +35,9 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     var userProfile:String = ""
     var userIconUrl:String = ""
     var postsInfos:JSON = []
+    
+    var indicator: UIActivityIndicatorView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +54,12 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         self.view.backgroundColor = UIColor.white
     
         setNavigationBar()
+        setTableView()
+        setActivityIndicator()
+        indicator.startAnimating()
+
         getUserInfo()
-        //getPosts()
-        
-        //テーブルビューに表示する配列
-        //self.setTableView()
+
     }
     
     func getUserInfo() {
@@ -97,12 +101,13 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
 
                 print(json)
                 self.postsInfos = json
+                self.indicator.stopAnimating()
+                self.profileTableView.reloadData()
                 
             case .failure(let error):
                 print(error)
             }
             
-            self.setTableView()
         }
     }
     
@@ -138,6 +143,17 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         profileTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         profileTableView.register(UserInfoTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UserInfoTableViewCell.self))
         self.view.addSubview(profileTableView)
+    }
+    
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        indicator = UIActivityIndicatorView()
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4-44, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.hidesWhenStopped = true
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        self.view.bringSubview(toFront: indicator)
+        indicator.color = UIColor.MainAppColor()
+        self.view.addSubview(indicator)
     }
     
     //MARK: テーブルビューのセルの数を設定する
