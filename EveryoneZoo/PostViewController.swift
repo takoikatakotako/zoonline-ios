@@ -148,8 +148,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func setSupportBtn() {
         //サポート
         supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
-        supportBtn.setImage(UIImage(named:"support_sample"), for: UIControlState.normal)
-        supportBtn.imageView?.contentMode = .scaleAspectFit
+        supportBtn.setImage(UIImage(named:"support_post"), for: UIControlState.normal)
+        supportBtn.imageView?.contentMode = UIViewContentMode.bottomRight
         supportBtn.contentHorizontalAlignment = .fill
         supportBtn.contentVerticalAlignment = .fill
         supportBtn.backgroundColor = UIColor.clear
