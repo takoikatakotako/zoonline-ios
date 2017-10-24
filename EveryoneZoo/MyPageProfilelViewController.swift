@@ -109,7 +109,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         //自分の情報
         let myProfielView:UIView = UIView()
         myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.56)
-        myProfielView.backgroundColor = UIColor.PostDetailFavPink()
+        myProfielView.backgroundColor = UIColor.LiginCushionLightGray()
         self.view.addSubview(myProfielView)
         
         //アイコン選択ボタン
@@ -326,10 +326,10 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             cell.textLabel?.textColor = UIColor.MainAppColor()
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         }else if indexPath.row == 1{
-            cell.backgroundColor = UIColor.PostDetailFavPink()
+            cell.backgroundColor = UIColor.LiginCushionLightGray()
             cell.selectionStyle = UITableViewCellSelectionStyle.none
         }else if indexPath.row == 6{
-            cell.backgroundColor = UIColor.PostDetailFavPink()
+            cell.backgroundColor = UIColor.LiginCushionLightGray()
             cell.selectionStyle = UITableViewCellSelectionStyle.none
         }else{
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]

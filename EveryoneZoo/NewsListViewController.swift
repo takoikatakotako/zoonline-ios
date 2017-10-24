@@ -36,9 +36,11 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     
     //テーブルビューインスタンス
     private var newsTableView: UITableView!
+    var indicator: UIActivityIndicatorView!
+
     
     //サポートボタン
-    let supportBtn:UIButton = UIButton()
+    var supportBtn:UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +50,19 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         viewHeight = self.view.frame.size.height
         tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+pageMenuHeight+tabBarHeight)
         
+        setTableView()
+        setActivityIndicator()
+        indicator.startAnimating()
         getNews()
+
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Zoo"))!
+        if !didSupport {
+            setSupportBtn()
+        }
+    }
+    
+    func setTableView() {
         //テーブルビューの初期化
         newsTableView = UITableView()
         newsTableView.delegate = self
@@ -57,17 +71,23 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         newsTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         newsTableView.rowHeight = viewWidth*0.28
         self.view.addSubview(newsTableView)
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Zoo"))!
-        if !didSupport {
-            setSupportBtn()
-        }
     }
     
     
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        
+        indicator = UIActivityIndicatorView()
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.3, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.hidesWhenStopped = true
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        indicator.color = UIColor.MainAppColor()
+        self.view.addSubview(indicator)
+    }
+    
     func setSupportBtn() {
         //サポート
+        supportBtn = UIButton()
         supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
         supportBtn.setImage(UIImage(named:"support_sample"), for: UIControlState.normal)
         supportBtn.imageView?.contentMode = .scaleAspectFit
@@ -77,6 +97,8 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
         self.view.addSubview(supportBtn)
     }
+    
+    
     
     //MARK: ButtonActions
     func supportBtnClicked(sender: UIButton){
@@ -96,9 +118,10 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
                 let json:JSON = JSON(response.result.value ?? kill)
                 //print(json)
                 print(json["is_success"].stringValue)
-                print(json["content"].arrayValue)
+                //print(json["content"].arrayValue)
                 self.newsContents = json["content"]
                 
+                self.indicator.stopAnimating()
                 self.newsTableView.reloadData()
                 
             case .failure(let error):
@@ -126,7 +149,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.newsContents[indexPath.row]["content"].stringValue
         let imageUrl = URL(string:self.newsContents[indexPath.row]["image_url"].stringValue)!
-        cell.thumbnailImg.sd_setImage(with: imageUrl)
+        cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
         return cell
     }
     

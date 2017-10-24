@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+import SwiftyJSON
+import SDWebImage
 
 class OfficialListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
@@ -21,7 +25,11 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
     private var tableViewHeight:CGFloat!
     
     //テーブルビューインスタンス
-    private var myTableView: UITableView!
+    private var officialTableView: UITableView!
+    var indicator: UIActivityIndicatorView!
+
+    var officialContents:JSON = []
+
     
     //テーブルビューに表示する配列
     private var myItems: NSArray = []
@@ -36,34 +44,93 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
         tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+pageMenuHeight+tabBarHeight)
-        
-        //テーブルビューの初期化
-        myTableView = UITableView()
-        
-        //デリゲートの設定
-        myTableView.delegate = self
-        myTableView.dataSource = self
-        
-        //テーブルビューの大きさの指定
-        myTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
-        
-        //テーブルビューの設置
-        myTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
-        myTableView.rowHeight = viewWidth*0.28
 
-        self.view.addSubview(myTableView)
+        setTableView()
+        setActivityIndicator()
+        indicator.startAnimating()
+        
+        
+        getNews()
     }
+    
+    
+    func setTableView() {
+        //テーブルビューの初期化
+        officialTableView = UITableView()
+        officialTableView.delegate = self
+        officialTableView.dataSource = self
+        officialTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
+        officialTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
+        officialTableView.rowHeight = viewWidth*0.28
+        self.view.addSubview(officialTableView)
+    }
+    
+    
+    // MARK: くるくるの生成
+    func setActivityIndicator(){
+        
+        indicator = UIActivityIndicatorView()
+        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.3, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.hidesWhenStopped = true
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        indicator.color = UIColor.MainAppColor()
+        self.view.addSubview(indicator)
+    }
+    
+    func getNews() {
+        
+        Alamofire.request(EveryZooAPI.getOfficialNews(), method: .get, encoding: JSONEncoding.default).responseJSON{ response in
+            
+            switch response.result {
+            case .success:
+                
+                print("--------------------------")
+
+                //print(response.value)
+                
+                
+                
+                let json:JSON = JSON(response.result.value ?? kill)
+
+                print(EveryZooAPI.getOfficialNews())
+                print("!-!-!-!-----------------------")
+
+                print(json[0]["title"])
+                print(json[0]["excerpt"])
+
+                print(json[1]["title"])
+                print(json[2]["title"])
+                print(json.count)
+                
+                
+                print(json["is_success"].stringValue)
+                print(json["content"].arrayValue)
+                self.officialContents = json
+                
+                self.indicator.stopAnimating()
+                self.officialTableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+    }
+
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return self.myItems.count
+        return self.officialContents.count
     }
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
+        cell.titleLabel.text = officialContents[indexPath.row]["title"]["rendered"].stringValue
+        cell.commentLabel.text = officialContents[indexPath.row]["excerpt"]["rendered"].stringValue
+
         return cell
     }
     

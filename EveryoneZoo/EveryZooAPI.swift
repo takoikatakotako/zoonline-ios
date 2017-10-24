@@ -53,6 +53,12 @@ class EveryZooAPI: NSObject {
         //http://minzoo.herokuapp.com/api/v0/zoo_news
         return API_URL+API_VERSION+"zoo_news"
     }
+    
+    class func getOfficialNews()->String{
+        //オフィシャルの投稿の取得
+        //https://blog.team-sommelier.com/wp-json/wp/v2/posts/
+        return "https://blog.team-sommelier.com/wp-json/wp/v2/posts/"
+    }
 
     class func getDoFavoritePost(userID:Int,postID:Int) -> String{
         
