@@ -157,7 +157,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         
-        //デリゲートを用いて初めのViewの色をランダムに変える
+        tableView.deselectRow(at: indexPath, animated: true)
         delegate?.openNews(newsUrl: self.newsContents[indexPath.row]["article_url"].stringValue)
     }
 }

@@ -12,6 +12,10 @@ import AlamofireImage
 import SwiftyJSON
 import SDWebImage
 
+protocol OfficialDelegate: class  {
+    func openNews(newsUrl:String)
+}
+
 class OfficialListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     //heights
@@ -32,14 +36,14 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
 
     
     //テーブルビューに表示する配列
-    private var myItems: NSArray = []
+
+    weak var delegate: OfficialDelegate?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //テーブルビューに表示する配列
-        myItems = ["sdfsdfs", "gfdsf", "sdfsfも", "dfsdfsdfsfd", "sdfsdf", "なし"]
-        
+        //テーブルビューに表示する配列        
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
@@ -95,11 +99,8 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
                 print(EveryZooAPI.getOfficialNews())
                 print("!-!-!-!-----------------------")
 
-                print(json[0]["title"])
-                print(json[0]["excerpt"])
+                print(json[0])
 
-                print(json[1]["title"])
-                print(json[2]["title"])
                 print(json.count)
                 
                 
@@ -137,5 +138,8 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
+        tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.openNews(newsUrl: officialContents[indexPath.row]["link"].stringValue)
+
     }
 }
