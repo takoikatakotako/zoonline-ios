@@ -38,21 +38,8 @@ class EditUserProfileVC: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         setNavigationBar()
-        
-        // 名前
-        let nameLabel:UILabel = UILabel()
-        nameLabel.frame = CGRect(x: viewWidth*0.05, y:  viewHeight*0.05, width: viewWidth*0.9, height:24)
-        nameLabel.text = "プロフィールを変更します"
-        nameLabel.textAlignment = NSTextAlignment.center
-        nameLabel.font = UIFont.systemFont(ofSize: 20)
-        self.view.addSubview(nameLabel)
-        
-        //ユーザー名入力欄
-        userProfileTexView = UITextView()
-        userProfileTexView.textAlignment = NSTextAlignment.left
-        userProfileTexView.frame = CGRect(x: viewWidth*0.05, y: viewHeight*0.13, width: viewWidth*0.9, height: viewWidth*0.2)
-        userProfileTexView.textColor = UIColor.gray
-        self.view.addSubview(userProfileTexView)
+        setTextView()
+
         
         let myProfile = UtilityLibrary.getUserProfile()
         if myProfile.isEmpty {
@@ -61,22 +48,6 @@ class EditUserProfileVC: UIViewController {
             userProfileTexView.text = myProfile
         }
         
-        //userNameTextFIeldUnderLine
-        let userNameTextFIeldLine:UIView = UIView()
-        userNameTextFIeldLine.frame = CGRect(x: viewWidth*0.05, y: viewHeight*0.25, width: viewWidth*0.9, height: 1)
-        userNameTextFIeldLine.backgroundColor = UIColor.gray
-        self.view.addSubview(userNameTextFIeldLine)
-        
-        //LoginButton
-        let changeUserNameBtn:UIButton = UIButton()
-        changeUserNameBtn.frame = CGRect(x: viewWidth*0.1, y: viewHeight*0.3, width: viewWidth*0.8, height: viewWidth*0.15)
-        changeUserNameBtn.backgroundColor = UIColor.MainAppColor()
-        changeUserNameBtn.setTitle("変更を保存", for: UIControlState.normal)
-        changeUserNameBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        changeUserNameBtn.layer.masksToBounds = true
-        changeUserNameBtn.layer.cornerRadius = 4.0
-        changeUserNameBtn.addTarget(self, action: #selector(changeUserProfileBtn(sender:)), for: .touchUpInside)
-        self.view.addSubview(changeUserNameBtn)
     }
     
     // MARK: - Viewにパーツの設置

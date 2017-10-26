@@ -94,8 +94,8 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         indicator = UIActivityIndicatorView()
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
-        indicator.color = UIColor.MainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        indicator.color = UIColor.MainAppColor()
         self.view.bringSubview(toFront: indicator)
         
         self.view.addSubview(indicator)

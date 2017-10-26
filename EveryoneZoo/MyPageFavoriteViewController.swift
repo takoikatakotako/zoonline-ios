@@ -111,12 +111,19 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self))! as! MyPagePostCell
         var dateText:String = self.favoritePosts[indexPath.row]["created_at"].stringValue
-        dateText = dateText.substring(to: dateText.index(dateText.startIndex, offsetBy: 10))
+        if !dateText.isEmpty {
+            dateText = dateText.substring(to: dateText.index(dateText.startIndex, offsetBy: 10))
+        }
+        //
         cell.dateLabel.text = dateText
         cell.titleLabel.text = self.favoritePosts[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.favoritePosts[indexPath.row]["caption"].stringValue
-        let imageUrl = URL(string:self.favoritePosts[indexPath.row]["image_url"].stringValue)!
-        cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
+        
+        let imageUrlText = self.favoritePosts[indexPath.row]["image_url"].stringValue
+        if let imageUrl = URL(string:imageUrlText){
+            cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
+        }
+
 
         return cell
     }
