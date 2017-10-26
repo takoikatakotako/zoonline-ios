@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import AlamofireImage
+import SCLAlertView
 
 class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate ,UINavigationControllerDelegate {
     
@@ -22,7 +23,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     private var userConfigTableViewHeight:CGFloat!
     private var tabBarHeight:CGFloat!
     
-    var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var indicator: UIActivityIndicatorView!
     
     //プロフィール
     var icon:UIImageView = UIImageView()
@@ -38,7 +39,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.PostDetailFavPink()
+        self.view.backgroundColor = UIColor.LiginCushionLightGray()
         
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
@@ -90,14 +91,13 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     // MARK: くるくるの生成
     func setActivityIndicator(){
         
+        indicator = UIActivityIndicatorView()
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
-        indicator.clipsToBounds = true
-        indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
-        indicator.backgroundColor = UIColor.MainAppColor()
+        indicator.color = UIColor.MainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         self.view.bringSubview(toFront: indicator)
-        indicator.color = UIColor.white
+        
         self.view.addSubview(indicator)
     }
     
@@ -157,7 +157,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         userConfigTableView.dataSource = self
         userConfigTableView.frame = CGRect(x: 0, y:myProfielViewHeight, width: viewWidth, height: userConfigTableViewHeight)
         userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        userConfigTableView.backgroundColor = UIColor.PostDetailFavPink()
+        userConfigTableView.backgroundColor = UIColor.LiginCushionLightGray()
         //userConfigTableView.isScrollEnabled = false
         self.view.addSubview(userConfigTableView)
     }
@@ -354,15 +354,19 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             btn_back.title = ""
             self.navigationItem.backBarButtonItem = btn_back
             self.navigationController?.pushViewController(userInfoView, animated: true)
+ 
             break
         case 2:
             //ユーザー名の編集
-            let vc:EditUserNameViewController = EditUserNameViewController()
-            
-            let btn_back = UIBarButtonItem()
-            btn_back.title = ""
-            self.navigationItem.backBarButtonItem = btn_back
-            self.navigationController?.pushViewController(vc, animated: true)
+
+            let alert = SCLAlertView()
+            let txt = alert.addTextField(UtilityLibrary.getUserName())
+            alert.addButton("変更") {
+                print("Text value: \(txt.text)")
+                self.changeUserName(newName: txt.text!)
+                self.indicator.startAnimating()
+            }
+            alert.showEdit("ユーザー名変更", subTitle: "新しいユーザー名を入力してください。")
             break
         case 3:
             //ユーザー名の編集
@@ -379,4 +383,36 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             break
         }
     }
+    
+    
+    
+    //名前の変更ボタン押されたら呼ばれます
+    func changeUserName(newName: String){
+        
+        if (newName.isEmpty) {
+            SCLAlertView().showInfo("エラー", subTitle: "ユーザー名の入力が必要です。")
+            return
+        }
+        
+        let parameters: Parameters = [
+            "name":newName
+        ]
+        
+        //print(API_URL+"v0/auth/")
+        Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                let json:JSON = JSON(response.result.value ?? kill)
+                self.getUserInfo()
+                print(json)
+                
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+    }
+    
 }

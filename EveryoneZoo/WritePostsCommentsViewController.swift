@@ -23,7 +23,7 @@ class WritePostsCommentsViewController: UIViewController {
     private var tabBarHeight:CGFloat!
     var textViewHeight:CGFloat!
 
-    //テーブルビューインスタンス
+    //テキストビューインスタンス
     private var commentTextView: UITextView!
     
     //Indicater

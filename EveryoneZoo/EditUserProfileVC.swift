@@ -18,6 +18,9 @@ class EditUserProfileVC: UIViewController {
     private var viewHeight:CGFloat!
     private var statusBarHeight:CGFloat!
     private var navigationBarHeight:CGFloat!
+    private var tabBarHeight:CGFloat!
+    private var textViewHeight:CGFloat!
+
     
     private var userProfileTexView:UITextView!
     
@@ -29,6 +32,8 @@ class EditUserProfileVC: UIViewController {
         viewHeight = self.view.frame.size.height
         statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
         navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
+        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+        textViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + tabBarHeight)
         
         self.view.backgroundColor = UIColor.white
         
@@ -90,6 +95,21 @@ class EditUserProfileVC: UIViewController {
         
         self.navigationItem.titleView = titleLabel
     }
+    
+    func setTextView(){
+        
+        // TextView生成する.
+        userProfileTexView = UITextView()
+        userProfileTexView.frame = CGRect(x:0, y:0, width:viewWidth, height:textViewHeight)
+        userProfileTexView.text = ""
+        userProfileTexView.font = UIFont.systemFont(ofSize: 20.0)
+        userProfileTexView.textColor = UIColor.black
+        self.view.addSubview(userProfileTexView)
+        
+        //キーボードは出しておく
+        userProfileTexView.becomeFirstResponder()
+    }
+    
     
     func changeUserProfileBtn(sender: UIButton){
         
