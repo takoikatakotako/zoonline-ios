@@ -93,12 +93,9 @@ class WritePostsCommentsViewController: UIViewController {
         
         let indicaterSize:CGFloat = viewWidth*0.3
         indicator.frame = CGRect(x: (viewWidth-indicaterSize)/2, y: viewWidth*0.25, width: indicaterSize, height: indicaterSize)
-        indicator.clipsToBounds = true
-        indicator.layer.cornerRadius = indicaterSize*0.3
         indicator.hidesWhenStopped = true
-        indicator.backgroundColor = UIColor.MainAppColor()
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        indicator.color = UIColor.white
+        indicator.color = UIColor.MainAppColor()
         self.view.bringSubview(toFront: indicator)
         self.view.addSubview(indicator)
     }
@@ -113,17 +110,12 @@ class WritePostsCommentsViewController: UIViewController {
         
         //indicatrer
         indicator.startAnimating()
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let myUserID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
-        
+
         let parameters: Parameters = [
-            "post_id": String(postsID),
-            "user_id": myUserID,
             "comments": commentTextView.text
-        ]
+            ]
         
-        Alamofire.request(EveryZooAPI.getDoComments(), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getDoComments(postID: postsID), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
             
             switch response.result {
             case .success:

@@ -83,10 +83,11 @@ class EveryZooAPI: NSObject {
         return API_URL+API_VERSION+"posts/" + String(postID) + "/comments/"
     }
     
-    class func getDoComments() -> String{
+    class func getDoComments(postID:Int) -> String{
     
         //コメントをする
-        return API_URL+API_VERSION+"comments/"
+        ///api/v0/posts/:post_id/comments
+        return API_URL+API_VERSION+"/posts/"+String(postID)+"/comments"
     }
     
     class func getUploadPicture() -> String {
