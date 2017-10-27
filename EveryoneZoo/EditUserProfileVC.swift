@@ -39,7 +39,6 @@ class EditUserProfileVC: UIViewController {
         
         setNavigationBar()
         setTextView()
-
         
         let myProfile = UtilityLibrary.getUserProfile()
         if myProfile.isEmpty {
@@ -65,7 +64,17 @@ class EditUserProfileVC: UIViewController {
         titleLabel.textColor = UIColor.white
         
         self.navigationItem.titleView = titleLabel
+        
+        let rightNavBtn = UIBarButtonItem(barButtonSystemItem:  .done, target: self, action: #selector(doChageProfile(sender:)))
+        self.navigationItem.rightBarButtonItem = rightNavBtn
     }
+    
+    //プロフィール変更ボタンが押されたら
+    internal func doChageProfile(sender: UIButton){
+        
+        //_ = self.navigationController?.popViewController(animated: true)
+    }
+    
     
     func setTextView(){
         
@@ -73,7 +82,7 @@ class EditUserProfileVC: UIViewController {
         userProfileTexView = UITextView()
         userProfileTexView.frame = CGRect(x:0, y:0, width:viewWidth, height:textViewHeight)
         userProfileTexView.text = ""
-        userProfileTexView.font = UIFont.systemFont(ofSize: 20.0)
+        userProfileTexView.font = UIFont.systemFont(ofSize: 16.0)
         userProfileTexView.textColor = UIColor.black
         self.view.addSubview(userProfileTexView)
         

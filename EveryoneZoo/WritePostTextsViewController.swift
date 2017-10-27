@@ -82,11 +82,8 @@ class WritePostTextsViewController: UIViewController,UITextViewDelegate {
         titleLabel.text = navTitle
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
-        
-        let rightNavBtn = UIBarButtonItem()
-        rightNavBtn.image = UIImage(named:"submit_nav_btn")!
-        rightNavBtn.action = #selector(doClose(sender:))
-        rightNavBtn.target = self
+
+        let rightNavBtn = UIBarButtonItem(barButtonSystemItem:  .done, target: self, action: #selector(doClose(sender:)))
         self.navigationItem.rightBarButtonItem = rightNavBtn
     }
     
