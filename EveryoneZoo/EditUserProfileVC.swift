@@ -72,7 +72,28 @@ class EditUserProfileVC: UIViewController {
     //プロフィール変更ボタンが押されたら
     internal func doChageProfile(sender: UIButton){
         
-        //_ = self.navigationController?.popViewController(animated: true)
+        if (userProfileTexView.text?.isEmpty)! {
+            SCLAlertView().showInfo("エラー", subTitle: "プロフィールの入力が必要です。")
+            return
+        }
+        
+        let parameters: Parameters = [
+            "profile":userProfileTexView.text
+        ]
+        
+        Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                SCLAlertView().showInfo("プロフィール更新", subTitle: "プロフィールを更新しました。")
+                _ = self.navigationController?.popViewController(animated: true)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     
@@ -90,31 +111,5 @@ class EditUserProfileVC: UIViewController {
         userProfileTexView.becomeFirstResponder()
     }
     
-    
-    func changeUserProfileBtn(sender: UIButton){
-        
-        if (userProfileTexView.text?.isEmpty)! {
-            SCLAlertView().showInfo("エラー", subTitle: "ユーザー名の入力が必要です。")
-            return
-        }
-        
-        let parameters: Parameters = [
-            "profile":userProfileTexView.text
-        ]
-        
-        Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
-            
-            switch response.result {
-            case .success:
-                print("Validation Successful")
-                let json:JSON = JSON(response.result.value ?? kill)
-                print(json)
 
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
-        
-    }
 }

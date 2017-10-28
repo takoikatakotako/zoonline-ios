@@ -369,7 +369,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             alert.showEdit("ユーザー名変更", subTitle: "新しいユーザー名を入力してください。")
             break
         case 3:
-            //ユーザー名の編集
+            //プロフィールの編集
             let vc:EditUserProfileVC = EditUserProfileVC()
             
             let btn_back = UIBarButtonItem()
@@ -377,6 +377,23 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             self.navigationItem.backBarButtonItem = btn_back
             self.navigationController?.pushViewController(vc, animated: true)
             break
+        case 4:
+            //メールアドレスの変更
+            print("メールアドレス")
+            let alert = SCLAlertView()
+            let txt = alert.addTextField(UtilityLibrary.getUserEmail())
+            alert.addButton("変更") {
+                print("Text value: \(txt.text)")
+                self.changeUserEmail(newEmail: txt.text!)
+                self.indicator.startAnimating()
+            }
+            alert.showEdit("メールアドレス変更", subTitle: "新しいメールアドレスを入力してください。")
+            break
+        case 5:
+            //パスワードの変更
+            print("パスワード")
+            break
+            
             
         default:
             
@@ -407,6 +424,45 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
                 let json:JSON = JSON(response.result.value ?? kill)
                 self.getUserInfo()
                 print(json)
+                
+            case .failure(let error):
+                print(error)
+                //テーブルの再読み込み
+            }
+        }
+    }
+    
+    //名前の変更ボタン押されたら呼ばれます
+    func changeUserEmail(newEmail: String){
+        
+        if (newEmail.isEmpty) {
+            SCLAlertView().showInfo("エラー", subTitle: "Emailの入力が必要です。")
+            return
+        }
+        
+        let parameters: Parameters = [
+            "email":newEmail
+        ]
+        
+        print(UtilityLibrary.getAPIAccessHeader())
+        
+        
+        
+        //print(API_URL+"v0/auth/")
+        Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+            
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
+                
+                if (json["status"].stringValue == "error") {
+                    SCLAlertView().showInfo("エラー", subTitle: "メールアドレスの値が不正です。")
+                }else{
+                    UtilityLibrary.setUserName(userName: newEmail)
+                    self.getUserInfo()
+                }
                 
             case .failure(let error):
                 print(error)
