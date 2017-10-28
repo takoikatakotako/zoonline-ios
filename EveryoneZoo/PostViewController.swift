@@ -340,6 +340,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell:NoLoginTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NoLoginTableViewCell.self), for: indexPath) as! NoLoginTableViewCell
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+            cell.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
             return cell
         }
         
@@ -470,6 +471,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func resistBtnClicked(sender: UIButton){
         
         let resistView:NewResistViewController = NewResistViewController()
+        resistView.statusBarHeight = self.statusBarHeight
+        resistView.navigationBarHeight = self.navigationBarHeight
         self.present(resistView, animated: true, completion: nil)
     }
 }

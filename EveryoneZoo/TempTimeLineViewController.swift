@@ -188,6 +188,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
             let cell:NoLoginTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NoLoginTableViewCell.self), for: indexPath) as! NoLoginTableViewCell
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+            cell.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
             return cell
         }
         
@@ -246,7 +247,9 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     //登録ボタンが押されたら呼ばれます
     func resistBtnClicked(sender: UIButton){
         
-        let resistView:NewResistViewController = NewResistViewController()
-        self.present(resistView, animated: true, completion: nil)
+        let loginView:NewResistViewController = NewResistViewController()
+        loginView.statusBarHeight = self.statusBarHeight
+        loginView.navigationBarHeight = self.navigationBarHeight
+        self.present(loginView, animated: true, completion: nil)
     }
 }
