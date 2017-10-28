@@ -83,6 +83,13 @@ class EveryZooAPI: NSObject {
         return API_URL+API_VERSION+"posts/" + String(postID) + "/comments/"
     }
     
+    class func deleateComments(commentID:Int) -> String {
+        
+        //投稿に紐づいたコメントを削除する
+        ///api/v0/posts/comments/:comment_id
+        return API_URL+API_VERSION+"posts/" + "comments/" + String(commentID)
+    }
+    
     class func getDoComments(postID:Int) -> String{
     
         //コメントをする

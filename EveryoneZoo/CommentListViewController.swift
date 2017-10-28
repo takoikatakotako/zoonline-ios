@@ -135,20 +135,24 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         }
     }
     
-    /*
-    func deleatePostComment(commentID) {
+    
+    func deleatePostComment(commentID:Int) {
         
-        Alamofire.request(EveryZooAPI.getComments(postID: postsID)).responseJSON{ response in
+        print(EveryZooAPI.deleateComments(commentID: commentID))
+        
+        let parameters: Parameters = [
+            "comments": commentID
+        ]
+        
+        
+        Alamofire.request(EveryZooAPI.deleateComments(commentID: commentID), method: .delete, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
             
             switch response.result {
             case .success:
                 
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
-                self.postsComments = json["comments"]
                 
-                self.indicator.stopAnimating()
-                self.commentTableView.reloadData()
                 
             case .failure(let error):
                 print(error)
@@ -156,7 +160,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
             }
         }
     }
-    */
+    
     
     
     //MARK: テーブルビューのセルの数を設定する
@@ -198,7 +202,8 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         if postsComments[indexPath.row]["user_id"].stringValue == UtilityLibrary.getUserID(){
             let alertView = SCLAlertView()
             alertView.addButton("削除") {
-               // self.deleteC()
+                let commentID = self.postsComments[indexPath.row]["comment_id"].intValue
+                self.deleatePostComment(commentID: commentID)
             }
             alertView.showInfo("コメント削除", subTitle: "このコメントを削除しますか？")
         }
