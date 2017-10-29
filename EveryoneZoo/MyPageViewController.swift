@@ -282,12 +282,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 switch indexPath.row {
                 case 0:
                     //お問い合わせ
-                    let contactView:WebViewController = WebViewController()
-                    contactView.statusBarHeight = self.statusBarHeight
-                    contactView.navigationBarHeight = self.navigationBarHeight
-                    contactView.url = CONTACT_PAGE_URL_STRING
-                    contactView.navTitle = "お問い合わせ"
-                    self.present(contactView, animated: true, completion: nil)
+                    openWebView(navTitle: "お問い合わせ", url: CONTACT_PAGE_URL_STRING)
                     break
                 case 1:
                     //アプリシェア
@@ -300,21 +295,11 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     break
                 case 2:
                     //利用規約
-                    let contactView:WebViewController = WebViewController()
-                    contactView.statusBarHeight = self.statusBarHeight
-                    contactView.navigationBarHeight = self.navigationBarHeight
-                    contactView.url = TOS_PAGE_URL_STRING
-                    contactView.navTitle = "利用規約"
-                    self.present(contactView, animated: true, completion: nil)
+                    openWebView(navTitle: "利用規約", url: TOS_PAGE_URL_STRING)
                     break
                 case 3:
                     //プライバシーポリシー
-                    let contactView:WebViewController = WebViewController()
-                    contactView.statusBarHeight = self.statusBarHeight
-                    contactView.navigationBarHeight = self.navigationBarHeight
-                    contactView.url = PRIVACY_PAGE_URL
-                    contactView.navTitle = "プライバシーポリシー"
-                    self.present(contactView, animated: true, completion: nil)
+                    openWebView(navTitle: "プライバシーポリシー", url: PRIVACY_PAGE_URL)
                     break
                 default:
                     break
@@ -336,12 +321,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 switch indexPath.row {
                 case 0:
                     //お問い合わせ
-                    let contactView:WebViewController = WebViewController()
-                    contactView.statusBarHeight = self.statusBarHeight
-                    contactView.navigationBarHeight = self.navigationBarHeight
-                    contactView.url = CONTACT_PAGE_URL_STRING
-                    contactView.navTitle = "お問い合わせ"
-                    self.present(contactView, animated: true, completion: nil)
+                    openWebView(navTitle: "お問い合わせ", url: CONTACT_PAGE_URL_STRING)
                     break
                 case 1:
                     //アプリシェア
@@ -353,21 +333,11 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     break
                 case 2:
                     //利用規約
-                    let contactView:WebViewController = WebViewController()
-                    contactView.statusBarHeight = self.statusBarHeight
-                    contactView.navigationBarHeight = self.navigationBarHeight
-                    contactView.url = TOS_PAGE_URL_STRING
-                    contactView.navTitle = "利用規約"
-                    self.present(contactView, animated: true, completion: nil)
+                    openWebView(navTitle: "利用規約", url: TOS_PAGE_URL_STRING)
                     break
                 case 3:
                     //プライバシーポリシー
-                    let contactView:WebViewController = WebViewController()
-                    contactView.statusBarHeight = self.statusBarHeight
-                    contactView.navigationBarHeight = self.navigationBarHeight
-                    contactView.url = PRIVACY_PAGE_URL
-                    contactView.navTitle = "プライバシーポリシー"
-                    self.present(contactView, animated: true, completion: nil)
+                    openWebView(navTitle: "プライバシーポリシー", url: PRIVACY_PAGE_URL)
                     break
                 default:
                     break
@@ -407,10 +377,20 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let vc:MyPageProfilelViewController = MyPageProfilelViewController()
         
-        let btn_back = UIBarButtonItem()
-        btn_back.title = ""
-        self.navigationItem.backBarButtonItem = btn_back
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func openWebView(navTitle:String, url:String){
+    
+        //利用規約
+        let contactView:WebViewController = WebViewController()
+        contactView.statusBarHeight = self.statusBarHeight
+        contactView.navigationBarHeight = self.navigationBarHeight
+        contactView.url = url
+        contactView.navTitle = navTitle
+        self.present(contactView, animated: true, completion: nil)
     }
     
     func tweet() {
