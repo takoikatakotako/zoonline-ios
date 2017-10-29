@@ -125,8 +125,8 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         cell.titleLabel.text = officialContents[indexPath.row]["title"]["rendered"].stringValue
         cell.commentLabel.text = UtilityLibrary.removeHtmlTags(text: officialContents[indexPath.row]["excerpt"]["rendered"].stringValue)
-            
-        
+        let dateDic = UtilityLibrary.parseDates(text: officialContents[indexPath.row]["date"].stringValue)
+        cell.dateLabel.text = dateDic["year"]! + "年"+dateDic["month"]! + "月"+dateDic["day"]! + "日"
         cell.thumbnailImg.image = UIImage(named:"no_img")
 
         return cell

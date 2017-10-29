@@ -141,7 +141,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         indicator.color = UIColor.MainAppColor()
         self.view.bringSubview(toFront: indicator)
-        indicator.color = UIColor.white
         self.view.addSubview(indicator)
     }
     

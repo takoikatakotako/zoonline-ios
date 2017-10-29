@@ -21,7 +21,6 @@ let PRIVACY_PAGE_URL:String = "http://minzoo.team-sommelier.com/privacy.html"
 class EveryZooAPI: NSObject {
     
     
-    
     class func getFavoritePosts(userID:Int) -> String {
     
         return API_URL+API_VERSION+"users/"+String(userID)+"/favorite_posts"
