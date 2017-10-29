@@ -119,4 +119,20 @@ class UtilityLibrary: NSObject {
         
         return rect
     }
+    
+    
+    class func removeHtmlTags(text:String)->String{
+        
+        var str = text
+        
+        //もっと良い感じにしたいね。
+        if let range = str.range(of: "<p>") {
+            str.removeSubrange(range)
+        }
+        if let range = str.range(of: "</p>") {
+            str.removeSubrange(range)
+        }
+        
+        return str
+    }
 }

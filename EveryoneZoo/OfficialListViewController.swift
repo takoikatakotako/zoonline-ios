@@ -124,7 +124,9 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
         //myItems配列の中身をテキストにして登録した
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         cell.titleLabel.text = officialContents[indexPath.row]["title"]["rendered"].stringValue
-        cell.commentLabel.text = officialContents[indexPath.row]["excerpt"]["rendered"].stringValue
+        cell.commentLabel.text = UtilityLibrary.removeHtmlTags(text: officialContents[indexPath.row]["excerpt"]["rendered"].stringValue)
+            
+        
         cell.thumbnailImg.image = UIImage(named:"no_img")
 
         return cell
