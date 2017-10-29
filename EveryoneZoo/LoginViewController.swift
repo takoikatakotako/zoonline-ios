@@ -235,7 +235,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         let parameters: Parameters!
         if self.mailTextField.text == "ero" {
             parameters = [
-                "email": "onojun@sommelier.com",
+                "email": "onojun@teamsommelier.com",
                 "password": "password"]
         }else{
             parameters = [

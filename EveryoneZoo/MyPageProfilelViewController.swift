@@ -387,7 +387,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
                 self.changeUserEmail(newEmail: txt.text!)
                 self.indicator.startAnimating()
             }
-            alert.showEdit("メールアドレス変更", subTitle: "新しいメールアドレスを入力してください。")
+            alert.showEdit("メールアドレス変更", subTitle: "新しいメールアドレスを入力してください。\n(変更後にログアウトします。)")
             break
         case 5:
             //パスワードの変更
@@ -432,7 +432,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         }
     }
     
-    //名前の変更ボタン押されたら呼ばれます
+    //メールアドレス変更
     func changeUserEmail(newEmail: String){
         
         if (newEmail.isEmpty) {
@@ -443,10 +443,6 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         let parameters: Parameters = [
             "email":newEmail
         ]
-        
-        print(UtilityLibrary.getAPIAccessHeader())
-        
-        
         
         //print(API_URL+"v0/auth/")
         Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
@@ -460,8 +456,10 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
                 if (json["status"].stringValue == "error") {
                     SCLAlertView().showInfo("エラー", subTitle: "メールアドレスの値が不正です。")
                 }else{
-                    UtilityLibrary.setUserName(userName: newEmail)
-                    self.getUserInfo()
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.userDefaultsManager?.doLogout()
+                    SCLAlertView().showInfo("メールアドレス変更", subTitle: "メールアドレスを変更しました。ログアウトします。")
+                    _ = self.navigationController?.popViewController(animated: true)
                 }
                 
             case .failure(let error):
