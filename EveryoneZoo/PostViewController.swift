@@ -455,7 +455,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     //Mark: 未ログイン関係の処理
-
     
     //ログインボタンが押されたら呼ばれます
     func loginBtnClicked(sender: UIButton){

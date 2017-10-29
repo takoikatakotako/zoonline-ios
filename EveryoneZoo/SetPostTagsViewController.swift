@@ -84,9 +84,9 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
         
-        //右上の検索ボタン
-        //serchNavBtn.tintColor = UIColor.white
-        //serchNavBtn.action = #selector(rightBarBtnClicked(sender:))
+        //閉じるボタン
+        let rightNavBtn = UIBarButtonItem(barButtonSystemItem:  .done, target: self, action: #selector(doClose(sender:)))
+        self.navigationItem.rightBarButtonItem = rightNavBtn
     }
     
     
@@ -200,5 +200,11 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
 
         tagsAry.remove(at: sender.tag)
         tagTableView.reloadData()
+    }
+    
+    //タグ画面を閉じる
+    internal func doClose(sender: UIButton){
+        
+        _ = self.navigationController?.popViewController(animated: true)
     }
 }
