@@ -211,7 +211,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to:EveryZooAPI.getUploadPicture())
+        }, to:EveryZooAPI.getUploadPicture(),headers: UtilityLibrary.getAPIAccessHeader())
         { (result) in
             switch result {
             case .success(let upload, _, _):
@@ -230,15 +230,20 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
                     case .success:
                         print("Validation Successful")
                         let json:JSON = JSON(response.result.value ?? kill)
+                        print(json)
+                        
+                        
                         
                         if json["is_success"].boolValue  {
                             let pic_id:String = json["picture"]["pic_id"].stringValue
                             self.doPost(pic_id: pic_id, postImage: postImage)
+                        }else{
+                            SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。不明なエラーです。")
                         }
                         
                     case .failure(let error):
                         print(error)
-                        
+                        SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。通信状況を確認してください。")
                     }
                 }
                 
@@ -261,11 +266,16 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
                 print("Validation Successful")
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
-                self.icon.image = postImage
-                self.indicator.stopAnimating()
+                if json["is_success"].boolValue {
+                    self.icon.image = postImage
+                    self.indicator.stopAnimating()
+                }else{
+                    SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。不明なエラーです。")
+                }
                 
             case .failure(let error):
                 print(error)
+                SCLAlertView().showError("変更失敗", subTitle: "アイコン画像の変更に失敗しました。通信状況を確認してください。")
             }
         }
     }

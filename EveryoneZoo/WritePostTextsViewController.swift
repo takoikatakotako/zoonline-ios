@@ -76,7 +76,7 @@ class WritePostTextsViewController: UIViewController,UITextViewDelegate {
         //「<戻る」を「<」のみにする
         navigationController!.navigationBar.topItem!.title = " "
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = UILabel()
+        let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = navTitle
@@ -95,9 +95,9 @@ class WritePostTextsViewController: UIViewController,UITextViewDelegate {
     
     func setTextView(){
     
-        textView.frame = CGRect(x: viewWidth*0.05, y: viewWidth*0.05, width: viewWidth*0.9, height: viewHeight-viewWidth*0.1)
+        textView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
         //textView.backgroundColor = UIColor.red
-        textView.font = UIFont.systemFont(ofSize: 16)
+        textView.font = UIFont.systemFont(ofSize: 20)
         textView.delegate = self
         textView.text = text
         self.view.addSubview(textView)

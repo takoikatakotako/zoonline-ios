@@ -262,11 +262,18 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
                 self.indicator.stopAnimating()
-                SCLAlertView().showSuccess("投稿完了", subTitle: "投稿が完了しました。")
+                
+                if json["is_success"].boolValue {
+                    SCLAlertView().showSuccess("投稿完了", subTitle: "投稿が完了しました。")
+                }else{
+                    SCLAlertView().showSuccess("投稿失敗", subTitle: "投稿に失敗しました。不明なエラーです。")
+                }
+                
                 
             case .failure(let error):
                 print(error)
                 //テーブルの再読み込み
+                SCLAlertView().showError("投稿失敗", subTitle: "投稿に失敗しました。通信状況を確認してください。")
             }
         }
     }
