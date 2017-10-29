@@ -139,9 +139,8 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
         let userInfoView: UserInfoViewController = UserInfoViewController()
         userInfoView.postUserID = frindsList[indexPath.row]["user-id"].intValue
         
-        let btn_back = UIBarButtonItem()
-        btn_back.title = ""
-        self.navigationItem.backBarButtonItem = btn_back
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(userInfoView, animated: true)
     }
     
