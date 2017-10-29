@@ -88,22 +88,18 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
             switch response.result {
             case .success:
                 
-                print("--------------------------")
+                //print("--------------------------")
 
                 //print(response.value)
                 
                 let json:JSON = JSON(response.result.value ?? kill)
 
                 print(EveryZooAPI.getOfficialNews())
-                print("!-!-!-!-----------------------")
-
+                //print("!-!-!-!-----------------------")
+                
                 print(json[0])
+                
 
-                print(json.count)
-                
-                
-                print(json["is_success"].stringValue)
-                print(json["content"].arrayValue)
                 self.officialContents = json
                 
                 self.indicator.stopAnimating()
@@ -129,6 +125,7 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         cell.titleLabel.text = officialContents[indexPath.row]["title"]["rendered"].stringValue
         cell.commentLabel.text = officialContents[indexPath.row]["excerpt"]["rendered"].stringValue
+        cell.thumbnailImg.image = UIImage(named:"no_img")
 
         return cell
     }
