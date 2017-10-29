@@ -168,8 +168,13 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         print("textFieldDidBeginEditing: \(textField.text!)")
         
         //初期入力値の場合は空にする
-        if textField.text == "ユーザー名またはメールアドレス" || textField.text == "パスワード" {
+        if textField.text == "ユーザー名またはメールアドレス"{
             textField.text = ""
+        }
+        
+        if  textField.text == "パスワード" {
+            textField.text = ""
+            passWordTextField.isSecureTextEntry = true
         }
     }
     

@@ -239,9 +239,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let vc:MyPagePostViewController = MyPagePostViewController()
                     vc.userID = Int(UtilityLibrary.getUserID())
                     
-                    let btn_back = UIBarButtonItem()
-                    btn_back.title = ""
-                    self.navigationItem.backBarButtonItem = btn_back
+                    let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                    self.navigationItem.backBarButtonItem = backButton
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 case 1:
@@ -249,9 +248,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let vc:FriendsListViewController = FriendsListViewController()
                     vc.userID = Int(UtilityLibrary.getUserID())
                     
-                    let btn_back = UIBarButtonItem()
-                    btn_back.title = ""
-                    self.navigationItem.backBarButtonItem = btn_back
+                    let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                    self.navigationItem.backBarButtonItem = backButton
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 case 2:
@@ -259,9 +257,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let vc:FollowerListViewController = FollowerListViewController()
                     vc.userID = Int(UtilityLibrary.getUserID())
                     
-                    let btn_back = UIBarButtonItem()
-                    btn_back.title = ""
-                    self.navigationItem.backBarButtonItem = btn_back
+                    let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                    self.navigationItem.backBarButtonItem = backButton
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 case 3:
@@ -269,9 +266,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let vc:MyPageFavoriteViewController = MyPageFavoriteViewController()
                     vc.userID = Int(UtilityLibrary.getUserID())
                     
-                    let btn_back = UIBarButtonItem()
-                    btn_back.title = ""
-                    self.navigationItem.backBarButtonItem = btn_back
+                    let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                    self.navigationItem.backBarButtonItem = backButton
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
                 default:
