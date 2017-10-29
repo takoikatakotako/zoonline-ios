@@ -31,7 +31,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     var indicator: UIActivityIndicatorView!
     
     //サポートボタン
-    let supportBtn:UIButton = UIButton()
+    var supportBtn:UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,6 +130,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     
     func setSupportBtn() {
         //サポート
+        supportBtn = UIButton()
         supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
         supportBtn.setImage(UIImage(named:"support_timeline"), for: UIControlState.normal)
         supportBtn.imageView?.contentMode = UIViewContentMode.bottomRight

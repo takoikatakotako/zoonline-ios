@@ -90,7 +90,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         supportBtn = UIButton()
         supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
         supportBtn.setImage(UIImage(named:"support_official"), for: UIControlState.normal)
-        supportBtn.imageView?.contentMode = .scaleAspectFit
+        supportBtn.imageView?.contentMode = UIViewContentMode.bottomRight
         supportBtn.contentHorizontalAlignment = .fill
         supportBtn.contentVerticalAlignment = .fill
         supportBtn.backgroundColor = UIColor.clear
