@@ -157,7 +157,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         let forgetPassWordBtn:UIButton = UIButton()
         forgetPassWordBtn.frame = CGRect(x: viewWidth*0.1, y: forgetPassWordBtnYPos, width: viewWidth*0.8, height: forgetPassWordBtnHeight)
         forgetPassWordBtn.backgroundColor = UIColor.white
-        forgetPassWordBtn.setTitleColor(UIColor.blue, for: UIControlState.normal)
+        forgetPassWordBtn.setTitleColor(UIColor.MainAppColor(), for: UIControlState.normal)
         forgetPassWordBtn.setTitle("パスワードを忘れた方", for: UIControlState.normal)
         forgetPassWordBtn.addTarget(self, action: #selector(forgetPassWordBtnClicked(sender:)), for: .touchUpInside)
         self.view.addSubview(forgetPassWordBtn)
@@ -266,7 +266,6 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                 }else{
                     
                     //ログイン成功
-
                     var myUserID:String = ""
                     var myUserName:String = ""
                     var myUserEmail:String = ""

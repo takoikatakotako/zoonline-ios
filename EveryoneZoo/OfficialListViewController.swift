@@ -92,8 +92,6 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
 
                 //print(response.value)
                 
-                
-                
                 let json:JSON = JSON(response.result.value ?? kill)
 
                 print(EveryZooAPI.getOfficialNews())
