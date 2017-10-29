@@ -181,8 +181,13 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         print("textFieldDidBeginEditing: \(textField.text!)")
         
         //初期入力値の場合は空にする
-        if textField.text == "メールアドレス" || textField.text == "ユーザー名" || textField.text == "パスワード" {
+        if textField.text == "メールアドレス" || textField.text == "ユーザー名"{
             textField.text = ""
+        }
+        
+        if  textField.text == "パスワード" {
+            textField.text = ""
+            passWordTextField.isSecureTextEntry = true
         }
     }
     
@@ -192,7 +197,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         
         
         registBtn.isEnabled = true
-        registBtn.backgroundColor = UIColor.PostDetailFavPink()
+        registBtn.backgroundColor = UIColor.LoginRegistSkyBlue()
         
         /*
         
