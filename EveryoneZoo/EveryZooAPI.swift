@@ -14,7 +14,7 @@ let API_VERSION:String = "v0/"
 
 let APP_URL: String = "http://minzoo.herokuapp.com"
 
-let CONTACT_PAGE_URL_STRING:String = "http://swiswiswift.sakura.ne.jp/zoonline/"
+let CONTACT_PAGE_URL_STRING:String = "https://docs.google.com/forms/d/1FISwLcsO7rgwDxhsI0b9fB7xHejt3KynVTQq_rMGYc8/edit"
 let TOS_PAGE_URL_STRING:String = "http://minzoo.team-sommelier.com/tos.html"
 let PRIVACY_PAGE_URL:String = "http://minzoo.team-sommelier.com/privacy.html"
 
@@ -69,6 +69,11 @@ class EveryZooAPI: NSObject {
         return API_URL+API_VERSION+"posts/"+String(postID)
     }
     
+    class func getSignUp() -> String {
+        
+        //サインイン
+        return API_URL+API_VERSION+"auth"
+    }
     
     class func getSignIn() -> String {
         

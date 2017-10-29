@@ -56,7 +56,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
         tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+HEIGHT_USER_CELL + tabBarHeight)
         
-        self.view.backgroundColor = UIColor.LiginCushionLightGray()
+        self.view.backgroundColor = UIColor.MypageArrowGray()
         
         setNavigationBar()
         
@@ -123,7 +123,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myPageTableView = UITableView(frame: CGRect(x: 0, y: HEIGHT_USER_CELL, width: viewWidth, height: tableViewHeight),style: UITableViewStyle.grouped)
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
-        myPageTableView.backgroundColor = UIColor.LiginCushionLightGray()
+        myPageTableView.backgroundColor = UIColor.MypageArrowGray()
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(MyPageTableViewCell.self))
         myPageTableView.rowHeight = 48
         self.view.addSubview(myPageTableView)

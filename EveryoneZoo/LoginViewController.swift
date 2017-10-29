@@ -186,7 +186,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
             loginBtn.backgroundColor = UIColor.gray
         } else{
             loginBtn.isEnabled = true
-            loginBtn.backgroundColor = UIColor.PostDetailFavPink()
+            loginBtn.backgroundColor = UIColor.LoginRegistSkyBlue()
         }
         
         return true

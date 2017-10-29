@@ -171,7 +171,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         registBtn.layer.masksToBounds = true
         registBtn.layer.cornerRadius = 4.0
         registBtn.isEnabled = false
-        registBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+        registBtn.addTarget(self, action: #selector(registBtnClicked(sender:)), for: .touchUpInside)
         self.view.addSubview(registBtn)
         
     }
@@ -190,6 +190,13 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         
         print(string)
         
+        
+        registBtn.isEnabled = true
+        registBtn.backgroundColor = UIColor.PostDetailFavPink()
+        
+        /*
+        
+        
         //ChangeLoginBtn
         if self.mailTextField.text == "ユーザー名またはメールアドレス" || self.passWordTextField.text == "パスワード" {
             registBtn.isEnabled = false
@@ -201,7 +208,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
             registBtn.isEnabled = true
             registBtn.backgroundColor = UIColor.PostDetailFavPink()
         }
-        
+        */
         return true
     }
     
@@ -235,10 +242,9 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
     }
     
     //ログインボタンが押されたら呼ばれる
-    func loginBtnClicked(sender: UIButton){
+    func registBtnClicked(sender: UIButton){
         print("touped")
         
-        //self.loginFailed.isHidden = true
         indicator.startAnimating()
         
         //post:http://minzoo.herokuapp.com/api/v0/login
@@ -246,45 +252,39 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         //onojun@sommelier.com
         //password
         let parameters: Parameters!
-        if self.mailTextField.text == "ero" {
-            parameters = [
-                "email": "onojun@sommelier.com",
-                "password": "password"]
-        }else{
-            parameters = [
-                "email": self.mailTextField.text ?? "",
-                "password": self.passWordTextField.text ?? ""]
-        }
+        parameters = [
+            "email": "snorlax.chemist.and.jazz@gmail.com",
+            "name": "onoono",
+            "password": "password",
+            "confirm_success_url":"http://minzoo.herokuapp.com/register_confirmation"]
         
-        
-        Alamofire.request(EveryZooAPI.getSignIn(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
-            
+        Alamofire.request(EveryZooAPI.getSignUp(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             
             self.indicator.stopAnimating()
             
-            
             switch response.result {
+                
+                
             case .success:
                 let json:JSON = JSON(response.result.value ?? kill)
-                
-                
                 print(json)
                 
-                if json["data"].isEmpty{
-                    
-                    //メールなどが違うと判断
-                    //self.loginFailed.isHidden = false
-                    SCLAlertView().showInfo("Important info", subTitle: "ログインに失敗しますた。たぶんパスとか違う")
-                    
+                
+                if json["status"].stringValue == "error" {
+                    //エラー
+                    SCLAlertView().showInfo("登録失敗", subTitle: "登録に失敗しました。メールアドレス、パスワードをご確認ください。")
+                }else if json["status"].stringValue != "success"{
+                    //原因不明
+                    SCLAlertView().showInfo("登録失敗", subTitle: "予期せぬエラーです。")
                 }else{
-                    
+                    //成功
                     //ログイン成功
                     
                     var myUserID:String = ""
                     var myUserName:String = ""
                     var myUserEmail:String = ""
-                    var myUserIconUrl:String = ""
-                    var myUserProfile:String = ""
+                    let myUserIconUrl:String = ""
+                    let myUserProfile:String = ""
                     
                     var myAccessToken:String = ""
                     var myClientToken:String = ""
@@ -293,20 +293,12 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
                     
                     myUserID = String(json["data"]["id"].intValue)
                     
-                    if !json["data"]["name"].stringValue.isEmpty {
-                        myUserName = json["data"]["name"].stringValue
-                    }
-                    
                     if !json["data"]["email"].stringValue.isEmpty {
                         myUserEmail = json["data"]["email"].stringValue
                     }
                     
-                    if !json["data"]["icon_url"].stringValue.isEmpty {
-                        myUserIconUrl = json["data"]["icon_url"].stringValue
-                    }
-                    
-                    if !json["data"]["profile"].stringValue.isEmpty {
-                        myUserProfile = json["data"]["profile"].stringValue
+                    if !json["data"]["name"].stringValue.isEmpty {
+                        myUserName = json["data"]["name"].stringValue
                     }
                     
                     if let accessToken = response.response?.allHeaderFields["Access-Token"] as? String {
