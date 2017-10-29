@@ -65,7 +65,8 @@ class MyPagePostCell: UITableViewCell {
         
         let cellWidth:CGFloat = self.frame.size.width
         let cellHeight:CGFloat = self.frame.size.height
-        
+
+        thumbnailImg.layer.cornerRadius = cellWidth*0.04
         thumbnailImg.frame =  CGRect(x: cellHeight*0.03, y: cellHeight*0.05, width: cellHeight*0.9, height: cellHeight*0.9)
 
         dateLabel.frame = CGRect(x: cellWidth*0.7, y: cellHeight*0.03, width: cellWidth*0.28, height: cellHeight*0.15)
