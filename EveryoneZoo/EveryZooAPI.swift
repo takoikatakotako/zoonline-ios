@@ -14,12 +14,11 @@ let API_VERSION:String = "v0/"
 
 let APP_URL: String = "http://minzoo.herokuapp.com"
 
-let CONTACT_PAGE_URL_STRING:String = "https://docs.google.com/forms/d/1FISwLcsO7rgwDxhsI0b9fB7xHejt3KynVTQq_rMGYc8/edit"
-let TOS_PAGE_URL_STRING:String = "http://minzoo.team-sommelier.com/tos.html"
-let PRIVACY_PAGE_URL:String = "http://minzoo.team-sommelier.com/privacy.html"
+let CONTACT_PAGE_URL_STRING:String = "https://docs.google.com/forms/d/1jTJbYnHRE-IJVgkazqw9PYn0GIQYsT7Kj1ApivQW0AA/edit"
+let TOS_PAGE_URL_STRING:String = "http://team-sommelier.com/tos.html"
+let PRIVACY_PAGE_URL:String = "http://team-sommelier.com/privacy.html"
 
 class EveryZooAPI: NSObject {
-    
     
     class func getFavoritePosts(userID:Int) -> String {
     
@@ -35,7 +34,6 @@ class EveryZooAPI: NSObject {
         //タイムラインの投稿を取得する
         return API_URL+API_VERSION+"users/" + String(userID) + "/following/posts/"
     }
-    
     
     class func getRecentPosts() -> String{
         //新着取得を取得

@@ -345,6 +345,29 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     break
                 case 1:
                     //アプリシェア
+                    let alertView = SCLAlertView()
+                    alertView.addButton("Twitter") {
+                        self.tweet()
+                    }
+                    alertView.showInfo("シェア", subTitle: "みんなの動物園を広める")
+                    break
+                case 2:
+                    //利用規約
+                    let contactView:WebViewController = WebViewController()
+                    contactView.statusBarHeight = self.statusBarHeight
+                    contactView.navigationBarHeight = self.navigationBarHeight
+                    contactView.url = TOS_PAGE_URL_STRING
+                    contactView.navTitle = "利用規約"
+                    self.present(contactView, animated: true, completion: nil)
+                    break
+                case 3:
+                    //プライバシーポリシー
+                    let contactView:WebViewController = WebViewController()
+                    contactView.statusBarHeight = self.statusBarHeight
+                    contactView.navigationBarHeight = self.navigationBarHeight
+                    contactView.url = PRIVACY_PAGE_URL
+                    contactView.navTitle = "プライバシーポリシー"
+                    self.present(contactView, animated: true, completion: nil)
                     break
                 default:
                     break
