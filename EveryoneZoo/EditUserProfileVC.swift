@@ -65,7 +65,7 @@ class EditUserProfileVC: UIViewController {
         
         self.navigationItem.titleView = titleLabel
         
-        let rightNavBtn = UIBarButtonItem(barButtonSystemItem:  .done, target: self, action: #selector(doChageProfile(sender:)))
+        let rightNavBtn = UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(doChageProfile(sender:)))
         self.navigationItem.rightBarButtonItem = rightNavBtn
     }
     

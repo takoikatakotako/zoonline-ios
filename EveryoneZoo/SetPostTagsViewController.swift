@@ -85,7 +85,7 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         self.navigationItem.titleView = titleLabel
         
         //閉じるボタン
-        let rightNavBtn = UIBarButtonItem(barButtonSystemItem:  .done, target: self, action: #selector(doClose(sender:)))
+        let rightNavBtn = UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(doClose(sender:)))
         self.navigationItem.rightBarButtonItem = rightNavBtn
     }
     
