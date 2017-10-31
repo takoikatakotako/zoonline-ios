@@ -98,8 +98,7 @@ class EditUserNameViewController: UIViewController,UITextFieldDelegate {
             "name":userNameTextFIeld.text!
         ]
         
-        //print(API_URL+"v0/auth/")
-        Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+        Alamofire.request(EveryZooAPI.getEditName(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
             
             switch response.result {
             case .success:

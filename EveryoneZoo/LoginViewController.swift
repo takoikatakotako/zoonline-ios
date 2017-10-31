@@ -203,16 +203,6 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         print("textFieldDidEndEditing: \(textField.text!)")
         //passWordTestの場合
         
-
-        
-        /*
-        if textField.tag == 101{
-            
-            var hideChara:String = ""
-            (0 ..< textField.text!.count).forEach { _ in hideChara+="*" }
-            textField.text = hideChara
-        }
- */
     }
  
     
@@ -240,7 +230,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         let parameters: Parameters!
         if self.mailTextField.text == "ero" {
             parameters = [
-                "email": "onojun@teamsommelier.com",
+                "email": "onojun@sommelier.com",
                 "password": "password"]
         }else{
             parameters = [

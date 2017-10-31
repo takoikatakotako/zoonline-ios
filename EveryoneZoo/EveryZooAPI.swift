@@ -69,8 +69,14 @@ class EveryZooAPI: NSObject {
     
     class func getSignUp() -> String {
         
-        //サインイン
-        return API_URL+API_VERSION+"auth"
+        //サインアップ、新規登録
+        return API_URL+API_VERSION+"auth/"
+    }
+    
+    class func getEditName() -> String {
+        
+        //ユーザー名の変更
+        return API_URL+API_VERSION+"auth/"
     }
     
     class func getSignIn() -> String {
@@ -78,6 +84,9 @@ class EveryZooAPI: NSObject {
         //サインイン
         return API_URL+API_VERSION+"auth/sign_in/"
     }
+    
+    
+    
     
     class func getComments(postID:Int) -> String {
         

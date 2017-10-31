@@ -103,7 +103,7 @@ class EditUserProfileVC: UIViewController {
         userProfileTexView = UITextView()
         userProfileTexView.frame = CGRect(x:0, y:0, width:viewWidth, height:textViewHeight)
         userProfileTexView.text = ""
-        userProfileTexView.font = UIFont.systemFont(ofSize: 16.0)
+        userProfileTexView.font = UIFont.systemFont(ofSize: 20.0)
         userProfileTexView.textColor = UIColor.black
         self.view.addSubview(userProfileTexView)
         
