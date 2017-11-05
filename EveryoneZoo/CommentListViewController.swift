@@ -141,8 +141,10 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         print(EveryZooAPI.deleateComments(commentID: commentID))
         
         let parameters: Parameters = [
-            "comments": commentID
+            "comment_id": commentID
         ]
+        
+        print(EveryZooAPI.deleateComments(commentID: commentID))
         
         
         Alamofire.request(EveryZooAPI.deleateComments(commentID: commentID), method: .delete, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
@@ -151,12 +153,17 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
             case .success:
                 
                 let json:JSON = JSON(response.result.value ?? kill)
-                print(json)
-                
+                if json["is_success"].boolValue {
+                    SCLAlertView().showInfo("コメント削除", subTitle: "コメントを削除しました")
+                    self.indicator.startAnimating()
+                    self.getPostsComments()
+                }else{
+                    SCLAlertView().showInfo("エラー", subTitle: "不明なエラーです")
+                }
                 
             case .failure(let error):
                 print(error)
-                //テーブルの再読み込み
+                SCLAlertView().showInfo("エラー", subTitle: "インターネットの接続を確認してください")
             }
         }
     }
