@@ -85,9 +85,6 @@ class EveryZooAPI: NSObject {
         return API_URL+API_VERSION+"auth/sign_in/"
     }
     
-    
-    
-    
     class func getComments(postID:Int) -> String {
         
         //投稿に紐づいたコメントを取得する

@@ -141,37 +141,20 @@ class UtilityLibrary: NSObject {
         //こんな感じの日付をパースする。"2017-10-21T19:02:58",
         
         var persedDic: Dictionary = ["year": "--", "month": "--", "day": "--", "hour": "--", "minute": "--", "second": "--" ]
-        
-        //八文字以下は不正な値なのでリターン
-        if text.utf8.count < 8 {
-            return persedDic
-        }
 
         let split = text.components(separatedBy: "T")
         let dateSplit = split[0].components(separatedBy: "-")
-        let timeSplit = split[1].components(separatedBy: ":")
-   
-        //splitの要素が２であることを期待している
-        if split.count != 2 {
-            return persedDic
-        }
-        
-        if dateSplit.count != 3{
-            return persedDic
-        }
+
+        let timeDifferenceSplit = split[1].components(separatedBy: "+")
+        let timeSplit = timeDifferenceSplit[0].components(separatedBy: ":")
 
         persedDic["year"] = dateSplit[0]
         persedDic["month"] = dateSplit[1]
         persedDic["day"] = dateSplit[2]
         
-        if timeSplit.count != 3{
-            return persedDic
-        }
-        
         persedDic["hour"] = timeSplit[0]
         persedDic["minute"] = timeSplit[1]
         persedDic["second"] = timeSplit[2]
- 
         return persedDic
     }
 }

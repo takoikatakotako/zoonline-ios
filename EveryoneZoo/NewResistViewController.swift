@@ -198,22 +198,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         
         registBtn.isEnabled = true
         registBtn.backgroundColor = UIColor.LoginRegistSkyBlue()
-        
-        /*
-        
-        
-        //ChangeLoginBtn
-        if self.mailTextField.text == "ユーザー名またはメールアドレス" || self.passWordTextField.text == "パスワード" {
-            registBtn.isEnabled = false
-            registBtn.backgroundColor = UIColor.gray
-        }else if (self.mailTextField.text?.isEmpty)! || (self.passWordTextField.text?.isEmpty)!{
-            registBtn.isEnabled = false
-            registBtn.backgroundColor = UIColor.gray
-        } else{
-            registBtn.isEnabled = true
-            registBtn.backgroundColor = UIColor.PostDetailFavPink()
-        }
-        */
+
         return true
     }
     
@@ -223,16 +208,15 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         print("textFieldDidEndEditing: \(textField.text!)")
         //passWordTestの場合
         
+        if !(self.mailTextField.text?.isEmpty)! && !(self.userNameTextField.text?.isEmpty)! && !(self.passWordTextField.text?.isEmpty)!{
         
+            registBtn.isEnabled = true
+            registBtn.backgroundColor = UIColor.LoginRegistSkyBlue()
+        }else{
         
-        /*
-         if textField.tag == 101{
-         
-         var hideChara:String = ""
-         (0 ..< textField.text!.count).forEach { _ in hideChara+="*" }
-         textField.text = hideChara
-         }
-         */
+            registBtn.isEnabled = false
+            registBtn.backgroundColor = UIColor.gray
+        }
     }
     
     
@@ -252,15 +236,30 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         
         indicator.startAnimating()
         
-        //post:http://minzoo.herokuapp.com/api/v0/login
+        let mail:String = self.mailTextField.text!
+        let userName:String = userNameTextField.text!
+        let passWord:String = passWordTextField.text!
         
-        //onojun@sommelier.com
-        //password
+        if mail.isEmpty {
+        
+            SCLAlertView().showInfo("エラー", subTitle: "メールアドレスを確認しください")
+        }
+        if (userName.isEmpty) {
+            
+            SCLAlertView().showInfo("エラー", subTitle: "ユーザー名を確認しください")
+        }
+        
+        if passWord.isEmpty {
+            
+            SCLAlertView().showInfo("エラー", subTitle: "パスワード確認しください")
+        }
+        
+
         let parameters: Parameters!
         parameters = [
-            "email": "snorlax.chemist.and.jazz@gmail.com",
-            "name": "onoono",
-            "password": "password",
+            "email": mail,
+            "name": userName,
+            "password": passWord,
             "confirm_success_url":"http://minzoo.herokuapp.com/register_confirmation"]
         
         Alamofire.request(EveryZooAPI.getSignUp(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
@@ -268,7 +267,6 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
             self.indicator.stopAnimating()
             
             switch response.result {
-                
                 
             case .success:
                 let json:JSON = JSON(response.result.value ?? kill)
@@ -282,49 +280,9 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
                     //原因不明
                     SCLAlertView().showInfo("登録失敗", subTitle: "予期せぬエラーです。")
                 }else{
-                    //成功
-                    //ログイン成功
-                    
-                    var myUserID:String = ""
-                    var myUserName:String = ""
-                    var myUserEmail:String = ""
-                    let myUserIconUrl:String = ""
-                    let myUserProfile:String = ""
-                    
-                    var myAccessToken:String = ""
-                    var myClientToken:String = ""
-                    var myExpiry:String = ""
-                    var myUniqID:String = ""
-                    
-                    myUserID = String(json["data"]["id"].intValue)
-                    
-                    if !json["data"]["email"].stringValue.isEmpty {
-                        myUserEmail = json["data"]["email"].stringValue
-                    }
-                    
-                    if !json["data"]["name"].stringValue.isEmpty {
-                        myUserName = json["data"]["name"].stringValue
-                    }
-                    
-                    if let accessToken = response.response?.allHeaderFields["Access-Token"] as? String {
-                        myAccessToken = accessToken
-                    }
-                    
-                    if let clientToken = response.response?.allHeaderFields["Client"] as? String {
-                        myClientToken = clientToken
-                    }
-                    
-                    if let expiry = response.response?.allHeaderFields["Expiry"] as? String {
-                        myExpiry = expiry
-                    }
-                    
-                    if let uid = response.response?.allHeaderFields["Uid"] as? String {
-                        myUniqID = uid
-                    }
-                    
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.userDefaultsManager?.doLogin(userID: myUserID, userName: myUserName, email: myUserEmail, iconUrl: myUserIconUrl, profile: myUserProfile, accessToken: myAccessToken, clientToken: myClientToken,expiry:myExpiry, uniqID:myUniqID)
-                    
+                    //登録成功
+
+                    SCLAlertView().showInfo("会員登録成功", subTitle: "登録したメールアドレスに届いたメールから会員登録を完了させ、ログインしてください。")
                     self.dismiss(animated: true, completion: nil)
                 }
                 

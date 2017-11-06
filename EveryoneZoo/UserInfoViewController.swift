@@ -100,9 +100,15 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
                 let json:JSON = JSON(response.result.value ?? kill)
 
                 print(json)
-                self.postsInfos = json
+                
                 self.indicator.stopAnimating()
-                self.profileTableView.reloadData()
+                if json["is_success"].boolValue {
+                    self.postsInfos = json["response"]
+                    self.profileTableView.reloadData()
+                }else{
+                    //不明なエラー
+                }
+
                 
             case .failure(let error):
                 print(error)
@@ -189,7 +195,13 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         
+        if self.postsInfos.count == 0 {
+            return cell
+        }
+        
         var dateText:String = self.postsInfos[indexPath.row-1]["updated_at"].stringValue
+        
+        
         dateText = dateText.substring(to: dateText.index(dateText.startIndex, offsetBy: 10))
         cell.dateLabel.text = dateText
         cell.titleLabel.text = self.postsInfos[indexPath.row-1]["title"].stringValue

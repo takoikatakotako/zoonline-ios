@@ -466,12 +466,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 self.postImgUrl = json["responce"]["imageInfo"]["image_url"].stringValue
                 self.iconUrl = json["responce"]["iconUrl"].stringValue
                 
-                var dates:String = json["responce"]["updated_dates"]["year"].stringValue + "年"
-                dates += json["responce"]["updated_dates"]["month"].stringValue + "月"
-                dates += json["responce"]["updated_dates"]["day"].stringValue + "日 "
-                dates += json["responce"]["updated_dates"]["hour"].stringValue + "時"
-                dates += json["responce"]["updated_dates"]["minute"].stringValue + "分"
-                self.pubDate = dates
+                print(json)
+                let dateDic = UtilityLibrary.parseDates(text: json["responce"]["updated_at"].stringValue)
+                var pubDate = dateDic["year"]! + "年" + dateDic["month"]!  + "月"
+                pubDate += dateDic["day"]! + "日"
+                pubDate += dateDic["hour"]!  + "時" + dateDic["minute"]!  + "分"
+                self.pubDate = pubDate
 
                 self.commentList = json["responce"]["commentList"].arrayValue
                 self.favList = json["responce"]["favList"].arrayValue
