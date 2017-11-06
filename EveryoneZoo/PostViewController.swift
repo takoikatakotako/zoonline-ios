@@ -80,11 +80,11 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             if !didSupport {
                 setSupportBtn()
             }
-            self.postTableView.reloadData()
         }else{
             //
-
+            
         }
+        self.postTableView.reloadData()
     }
     
     // MARK: - Viewにパーツの設置
