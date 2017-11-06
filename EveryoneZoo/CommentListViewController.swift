@@ -186,7 +186,10 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
             cell.thumbnailImgView.sd_setImage(with: url)
         }
         
-        cell.dateLabel.text = self.postsComments[indexPath.row]["updated_at"].stringValue
+        let dates = UtilityLibrary.parseDates(text: self.postsComments[indexPath.row]["updated_at"].stringValue)
+        var dateStr = dates["year"]! + "年" + dates["month"]! + "月"
+        dateStr += dates["day"]! + "日"
+        cell.dateLabel.text = dateStr
         cell.commentLabel.text = self.postsComments[indexPath.row]["comment"].stringValue
      
         //画像にタッチイベントを追加
