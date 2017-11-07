@@ -8,11 +8,11 @@
 
 import UIKit
 
-let API_URL:String = "http://minzoo.herokuapp.com/api/"
+//let API_URL:String = "http://minzoo.herokuapp.com/api/"
 //let API_URL:String = "http://localhost:3000/api/"
-let API_VERSION:String = "v0/"
+let API_URL:String = "https://www.zooforeveryone.work/"
 
-let APP_URL: String = "http://minzoo.herokuapp.com"
+let API_VERSION:String = "v0/"
 
 let CONTACT_PAGE_URL_STRING:String = "https://docs.google.com/forms/d/1jTJbYnHRE-IJVgkazqw9PYn0GIQYsT7Kj1ApivQW0AA/edit"
 let TOS_PAGE_URL_STRING:String = "http://team-sommelier.com/tos.html"

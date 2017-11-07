@@ -190,8 +190,11 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         var dateStr = dates["year"]! + "年" + dates["month"]! + "月"
         dateStr += dates["day"]! + "日"
         cell.dateLabel.text = dateStr
+        
         cell.commentLabel.text = self.postsComments[indexPath.row]["comment"].stringValue
      
+        cell.commentUser.text = self.postsComments[indexPath.row]["username"].stringValue
+        
         //画像にタッチイベントを追加
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
         singleTap.numberOfTapsRequired = 1
