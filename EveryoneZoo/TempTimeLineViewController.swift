@@ -202,9 +202,12 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         //myItems配列の中身をテキストにして登録した
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
 
-        var dateText:String = self.newsContents[indexPath.row]["updated_at"].stringValue
-        dateText = dateText.substring(to: dateText.index(dateText.startIndex, offsetBy: 10))
+        let dates = UtilityLibrary.parseDates(text: self.newsContents[indexPath.row]["updated_at"].stringValue)
+        var dateText:String = dates["year"]! + "/"
+        dateText += dates["month"]! + "/"
+        dateText += dates["day"]!
         cell.dateLabel.text = dateText
+        
         cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.newsContents[indexPath.row]["caption"].stringValue
         let imageUrl = URL(string:self.newsContents[indexPath.row]["itemImage"].stringValue)!

@@ -306,6 +306,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 appDelegate.userDefaultsManager?.doLogout()
                 self.myPageTableView.reloadData()
                 setUserCellText()
+                SCLAlertView().showInfo("ログアウト", subTitle: "ログアウトが完了しました。")
                 break
             default: break
                 

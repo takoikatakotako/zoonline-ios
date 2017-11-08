@@ -110,12 +110,12 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self))! as! MyPagePostCell
-        var dateText:String = self.favoritePosts[indexPath.row]["created_at"].stringValue
-        if !dateText.isEmpty {
-            dateText = dateText.substring(to: dateText.index(dateText.startIndex, offsetBy: 10))
-        }
-        //
+        let dates = UtilityLibrary.parseDates(text: self.favoritePosts[indexPath.row]["created_at"].stringValue)
+        var dateText:String = dates["year"]! + "/"
+        dateText += dates["month"]! + "/"
+        dateText += dates["day"]!
         cell.dateLabel.text = dateText
+
         cell.titleLabel.text = self.favoritePosts[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.favoritePosts[indexPath.row]["caption"].stringValue
         

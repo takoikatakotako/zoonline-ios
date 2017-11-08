@@ -387,6 +387,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         
+        if !UtilityLibrary.isLogin() {
+            return
+        }
         
         //画面遷移、投稿詳細画面へ
         if indexPath.row == 0{

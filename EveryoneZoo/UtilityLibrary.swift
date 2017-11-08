@@ -143,11 +143,22 @@ class UtilityLibrary: NSObject {
         var persedDic: Dictionary = ["year": "--", "month": "--", "day": "--", "hour": "--", "minute": "--", "second": "--" ]
 
         let split = text.components(separatedBy: "T")
+        if split.count != 2 {
+            return persedDic
+        }
+        
         let dateSplit = split[0].components(separatedBy: "-")
-
+        if dateSplit.count != 3 {
+            return persedDic
+        }
+        
         let timeDifferenceSplit = split[1].components(separatedBy: "+")
-        let timeSplit = timeDifferenceSplit[0].components(separatedBy: ":")
 
+        let timeSplit = timeDifferenceSplit[0].components(separatedBy: ":")
+        if timeSplit.count != 3 {
+            return persedDic
+        }
+        
         persedDic["year"] = dateSplit[0]
         persedDic["month"] = dateSplit[1]
         persedDic["day"] = dateSplit[2]

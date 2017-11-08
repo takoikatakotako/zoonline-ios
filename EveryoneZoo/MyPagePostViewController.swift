@@ -11,6 +11,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 import SDWebImage
+import SCLAlertView
 
 class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -71,13 +72,12 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
                     self.postsContents = json["response"]
                     self.postListTableView.reloadData()
                 }else{
-                
+                    SCLAlertView().showInfo("エラー", subTitle: "不明なエラーです")
                 }
-                
-                
+        
             case .failure(let error):
                 print(error)
-                //テーブルの再読み込み
+                SCLAlertView().showInfo("エラー", subTitle: "インターネットの接続を確認してください")
             }
         }
     }
@@ -115,9 +115,6 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
         print(self.postsContents[indexPath.row])
         
         let dates = UtilityLibrary.parseDates(text: self.postsContents[indexPath.row]["created_at"].stringValue)
-        
-        
-        
         var dateText:String = dates["year"]! + "/"
         dateText += dates["month"]! + "/"
         dateText += dates["day"]!

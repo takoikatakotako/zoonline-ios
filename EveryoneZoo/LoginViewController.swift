@@ -160,7 +160,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         forgetPassWordBtn.setTitleColor(UIColor.MainAppColor(), for: UIControlState.normal)
         forgetPassWordBtn.setTitle("パスワードを忘れた方", for: UIControlState.normal)
         forgetPassWordBtn.addTarget(self, action: #selector(forgetPassWordBtnClicked(sender:)), for: .touchUpInside)
-        self.view.addSubview(forgetPassWordBtn)
+       // self.view.addSubview(forgetPassWordBtn)
     }
     
     
@@ -256,8 +256,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
                     
                     //メールなどが違うと判断
                     //self.loginFailed.isHidden = false
-                    SCLAlertView().showInfo("Important info", subTitle: "ログインに失敗しますた。たぶんパスとか違う")
-                
+                    SCLAlertView().showInfo("ログイン失敗", subTitle: "メールアドレス、パスワードを確認してください。")
                 }else{
                     
                     //ログイン成功
