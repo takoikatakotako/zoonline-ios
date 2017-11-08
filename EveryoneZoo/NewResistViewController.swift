@@ -260,7 +260,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
             "email": mail,
             "name": userName,
             "password": passWord,
-            "confirm_success_url":"http://minzoo.herokuapp.com/register_confirmation"]
+            "confirm_success_url":API_CONFIRM_SUCCESS_URL]
         
         Alamofire.request(EveryZooAPI.getSignUp(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             

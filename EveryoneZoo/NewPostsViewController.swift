@@ -199,10 +199,9 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
             
             switch response.result {
             case .success:
-                print("Validation Successful")
-                
                 self.isNetWorkConnect = true
                 let json:JSON = JSON(response.result.value ?? kill)
+                print(json)
                 self.setImageBtns(json: json)
             case .failure(let error):
                 print(error)

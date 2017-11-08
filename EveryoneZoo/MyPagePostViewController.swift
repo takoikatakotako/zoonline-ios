@@ -65,10 +65,15 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
             case .success:
                 
                 let json:JSON = JSON(response.result.value ?? kill)
-                print(json)
-                self.postsContents = json
                 
-                self.postListTableView.reloadData()
+                if json["is_success"].boolValue {
+                    print(json)
+                    self.postsContents = json["response"]
+                    self.postListTableView.reloadData()
+                }else{
+                
+                }
+                
                 
             case .failure(let error):
                 print(error)
@@ -105,8 +110,17 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self))! as! MyPagePostCell
-        var dateText:String = self.postsContents[indexPath.row]["created_at"].stringValue
-        dateText = dateText.substring(to: dateText.index(dateText.startIndex, offsetBy: 10))
+        
+        print("----------")
+        print(self.postsContents[indexPath.row])
+        
+        let dates = UtilityLibrary.parseDates(text: self.postsContents[indexPath.row]["created_at"].stringValue)
+        
+        
+        
+        var dateText:String = dates["year"]! + "/"
+        dateText += dates["month"]! + "/"
+        dateText += dates["day"]!
         cell.dateLabel.text = dateText
         cell.titleLabel.text = self.postsContents[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.postsContents[indexPath.row]["caption"].stringValue

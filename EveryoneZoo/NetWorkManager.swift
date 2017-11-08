@@ -17,7 +17,7 @@ class NetWorkManager: NSObject {
     //push:/api/v0/users/{:自分のuser_id}/following/{:フォローしたいuser_id}
     func followUser(myUserId:Int,followUserId:Int){
         
-        let url:String = API_URL + "/api/v0/users/" + String(myUserId) + "/following/" + String(followUserId)
+        let url:String = API_URL + API_VERSION + "users/" + String(myUserId) + "/following/" + String(followUserId)
         
         Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
             
@@ -34,7 +34,7 @@ class NetWorkManager: NSObject {
     //delete:/api/v0/user/{:自分のuser_id}/following/{:フォロー解除したいuser_id}
     func unfollowUser(myUserId:Int,followUserId:Int){
         
-        let url:String = API_URL + "/api/v0/users/" + String(myUserId) + "/following/" + String(followUserId)
+        let url:String = API_URL + API_VERSION + "/users/" + String(myUserId) + "/following/" + String(followUserId)
         
         Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
             

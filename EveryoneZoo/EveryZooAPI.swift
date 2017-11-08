@@ -10,7 +10,10 @@ import UIKit
 
 //let API_URL:String = "http://minzoo.herokuapp.com/api/"
 //let API_URL:String = "http://localhost:3000/api/"
-let API_URL:String = "https://www.zooforeveryone.work/"
+let API_URL:String = "https://www.zooforeveryone.work/api/"
+
+//let API_CONFIRM_SUCCESS_URL = "http://minzoo.herokuapp.com/register_confirmation"
+let API_CONFIRM_SUCCESS_URL = "https://www.zooforeveryone.work/register_confirmation"
 
 let API_VERSION:String = "v0/"
 
