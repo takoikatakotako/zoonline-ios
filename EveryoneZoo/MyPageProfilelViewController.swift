@@ -35,7 +35,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     
     //表示するもの
     //let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","プロフィールの変更","メールアドレスの変更","パスワードの変更",""]
-    let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","プロフィールの変更","パスワードの変更"]
+    let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","プロフィールの変更","メールアドレスの変更"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
