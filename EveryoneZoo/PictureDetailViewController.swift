@@ -200,11 +200,15 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         }
         
         //PostImgView
-        //let postImgHeight:CGFloat = viewWidth*2
         cell.postImgView.frame = CGRect(x: 0, y: userInfoBtnHeight, width: viewWidth, height: postImgHeight)
         if let imageUrl = URL(string: self.postImgUrl){
             cell.postImgView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
         }
+        //画像にタッチイベントを追加
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
+        singleTap.numberOfTapsRequired = 1
+        cell.postImgView.addGestureRecognizer(singleTap)
+        
         
         //FavBtn
         //let favComentMenuBtnHeight:CGFloat = viewWidth*0.15
@@ -271,7 +275,27 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         return cellHeight
     }
     
+    
     //Mark: - Actions
+    
+    //MARK: シングルタップ時に実行される
+    func tapSingle(sender: UITapGestureRecognizer) {
+        print(sender.view?.tag ?? 400)
+        
+        if let img = sender.view as? UIImageView{
+            //画像拡大
+            let picExpandVC:PictureExpandVC = PictureExpandVC()
+            picExpandVC.statusBarHeight = self.statusBarHeight
+            picExpandVC.navigationBarHeight = self.navigationBarHeight
+            picExpandVC.image = img.image
+            picExpandVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(picExpandVC, animated: true, completion: nil)
+        }else{
+            //エラー
+        
+        }
+    }
+    
     //フォローボタンが押されたら呼ばれる
     func followBtnClicked(sender: FollowUserButton){
         
@@ -520,10 +544,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
                 //テーブルの再読み込み
             }
         }
-
-        
-        
-        
         
     }
     

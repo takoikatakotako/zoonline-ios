@@ -16,6 +16,7 @@
 		8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */; };
 		8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586711ED848F400802F54 /* UserInfoViewController.swift */; };
 		8D2533BE1F64FB4F00DB9C96 /* EditUserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2533BD1F64FB4F00DB9C96 /* EditUserProfileVC.swift */; };
+		8D2A9AEF1FB4F914006ECD20 /* PictureExpandVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */; };
 		8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */; };
 		8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113E1EEED5E6004BA744 /* LoginViewController.swift */; };
 		8D46EFBC1F2DEC3100FFD8D7 /* MyPagePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D46EFBB1F2DEC3100FFD8D7 /* MyPagePostCell.swift */; };
@@ -100,6 +101,7 @@
 		8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		8D1586711ED848F400802F54 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		8D2533BD1F64FB4F00DB9C96 /* EditUserProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserProfileVC.swift; sourceTree = "<group>"; };
+		8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureExpandVC.swift; sourceTree = "<group>"; };
 		8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		8D35113E1EEED5E6004BA744 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D46EFBB1F2DEC3100FFD8D7 /* MyPagePostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPagePostCell.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			children = (
 				8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */,
 				8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */,
+				8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */,
 			);
 			name = PostDetail;
 			sourceTree = "<group>";
@@ -820,6 +823,7 @@
 				8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */,
 				8DA4153D1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift in Sources */,
 				8D7343631F3A1CB700EB232E /* NewsListViewController.swift in Sources */,
+				8D2A9AEF1FB4F914006ECD20 /* PictureExpandVC.swift in Sources */,
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,

@@ -62,6 +62,7 @@ class PostDetailTableCell: UITableViewCell {
         postImgView.image = UIImage(named: "sample_loading")!
         postImgView.backgroundColor = UIColor.white
         postImgView.contentMode = UIViewContentMode.scaleAspectFit
+        postImgView.isUserInteractionEnabled = true
         contentView.addSubview(postImgView)
         
         //FavImg
@@ -125,7 +126,6 @@ class PostDetailTableCell: UITableViewCell {
 
     }
 }
-
 
 
 class FollowUserButton: UIButton {
