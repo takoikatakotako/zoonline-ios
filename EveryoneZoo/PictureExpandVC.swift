@@ -89,6 +89,7 @@ class PictureExpandVC: UIViewController,UIScrollViewDelegate {
     
     func doClose(sender: UIButton){
         
+        self.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.dismiss(animated: true, completion: nil)
     }
 }
