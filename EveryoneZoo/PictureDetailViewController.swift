@@ -288,6 +288,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             picExpandVC.statusBarHeight = self.statusBarHeight
             picExpandVC.navigationBarHeight = self.navigationBarHeight
             picExpandVC.image = img.image
+            picExpandVC.navigationTitle = self.postTitle
             picExpandVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             self.present(picExpandVC, animated: true, completion: nil)
         }else{
