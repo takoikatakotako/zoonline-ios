@@ -11,13 +11,9 @@ import Alamofire
 import SwiftyJSON
 import SDWebImage
 
-class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource {
+class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UITableViewDataSource {
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
     private var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
     private var timeLineTableView:UITableView = UITableView()
@@ -28,7 +24,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     //Contents
     var newsContents:JSON = []
 
-    var indicator: UIActivityIndicatorView!
+    //var indicator: UIActivityIndicatorView!
     
     //サポートボタン
     var supportBtn:UIButton!
@@ -49,7 +45,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         
         setNavigationBarBar()
         setTableView()
-        setActivityIndicator()
+        //setActivityIndicator()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +56,8 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
     
     // MARK: - Viewにパーツの設置
     // MARK: くるくるの生成
+    
+    /*
     func setActivityIndicator(){
         
         indicator = UIActivityIndicatorView()
@@ -68,7 +66,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         indicator.color = UIColor.MainAppColor()
         self.view.addSubview(indicator)
-    }
+    }*/
     
     // MARK: NavigationBarの設置
     func setNavigationBarBar(){
@@ -121,7 +119,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
                 self.newsContents = []
                 self.isNetWorkConnect = false
             }
-            self.indicator.stopAnimating()
+            self.hideIndicator()
             self.timeLineTableView.reloadData()
         }
     }
@@ -159,7 +157,7 @@ class TempTimeLineViewController: UIViewController ,UITableViewDelegate, UITable
         if !UtilityLibrary.isLogin() {
             timeLineTableView.reloadData()
         }else{
-            self.indicator.startAnimating()
+            self.showIndicater()
             getNews()
         }
     }

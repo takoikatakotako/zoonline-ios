@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A12A19BE65ED99ED482890E /* Pods_EveryoneZooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600BCE0ECEDD3B35A3B6B9B9 /* Pods_EveryoneZooUITests.framework */; };
 		72F50AA25E9B21009A0C6FAD /* Pods_EveryoneZoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */; };
+		8D07EF701FBC9B5600A37543 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* UIViewControllerExtension.swift */; };
 		8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */; };
 		8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */; };
 		8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */; };
@@ -94,6 +95,7 @@
 		600BCE0ECEDD3B35A3B6B9B9 /* Pods_EveryoneZooUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneZooUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneZoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		831076F39DE8E24A4BCF6907 /* Pods-EveryoneZooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8D07EF6F1FBC9B5600A37543 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureViewController.swift; sourceTree = "<group>"; };
 		8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityLibrary.swift; sourceTree = "<group>"; };
 		8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */,
+				8D07EF6F1FBC9B5600A37543 /* UIViewControllerExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -806,6 +809,7 @@
 				8DC719111F08A580003C5E00 /* PostTextsTableViewCell.swift in Sources */,
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
 				8DC7190F1F08A3FB003C5E00 /* PostSpaceTableViewCell.swift in Sources */,
+				8D07EF701FBC9B5600A37543 /* UIViewControllerExtension.swift in Sources */,
 				8D48576E1F40457F00608A56 /* NewPostsViewController.swift in Sources */,
 				8DD2A0DD1F556609002048B4 /* MyPageProfilelViewController.swift in Sources */,
 				8DF3A73E1F58724300A5A3B1 /* SupportVC.swift in Sources */,

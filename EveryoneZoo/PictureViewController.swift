@@ -41,6 +41,8 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         setIndicator()
         setPageMenu()
         startIndicator()
+        
+        
     }
     
     // MARK: - Viewにパーツの設置
@@ -118,6 +120,8 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
     }
     
     func startIndicator() {
+        
+        
         self.view.bringSubview(toFront: indicator)
         indicator.startAnimating()
     }
