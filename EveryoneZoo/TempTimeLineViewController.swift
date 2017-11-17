@@ -17,7 +17,6 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     private var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
     private var timeLineTableView:UITableView = UITableView()
-    
     private var isNetWorkConnect:Bool!
 
 
@@ -55,18 +54,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     }
     
     // MARK: - Viewにパーツの設置
-    // MARK: くるくるの生成
-    
-    /*
-    func setActivityIndicator(){
-        
-        indicator = UIActivityIndicatorView()
-        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4, width: viewWidth*0.3, height: viewWidth*0.3)
-        indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        indicator.color = UIColor.MainAppColor()
-        self.view.addSubview(indicator)
-    }*/
+
     
     // MARK: NavigationBarの設置
     func setNavigationBarBar(){

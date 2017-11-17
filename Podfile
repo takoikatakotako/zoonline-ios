@@ -12,6 +12,7 @@ target 'EveryoneZoo' do
   pod 'AlamofireImage', '~> 3.1'
   pod 'SDWebImage/GIF'
   pod 'PageMenu'
+  pod 'Google-Mobile-Ads-SDK'
 
   target 'EveryoneZooTests' do
     inherit! :search_paths
