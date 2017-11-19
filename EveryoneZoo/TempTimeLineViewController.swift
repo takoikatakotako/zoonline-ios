@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SDWebImage
+import GoogleMobileAds
+
 
 class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UITableViewDataSource {
     
@@ -20,6 +22,9 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     private var isNetWorkConnect:Bool!
 
 
+    var bannerView: GADBannerView!
+
+    
     //Contents
     var newsContents:JSON = []
 
@@ -45,6 +50,14 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         setNavigationBarBar()
         setTableView()
         //setActivityIndicator()
+        
+        // In this case, we instantiate the banner with desired ad size.
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+
+        addBannerViewToView(bannerView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +65,28 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         
         refleshTableView()
     }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(bannerView)
+        self.view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: bottomLayoutGuide,
+                                attribute: .top,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+            ])
+    }
+    
     
     // MARK: - Viewにパーツの設置
 
