@@ -110,6 +110,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         timeLineTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         timeLineTableView.register(NoLoginTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NoLoginTableViewCell.self))
         timeLineTableView.register(NetWorkErrorTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self))
+        timeLineTableView.register(BannerAdTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(BannerAdTableViewCell.self))
         timeLineTableView.rowHeight = viewWidth*0.28
         self.view.addSubview(timeLineTableView)
         
@@ -220,9 +221,15 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
             return cell
         }
         
+        
+        if  indexPath.row == 2 {
+            let cell:BannerAdTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(BannerAdTableViewCell.self), for: indexPath) as! BannerAdTableViewCell
+            return cell
+        }
+        
+        
         //myItems配列の中身をテキストにして登録した
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
-
         let dates = UtilityLibrary.parseDates(text: self.newsContents[indexPath.row]["updated_at"].stringValue)
         var dateText:String = dates["year"]! + "/"
         dateText += dates["month"]! + "/"
