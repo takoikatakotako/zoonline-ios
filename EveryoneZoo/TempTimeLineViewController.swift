@@ -12,7 +12,6 @@ import SwiftyJSON
 import SDWebImage
 import GoogleMobileAds
 
-
 class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UITableViewDataSource {
     
     //width, height
@@ -52,12 +51,11 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         //setActivityIndicator()
         
         // In this case, we instantiate the banner with desired ad size.
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
 
-        addBannerViewToView(bannerView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +66,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     
     func addBannerViewToView(_ bannerView: GADBannerView) {
         bannerView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(bannerView)
+        //self.view.addSubview(bannerView)
         self.view.addConstraints(
             [NSLayoutConstraint(item: bannerView,
                                 attribute: .bottom,
@@ -224,6 +222,30 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         
         if  indexPath.row == 2 {
             let cell:BannerAdTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(BannerAdTableViewCell.self), for: indexPath) as! BannerAdTableViewCell
+            //addBannerViewToView(bannerView)
+
+            bannerView.translatesAutoresizingMaskIntoConstraints = false
+            cell.addSubview(bannerView)
+            /*
+            cell.addConstraints(
+                [NSLayoutConstraint(item: bannerView,
+                                    attribute: .bottom,
+                                    relatedBy: .equal,
+                                    toItem: bottomLayoutGuide,
+                                    attribute: .top,
+                                    multiplier: 1,
+                                    constant: 0),
+                 NSLayoutConstraint(item: bannerView,
+                                    attribute: .centerX,
+                                    relatedBy: .equal,
+                                    toItem: view,
+                                    attribute: .centerX,
+                                    multiplier: 1,
+                                    constant: 0)
+                ])
+            
+            */
+            
             return cell
         }
         
