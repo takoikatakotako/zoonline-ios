@@ -15,22 +15,14 @@ import GoogleMobileAds
 class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UITableViewDataSource {
     
     //width, height
-    private var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
     private var timeLineTableView:UITableView = UITableView()
     private var isNetWorkConnect:Bool!
 
-
     var bannerView: GADBannerView!
-
     
     //Contents
     var newsContents:JSON = []
-
-    //var indicator: UIActivityIndicatorView!
-    
-    //サポートボタン
-    var supportBtn:UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +38,21 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         
         isNetWorkConnect = true
         
-        setNavigationBarBar()
+        setNavigationBarBar(navTitle: "タイムライン")
         setTableView()
-        //setActivityIndicator()
         
         // In this case, we instantiate the banner with desired ad size.
         bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_PostDetail"))!
+        if !didSupport && UtilityLibrary.isLogin(){
+            
+            self.setSupportBtn(btnHeight: self.tableViewHeight, imgName: "support_timeline")
+        }
 
     }
 
@@ -64,41 +62,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         refleshTableView()
     }
     
-    func addBannerViewToView(_ bannerView: GADBannerView) {
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
-        //self.view.addSubview(bannerView)
-        self.view.addConstraints(
-            [NSLayoutConstraint(item: bannerView,
-                                attribute: .bottom,
-                                relatedBy: .equal,
-                                toItem: bottomLayoutGuide,
-                                attribute: .top,
-                                multiplier: 1,
-                                constant: 0),
-             NSLayoutConstraint(item: bannerView,
-                                attribute: .centerX,
-                                relatedBy: .equal,
-                                toItem: view,
-                                attribute: .centerX,
-                                multiplier: 1,
-                                constant: 0)
-            ])
-    }
-    
-    
     // MARK: - Viewにパーツの設置
-
-    
-    // MARK: NavigationBarの設置
-    func setNavigationBarBar(){
-
-        //UINavigationBarの位置とサイズを指定
-        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
-        UINavigationBar.appearance().tintColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        self.title = "タイムライン"
-    }
-    
     func setTableView() {
         
         //テーブルビューの初期化
@@ -146,27 +110,6 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         }
     }
 
-
-    
-    func setSupportBtn() {
-        //サポート
-        supportBtn = UIButton()
-        supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
-        supportBtn.setImage(UIImage(named:"support_timeline"), for: UIControlState.normal)
-        supportBtn.imageView?.contentMode = UIViewContentMode.bottomRight
-        supportBtn.contentHorizontalAlignment = .fill
-        supportBtn.contentVerticalAlignment = .fill
-        supportBtn.backgroundColor = UIColor.clear
-        supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
-        self.view.addSubview(supportBtn)
-    }
-
-    func supportBtnClicked(sender: UIButton){
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_TimeLine")
-        supportBtn.removeFromSuperview()
-    }
     
     func scrollReflesh(sender : UIRefreshControl) {
         self.timeLineTableView.refreshControl?.endRefreshing()
@@ -226,25 +169,6 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
 
             bannerView.translatesAutoresizingMaskIntoConstraints = false
             cell.addSubview(bannerView)
-            /*
-            cell.addConstraints(
-                [NSLayoutConstraint(item: bannerView,
-                                    attribute: .bottom,
-                                    relatedBy: .equal,
-                                    toItem: bottomLayoutGuide,
-                                    attribute: .top,
-                                    multiplier: 1,
-                                    constant: 0),
-                 NSLayoutConstraint(item: bannerView,
-                                    attribute: .centerX,
-                                    relatedBy: .equal,
-                                    toItem: view,
-                                    attribute: .centerX,
-                                    multiplier: 1,
-                                    constant: 0)
-                ])
-            
-            */
             
             return cell
         }
@@ -287,26 +211,5 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(picDetailView, animated: true)
-    }
-    
-    
-    //Mark: 未ログイン関係の処理
-    
-    //ログインボタンが押されたら呼ばれます
-    func loginBtnClicked(sender: UIButton){
-        
-        let loginView:LoginViewController = LoginViewController()
-        loginView.statusBarHeight = self.statusBarHeight
-        loginView.navigationBarHeight = self.navigationBarHeight
-        self.present(loginView, animated: true, completion: nil)
-    }
-    
-    //登録ボタンが押されたら呼ばれます
-    func resistBtnClicked(sender: UIButton){
-        
-        let loginView:NewResistViewController = NewResistViewController()
-        loginView.statusBarHeight = self.statusBarHeight
-        loginView.navigationBarHeight = self.navigationBarHeight
-        self.present(loginView, animated: true, completion: nil)
     }
 }

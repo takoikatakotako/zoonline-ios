@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A12A19BE65ED99ED482890E /* Pods_EveryoneZooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600BCE0ECEDD3B35A3B6B9B9 /* Pods_EveryoneZooUITests.framework */; };
 		72F50AA25E9B21009A0C6FAD /* Pods_EveryoneZoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */; };
-		8D07EF701FBC9B5600A37543 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* UIViewControllerExtension.swift */; };
+		8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */; };
 		8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */; };
 		8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */; };
 		8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */; };
@@ -96,7 +96,7 @@
 		600BCE0ECEDD3B35A3B6B9B9 /* Pods_EveryoneZooUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneZooUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneZoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		831076F39DE8E24A4BCF6907 /* Pods-EveryoneZooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests.release.xcconfig"; sourceTree = "<group>"; };
-		8D07EF6F1FBC9B5600A37543 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustumViewController.swift; sourceTree = "<group>"; };
 		8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureViewController.swift; sourceTree = "<group>"; };
 		8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityLibrary.swift; sourceTree = "<group>"; };
 		8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +237,15 @@
 			name = MyPageItem;
 			sourceTree = "<group>";
 		};
+		8D532C4E1FC3496700D2E532 /* Inheritance */ = {
+			isa = PBXGroup;
+			children = (
+				8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */,
+				8D7CDC3B1F14F12D00C3844E /* NavigationBarLabel.swift */,
+			);
+			name = Inheritance;
+			sourceTree = "<group>";
+		};
 		8D57A7951F89DADE00A85D83 /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */,
-				8D07EF6F1FBC9B5600A37543 /* UIViewControllerExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -290,14 +298,6 @@
 				8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */,
 			);
 			name = Deprecated;
-			sourceTree = "<group>";
-		};
-		8D6215A41EC2011100593E55 /* ComoonUI */ = {
-			isa = PBXGroup;
-			children = (
-				8D7CDC3B1F14F12D00C3844E /* NavigationBarLabel.swift */,
-			);
-			name = ComoonUI;
 			sourceTree = "<group>";
 		};
 		8D6215A51EC2014200593E55 /* Post */ = {
@@ -369,8 +369,8 @@
 				8D5F25A01F8B3FFA008D6BF1 /* Deprecated */,
 				8D57A7951F89DADE00A85D83 /* Librarys */,
 				8D57A7961F89DB2100A85D83 /* Extensions */,
+				8D532C4E1FC3496700D2E532 /* Inheritance */,
 				8D9DE17F1EE4147500121FC1 /* Manager */,
-				8D6215A41EC2011100593E55 /* ComoonUI */,
 				8DA4153B1F93A9E300A38AC8 /* CommonTableCells */,
 				8D68887E1E9E7EF000140508 /* ViewController */,
 				8D73B4281E7AE08F00E3B301 /* Main.storyboard */,
@@ -812,7 +812,7 @@
 				8DC719111F08A580003C5E00 /* PostTextsTableViewCell.swift in Sources */,
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
 				8DC7190F1F08A3FB003C5E00 /* PostSpaceTableViewCell.swift in Sources */,
-				8D07EF701FBC9B5600A37543 /* UIViewControllerExtension.swift in Sources */,
+				8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */,
 				8D48576E1F40457F00608A56 /* NewPostsViewController.swift in Sources */,
 				8DD2A0DD1F556609002048B4 /* MyPageProfilelViewController.swift in Sources */,
 				8DF3A73E1F58724300A5A3B1 /* SupportVC.swift in Sources */,
