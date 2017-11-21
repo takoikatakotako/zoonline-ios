@@ -27,6 +27,8 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.pageName = PageName.TimeLine.rawValue
+        
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height

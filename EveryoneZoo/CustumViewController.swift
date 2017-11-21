@@ -18,24 +18,9 @@ class CustumViewController:UIViewController {
     
     private var indicator:UIActivityIndicatorView!
     
-    var supportBtn:UIButton!
-        
-    enum SupportKeyName: String {
-        case Field = "KEY_SUPPORT_Field"
-        case TimeLine = "KEY_SUPPORT_TimeLine"
-        case Post = "KEY_SUPPORT_Post"
-        case Official = "KEY_SUPPORT_Zoo"
-        case Detail = "KEY_SUPPORT_PostDetail"
-    }
+    var supportBtn:SupportBtn!
     
-    enum SupportImgName: String {
-        case Field = "KEY_SUPPORT_Field"
-        case TimeLine = "KEY_SUPPORT_TimeLine"
-        case Post = "KEY_SUPPORT_Post"
-        case Official = "KEY_SUPPORT_Zoo"
-        case Detail = "KEY_SUPPORT_PostDetail"
-    }
-    
+    var pageName = 0
     
     // MARK: NavigationBar
     func setNavigationBarBar(navTitle:String){
@@ -47,19 +32,15 @@ class CustumViewController:UIViewController {
     }
     
     // MARK: SupportBtn
-    func setSupportBtn(btnHeight: CGFloat, imgName:String) {
+    func setSupportBtn(btnHeight: CGFloat) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_TimeLine"))!
+        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: SupportBtn.getSupportKey(pageNum: pageName)))!
         if !didSupport && UtilityLibrary.isLogin(){
         
-            supportBtn = UIButton()
+            supportBtn = SupportBtn()
             supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: btnHeight)
-            supportBtn.setImage(UIImage(named:imgName), for: UIControlState.normal)
-            supportBtn.imageView?.contentMode = UIViewContentMode.bottomRight
-            supportBtn.contentHorizontalAlignment = .fill
-            supportBtn.contentVerticalAlignment = .fill
-            supportBtn.backgroundColor = UIColor.clear
+            supportBtn.setImage(UIImage(named:SupportBtn.getSupportImgName(pageNum: pageName)), for: UIControlState.normal)
             supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
             self.view.addSubview(supportBtn)
         }
@@ -68,7 +49,7 @@ class CustumViewController:UIViewController {
     func supportBtnClicked(sender: UIButton){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_TimeLine")
+        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: SupportBtn.getSupportKey(pageNum: pageName))
         supportBtn.removeFromSuperview()
     }
     
