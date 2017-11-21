@@ -33,15 +33,21 @@ class CustumViewController:UIViewController {
     
     // MARK: SupportBtn
     func setSupportBtn(btnHeight: CGFloat, imgName:String) {
-        supportBtn = UIButton()
-        supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: btnHeight)
-        supportBtn.setImage(UIImage(named:imgName), for: UIControlState.normal)
-        supportBtn.imageView?.contentMode = UIViewContentMode.bottomRight
-        supportBtn.contentHorizontalAlignment = .fill
-        supportBtn.contentVerticalAlignment = .fill
-        supportBtn.backgroundColor = UIColor.clear
-        supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
-        self.view.addSubview(supportBtn)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_TimeLine"))!
+        if !didSupport && UtilityLibrary.isLogin(){
+        
+            supportBtn = UIButton()
+            supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: btnHeight)
+            supportBtn.setImage(UIImage(named:imgName), for: UIControlState.normal)
+            supportBtn.imageView?.contentMode = UIViewContentMode.bottomRight
+            supportBtn.contentHorizontalAlignment = .fill
+            supportBtn.contentVerticalAlignment = .fill
+            supportBtn.backgroundColor = UIColor.clear
+            supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
+            self.view.addSubview(supportBtn)
+        }
     }
     
     func supportBtnClicked(sender: UIButton){

@@ -18,16 +18,15 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     private var tableViewHeight:CGFloat!
     private var timeLineTableView:UITableView = UITableView()
     private var isNetWorkConnect:Bool!
-
-    var bannerView: GADBannerView!
     
     //Contents
     var newsContents:JSON = []
-    
+
+    var bannerView: GADBannerView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //Viewの大きさを取得
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
@@ -40,20 +39,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         
         setNavigationBarBar(navTitle: "タイムライン")
         setTableView()
-        
-        // In this case, we instantiate the banner with desired ad size.
-        bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_PostDetail"))!
-        if !didSupport && UtilityLibrary.isLogin(){
-            
-            self.setSupportBtn(btnHeight: self.tableViewHeight, imgName: "support_timeline")
-        }
-
+        setAd()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,7 +59,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         timeLineTableView.register(NoLoginTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NoLoginTableViewCell.self))
         timeLineTableView.register(NetWorkErrorTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self))
         timeLineTableView.register(BannerAdTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(BannerAdTableViewCell.self))
-        timeLineTableView.rowHeight = viewWidth*0.28
+        timeLineTableView.rowHeight = viewWidth * 0.28
         self.view.addSubview(timeLineTableView)
         
         //リフレッシュコントロールの追加
@@ -110,10 +96,17 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         }
     }
 
+    func setAd() {
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+    }
     
+    // MARK: - テーブルビュー関連
     func scrollReflesh(sender : UIRefreshControl) {
         self.timeLineTableView.refreshControl?.endRefreshing()
-        
         refleshTableView()
     }
     
@@ -126,7 +119,6 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
             getNews()
         }
     }
-    
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,6 +133,10 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
 
         if !UtilityLibrary.isLogin() { return tableViewHeight }
         if !isNetWorkConnect { return tableViewHeight }
+        
+        if indexPath.row == 2 || indexPath.row == 7{
+            return 50
+        }
         
         return viewWidth*0.28
     }
@@ -162,26 +158,17 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
             return cell
         }
         
-        
-        if  indexPath.row == 2 {
+        if  indexPath.row == 2 || indexPath.row == 7 {
             let cell:BannerAdTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(BannerAdTableViewCell.self), for: indexPath) as! BannerAdTableViewCell
-            //addBannerViewToView(bannerView)
-
-            bannerView.translatesAutoresizingMaskIntoConstraints = false
             cell.addSubview(bannerView)
-            
             return cell
         }
         
-        
-        //myItems配列の中身をテキストにして登録した
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         let dates = UtilityLibrary.parseDates(text: self.newsContents[indexPath.row]["updated_at"].stringValue)
         var dateText:String = dates["year"]! + "/"
-        dateText += dates["month"]! + "/"
-        dateText += dates["day"]!
+        dateText += dates["month"]! + "/" + dates["day"]!
         cell.dateLabel.text = dateText
-        
         cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.newsContents[indexPath.row]["caption"].stringValue
         let imageUrl = URL(string:self.newsContents[indexPath.row]["itemImage"].stringValue)!
@@ -192,13 +179,8 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        if !UtilityLibrary.isLogin() {
-            return
-        }
-        
-        if !isNetWorkConnect {
-            return
-        }
+        if !UtilityLibrary.isLogin() { return }
+        if !isNetWorkConnect { return }
         
         goDetailView(postID: self.newsContents[indexPath.row]["id"].intValue)
     }
