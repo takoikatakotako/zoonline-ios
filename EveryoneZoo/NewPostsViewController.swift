@@ -19,18 +19,13 @@ protocol NewPostsDelegate: class  {
     func stopIndicator()
 }
 
-class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class NewPostsViewController: CustumViewController,UITableViewDelegate, UITableViewDataSource {
     
     //delegate
     weak var delegate: NewPostsDelegate?
     
     //width, height
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
-    var statusBarHeight:CGFloat!
-    var navigationBarHeight:CGFloat!
     var pageMenuHeight:CGFloat!
-    var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
 
     //view parts
@@ -42,8 +37,6 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
     var isNetWorkConnect:Bool = true
     
     //サポートボタン
-    let supportBtn:UIButton = UIButton()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,35 +51,14 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Field"))!
         if !didSupport {
-            setSupportBtn()
+            //setSupportBtn()
         }
         
         //network
         dowonloadJsons()
         
-        self.delegate?.startIndicator()
-
     }
 
-    func setSupportBtn() {
-        //サポート
-        supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
-        supportBtn.setImage(UIImage(named:"support_plaza"), for: UIControlState.normal)
-        supportBtn.imageView?.contentMode = UIViewContentMode.bottomRight
-        supportBtn.contentHorizontalAlignment = .fill
-        supportBtn.contentVerticalAlignment = .fill
-        supportBtn.backgroundColor = UIColor.clear
-        supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
-        self.view.addSubview(supportBtn)
-    }
-    
-    func supportBtnClicked(sender: UIButton){
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Field")
-        supportBtn.removeFromSuperview()
-    }
-    
-    
     // MARK: - Viewにパーツの設置
     
     // MARK: テーブルビューの生成
@@ -203,6 +175,9 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
                 self.setImageBtns(json: json)
+                
+                self.hideIndicator()
+
             case .failure(let error):
                 print(error)
                 self.isNetWorkConnect = false
@@ -235,7 +210,6 @@ class NewPostsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func scrollReflesh(sender : UIRefreshControl) {
         
-        self.delegate?.startIndicator()
         dowonloadJsons()
     }
 }

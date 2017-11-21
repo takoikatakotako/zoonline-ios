@@ -9,25 +9,17 @@
 import UIKit
 import PageMenu
 
-class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelegate, PopularPostsDelegate{
+class FieldViewController: CustumViewController,CAPSPageMenuDelegate ,NewPostsDelegate, PopularPostsDelegate{
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
-
     private var pageMenuHeight:CGFloat!
     private var contentsViewHeight:CGFloat!
     
     var pageMenu : CAPSPageMenu?
-    var indicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Viewの大きさを取得
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
@@ -38,11 +30,8 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         contentsViewHeight = viewHeight
         
         setNavigationBar()
-        setIndicator()
         setPageMenu()
-        startIndicator()
-        
-        
+        self.showIndicater()
     }
     
     // MARK: - Viewにパーツの設置
@@ -59,7 +48,6 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
     
     func setPageMenu() {
         
-        // Array to keep track of controllers in page menu
         var controllerArray : [UIViewController] = []
         
         let NewPostsVC : NewPostsViewController = NewPostsViewController()
@@ -100,15 +88,6 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
         self.view.addSubview(pageMenu!.view)
     }
     
-    func setIndicator(){
-        indicator = UIActivityIndicatorView()
-        indicator.frame = CGRect(x: viewWidth*0.3, y: viewHeight*0.4, width: viewWidth*0.4, height: navigationBarHeight)
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        indicator.color = UIColor.MainAppColor()
-        indicator.hidesWhenStopped = true
-        self.view.addSubview(indicator)
-    }
-    
     func goDetailView(postID:Int) {
         //画面遷移、投稿詳細画面へ
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
@@ -120,13 +99,11 @@ class FieldViewController: UIViewController,CAPSPageMenuDelegate ,NewPostsDelega
     }
     
     func startIndicator() {
-        
-        
-        self.view.bringSubview(toFront: indicator)
-        indicator.startAnimating()
+        self.showIndicater()
     }
     
     func stopIndicator()  {
-        indicator.stopAnimating()
+        self.hideIndicator()
     }
+
 }

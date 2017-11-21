@@ -56,7 +56,6 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
         //network
         dowonloadJsons()
         
-        self.delegate?.startIndicator()
     }
     
     
@@ -168,7 +167,6 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
         Alamofire.request(EveryZooAPI.getPopularPosts()).responseJSON{ response in
             
             self.pictureTableView.refreshControl?.endRefreshing()
-            self.delegate?.stopIndicator()
             
             switch response.result {
             case .success:
@@ -214,7 +212,6 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
     func scrollReflesh(sender : UIRefreshControl) {
         
         //network
-        self.delegate?.startIndicator()
         dowonloadJsons()
     }
 }

@@ -36,8 +36,6 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     
     //テーブルビューインスタンス
     private var newsTableView: UITableView!
-    var indicator: UIActivityIndicatorView!
-
     
     //サポートボタン
     var supportBtn:UIButton!
@@ -51,8 +49,6 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+pageMenuHeight+tabBarHeight)
         
         setTableView()
-        setActivityIndicator()
-        indicator.startAnimating()
         getNews()
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -71,18 +67,6 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         newsTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         newsTableView.rowHeight = viewWidth*0.28
         self.view.addSubview(newsTableView)
-    }
-    
-    
-    // MARK: くるくるの生成
-    func setActivityIndicator(){
-        
-        indicator = UIActivityIndicatorView()
-        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.3, width: viewWidth*0.3, height: viewWidth*0.3)
-        indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        indicator.color = UIColor.MainAppColor()
-        self.view.addSubview(indicator)
     }
     
     func setSupportBtn() {
@@ -120,8 +104,6 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
                 print(json["is_success"].stringValue)
                 //print(json["content"].arrayValue)
                 self.newsContents = json["content"]
-                
-                self.indicator.stopAnimating()
                 self.newsTableView.reloadData()
                 
             case .failure(let error):

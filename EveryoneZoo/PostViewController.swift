@@ -56,7 +56,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         setNavigationBar()
         setTableView()
         setActivityIndicator()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {

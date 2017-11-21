@@ -183,7 +183,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         print(string)
         
         //ChangeLoginBtn
-        if self.mailTextField.text == "ユーザー名またはメールアドレス" || self.passWordTextField.text == "パスワード" {
+        if self.mailTextField.text == "メールアドレス" || self.passWordTextField.text == "パスワード" {
             loginBtn.isEnabled = false
             loginBtn.backgroundColor = UIColor.gray
         }else if (self.mailTextField.text?.isEmpty)! || (self.passWordTextField.text?.isEmpty)!{

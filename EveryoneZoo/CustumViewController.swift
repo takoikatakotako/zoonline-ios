@@ -19,12 +19,27 @@ class CustumViewController:UIViewController {
     private var indicator:UIActivityIndicatorView!
     
     var supportBtn:UIButton!
+        
+    enum SupportKeyName: String {
+        case Field = "KEY_SUPPORT_Field"
+        case TimeLine = "KEY_SUPPORT_TimeLine"
+        case Post = "KEY_SUPPORT_Post"
+        case Official = "KEY_SUPPORT_Zoo"
+        case Detail = "KEY_SUPPORT_PostDetail"
+    }
+    
+    enum SupportImgName: String {
+        case Field = "KEY_SUPPORT_Field"
+        case TimeLine = "KEY_SUPPORT_TimeLine"
+        case Post = "KEY_SUPPORT_Post"
+        case Official = "KEY_SUPPORT_Zoo"
+        case Detail = "KEY_SUPPORT_PostDetail"
+    }
     
     
     // MARK: NavigationBar
     func setNavigationBarBar(navTitle:String){
         
-        //UINavigationBarの位置とサイズを指定
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
         UINavigationBar.appearance().tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
@@ -73,7 +88,10 @@ class CustumViewController:UIViewController {
     }
     
     func hideIndicator() {
-        indicator.removeFromSuperview()
+        
+        if let showingIndicator = indicator {
+            showingIndicator.removeFromSuperview()
+        }
     }
     
     //Mark: 未ログイン関係の処理

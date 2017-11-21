@@ -9,15 +9,10 @@
 import UIKit
 import PageMenu
 
-class ZooListViewController: UIViewController,NewsDelegate,CAPSPageMenuDelegate,OfficialDelegate {
+class ZooListViewController: CustumViewController,NewsDelegate,CAPSPageMenuDelegate,OfficialDelegate {
     
     //width, height
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
-    var statusBarHeight:CGFloat!
-    var navigationBarHeight:CGFloat!
     var pageMenuHeight:CGFloat!
-    var tabBarHeight:CGFloat!
     private var contentsViewHeight:CGFloat!
     
     var pageMenu : CAPSPageMenu?
@@ -36,9 +31,7 @@ class ZooListViewController: UIViewController,NewsDelegate,CAPSPageMenuDelegate,
         print(contentsViewHeight)
         setNavigationBar()
 
-        // Array to keep track of controllers in page menu
         var controllerArray : [UIViewController] = []
-        
         let controller : NewsListViewController = NewsListViewController()
         controller.title = "ニュース"
         controller.delegate = self
@@ -56,7 +49,6 @@ class ZooListViewController: UIViewController,NewsDelegate,CAPSPageMenuDelegate,
         controller2.tabBarHeight = tabBarHeight
         controller2.pageMenuHeight = pageMenuHeight
         controllerArray.append(controller2)
-        
         
         let parameters: [CAPSPageMenuOption] = [
             .scrollMenuBackgroundColor(UIColor.white),
@@ -79,27 +71,14 @@ class ZooListViewController: UIViewController,NewsDelegate,CAPSPageMenuDelegate,
         self.view.addSubview(pageMenu!.view)
     }
     
-    func willMoveToPage(_ controller: UIViewController, index: Int){
-    
-    }
+    func willMoveToPage(_ controller: UIViewController, index: Int){}
     
     func didMoveToPage(_ controller: UIViewController, index: Int){}
-    
     
     
     // MARK: - Viewにパーツの設置
     func setNavigationBar() {
         
-        //ステータスバー部分の覆い
-        let statusBgView:UIView = UIView()
-        statusBgView.frame = CGRect(x: 0, y: -navigationBarHeight*2, width: viewWidth, height: navigationBarHeight*2)
-        statusBgView.backgroundColor = UIColor.MainAppColor()
-        self.view.addSubview(statusBgView)
-        
-        //ナビゲーションコントローラーの色の変更
-        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
-        self.navigationController?.navigationBar.isTranslucent = false
-        UINavigationBar.appearance().tintColor = UIColor.white
         
         //ナビゲーションアイテムを作成
         let titleLabel:NavigationBarLabel = NavigationBarLabel()
