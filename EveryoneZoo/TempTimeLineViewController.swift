@@ -20,10 +20,12 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     private var isNetWorkConnect:Bool!
     
     //Contents
-    var newsContents:JSON = []
+    var timeLineContents:JSON = []
 
+    //Ad
     var bannerView: GADBannerView!
-
+    var adInsertNums = [3, 9]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -85,12 +87,12 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
                 
                 if json["is_success"].boolValue {
                     print(json["content"].arrayValue)
-                    self.newsContents = json["content"]
+                    self.timeLineContents = json["content"]
                 }
                 
             case .failure(let error):
                 print(error)
-                self.newsContents = []
+                self.timeLineContents = []
                 self.isNetWorkConnect = false
             }
             self.hideIndicator()
@@ -100,7 +102,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
 
     func setAd() {
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = ADMOB_BANNER_ID
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +130,8 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         if !UtilityLibrary.isLogin() { return 1}
         if !isNetWorkConnect { return 1 }
         
-        return newsContents.count
+        //timeLineContentsと広告配列の和
+        return timeLineContents.count + (calcIndexDiff(indexRow: timeLineContents.count - 1) - timeLineContents.count)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -136,7 +139,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         if !UtilityLibrary.isLogin() { return tableViewHeight }
         if !isNetWorkConnect { return tableViewHeight }
         
-        if indexPath.row == 3 || indexPath.row == 8{
+        if adInsertNums.contains(indexPath.row){
             return 50
         }
         
@@ -160,22 +163,39 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
             return cell
         }
         
-        if  indexPath.row == 3 || indexPath.row == 8 {
+        if adInsertNums.contains(indexPath.row) {
             let cell:BannerAdTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(BannerAdTableViewCell.self), for: indexPath) as! BannerAdTableViewCell
             cell.addSubview(bannerView)
             return cell
         }
         
+        print("--------")
+        print(indexPath.row)
+        print(calcIndexDiff(indexRow: indexPath.row))
+        
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
-        let dates = UtilityLibrary.parseDates(text: self.newsContents[indexPath.row]["updated_at"].stringValue)
+        let dates = UtilityLibrary.parseDates(text: self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["updated_at"].stringValue)
         var dateText:String = dates["year"]! + "/"
         dateText += dates["month"]! + "/" + dates["day"]!
         cell.dateLabel.text = dateText
-        cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
-        cell.commentLabel.text = self.newsContents[indexPath.row]["caption"].stringValue
-        let imageUrl = URL(string:self.newsContents[indexPath.row]["itemImage"].stringValue)!
-        cell.thumbnailImg.sd_setImage(with: imageUrl)
+        cell.titleLabel.text = self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["title"].stringValue
+        cell.commentLabel.text = self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["caption"].stringValue
+        if let imageUrl = URL(string:self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["itemImage"].stringValue){
+            cell.thumbnailImg.sd_setImage(with: imageUrl)
+        }
         return cell
+    }
+    
+    //Adをインサートしたことでindexがずれるので、それを修正
+    func calcIndexDiff(indexRow:Int)->Int{
+    
+        var indexDiff = 0
+        for i in adInsertNums{
+            if indexRow > i {
+                indexDiff += 1
+            }
+        }
+        return indexRow - indexDiff
     }
     
     //Mark: テーブルビューのセルが押されたら呼ばれる
@@ -183,8 +203,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
 
         if !UtilityLibrary.isLogin() { return }
         if !isNetWorkConnect { return }
-        
-        goDetailView(postID: self.newsContents[indexPath.row]["id"].intValue)
+        goDetailView(postID: self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["id"].intValue)
     }
     
     func goDetailView(postID:Int) {

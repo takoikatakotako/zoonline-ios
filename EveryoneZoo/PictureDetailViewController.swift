@@ -12,8 +12,6 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 import SCLAlertView
-import GoogleMobileAds
-
 
 class PictureDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -59,10 +57,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     
     var myComposeView : SLComposeViewController!
     
-    
-    var interstitial: GADInterstitial!
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,10 +78,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         
         //投稿の情報の取得
         getPostInfo(postID: self.postID)
-        
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        let request = GADRequest()
-        interstitial.load(request)
     }
     
     // MARK: - Viewにパーツの設置
@@ -309,10 +299,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     
     //フォローボタンが押されたら呼ばれる
     func followBtnClicked(sender: FollowUserButton){
-        
-        if interstitial.isReady {
-            interstitial.present(fromRootViewController: self)
-        }
         
         if !(UtilityLibrary.isLogin()){
             SCLAlertView().showInfo("ログインしてね", subTitle: "フォロー機能を使うにはログインが必要だよ！")
