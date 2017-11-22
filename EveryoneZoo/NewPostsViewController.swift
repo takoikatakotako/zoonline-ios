@@ -41,22 +41,18 @@ class NewPostsViewController: CustumViewController,UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.pageName = PageName.Field.rawValue
+        
         //画面横サイズを取得
         self.viewWidth = self.view.frame.width
         self.viewHeight = self.view.frame.height
         self.tableViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + pageMenuHeight + tabBarHeight)
 
         setTableView()
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Field"))!
-        if !didSupport {
-            //setSupportBtn()
-        }
+        setSupportBtn(btnHeight: self.tableViewHeight)
         
         //network
         dowonloadJsons()
-        
     }
 
     // MARK: - Viewにパーツの設置
@@ -154,12 +150,6 @@ class NewPostsViewController: CustumViewController,UITableViewDelegate, UITableV
     }
     
 
-    
-    //Mark: テーブルビューのセルが押されたら呼ばれる
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
-    }
-    
     func dowonloadJsons(){
         
         print(EveryZooAPI.getRecentPosts())
@@ -209,7 +199,7 @@ class NewPostsViewController: CustumViewController,UITableViewDelegate, UITableV
     }
     
     func scrollReflesh(sender : UIRefreshControl) {
-        
+        delegate?.startIndicator()
         dowonloadJsons()
     }
 }

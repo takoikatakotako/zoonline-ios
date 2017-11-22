@@ -19,18 +19,13 @@ protocol PopularPostsDelegate: class  {
     func stopIndicator()
 }
 
-class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource  {
+class PopularPostsViewController: CustumViewController,UITableViewDelegate, UITableViewDataSource  {
 
     //delegate
     weak var delegate: PopularPostsDelegate?
     
     //width, height
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
-    var statusBarHeight:CGFloat!
-    var navigationBarHeight:CGFloat!
     var pageMenuHeight:CGFloat!
-    var tabBarHeight:CGFloat!
     private var tableViewHeight:CGFloat!
     
     
@@ -46,6 +41,8 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.pageName = PageName.Field.rawValue
+        
         //画面横サイズを取得
         self.viewWidth = self.view.frame.width
         self.viewHeight = self.view.frame.height
@@ -53,9 +50,9 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
         
         setTableView()
         
+        delegate?.startIndicator()
         //network
         dowonloadJsons()
-        
     }
     
     
@@ -79,10 +76,6 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
         pictureTableView.register(LeftPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self))
         pictureTableView.register(RightPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(RightPicturesTableViewCell.self))
         pictureTableView.register(NetWorkErrorTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self))
-        
-        //added
-        pictureTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
         pictureTableView.rowHeight = viewWidth
         UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
@@ -154,19 +147,12 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
         }
     }
     
-    
-    
-    //Mark: テーブルビューのセルが押されたら呼ばれる
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
-    }
-    
-    
     func dowonloadJsons(){
         
         Alamofire.request(EveryZooAPI.getPopularPosts()).responseJSON{ response in
             
             self.pictureTableView.refreshControl?.endRefreshing()
+            self.delegate?.stopIndicator()
             
             switch response.result {
             case .success:
@@ -212,6 +198,7 @@ class PopularPostsViewController: UIViewController,UITableViewDelegate, UITableV
     func scrollReflesh(sender : UIRefreshControl) {
         
         //network
+        delegate?.startIndicator()
         dowonloadJsons()
     }
 }

@@ -20,6 +20,8 @@ class FieldViewController: CustumViewController,CAPSPageMenuDelegate ,NewPostsDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.pageName = PageName.Field.rawValue
+        
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height

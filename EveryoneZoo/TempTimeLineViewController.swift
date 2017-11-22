@@ -136,7 +136,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         if !UtilityLibrary.isLogin() { return tableViewHeight }
         if !isNetWorkConnect { return tableViewHeight }
         
-        if indexPath.row == 2 || indexPath.row == 7{
+        if indexPath.row == 3 || indexPath.row == 8{
             return 50
         }
         
@@ -160,7 +160,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
             return cell
         }
         
-        if  indexPath.row == 2 || indexPath.row == 7 {
+        if  indexPath.row == 3 || indexPath.row == 8 {
             let cell:BannerAdTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(BannerAdTableViewCell.self), for: indexPath) as! BannerAdTableViewCell
             cell.addSubview(bannerView)
             return cell
