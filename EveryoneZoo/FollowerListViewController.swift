@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import AlamofireImage
 import SCLAlertView
 
 class FollowerListViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource {
@@ -161,7 +160,7 @@ class FollowerListViewController: UIViewController,UICollectionViewDelegate, UIC
         cell.userLabel!.text = followerList[indexPath.row]["user-name"].stringValue
         
         if let url = URL(string:followerList[indexPath.row]["icon-url"].stringValue) {
-            cell.icomImageView.af_setImage(withURL: url)
+            cell.icomImageView.sd_setImage(with: url)
         }
         
         return cell

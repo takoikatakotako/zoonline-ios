@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
 import SwiftyJSON
 import SDWebImage
 
@@ -85,7 +84,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     
     
     //MARK: ButtonActions
-    func supportBtnClicked(sender: UIButton){
+    @objc func supportBtnClicked(sender: UIButton){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Zoo")

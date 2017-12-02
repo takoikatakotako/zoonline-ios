@@ -70,7 +70,7 @@ class TimeLineViewController: UIViewController,CAPSPageMenuDelegate {
         //UINavigationBarの位置とサイズを指定
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
         UINavigationBar.appearance().tintColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         self.title = "タイムライン"
     }
     

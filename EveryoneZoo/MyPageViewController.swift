@@ -9,6 +9,7 @@
 import UIKit
 import Social
 import SCLAlertView
+import SDWebImage
 
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -94,7 +95,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let defaultIcon = UIImage(named:"icon_default")
         if let url = URL(string: UtilityLibrary.getUserIconUrl()){
-            userCellBtn.iconImgView.af_setImage(withURL: url, placeholderImage: defaultIcon)
+            userCellBtn.iconImgView.sd_setImage(with: url, placeholderImage: defaultIcon)
 
         }else{
             userCellBtn.iconImgView.image = defaultIcon
@@ -361,7 +362,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - アクションの設定
     
     //basicボタンが押されたら呼ばれます
-    internal func goMyProfile(sender: UIButton){
+    @objc internal func goMyProfile(sender: UIButton){
         
         if !(UtilityLibrary.isLogin()){
 

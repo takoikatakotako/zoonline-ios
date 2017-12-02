@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
 import SwiftyJSON
 import SDWebImage
 import SCLAlertView
@@ -239,7 +238,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     
     
     //MARK: シングルタップ時に実行される
-    func tapSingle(sender: UITapGestureRecognizer) {
+    @objc func tapSingle(sender: UITapGestureRecognizer) {
         print(sender.view?.tag ?? 1)
         
         //画面遷移を行う
@@ -254,7 +253,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     
     
     // MARK: -
-    func goWriteCommentView(sender: UIButton){
+    @objc func goWriteCommentView(sender: UIButton){
         
         let wirtePostCommentsVC: WritePostsCommentsViewController = WritePostsCommentsViewController()
         wirtePostCommentsVC.postsID = postsID

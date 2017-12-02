@@ -1,7 +1,5 @@
 PODS:
   - Alamofire (4.4.0)
-  - AlamofireImage (3.2.0):
-    - Alamofire (~> 4.1)
   - FLAnimatedImage (1.0.12)
   - Google-Mobile-Ads-SDK (7.24.1)
   - PageMenu (2.0.0)
@@ -14,7 +12,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - AlamofireImage (~> 3.1)
   - Google-Mobile-Ads-SDK
   - PageMenu
   - SCLAlertView
@@ -23,7 +20,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Google-Mobile-Ads-SDK: ed8004a7265b424568dc84f3d2bbe3ea3fff958f
   PageMenu: 9c38fd7e0d9ef4b1408320f55bb907bbc0e538dc
@@ -31,6 +27,6 @@ SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 9c1f14f9913aaea51371049e40f70c940dd60fc3
+PODFILE CHECKSUM: 4e4187bcffca4599aff4c1e8b4b7c98da288fd3f
 
 COCOAPODS: 1.3.1

@@ -7,9 +7,10 @@ target 'EveryoneZoo' do
 
   # Pods for EveryoneZoo
   pod 'SCLAlertView'
+  #'https://github.com/vikmeup/SCLAlertView-Swift.git'
   pod 'Alamofire'
   pod 'SwiftyJSON'
-  pod 'AlamofireImage', '~> 3.1'
+  #pod 'AlamofireImage', '~> 3.1'
   pod 'SDWebImage/GIF'
   pod 'PageMenu'
   pod 'Google-Mobile-Ads-SDK'

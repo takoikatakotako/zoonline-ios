@@ -109,7 +109,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     }
     
     // MARK: - テーブルビュー関連
-    func scrollReflesh(sender : UIRefreshControl) {
+    @objc func scrollReflesh(sender : UIRefreshControl) {
         self.timeLineTableView.refreshControl?.endRefreshing()
         refleshTableView()
     }

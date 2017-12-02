@@ -156,7 +156,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //MARK: ButtonActions
-    func supportBtnClicked(sender: UIButton){
+    @objc func supportBtnClicked(sender: UIButton){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Post")
@@ -164,7 +164,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //投稿ボタンが押されたら呼ばれる
-    internal func postBarBtnClicked(sender: UIButton){
+    @objc internal func postBarBtnClicked(sender: UIButton){
         
         if !isSelectedImage {
             SCLAlertView().showInfo("エラー", subTitle: "画像が選択されていません。")
@@ -466,7 +466,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //Mark: 未ログイン関係の処理
     
     //ログインボタンが押されたら呼ばれます
-    func loginBtnClicked(sender: UIButton){
+    @objc func loginBtnClicked(sender: UIButton){
         
         let loginView:LoginViewController = LoginViewController()
         loginView.statusBarHeight = self.statusBarHeight
@@ -475,7 +475,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //登録ボタンが押されたら呼ばれます
-    func resistBtnClicked(sender: UIButton){
+    @objc func resistBtnClicked(sender: UIButton){
         
         let resistView:NewResistViewController = NewResistViewController()
         resistView.statusBarHeight = self.statusBarHeight

@@ -27,7 +27,7 @@ class CustumViewController:UIViewController {
         
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
         UINavigationBar.appearance().tintColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         self.title = navTitle
     }
     
@@ -46,7 +46,7 @@ class CustumViewController:UIViewController {
         }
     }
     
-    func supportBtnClicked(sender: UIButton){
+    @objc func supportBtnClicked(sender: UIButton){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: SupportBtn.getSupportKey(pageNum: pageName))

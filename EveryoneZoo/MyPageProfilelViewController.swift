@@ -9,8 +9,8 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import AlamofireImage
 import SCLAlertView
+import SDWebImage
 
 class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate ,UINavigationControllerDelegate {
     
@@ -62,7 +62,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     
         let defaultIcon = UIImage(named:"icon_default")
         if let url = URL(string: UtilityLibrary.getUserIconUrl()){
-            icon.af_setImage(withURL: url, placeholderImage: defaultIcon)
+            icon.sd_setImage(with: url, placeholderImage: defaultIcon)
 
         }else{
             icon.image = defaultIcon
@@ -165,7 +165,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     
     
     //
-    func choseIconBtnClicked(sender: UIButton){
+    @objc func choseIconBtnClicked(sender: UIButton){
         
         // インスタンス生成
         let myImagePicker = UIImagePickerController()

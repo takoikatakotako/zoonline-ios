@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
 import SwiftyJSON
 import SDWebImage
 import SCLAlertView

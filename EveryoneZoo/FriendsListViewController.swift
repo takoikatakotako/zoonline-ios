@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
 import SwiftyJSON
 import SDWebImage
 import SCLAlertView
@@ -157,7 +156,7 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
         cell.userLabel!.text = frindsList[indexPath.row]["user-name"].stringValue
 
         if let url = URL(string:frindsList[indexPath.row]["icon-url"].stringValue) {
-            cell.icomImageView.af_setImage(withURL: url)
+            cell.icomImageView.sd_setImage(with: url)
         }
         
         return cell

@@ -9,9 +9,9 @@
 import UIKit
 import Social
 import Alamofire
-import AlamofireImage
 import SwiftyJSON
 import SCLAlertView
+import SDWebImage
 
 class PictureDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -137,7 +137,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     }
     
     //MARK: ButtonActions
-    func supportBtnClicked(sender: UIButton){
+    @objc func supportBtnClicked(sender: UIButton){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_PostDetail")
@@ -178,7 +178,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         cell.thumbnailImgView.frame = CGRect(x: userInfoBtnHeight*0.2, y: userInfoBtnHeight*0.15, width: userInfoBtnHeight*0.7, height: userInfoBtnHeight*0.7)
         cell.thumbnailImgView.layer.cornerRadius = cell.thumbnailImgView.frame.height * 0.5
         if let url = URL(string:self.iconUrl) {
-            cell.thumbnailImgView.af_setImage(withURL: url, placeholderImage:  UIImage(named:"icon_default")!)
+            cell.thumbnailImgView.sd_setImage(with: url, placeholderImage:  UIImage(named:"icon_default")!)
         }
         cell.userNameTextView.frame = CGRect(x: userInfoBtnHeight, y: 0, width: userInfoBtnWidth-userInfoBtnHeight, height: userInfoBtnHeight)
         cell.userNameTextView.text = postUserName
@@ -279,7 +279,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     //Mark: - Actions
     
     //MARK: シングルタップ時に実行される
-    func tapSingle(sender: UITapGestureRecognizer) {
+    @objc func tapSingle(sender: UITapGestureRecognizer) {
         print(sender.view?.tag ?? 400)
         
         if let img = sender.view as? UIImageView{
@@ -298,7 +298,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     }
     
     //フォローボタンが押されたら呼ばれる
-    func followBtnClicked(sender: FollowUserButton){
+    @objc func followBtnClicked(sender: FollowUserButton){
         
         if !(UtilityLibrary.isLogin()){
             SCLAlertView().showInfo("ログインしてね", subTitle: "フォロー機能を使うにはログインが必要だよ！")
@@ -319,7 +319,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     }
     
     //ファボボタンが押されたら呼ばれる
-    func favBtnClicked(sender: FavCommentButton){
+    @objc func favBtnClicked(sender: FavCommentButton){
         
         if !(UtilityLibrary.isLogin()) {
             //ログインしていない
@@ -371,13 +371,13 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
 
     
     //コメントボタンが押されたら呼ばれる
-    func commentBtnClicked(sender: FavCommentButton){
+    @objc func commentBtnClicked(sender: FavCommentButton){
         
         goCommentView()
     }
     
     //ユーザー情報が押されたら呼ばれる
-    func userInfoBtnClicked(sender: UIButton){
+    @objc func userInfoBtnClicked(sender: UIButton){
         
         //画面遷移、ユーザー情報画面へ
         let userInfoView: UserInfoViewController = UserInfoViewController()
@@ -389,7 +389,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     }
     
     //Mark: コメント投稿画面への遷移
-    func showActionShert(sender: UIButton){
+    @objc func showActionShert(sender: UIButton){
         
         // インスタンス生成　styleはActionSheet.
         let actionAlert = UIAlertController(title: "メニュー", message: "操作を選んでください", preferredStyle: UIAlertControllerStyle.actionSheet)

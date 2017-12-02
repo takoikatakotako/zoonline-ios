@@ -217,7 +217,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     }
     
     //ログインボタンが押されたら呼ばれる
-    func loginBtnClicked(sender: UIButton){
+    @objc func loginBtnClicked(sender: UIButton){
         print("touped")
         
         //self.loginFailed.isHidden = true
@@ -322,7 +322,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     
     
     //パスワード再発行ボタンが押された。
-    func forgetPassWordBtnClicked(sender: UIButton){
+    @objc func forgetPassWordBtnClicked(sender: UIButton){
         let alert = SCLAlertView()
         let txt = alert.addTextField(UtilityLibrary.getUserEmail())
         alert.addButton("発行") {
@@ -333,7 +333,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     }
     
     //左側のボタンが押されたら呼ばれる
-    func leftBarBtnClicked(sender: UIButton){
+    @objc func leftBarBtnClicked(sender: UIButton){
         
         self.dismiss(animated: true, completion: nil)
     }

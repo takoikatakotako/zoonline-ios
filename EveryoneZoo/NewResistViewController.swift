@@ -231,7 +231,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
     }
     
     //ログインボタンが押されたら呼ばれる
-    func registBtnClicked(sender: UIButton){
+    @objc func registBtnClicked(sender: UIButton){
         print("touped")
         
         indicator.startAnimating()
@@ -308,7 +308,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
     }
     
     //左側のボタンが押されたら呼ばれる
-    func leftBarBtnClicked(sender: UIButton){
+    @objc func leftBarBtnClicked(sender: UIButton){
         
         self.dismiss(animated: true, completion: nil)
     }

@@ -88,7 +88,7 @@ class WritePostTextsViewController: UIViewController,UITextViewDelegate {
     }
     
     //投稿ボタンが押されたら呼ばれる
-    internal func doClose(sender: UIButton){
+    @objc internal func doClose(sender: UIButton){
         
         _ = self.navigationController?.popViewController(animated: true)
     }

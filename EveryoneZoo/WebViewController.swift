@@ -107,7 +107,7 @@ class WebViewController: UIViewController , UIWebViewDelegate{
         indicator.startAnimating()
     }
     
-    func doClose(sender: UIButton){
+    @objc func doClose(sender: UIButton){
     
         self.dismiss(animated: true, completion: nil)
     }

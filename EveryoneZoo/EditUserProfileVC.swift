@@ -70,7 +70,7 @@ class EditUserProfileVC: UIViewController {
     }
     
     //プロフィール変更ボタンが押されたら
-    internal func doChageProfile(sender: UIButton){
+    @objc internal func doChageProfile(sender: UIButton){
         
         if (userProfileTexView.text?.isEmpty)! {
             SCLAlertView().showInfo("エラー", subTitle: "プロフィールの入力が必要です。")

@@ -9,7 +9,6 @@
 import UIKit
 import SCLAlertView
 import Alamofire
-import AlamofireImage
 import SwiftyJSON
 import SDWebImage
 
@@ -119,7 +118,7 @@ class NewPostsViewController: CustumViewController,UITableViewDelegate, UITableV
             for i in 0..<6 {
                 let cellNum:Int = indexPath.row*6+i
                 let url = URL(string: imageURLs[cellNum])!
-                cell.picturesImgViews[i].af_setImage(withURL: url)
+                cell.picturesImgViews[i].sd_setImage(with: url, placeholderImage:UIImage(named:"no_img"))
                 cell.picturesImgViews[i].tag = postIds[cellNum]
                 
                 //画像にタッチイベントを追加
@@ -138,7 +137,7 @@ class NewPostsViewController: CustumViewController,UITableViewDelegate, UITableV
                 
                 let cellNum:Int = indexPath.row*6+i
                 let url = URL(string: imageURLs[cellNum])!
-                cell.picturesImgViews[i].af_setImage(withURL: url)
+                cell.picturesImgViews[i].sd_setImage(with: url)
                 cell.picturesImgViews[i].tag = postIds[cellNum]
                 
                 let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
@@ -191,14 +190,14 @@ class NewPostsViewController: CustumViewController,UITableViewDelegate, UITableV
     
     // タッチイベントの検出
     //MARK: シングルタップ時に実行される
-    func tapSingle(sender: UITapGestureRecognizer) {
+    @objc func tapSingle(sender: UITapGestureRecognizer) {
         print(sender.view?.tag ?? 400)
         
         //画面遷移を行う
         delegate?.goDetailView(postID: sender.view?.tag ?? 400)
     }
     
-    func scrollReflesh(sender : UIRefreshControl) {
+    @objc func scrollReflesh(sender : UIRefreshControl) {
         delegate?.startIndicator()
         dowonloadJsons()
     }

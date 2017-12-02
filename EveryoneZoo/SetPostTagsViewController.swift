@@ -196,14 +196,14 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     }
     
     //角丸ボタンが押されたら呼ばれます
-    func deleatBtnClicked(sender: UIButton){
+    @objc func deleatBtnClicked(sender: UIButton){
 
         tagsAry.remove(at: sender.tag)
         tagTableView.reloadData()
     }
     
     //タグ画面を閉じる
-    internal func doClose(sender: UIButton){
+    @objc internal func doClose(sender: UIButton){
         
         _ = self.navigationController?.popViewController(animated: true)
     }
