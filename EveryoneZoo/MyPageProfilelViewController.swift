@@ -373,7 +373,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             let alert = SCLAlertView()
             let txt = alert.addTextField(UtilityLibrary.getUserName())
             alert.addButton("変更") {
-                print("Text value: \(txt.text)")
+                print("Text value: \(String(describing: txt.text))")
                 self.changeUserName(newName: txt.text!)
                 self.indicator.startAnimating()
             }
@@ -394,7 +394,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             let alert = SCLAlertView()
             let txt = alert.addTextField(UtilityLibrary.getUserEmail())
             alert.addButton("変更") {
-                print("Text value: \(txt.text)")
+                print("Text value: \(String(describing: txt.text))")
                 self.changeUserEmail(newEmail: txt.text!)
                 self.indicator.startAnimating()
             }
