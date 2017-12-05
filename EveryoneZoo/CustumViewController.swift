@@ -78,7 +78,7 @@ class CustumViewController:UIViewController {
     //Mark: 未ログイン関係の処理
     
     //ログインボタンが押されたら呼ばれます
-    func loginBtnClicked(sender: UIButton){
+    @objc func loginBtnClicked(sender: UIButton){
         
         let loginView:LoginViewController = LoginViewController()
         loginView.statusBarHeight = self.statusBarHeight
@@ -87,7 +87,7 @@ class CustumViewController:UIViewController {
     }
     
     //登録ボタンが押されたら呼ばれます
-    func resistBtnClicked(sender: UIButton){
+    @objc func resistBtnClicked(sender: UIButton){
         
         let loginView:NewResistViewController = NewResistViewController()
         loginView.statusBarHeight = self.statusBarHeight
