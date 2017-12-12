@@ -33,7 +33,7 @@ class FieldViewController: CustumViewController,CAPSPageMenuDelegate ,NewPostsDe
         
         setNavigationBar()
         setPageMenu()
-        self.showIndicater()
+        //self.showIndicater()
     }
     
     // MARK: - Viewにパーツの設置
@@ -94,7 +94,6 @@ class FieldViewController: CustumViewController,CAPSPageMenuDelegate ,NewPostsDe
         //画面遷移、投稿詳細画面へ
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
         picDetailView.postID = postID
-        
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(picDetailView, animated: true)

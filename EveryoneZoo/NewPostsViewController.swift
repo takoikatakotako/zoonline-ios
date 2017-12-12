@@ -18,24 +18,23 @@ protocol NewPostsDelegate: class  {
     func stopIndicator()
 }
 
-class NewPostsViewController: CustumViewController,UITableViewDelegate, UITableViewDataSource {
+class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     //delegate
     weak var delegate: NewPostsDelegate?
     
     //width, height
     var pageMenuHeight:CGFloat!
-    private var tableViewHeight:CGFloat!
-
-    //view parts
-    private var pictureTableView: UITableView!
+    private var collectionViewHeight:CGFloat!
     
     //APIから取得したデーター
     var imageURLs:Array<String> = Array()
     var postIds:Array<Int> = Array()
     var isNetWorkConnect:Bool = true
     
-    //サポートボタン
+    var myCollectionView : UICollectionView!
+
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,160 +44,76 @@ class NewPostsViewController: CustumViewController,UITableViewDelegate, UITableV
         //画面横サイズを取得
         self.viewWidth = self.view.frame.width
         self.viewHeight = self.view.frame.height
-        self.tableViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + pageMenuHeight + tabBarHeight)
+        self.collectionViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + pageMenuHeight + tabBarHeight)
 
-        setTableView()
-        setSupportBtn(btnHeight: self.tableViewHeight)
+        let collectionFrame = CGRect(x: 0, y: 0, width: viewWidth, height: collectionViewHeight)
+
+        // CollectionViewのレイアウトを生成.
+        let layout = UICollectionViewFlowLayout()
         
-        //network
-        dowonloadJsons()
+        // Cell一つ一つの大きさ.
+        layout.itemSize = CGSize(width:viewWidth/4, height:viewWidth/4)
+        
+        // セルのマージン.
+        layout.sectionInset = UIEdgeInsets.zero
+        //layout.sectionInset = UIEdgeInsetsMake(16, 16, 16, 16)
+        //セルの横方向のマージン
+        layout.minimumInteritemSpacing = 0.0
+        
+        //セルの縦方向のマージン
+        layout.minimumLineSpacing = 0.0
+        
+        // セクション毎のヘッダーサイズ.
+        layout.headerReferenceSize = CGSize(width:0,height:0)
+        
+        // CollectionViewを生成.
+        myCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
+        
+        // Cellに使われるクラスを登録.
+        myCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
+        
+        myCollectionView.delegate = self
+        myCollectionView.dataSource = self
+        myCollectionView.preservesSuperviewLayoutMargins = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        myCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.view.addSubview(myCollectionView)
+        
+        
+        let aaaa = UIView()
+        aaaa.backgroundColor = UIColor.red
+        aaaa.frame = CGRect(x: 0, y: 0, width: 100, height: collectionViewHeight)
+        self.view.addSubview(aaaa)
     }
 
     // MARK: - Viewにパーツの設置
     
-    // MARK: テーブルビューの生成
-    func setTableView(){
+    //Cellが選択された際に呼び出される
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        // ScrollViewを生成.
-        pictureTableView = UITableView()
-        pictureTableView.delegate = self
-        pictureTableView.dataSource = self
-        pictureTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
-        pictureTableView.backgroundColor = UIColor.white
-        pictureTableView.separatorStyle = .none
-        
-        // はじめはコンテンツビューのサイズは画面と同じ
-        pictureTableView.contentSize = CGSize(width:viewWidth, height:self.tableViewHeight)
-        
-        //テーブルビューの設置
-        pictureTableView.register(LeftPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self))
-        pictureTableView.register(RightPicturesTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(RightPicturesTableViewCell.self))
-        pictureTableView.register(NetWorkErrorTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self))
-        
-        //added
-        pictureTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        pictureTableView.rowHeight = viewWidth
-        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
-        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
-        self.view.addSubview(pictureTableView)
-        
-        //リフレッシュコントロールの追加
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
-        pictureTableView.refreshControl = refreshControl
+        print("Num: \(indexPath.row)")
     }
     
-    
-    //MARK: テーブルビューのセルの数を設定する
-    // MARK: - TableViewのデリゲートメソッド
-    //MARK: テーブルビューのセルの数を設定する
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if !isNetWorkConnect {
-            return 1
-        }
-        return imageURLs.count/6
+    //Cellの総数を返す
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 100
     }
     
-    //MARK: テーブルビューのセルの中身を設定する
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //Cellに値を設定する
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        //ネットワークエラの処理
-        if !isNetWorkConnect {
-            let cell:NetWorkErrorTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self), for: indexPath) as! NetWorkErrorTableViewCell
-            return cell
-        }
-        
-        if indexPath.row % 2 == 0 {
-            //左上に大きい四角があるCell
-            let cell:LeftPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LeftPicturesTableViewCell.self), for: indexPath) as! LeftPicturesTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.layoutMargins = UIEdgeInsets.zero
-            
-            for i in 0..<6 {
-                let cellNum:Int = indexPath.row*6+i
-                let url = URL(string: imageURLs[cellNum])!
-                cell.picturesImgViews[i].sd_setImage(with: url, placeholderImage:UIImage(named:"no_img"))
-                cell.picturesImgViews[i].tag = postIds[cellNum]
-                
-                //画像にタッチイベントを追加
-                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
-                singleTap.numberOfTapsRequired = 1
-                cell.picturesImgViews[i].addGestureRecognizer(singleTap)
-            }
-            return cell
-        }else{
-            //右上に大きい四角があるCell
-            let cell:RightPicturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(RightPicturesTableViewCell.self), for: indexPath) as! RightPicturesTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.layoutMargins = UIEdgeInsets.zero
-            
-            for i in 0..<6 {
-                
-                let cellNum:Int = indexPath.row*6+i
-                let url = URL(string: imageURLs[cellNum])!
-                cell.picturesImgViews[i].sd_setImage(with: url)
-                cell.picturesImgViews[i].tag = postIds[cellNum]
-                
-                let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
-                singleTap.numberOfTapsRequired = 1
-                cell.picturesImgViews[i].addGestureRecognizer(singleTap)
-            }
-            return cell
-        }
+        let cell : UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath as IndexPath)
+        cell.backgroundColor = makeColor()
+        return cell
     }
     
-
-    func dowonloadJsons(){
+    //ランダムに色を生成する
+    func makeColor() -> UIColor {
+        let r: CGFloat = CGFloat(arc4random_uniform(255)+1) / 255.0
+        let g: CGFloat = CGFloat(arc4random_uniform(255)+1) / 255.0
+        let b: CGFloat = CGFloat(arc4random_uniform(255)+1) / 255.0
+        let color: UIColor = UIColor(red: r, green: g, blue: b, alpha: 1.0)
         
-        print(EveryZooAPI.getRecentPosts())
-        
-        Alamofire.request(EveryZooAPI.getRecentPosts()).responseJSON{ response in
-            
-            self.pictureTableView.refreshControl?.endRefreshing()
-            self.delegate?.stopIndicator()
-            
-            switch response.result {
-            case .success:
-                self.isNetWorkConnect = true
-                let json:JSON = JSON(response.result.value ?? kill)
-                print(json)
-                self.setImageBtns(json: json)
-                
-                self.hideIndicator()
-
-            case .failure(let error):
-                print(error)
-                self.isNetWorkConnect = false
-                //テーブルの再読み込み
-                self.pictureTableView.reloadData()
-            }
-        }
-    }
-    
-    
-    func setImageBtns(json:JSON){
-        imageURLs = []
-        postIds = []
-        for i in 0..<json.count {
-            imageURLs.append(json[i]["itemImage"].stringValue)
-            postIds.append(json[i]["id"].intValue)
-        }
-        self.pictureTableView.reloadData()
-    }
-    
-    
-    // タッチイベントの検出
-    //MARK: シングルタップ時に実行される
-    @objc func tapSingle(sender: UITapGestureRecognizer) {
-        print(sender.view?.tag ?? 400)
-        
-        //画面遷移を行う
-        delegate?.goDetailView(postID: sender.view?.tag ?? 400)
-    }
-    
-    @objc func scrollReflesh(sender : UIRefreshControl) {
-        delegate?.startIndicator()
-        dowonloadJsons()
+        return color
     }
 }
