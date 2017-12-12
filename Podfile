@@ -6,12 +6,10 @@ target 'EveryoneZoo' do
   use_frameworks!
 
   # Pods for EveryoneZoo
-  pod 'SCLAlertView'
-  #'https://github.com/vikmeup/SCLAlertView-Swift.git'
-  pod 'Alamofire'
+  pod 'SCLAlertView', '~> 0.7'
+  pod 'Alamofire', '~> 4.6'
   pod 'SwiftyJSON'
-  #pod 'AlamofireImage', '~> 3.1'
-  pod 'SDWebImage/GIF'
+  pod 'SDWebImage/GIF', '~> 4.2'
   pod 'PageMenu'
   pod 'Google-Mobile-Ads-SDK'
 

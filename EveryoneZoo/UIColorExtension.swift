@@ -124,7 +124,7 @@ extension UIColor {
     class func colorWithHexString (_ hex:String) -> UIColor {
         
         let cString = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
-        if ((cString as String).characters.count != 6) {
+        if ((cString as String).count != 6) {
             return UIColor.gray
         }
         

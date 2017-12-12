@@ -200,8 +200,7 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         }
         
         var dateText:String = self.postsInfos[indexPath.row-1]["updated_at"].stringValue
-        
-        dateText = dateText.substring(to: dateText.index(dateText.startIndex, offsetBy: 10))
+        dateText = "デバックでバック"
         cell.dateLabel.text = dateText
         cell.titleLabel.text = self.postsInfos[indexPath.row-1]["title"].stringValue
         cell.commentLabel.text = self.postsInfos[indexPath.row-1]["caption"].stringValue
