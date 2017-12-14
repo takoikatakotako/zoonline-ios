@@ -33,7 +33,7 @@ class FieldViewController: CustumViewController,CAPSPageMenuDelegate ,NewPostsDe
         
         setNavigationBar()
         setPageMenu()
-        //self.showIndicater()
+        self.showIndicater()
     }
     
     // MARK: - Viewにパーツの設置

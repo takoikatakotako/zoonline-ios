@@ -48,15 +48,21 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
 
         
         setCollectionView()
+        getNewContents()
+
         
+    }
+    
+    func getNewContents(){
         Alamofire.request(EveryZooAPI.getRecentPosts()).responseJSON{ response in
+            
+            self.delegate?.stopIndicator()
             
             switch response.result {
             case .success:
                 self.isNetWorkConnect = true
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
-                
                 
                 self.newContents = json
             case .failure(let error):
@@ -94,6 +100,9 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
         print("Section: \(indexPath.section)")
         print("Num: \(indexPath.row)")
         print("Number: \(indexPath.section * 6 + indexPath.row)")
+        
+        delegate?.goDetailView(postID: self.newContents[indexPath.section * 6 + indexPath.row]["id"].intValue)
+
     }
     
     //セクションあたりのセルの数を返す
