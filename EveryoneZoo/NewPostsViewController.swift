@@ -106,7 +106,6 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
     }
     
     func setFieldCollection(){
-        
         newCollectionView.collectionViewLayout.invalidateLayout()
         let layout = FieldCollectionViewFlowLayout()
         newCollectionView.setCollectionViewLayout(layout, animated: true)
@@ -138,7 +137,6 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
         print("Number: \(indexPath.section * 6 + indexPath.row)")
         
         delegate?.goDetailView(postID: self.newContents[indexPath.section * 6 + indexPath.row]["id"].intValue)
-
     }
     
     //セクションあたりのセルの数を返す
@@ -156,14 +154,12 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
         if !isNetWorkConnect {
             return 1
         }
-        
         return newContents.count / 6
     }
     //Cellに値を設定する
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if !isNetWorkConnect {
-            
             let cell:UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier:  NSStringFromClass(UICollectionViewCell.self), for: indexPath as IndexPath)
             cell.backgroundColor = UIColor.yellow
             return cell

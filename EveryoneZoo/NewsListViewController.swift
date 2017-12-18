@@ -65,6 +65,9 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         newsTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
         newsTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         newsTableView.rowHeight = viewWidth*0.28
+        if #available(iOS 11.0, *) {
+            newsTableView.contentInsetAdjustmentBehavior = .never
+        }
         self.view.addSubview(newsTableView)
     }
     
