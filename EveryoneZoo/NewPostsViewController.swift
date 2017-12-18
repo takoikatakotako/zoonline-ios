@@ -34,8 +34,6 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
     //CollectionViews
     var newCollectionView : UICollectionView!
 
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +50,6 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
     
     func getNewContents(){
         
-        
         Alamofire.request(EveryZooAPI.getRecentPosts()).responseJSON{ response in
             
             switch response.result {
@@ -62,12 +59,11 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
                 if !self.isNetWorkConnect{
                     self.setFieldCollection()
                 }
-                
                 self.isNetWorkConnect = true
                 let json:JSON = JSON(response.result.value ?? kill)
                 print(json)
                 self.newContents = json
-                
+
             case .failure(let error):
                 print(error)
                 //NetWork True -> False
@@ -75,7 +71,9 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
                     self.setNetWorkErrorCollection()
                 }
                 self.isNetWorkConnect = false
+                self.newContents = []
             }
+            
             self.delegate?.stopIndicator()
             self.newCollectionView.refreshControl?.endRefreshing()
             self.newCollectionView.reloadData()
@@ -91,6 +89,7 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
         newCollectionView.backgroundColor = UIColor.white
         newCollectionView.register(FieldCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(FieldCollectionViewCell.self))
         newCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UICollectionViewCell.self))
+        newCollectionView.register(NetWorkErrorCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(NetWorkErrorCollectionViewCell.self))
         newCollectionView.delegate = self
         newCollectionView.dataSource = self
         if #available(iOS 11.0, *) {
@@ -101,14 +100,13 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
         newCollectionView.refreshControl = refreshControl
-
         self.view.addSubview(newCollectionView)
     }
     
     func setFieldCollection(){
         newCollectionView.collectionViewLayout.invalidateLayout()
         let layout = FieldCollectionViewFlowLayout()
-        newCollectionView.setCollectionViewLayout(layout, animated: true)
+        newCollectionView.setCollectionViewLayout(layout, animated: false)
     }
     
     func setNetWorkErrorCollection(){
@@ -121,12 +119,10 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
         layout.minimumLineSpacing = 0.0
         layout.headerReferenceSize = CGSize(width:0,height:0)
         
-        newCollectionView.setCollectionViewLayout(layout, animated: true)
+        newCollectionView.setCollectionViewLayout(layout, animated: false)
     }
     
-    
     @objc func scrollReflesh(sender : UIRefreshControl) {
-        delegate?.startIndicator()
         getNewContents()
     }
     
@@ -160,8 +156,9 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if !isNetWorkConnect {
-            let cell:UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier:  NSStringFromClass(UICollectionViewCell.self), for: indexPath as IndexPath)
+            let cell:NetWorkErrorCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier:  NSStringFromClass(NetWorkErrorCollectionViewCell.self), for: indexPath as IndexPath) as! NetWorkErrorCollectionViewCell
             cell.backgroundColor = UIColor.yellow
+            cell.thumbnailImgView?.image = UIImage(named:"chara_penpen")
             return cell
         }
         
