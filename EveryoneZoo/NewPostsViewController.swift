@@ -118,7 +118,6 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
         layout.headerReferenceSize = CGSize(width:0,height:0)
-        
         newCollectionView.setCollectionViewLayout(layout, animated: false)
     }
     
@@ -128,6 +127,8 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
     
     //Cellが選択された際に呼び出される
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if !isNetWorkConnect { return }
         print("Section: \(indexPath.section)")
         print("Num: \(indexPath.row)")
         print("Number: \(indexPath.section * 6 + indexPath.row)")
@@ -157,8 +158,6 @@ class NewPostsViewController: CustumViewController, UICollectionViewDelegate, UI
         
         if !isNetWorkConnect {
             let cell:NetWorkErrorCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier:  NSStringFromClass(NetWorkErrorCollectionViewCell.self), for: indexPath as IndexPath) as! NetWorkErrorCollectionViewCell
-            cell.backgroundColor = UIColor.yellow
-            cell.thumbnailImgView?.image = UIImage(named:"chara_penpen")
             return cell
         }
         

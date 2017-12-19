@@ -9,7 +9,6 @@
 import UIKit
 
 class NetWorkErrorCollectionViewCell: UICollectionViewCell {
-    var thumbnailImgView : UIImageView?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -17,12 +16,7 @@ class NetWorkErrorCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        // thumbnailImgを生成.
-        thumbnailImgView = UIImageView()
-        self.contentMode = UIViewContentMode.scaleAspectFill
-        self.backgroundView = self.thumbnailImgView
     }
-    
    
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -30,9 +24,29 @@ class NetWorkErrorCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        //let cellWidth:CGFloat = self.frame.width
-        //let cellHeight:CGFloat = self.frame.height
+        let cellWidth:CGFloat = self.frame.width
+        let cellHeight:CGFloat = self.frame.height
         
-
+        let errorLabel = UILabel()
+        errorLabel.text = "ネットワークエラー"
+        errorLabel.frame = CGRect(x: 0, y: cellHeight*0.05, width: cellWidth, height: cellHeight*0.1)
+        errorLabel.textColor = UIColor.DarkPink()
+        errorLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        errorLabel.textAlignment = NSTextAlignment.center
+        self.contentView.addSubview(errorLabel)
+        
+        let messageLabel = UILabel()
+        messageLabel.text = "通信を確認してください"
+        messageLabel.frame = CGRect(x: 0, y: cellHeight*0.15, width: cellWidth, height: cellHeight*0.1)
+        messageLabel.textColor = UIColor.black
+        messageLabel.font = UIFont.systemFont(ofSize: 20)
+        messageLabel.textAlignment = NSTextAlignment.center
+        self.contentView.addSubview(messageLabel)
+        
+        let penguinImgView = UIImageView()
+        penguinImgView.image = UIImage(named:"chara_penpen")
+        penguinImgView.frame = CGRect(x: 0, y: cellHeight*0.3, width: cellWidth, height: cellHeight*0.6)
+        penguinImgView.contentMode = UIViewContentMode.scaleAspectFit
+        self.contentView.addSubview(penguinImgView)
     }
 }
