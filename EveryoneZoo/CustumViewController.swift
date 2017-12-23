@@ -55,6 +55,10 @@ class CustumViewController:UIViewController {
     
     // MARK: Indicator
     func showIndicater() {
+        
+        //rv dame
+        
+        /*
         let rv = UIApplication.shared.keyWindow! as UIWindow
         let width:CGFloat = rv.frame.size.width
         let height:CGFloat = rv.frame.size.height
@@ -66,6 +70,7 @@ class CustumViewController:UIViewController {
         indicator.hidesWhenStopped = true
         rv.addSubview(indicator)
         indicator.startAnimating()
+ */
     }
     
     func hideIndicator() {
