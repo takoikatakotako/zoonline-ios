@@ -54,30 +54,31 @@ class CustumViewController:UIViewController {
     }
     
     // MARK: Indicator
-    func showIndicater() {
+    func setIndicater(){
         
-        //rv dame
-        
-        /*
-        let rv = UIApplication.shared.keyWindow! as UIWindow
-        let width:CGFloat = rv.frame.size.width
-        let height:CGFloat = rv.frame.size.height
-        let indicatorSize:CGFloat = rv.frame.size.width * 0.4
         indicator = UIActivityIndicatorView()
-        indicator.frame = CGRect(x: (width-indicatorSize)/2, y: (height-indicatorSize)/2, width: indicatorSize, height: indicatorSize)
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        indicator.color = UIColor.MainAppColor()
         indicator.hidesWhenStopped = true
-        rv.addSubview(indicator)
+        
+        if let navBar = self.navigationController {
+            indicator.frame = CGRect(x: self.view.frame.width * 0.4, y: self.view.frame.height * 0.4 - navBar.navigationBar.frame.size.height, width: self.view.frame.width * 0.2, height: self.view.frame.width * 0.2)
+        }else{
+            indicator.frame = CGRect(x: self.view.frame.width * 0.4, y: self.view.frame.height * 0.4, width: self.view.frame.width * 0.2, height: self.view.frame.width * 0.2)
+        }
+        
+        indicator.color = UIColor.MainAppColor()
+        self.view.addSubview(indicator)
+    }
+    
+    
+    func showIndicater() {
+
         indicator.startAnimating()
- */
     }
     
     func hideIndicator() {
         
-        if let showingIndicator = indicator {
-            showingIndicator.removeFromSuperview()
-        }
+        indicator.stopAnimating()
     }
     
     //Mark: 未ログイン関係の処理

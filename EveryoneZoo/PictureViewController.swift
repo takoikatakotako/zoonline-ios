@@ -33,6 +33,7 @@ class FieldViewController: CustumViewController,CAPSPageMenuDelegate ,NewPostsDe
         
         setNavigationBar()
         setPageMenu()
+        self.setIndicater()
         self.showIndicater()
     }
     
@@ -106,5 +107,4 @@ class FieldViewController: CustumViewController,CAPSPageMenuDelegate ,NewPostsDe
     func stopIndicator()  {
         self.hideIndicator()
     }
-
 }
