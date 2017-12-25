@@ -10,7 +10,7 @@
 		1A12A19BE65ED99ED482890E /* Pods_EveryoneZooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600BCE0ECEDD3B35A3B6B9B9 /* Pods_EveryoneZooUITests.framework */; };
 		72F50AA25E9B21009A0C6FAD /* Pods_EveryoneZoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */; };
 		8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */; };
-		8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */; };
+		8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */; };
 		8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */; };
 		8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */; };
 		8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4591E8031800008D997 /* ZooListViewController.swift */; };
@@ -100,7 +100,7 @@
 		6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneZoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		831076F39DE8E24A4BCF6907 /* Pods-EveryoneZooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustumViewController.swift; sourceTree = "<group>"; };
-		8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureViewController.swift; sourceTree = "<group>"; };
+		8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldViewController.swift; sourceTree = "<group>"; };
 		8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityLibrary.swift; sourceTree = "<group>"; };
 		8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		8D0FB4591E8031800008D997 /* ZooListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZooListViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +229,14 @@
 				8DE541761EFAB3010085F916 /* NewResistViewController.swift */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		8D20B0CD1FF1543B00DEE281 /* CommonCollectionCells */ = {
+			isa = PBXGroup;
+			children = (
+				8DDF858F1FE83F89002CD0FC /* NetWorkErrorCollectionViewCell.swift */,
+			);
+			name = CommonCollectionCells;
 			sourceTree = "<group>";
 		};
 		8D5121251F0D405B00C6D774 /* MyPageItem */ = {
@@ -379,6 +387,7 @@
 				8D57A7961F89DB2100A85D83 /* Extensions */,
 				8D532C4E1FC3496700D2E532 /* Inheritance */,
 				8D9DE17F1EE4147500121FC1 /* Manager */,
+				8D20B0CD1FF1543B00DEE281 /* CommonCollectionCells */,
 				8DA4153B1F93A9E300A38AC8 /* CommonTableCells */,
 				8D68887E1E9E7EF000140508 /* ViewController */,
 				8D73B4281E7AE08F00E3B301 /* Main.storyboard */,
@@ -439,12 +448,11 @@
 		8DA0AB711ECB0A0000D75B1A /* FieldView */ = {
 			isa = PBXGroup;
 			children = (
-				8D0FB4531E7AED8E0008D997 /* PictureViewController.swift */,
+				8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */,
 				8D48576D1F40457F00608A56 /* NewPostsViewController.swift */,
 				8D48576F1F40A02500608A56 /* PopularPostsViewController.swift */,
 				8DA4C6981FE045A800C84A73 /* FieldCollectionViewFlowLayout.swift */,
 				8DA4C69A1FE0D95800C84A73 /* FieldCollectionViewCell.swift */,
-				8DDF858F1FE83F89002CD0FC /* NetWorkErrorCollectionViewCell.swift */,
 			);
 			name = FieldView;
 			sourceTree = "<group>";
@@ -812,7 +820,7 @@
 			files = (
 				8DC719131F08BC3F003C5E00 /* WritePostTextsViewController.swift in Sources */,
 				8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */,
-				8D0FB4541E7AED8E0008D997 /* PictureViewController.swift in Sources */,
+				8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */,
 				8DA4C69B1FE0D95800C84A73 /* FieldCollectionViewCell.swift in Sources */,
 				8DF9CFE41EE959F9002B8459 /* WebViewController.swift in Sources */,
 				8D7CDC371F14DD8F00C3844E /* EditUserNameViewController.swift in Sources */,

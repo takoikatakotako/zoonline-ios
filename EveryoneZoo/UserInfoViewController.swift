@@ -10,19 +10,14 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SDWebImage
+import SCLAlertView
 
-class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
-    
+class UserInfoViewController: CustumViewController, UITableViewDelegate, UITableViewDataSource {
     
     //テーブルビューインスタンス
     private var profileTableView: UITableView!
     
     //width, height
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
     private var profileCellHeight:CGFloat!
     private var postCellHeight:CGFloat!
     
@@ -35,13 +30,12 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     var userProfile:String = ""
     var userIconUrl:String = ""
     var postsInfos:JSON = []
-    
-    var indicator: UIActivityIndicatorView!
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.view.backgroundColor = UIColor.white
+        
         viewWidth = self.view.frame.width
         viewHeight = self.view.frame.height
         statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
@@ -51,15 +45,13 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         profileCellHeight = viewWidth*0.65
         postCellHeight = viewWidth*0.28
         
-        self.view.backgroundColor = UIColor.white
-    
         setNavigationBar()
         setTableView()
-        setActivityIndicator()
-        indicator.startAnimating()
-
+        
+        self.setIndicater()
+        self.showIndicater()
+        
         getUserInfo()
-
     }
     
     func getUserInfo() {
@@ -85,46 +77,38 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
 
             case .failure(let error):
                 print(error)
+                self.hideIndicator()
+                SCLAlertView().showError("エラー", subTitle: "ユーザー情報の取得に失敗しました")
             }
         }
     }
     
     
     func getPosts() {
-        
+        //ユーザーの投稿を取得する
         Alamofire.request(EveryZooAPI.getUserPosts(userID: postUserID)).responseJSON{ response in
             
             switch response.result {
             case .success:
-                
                 let json:JSON = JSON(response.result.value ?? kill)
-
-                print(json)
-                
-                self.indicator.stopAnimating()
                 if json["is_success"].boolValue {
                     self.postsInfos = json["response"]
                     self.profileTableView.reloadData()
                 }else{
                     //不明なエラー
+                    SCLAlertView().showError("エラー", subTitle: "不明なエラーです")
                 }
-
                 
             case .failure(let error):
                 print(error)
+                SCLAlertView().showError("エラー", subTitle: "ユーザー情報の取得に失敗しました")
             }
-            
+            self.hideIndicator()
         }
     }
     
-    // MARK: NavigationBar
+    // MARK: ViewParts
     func setNavigationBar() {
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
-        self.navigationController?.navigationBar.isTranslucent = false
-        UINavigationBar.appearance().tintColor = UIColor.white
-        
-        //ナビゲーションアイテムを作成
         let titleLabel:NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
@@ -133,34 +117,17 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         self.navigationItem.titleView = titleLabel
     }
     
-    
     func setTableView() {
-        //テーブルビューの初期化
         profileTableView = UITableView()
-        
-        //デリゲートの設定
         profileTableView.delegate = self
         profileTableView.dataSource = self
-        
-        //テーブルビューの大きさの指定
         profileTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight-(statusBarHeight+tabBarHeight+navigationBarHeight))
-        
-        //テーブルビューの設置
         profileTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         profileTableView.register(UserInfoTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UserInfoTableViewCell.self))
         self.view.addSubview(profileTableView)
     }
     
-    // MARK: くるくるの生成
-    func setActivityIndicator(){
-        indicator = UIActivityIndicatorView()
-        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4-44, width: viewWidth*0.3, height: viewWidth*0.3)
-        indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        self.view.bringSubview(toFront: indicator)
-        indicator.color = UIColor.MainAppColor()
-        self.view.addSubview(indicator)
-    }
+    // MARK: TableViewDelegateMethods
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -172,7 +139,6 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 0 {
-
             return profileCellHeight
         }else {
             return postCellHeight
@@ -181,10 +147,10 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //myItems配列の中身をテキストにして登録した
         
         if indexPath.row == 0 {
             let cell:UserInfoTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UserInfoTableViewCell.self), for: indexPath) as! UserInfoTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.backgroundColor = UIColor.MypageArrowGray()
             cell.iconImgView.sd_setImage(with: URL(string:self.userIconUrl), placeholderImage: UIImage(named: "icon_default"))
             cell.userNameLabel.text = self.userName
@@ -192,15 +158,14 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
             return cell
         }
         
-        
         let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
-        
         if self.postsInfos.count == 0 {
             return cell
         }
         
-        var dateText:String = self.postsInfos[indexPath.row-1]["updated_at"].stringValue
-        dateText = "デバックでバック"
+        let dates = UtilityLibrary.parseDates(text: self.postsInfos[indexPath.row-1]["updated_at"].stringValue)
+        var dateText:String = dates["year"]! + "/"
+        dateText += dates["month"]! + "/" + dates["day"]!
         cell.dateLabel.text = dateText
         cell.titleLabel.text = self.postsInfos[indexPath.row-1]["title"].stringValue
         cell.commentLabel.text = self.postsInfos[indexPath.row-1]["caption"].stringValue
@@ -220,7 +185,6 @@ class UserInfoViewController: UIViewController,UITableViewDelegate, UITableViewD
         //画面遷移、投稿詳細画面へ
         let picDetailView: PictureDetailViewController = PictureDetailViewController()
         picDetailView.postID = self.postsInfos[indexPath.row-1]["id"].intValue
-        
         let btn_back = UIBarButtonItem()
         btn_back.title = ""
         self.navigationItem.backBarButtonItem = btn_back

@@ -84,7 +84,6 @@ class FieldViewController: CustumViewController,CAPSPageMenuDelegate ,NewPostsDe
             .unselectedMenuItemLabelColor(UIColor.gray)
         ]
         
-        // Initialize page menu with controller array, frame, and optional parameters
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: 0, width: viewWidth, height: contentsViewHeight), pageMenuOptions: parameters)
         pageMenu!.view.backgroundColor = UIColor.white
         pageMenu!.delegate = self

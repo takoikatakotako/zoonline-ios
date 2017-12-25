@@ -17,7 +17,6 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     
     //Post ID
     public var postID:Int!
-    
     private var myUserID:String!
     
     //width, height
