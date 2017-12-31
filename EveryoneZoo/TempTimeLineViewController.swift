@@ -41,6 +41,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         
         isNetWorkConnect = true
         
+        setIndicater()
         setNavigationBarBar(navTitle: "タイムライン")
         setTableView()
         setAd()
