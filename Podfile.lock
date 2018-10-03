@@ -18,6 +18,16 @@ DEPENDENCIES:
   - SDWebImage/GIF (~> 4.2)
   - SwiftyJSON
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - FLAnimatedImage
+    - Google-Mobile-Ads-SDK
+    - PageMenu
+    - SCLAlertView
+    - SDWebImage
+    - SwiftyJSON
+
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
@@ -29,4 +39,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 5c5dc8bd2028ddf736aa3a399c0b4bc2ddc1cecd
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3

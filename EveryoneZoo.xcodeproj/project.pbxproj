@@ -520,7 +520,6 @@
 				8D73B41E1E7AE08F00E3B301 /* Frameworks */,
 				8D73B41F1E7AE08F00E3B301 /* Resources */,
 				A52C7048EE947D68AB50C4A4 /* [CP] Embed Pods Frameworks */,
-				E6865DCECCD94C4F9FE7A8CC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -539,8 +538,6 @@
 				8D73B4311E7AE09000E3B301 /* Sources */,
 				8D73B4321E7AE09000E3B301 /* Frameworks */,
 				8D73B4331E7AE09000E3B301 /* Resources */,
-				006DFA5B0C6660743C391F70 /* [CP] Embed Pods Frameworks */,
-				97D066A0B6195E2CD904D20C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -560,8 +557,6 @@
 				8D73B43C1E7AE09000E3B301 /* Sources */,
 				8D73B43D1E7AE09000E3B301 /* Frameworks */,
 				8D73B43E1E7AE09000E3B301 /* Resources */,
-				F834012A0E01055083B9E4DB /* [CP] Embed Pods Frameworks */,
-				8D0BA2C89EC327E7806A7FF9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -654,21 +649,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		006DFA5B0C6660743C391F70 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EveryoneZooTests/Pods-EveryoneZooTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		0D2E9B135FF7BA179765FCA9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -723,36 +703,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8D0BA2C89EC327E7806A7FF9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		97D066A0B6195E2CD904D20C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EveryoneZooTests/Pods-EveryoneZooTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A52C7048EE947D68AB50C4A4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -779,36 +729,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E6865DCECCD94C4F9FE7A8CC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F834012A0E01055083B9E4DB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1060,7 +980,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.everyzoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1078,7 +998,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.everyzoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

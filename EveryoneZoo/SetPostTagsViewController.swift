@@ -50,8 +50,8 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         postTagLabelHeight = viewWidth*0.14
         setTagTextFieldSpaceHeight = viewWidth*0.02
         setTagTextFieldHeight = viewWidth*0.15
-        tagTableViewHeight = viewHeight-(statusBarHeight+navigationBarHeight+postTagLabelHeight+setTagTextFieldSpaceHeight+setTagTextFieldHeight+tabBarHeight)
-        
+        //tagTableViewHeight = viewHeight-(statusBarHeight+navigationBarHeight+postTagLabelHeight+setTagTextFieldSpaceHeight+setTagTextFieldHeight+tabBarHeight)
+        tagTableViewHeight = viewHeight
         self.view.backgroundColor = UIColor.white
 
         setNavigationBar()
