@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:EveryoneZoo.xcodeproj">
+      location = "self:/Users/jumpei.ono/Desktop/MyProject/zoonline-ios/zoonline-ios.xcodeproj">
    </FileRef>
 </Workspace>

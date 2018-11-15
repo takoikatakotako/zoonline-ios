@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080B76F7A1C7BCB3153053BA /* Pods_zoonline_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460FAC8C9C665B0AD341F70 /* Pods_zoonline_iosUITests.framework */; };
 		1A12A19BE65ED99ED482890E /* Pods_EveryoneZooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600BCE0ECEDD3B35A3B6B9B9 /* Pods_EveryoneZooUITests.framework */; };
-		72F50AA25E9B21009A0C6FAD /* Pods_EveryoneZoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */; };
 		8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */; };
 		8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */; };
 		8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */; };
@@ -73,6 +73,8 @@
 		8DF862E11E992CB200FBF176 /* PictureDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */; };
 		8DF9CFE41EE959F9002B8459 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF9CFE31EE959F9002B8459 /* WebViewController.swift */; };
 		8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */; };
+		BF70E69022D3ADEF06237C49 /* Pods_zoonline_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6372D62AAAC202B9F09A8FDC /* Pods_zoonline_iosTests.framework */; };
+		D00CBACC0C78EB51E3FC96C9 /* Pods_zoonline_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EB92E2361F93A97E488D41 /* Pods_zoonline_ios.framework */; };
 		EAAB25067CF3061B46797FE0 /* Pods_EveryoneZooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22ADCE5CE831A681A93AECC6 /* Pods_EveryoneZooTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,9 +96,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13EB92E2361F93A97E488D41 /* Pods_zoonline_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zoonline_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22ADCE5CE831A681A93AECC6 /* Pods_EveryoneZooTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneZooTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		490BDC2156CE13494C4E60D5 /* Pods-EveryoneZooTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooTests/Pods-EveryoneZooTests.debug.xcconfig"; sourceTree = "<group>"; };
 		600BCE0ECEDD3B35A3B6B9B9 /* Pods_EveryoneZooUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneZooUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6372D62AAAC202B9F09A8FDC /* Pods_zoonline_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zoonline_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B66379324BB53EEE7CAC139 /* Pods-zoonline-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-ios/Pods-zoonline-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneZoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		831076F39DE8E24A4BCF6907 /* Pods-EveryoneZooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustumViewController.swift; sourceTree = "<group>"; };
@@ -128,16 +133,16 @@
 		8D6A73ED1F83BE2A00902AFC /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		8D7343621F3A1CB700EB232E /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
 		8D7343641F3A1D5D00EB232E /* OfficialListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficialListViewController.swift; sourceTree = "<group>"; };
-		8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneZoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D73B4211E7AE08F00E3B301 /* zoonline-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "zoonline-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D73B4291E7AE08F00E3B301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D73B42E1E7AE08F00E3B301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D73B4301E7AE08F00E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D73B4351E7AE09000E3B301 /* EveryoneZooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EveryoneZooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D73B4351E7AE09000E3B301 /* zoonline-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "zoonline-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryoneZooTests.swift; sourceTree = "<group>"; };
 		8D73B43B1E7AE09000E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D73B4401E7AE09000E3B301 /* EveryoneZooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EveryoneZooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D73B4401E7AE09000E3B301 /* zoonline-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "zoonline-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryoneZooUITests.swift; sourceTree = "<group>"; };
 		8D73B4461E7AE09000E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserNameViewController.swift; sourceTree = "<group>"; };
@@ -172,10 +177,16 @@
 		8DF862E01E992CB200FBF176 /* PictureDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureDetailViewController.swift; sourceTree = "<group>"; };
 		8DF9CFE31EE959F9002B8459 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageUserCellBtn.swift; sourceTree = "<group>"; };
+		9460FAC8C9C665B0AD341F70 /* Pods_zoonline_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zoonline_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A01DE3ABE1DB3EF25E7FA9A2 /* Pods-zoonline-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A53C8612E552A7E943C79BF7 /* Pods-EveryoneZoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZoo.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo.release.xcconfig"; sourceTree = "<group>"; };
 		B6E6153F1CF883E44B3F5A09 /* Pods-EveryoneZoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZoo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo.debug.xcconfig"; sourceTree = "<group>"; };
+		CA69A7633543F1017C1CEB43 /* Pods-zoonline-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosTests/Pods-zoonline-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E15B20675E61512C92B15E98 /* Pods-EveryoneZooUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E384DDEE892248A1E2F67658 /* Pods-zoonline-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosTests/Pods-zoonline-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 		E927651FCE149672BF572470 /* Pods-EveryoneZooTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooTests/Pods-EveryoneZooTests.release.xcconfig"; sourceTree = "<group>"; };
+		ED5CCC74348DDB69432C44AC /* Pods-zoonline-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EE6523CBEF832B9C0E0E51B4 /* Pods-zoonline-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-ios/Pods-zoonline-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,7 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D8A43301F7D421700F79C0F /* Social.framework in Frameworks */,
-				72F50AA25E9B21009A0C6FAD /* Pods_EveryoneZoo.framework in Frameworks */,
+				D00CBACC0C78EB51E3FC96C9 /* Pods_zoonline_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAAB25067CF3061B46797FE0 /* Pods_EveryoneZooTests.framework in Frameworks */,
+				BF70E69022D3ADEF06237C49 /* Pods_zoonline_iosTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A12A19BE65ED99ED482890E /* Pods_EveryoneZooUITests.framework in Frameworks */,
+				080B76F7A1C7BCB3153053BA /* Pods_zoonline_iosUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +229,12 @@
 				E927651FCE149672BF572470 /* Pods-EveryoneZooTests.release.xcconfig */,
 				E15B20675E61512C92B15E98 /* Pods-EveryoneZooUITests.debug.xcconfig */,
 				831076F39DE8E24A4BCF6907 /* Pods-EveryoneZooUITests.release.xcconfig */,
+				6B66379324BB53EEE7CAC139 /* Pods-zoonline-ios.debug.xcconfig */,
+				EE6523CBEF832B9C0E0E51B4 /* Pods-zoonline-ios.release.xcconfig */,
+				CA69A7633543F1017C1CEB43 /* Pods-zoonline-iosTests.debug.xcconfig */,
+				E384DDEE892248A1E2F67658 /* Pods-zoonline-iosTests.release.xcconfig */,
+				ED5CCC74348DDB69432C44AC /* Pods-zoonline-iosUITests.debug.xcconfig */,
+				A01DE3ABE1DB3EF25E7FA9A2 /* Pods-zoonline-iosUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -370,9 +389,9 @@
 		8D73B4221E7AE08F00E3B301 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */,
-				8D73B4351E7AE09000E3B301 /* EveryoneZooTests.xctest */,
-				8D73B4401E7AE09000E3B301 /* EveryoneZooUITests.xctest */,
+				8D73B4211E7AE08F00E3B301 /* zoonline-ios.app */,
+				8D73B4351E7AE09000E3B301 /* zoonline-iosTests.xctest */,
+				8D73B4401E7AE09000E3B301 /* zoonline-iosUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -504,6 +523,9 @@
 				6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */,
 				22ADCE5CE831A681A93AECC6 /* Pods_EveryoneZooTests.framework */,
 				600BCE0ECEDD3B35A3B6B9B9 /* Pods_EveryoneZooUITests.framework */,
+				13EB92E2361F93A97E488D41 /* Pods_zoonline_ios.framework */,
+				6372D62AAAC202B9F09A8FDC /* Pods_zoonline_iosTests.framework */,
+				9460FAC8C9C665B0AD341F70 /* Pods_zoonline_iosUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -511,9 +533,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D73B4201E7AE08F00E3B301 /* EveryoneZoo */ = {
+		8D73B4201E7AE08F00E3B301 /* zoonline-ios */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8D73B4491E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZoo" */;
+			buildConfigurationList = 8D73B4491E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "zoonline-ios" */;
 			buildPhases = (
 				5ACE218BB6577C936EBD7836 /* [CP] Check Pods Manifest.lock */,
 				8D73B41D1E7AE08F00E3B301 /* Sources */,
@@ -525,14 +547,14 @@
 			);
 			dependencies = (
 			);
-			name = EveryoneZoo;
+			name = "zoonline-ios";
 			productName = EveryoneZoo;
-			productReference = 8D73B4211E7AE08F00E3B301 /* EveryoneZoo.app */;
+			productReference = 8D73B4211E7AE08F00E3B301 /* zoonline-ios.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8D73B4341E7AE09000E3B301 /* EveryoneZooTests */ = {
+		8D73B4341E7AE09000E3B301 /* zoonline-iosTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8D73B44C1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZooTests" */;
+			buildConfigurationList = 8D73B44C1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "zoonline-iosTests" */;
 			buildPhases = (
 				3823344F3002E6C55260184A /* [CP] Check Pods Manifest.lock */,
 				8D73B4311E7AE09000E3B301 /* Sources */,
@@ -544,14 +566,14 @@
 			dependencies = (
 				8D73B4371E7AE09000E3B301 /* PBXTargetDependency */,
 			);
-			name = EveryoneZooTests;
+			name = "zoonline-iosTests";
 			productName = EveryoneZooTests;
-			productReference = 8D73B4351E7AE09000E3B301 /* EveryoneZooTests.xctest */;
+			productReference = 8D73B4351E7AE09000E3B301 /* zoonline-iosTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8D73B43F1E7AE09000E3B301 /* EveryoneZooUITests */ = {
+		8D73B43F1E7AE09000E3B301 /* zoonline-iosUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8D73B44F1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZooUITests" */;
+			buildConfigurationList = 8D73B44F1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "zoonline-iosUITests" */;
 			buildPhases = (
 				0D2E9B135FF7BA179765FCA9 /* [CP] Check Pods Manifest.lock */,
 				8D73B43C1E7AE09000E3B301 /* Sources */,
@@ -563,9 +585,9 @@
 			dependencies = (
 				8D73B4421E7AE09000E3B301 /* PBXTargetDependency */,
 			);
-			name = EveryoneZooUITests;
+			name = "zoonline-iosUITests";
 			productName = EveryoneZooUITests;
-			productReference = 8D73B4401E7AE09000E3B301 /* EveryoneZooUITests.xctest */;
+			productReference = 8D73B4401E7AE09000E3B301 /* zoonline-iosUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -600,7 +622,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8D73B41C1E7AE08F00E3B301 /* Build configuration list for PBXProject "EveryoneZoo" */;
+			buildConfigurationList = 8D73B41C1E7AE08F00E3B301 /* Build configuration list for PBXProject "zoonline-ios" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -613,9 +635,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D73B4201E7AE08F00E3B301 /* EveryoneZoo */,
-				8D73B4341E7AE09000E3B301 /* EveryoneZooTests */,
-				8D73B43F1E7AE09000E3B301 /* EveryoneZooUITests */,
+				8D73B4201E7AE08F00E3B301 /* zoonline-ios */,
+				8D73B4341E7AE09000E3B301 /* zoonline-iosTests */,
+				8D73B43F1E7AE09000E3B301 /* zoonline-iosUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -660,7 +682,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EveryoneZooUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-zoonline-iosUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -678,7 +700,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EveryoneZooTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-zoonline-iosTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -696,7 +718,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EveryoneZoo-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-zoonline-ios-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -709,7 +731,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-zoonline-ios/Pods-zoonline-ios-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
@@ -728,7 +750,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EveryoneZoo/Pods-EveryoneZoo-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-zoonline-ios/Pods-zoonline-ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -819,12 +841,12 @@
 /* Begin PBXTargetDependency section */
 		8D73B4371E7AE09000E3B301 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8D73B4201E7AE08F00E3B301 /* EveryoneZoo */;
+			target = 8D73B4201E7AE08F00E3B301 /* zoonline-ios */;
 			targetProxy = 8D73B4361E7AE09000E3B301 /* PBXContainerItemProxy */;
 		};
 		8D73B4421E7AE09000E3B301 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8D73B4201E7AE08F00E3B301 /* EveryoneZoo */;
+			target = 8D73B4201E7AE08F00E3B301 /* zoonline-ios */;
 			targetProxy = 8D73B4411E7AE09000E3B301 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -969,7 +991,7 @@
 		};
 		8D73B44A1E7AE09000E3B301 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6E6153F1CF883E44B3F5A09 /* Pods-EveryoneZoo.debug.xcconfig */;
+			baseConfigurationReference = 6B66379324BB53EEE7CAC139 /* Pods-zoonline-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5RH346BQ66;
@@ -987,7 +1009,7 @@
 		};
 		8D73B44B1E7AE09000E3B301 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A53C8612E552A7E943C79BF7 /* Pods-EveryoneZoo.release.xcconfig */;
+			baseConfigurationReference = EE6523CBEF832B9C0E0E51B4 /* Pods-zoonline-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5RH346BQ66;
@@ -1005,7 +1027,7 @@
 		};
 		8D73B44D1E7AE09000E3B301 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 490BDC2156CE13494C4E60D5 /* Pods-EveryoneZooTests.debug.xcconfig */;
+			baseConfigurationReference = CA69A7633543F1017C1CEB43 /* Pods-zoonline-iosTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1017,13 +1039,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EveryoneZoo.app/EveryoneZoo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/zoonline-ios.app/zoonline-ios";
 			};
 			name = Debug;
 		};
 		8D73B44E1E7AE09000E3B301 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E927651FCE149672BF572470 /* Pods-EveryoneZooTests.release.xcconfig */;
+			baseConfigurationReference = E384DDEE892248A1E2F67658 /* Pods-zoonline-iosTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1035,13 +1057,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EveryoneZoo.app/EveryoneZoo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/zoonline-ios.app/zoonline-ios";
 			};
 			name = Release;
 		};
 		8D73B4501E7AE09000E3B301 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E15B20675E61512C92B15E98 /* Pods-EveryoneZooUITests.debug.xcconfig */;
+			baseConfigurationReference = ED5CCC74348DDB69432C44AC /* Pods-zoonline-iosUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 5RH346BQ66;
@@ -1058,7 +1080,7 @@
 		};
 		8D73B4511E7AE09000E3B301 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 831076F39DE8E24A4BCF6907 /* Pods-EveryoneZooUITests.release.xcconfig */;
+			baseConfigurationReference = A01DE3ABE1DB3EF25E7FA9A2 /* Pods-zoonline-iosUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 5RH346BQ66;
@@ -1076,7 +1098,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8D73B41C1E7AE08F00E3B301 /* Build configuration list for PBXProject "EveryoneZoo" */ = {
+		8D73B41C1E7AE08F00E3B301 /* Build configuration list for PBXProject "zoonline-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D73B4471E7AE09000E3B301 /* Debug */,
@@ -1085,7 +1107,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8D73B4491E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZoo" */ = {
+		8D73B4491E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "zoonline-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D73B44A1E7AE09000E3B301 /* Debug */,
@@ -1094,7 +1116,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8D73B44C1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZooTests" */ = {
+		8D73B44C1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "zoonline-iosTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D73B44D1E7AE09000E3B301 /* Debug */,
@@ -1103,7 +1125,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8D73B44F1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "EveryoneZooUITests" */ = {
+		8D73B44F1E7AE09000E3B301 /* Build configuration list for PBXNativeTarget "zoonline-iosUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D73B4501E7AE09000E3B301 /* Debug */,
