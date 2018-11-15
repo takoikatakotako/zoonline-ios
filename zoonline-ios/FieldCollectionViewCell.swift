@@ -1,11 +1,3 @@
-//
-//  FieldCollectionViewCell.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/12/13.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class FieldCollectionViewCell: UICollectionViewCell {

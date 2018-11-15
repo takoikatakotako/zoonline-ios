@@ -29,7 +29,6 @@
 		8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D53FD611F375DA800809E7F /* FollowerListViewController.swift */; };
 		8D57A7941F89D2BA00A85D83 /* EveryZooAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D57A7931F89D2BA00A85D83 /* EveryZooAPI.swift */; };
 		8D5F25A21F8B522C008D6BF1 /* UserInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F25A11F8B522C008D6BF1 /* UserInfoTableViewCell.swift */; };
-		8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */; };
 		8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215AC1EC3689600593E55 /* MyPageViewController.swift */; };
 		8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D6888781E9E7C2E00140508 /* Localizable.strings */; };
 		8D6A73EE1F83BE2A00902AFC /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6A73ED1F83BE2A00902AFC /* UserCollectionViewCell.swift */; };
@@ -124,7 +123,6 @@
 		8D53FD611F375DA800809E7F /* FollowerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
 		8D57A7931F89D2BA00A85D83 /* EveryZooAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EveryZooAPI.swift; sourceTree = "<group>"; };
 		8D5F25A11F8B522C008D6BF1 /* UserInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoTableViewCell.swift; sourceTree = "<group>"; };
-		8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPartsSize.swift; sourceTree = "<group>"; };
 		8D6215AC1EC3689600593E55 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		8D6888771E9E7C2E00140508 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D68887B1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
@@ -326,14 +324,6 @@
 			name = UserInfo;
 			sourceTree = "<group>";
 		};
-		8D5F25A01F8B3FFA008D6BF1 /* Deprecated */ = {
-			isa = PBXGroup;
-			children = (
-				8D6215A21EC1FFF000593E55 /* ViewPartsSize.swift */,
-			);
-			name = Deprecated;
-			sourceTree = "<group>";
-		};
 		8D6215A51EC2014200593E55 /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,7 +392,6 @@
 				8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */,
 				8D532C511FC495DD00D2E532 /* ZooForEveryoneConfig.swift */,
 				8D68887E1E9E7EF000140508 /* ViewController */,
-				8D5F25A01F8B3FFA008D6BF1 /* Deprecated */,
 				8D57A7951F89DADE00A85D83 /* Librarys */,
 				8D57A7961F89DB2100A85D83 /* Extensions */,
 				8D532C4E1FC3496700D2E532 /* Inheritance */,
@@ -769,7 +758,6 @@
 				8DA4C69B1FE0D95800C84A73 /* FieldCollectionViewCell.swift in Sources */,
 				8DF9CFE41EE959F9002B8459 /* WebViewController.swift in Sources */,
 				8D7CDC371F14DD8F00C3844E /* EditUserNameViewController.swift in Sources */,
-				8D6215A31EC1FFF000593E55 /* ViewPartsSize.swift in Sources */,
 				8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */,
 				8D46EFBC1F2DEC3100FFD8D7 /* MyPagePostCell.swift in Sources */,
 				8D7343651F3A1D5D00EB232E /* OfficialListViewController.swift in Sources */,
