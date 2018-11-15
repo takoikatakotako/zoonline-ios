@@ -415,7 +415,8 @@
 				8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */,
 				8D73B4301E7AE08F00E3B301 /* Info.plist */,
 			);
-			path = EveryoneZoo;
+			name = EveryoneZoo;
+			path = "zoonline-ios";
 			sourceTree = "<group>";
 		};
 		8D73B4381E7AE09000E3B301 /* EveryoneZooTests */ = {
@@ -424,7 +425,8 @@
 				8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */,
 				8D73B43B1E7AE09000E3B301 /* Info.plist */,
 			);
-			path = EveryoneZooTests;
+			name = EveryoneZooTests;
+			path = "zoonline-iosTests";
 			sourceTree = "<group>";
 		};
 		8D73B4431E7AE09000E3B301 /* EveryoneZooUITests */ = {
@@ -433,7 +435,8 @@
 				8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */,
 				8D73B4461E7AE09000E3B301 /* Info.plist */,
 			);
-			path = EveryoneZooUITests;
+			name = EveryoneZooUITests;
+			path = "zoonline-iosUITests";
 			sourceTree = "<group>";
 		};
 		8D7CDC391F14E74500C3844E /* Official */ = {
@@ -995,7 +998,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5RH346BQ66;
-				INFOPLIST_FILE = EveryoneZoo/Info.plist;
+				INFOPLIST_FILE = "zoonline-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
@@ -1013,7 +1016,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5RH346BQ66;
-				INFOPLIST_FILE = EveryoneZoo/Info.plist;
+				INFOPLIST_FILE = "zoonline-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
