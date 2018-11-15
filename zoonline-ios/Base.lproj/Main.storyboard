@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dco-yk-reu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dco-yk-reu">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,7 +31,7 @@
                         <viewControllerLayoutGuide type="bottom" id="gX1-tv-GCU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="JA5-fa-oBh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -52,7 +51,7 @@
                         <viewControllerLayoutGuide type="bottom" id="cz6-Jt-enA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3Ny-wP-xzQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -89,7 +88,7 @@
                         <viewControllerLayoutGuide type="bottom" id="K7s-mP-snq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="y7A-Uw-XSN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -143,7 +142,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Hpx-6U-A5c"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pkz-mc-IQE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -153,16 +152,16 @@
             </objects>
             <point key="canvasLocation" x="564" y="-36"/>
         </scene>
-        <!--Field View Controller-->
+        <!--FieldVC-->
         <scene sceneID="qBL-za-jVZ">
             <objects>
-                <viewController id="4vJ-MG-yTB" customClass="FieldViewController" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4vJ-MG-yTB" customClass="FieldVC" customModule="EveryoneZoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fWt-ne-MW5"/>
                         <viewControllerLayoutGuide type="bottom" id="Ecn-3W-Fcw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="afo-Jb-oVc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

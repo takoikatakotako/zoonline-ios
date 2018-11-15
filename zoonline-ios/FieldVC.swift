@@ -1,15 +1,7 @@
-//
-//  PictureViewController.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/03/17.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import PageMenu
 
-class FieldViewController: CustumViewController,CAPSPageMenuDelegate ,NewPostsDelegate, PopularPostsDelegate{
+class FieldVC: CustumViewController,CAPSPageMenuDelegate ,NewPostsDelegate, PopularPostsDelegate{
     
     //width, height
     private var pageMenuHeight:CGFloat!

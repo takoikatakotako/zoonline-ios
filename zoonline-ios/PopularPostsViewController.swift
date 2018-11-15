@@ -1,11 +1,3 @@
-//
-//  PopularPostViewController.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/08/13.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import SCLAlertView
 import Alamofire

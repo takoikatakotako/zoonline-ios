@@ -55,7 +55,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
         navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
-        tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+HEIGHT_USER_CELL + tabBarHeight)
+        tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+80 + tabBarHeight)
         
         self.view.backgroundColor = UIColor.MypageArrowGray()
         
@@ -89,7 +89,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //user用のセル
     func setUserCellBtn() {
         
-        userCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: 0, width: viewWidth, height: HEIGHT_USER_CELL))
+        userCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: 0, width: viewWidth, height: 80))
         userCellBtn.backgroundColor = UIColor.white
         userCellBtn.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for:.touchUpInside)
         
@@ -121,7 +121,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //TableViewの設置
     func setTableView(){
     
-        myPageTableView = UITableView(frame: CGRect(x: 0, y: HEIGHT_USER_CELL, width: viewWidth, height: tableViewHeight),style: UITableViewStyle.grouped)
+        myPageTableView = UITableView(frame: CGRect(x: 0, y: 80, width: viewWidth, height: tableViewHeight),style: UITableViewStyle.grouped)
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
         myPageTableView.backgroundColor = UIColor.MypageArrowGray()

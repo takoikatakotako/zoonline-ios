@@ -10,7 +10,7 @@
 		080B76F7A1C7BCB3153053BA /* Pods_zoonline_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460FAC8C9C665B0AD341F70 /* Pods_zoonline_iosUITests.framework */; };
 		1A12A19BE65ED99ED482890E /* Pods_EveryoneZooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600BCE0ECEDD3B35A3B6B9B9 /* Pods_EveryoneZooUITests.framework */; };
 		8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */; };
-		8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */; };
+		8D0FB4541E7AED8E0008D997 /* FieldVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* FieldVC.swift */; };
 		8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */; };
 		8D0FB4581E8030AD0008D997 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */; };
 		8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4591E8031800008D997 /* ZooListViewController.swift */; };
@@ -105,7 +105,7 @@
 		6B8FF17247E5C223FBAD3BDA /* Pods_EveryoneZoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneZoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		831076F39DE8E24A4BCF6907 /* Pods-EveryoneZooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryoneZooUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EveryoneZooUITests/Pods-EveryoneZooUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustumViewController.swift; sourceTree = "<group>"; };
-		8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldViewController.swift; sourceTree = "<group>"; };
+		8D0FB4531E7AED8E0008D997 /* FieldVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldVC.swift; sourceTree = "<group>"; };
 		8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityLibrary.swift; sourceTree = "<group>"; };
 		8D0FB4571E8030AD0008D997 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		8D0FB4591E8031800008D997 /* ZooListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZooListViewController.swift; sourceTree = "<group>"; };
@@ -359,7 +359,7 @@
 		8D68887E1E9E7EF000140508 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				8DA0AB711ECB0A0000D75B1A /* FieldView */,
+				8DA0AB711ECB0A0000D75B1A /* Field */,
 				8DA0AB701ECB032C00D75B1A /* TimeLine */,
 				8D6215A51EC2014200593E55 /* Post */,
 				8D7CDC391F14E74500C3844E /* Official */,
@@ -377,9 +377,9 @@
 		8D73B4181E7AE08F00E3B301 = {
 			isa = PBXGroup;
 			children = (
-				8D73B4231E7AE08F00E3B301 /* EveryoneZoo */,
-				8D73B4381E7AE09000E3B301 /* EveryoneZooTests */,
-				8D73B4431E7AE09000E3B301 /* EveryoneZooUITests */,
+				8D73B4231E7AE08F00E3B301 /* Zoonline */,
+				8D73B4381E7AE09000E3B301 /* ZoonlineTests */,
+				8D73B4431E7AE09000E3B301 /* Zoonline UITests */,
 				8D73B4221E7AE08F00E3B301 /* Products */,
 				3D8FEAE2693C640787112C90 /* Pods */,
 				AD036EBAB48E2DEE51E63AD4 /* Frameworks */,
@@ -396,11 +396,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8D73B4231E7AE08F00E3B301 /* EveryoneZoo */ = {
+		8D73B4231E7AE08F00E3B301 /* Zoonline */ = {
 			isa = PBXGroup;
 			children = (
 				8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */,
 				8D532C511FC495DD00D2E532 /* ZooForEveryoneConfig.swift */,
+				8D68887E1E9E7EF000140508 /* ViewController */,
 				8D5F25A01F8B3FFA008D6BF1 /* Deprecated */,
 				8D57A7951F89DADE00A85D83 /* Librarys */,
 				8D57A7961F89DB2100A85D83 /* Extensions */,
@@ -408,34 +409,33 @@
 				8D9DE17F1EE4147500121FC1 /* Manager */,
 				8D20B0CD1FF1543B00DEE281 /* CommonCollectionCells */,
 				8DA4153B1F93A9E300A38AC8 /* CommonTableCells */,
-				8D68887E1E9E7EF000140508 /* ViewController */,
 				8D73B4281E7AE08F00E3B301 /* Main.storyboard */,
 				8D6888781E9E7C2E00140508 /* Localizable.strings */,
 				8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */,
 				8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */,
 				8D73B4301E7AE08F00E3B301 /* Info.plist */,
 			);
-			name = EveryoneZoo;
+			name = Zoonline;
 			path = "zoonline-ios";
 			sourceTree = "<group>";
 		};
-		8D73B4381E7AE09000E3B301 /* EveryoneZooTests */ = {
+		8D73B4381E7AE09000E3B301 /* ZoonlineTests */ = {
 			isa = PBXGroup;
 			children = (
 				8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */,
 				8D73B43B1E7AE09000E3B301 /* Info.plist */,
 			);
-			name = EveryoneZooTests;
+			name = ZoonlineTests;
 			path = "zoonline-iosTests";
 			sourceTree = "<group>";
 		};
-		8D73B4431E7AE09000E3B301 /* EveryoneZooUITests */ = {
+		8D73B4431E7AE09000E3B301 /* Zoonline UITests */ = {
 			isa = PBXGroup;
 			children = (
 				8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */,
 				8D73B4461E7AE09000E3B301 /* Info.plist */,
 			);
-			name = EveryoneZooUITests;
+			name = "Zoonline UITests";
 			path = "zoonline-iosUITests";
 			sourceTree = "<group>";
 		};
@@ -467,16 +467,16 @@
 			name = TimeLine;
 			sourceTree = "<group>";
 		};
-		8DA0AB711ECB0A0000D75B1A /* FieldView */ = {
+		8DA0AB711ECB0A0000D75B1A /* Field */ = {
 			isa = PBXGroup;
 			children = (
-				8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */,
+				8D0FB4531E7AED8E0008D997 /* FieldVC.swift */,
 				8D48576D1F40457F00608A56 /* NewPostsViewController.swift */,
 				8D48576F1F40A02500608A56 /* PopularPostsViewController.swift */,
 				8DA4C6981FE045A800C84A73 /* FieldCollectionViewFlowLayout.swift */,
 				8DA4C69A1FE0D95800C84A73 /* FieldCollectionViewCell.swift */,
 			);
-			name = FieldView;
+			name = Field;
 			sourceTree = "<group>";
 		};
 		8DA4153B1F93A9E300A38AC8 /* CommonTableCells */ = {
@@ -765,7 +765,7 @@
 			files = (
 				8DC719131F08BC3F003C5E00 /* WritePostTextsViewController.swift in Sources */,
 				8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */,
-				8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */,
+				8D0FB4541E7AED8E0008D997 /* FieldVC.swift in Sources */,
 				8DA4C69B1FE0D95800C84A73 /* FieldCollectionViewCell.swift in Sources */,
 				8DF9CFE41EE959F9002B8459 /* WebViewController.swift in Sources */,
 				8D7CDC371F14DD8F00C3844E /* EditUserNameViewController.swift in Sources */,
