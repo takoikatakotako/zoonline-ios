@@ -1,101 +1,78 @@
 import UIKit
 import PageMenu
 
-class FieldVC: CustumViewController,CAPSPageMenuDelegate ,NewPostsDelegate, PopularPostsDelegate{
+class FieldVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
-    //width, height
-    private var pageMenuHeight:CGFloat!
-    private var contentsViewHeight:CGFloat!
-    
-    var pageMenu : CAPSPageMenu?
-    
+    //CollectionViews
+    var newCollectionView : UICollectionView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.pageName = PageName.Field.rawValue
-        
-        //Viewの大きさを取得
-        viewWidth = self.view.frame.size.width
-        viewHeight = self.view.frame.size.height
-        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
-        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
-        pageMenuHeight = navigationBarHeight
-        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
-        contentsViewHeight = viewHeight
-        
-        setNavigationBar()
-        setPageMenu()
-        self.setIndicater()
-        self.showIndicater()
-    }
-    
-    // MARK: - Viewにパーツの設置
-    func setNavigationBar() {
-        
         //ナビゲーションアイテムを作成
         let titleLabel:NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
+        titleLabel.frame = CGRect(x: view.frame.width*0.3, y: 0, width: view.frame.width*0.4, height: 40)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "ひろば"
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
+
+        
+        
+        let collectionFrame = self.view.frame
+        let layout = FieldCollectionViewFlowLayout()
+        newCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
+        newCollectionView.backgroundColor = UIColor.white
+        newCollectionView.register(FieldCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(FieldCollectionViewCell.self))
+        newCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UICollectionViewCell.self))
+        newCollectionView.register(NetWorkErrorCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(NetWorkErrorCollectionViewCell.self))
+        newCollectionView.delegate = self
+        newCollectionView.dataSource = self
+        if #available(iOS 11.0, *) {
+            newCollectionView.contentInsetAdjustmentBehavior = .never
+        }
+        
+        //リフレッシュコントロールの追加
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
+        newCollectionView.refreshControl = refreshControl
+        self.view.addSubview(newCollectionView)
+        
+        newCollectionView.collectionViewLayout.invalidateLayout()
+        let layout2 = FieldCollectionViewFlowLayout()
+        newCollectionView.setCollectionViewLayout(layout2, animated: false)
+    }
+
+
+    
+    
+    @objc func scrollReflesh(sender : UIRefreshControl) {
+
     }
     
-    func setPageMenu() {
+    //Cellが選択された際に呼び出される
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        var controllerArray : [UIViewController] = []
-        
-        let NewPostsVC : NewPostsViewController = NewPostsViewController()
-        NewPostsVC.title = "新着"
-        NewPostsVC.delegate = self
-        NewPostsVC.statusBarHeight = statusBarHeight
-        NewPostsVC.navigationBarHeight = navigationBarHeight
-        NewPostsVC.pageMenuHeight = pageMenuHeight
-        NewPostsVC.tabBarHeight = tabBarHeight
-        controllerArray.append(NewPostsVC)
-        
-        let PopularPostsVC : PopularPostsViewController = PopularPostsViewController()
-        PopularPostsVC.title = "人気"
-        PopularPostsVC.delegate = self
-        PopularPostsVC.statusBarHeight = statusBarHeight
-        PopularPostsVC.navigationBarHeight = navigationBarHeight
-        PopularPostsVC.pageMenuHeight = pageMenuHeight
-        PopularPostsVC.tabBarHeight = tabBarHeight
-        controllerArray.append(PopularPostsVC)
-        
-        let parameters: [CAPSPageMenuOption] = [
-            .scrollMenuBackgroundColor(UIColor.white),
-            .menuItemSeparatorWidth(4),
-            .menuHeight(pageMenuHeight),
-            .useMenuLikeSegmentedControl(true),
-            .menuItemSeparatorPercentageHeight(0.1),
-            .bottomMenuHairlineColor(UIColor.blue),
-            .selectionIndicatorColor(UIColor.MainAppColor()),
-            .selectedMenuItemLabelColor(UIColor.MainAppColor()),
-            .menuItemFont(UIFont.boldSystemFont(ofSize: 16)),
-            .unselectedMenuItemLabelColor(UIColor.gray)
-        ]
-        
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: 0, width: viewWidth, height: contentsViewHeight), pageMenuOptions: parameters)
-        pageMenu!.view.backgroundColor = UIColor.white
-        pageMenu!.delegate = self
-        self.view.addSubview(pageMenu!.view)
+        print("Section: \(indexPath.section)")
+        print("Num: \(indexPath.row)")
+        print("Number: \(indexPath.section * 6 + indexPath.row)")
     }
     
-    func goDetailView(postID:Int) {
-        //画面遷移、投稿詳細画面へ
-        let picDetailView: PictureDetailViewController = PictureDetailViewController()
-        picDetailView.postID = postID
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = backButton
-        self.navigationController?.pushViewController(picDetailView, animated: true)
+    //セクションあたりのセルの数を返す
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6
+    }
+    //セクションの総数を返す
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 5
+    }
+    //Cellに値を設定する
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell:FieldCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier:  NSStringFromClass(FieldCollectionViewCell.self), for: indexPath as IndexPath) as! FieldCollectionViewCell
+        cell.clipsToBounds = true
+        cell.layer.cornerRadius = 16
+        cell.thumbnailImgView?.image = UIImage(named: "no_img")
+        return cell
     }
     
-    func startIndicator() {
-        self.showIndicater()
-    }
-    
-    func stopIndicator()  {
-        self.hideIndicator()
-    }
 }

@@ -1,3 +1,5 @@
+
+/*
 import UIKit
 import SCLAlertView
 import Alamofire
@@ -10,7 +12,7 @@ protocol PopularPostsDelegate: class  {
     func stopIndicator()
 }
 
-class PopularPostsViewController: CustumViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+class PopularPostsVC: CustumViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     //delegate
     weak var delegate: PopularPostsDelegate?
     
@@ -160,3 +162,4 @@ class PopularPostsViewController: CustumViewController, UICollectionViewDelegate
         return cell
     }
 }
+*/
