@@ -54,7 +54,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         indicator.hidesWhenStopped = true
         self.view.addSubview(indicator)
         self.view.bringSubviewToFront(indicator)
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
     }
     
     // MARK: - Viewにパーツの設置
@@ -64,13 +64,13 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         //ステータスバー部分の覆い
         let statusView:UIView = UIView()
         statusView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: statusBarHeight*2)
-        statusView.backgroundColor = UIColor.MainAppColor()
+        statusView.backgroundColor = UIColor.init(named: "main")
         self.view.addSubview(statusView)
         
         //ナビゲーションコントローラーの色の変更
         let navBar = UINavigationBar()
         navBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
-        navBar.barTintColor = UIColor.MainAppColor()
+        navBar.barTintColor = UIColor.init(named: "main")
         navBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         

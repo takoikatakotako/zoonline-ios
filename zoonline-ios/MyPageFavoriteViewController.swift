@@ -86,7 +86,7 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
     // MARK: ナビゲーションバーの設定
     func setNavigationBar() {
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成

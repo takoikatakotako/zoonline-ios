@@ -34,7 +34,7 @@ class MyPagePostCell: UITableViewCell {
         titleLabel = UILabel()
         titleLabel.text = "タイトルタイトルタイトルタイトルたい凸たいタイトルタイトルタイトルたい凸たい凸タイトタイトルタイトルタイトルたい凸たい凸タイト凸タイトル"
         titleLabel.numberOfLines = 0
-        titleLabel.textColor = UIColor.MainAppColor()
+        titleLabel.textColor = UIColor.init(named: "main")
         titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
         self.contentView.addSubview(titleLabel)
         

@@ -66,7 +66,7 @@ class CustumViewController:UIViewController {
             indicator.frame = CGRect(x: self.view.frame.width * 0.4, y: self.view.frame.height * 0.4, width: self.view.frame.width * 0.2, height: self.view.frame.width * 0.2)
         }
         
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
         self.view.addSubview(indicator)
     }
     

@@ -63,7 +63,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     // MARK: NavigationBar
     func setNavigationBar() {
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
         self.navigationController?.navigationBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         
@@ -107,9 +107,9 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
         self.view.bringSubviewToFront(indicator)
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
         self.view.addSubview(indicator)
     }
     

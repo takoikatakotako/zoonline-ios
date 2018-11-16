@@ -55,7 +55,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         indicator.hidesWhenStopped = true
         self.view.addSubview(indicator)
         self.view.bringSubviewToFront(indicator)
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
     }
     
     // MARK: - Viewにパーツの設置
@@ -65,13 +65,13 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         //ステータスバー部分の覆い
         let statusView:UIView = UIView()
         statusView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: statusBarHeight*2)
-        statusView.backgroundColor = UIColor.MainAppColor()
+        statusView.backgroundColor = UIColor.init(named: "main")
         self.view.addSubview(statusView)
         
         //ナビゲーションコントローラーの色の変更
         let navBar = UINavigationBar()
         navBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
-        navBar.barTintColor = UIColor.MainAppColor()
+        navBar.barTintColor = UIColor.init(named: "main")
         navBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         
@@ -157,7 +157,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         let forgetPassWordBtn:UIButton = UIButton()
         forgetPassWordBtn.frame = CGRect(x: viewWidth*0.1, y: forgetPassWordBtnYPos, width: viewWidth*0.8, height: forgetPassWordBtnHeight)
         forgetPassWordBtn.backgroundColor = UIColor.white
-        forgetPassWordBtn.setTitleColor(UIColor.MainAppColor(), for: UIControl.State.normal)
+        forgetPassWordBtn.setTitleColor(UIColor.init(named: "main"), for: UIControl.State.normal)
         forgetPassWordBtn.setTitle("パスワードを忘れた方", for: UIControl.State.normal)
         forgetPassWordBtn.addTarget(self, action: #selector(forgetPassWordBtnClicked(sender:)), for: .touchUpInside)
        // self.view.addSubview(forgetPassWordBtn)

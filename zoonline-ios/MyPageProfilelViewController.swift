@@ -76,7 +76,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     // MARK: ナビゲーションバーの設定
     func setNavigationBar() {
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
@@ -96,7 +96,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
         self.view.bringSubviewToFront(indicator)
         
         self.view.addSubview(indicator)
@@ -171,7 +171,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         let myImagePicker = UIImagePickerController()
         myImagePicker.delegate = self
         myImagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        myImagePicker.navigationBar.barTintColor = UIColor.MainAppColor()
+        myImagePicker.navigationBar.barTintColor = UIColor.init(named: "main")
         myImagePicker.navigationBar.tintColor = UIColor.white
         myImagePicker.navigationBar.isTranslucent = false
         self.present(myImagePicker, animated: true, completion: nil)
@@ -337,7 +337,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         if indexPath.row == 0{
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-            cell.textLabel?.textColor = UIColor.MainAppColor()
+            cell.textLabel?.textColor = UIColor.init(named: "main")
             cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         }else if indexPath.row == 1{
             cell.backgroundColor = UIColor.LiginCushionLightGray()

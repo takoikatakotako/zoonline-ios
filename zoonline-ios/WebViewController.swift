@@ -66,13 +66,13 @@ class WebViewController: UIViewController , UIWebViewDelegate{
         //ステータスバー部分の覆い
         let aadView:UIView = UIView()
         aadView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: statusBarHeight*2)
-        aadView.backgroundColor = UIColor.MainAppColor()
+        aadView.backgroundColor = UIColor.init(named: "main")
         self.view.addSubview(aadView)
         
         //ナビゲーションコントローラーの色の変更
         let navBar = UINavigationBar()
         navBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
-        navBar.barTintColor = UIColor.MainAppColor()
+        navBar.barTintColor = UIColor.init(named: "main")
         navBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         
@@ -100,7 +100,7 @@ class WebViewController: UIViewController , UIWebViewDelegate{
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
         self.view.bringSubviewToFront(indicator)
         indicator.color = UIColor.white
         self.view.addSubview(indicator)

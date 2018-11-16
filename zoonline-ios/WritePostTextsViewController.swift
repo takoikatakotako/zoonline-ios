@@ -70,7 +70,7 @@ class WritePostTextsViewController: UIViewController,UITextViewDelegate {
     func setNavigationBar() {
         
         //ナビゲーションコントローラーの色の変更
-        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
         self.navigationController?.navigationBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         //「<戻る」を「<」のみにする

@@ -9,11 +9,6 @@
 import UIKit
 
 extension UIColor {
-
-    class func MainAppColor() -> UIColor {
-        //基本の青色,タブバーとかフレンズアイコン
-        return UIColor.colorWithHexString("007aff")
-    }
     
     class func DarkPink() -> UIColor {
         //濃いピンク ログアウトアイコン

@@ -76,7 +76,7 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.3, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
         self.view.addSubview(indicator)
     }
     

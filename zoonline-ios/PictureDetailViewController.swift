@@ -118,7 +118,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         indicator.hidesWhenStopped = true
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
         self.view.bringSubviewToFront(indicator)
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
         self.view.addSubview(indicator)
         indicator.startAnimating()
     }

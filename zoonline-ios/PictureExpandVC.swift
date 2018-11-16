@@ -42,13 +42,13 @@ class PictureExpandVC: UIViewController,UIScrollViewDelegate {
         //ステータスバー部分の覆い
         let aadView:UIView = UIView()
         aadView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: statusBarHeight*2)
-        aadView.backgroundColor = UIColor.MainAppColor()
+        aadView.backgroundColor = UIColor.init(named: "main")
         self.view.addSubview(aadView)
         
         //ナビゲーションコントローラーの色の変更
         let navBar = UINavigationBar()
         navBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
-        navBar.barTintColor = UIColor.MainAppColor()
+        navBar.barTintColor = UIColor.init(named: "main")
         navBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         

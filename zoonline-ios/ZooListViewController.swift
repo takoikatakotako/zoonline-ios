@@ -61,8 +61,8 @@ class ZooListViewController: UIViewController {
             .useMenuLikeSegmentedControl(true),
             .menuItemSeparatorPercentageHeight(0.1),
             .bottomMenuHairlineColor(UIColor.blue),
-            .selectionIndicatorColor(UIColor.MainAppColor()),
-            .selectedMenuItemLabelColor(UIColor.MainAppColor()),
+            .selectionIndicatorColor(UIColor.init(named: "main")),
+            .selectedMenuItemLabelColor(UIColor.init(named: "main")),
             .menuItemFont(UIFont.boldSystemFont(ofSize: 16)),
             .unselectedMenuItemLabelColor(UIColor.gray)
         ]

@@ -53,7 +53,7 @@ class WritePostsCommentsViewController: UIViewController {
     // MARK: NavigationBar
     func setNavigationBar() {
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
         self.navigationController?.navigationBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
         
@@ -95,7 +95,7 @@ class WritePostsCommentsViewController: UIViewController {
         indicator.frame = CGRect(x: (viewWidth-indicaterSize)/2, y: viewWidth*0.25, width: indicaterSize, height: indicaterSize)
         indicator.hidesWhenStopped = true
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
         self.view.bringSubviewToFront(indicator)
         self.view.addSubview(indicator)
     }

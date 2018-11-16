@@ -25,12 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //ナビゲーションバー
         UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().barTintColor = UIColor.MainAppColor()
+        UINavigationBar.appearance().barTintColor = UIColor.init(named: "main")
         UINavigationBar.appearance().isTranslucent = false
         //UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         
         //タブバー
-        UITabBar.appearance().tintColor = UIColor.MainAppColor()
+        UITabBar.appearance().tintColor = UIColor.init(named: "main")
         UITabBar.appearance().unselectedItemTintColor = UIColor.TextColorGray()
         UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().isTranslucent = false

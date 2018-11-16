@@ -83,7 +83,7 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
     // MARK: ナビゲーションバーの設定
     func setNavigationBar() {
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.MainAppColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
@@ -124,7 +124,7 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
         indicator.hidesWhenStopped = true
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
         self.view.bringSubviewToFront(indicator)
-        indicator.color = UIColor.MainAppColor()
+        indicator.color = UIColor.init(named: "main")
         self.view.addSubview(indicator)
     }
     
