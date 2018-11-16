@@ -1,22 +1,12 @@
-//
-//  AppDelegate.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/03/17.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
     var networkManager:NetWorkManager?
     var userDefaultsManager:UserDefaultsManager?
-    
-    var userScore:Int?
+    var tabBarController: UITabBarController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -39,6 +29,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.networkManager = NetWorkManager()
         self.userDefaultsManager = UserDefaultsManager()
 
+        
+        
+        // ページを格納する配列
+        var viewControllers: [UIViewController] = []
+        
+        let firstViewController: FieldVC? = FieldVC()
+        firstViewController?.tabBarItem = UITabBarItem(title: "ひろば", image: UIImage(named: "tab_field"), tag: 1)
+        let firstNavigationController = UINavigationController(rootViewController: firstViewController!)
+        viewControllers.append(firstNavigationController)
+        
+        let secondViewController: TimeLineViewController? = TimeLineViewController()
+        secondViewController?.tabBarItem = UITabBarItem(title: "タイムライン", image: UIImage(named: "tab_timeline"), tag: 2)
+        let secondNavigationController = UINavigationController(rootViewController: secondViewController!)
+        viewControllers.append(secondNavigationController)
+        
+        let thirdViewController: MyPageViewController? = MyPageViewController()
+        thirdViewController?.tabBarItem = UITabBarItem(title: "マイページ", image: UIImage(named: "tab_mypage"), tag: 3)
+        let thirdNavigationController = UINavigationController(rootViewController: thirdViewController!)
+        viewControllers.append(thirdNavigationController)
+        
+        
+        tabBarController = UITabBarController()
+        tabBarController?.setViewControllers(viewControllers, animated: false)
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window!.makeKeyAndVisible()
+        window?.rootViewController = tabBarController
+        
         return true
     }
 
