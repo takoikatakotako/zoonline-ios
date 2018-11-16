@@ -40,7 +40,7 @@ class CustumViewController:UIViewController {
         
             supportBtn = SupportBtn()
             supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: btnHeight)
-            supportBtn.setImage(UIImage(named:SupportBtn.getSupportImgName(pageNum: pageName)), for: UIControlState.normal)
+            supportBtn.setImage(UIImage(named:SupportBtn.getSupportImgName(pageNum: pageName)), for: UIControl.State.normal)
             supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
             self.view.addSubview(supportBtn)
         }
@@ -57,7 +57,7 @@ class CustumViewController:UIViewController {
     func setIndicater(){
         
         indicator = UIActivityIndicatorView()
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        indicator.style = UIActivityIndicatorView.Style.whiteLarge
         indicator.hidesWhenStopped = true
         
         if let navBar = self.navigationController {

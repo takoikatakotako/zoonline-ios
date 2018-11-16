@@ -46,7 +46,7 @@ class NetWorkErrorCollectionViewCell: UICollectionViewCell {
         let penguinImgView = UIImageView()
         penguinImgView.image = UIImage(named:"chara_penpen")
         penguinImgView.frame = CGRect(x: 0, y: cellHeight*0.3, width: cellWidth, height: cellHeight*0.6)
-        penguinImgView.contentMode = UIViewContentMode.scaleAspectFit
+        penguinImgView.contentMode = UIView.ContentMode.scaleAspectFit
         self.contentView.addSubview(penguinImgView)
     }
 }

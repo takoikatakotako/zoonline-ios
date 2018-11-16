@@ -137,17 +137,17 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewWidth*0.5, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        indicator.style = UIActivityIndicatorView.Style.whiteLarge
         indicator.color = UIColor.MainAppColor()
-        self.view.bringSubview(toFront: indicator)
+        self.view.bringSubviewToFront(indicator)
         self.view.addSubview(indicator)
     }
     
     func setSupportBtn() {
         //サポート
         supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
-        supportBtn.setImage(UIImage(named:"support_post"), for: UIControlState.normal)
-        supportBtn.imageView?.contentMode = UIViewContentMode.bottomRight
+        supportBtn.setImage(UIImage(named:"support_post"), for: UIControl.State.normal)
+        supportBtn.imageView?.contentMode = UIView.ContentMode.bottomRight
         supportBtn.contentHorizontalAlignment = .fill
         supportBtn.contentVerticalAlignment = .fill
         supportBtn.backgroundColor = UIColor.clear
@@ -199,7 +199,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func doImageUpload() {
         
         let userID:String = UtilityLibrary.getUserID()
-        let imageData = UIImagePNGRepresentation(postImage)!
+        let imageData = postImage.pngData()!
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
@@ -343,7 +343,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if !UtilityLibrary.isLogin() {
             let cell:NoLoginTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NoLoginTableViewCell.self), for: indexPath) as! NoLoginTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
             cell.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
             return cell
@@ -377,7 +377,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
             //スペーサーView
             let cell:PostSpaceTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostSpaceTableViewCell.self), for: indexPath) as! PostSpaceTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         }
     }
@@ -396,7 +396,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             // インスタンス生成
             myImagePicker = UIImagePickerController()
             myImagePicker.delegate = self
-            myImagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            myImagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
             myImagePicker.navigationBar.barTintColor = UIColor.MainAppColor()
             myImagePicker.navigationBar.tintColor = UIColor.white
             myImagePicker.navigationBar.isTranslucent = false
@@ -438,9 +438,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //画像が選択された時に呼ばれる.
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             
             postImage = image
             postImageWidth = postImage.size.width
@@ -482,4 +485,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         resistView.navigationBarHeight = self.navigationBarHeight
         self.present(resistView, animated: true, completion: nil)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

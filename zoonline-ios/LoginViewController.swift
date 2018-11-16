@@ -50,11 +50,11 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         setView()
         
         //Indicator
-        indicator.activityIndicatorViewStyle = .whiteLarge
+        indicator.style = .whiteLarge
         indicator.center = self.view.center
         indicator.hidesWhenStopped = true
         self.view.addSubview(indicator)
-        self.view.bringSubview(toFront: indicator)
+        self.view.bringSubviewToFront(indicator)
         indicator.color = UIColor.MainAppColor()
     }
     
@@ -108,11 +108,11 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         mailTextField.tag = 100
         mailTextField.text = "ユーザー名またはメールアドレス"
         mailTextField.textColor = UIColor.gray
-        mailTextField.borderStyle = UITextBorderStyle.none
+        mailTextField.borderStyle = UITextField.BorderStyle.none
         mailTextField.font = UIFont.systemFont(ofSize: 16)
         mailTextField.backgroundColor = UIColor.white
         mailTextField.leftView = mailTextFieldPadding
-        mailTextField.leftViewMode = UITextFieldViewMode.always
+        mailTextField.leftViewMode = UITextField.ViewMode.always
         self.view.addSubview(mailTextField)
         
         //MailUnderLine
@@ -129,9 +129,9 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         passWordTextField.tag = 101
         passWordTextField.text = "パスワード"
         passWordTextField.textColor = UIColor.gray
-        passWordTextField.borderStyle = UITextBorderStyle.none
+        passWordTextField.borderStyle = UITextField.BorderStyle.none
         passWordTextField.leftView = passWordTextFieldPadding
-        passWordTextField.leftViewMode = UITextFieldViewMode.always
+        passWordTextField.leftViewMode = UITextField.ViewMode.always
         self.view.addSubview(passWordTextField)
         
         //MailUnderLine
@@ -145,7 +145,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         loginBtn = UIButton()
         loginBtn.frame = CGRect(x: viewWidth*0.1, y: loginBtnYPos, width: viewWidth*0.8, height: loginBtnHeight)
         loginBtn.backgroundColor = UIColor.gray
-        loginBtn.setTitle("ログイン", for: UIControlState.normal)
+        loginBtn.setTitle("ログイン", for: UIControl.State.normal)
         loginBtn.layer.masksToBounds = true
         loginBtn.layer.cornerRadius = 4.0
         loginBtn.isEnabled = false
@@ -157,8 +157,8 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         let forgetPassWordBtn:UIButton = UIButton()
         forgetPassWordBtn.frame = CGRect(x: viewWidth*0.1, y: forgetPassWordBtnYPos, width: viewWidth*0.8, height: forgetPassWordBtnHeight)
         forgetPassWordBtn.backgroundColor = UIColor.white
-        forgetPassWordBtn.setTitleColor(UIColor.MainAppColor(), for: UIControlState.normal)
-        forgetPassWordBtn.setTitle("パスワードを忘れた方", for: UIControlState.normal)
+        forgetPassWordBtn.setTitleColor(UIColor.MainAppColor(), for: UIControl.State.normal)
+        forgetPassWordBtn.setTitle("パスワードを忘れた方", for: UIControl.State.normal)
         forgetPassWordBtn.addTarget(self, action: #selector(forgetPassWordBtnClicked(sender:)), for: .touchUpInside)
        // self.view.addSubview(forgetPassWordBtn)
     }

@@ -18,7 +18,7 @@ class FieldCollectionViewFlowLayout: UICollectionViewFlowLayout {
         self.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         self.minimumLineSpacing = 4
         self.minimumInteritemSpacing = 4
-        self.sectionInset = UIEdgeInsetsMake(4, 4, 4, 4)
+        self.sectionInset = UIEdgeInsets.init(top: 4, left: 4, bottom: 4, right: 4)
     }
     
     override func prepare() {

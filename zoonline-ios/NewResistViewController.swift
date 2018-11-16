@@ -49,11 +49,11 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         setView()
         
         //Indicator
-        indicator.activityIndicatorViewStyle = .whiteLarge
+        indicator.style = .whiteLarge
         indicator.center = self.view.center
         indicator.hidesWhenStopped = true
         self.view.addSubview(indicator)
-        self.view.bringSubview(toFront: indicator)
+        self.view.bringSubviewToFront(indicator)
         indicator.color = UIColor.MainAppColor()
     }
     
@@ -109,11 +109,11 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         mailTextField.tag = 100
         mailTextField.text = "メールアドレス"
         mailTextField.textColor = UIColor.gray
-        mailTextField.borderStyle = UITextBorderStyle.none
+        mailTextField.borderStyle = UITextField.BorderStyle.none
         mailTextField.font = UIFont.systemFont(ofSize: 16)
         mailTextField.backgroundColor = UIColor.white
         mailTextField.leftView = mailTextFieldPadding
-        mailTextField.leftViewMode = UITextFieldViewMode.always
+        mailTextField.leftViewMode = UITextField.ViewMode.always
         self.view.addSubview(mailTextField)
         
         //MailUnderLine
@@ -131,9 +131,9 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         userNameTextField.tag = 101
         userNameTextField.text = "ユーザー名"
         userNameTextField.textColor = UIColor.gray
-        userNameTextField.borderStyle = UITextBorderStyle.none
+        userNameTextField.borderStyle = UITextField.BorderStyle.none
         userNameTextField.leftView = userNameTextFieldPadding
-        userNameTextField.leftViewMode = UITextFieldViewMode.always
+        userNameTextField.leftViewMode = UITextField.ViewMode.always
         self.view.addSubview(userNameTextField)
         
         //UserUnderLine
@@ -151,9 +151,9 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         passWordTextField.tag = 101
         passWordTextField.text = "パスワード"
         passWordTextField.textColor = UIColor.gray
-        passWordTextField.borderStyle = UITextBorderStyle.none
+        passWordTextField.borderStyle = UITextField.BorderStyle.none
         passWordTextField.leftView = passWordTextFieldPadding
-        passWordTextField.leftViewMode = UITextFieldViewMode.always
+        passWordTextField.leftViewMode = UITextField.ViewMode.always
         self.view.addSubview(passWordTextField)
         
         //PassUnderLine
@@ -167,7 +167,7 @@ class NewResistViewController: UIViewController,UITextFieldDelegate {
         registBtn = UIButton()
         registBtn.frame = CGRect(x: viewWidth*0.1, y: registBtnYPos, width: viewWidth*0.8, height: loginBtnHeight)
         registBtn.backgroundColor = UIColor.gray
-        registBtn.setTitle("新規登録", for: UIControlState.normal)
+        registBtn.setTitle("新規登録", for: UIControl.State.normal)
         registBtn.layer.masksToBounds = true
         registBtn.layer.cornerRadius = 4.0
         registBtn.isEnabled = false

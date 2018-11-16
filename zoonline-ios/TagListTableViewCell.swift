@@ -13,7 +13,7 @@ class TagListTableViewCell: UITableViewCell {
     var tagLabel:UILabel = UILabel()
     var deleateBtn:UIButton = UIButton()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         //self.contentView.backgroundColor = UIColor.blue

@@ -10,7 +10,7 @@ import UIKit
 
 class NetWorkErrorTableViewCell: UITableViewCell {
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
@@ -51,7 +51,7 @@ class NetWorkErrorTableViewCell: UITableViewCell {
         //Error Img View
         let errorImgView:UIImageView = UIImageView()
         errorImgView.image = UIImage(named:"chara_penpen")
-        errorImgView.contentMode = UIViewContentMode.scaleAspectFit
+        errorImgView.contentMode = UIView.ContentMode.scaleAspectFit
         errorImgView.frame = CGRect(x: 0, y: errorLabelHeight+conformLabelHeight*2, width: cellWidth, height: errorImgViewHeight)
         self.addSubview(errorImgView)
     }

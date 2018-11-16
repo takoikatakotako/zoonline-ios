@@ -150,7 +150,7 @@ class UserInfoViewController: CustumViewController, UITableViewDelegate, UITable
         
         if indexPath.row == 0 {
             let cell:UserInfoTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UserInfoTableViewCell.self), for: indexPath) as! UserInfoTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.backgroundColor = UIColor.MypageArrowGray()
             cell.iconImgView.sd_setImage(with: URL(string:self.userIconUrl), placeholderImage: UIImage(named: "icon_default"))
             cell.userNameLabel.text = self.userName

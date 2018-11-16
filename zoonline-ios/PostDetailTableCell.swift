@@ -36,7 +36,7 @@ class PostDetailTableCell: UITableViewCell {
     var tag1Label:UILabel!
     var tag2Label:UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         //UserInfoBtn
@@ -61,7 +61,7 @@ class PostDetailTableCell: UITableViewCell {
         postImgView = UIImageView()
         postImgView.image = UIImage(named: "sample_loading")!
         postImgView.backgroundColor = UIColor.white
-        postImgView.contentMode = UIViewContentMode.scaleAspectFit
+        postImgView.contentMode = UIView.ContentMode.scaleAspectFit
         postImgView.isUserInteractionEnabled = true
         contentView.addSubview(postImgView)
         

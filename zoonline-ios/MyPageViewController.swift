@@ -121,7 +121,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //TableViewの設置
     func setTableView(){
     
-        myPageTableView = UITableView(frame: CGRect(x: 0, y: 80, width: viewWidth, height: tableViewHeight),style: UITableViewStyle.grouped)
+        myPageTableView = UITableView(frame: CGRect(x: 0, y: 80, width: viewWidth, height: tableViewHeight),style: UITableView.Style.grouped)
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
         myPageTableView.backgroundColor = UIColor.MypageArrowGray()
@@ -223,7 +223,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         return cell
     }
     

@@ -122,8 +122,8 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
         indicator.clipsToBounds = true
         indicator.layer.cornerRadius = viewWidth*0.3*0.3
         indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        self.view.bringSubview(toFront: indicator)
+        indicator.style = UIActivityIndicatorView.Style.whiteLarge
+        self.view.bringSubviewToFront(indicator)
         indicator.color = UIColor.MainAppColor()
         self.view.addSubview(indicator)
     }

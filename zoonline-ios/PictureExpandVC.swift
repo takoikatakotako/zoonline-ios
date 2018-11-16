@@ -79,7 +79,7 @@ class PictureExpandVC: UIViewController,UIScrollViewDelegate {
         postImgView = UIImageView()
         postImgView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: scrollViewHeight)
         postImgView.image = image
-        postImgView.contentMode = UIViewContentMode.scaleAspectFit
+        postImgView.contentMode = UIView.ContentMode.scaleAspectFit
         imageScrollView.addSubview(postImgView)
     }
     

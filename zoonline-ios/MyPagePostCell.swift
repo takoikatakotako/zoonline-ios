@@ -22,12 +22,12 @@ class MyPagePostCell: UITableViewCell {
     //cooment
     var commentLabel:UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         thumbnailImg = UIImageView()
         thumbnailImg.image = UIImage(named: "sample_loading")
-        thumbnailImg.contentMode = UIViewContentMode.scaleAspectFill
+        thumbnailImg.contentMode = UIView.ContentMode.scaleAspectFill
         thumbnailImg.clipsToBounds = true
         self.contentView.addSubview(thumbnailImg)
         

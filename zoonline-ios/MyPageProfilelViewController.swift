@@ -95,9 +95,9 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         indicator = UIActivityIndicatorView()
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        indicator.style = UIActivityIndicatorView.Style.whiteLarge
         indicator.color = UIColor.MainAppColor()
-        self.view.bringSubview(toFront: indicator)
+        self.view.bringSubviewToFront(indicator)
         
         self.view.addSubview(indicator)
     }
@@ -170,7 +170,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         // インスタンス生成
         let myImagePicker = UIImagePickerController()
         myImagePicker.delegate = self
-        myImagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        myImagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         myImagePicker.navigationBar.barTintColor = UIColor.MainAppColor()
         myImagePicker.navigationBar.tintColor = UIColor.white
         myImagePicker.navigationBar.isTranslucent = false
@@ -181,11 +181,14 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     // MARK: - UIImagePickerのDelgate
     
     //画像が選択された時に呼ばれる.
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             
-            self.view.bringSubview(toFront: self.indicator)
+            self.view.bringSubviewToFront(self.indicator)
             self.indicator.startAnimating()
             self.doImageUpload(postImage: image)
             
@@ -208,7 +211,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let userID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
         
-        let imageData = UIImagePNGRepresentation(postImage)!
+        let imageData = postImage.pngData()!
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
@@ -335,16 +338,16 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
             cell.textLabel?.textColor = UIColor.MainAppColor()
-            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         }else if indexPath.row == 1{
             cell.backgroundColor = UIColor.LiginCushionLightGray()
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
         }else if indexPath.row == 6{
             cell.backgroundColor = UIColor.LiginCushionLightGray()
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
         }else{
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]
-            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         }
         
         return cell
@@ -480,4 +483,14 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         }
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

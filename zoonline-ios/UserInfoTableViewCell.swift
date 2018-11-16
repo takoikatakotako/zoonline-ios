@@ -14,7 +14,7 @@ class UserInfoTableViewCell: UITableViewCell {
     var userNameLabel:UILabel = UILabel()
     var profileLabel:UILabel = UILabel()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
                 
         iconImgView = UIImageView()

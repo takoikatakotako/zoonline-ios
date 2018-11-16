@@ -12,7 +12,7 @@ class PostImageTableViewCell: UITableViewCell {
     
     var postImageView:UIImageView = UIImageView()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.contentView.addSubview(postImageView)

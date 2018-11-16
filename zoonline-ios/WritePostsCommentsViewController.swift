@@ -94,9 +94,9 @@ class WritePostsCommentsViewController: UIViewController {
         let indicaterSize:CGFloat = viewWidth*0.3
         indicator.frame = CGRect(x: (viewWidth-indicaterSize)/2, y: viewWidth*0.25, width: indicaterSize, height: indicaterSize)
         indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        indicator.style = UIActivityIndicatorView.Style.whiteLarge
         indicator.color = UIColor.MainAppColor()
-        self.view.bringSubview(toFront: indicator)
+        self.view.bringSubviewToFront(indicator)
         self.view.addSubview(indicator)
     }
     

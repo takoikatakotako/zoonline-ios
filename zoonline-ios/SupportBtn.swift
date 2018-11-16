@@ -53,7 +53,7 @@ class SupportBtn: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.imageView?.contentMode = UIViewContentMode.bottomRight
+        self.imageView?.contentMode = UIView.ContentMode.bottomRight
         self.contentHorizontalAlignment = .fill
         self.contentVerticalAlignment = .fill
         self.backgroundColor = UIColor.clear

@@ -11,7 +11,7 @@ class FieldCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         // thumbnailImgを生成.
         thumbnailImgView = UIImageView()
-        self.contentMode = UIViewContentMode.scaleAspectFill
+        self.contentMode = UIView.ContentMode.scaleAspectFill
         self.backgroundView = self.thumbnailImgView
     }
 }

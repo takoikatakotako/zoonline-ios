@@ -13,11 +13,11 @@ class NoLoginTableViewCell: UITableViewCell {
     var loginBtn:UIButton!
     var newResisterBtn:UIButton!
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         //LoginBtn
         loginBtn = UIButton()
-        loginBtn.setTitle("ログイン", for: UIControlState.normal)
+        loginBtn.setTitle("ログイン", for: UIControl.State.normal)
         loginBtn.backgroundColor = UIColor.LoginRegistSkyBlue()
         loginBtn.layer.masksToBounds = true
         loginBtn.layer.cornerRadius = 4.0
@@ -25,7 +25,7 @@ class NoLoginTableViewCell: UITableViewCell {
         
         //newResist
         newResisterBtn = UIButton()
-        newResisterBtn.setTitle("アカウント登録", for: UIControlState.normal)
+        newResisterBtn.setTitle("アカウント登録", for: UIControl.State.normal)
         newResisterBtn.backgroundColor = UIColor.AccountRegistErrorPink()
         newResisterBtn.layer.masksToBounds = true
         newResisterBtn.layer.cornerRadius = 4.0
@@ -57,7 +57,7 @@ class NoLoginTableViewCell: UITableViewCell {
         var loginCanDoView:UIImageView!
         loginCanDoView = UIImageView()
         loginCanDoView.image = UIImage(named:"login_can_do")
-        loginCanDoView.contentMode = UIViewContentMode.scaleAspectFit
+        loginCanDoView.contentMode = UIView.ContentMode.scaleAspectFit
         loginCanDoView.frame = CGRect(x: 0, y: cellHeight*0.2, width: cellWidth, height: cellHeight*0.4)
         self.addSubview(loginCanDoView)
         

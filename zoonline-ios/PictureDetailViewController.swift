@@ -116,8 +116,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         indicator = UIActivityIndicatorView()
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4-44, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        self.view.bringSubview(toFront: indicator)
+        indicator.style = UIActivityIndicatorView.Style.whiteLarge
+        self.view.bringSubviewToFront(indicator)
         indicator.color = UIColor.MainAppColor()
         self.view.addSubview(indicator)
         indicator.startAnimating()
@@ -126,8 +126,8 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     func setSupportBtn() {
         //サポート
         supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
-        supportBtn.setImage(UIImage(named:"support_detail"), for: UIControlState.normal)
-        supportBtn.imageView?.contentMode = UIViewContentMode.bottomRight
+        supportBtn.setImage(UIImage(named:"support_detail"), for: UIControl.State.normal)
+        supportBtn.imageView?.contentMode = UIView.ContentMode.bottomRight
         supportBtn.contentHorizontalAlignment = .fill
         supportBtn.contentVerticalAlignment = .fill
         supportBtn.backgroundColor = UIColor.clear
@@ -168,7 +168,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
 
         let cell:PostDetailTableCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostDetailTableCell.self), for: indexPath) as! PostDetailTableCell
         cell.layoutMargins = UIEdgeInsets.zero
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         //UserInfoBtn
         let userInfoBtnWidth:CGFloat = viewWidth*0.65
@@ -391,12 +391,12 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
     @objc func showActionShert(sender: UIButton){
         
         // インスタンス生成　styleはActionSheet.
-        let actionAlert = UIAlertController(title: "メニュー", message: "操作を選んでください", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let actionAlert = UIAlertController(title: "メニュー", message: "操作を選んでください", preferredStyle: UIAlertController.Style.actionSheet)
         
         if UtilityLibrary.isLogin() {
             
             // アクションを生成.
-            let commentAction = UIAlertAction(title: "コメント", style: UIAlertActionStyle.default, handler: {
+            let commentAction = UIAlertAction(title: "コメント", style: UIAlertAction.Style.default, handler: {
                 (action: UIAlertAction!) in
                 // コメント画面へ遷移
                 self.goCommentView()
@@ -405,7 +405,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
             
             if postUserID == Int(UtilityLibrary.getUserID()) {
                 
-                let addAlbumAction = UIAlertAction(title: "投稿を削除", style: UIAlertActionStyle.default, handler: {
+                let addAlbumAction = UIAlertAction(title: "投稿を削除", style: UIAlertAction.Style.default, handler: {
                     (action: UIAlertAction!) in
                     
                     let alertView = SCLAlertView()
@@ -420,7 +420,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         }
 
         
-        let reportAction = UIAlertAction(title: "レポート", style: UIAlertActionStyle.default, handler: {
+        let reportAction = UIAlertAction(title: "レポート", style: UIAlertAction.Style.default, handler: {
             (action: UIAlertAction!) in
             
             //お問い合わせ
@@ -434,7 +434,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         actionAlert.addAction(reportAction)
 
         
-        let shareAction = UIAlertAction(title: "シェアする", style: UIAlertActionStyle.default, handler: {
+        let shareAction = UIAlertAction(title: "シェアする", style: UIAlertAction.Style.default, handler: {
             (action: UIAlertAction!) in
             let alertView = SCLAlertView()
             alertView.addButton("Twitter") {
@@ -446,7 +446,7 @@ class PictureDetailViewController: UIViewController,UITableViewDelegate, UITable
         actionAlert.addAction(shareAction)
 
         
-        let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler: {
+        let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: {
             (action: UIAlertAction!) in
             print("キャンセルをタップした時の処理")
         })

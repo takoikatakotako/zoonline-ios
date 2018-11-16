@@ -60,7 +60,7 @@ class EditUserNameViewController: UIViewController,UITextFieldDelegate {
         let changeUserNameBtn:UIButton = UIButton()
         changeUserNameBtn.frame = CGRect(x: viewWidth*0.1, y: viewHeight*0.3, width: viewWidth*0.8, height: viewWidth*0.15)
         changeUserNameBtn.backgroundColor = UIColor.MainAppColor()
-        changeUserNameBtn.setTitle("変更を保存", for: UIControlState.normal)
+        changeUserNameBtn.setTitle("変更を保存", for: UIControl.State.normal)
         changeUserNameBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         changeUserNameBtn.layer.masksToBounds = true
         changeUserNameBtn.layer.cornerRadius = 4.0

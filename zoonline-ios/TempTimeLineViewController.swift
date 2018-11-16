@@ -69,7 +69,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         
         //リフレッシュコントロールの追加
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: UIControl.Event.valueChanged)
         timeLineTableView.refreshControl = refreshControl
     }
     
@@ -152,7 +152,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         
         if !UtilityLibrary.isLogin() {
             let cell:NoLoginTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NoLoginTableViewCell.self), for: indexPath) as! NoLoginTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
             cell.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
             return cell
@@ -160,7 +160,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         
         if !isNetWorkConnect {
             let cell:NetWorkErrorTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self), for: indexPath) as! NetWorkErrorTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         }
         

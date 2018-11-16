@@ -99,9 +99,9 @@ class WebViewController: UIViewController , UIWebViewDelegate{
         
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        indicator.style = UIActivityIndicatorView.Style.whiteLarge
         indicator.color = UIColor.MainAppColor()
-        self.view.bringSubview(toFront: indicator)
+        self.view.bringSubviewToFront(indicator)
         indicator.color = UIColor.white
         self.view.addSubview(indicator)
         indicator.startAnimating()

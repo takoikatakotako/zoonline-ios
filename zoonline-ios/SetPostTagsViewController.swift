@@ -181,7 +181,7 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell:TagListTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(TagListTableViewCell.self), for: indexPath) as! TagListTableViewCell
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.layoutMargins = UIEdgeInsets.zero
         cell.tagLabel.text = tagsAry[tagsAry.count-indexPath.row-1]
         
