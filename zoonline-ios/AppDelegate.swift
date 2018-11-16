@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firstNavigationController = UINavigationController(rootViewController: firstViewController!)
         viewControllers.append(firstNavigationController)
         
-        let secondViewController: TimeLineViewController? = TimeLineViewController()
+        let secondViewController: TimeLineVC? = TimeLineVC()
         secondViewController?.tabBarItem = UITabBarItem(title: "タイムライン", image: UIImage(named: "tab_timeline"), tag: 2)
         let secondNavigationController = UINavigationController(rootViewController: secondViewController!)
         viewControllers.append(secondNavigationController)
