@@ -131,7 +131,7 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
 
         //画面遷移、投稿詳細画面へ
-        let picDetailView: PictureDetailViewController = PictureDetailViewController()
+        let picDetailView: PostDetailVC = PostDetailVC()
         picDetailView.postID = self.postsContents[indexPath.row]["id"].intValue
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton

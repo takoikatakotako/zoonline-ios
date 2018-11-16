@@ -1,11 +1,3 @@
-//
-//  PictureDetailViewController.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/04/08.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import Social
 import Alamofire
@@ -13,7 +5,7 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class PictureDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
     //Post ID
     public var postID:Int!

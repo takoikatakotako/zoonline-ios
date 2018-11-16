@@ -57,7 +57,7 @@ class FieldVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         print("Number: \(indexPath.section * 6 + indexPath.row)")
         
         //画面遷移、投稿詳細画面へ
-        let picDetailView: PictureDetailViewController = PictureDetailViewController()
+        let picDetailView: PostDetailVC = PostDetailVC()
         picDetailView.postID = 0
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton

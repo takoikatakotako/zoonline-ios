@@ -130,7 +130,7 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
     //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //画面遷移、投稿詳細画面へ
-        let picDetailView: PictureDetailViewController = PictureDetailViewController()
+        let picDetailView: PostDetailVC = PostDetailVC()
         picDetailView.postID = self.favoritePosts[indexPath.row]["id"].intValue
         
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
