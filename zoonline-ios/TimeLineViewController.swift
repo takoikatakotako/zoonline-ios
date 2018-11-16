@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import PageMenu
+// import PageMenu
 import SCLAlertView
 
-class TimeLineViewController: UIViewController,CAPSPageMenuDelegate {
+class TimeLineViewController: UIViewController {
     
     //width,height
     private var viewWidth:CGFloat!
@@ -24,8 +24,9 @@ class TimeLineViewController: UIViewController,CAPSPageMenuDelegate {
     private var contentsViewHeight:CGFloat!
 
     
-    var pageMenu : CAPSPageMenu?
+    //var pageMenu : CAPSPageMenu?
 
+    /*
     
     //view parts
     private var postDetailTableView: UITableView!
@@ -139,5 +140,5 @@ class TimeLineViewController: UIViewController,CAPSPageMenuDelegate {
         self.present(resistView, animated: true, completion: nil)
     }
 
-    
+    */
 }

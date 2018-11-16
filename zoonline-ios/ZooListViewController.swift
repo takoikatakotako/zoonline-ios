@@ -7,16 +7,20 @@
 //
 
 import UIKit
-import PageMenu
+//import PageMenu
 
-class ZooListViewController: CustumViewController,NewsDelegate,CAPSPageMenuDelegate,OfficialDelegate {
+class ZooListViewController: UIViewController {
+
+    
     
     //width, height
     var pageMenuHeight:CGFloat!
     private var contentsViewHeight:CGFloat!
     
-    var pageMenu : CAPSPageMenu?
+    // var pageMenu : CAPSPageMenu?
 
+    /*
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,12 +93,6 @@ class ZooListViewController: CustumViewController,NewsDelegate,CAPSPageMenuDeleg
         self.navigationItem.titleView = titleLabel
     }
     
-    //Delegateで呼ぶViewの背景色を変えるメソッド
-    func openNews(newsUrl:String){
-        //ここでニュースページに飛ぶ
-        let url = URL(string:newsUrl)
-        if( UIApplication.shared.canOpenURL(url!) ) {
-            UIApplication.shared.open(url!)
-        }
-    }
+ 
+ */
 }

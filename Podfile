@@ -6,11 +6,11 @@ target 'zoonline-ios' do
   use_frameworks!
 
   # Pods for EveryoneZoo
-  pod 'SCLAlertView', '~> 0.7'
-  pod 'Alamofire', '~> 4.6'
+  pod 'SCLAlertView'
+  pod 'Alamofire'
   pod 'SwiftyJSON'
-  pod 'SDWebImage/GIF', '~> 4.2'
-  pod 'PageMenu'
+  pod 'SDWebImage/GIF'
+  # pod 'PageMenu'
   pod 'Google-Mobile-Ads-SDK'
 
   target 'zoonline-iosTests' do
