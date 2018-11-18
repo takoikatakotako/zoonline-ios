@@ -52,8 +52,12 @@ class PostDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.white
 
+        let postDetailView = PostDetailView()
+        postDetailView.frame = view.frame
+        view.addSubview(postDetailView)
+        
         /*
         
         viewWidth = self.view.frame.width
