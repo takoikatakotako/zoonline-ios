@@ -1,11 +1,3 @@
-//
-//  PictureExpandVC.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/11/10.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class PictureExpandVC: UIViewController,UIScrollViewDelegate {

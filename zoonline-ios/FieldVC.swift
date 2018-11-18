@@ -58,7 +58,7 @@ class FieldVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         //画面遷移、投稿詳細画面へ
         let picDetailView: PostDetailVC = PostDetailVC()
-        picDetailView.postID = 0
+        //picDetailView.postID = 0
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(picDetailView, animated: true)

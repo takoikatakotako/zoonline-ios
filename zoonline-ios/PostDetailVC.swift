@@ -5,8 +5,9 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class PostDetailVC: UIViewController {
     
+    /*
     //Post ID
     public var postID:Int!
     private var myUserID:String!
@@ -47,12 +48,14 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
     let supportBtn:UIButton = UIButton()
     
     var myComposeView : SLComposeViewController!
-    
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.white
 
+        /*
+        
         viewWidth = self.view.frame.width
         viewHeight = self.view.frame.height
         statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
@@ -69,7 +72,11 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
         
         //投稿の情報の取得
         getPostInfo(postID: self.postID)
+ 
+ */
     }
+    
+    /*
     
     // MARK: - Viewにパーツの設置
     // MARK: NavigationBar
@@ -602,9 +609,12 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
     
     
     func tweet() {
-        
+        /*
         myComposeView = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         myComposeView.setInitialText("#みんなの動物園")
         self.present(myComposeView, animated: true, completion: nil)
+         */
     }
+ 
+ */
 }

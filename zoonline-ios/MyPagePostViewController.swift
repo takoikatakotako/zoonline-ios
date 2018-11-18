@@ -132,7 +132,7 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
 
         //画面遷移、投稿詳細画面へ
         let picDetailView: PostDetailVC = PostDetailVC()
-        picDetailView.postID = self.postsContents[indexPath.row]["id"].intValue
+        //picDetailView.postID = self.postsContents[indexPath.row]["id"].intValue
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(picDetailView, animated: true)

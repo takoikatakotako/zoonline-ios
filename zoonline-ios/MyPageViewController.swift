@@ -392,9 +392,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tweet() {
-        
+        /*
         myComposeView = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         myComposeView.setInitialText("#みんなの動物園")
         self.present(myComposeView, animated: true, completion: nil)
+ */
     }
 }

@@ -184,7 +184,7 @@ class UserInfoViewController: CustumViewController, UITableViewDelegate, UITable
         
         //画面遷移、投稿詳細画面へ
         let picDetailView: PostDetailVC = PostDetailVC()
-        picDetailView.postID = self.postsInfos[indexPath.row-1]["id"].intValue
+        //picDetailView.postID = self.postsInfos[indexPath.row-1]["id"].intValue
         let btn_back = UIBarButtonItem()
         btn_back.title = ""
         self.navigationItem.backBarButtonItem = btn_back

@@ -122,8 +122,6 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
         if let imageUrl = URL(string:imageUrlText){
             cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
         }
-
-
         return cell
     }
     
@@ -131,7 +129,7 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //画面遷移、投稿詳細画面へ
         let picDetailView: PostDetailVC = PostDetailVC()
-        picDetailView.postID = self.favoritePosts[indexPath.row]["id"].intValue
+        //picDetailView.postID = self.favoritePosts[indexPath.row]["id"].intValue
         
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton
