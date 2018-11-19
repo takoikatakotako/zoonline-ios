@@ -404,14 +404,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.present(myImagePicker, animated: true, completion: nil)
             
         }else if indexPath.row == 2 {
-            let writePosTextsVC:WritePostTextsViewController = WritePostTextsViewController()
+            let writePosTextsVC:WritePostTextsVC = WritePostTextsVC()
             writePosTextsVC.text = titleStr
             writePosTextsVC.isTitle = true
             writePosTextsVC.navTitle = "タイトル"
             writePosTextsVC.delegate = self
             self.navigationController?.pushViewController(writePosTextsVC, animated: true)
         }else if indexPath.row == 4 {
-            let writePosTextsVC:WritePostTextsViewController = WritePostTextsViewController()
+            let writePosTextsVC:WritePostTextsVC = WritePostTextsVC()
             writePosTextsVC.text = commentStr
             writePosTextsVC.isTitle = false
             writePosTextsVC.navTitle = "コメント"
