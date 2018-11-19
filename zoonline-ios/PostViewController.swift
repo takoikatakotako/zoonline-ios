@@ -1,25 +1,14 @@
-//
-//  PostViewController.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/04/08.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import Alamofire
 import SwiftyJSON
 import SCLAlertView
 
-class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate,SetTagsDelegate{
+//class PostViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate,SetTagsDelegate{
     
+class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
-    private var tableViewHeight:CGFloat!
+
 
     //views
     private var postTableView: UITableView!
@@ -44,22 +33,19 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Viewの大きさを取得
-        viewWidth = self.view.frame.size.width
-        viewHeight = self.view.frame.size.height
-        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
-        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
-        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
-
-        tableViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + tabBarHeight!)
+        view.backgroundColor = .white
         
         setNavigationBar()
         setTableView()
-        setActivityIndicator()
+        
     }
     
+    
+    /*
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
         
         self.navigationItem.rightBarButtonItem = nil
         
@@ -84,26 +70,26 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }
         self.postTableView.reloadData()
+ 
+ 
     }
+ */
+    
+    
     
     // MARK: - Viewにパーツの設置
     // MARK: ナビゲーションバー
     func setNavigationBar() {
         
-        //ステータスバー部分の覆い
-        let statusBgView:UIView = UIView()
-        statusBgView.frame = CGRect(x: 0, y: -navigationBarHeight*2, width: viewWidth, height: navigationBarHeight*2)
-        statusBgView.backgroundColor = UIColor.init(named: "main")
-        self.view.addSubview(statusBgView)
-        
-        //ナビゲーションコントローラーの色の変更
-        self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
-        self.navigationController?.navigationBar.isTranslucent = false
-        UINavigationBar.appearance().tintColor = UIColor.white
+        let rightNavBtn = UIBarButtonItem()
+        rightNavBtn.image = UIImage(named:"submit_nav_btn")!
+        //rightNavBtn.action = #selector(postBarBtnClicked(sender:))
+        //rightNavBtn.target = self
+        self.navigationItem.rightBarButtonItem = rightNavBtn
         
         //ナビゲーションアイテムを作成
         let titleLabel:NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
+        titleLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "投稿"
         titleLabel.textColor = UIColor.white
@@ -112,9 +98,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //TableViewの設置
     func setTableView(){
-        
         postTableView = UITableView()
-        postTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: tableViewHeight)
+        postTableView.frame = view.frame
         postTableView.dataSource = self
         postTableView.delegate = self
         postTableView.separatorStyle = .none
@@ -134,17 +119,19 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: くるくるの生成
     func setActivityIndicator(){
-        
+        /*
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewWidth*0.5, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
         indicator.color = UIColor.init(named: "main")
         self.view.bringSubviewToFront(indicator)
         self.view.addSubview(indicator)
+         */
     }
     
     func setSupportBtn() {
         //サポート
+        /*
         supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
         supportBtn.setImage(UIImage(named:"support_post"), for: UIControl.State.normal)
         supportBtn.imageView?.contentMode = UIView.ContentMode.bottomRight
@@ -153,6 +140,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         supportBtn.backgroundColor = UIColor.clear
         supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
         self.view.addSubview(supportBtn)
+         */
     }
     
     //MARK: ButtonActions
@@ -279,7 +267,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     //MARK: テーブルビューのセルの高さを計算する
+    /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        
         
         if !UtilityLibrary.isLogin() {
             return tableViewHeight
@@ -325,7 +316,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             return viewWidth*0.04
         }
     }
-    
+    */
     
     //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -341,14 +332,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if !UtilityLibrary.isLogin() {
-            let cell:NoLoginTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NoLoginTableViewCell.self), for: indexPath) as! NoLoginTableViewCell
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            cell.loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
-            cell.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
-            return cell
-        }
         
+
         
         if indexPath.row == 0 {
             //画像選択View
@@ -386,6 +371,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         
+        
+        /*
         if !UtilityLibrary.isLogin() {
             return
         }
@@ -423,8 +410,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             SetPostTagsVC.delegate = self
             self.navigationController?.pushViewController(SetPostTagsVC, animated: true)
         }
+ 
+ */
     }
     
+    
+    /*
     func setTitle(str:String){
         titleStr = str
     }
@@ -495,4 +486,6 @@ fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [U
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
+ 
+ */
 }

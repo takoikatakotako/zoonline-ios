@@ -1,11 +1,3 @@
-//
-//  ZooForEveryoneConfig.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/11/22.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 enum PageName: Int {

@@ -49,7 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let thirdNavigationController = UINavigationController(rootViewController: thirdViewController!)
         viewControllers.append(thirdNavigationController)
         
-        
         tabBarController = UITabBarController()
         tabBarController?.setViewControllers(viewControllers, animated: false)
         
