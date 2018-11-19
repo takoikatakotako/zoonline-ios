@@ -2,41 +2,6 @@ import UIKit
 
 extension UIColor {
     
-    class func DarkPink() -> UIColor {
-        //濃いピンク ログアウトアイコン
-        return UIColor.colorWithHexString("ff007a")
-    }
-    
-    class func ShareRed() -> UIColor {
-        //赤 シェアアイコン(マイページ)
-        return UIColor.colorWithHexString("ff1f1a")
-    }
-    
-    class func FollowYellowGreen() -> UIColor {
-        //黄緑 フォロワーアイコン
-        return UIColor.colorWithHexString("6ee600")
-    }
-
-    class func FavoriteOrange() -> UIColor {
-        //オレンジ お気に入りアイコン
-        return UIColor.colorWithHexString("ff8500")
-    }
-    
-    class func ContactBluePurple() -> UIColor {
-        //青紫色 お問い合わせアイコン
-        return UIColor.colorWithHexString("8500ff")
-    }
-    
-    class func PostListGreen() -> UIColor {
-        //緑 投稿一覧アイコン
-        return UIColor.colorWithHexString("00cc6a")
-    }
-    
-    class func PostDetailIconGry() -> UIColor {
-        //灰色 詳細画面のアイコン
-        return UIColor.colorWithHexString("8e8e93")
-    }
-    
     class func MypageArrowGray() -> UIColor {
         //灰色 マイページの矢印
         return UIColor.colorWithHexString("c5c5ca")

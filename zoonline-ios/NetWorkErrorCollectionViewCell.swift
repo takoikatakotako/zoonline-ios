@@ -1,11 +1,3 @@
-//
-//  NetWorkErrorCollectionViewCell.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/12/19.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class NetWorkErrorCollectionViewCell: UICollectionViewCell {
@@ -30,7 +22,7 @@ class NetWorkErrorCollectionViewCell: UICollectionViewCell {
         let errorLabel = UILabel()
         errorLabel.text = "ネットワークエラー"
         errorLabel.frame = CGRect(x: 0, y: cellHeight*0.05, width: cellWidth, height: cellHeight*0.1)
-        errorLabel.textColor = UIColor.DarkPink()
+        errorLabel.textColor = UIColor(named: "darkPink")
         errorLabel.font = UIFont.boldSystemFont(ofSize: 20)
         errorLabel.textAlignment = NSTextAlignment.center
         self.contentView.addSubview(errorLabel)
