@@ -5,14 +5,6 @@ import SDWebImage
 
 class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tableViewHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
-
     //ユーザー数の
     var userCellBtn:MyPageUserCellBtn!
     
@@ -41,59 +33,44 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //Viewの大きさを取得
-        viewWidth = self.view.frame.size.width
-        viewHeight = self.view.frame.size.height
-        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
-        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
-        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
-        tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+80 + tabBarHeight)
+        view.backgroundColor = UIColor.MypageArrowGray()
         
-        self.view.backgroundColor = UIColor.MypageArrowGray()
+        //ナビゲーションアイテムを作成
+        let titleLabel:NavigationBarLabel = NavigationBarLabel(frame: CGRect(x: view.frame.width, y: 0, width: view.frame.width, height: 40))
+        titleLabel.text = "マイページ"
+        self.navigationItem.titleView = titleLabel
         
-        setNavigationBar()
+        //user用のセル
+        userCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
+        userCellBtn.backgroundColor = UIColor.white
+        userCellBtn.addTarget(self, action: #selector(MyPageVC.goMyProfile(sender:)), for:.touchUpInside)
+        let defaultIcon = UIImage(named:"common-icon-default")
+        if let url = URL(string: UtilityLibrary.getUserIconUrl()){
+            userCellBtn.iconImgView.sd_setImage(with: url, placeholderImage: defaultIcon)
+        }else{
+            userCellBtn.iconImgView.image = defaultIcon
+        }
+        view.addSubview(userCellBtn)
         
-        setUserCellBtn()
-        
-        setTableView()
-        
+        myPageTableView = UITableView(frame: CGRect(x: 0, y: 80, width: view.frame.width, height: view.frame.height),style: UITableView.Style.grouped)
+        myPageTableView.dataSource = self
+        myPageTableView.delegate = self
+        myPageTableView.backgroundColor = UIColor.MypageArrowGray()
+        myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(MyPageTableViewCell.self))
+        myPageTableView.rowHeight = 48
+        self.view.addSubview(myPageTableView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setUserCellText()
+        //setUserCellText()
         self.myPageTableView.reloadData()
-    }
-    
-    // MARK: - Viewにパーツの設置
-    func setNavigationBar() {
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
-        self.navigationController?.navigationBar.isTranslucent = false
-        
-        //ナビゲーションアイテムを作成
-        let titleLabel:NavigationBarLabel = NavigationBarLabel(frame: CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight))
-        titleLabel.text = "マイページ"
-        self.navigationItem.titleView = titleLabel
     }
 
     //user用のセル
     func setUserCellBtn() {
         
-        userCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: 0, width: viewWidth, height: 80))
-        userCellBtn.backgroundColor = UIColor.white
-        userCellBtn.addTarget(self, action: #selector(MyPageVC.goMyProfile(sender:)), for:.touchUpInside)
-        
-        let defaultIcon = UIImage(named:"icon_default")
-        if let url = URL(string: UtilityLibrary.getUserIconUrl()){
-            userCellBtn.iconImgView.sd_setImage(with: url, placeholderImage: defaultIcon)
-
-        }else{
-            userCellBtn.iconImgView.image = defaultIcon
-        }
-        
-        self.view.addSubview(userCellBtn)
     }
     
     //UserCellに文字を
@@ -110,17 +87,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    //TableViewの設置
-    func setTableView(){
-    
-        myPageTableView = UITableView(frame: CGRect(x: 0, y: 80, width: viewWidth, height: tableViewHeight),style: UITableView.Style.grouped)
-        myPageTableView.dataSource = self
-        myPageTableView.delegate = self
-        myPageTableView.backgroundColor = UIColor.MypageArrowGray()
-        myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(MyPageTableViewCell.self))
-        myPageTableView.rowHeight = 48
-        self.view.addSubview(myPageTableView)
-    }
     
     // MARK: - TableViewのデリゲートメソッド
     
@@ -336,8 +302,8 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 //ログイン
                 
                 let loginView:LoginViewController = LoginViewController()
-                loginView.statusBarHeight = self.statusBarHeight
-                loginView.navigationBarHeight = self.navigationBarHeight
+                //loginView.statusBarHeight = self.statusBarHeight
+                //loginView.navigationBarHeight = self.navigationBarHeight
                 self.present(loginView, animated: true, completion: nil)
                 
                 
@@ -359,8 +325,8 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if !(UtilityLibrary.isLogin()){
 
             let loginView:LoginViewController = LoginViewController()
-            loginView.statusBarHeight = self.statusBarHeight
-            loginView.navigationBarHeight = self.navigationBarHeight
+            //loginView.statusBarHeight = self.statusBarHeight
+            //loginView.navigationBarHeight = self.navigationBarHeight
             self.present(loginView, animated: true, completion: nil)
             return
         }
@@ -376,8 +342,8 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
         //利用規約
         let contactView:WebViewController = WebViewController()
-        contactView.statusBarHeight = self.statusBarHeight
-        contactView.navigationBarHeight = self.navigationBarHeight
+        //contactView.statusBarHeight = self.statusBarHeight
+        //contactView.navigationBarHeight = self.navigationBarHeight
         contactView.url = url
         contactView.navTitle = navTitle
         self.present(contactView, animated: true, completion: nil)

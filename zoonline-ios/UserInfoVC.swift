@@ -4,7 +4,7 @@ import SwiftyJSON
 import SDWebImage
 import SCLAlertView
 
-class UserInfoVC: CustumViewController, UITableViewDelegate, UITableViewDataSource {
+class UserInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //テーブルビューインスタンス
     private var profileTableView: UITableView!
@@ -27,22 +27,8 @@ class UserInfoVC: CustumViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.white
-        
-        viewWidth = self.view.frame.width
-        viewHeight = self.view.frame.height
-        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
-        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
-        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
-        
-        profileCellHeight = viewWidth*0.65
-        postCellHeight = viewWidth*0.28
-        
         setNavigationBar()
         setTableView()
-        
-        self.setIndicater()
-        self.showIndicater()
-        
         getUserInfo()
     }
     
@@ -69,7 +55,6 @@ class UserInfoVC: CustumViewController, UITableViewDelegate, UITableViewDataSour
 
             case .failure(let error):
                 print(error)
-                self.hideIndicator()
                 SCLAlertView().showError("エラー", subTitle: "ユーザー情報の取得に失敗しました")
             }
         }
@@ -95,14 +80,13 @@ class UserInfoVC: CustumViewController, UITableViewDelegate, UITableViewDataSour
                 print(error)
                 SCLAlertView().showError("エラー", subTitle: "ユーザー情報の取得に失敗しました")
             }
-            self.hideIndicator()
         }
     }
     
     // MARK: ViewParts
     func setNavigationBar() {
         let titleLabel:NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
+        titleLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "プロフィール"
         titleLabel.textColor = UIColor.white
@@ -113,7 +97,7 @@ class UserInfoVC: CustumViewController, UITableViewDelegate, UITableViewDataSour
         profileTableView = UITableView()
         profileTableView.delegate = self
         profileTableView.dataSource = self
-        profileTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight-(statusBarHeight+tabBarHeight+navigationBarHeight))
+        profileTableView.frame = view.frame
         profileTableView.register(MyPagePostCell.self, forCellReuseIdentifier: NSStringFromClass(MyPagePostCell.self))
         profileTableView.register(UserInfoTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UserInfoTableViewCell.self))
         self.view.addSubview(profileTableView)
