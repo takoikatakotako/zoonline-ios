@@ -71,7 +71,7 @@ class PostDetailView: UIView {
         addSubview(favoriteButton)
 
         favoriteLabel = UILabel()
-        favoriteLabel.textColor = UIColor.PostDetailFavPink()
+        favoriteLabel.textColor = UIColor(named: "ff92ae")
         favoriteLabel.font = UIFont.boldSystemFont(ofSize: 24)
         favoriteLabel.text = "10"
         addSubview(favoriteLabel)
@@ -82,7 +82,7 @@ class PostDetailView: UIView {
         addSubview(commentButton)
 
         commentLabel = UILabel()
-        commentLabel.textColor = UIColor.TextColorGray()
+        commentLabel.textColor = UIColor(named: "textColorGray")
         commentLabel.font = UIFont.boldSystemFont(ofSize: 24)
         commentLabel.text = "10"
         addSubview(commentLabel)
@@ -95,7 +95,7 @@ class PostDetailView: UIView {
         // Date
         dateLabel = UILabel()
         dateLabel.text = "2017年4月1日"
-        dateLabel.textColor = UIColor.TextColorGray()
+        dateLabel.textColor = UIColor(named: "textColorGray")
         dateLabel.font = UIFont.systemFont(ofSize: 18)
         addSubview(dateLabel)
 

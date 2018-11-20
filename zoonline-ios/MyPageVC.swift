@@ -33,7 +33,7 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.MypageArrowGray()
+        view.backgroundColor = UIColor(named: "mypageArrowGray")
         
         //ナビゲーションアイテムを作成
         let titleLabel:NavigationBarLabel = NavigationBarLabel(frame: CGRect(x: view.frame.width, y: 0, width: view.frame.width, height: 40))
@@ -55,7 +55,7 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         myPageTableView = UITableView(frame: view.frame,style: UITableView.Style.grouped)
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
-        myPageTableView.backgroundColor = UIColor.MypageArrowGray()
+        myPageTableView.backgroundColor = UIColor(named: "mypageArrowGray")
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(MyPageTableViewCell.self))
         myPageTableView.rowHeight = 48
         myPageTableView.tableHeaderView = userCellBtn

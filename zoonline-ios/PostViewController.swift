@@ -103,7 +103,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         postTableView.dataSource = self
         postTableView.delegate = self
         postTableView.separatorStyle = .none
-        postTableView.backgroundColor = UIColor.MypageArrowGray()
+        postTableView.backgroundColor = UIColor(named: "mypageArrowGray")
         postTableView.separatorStyle = .none
 
         postTableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostImageTableViewCell.self))

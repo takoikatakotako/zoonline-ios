@@ -1,11 +1,3 @@
-//
-//  NoLoginTableViewCell.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/10/15.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class NoLoginTableViewCell: UITableViewCell {
@@ -18,7 +10,7 @@ class NoLoginTableViewCell: UITableViewCell {
         //LoginBtn
         loginBtn = UIButton()
         loginBtn.setTitle("ログイン", for: UIControl.State.normal)
-        loginBtn.backgroundColor = UIColor.LoginRegistSkyBlue()
+        loginBtn.backgroundColor = UIColor(named: "loginRegistSkyBlue")
         loginBtn.layer.masksToBounds = true
         loginBtn.layer.cornerRadius = 4.0
         self.addSubview(loginBtn)
@@ -26,7 +18,7 @@ class NoLoginTableViewCell: UITableViewCell {
         //newResist
         newResisterBtn = UIButton()
         newResisterBtn.setTitle("アカウント登録", for: UIControl.State.normal)
-        newResisterBtn.backgroundColor = UIColor.AccountRegistErrorPink()
+        newResisterBtn.backgroundColor = UIColor(named: "accountRegistErrorPink")
         newResisterBtn.layer.masksToBounds = true
         newResisterBtn.layer.cornerRadius = 4.0
         self.addSubview(newResisterBtn)

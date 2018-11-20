@@ -1,11 +1,3 @@
-//
-//  TagListTableViewCell.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/07/02.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class TagListTableViewCell: UITableViewCell {
@@ -40,7 +32,7 @@ class TagListTableViewCell: UITableViewCell {
         tagLabel.text = "#"+tagLabel.text!
         tagLabel.textColor = UIColor.white
         tagLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        tagLabel.backgroundColor = UIColor.PostDetailFavPink()
+        tagLabel.backgroundColor = UIColor(named: "ff92ae")
 
         //サイズの計算
         let frame:CGSize = CGSize(width: cellWidth*0.8, height: cellHeight*0.6)
@@ -54,6 +46,6 @@ class TagListTableViewCell: UITableViewCell {
         removeImg.image = UIImage(named:"remove")
         removeImg.frame = CGRect(x: deleateBtn.frame.width*0.2, y:deleateBtn.frame.height*0.2, width: deleateBtn.frame.width*0.6, height: deleateBtn.frame.height*0.6)
         deleateBtn.addSubview(removeImg)
-        
+    
     }
 }

@@ -127,7 +127,7 @@ class UserInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             let cell:UserInfoTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UserInfoTableViewCell.self), for: indexPath) as! UserInfoTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            cell.backgroundColor = UIColor.MypageArrowGray()
+            cell.backgroundColor = UIColor(named: "mypageArrowGray")
             cell.iconImgView.sd_setImage(with: URL(string:self.userIconUrl), placeholderImage: UIImage(named: "icon_default"))
             cell.userNameLabel.text = self.userName
             cell.profileLabel.text = self.userProfile

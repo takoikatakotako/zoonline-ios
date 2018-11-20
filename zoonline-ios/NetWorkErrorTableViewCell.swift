@@ -1,11 +1,3 @@
-//
-//  NetWorkErrorTableViewCell.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/04/23.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class NetWorkErrorTableViewCell: UITableViewCell {
@@ -36,7 +28,7 @@ class NetWorkErrorTableViewCell: UITableViewCell {
         errorLabel.frame = CGRect(x: 0, y: errorLabelHeight, width: cellWidth, height: errorLabelHeight)
         errorLabel.text = "ネットワークエラー"
         errorLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        errorLabel.textColor = UIColor.PostDetailFavPink()
+        errorLabel.textColor = UIColor(named: "ff92ae")
         errorLabel.textAlignment = NSTextAlignment.center
         self.addSubview(errorLabel)
         

@@ -189,7 +189,7 @@ class SignInVC: UIViewController,UITextFieldDelegate {
         
         
         registBtn.isEnabled = true
-        registBtn.backgroundColor = UIColor.LoginRegistSkyBlue()
+        registBtn.backgroundColor = UIColor(named: "loginRegistSkyBlue")
 
         return true
     }
@@ -203,7 +203,7 @@ class SignInVC: UIViewController,UITextFieldDelegate {
         if !(self.mailTextField.text?.isEmpty)! && !(self.userNameTextField.text?.isEmpty)! && !(self.passWordTextField.text?.isEmpty)!{
         
             registBtn.isEnabled = true
-            registBtn.backgroundColor = UIColor.LoginRegistSkyBlue()
+            registBtn.backgroundColor = UIColor(named: "loginRegistSkyBlue")
         }else{
         
             registBtn.isEnabled = false

@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //タブバー
         UITabBar.appearance().tintColor = UIColor.init(named: "main")
-        UITabBar.appearance().unselectedItemTintColor = UIColor.TextColorGray()
+        UITabBar.appearance().unselectedItemTintColor = UIColor(named: "textColorGray")
         UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().isTranslucent = false
         

@@ -87,7 +87,7 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         
         //
         let grayView:UIView = UIView()
-        grayView.backgroundColor = UIColor.LoginRegistSkyBlue()
+        grayView.backgroundColor = UIColor(named: "loginRegistSkyBlue")
         grayView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: postTagLabelHeight)
         self.view.addSubview(grayView)
         

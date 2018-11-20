@@ -2,76 +2,15 @@ import UIKit
 
 extension UIColor {
     
-    class func MypageArrowGray() -> UIColor {
-        //灰色 マイページの矢印
-        return UIColor.colorWithHexString("c5c5ca")
-    }
-    
-    class func DefaultIconLeg() -> UIColor {
-        //デフォルトアイコン 足
-        return UIColor.colorWithHexString("89c2ff")
-    }
-    
-    class func DefaultIconShadow() -> UIColor {
-        //デフォルトアイコン 影
-        return UIColor.colorWithHexString("9aa7b2")
-    }
-    
-    class func DefaultIconCircle() -> UIColor {
-        //デフォルトアイコン 丸
-        return UIColor.colorWithHexString("c4e0ff")
-    }
-    
-    class func ErrorPenguinDarkBlue() -> UIColor {
-        //エラーペンギン 深い紺色
-        return UIColor.colorWithHexString("1e2935")
-    }
-    
-    class func ErrorPenguinBodySkyBlue() -> UIColor {
-        //エラーペンギン 腹の水色
-        return UIColor.colorWithHexString("a4c5ed")
-    }
-    
-    class func AccountRegistErrorPink() -> UIColor {
-        //ピンク アカウント登録エラーメッセージ アカウント登録ボタン
-        return UIColor.colorWithHexString("f14f80")
-    }
-    
-    class func LoginRegistSkyBlue() -> UIColor {
-        //水色 登録ボタン、ログインボタン
-        return UIColor.colorWithHexString("00b4ff")
-    }
-    
-    class func TextColorGray() -> UIColor {
-        // 灰色 文字色とか線とか
-        return UIColor.colorWithHexString("999999")
-    }
-    
-    class func LiginCushionLightGray() -> UIColor {
-        // 薄い灰色 ログインクッションのアイコン・文字色 投稿画面のカメラ
-        return UIColor.colorWithHexString("b5b5b5")
-    }
-    
-    class func CommentIconSkyBlue() -> UIColor {
-        // タグアイコンとかコメントアイコンの水色
-        return UIColor.colorWithHexString("7fcef4")
-    }
-    
-    class func CommentListUserNameBlue() -> UIColor {
-        // 青 コメント一覧UIのユーザー名の色
-        return UIColor.colorWithHexString("0080ff")
-    }
-    
-    class func CommentListUserIconBlue() -> UIColor {
-        // 青 コメント一覧UIのユーザーアイコン
-        return UIColor.colorWithHexString("40a0ff")
-    }
-    
+/*
+
+
     class func PostDetailFavPink() -> UIColor {
         // ピンク 詳細画面とかのファボアイコン
         return UIColor.colorWithHexString("ff92ae")
     }
- 
+     */
+
     //カラーコードをUIColorに変換
     class func colorWithHexString (_ hex:String) -> UIColor {
         

@@ -1,11 +1,3 @@
-//
-//  MyPageProfilelViewController.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/05/18.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import Alamofire
 import SwiftyJSON
@@ -40,7 +32,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.LiginCushionLightGray()
+        self.view.backgroundColor = UIColor(named: "liginCushionLightGray")
         
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
@@ -110,7 +102,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         //自分の情報
         let myProfielView:UIView = UIView()
         myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.56)
-        myProfielView.backgroundColor = UIColor.LiginCushionLightGray()
+        myProfielView.backgroundColor = UIColor(named: "liginCushionLightGray")
         self.view.addSubview(myProfielView)
         
         //アイコン選択ボタン
@@ -158,7 +150,7 @@ class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITabl
         userConfigTableView.dataSource = self
         userConfigTableView.frame = CGRect(x: 0, y:myProfielViewHeight, width: viewWidth, height: userConfigTableViewHeight)
         userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        userConfigTableView.backgroundColor = UIColor.LiginCushionLightGray()
+        userConfigTableView.backgroundColor = UIColor(named: "liginCushionLightGray")
         //userConfigTableView.isScrollEnabled = false
         self.view.addSubview(userConfigTableView)
     }
@@ -340,10 +332,10 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             cell.textLabel?.textColor = UIColor.init(named: "main")
             cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         }else if indexPath.row == 1{
-            cell.backgroundColor = UIColor.LiginCushionLightGray()
+            cell.backgroundColor = UIColor(named: "liginCushionLightGray")
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
         }else if indexPath.row == 6{
-            cell.backgroundColor = UIColor.LiginCushionLightGray()
+            cell.backgroundColor = UIColor(named: "liginCushionLightGray")
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
         }else{
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]
@@ -482,7 +474,6 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             }
         }
     }
-    
 }
 
 // Helper function inserted by Swift 4.2 migrator.
