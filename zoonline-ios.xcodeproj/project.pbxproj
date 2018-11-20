@@ -204,6 +204,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1743803421A4186B00673721 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8D35113E1EEED5E6004BA744 /* LoginViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		568484AC1AB1FC4B6C88B766 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,7 +230,6 @@
 			children = (
 				8D46EFBB1F2DEC3100FFD8D7 /* MyPagePostCell.swift */,
 				8DF9CFE31EE959F9002B8459 /* WebViewController.swift */,
-				8D35113E1EEED5E6004BA744 /* LoginViewController.swift */,
 				8DE541761EFAB3010085F916 /* NewResistViewController.swift */,
 			);
 			name = Common;
@@ -330,6 +337,7 @@
 		8D68887E1E9E7EF000140508 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				1743803421A4186B00673721 /* Login */,
 				8DA0AB711ECB0A0000D75B1A /* Field */,
 				8DA0AB701ECB032C00D75B1A /* TimeLine */,
 				8D6215A51EC2014200593E55 /* Post */,
