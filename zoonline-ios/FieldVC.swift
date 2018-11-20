@@ -48,7 +48,7 @@ class FieldVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         postButton.backgroundColor = UIColor(named: "main")
         postButton.frame = CGRect(x: width - 100, y: height - 100, width: 80, height: 80)
         postButton.layer.cornerRadius = 40
-        postButton.setImage(UIImage(named: "tab_post"), for: .normal)
+        postButton.setImage(UIImage(named: "field-add"), for: .normal)
         postButton.addTarget(self, action: #selector(showPostVC(sender:)), for:.touchUpInside)
         view.addSubview(postButton)
     }
