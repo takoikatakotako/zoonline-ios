@@ -40,7 +40,7 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         titleLabel.text = "マイページ"
         self.navigationItem.titleView = titleLabel
         
-        //user用のセル
+        // header
         userCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
         userCellBtn.backgroundColor = UIColor.white
         userCellBtn.addTarget(self, action: #selector(MyPageVC.goMyProfile(sender:)), for:.touchUpInside)
@@ -50,31 +50,22 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }else{
             userCellBtn.iconImgView.image = defaultIcon
         }
-        view.addSubview(userCellBtn)
-        
-        myPageTableView = UITableView(frame: CGRect(x: 0, y: 80, width: view.frame.width, height: view.frame.height),style: UITableView.Style.grouped)
+
+        // table
+        myPageTableView = UITableView(frame: view.frame,style: UITableView.Style.grouped)
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
         myPageTableView.backgroundColor = UIColor.MypageArrowGray()
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(MyPageTableViewCell.self))
         myPageTableView.rowHeight = 48
-        self.view.addSubview(myPageTableView)
+        myPageTableView.tableHeaderView = userCellBtn
+        view.addSubview(myPageTableView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //setUserCellText()
-        self.myPageTableView.reloadData()
-    }
-
-    //user用のセル
-    func setUserCellBtn() {
-        
-    }
-    
-    //UserCellに文字を
-    func setUserCellText() {
+        //user用のセル
         if (UtilityLibrary.isLogin()) {
             //ログイン
             userCellBtn.userNameLabel.text = UtilityLibrary.getUserName()
@@ -85,20 +76,15 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             userCellBtn.userMailAdressLabel.text = "ログインしてください"
             userCellBtn.iconImgView.image = UIImage(named:"icon_default")
         }
+        
+        myPageTableView.reloadData()
     }
-    
-    
+
     // MARK: - TableViewのデリゲートメソッド
     
     //セクションの数を返す.
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-        //ログインしている場合はボタンをつける
-        if UtilityLibrary.isLogin() {
-            return loginedSectionTitle.count
-        }else{
             return unloginedSectionTitle.count
-        }
     }
     
     //セクションのタイトルを返す.
@@ -125,7 +111,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //テーブルに表示する配列の総数を返す.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if UtilityLibrary.isLogin() {
             switch section {
             case 0:
                 return userInfoTitle.count
@@ -136,24 +121,13 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             default:
                 return 0
             }
-        }else{
-            switch section {
-            case 0:
-                return configsTitle.count
-            case 1:
-                return loginTitle.count
-            default:
-                return 0
-            }
-        }
+
     }
     
     //Cellに値を設定する.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:MyPageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPageTableViewCell.self), for: indexPath) as! MyPageTableViewCell
-        
-        if (UtilityLibrary.isLogin()) {
             switch indexPath.section {
             case 0:
                 cell.textCellLabel.text =  userInfoTitle[indexPath.row]
@@ -167,19 +141,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             default: break
 
             }
-        }else{
-        
-            switch indexPath.section {
-            case 0:
-                cell.textCellLabel.text =  configsTitle[indexPath.row]
-                cell.thumbnailImgView.image = UIImage(named:configsIcon[indexPath.row])
-            case 1:
-                cell.textCellLabel.text =  loginTitle[indexPath.row]
-                cell.thumbnailImgView.image = UIImage(named:loginIcon[indexPath.row])
-            default: break
-
-            }
-        }
         
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         return cell
@@ -188,7 +149,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //Cellが選択された際に呼び出される.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if UtilityLibrary.isLogin() {
             switch indexPath.section {
             case 0:
                 //ユーザー情報
@@ -264,54 +224,11 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.userDefaultsManager?.doLogout()
                 self.myPageTableView.reloadData()
-                setUserCellText()
                 SCLAlertView().showInfo("ログアウト", subTitle: "ログアウトが完了しました。")
                 break
             default: break
                 
             }
-        }else{
-            
-            switch indexPath.section {
-            case 0:
-                switch indexPath.row {
-                case 0:
-                    //お問い合わせ
-                    openWebView(navTitle: "お問い合わせ", url: CONTACT_PAGE_URL_STRING)
-                    break
-                case 1:
-                    //アプリシェア
-                    let alertView = SCLAlertView()
-                    alertView.addButton("Twitter") {
-                        self.tweet()
-                    }
-                    alertView.showInfo("シェア", subTitle: "みんなの動物園を広める")
-                    break
-                case 2:
-                    //利用規約
-                    openWebView(navTitle: "利用規約", url: TOS_PAGE_URL_STRING)
-                    break
-                case 3:
-                    //プライバシーポリシー
-                    openWebView(navTitle: "プライバシーポリシー", url: PRIVACY_PAGE_URL)
-                    break
-                default:
-                    break
-                }
-            case 1:
-                //ログイン
-                
-                let loginView:LoginViewController = LoginViewController()
-                //loginView.statusBarHeight = self.statusBarHeight
-                //loginView.navigationBarHeight = self.navigationBarHeight
-                self.present(loginView, animated: true, completion: nil)
-                
-                
-                break
-            default: break
-                
-            }
-        }
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
