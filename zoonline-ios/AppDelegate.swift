@@ -39,13 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firstNavigationController = UINavigationController(rootViewController: firstViewController!)
         viewControllers.append(firstNavigationController)
         
-        let secondViewController: TimeLineVC? = TimeLineVC()
-        secondViewController?.tabBarItem = UITabBarItem(title: "タイムライン", image: UIImage(named: "tab_timeline"), tag: 2)
-        let secondNavigationController = UINavigationController(rootViewController: secondViewController!)
-        viewControllers.append(secondNavigationController)
+        // let secondViewController: TimeLineVC? = TimeLineVC()
+        // secondViewController?.tabBarItem = UITabBarItem(title: "タイムライン", image: UIImage(named: "tab_timeline"), tag: 2)
+        // let secondNavigationController = UINavigationController(rootViewController: secondViewController!)
+        // viewControllers.append(secondNavigationController)
         
-        let thirdViewController: MyPageViewController? = MyPageViewController()
-        thirdViewController?.tabBarItem = UITabBarItem(title: "マイページ", image: UIImage(named: "tab_mypage"), tag: 3)
+        let thirdViewController: MyPageVC? = MyPageVC()
+        thirdViewController?.tabBarItem = UITabBarItem(title: "マイページ", image: UIImage(named: "tab_mypage"), tag: 2)
         let thirdNavigationController = UINavigationController(rootViewController: thirdViewController!)
         viewControllers.append(thirdNavigationController)
         

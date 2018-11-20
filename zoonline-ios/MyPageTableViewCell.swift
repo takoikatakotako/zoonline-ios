@@ -1,11 +1,3 @@
-//
-//  ConfigTableViewCell.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/05/16.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class MyPageTableViewCell: UITableViewCell {

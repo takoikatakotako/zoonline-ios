@@ -1,18 +1,10 @@
-//
-//  UserInfoViewController.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/05/26.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import Alamofire
 import SwiftyJSON
 import SDWebImage
 import SCLAlertView
 
-class UserInfoViewController: CustumViewController, UITableViewDelegate, UITableViewDataSource {
+class UserInfoVC: CustumViewController, UITableViewDelegate, UITableViewDataSource {
     
     //テーブルビューインスタンス
     private var profileTableView: UITableView!

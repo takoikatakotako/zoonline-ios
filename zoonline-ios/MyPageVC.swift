@@ -1,17 +1,9 @@
-//
-//  MyPageViewController.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/05/11.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import Social
 import SCLAlertView
 import SDWebImage
 
-class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     //width, height
     private var viewWidth:CGFloat!
@@ -91,7 +83,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         userCellBtn = MyPageUserCellBtn(frame:CGRect(x: 0, y: 0, width: viewWidth, height: 80))
         userCellBtn.backgroundColor = UIColor.white
-        userCellBtn.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for:.touchUpInside)
+        userCellBtn.addTarget(self, action: #selector(MyPageVC.goMyProfile(sender:)), for:.touchUpInside)
         
         let defaultIcon = UIImage(named:"icon_default")
         if let url = URL(string: UtilityLibrary.getUserIconUrl()){

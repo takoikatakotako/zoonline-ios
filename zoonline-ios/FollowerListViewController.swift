@@ -137,7 +137,7 @@ class FollowerListViewController: UIViewController,UICollectionViewDelegate, UIC
         print("Num: \(indexPath.row)")
         
         //画面遷移、ユーザー情報画面へ
-        let userInfoView: UserInfoViewController = UserInfoViewController()
+        let userInfoView: UserInfoVC = UserInfoVC()
         userInfoView.postUserID = followerList[indexPath.row]["user-id"].intValue
         
         let btn_back = UIBarButtonItem()
