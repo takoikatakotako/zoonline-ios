@@ -3,7 +3,7 @@ import SCLAlertView
 import Alamofire
 import SwiftyJSON
 
-class NewResistVC: UIViewController,UITextFieldDelegate {
+class SignInVC: UIViewController,UITextFieldDelegate {
     
     //width,height
     private var viewWidth:CGFloat!

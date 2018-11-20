@@ -238,21 +238,9 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //basicボタンが押されたら呼ばれます
     @objc internal func goMyProfile(sender: UIButton){
-        
-        if !(UtilityLibrary.isLogin()){
-
-            let loginView:LoginViewController = LoginViewController()
-            //loginView.statusBarHeight = self.statusBarHeight
-            //loginView.navigationBarHeight = self.navigationBarHeight
-            self.present(loginView, animated: true, completion: nil)
-            return
-        }
-        
-        let vc:MyPageProfilelViewController = MyPageProfilelViewController()
-        
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = backButton
-        self.navigationController?.pushViewController(vc, animated: true)
+        let loginVC = LoginVC()
+        let navigationController = UINavigationController(rootViewController: loginVC)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     func openWebView(navTitle:String, url:String){

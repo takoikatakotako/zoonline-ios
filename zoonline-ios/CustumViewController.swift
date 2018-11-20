@@ -1,11 +1,3 @@
-//
-//  UIViewControllerExtension.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/11/16.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class CustumViewController:UIViewController {
@@ -86,7 +78,7 @@ class CustumViewController:UIViewController {
     //ログインボタンが押されたら呼ばれます
     @objc func loginBtnClicked(sender: UIButton){
         
-        let loginView:LoginViewController = LoginViewController()
+        let loginView:LoginVC = LoginVC()
         loginView.statusBarHeight = self.statusBarHeight
         loginView.navigationBarHeight = self.navigationBarHeight
         self.present(loginView, animated: true, completion: nil)
@@ -95,7 +87,7 @@ class CustumViewController:UIViewController {
     //登録ボタンが押されたら呼ばれます
     @objc func resistBtnClicked(sender: UIButton){
         
-        let loginView:NewResistVC = NewResistVC()
+        let loginView:SignInVC = SignInVC()
         loginView.statusBarHeight = self.statusBarHeight
         loginView.navigationBarHeight = self.navigationBarHeight
         self.present(loginView, animated: true, completion: nil)

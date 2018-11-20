@@ -3,7 +3,7 @@ import SCLAlertView
 import Alamofire
 import SwiftyJSON
 
-class LoginViewController: UIViewController ,UITextFieldDelegate{
+class LoginVC: UIViewController ,UITextFieldDelegate{
 
     //width,height
     private var viewWidth:CGFloat!
