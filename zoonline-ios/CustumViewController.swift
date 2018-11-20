@@ -95,7 +95,7 @@ class CustumViewController:UIViewController {
     //登録ボタンが押されたら呼ばれます
     @objc func resistBtnClicked(sender: UIButton){
         
-        let loginView:NewResistViewController = NewResistViewController()
+        let loginView:NewResistVC = NewResistVC()
         loginView.statusBarHeight = self.statusBarHeight
         loginView.navigationBarHeight = self.navigationBarHeight
         self.present(loginView, animated: true, completion: nil)

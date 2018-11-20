@@ -1,17 +1,9 @@
-//
-//  NewResistViewController.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/06/21.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import SCLAlertView
 import Alamofire
 import SwiftyJSON
 
-class NewResistViewController: UIViewController,UITextFieldDelegate {
+class NewResistVC: UIViewController,UITextFieldDelegate {
     
     //width,height
     private var viewWidth:CGFloat!
