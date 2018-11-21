@@ -5,41 +5,80 @@ import SwiftyJSON
 
 class LoginVC: UIViewController ,UITextFieldDelegate{
 
-    //width,height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    var statusBarHeight:CGFloat!
-    var navigationBarHeight:CGFloat!
-    private var mailTextFieldHeight:CGFloat!
-    private var passwordTextFieldHeight:CGFloat!
-    private var loginBtnHeight:CGFloat!
-    private var forgetPassWordBtnHeight:CGFloat!
-    private var loginViewHeight:CGFloat!
-    
     //ViewParts
     var mailTextField:UITextField!
     var passWordTextField:UITextField!
     var loginBtn:UIButton!
-    
-    //
     let indicator:UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //画面横サイズを取得
-        viewWidth = self.view.frame.width
-        viewHeight = self.view.frame.height
-        mailTextFieldHeight = viewWidth*0.15
-        passwordTextFieldHeight = viewWidth*0.15
-        loginBtnHeight = viewWidth*0.15
-        forgetPassWordBtnHeight = viewWidth*0.15
-        loginViewHeight = viewHeight - (statusBarHeight+navigationBarHeight)
+        view.backgroundColor = UIColor.white
+        title = "ログイン"
+
+        //バーの左側に設置するボタンの作成
+        let leftNavBtn =  UIBarButtonItem(title: "閉じる", style: .plain, target: self, action:  #selector(leftBarBtnClicked(sender:)))
+        self.navigationItem.leftBarButtonItem = leftNavBtn
+
+        // 各種サイズ
+
+        //テキストフィールドのパディング
+        let mailTextFieldPadding = UIView()
+        mailTextFieldPadding.frame = CGRect(x: 0, y: 0, width: 20, height: 60)
+        let passWordTextFieldPadding = UIView()
+        passWordTextFieldPadding.frame = CGRect(x: 0, y: 0, width: 20, height: 60)
         
-        self.view.backgroundColor = UIColor.white
-        //Viewにパーツを追加
-        setNavigationBar()
-        setView()
+        //MailTest
+        mailTextField = UITextField()
+        mailTextField.delegate = self
+        mailTextField.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 60)
+        mailTextField.tag = 100
+        mailTextField.text = "ユーザー名またはメールアドレス"
+        mailTextField.textColor = UIColor.gray
+        mailTextField.borderStyle = UITextField.BorderStyle.none
+        mailTextField.font = UIFont.systemFont(ofSize: 16)
+        mailTextField.backgroundColor = UIColor.white
+        mailTextField.leftView = mailTextFieldPadding
+        mailTextField.leftViewMode = UITextField.ViewMode.always
+        view.addSubview(mailTextField)
+        
+        
+        //MailUnderLine
+        let mailTextFieldLine:UIView = UIView()
+        mailTextFieldLine.frame = CGRect(x: 0, y: 60, width: view.frame.width, height: 1)
+        mailTextFieldLine.backgroundColor = UIColor.gray
+        view.addSubview(mailTextFieldLine)
+        
+        //PassTest
+        passWordTextField = UITextField()
+        passWordTextField.delegate = self
+        passWordTextField.frame = CGRect(x: 0, y: 61, width: view.frame.width, height: 60)
+        passWordTextField.tag = 101
+        passWordTextField.text = "パスワード"
+        passWordTextField.textColor = UIColor.gray
+        passWordTextField.borderStyle = UITextField.BorderStyle.none
+        passWordTextField.leftView = passWordTextFieldPadding
+        passWordTextField.leftViewMode = UITextField.ViewMode.always
+        view.addSubview(passWordTextField)
+        
+        //MailUnderLine
+        let passWordTextFieldLine:UIView = UIView()
+        passWordTextFieldLine.frame = CGRect(x: 0, y: 121, width: view.frame.width, height: 1)
+        passWordTextFieldLine.backgroundColor = UIColor.gray
+        view.addSubview(passWordTextFieldLine)
+        
+        //LoginButton
+        loginBtn = UIButton()
+        loginBtn.frame = CGRect(x: view.frame.width * 0.1, y: 122, width: view.frame.width * 0.8, height: 60)
+        loginBtn.backgroundColor = UIColor.gray
+        loginBtn.setTitle("ログイン", for: UIControl.State.normal)
+        loginBtn.layer.masksToBounds = true
+        loginBtn.layer.cornerRadius = 4.0
+        loginBtn.isEnabled = false
+        loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
+        view.addSubview(loginBtn)
+
         
         //Indicator
         indicator.style = .whiteLarge
@@ -50,87 +89,12 @@ class LoginVC: UIViewController ,UITextFieldDelegate{
         indicator.color = UIColor.init(named: "main")
     }
     
-    // MARK: - Viewにパーツの設置
-    // MARK: ナビゲーションバー
-    func setNavigationBar() {
-        
-        //ステータスバー部分の覆い
-        let statusView:UIView = UIView()
-        statusView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: statusBarHeight*2)
-        statusView.backgroundColor = UIColor.init(named: "main")
-        self.view.addSubview(statusView)
-        
-        //ナビゲーションコントローラーの色の変更
-        let navBar = UINavigationBar()
-        navBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
-        navBar.barTintColor = UIColor.init(named: "main")
-        navBar.isTranslucent = false
-        UINavigationBar.appearance().tintColor = UIColor.white
-        
-        //ナビゲーションアイテムを作成
-        let navItems = UINavigationItem()
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
-        titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "ログイン"
-        titleLabel.textColor = UIColor.white
-        navItems.titleView = titleLabel
-        
-        //バーの左側に設置するボタンの作成
-        let leftNavBtn =  UIBarButtonItem(title: "閉じる", style: .plain, target: self, action:  #selector(leftBarBtnClicked(sender:)))
-        navItems.leftBarButtonItem = leftNavBtn
-        navBar.pushItem(navItems, animated: true)
-        self.view.addSubview(navBar)
-    }
     
     // MARK: ナビゲーションバー
     func setView() {
-        
-        //テキストフィールドのパディング
-        let mailTextFieldPadding = UIView()
-        mailTextFieldPadding.frame = CGRect(x: 0, y: 0, width: 20, height: mailTextFieldHeight)
-        let passWordTextFieldPadding = UIView()
-        passWordTextFieldPadding.frame = CGRect(x: 0, y: 0, width: 20, height: mailTextFieldHeight)
+        /*
 
-        //MailTest
-        let mailTextFieldYPos = statusBarHeight+navigationBarHeight
-        mailTextField = UITextField()
-        mailTextField.delegate = self
-        mailTextField.frame = CGRect(x: 0, y: mailTextFieldYPos, width: viewWidth, height: mailTextFieldHeight)
-        mailTextField.tag = 100
-        mailTextField.text = "ユーザー名またはメールアドレス"
-        mailTextField.textColor = UIColor.gray
-        mailTextField.borderStyle = UITextField.BorderStyle.none
-        mailTextField.font = UIFont.systemFont(ofSize: 16)
-        mailTextField.backgroundColor = UIColor.white
-        mailTextField.leftView = mailTextFieldPadding
-        mailTextField.leftViewMode = UITextField.ViewMode.always
-        self.view.addSubview(mailTextField)
         
-        //MailUnderLine
-        let mailTextFieldLine:UIView = UIView()
-        mailTextFieldLine.frame = CGRect(x: 0, y: mailTextFieldYPos+mailTextFieldHeight, width: viewWidth, height: 1)
-        mailTextFieldLine.backgroundColor = UIColor.gray
-        self.view.addSubview(mailTextFieldLine)
-        
-        //PassTest
-        let passTextYPos = mailTextFieldYPos + mailTextFieldHeight + 1
-        passWordTextField = UITextField()
-        passWordTextField.delegate = self
-        passWordTextField.frame = CGRect(x: 0, y: passTextYPos, width: viewWidth, height: passwordTextFieldHeight)
-        passWordTextField.tag = 101
-        passWordTextField.text = "パスワード"
-        passWordTextField.textColor = UIColor.gray
-        passWordTextField.borderStyle = UITextField.BorderStyle.none
-        passWordTextField.leftView = passWordTextFieldPadding
-        passWordTextField.leftViewMode = UITextField.ViewMode.always
-        self.view.addSubview(passWordTextField)
-        
-        //MailUnderLine
-        let passWordTextFieldLine:UIView = UIView()
-        passWordTextFieldLine.frame = CGRect(x: 0, y: passTextYPos+passwordTextFieldHeight, width: viewWidth, height: 1)
-        passWordTextFieldLine.backgroundColor = UIColor.gray
-        self.view.addSubview(passWordTextFieldLine)
         
         //LoginButton
         let loginBtnYPos = passTextYPos + passwordTextFieldHeight + 1 + viewWidth*0.05
@@ -153,6 +117,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate{
         forgetPassWordBtn.setTitle("パスワードを忘れた方", for: UIControl.State.normal)
         forgetPassWordBtn.addTarget(self, action: #selector(forgetPassWordBtnClicked(sender:)), for: .touchUpInside)
        // self.view.addSubview(forgetPassWordBtn)
+ */
     }
     
     

@@ -79,8 +79,8 @@ class CustumViewController:UIViewController {
     @objc func loginBtnClicked(sender: UIButton){
         
         let loginView:LoginVC = LoginVC()
-        loginView.statusBarHeight = self.statusBarHeight
-        loginView.navigationBarHeight = self.navigationBarHeight
+        //loginView.statusBarHeight = self.statusBarHeight
+        //loginView.navigationBarHeight = self.navigationBarHeight
         self.present(loginView, animated: true, completion: nil)
     }
     
