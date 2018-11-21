@@ -27,24 +27,24 @@ class MyPageUserCellBtn: UIButton {
         iconImgView.backgroundColor = UIColor.white
         iconImgView.layer.cornerRadius = viewHeight*0.8/2
         iconImgView.layer.masksToBounds = true
-        self.addSubview(iconImgView)
+        addSubview(iconImgView)
         
         //ユーザーラベル
         userNameLabel.text = "未ログイン"
         userNameLabel.font = UIFont.systemFont(ofSize: 24)
         userNameLabel.frame = CGRect(x: viewHeight*1.1, y: viewHeight*0.2, width: viewWidth*0.6, height: viewHeight*0.4)
-        self.addSubview(userNameLabel)
+        addSubview(userNameLabel)
         
         //メールアドレス
         userMailAdressLabel.text = "ログインしてください"
         userMailAdressLabel.font = UIFont.systemFont(ofSize: 14)
         userMailAdressLabel.frame = CGRect(x: viewHeight*1.1, y: viewHeight*0.6, width: viewWidth*0.6, height: viewHeight*0.3)
-        self.addSubview(userMailAdressLabel)
+        addSubview(userMailAdressLabel)
         
         //プロフィール画面の矢印
         let profielArrow:UIImageView = UIImageView()
         profielArrow.image = UIImage(named:"arrow_rignt")
         profielArrow.frame = CGRect(x: viewWidth*0.9, y: viewHeight*0.4, width: viewWidth*0.03, height: viewHeight*0.2)
-        self.addSubview(profielArrow)
+        addSubview(profielArrow)
     }
 }

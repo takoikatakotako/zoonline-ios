@@ -5,7 +5,62 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class PostDetailVC: UIViewController {
+class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
+    
+    private var postDetailTableView: UITableView!
+
+    private var myItems: NSArray = []
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.white
+        
+        let postDetailView = PostDetailView()
+        postDetailView.frame = view.frame
+        //view.addSubview(postDetailView)
+        
+        myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし","りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし","りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
+
+        
+        //テーブルビューの初期化
+        postDetailTableView = UITableView()
+        
+        //デリゲートの設定
+        postDetailTableView.delegate = self
+        postDetailTableView.dataSource = self
+        
+        //テーブルビューの大きさの指定
+        postDetailTableView.frame = view.frame
+        
+        //テーブルビューの設置
+        postDetailTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        postDetailTableView.tableHeaderView = postDetailView
+
+        view.addSubview(postDetailTableView)
+    }
+    
+    //MARK: テーブルビューのセルの数を設定する
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //テーブルビューのセルの数はmyItems配列の数とした
+        return self.myItems.count
+    }
+    
+    //MARK: テーブルビューのセルの中身を設定する
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //myItems配列の中身をテキストにして登録した
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        cell.textLabel?.text = self.myItems[indexPath.row] as? String
+        return cell
+    }
+    
+    //Mark: テーブルビューのセルが押されたら呼ばれる
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(indexPath.row)番のセルを選択しました！ ")
+    }
+    
+    
     
     /*
     //Post ID
@@ -49,15 +104,6 @@ class PostDetailVC: UIViewController {
     
     var myComposeView : SLComposeViewController!
     */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.white
-
-        let postDetailView = PostDetailView()
-        postDetailView.frame = view.frame
-        view.addSubview(postDetailView)
-        
         /*
         
         viewWidth = self.view.frame.width
@@ -77,9 +123,9 @@ class PostDetailVC: UIViewController {
         //投稿の情報の取得
         getPostInfo(postID: self.postID)
  
- */
+
     }
-    
+ */
     /*
     
     // MARK: - Viewにパーツの設置

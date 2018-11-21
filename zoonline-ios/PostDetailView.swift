@@ -71,7 +71,7 @@ class PostDetailView: UIView {
         addSubview(favoriteButton)
 
         favoriteLabel = UILabel()
-        favoriteLabel.textColor = UIColor(named: "ff92ae")
+        favoriteLabel.textColor = UIColor(named: "postDetailFavPink")
         favoriteLabel.font = UIFont.boldSystemFont(ofSize: 24)
         favoriteLabel.text = "10"
         addSubview(favoriteLabel)

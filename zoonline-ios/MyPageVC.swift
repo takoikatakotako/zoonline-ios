@@ -74,7 +74,7 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //未ログイン
             userCellBtn.userNameLabel.text = "未ログイン"
             userCellBtn.userMailAdressLabel.text = "ログインしてください"
-            userCellBtn.iconImgView.image = UIImage(named: "icon_default")
+            userCellBtn.iconImgView.image = UIImage(named: "common-icon-default")
         }
 
         myPageTableView.reloadData()

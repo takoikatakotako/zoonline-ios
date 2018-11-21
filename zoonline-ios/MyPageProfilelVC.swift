@@ -4,7 +4,7 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class MyPageProfilelViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate ,UINavigationControllerDelegate {
+class MyPageProfilelVC: UIViewController,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate ,UINavigationControllerDelegate {
     
     //width, height
     private var viewWidth:CGFloat!
