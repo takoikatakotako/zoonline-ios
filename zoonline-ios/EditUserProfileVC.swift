@@ -1,11 +1,3 @@
-//
-//  EditUserProfileVC.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/09/10.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import Alamofire
 import SwiftyJSON
@@ -46,7 +38,6 @@ class EditUserProfileVC: UIViewController {
         }else{
             userProfileTexView.text = myProfile
         }
-        
     }
     
     // MARK: - Viewにパーツの設置

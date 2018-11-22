@@ -1,7 +1,18 @@
 import UIKit
 
 class PostDetailView: UIView {
-
+    
+    //  各種高さ
+    // Iconとフォロー
+    let userInfoHeight: CGFloat = 60
+    // Favoriteとコメントなど
+    let menuHeight: CGFloat = 60
+    // Dateの高さ
+    let dateHeight: CGFloat = 20
+    // テーブルビューまでのマージン
+    let bottomMargin:CGFloat = 8
+    
+    // Viewのパーツ
     // UserInfo
     var userThumbnail: UIImageView!
     var usetName: UILabel!
@@ -29,6 +40,9 @@ class PostDetailView: UIView {
 
     // Detail
     var detailTextView: UITextView!
+    
+    // BottomLine
+    var bottomLine:UIView!
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -106,17 +120,15 @@ class PostDetailView: UIView {
         detailTextView.textAlignment = .left
         detailTextView.isEditable = false
         addSubview(detailTextView)
+        
+        // BottomLine
+        bottomLine = UIView()
+        bottomLine.backgroundColor = UIColor(named: "mypageArrowGray")
+        addSubview(bottomLine)
     }
 
     override func layoutSubviews() {
         let width = frame.width
-        let height = frame.height
-        // Iconとフォロー
-        let userInfoHeight: CGFloat = 60
-        // Favoriteとコメントなど
-        let menuHeight: CGFloat = 60
-        // Dateの高さ
-        let dateHeight: CGFloat = 20
 
         // UserInfo
         userThumbnail.frame = CGRect(x: 20, y: (userInfoHeight - 40) / 2, width: 40, height: 40)
@@ -144,11 +156,27 @@ class PostDetailView: UIView {
         dateLabel.frame = CGRect(x: 20, y: userInfoHeight + width + menuHeight, width: 200, height: dateHeight)
 
         // Detail
-        let textViewSize = detailTextView.sizeThatFits(CGSize(width: width - 40, height: 0))
+        let textViewSize = getTextViewSize(viewWidth: frame.width)
         detailTextView.frame = CGRect(
             x: 20,
             y: userInfoHeight + width + menuHeight + dateHeight,
             width: textViewSize.width,
             height: textViewSize.height)
+        
+        // BottomLine
+        bottomLine.frame = CGRect(
+            x: 0,
+            y: userInfoHeight + width + menuHeight + dateHeight + textViewSize.height + bottomMargin - 1,
+            width: width,
+            height: 0.5)
+    }
+    
+    func getTextViewSize(viewWidth:CGFloat) -> CGSize {
+        return detailTextView.sizeThatFits(CGSize(width: viewWidth - 40, height: 0))
+    }
+    
+    func calcHeight(viewWidth:CGFloat) -> CGFloat {
+        let textViewSize = getTextViewSize(viewWidth: viewWidth)
+        return userInfoHeight + viewWidth + menuHeight + dateHeight + textViewSize.height + bottomMargin
     }
 }

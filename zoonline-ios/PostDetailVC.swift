@@ -18,7 +18,9 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
         view.backgroundColor = UIColor.white
         
         let postDetailView = PostDetailView()
-        postDetailView.frame = view.frame
+        print(postDetailView.calcHeight(viewWidth: view.frame.width))
+        
+        postDetailView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: postDetailView.calcHeight(viewWidth: view.frame.width))
         //view.addSubview(postDetailView)
         
         myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし","りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし","りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
@@ -35,9 +37,9 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
         postDetailTableView.frame = view.frame
         
         //テーブルビューの設置
-        postDetailTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        postDetailTableView.register(CommentTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(CommentTableViewCell.self))
         postDetailTableView.tableHeaderView = postDetailView
-
+        postDetailTableView.rowHeight = 100
         view.addSubview(postDetailTableView)
     }
     
@@ -50,8 +52,8 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.textLabel?.text = self.myItems[indexPath.row] as? String
+        let cell:CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self))! as! CommentTableViewCell
+        //cell.textLabel?.text = self.myItems[indexPath.row] as? String
         return cell
     }
     

@@ -1,11 +1,3 @@
-//
-//  CommentTableViewCell.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/04/29.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class CommentTableViewCell: UITableViewCell {
@@ -21,8 +13,9 @@ class CommentTableViewCell: UITableViewCell {
         thumbnailImgView = UIImageView()
         thumbnailImgView.layer.masksToBounds = true
         thumbnailImgView.isUserInteractionEnabled = true
-        thumbnailImgView.image = UIImage(named:"icon_default")
-        
+        thumbnailImgView.image = UIImage(named:"post-detail-follow-icon")
+        contentView.addSubview(thumbnailImgView)
+
         commentUser = UILabel()
         commentUser.text = "いろはにほへと"
         commentUser.isUserInteractionEnabled = false
@@ -35,7 +28,6 @@ class CommentTableViewCell: UITableViewCell {
         commentLabel.text = "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ"
         commentLabel.isUserInteractionEnabled = false
         
-        contentView.addSubview(thumbnailImgView)
         contentView.addSubview(commentUser)
         contentView.addSubview(dateLabel)
         contentView.addSubview(commentLabel)
