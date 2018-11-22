@@ -47,11 +47,11 @@ class CommentTableViewCell: UITableViewCell {
         
         let cellWidth:CGFloat = self.frame.width
         
-        //ThumbnailUmg
-        thumbnailImgView.frame = CGRect(x: cellWidth*0.05, y: cellWidth*0.28*0.15, width: cellWidth*0.28*0.35, height: cellWidth*0.28*0.35)
-        thumbnailImgView.layer.cornerRadius = cellWidth*0.28*0.35/2
+        // ThumbnailUmg
+        thumbnailImgView.frame = CGRect(x: 16, y: 16, width: 32, height: 32)
+        thumbnailImgView.layer.cornerRadius = 16
         
-        //CommentLabel
+        // CommentLabel
         commentUser.frame = CGRect(x: cellWidth*0.18, y: cellWidth*0.28*0.08, width: cellWidth*0.5, height: cellWidth*0.28*0.35)
         commentUser.font = UIFont.boldSystemFont(ofSize: 14)
         commentUser.textColor = UIColor.init(named: "main")

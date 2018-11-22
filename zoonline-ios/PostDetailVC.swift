@@ -16,40 +16,40 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
-        
-        let postDetailView = PostDetailView()
-        print(postDetailView.calcHeight(viewWidth: view.frame.width))
-        
-        postDetailView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: postDetailView.calcHeight(viewWidth: view.frame.width))
-        //view.addSubview(postDetailView)
-        
+
         myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし","りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし","りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
 
+        // 投稿
+        let postDetailView = PostDetailView()
+        postDetailView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: postDetailView.calcHeight(viewWidth: view.frame.width))
         
         //テーブルビューの初期化
         postDetailTableView = UITableView()
-        
-        //デリゲートの設定
         postDetailTableView.delegate = self
         postDetailTableView.dataSource = self
-        
-        //テーブルビューの大きさの指定
-        postDetailTableView.frame = view.frame
-        
-        //テーブルビューの設置
         postDetailTableView.register(CommentTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(CommentTableViewCell.self))
         postDetailTableView.tableHeaderView = postDetailView
         postDetailTableView.rowHeight = 100
         view.addSubview(postDetailTableView)
     }
     
-    //MARK: テーブルビューのセルの数を設定する
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let width = view.frame.width
+        let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
+        //テーブルビューの大きさの指定
+        postDetailTableView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+    }
+
+    
+    // MARK: TableView Delegate Methods
+    // テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
-        return self.myItems.count
+        return myItems.count
     }
     
-    //MARK: テーブルビューのセルの中身を設定する
+    // テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell:CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self))! as! CommentTableViewCell
@@ -57,7 +57,7 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
-    //Mark: テーブルビューのセルが押されたら呼ばれる
+    // テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
     }
