@@ -182,7 +182,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         let iconUrlStr:String = self.postsComments[indexPath.row]["icon_url"].stringValue
         print(iconUrlStr)
         if let url = URL(string:iconUrlStr) {
-            cell.thumbnailImgView.sd_setImage(with: url)
+            cell.thumbnail.sd_setImage(with: url)
         }
         
         let dates = UtilityLibrary.parseDates(text: self.postsComments[indexPath.row]["updated_at"].stringValue)
@@ -190,15 +190,15 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         dateStr += dates["day"]! + "日"
         cell.dateLabel.text = dateStr
         
-        cell.commentLabel.text = self.postsComments[indexPath.row]["comment"].stringValue
+        cell.commentTextView.text = self.postsComments[indexPath.row]["comment"].stringValue
      
-        cell.commentUser.text = self.postsComments[indexPath.row]["username"].stringValue
+        cell.userName.text = self.postsComments[indexPath.row]["username"].stringValue
         
         //画像にタッチイベントを追加
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapSingle(sender:)))
         singleTap.numberOfTapsRequired = 1
-        cell.thumbnailImgView.tag = self.postsComments[indexPath.row]["user_id"].intValue
-        cell.thumbnailImgView.addGestureRecognizer(singleTap)
+        cell.thumbnail.tag = self.postsComments[indexPath.row]["user_id"].intValue
+        cell.thumbnail.addGestureRecognizer(singleTap)
         
         return cell
     }

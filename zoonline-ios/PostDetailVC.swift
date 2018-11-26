@@ -9,7 +9,7 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
     
     private var postDetailTableView: UITableView!
 
-    private var myItems: NSArray = []
+    private var myItems: Array<String> = []
 
     
     override func viewDidLoad() {
@@ -17,7 +17,11 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
         
         view.backgroundColor = UIColor.white
 
-        myItems = ["りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし","りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし","りんご", "すいか", "もも", "さくらんぼ", "ぶどう", "なし"]
+        myItems = ["天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
+                   "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
+                   "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
+                   "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
+                   "天王寺動物園"]
 
         // 投稿
         let postDetailView = PostDetailView()
@@ -53,8 +57,13 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell:CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self))! as! CommentTableViewCell
-        //cell.textLabel?.text = self.myItems[indexPath.row] as? String
+        cell.commentTextView.text = myItems[indexPath.row]
         return cell
+    }
+    
+    // テーブルビューの高さを指定する
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CommentTableViewCell.calcHeight(viewWidth: view.frame.width, comments: myItems[indexPath.row])
     }
     
     // テーブルビューのセルが押されたら呼ばれる
