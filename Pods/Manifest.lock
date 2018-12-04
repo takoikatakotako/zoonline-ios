@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (4.7.3)
+  - Alamofire (4.8.0)
   - FLAnimatedImage (1.0.12)
-  - Google-Mobile-Ads-SDK (7.35.2)
+  - Google-Mobile-Ads-SDK (7.36.0)
   - SCLAlertView (0.8)
   - SDWebImage/Core (4.4.2)
   - SDWebImage/GIF (4.4.2):
@@ -26,9 +26,9 @@ SPEC REPOS:
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
-  Google-Mobile-Ads-SDK: 8f07cc8eac6649fe648cabc97d67c8d20173624a
+  Google-Mobile-Ads-SDK: 5bb4d2cea811842e104a24780caef63b4808e1bd
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
