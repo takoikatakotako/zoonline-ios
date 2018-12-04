@@ -7,6 +7,7 @@ PODS:
   - SDWebImage/GIF (4.4.2):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - SwiftLint (0.29.1)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - SCLAlertView
   - SDWebImage/GIF
+  - SwiftLint
   - SwiftyJSON
 
 SPEC REPOS:
@@ -23,6 +25,7 @@ SPEC REPOS:
     - Google-Mobile-Ads-SDK
     - SCLAlertView
     - SDWebImage
+    - SwiftLint
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -31,8 +34,9 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 5bb4d2cea811842e104a24780caef63b4808e1bd
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 380283d476d28122627e3dcef7a93c003523eacb
+PODFILE CHECKSUM: ece54f4bf2258bb36ea9cd6e0a0cb7e56bfbe871
 
 COCOAPODS: 1.5.3

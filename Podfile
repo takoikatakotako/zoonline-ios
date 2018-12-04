@@ -10,6 +10,9 @@ target 'zoonline-ios' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'SDWebImage/GIF'
+  pod 'SwiftLint'
+
+
   # pod 'PageMenu'
   pod 'Google-Mobile-Ads-SDK'
 
