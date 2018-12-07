@@ -3,10 +3,10 @@ import UIKit
 class CommentTableViewCell: UITableViewCell {
     
     
-    var thumbnail:UIImageView!
-    var userName:UILabel!
-    var dateLabel:UILabel!
-    var commentTextView:UITextView!
+    var thumbnail: UIImageView!
+    var userName: UILabel!
+    var dateLabel: UILabel!
+    var commentTextView: UITextView!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -14,7 +14,7 @@ class CommentTableViewCell: UITableViewCell {
         thumbnail = UIImageView()
         thumbnail.layer.masksToBounds = true
         thumbnail.isUserInteractionEnabled = true
-        thumbnail.image = UIImage(named:"post-detail-follow-icon")
+        thumbnail.image = UIImage(named: "post-detail-follow-icon")
         contentView.addSubview(thumbnail)
 
         userName = UILabel()
@@ -52,7 +52,7 @@ class CommentTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let width:CGFloat = self.frame.width
+        let width: CGFloat = self.frame.width
         
         // Thumbnail
         thumbnail.frame = CGRect(x: 16, y: 8, width: 32, height: 32)
@@ -69,16 +69,16 @@ class CommentTableViewCell: UITableViewCell {
         commentTextView.frame = CGRect(x: 64, y: 40, width: width - 64 - 16, height: textViewSize.height)
     }
     
-    class func getTextViewSize(viewWidth:CGFloat, textView:UITextView) -> CGSize {
+    class func getTextViewSize(viewWidth: CGFloat, textView: UITextView) -> CGSize {
         return textView.sizeThatFits(CGSize(width: viewWidth - 64 - 16, height: 0))
     }
     
     // ViewControllerからCellの高さを計算する為に使用
-    class func calcHeight(viewWidth:CGFloat, comments:String) -> CGFloat {
+    class func calcHeight(viewWidth: CGFloat, comments: String) -> CGFloat {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 16)
         textView.text = comments
-        let textViewSize = getTextViewSize(viewWidth:viewWidth, textView:textView)
+        let textViewSize = getTextViewSize(viewWidth: viewWidth, textView: textView)
         return 40 + textViewSize.height + 8
     }
 }

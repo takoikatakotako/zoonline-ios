@@ -3,22 +3,22 @@ import UIKit
 //MARK: step 1 Add Protocol here
 protocol SetTextDelegate: class {
     
-    func setTitle(str:String)
-    func setComment(str:String)
+    func setTitle(str: String)
+    func setComment(str: String)
 }
 
 class WritePostTextsVC: UIViewController,UITextViewDelegate {
 
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    private var statusBarHeight: CGFloat!
+    private var navigationBarHeight: CGFloat!
     
     //segue
-    var isTitle:Bool!
-    var navTitle:String!
-    var text:String!
+    var isTitle: Bool!
+    var navTitle: String!
+    var text: String!
     
     //viewParts
     private var textView: UITextView = UITextView()
@@ -68,7 +68,7 @@ class WritePostTextsVC: UIViewController,UITextViewDelegate {
         //「<戻る」を「<」のみにする
         navigationController!.navigationBar.topItem!.title = " "
         //ナビゲーションアイテムを作成
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
+        let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = navTitle

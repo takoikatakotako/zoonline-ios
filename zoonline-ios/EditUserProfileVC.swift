@@ -6,15 +6,15 @@ import SCLAlertView
 class EditUserProfileVC: UIViewController {
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
-    private var textViewHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    private var statusBarHeight: CGFloat!
+    private var navigationBarHeight: CGFloat!
+    private var tabBarHeight: CGFloat!
+    private var textViewHeight: CGFloat!
 
     
-    private var userProfileTexView:UITextView!
+    private var userProfileTexView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class EditUserProfileVC: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = NavigationBarLabel()
+        let titleLabel: UILabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "プロフィールの変更"
@@ -69,7 +69,7 @@ class EditUserProfileVC: UIViewController {
         }
         
         let parameters: Parameters = [
-            "profile":userProfileTexView.text
+            "profile": userProfileTexView.text
         ]
         
         Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
@@ -77,7 +77,7 @@ class EditUserProfileVC: UIViewController {
             switch response.result {
             case .success:
                 print("Validation Successful")
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 SCLAlertView().showInfo("プロフィール更新", subTitle: "プロフィールを更新しました。")
                 _ = self.navigationController?.popViewController(animated: true)
@@ -92,7 +92,7 @@ class EditUserProfileVC: UIViewController {
         
         // TextView生成する.
         userProfileTexView = UITextView()
-        userProfileTexView.frame = CGRect(x:0, y:0, width:viewWidth, height:textViewHeight)
+        userProfileTexView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: textViewHeight)
         userProfileTexView.text = ""
         userProfileTexView.font = UIFont.systemFont(ofSize: 20.0)
         userProfileTexView.textColor = UIColor.black

@@ -7,27 +7,27 @@ import SDWebImage
 class MyPageProfilelVC: UIViewController,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate ,UINavigationControllerDelegate {
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    var myProfielViewHeight:CGFloat!
-    private var userConfigTableViewHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    private var statusBarHeight: CGFloat!
+    private var navigationBarHeight: CGFloat!
+    var myProfielViewHeight: CGFloat!
+    private var userConfigTableViewHeight: CGFloat!
+    private var tabBarHeight: CGFloat!
     
     var indicator: UIActivityIndicatorView!
     
     //プロフィール
-    var icon:UIImageView = UIImageView()
-    let nameLabel:UILabel = UILabel()
-    let mailLabel:UILabel = UILabel()
+    var icon: UIImageView = UIImageView()
+    let nameLabel: UILabel = UILabel()
+    let mailLabel: UILabel = UILabel()
 
     //テーブルビューインスタンス
     var userConfigTableView: UITableView!
     
     //表示するもの
     //let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","プロフィールの変更","メールアドレスの変更","パスワードの変更",""]
-    let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","プロフィールの変更","メールアドレスの変更"]
+    let changeUserInfoAry: Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","プロフィールの変更","メールアドレスの変更"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class MyPageProfilelVC: UIViewController,UITableViewDelegate, UITableViewDataSou
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        let defaultIcon = UIImage(named:"icon_default")
+        let defaultIcon = UIImage(named: "icon_default")
         if let url = URL(string: UtilityLibrary.getUserIconUrl()){
             icon.sd_setImage(with: url, placeholderImage: defaultIcon)
 
@@ -72,7 +72,7 @@ class MyPageProfilelVC: UIViewController,UITableViewDelegate, UITableViewDataSou
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = NavigationBarLabel()
+        let titleLabel: UILabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "プロフィール"
@@ -100,41 +100,41 @@ class MyPageProfilelVC: UIViewController,UITableViewDelegate, UITableViewDataSou
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         //自分の情報
-        let myProfielView:UIView = UIView()
+        let myProfielView: UIView = UIView()
         myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.56)
         myProfielView.backgroundColor = UIColor(named: "liginCushionLightGray")
         self.view.addSubview(myProfielView)
         
         //アイコン選択ボタン
-        let iconChoseBtn:UIButton = UIButton()
-        let iconChoseBtnHeight:CGFloat = myProfielView.frame.height*0.44
-        iconChoseBtn.frame =  CGRect(x: viewWidth/2-iconChoseBtnHeight/2, y: myProfielView.frame.height*0.1, width: iconChoseBtnHeight, height:iconChoseBtnHeight)
+        let iconChoseBtn: UIButton = UIButton()
+        let iconChoseBtnHeight: CGFloat = myProfielView.frame.height*0.44
+        iconChoseBtn.frame =  CGRect(x: viewWidth/2-iconChoseBtnHeight/2, y: myProfielView.frame.height*0.1, width: iconChoseBtnHeight, height: iconChoseBtnHeight)
         iconChoseBtn.addTarget(self, action: #selector(choseIconBtnClicked(sender:)), for: .touchUpInside)
         myProfielView.addSubview(iconChoseBtn)
         
         //卵アイコン
-        icon.frame = CGRect(x: 0, y: 0, width: iconChoseBtn.frame.size.width, height:iconChoseBtn.frame.size.height)
+        icon.frame = CGRect(x: 0, y: 0, width: iconChoseBtn.frame.size.width, height: iconChoseBtn.frame.size.height)
         icon.layer.cornerRadius = iconChoseBtn.frame.size.width/2
         icon.layer.masksToBounds = true
         icon.isUserInteractionEnabled = false
         iconChoseBtn.addSubview(icon)
         
         //プラスのボタン
-        let iconPlusImg:UIImageView = UIImageView()
+        let iconPlusImg: UIImageView = UIImageView()
         iconPlusImg.isUserInteractionEnabled = false
-        iconPlusImg.frame = CGRect(x: iconChoseBtn.frame.size.width*0.7, y: iconChoseBtn.frame.size.width*0.7, width: iconChoseBtn.frame.size.width*0.3, height:iconChoseBtn.frame.size.height*0.3)
-        iconPlusImg.image = UIImage(named:"iconChange")
+        iconPlusImg.frame = CGRect(x: iconChoseBtn.frame.size.width*0.7, y: iconChoseBtn.frame.size.width*0.7, width: iconChoseBtn.frame.size.width*0.3, height: iconChoseBtn.frame.size.height*0.3)
+        iconPlusImg.image = UIImage(named: "iconChange")
         iconChoseBtn.addSubview(iconPlusImg)
         
         // 名前
-        nameLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.58, width: viewWidth, height:myProfielView.frame.height*0.2)
+        nameLabel.frame = CGRect(x: 0, y: myProfielView.frame.height*0.58, width: viewWidth, height: myProfielView.frame.height*0.2)
         nameLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName")
         nameLabel.textAlignment = NSTextAlignment.center
         nameLabel.font = UIFont.systemFont(ofSize: 28)
         self.view.addSubview(nameLabel)
         
         // Mail
-        mailLabel.frame = CGRect(x: 0, y:  myProfielView.frame.height*0.75, width: viewWidth, height:myProfielView.frame.height*0.2)
+        mailLabel.frame = CGRect(x: 0, y: myProfielView.frame.height*0.75, width: viewWidth, height: myProfielView.frame.height*0.2)
         mailLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserEmail")
         mailLabel.textAlignment = NSTextAlignment.center
         mailLabel.font = UIFont.systemFont(ofSize: 14)
@@ -148,7 +148,7 @@ class MyPageProfilelVC: UIViewController,UITableViewDelegate, UITableViewDataSou
         userConfigTableView = UITableView()
         userConfigTableView.delegate = self
         userConfigTableView.dataSource = self
-        userConfigTableView.frame = CGRect(x: 0, y:myProfielViewHeight, width: viewWidth, height: userConfigTableViewHeight)
+        userConfigTableView.frame = CGRect(x: 0, y: myProfielViewHeight, width: viewWidth, height: userConfigTableViewHeight)
         userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         userConfigTableView.backgroundColor = UIColor(named: "liginCushionLightGray")
         //userConfigTableView.isScrollEnabled = false
@@ -173,7 +173,7 @@ class MyPageProfilelVC: UIViewController,UITableViewDelegate, UITableViewDataSou
     // MARK: - UIImagePickerのDelgate
     
     //画像が選択された時に呼ばれる.
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 // Local variable inserted by Swift 4.2 migrator.
 let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
@@ -198,16 +198,16 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     }
     
     
-    func doImageUpload(postImage:UIImage) {
+    func doImageUpload(postImage: UIImage) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let userID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
+        let userID: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
         
         let imageData = postImage.pngData()!
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to:EveryZooAPI.getUploadPicture(),headers: UtilityLibrary.getAPIAccessHeader())
+        }, to: EveryZooAPI.getUploadPicture(),headers: UtilityLibrary.getAPIAccessHeader())
         { (result) in
             switch result {
             case .success(let upload, _, _):
@@ -225,13 +225,13 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                     switch response.result {
                     case .success:
                         print("Validation Successful")
-                        let json:JSON = JSON(response.result.value ?? kill)
+                        let json: JSON = JSON(response.result.value ?? kill)
                         print(json)
                         
                         
                         
                         if json["is_success"].boolValue  {
-                            let pic_id:String = json["picture"]["pic_id"].stringValue
+                            let pic_id: String = json["picture"]["pic_id"].stringValue
                             self.doPost(pic_id: pic_id, postImage: postImage)
                         }else{
                             SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。不明なエラーです。")
@@ -249,10 +249,10 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         }
     }
     
-    func doPost(pic_id:String, postImage:UIImage) {
+    func doPost(pic_id: String, postImage: UIImage) {
         
         let parameters: Parameters = [
-            "pic_id":pic_id
+            "pic_id": pic_id
         ]
 
         Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
@@ -260,7 +260,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             switch response.result {
             case .success:
                 print("Validation Successful")
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 if json["is_success"].boolValue {
                     self.icon.image = postImage
@@ -280,13 +280,13 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     func getUserInfo() {
         //ユーザーの情報を取得する
         
-        let userID:Int = Int(UtilityLibrary.getUserID())!
+        let userID: Int = Int(UtilityLibrary.getUserID())!
         Alamofire.request(EveryZooAPI.getUserInfo(userID: userID)).responseJSON{ response in
             
             switch response.result {
             case .success:
                 
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 
                 UtilityLibrary.setUserName(userName: json["userName"].stringValue)
@@ -324,7 +324,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         
         if indexPath.row == 0{
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]
@@ -376,7 +376,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             break
         case 3:
             //プロフィールの編集
-            let vc:EditUserProfileVC = EditUserProfileVC()
+            let vc: EditUserProfileVC = EditUserProfileVC()
             
             let btn_back = UIBarButtonItem()
             btn_back.title = ""
@@ -418,7 +418,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         }
         
         let parameters: Parameters = [
-            "name":newName
+            "name": newName
         ]
         
         //print(API_URL+"v0/auth/")
@@ -427,7 +427,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             switch response.result {
             case .success:
                 print("Validation Successful")
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 self.getUserInfo()
                 print(json)
                 
@@ -447,7 +447,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         }
         
         let parameters: Parameters = [
-            "email":newEmail
+            "email": newEmail
         ]
         
         //print(API_URL+"v0/auth/")
@@ -456,7 +456,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             switch response.result {
             case .success:
                 print("Validation Successful")
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 
                 if (json["status"].stringValue == "error") {

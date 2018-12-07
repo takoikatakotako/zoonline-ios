@@ -13,15 +13,15 @@ import SCLAlertView
 
 class WritePostsCommentsViewController: UIViewController {
     
-    var postsID:Int!
+    var postsID: Int!
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
-    var textViewHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    private var statusBarHeight: CGFloat!
+    private var navigationBarHeight: CGFloat!
+    private var tabBarHeight: CGFloat!
+    var textViewHeight: CGFloat!
 
     //テキストビューインスタンス
     private var commentTextView: UITextView!
@@ -58,7 +58,7 @@ class WritePostsCommentsViewController: UIViewController {
         UINavigationBar.appearance().tintColor = UIColor.white
         
         //ナビゲーションアイテムを作成
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
+        let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "コメント"
@@ -68,7 +68,7 @@ class WritePostsCommentsViewController: UIViewController {
         
         //バーの右側に設置するボタンの作成
         let rightNavBtn = UIBarButtonItem()
-        rightNavBtn.image = UIImage(named:"submit_nav_btn")!
+        rightNavBtn.image = UIImage(named: "submit_nav_btn")!
         rightNavBtn.action = #selector(postNavBtnClicked(sender:))
         rightNavBtn.target = self
         self.navigationItem.rightBarButtonItem = rightNavBtn
@@ -78,7 +78,7 @@ class WritePostsCommentsViewController: UIViewController {
         
         // TextView生成する.
         commentTextView = UITextView()
-        commentTextView.frame = CGRect(x:0, y:0, width:viewWidth, height:textViewHeight)
+        commentTextView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: textViewHeight)
         commentTextView.text = ""
         commentTextView.font = UIFont.systemFont(ofSize: 20.0)
         commentTextView.textColor = UIColor.black
@@ -91,7 +91,7 @@ class WritePostsCommentsViewController: UIViewController {
     // MARK: くるくるの生成
     func setActivityIndicator(){
         
-        let indicaterSize:CGFloat = viewWidth*0.3
+        let indicaterSize: CGFloat = viewWidth*0.3
         indicator.frame = CGRect(x: (viewWidth-indicaterSize)/2, y: viewWidth*0.25, width: indicaterSize, height: indicaterSize)
         indicator.hidesWhenStopped = true
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
@@ -120,7 +120,7 @@ class WritePostsCommentsViewController: UIViewController {
             switch response.result {
             case .success:
                 
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 _ = self.navigationController?.popViewController(animated: true)
                 

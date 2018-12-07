@@ -2,9 +2,9 @@ import UIKit
 
 class MyPageUserCellBtn: UIButton {
     
-    let iconImgView:UIImageView = UIImageView()
-    let userNameLabel:UILabel = UILabel()
-    let userMailAdressLabel:UILabel = UILabel()
+    let iconImgView: UIImageView = UIImageView()
+    let userNameLabel: UILabel = UILabel()
+    let userMailAdressLabel: UILabel = UILabel()
 
     override init(frame: CGRect) { // for using CustomView in code
         super.init(frame: frame)
@@ -18,11 +18,11 @@ class MyPageUserCellBtn: UIButton {
     
     private func commonInit() {
         
-        let viewWidth:CGFloat = self.frame.size.width
-        let viewHeight:CGFloat = self.frame.size.height
+        let viewWidth: CGFloat = self.frame.size.width
+        let viewHeight: CGFloat = self.frame.size.height
 
         //アイコン
-        iconImgView.image = UIImage(named:"common-icon-default")
+        iconImgView.image = UIImage(named: "common-icon-default")
         iconImgView.frame = CGRect(x: viewHeight*0.1, y: viewHeight*0.1, width: viewHeight*0.8, height: viewHeight*0.8)
         iconImgView.backgroundColor = UIColor.white
         iconImgView.layer.cornerRadius = viewHeight*0.8/2
@@ -42,8 +42,8 @@ class MyPageUserCellBtn: UIButton {
         addSubview(userMailAdressLabel)
         
         //プロフィール画面の矢印
-        let profielArrow:UIImageView = UIImageView()
-        profielArrow.image = UIImage(named:"arrow_rignt")
+        let profielArrow: UIImageView = UIImageView()
+        profielArrow.image = UIImage(named: "arrow_rignt")
         profielArrow.frame = CGRect(x: viewWidth*0.9, y: viewHeight*0.4, width: viewWidth*0.03, height: viewHeight*0.2)
         addSubview(profielArrow)
     }

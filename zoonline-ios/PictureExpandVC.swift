@@ -3,16 +3,16 @@ import UIKit
 class PictureExpandVC: UIViewController,UIScrollViewDelegate {
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var scrollViewHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    private var scrollViewHeight: CGFloat!
     private var imageScrollView: UIScrollView!
-    private var postImgView:UIImageView!
+    private var postImgView: UIImageView!
     
-    var statusBarHeight:CGFloat!
-    var navigationBarHeight:CGFloat!
-    var image:UIImage!
-    var navigationTitle:String!
+    var statusBarHeight: CGFloat!
+    var navigationBarHeight: CGFloat!
+    var image: UIImage!
+    var navigationTitle: String!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +32,7 @@ class PictureExpandVC: UIViewController,UIScrollViewDelegate {
     func setNavigationBar() {
         
         //ステータスバー部分の覆い
-        let aadView:UIView = UIView()
+        let aadView: UIView = UIView()
         aadView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: statusBarHeight*2)
         aadView.backgroundColor = UIColor.init(named: "main")
         self.view.addSubview(aadView)
@@ -46,7 +46,7 @@ class PictureExpandVC: UIViewController,UIScrollViewDelegate {
         
         //ナビゲーションアイテムを作成
         let navItems = UINavigationItem()
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
+        let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = navigationTitle

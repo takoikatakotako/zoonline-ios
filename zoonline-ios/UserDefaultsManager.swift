@@ -11,7 +11,7 @@ import UIKit
 class UserDefaultsManager: NSObject {
     
     static let sharedInstance = UserDefaultsManager()
-    var userDefaults:UserDefaults = UserDefaults.standard
+    var userDefaults: UserDefaults = UserDefaults.standard
     
     override init() {
         //UserInfo
@@ -36,7 +36,7 @@ class UserDefaultsManager: NSObject {
         userDefaults.register(defaults: ["KEY_SUPPORT_Zoo": false])
     }
     
-    func doLogin(userID:String, userName:String, email:String, iconUrl:String, profile:String, accessToken:String, clientToken:String, expiry:String, uniqID:String) {
+    func doLogin(userID: String, userName: String, email: String, iconUrl: String, profile: String, accessToken: String, clientToken: String, expiry: String, uniqID: String) {
         userDefaults.set(true, forKey: "KEY_login")
         userDefaults.set(userID, forKey: "KEY_MyUserID")
         userDefaults.set(userName, forKey: "KEY_MyUserName")

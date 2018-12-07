@@ -14,20 +14,20 @@ import SCLAlertView
 
 class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var userID:Int!
+    var userID: Int!
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    private var statusBarHeight: CGFloat!
+    private var navigationBarHeight: CGFloat!
+    private var tabBarHeight: CGFloat!
     
-    private var tableViewHeight:CGFloat!
+    private var tableViewHeight: CGFloat!
     
     //テーブルビューインスタンス
-    var friendsCollectionView : UICollectionView!
-    private var frindsList:JSON = []
+    var friendsCollectionView: UICollectionView!
+    private var frindsList: JSON = []
 
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -60,7 +60,7 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
             switch response.result {
             case .success:
                 
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 
                 if json["is_success"].boolValue {
@@ -87,7 +87,7 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
+        let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "フレンズ"
@@ -102,11 +102,11 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
         
         // CollectionViewのレイアウトを生成.
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width:viewWidth/3, height:viewWidth/3)
+        layout.itemSize = CGSize(width: viewWidth/3, height: viewWidth/3)
         layout.sectionInset = UIEdgeInsets.zero
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
-        layout.headerReferenceSize = CGSize(width:0,height:0)
+        layout.headerReferenceSize = CGSize(width: 0,height: 0)
         friendsCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
         friendsCollectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self))
         friendsCollectionView.delegate = self
@@ -151,11 +151,11 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
     //Cellに値を設定する
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell : UserCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self), for: indexPath) as! UserCollectionViewCell
+        let cell: UserCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self), for: indexPath) as! UserCollectionViewCell
         cell.userLabel?.textColor = UIColor.black
         cell.userLabel!.text = frindsList[indexPath.row]["user-name"].stringValue
 
-        if let url = URL(string:frindsList[indexPath.row]["icon-url"].stringValue) {
+        if let url = URL(string: frindsList[indexPath.row]["icon-url"].stringValue) {
             cell.icomImageView.sd_setImage(with: url)
         }
         

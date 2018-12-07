@@ -6,10 +6,10 @@ import SwiftyJSON
 class LoginVC: UIViewController ,UITextFieldDelegate{
 
     //ViewParts
-    var mailTextField:UITextField!
-    var passWordTextField:UITextField!
-    var loginBtn:UIButton!
-    let indicator:UIActivityIndicatorView = UIActivityIndicatorView()
+    var mailTextField: UITextField!
+    var passWordTextField: UITextField!
+    var loginBtn: UIButton!
+    let indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate{
         title = "ログイン"
 
         //バーの左側に設置するボタンの作成
-        let leftNavBtn =  UIBarButtonItem(title: "閉じる", style: .plain, target: self, action:  #selector(leftBarBtnClicked(sender:)))
+        let leftNavBtn =  UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(leftBarBtnClicked(sender:)))
         self.navigationItem.leftBarButtonItem = leftNavBtn
 
         // 各種サイズ
@@ -45,7 +45,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate{
         
         
         //MailUnderLine
-        let mailTextFieldLine:UIView = UIView()
+        let mailTextFieldLine: UIView = UIView()
         mailTextFieldLine.frame = CGRect(x: 0, y: 60, width: view.frame.width, height: 1)
         mailTextFieldLine.backgroundColor = UIColor.gray
         view.addSubview(mailTextFieldLine)
@@ -63,7 +63,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate{
         view.addSubview(passWordTextField)
         
         //MailUnderLine
-        let passWordTextFieldLine:UIView = UIView()
+        let passWordTextFieldLine: UIView = UIView()
         passWordTextFieldLine.frame = CGRect(x: 0, y: 121, width: view.frame.width, height: 1)
         passWordTextFieldLine.backgroundColor = UIColor.gray
         view.addSubview(passWordTextFieldLine)
@@ -204,7 +204,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate{
             
             switch response.result {
             case .success:
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 
                 
                 print(json)
@@ -217,16 +217,16 @@ class LoginVC: UIViewController ,UITextFieldDelegate{
                 }else{
                     
                     //ログイン成功
-                    var myUserID:String = ""
-                    var myUserName:String = ""
-                    var myUserEmail:String = ""
-                    var myUserIconUrl:String = ""
-                    var myUserProfile:String = ""
+                    var myUserID: String = ""
+                    var myUserName: String = ""
+                    var myUserEmail: String = ""
+                    var myUserIconUrl: String = ""
+                    var myUserProfile: String = ""
 
-                    var myAccessToken:String = ""
-                    var myClientToken:String = ""
-                    var myExpiry:String = ""
-                    var myUniqID:String = ""
+                    var myAccessToken: String = ""
+                    var myClientToken: String = ""
+                    var myExpiry: String = ""
+                    var myUniqID: String = ""
                     
                     myUserID = String(json["data"]["id"].intValue)
                     
@@ -263,7 +263,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate{
                     }
                     
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.userDefaultsManager?.doLogin(userID: myUserID, userName: myUserName, email: myUserEmail, iconUrl: myUserIconUrl, profile: myUserProfile, accessToken: myAccessToken, clientToken: myClientToken,expiry:myExpiry, uniqID:myUniqID)
+                    appDelegate.userDefaultsManager?.doLogin(userID: myUserID, userName: myUserName, email: myUserEmail, iconUrl: myUserIconUrl, profile: myUserProfile, accessToken: myAccessToken, clientToken: myClientToken,expiry: myExpiry, uniqID: myUniqID)
                 
                     self.dismiss(animated: true, completion: nil)
                 }

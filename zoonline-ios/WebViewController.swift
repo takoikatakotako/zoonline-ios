@@ -3,19 +3,19 @@ import UIKit
 class WebViewController: UIViewController , UIWebViewDelegate{
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    var statusBarHeight:CGFloat!
-    var navigationBarHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    var statusBarHeight: CGFloat!
+    var navigationBarHeight: CGFloat!
     
-    private var webViewHeight:CGFloat!
-    
-    //
-    var url:String!
-    var navTitle:String!
+    private var webViewHeight: CGFloat!
     
     //
-    var webview : UIWebView!
+    var url: String!
+    var navTitle: String!
+    
+    //
+    var webview: UIWebView!
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
 
 
@@ -56,7 +56,7 @@ class WebViewController: UIViewController , UIWebViewDelegate{
     func setNavigationBar() {
         
         //ステータスバー部分の覆い
-        let aadView:UIView = UIView()
+        let aadView: UIView = UIView()
         aadView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: statusBarHeight*2)
         aadView.backgroundColor = UIColor.init(named: "main")
         self.view.addSubview(aadView)
@@ -70,7 +70,7 @@ class WebViewController: UIViewController , UIWebViewDelegate{
         
         //ナビゲーションアイテムを作成
         let navItems = UINavigationItem()
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
+        let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = navTitle

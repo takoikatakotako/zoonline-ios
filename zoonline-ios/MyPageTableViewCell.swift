@@ -3,7 +3,7 @@ import UIKit
 class MyPageTableViewCell: UITableViewCell {
     
     var thumbnailImgView: UIImageView! = UIImageView()
-    var textCellLabel:UILabel! = UILabel()
+    var textCellLabel: UILabel! = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,8 +22,8 @@ class MyPageTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let cellWidth:CGFloat = self.frame.width
-        let cellHeight:CGFloat = self.frame.height
+        let cellWidth: CGFloat = self.frame.width
+        let cellHeight: CGFloat = self.frame.height
         
         //ThumbnailUmg
         thumbnailImgView.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.15, width: cellHeight*0.7, height: cellHeight*0.7)

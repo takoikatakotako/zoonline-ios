@@ -4,7 +4,7 @@ class FieldVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 
     //CollectionViews
     var collectionView: UICollectionView!
-    var postButton:UIButton!
+    var postButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class FieldVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         postButton.frame = CGRect(x: width - 100, y: height - 100, width: 80, height: 80)
         postButton.layer.cornerRadius = 40
         postButton.setImage(UIImage(named: "field-add"), for: .normal)
-        postButton.addTarget(self, action: #selector(showPostVC(sender:)), for:.touchUpInside)
+        postButton.addTarget(self, action: #selector(showPostVC(sender:)), for: .touchUpInside)
         view.addSubview(postButton)
     }
 

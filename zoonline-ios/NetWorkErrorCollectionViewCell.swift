@@ -16,8 +16,8 @@ class NetWorkErrorCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let cellWidth:CGFloat = self.frame.width
-        let cellHeight:CGFloat = self.frame.height
+        let cellWidth: CGFloat = self.frame.width
+        let cellHeight: CGFloat = self.frame.height
         
         let errorLabel = UILabel()
         errorLabel.text = "ネットワークエラー"
@@ -36,7 +36,7 @@ class NetWorkErrorCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(messageLabel)
         
         let penguinImgView = UIImageView()
-        penguinImgView.image = UIImage(named:"chara_penpen")
+        penguinImgView.image = UIImage(named: "chara_penpen")
         penguinImgView.frame = CGRect(x: 0, y: cellHeight*0.3, width: cellWidth, height: cellHeight*0.6)
         penguinImgView.contentMode = UIView.ContentMode.scaleAspectFit
         self.contentView.addSubview(penguinImgView)

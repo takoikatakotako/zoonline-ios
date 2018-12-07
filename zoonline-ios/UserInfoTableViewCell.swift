@@ -10,15 +10,15 @@ import UIKit
 
 class UserInfoTableViewCell: UITableViewCell {
 
-    var iconImgView:UIImageView = UIImageView()
-    var userNameLabel:UILabel = UILabel()
-    var profileLabel:UILabel = UILabel()
+    var iconImgView: UIImageView = UIImageView()
+    var userNameLabel: UILabel = UILabel()
+    var profileLabel: UILabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
                 
         iconImgView = UIImageView()
-        iconImgView.image = UIImage(named:"icon_default")
+        iconImgView.image = UIImage(named: "icon_default")
         iconImgView.layer.masksToBounds = true
 
         userNameLabel = UILabel()
@@ -51,10 +51,10 @@ class UserInfoTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let cellWidth:CGFloat = self.frame.width
-        let cellHeight:CGFloat = self.frame.height
+        let cellWidth: CGFloat = self.frame.width
+        let cellHeight: CGFloat = self.frame.height
         
-        let iconWidth:CGFloat = cellWidth*0.24
+        let iconWidth: CGFloat = cellWidth*0.24
         
         //ThumbnailUmg
         iconImgView.layer.cornerRadius = iconWidth/2

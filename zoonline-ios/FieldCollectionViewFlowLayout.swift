@@ -34,10 +34,10 @@ class FieldCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 let numberOfCellsInSection = collectionView.numberOfItems(inSection: section)
                 var height = contentSize.height
                 
-                var x:CGFloat = 0
-                var y:CGFloat = 0
-                var cellwidth:CGFloat = 0
-                var cellheight:CGFloat = 0
+                var x: CGFloat = 0
+                var y: CGFloat = 0
+                var cellwidth: CGFloat = 0
+                var cellheight: CGFloat = 0
                 
                 for i in (0..<numberOfCellsInSection) {
                     let position = i  % (numberOfCellsInSection)
@@ -134,7 +134,7 @@ class FieldCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return attributes
     }
     
-    override var collectionViewContentSize : CGSize {
+    override var collectionViewContentSize: CGSize {
         return contentSize
     }
 }

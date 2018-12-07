@@ -3,30 +3,30 @@ import UIKit
 
 protocol SetTagsDelegate: class {
     
-    func setTags(ary:Array<String>)
+    func setTags(ary: Array<String>)
 }
 
 class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource {
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    private var statusBarHeight: CGFloat!
+    private var navigationBarHeight: CGFloat!
+    private var tabBarHeight: CGFloat!
 
     
-    var postTagLabelHeight:CGFloat!
-    var setTagTextFieldSpaceHeight:CGFloat!
-    var setTagTextFieldHeight:CGFloat!
-    var tagTableViewHeight:CGFloat!
+    var postTagLabelHeight: CGFloat!
+    var setTagTextFieldSpaceHeight: CGFloat!
+    var setTagTextFieldHeight: CGFloat!
+    var tagTableViewHeight: CGFloat!
 
     //segue
-    var tagsAry:Array<String>!
+    var tagsAry: Array<String>!
     
     //ViewParts
-    var setTagTextField:UITextField = UITextField()
-    var tagTableView:UITableView = UITableView()
+    var setTagTextField: UITextField = UITextField()
+    var tagTableView: UITableView = UITableView()
     
     //delegate
     weak var delegate: SetTagsDelegate?
@@ -56,7 +56,7 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        delegate?.setTags(ary:tagsAry)
+        delegate?.setTags(ary: tagsAry)
     }
     
     // MARK: - Viewにパーツの設置
@@ -70,7 +70,7 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         //「<戻る」を「<」のみにする
         navigationController!.navigationBar.topItem!.title = " "
         //ナビゲーションアイテムを作成
-        let titleLabel:UILabel = UILabel()
+        let titleLabel: UILabel = UILabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "タグの編集"
@@ -86,12 +86,12 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     func setTextField()  {
         
         //
-        let grayView:UIView = UIView()
+        let grayView: UIView = UIView()
         grayView.backgroundColor = UIColor(named: "loginRegistSkyBlue")
         grayView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: postTagLabelHeight)
         self.view.addSubview(grayView)
         
-        let label:UILabel  = UILabel()
+        let label: UILabel  = UILabel()
         label.frame = CGRect(x: viewWidth*0.1, y: 0, width: viewWidth*0.8, height: postTagLabelHeight)
         label.text = "投稿のタグ"
         self.view.addSubview(label)
@@ -104,9 +104,9 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
         setTagTextField.delegate = self
         self.view.addSubview(setTagTextField)
         
-        let setTagTextFieldLine:UIView = UIView()
+        let setTagTextFieldLine: UIView = UIView()
         setTagTextFieldLine.backgroundColor = UIColor.gray
-        var linePos:CGFloat = postTagLabelHeight + setTagTextFieldSpaceHeight
+        var linePos: CGFloat = postTagLabelHeight + setTagTextFieldSpaceHeight
         linePos = linePos + setTagTextFieldHeight!
         setTagTextFieldLine.frame = CGRect(x: viewWidth*0.1, y: linePos, width: viewWidth*0.8, height: 1)
         self.view.addSubview(setTagTextFieldLine)
@@ -173,13 +173,13 @@ class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableVie
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:TagListTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(TagListTableViewCell.self), for: indexPath) as! TagListTableViewCell
+        let cell: TagListTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(TagListTableViewCell.self), for: indexPath) as! TagListTableViewCell
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.layoutMargins = UIEdgeInsets.zero
         cell.tagLabel.text = tagsAry[tagsAry.count-indexPath.row-1]
         
         cell.deleateBtn.tag = tagsAry.count-indexPath.row-1
-        cell.deleateBtn.addTarget(self, action:  #selector(deleatBtnClicked(sender:)), for: .touchUpInside)
+        cell.deleateBtn.addTarget(self, action: #selector(deleatBtnClicked(sender:)), for: .touchUpInside)
         return cell
     }
     

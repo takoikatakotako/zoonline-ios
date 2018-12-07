@@ -1,7 +1,7 @@
 import UIKit
 
 class FieldCollectionViewCell: UICollectionViewCell {
-    var thumbnailImgView : UIImageView?
+    var thumbnailImgView: UIImageView?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!

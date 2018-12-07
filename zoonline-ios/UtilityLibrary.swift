@@ -6,7 +6,7 @@ class UtilityLibrary: NSObject {
     class func isLogin()->Bool{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        var isLogin:Bool = false
+        var isLogin: Bool = false
         
         if (appDelegate.userDefaultsManager?.userDefaults.object(forKey: "KEY_login") != nil) {
             isLogin = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_login"))!
@@ -20,53 +20,53 @@ class UtilityLibrary: NSObject {
     class func getUserID()->String{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let userID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
+        let userID: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
         return userID
     }
     
     class func getUserName()->String{
     
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let userName:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName"))!
+        let userName: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName"))!
         return userName
     }
     
     class func getUserEmail()->String{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let userEmail:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserEmail"))!
+        let userEmail: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserEmail"))!
         return userEmail
     }
     
     class func getUserProfile()->String{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let userProfile:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserProfile"))!
+        let userProfile: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserProfile"))!
         return userProfile
     }
     
     class func getUserIconUrl()->String{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let userIconUrl:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserIconUrl"))!
+        let userIconUrl: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserIconUrl"))!
         return userIconUrl
     }
     
-    class func setUserName(userName:String){
+    class func setUserName(userName: String){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(userName, forKey: "KEY_MyUserName")
         return
     }
     
-    class func setUserProfile(userProfile:String){
+    class func setUserProfile(userProfile: String){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(userProfile, forKey: "KEY_MyUserProfile")
         return
     }
     
-    class func setUserIconUrl(userIconUrl:String){
+    class func setUserIconUrl(userIconUrl: String){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(userIconUrl, forKey: "KEY_MyUserIconUrl")
@@ -76,10 +76,10 @@ class UtilityLibrary: NSObject {
     class func getAPIAccessHeader()->HTTPHeaders{
     
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let myAccessToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
-        let myClientToken:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
-        let myExpiry:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
-        let myUniqID:String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
+        let myAccessToken: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyAccessToken"))!
+        let myClientToken: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyClientToken"))!
+        let myExpiry: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyExpiry"))!
+        let myUniqID: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUniqID"))!
         
         let headers: HTTPHeaders = [
             "access-token": myAccessToken,
@@ -91,10 +91,10 @@ class UtilityLibrary: NSObject {
         return headers
     }
     
-    class func calcTextViewHeight(text:String,width:CGFloat,font:UIFont)->CGFloat{
+    class func calcTextViewHeight(text: String,width: CGFloat,font: UIFont)->CGFloat{
         
-        let calcTextView:UITextView = UITextView()
-        calcTextView.frame = CGRect(x: 0, y: 0, width:width, height: 5)
+        let calcTextView: UITextView = UITextView()
+        calcTextView.frame = CGRect(x: 0, y: 0, width: width, height: 5)
         calcTextView.font = font
         calcTextView.text = text
         calcTextView.sizeToFit()
@@ -102,18 +102,18 @@ class UtilityLibrary: NSObject {
         return calcTextView.frame.size.height
     }
     
-    class func calcLabelSize(text:String,font:UIFont)->CGSize{
+    class func calcLabelSize(text: String,font: UIFont)->CGSize{
         
-        let calcLabel:UILabel = UILabel()
+        let calcLabel: UILabel = UILabel()
         calcLabel.text = text
         calcLabel.font = font
-        let rect:CGSize = calcLabel.sizeThatFits(CGSize.zero)
+        let rect: CGSize = calcLabel.sizeThatFits(CGSize.zero)
         
         return rect
     }
     
     
-    class func removeHtmlTags(text:String)->String{
+    class func removeHtmlTags(text: String)->String{
         
         //テキストからhtmlタグを取り除く
         var str = text
@@ -129,7 +129,7 @@ class UtilityLibrary: NSObject {
         return str
     }
     
-    class func parseDates(text:String)->[String: String]{
+    class func parseDates(text: String)->[String: String]{
         //こんな感じの日付をパースする。"2017-10-21T19:02:58",
         
         var persedDic: Dictionary = ["year": "--", "month": "--", "day": "--", "hour": "--", "minute": "--", "second": "--" ]

@@ -2,7 +2,6 @@ disabled_rules:
   - class_delegate_protocol
   - closing_brace
   - closure_parameter_position
-  - colon
   - comma
   - compiler_protocol_init
   - control_statement
@@ -32,6 +31,6 @@ disabled_rules:
   - todo
   - type_body_length
   - private_over_fileprivate
-  
+
 excluded:
   - Pods

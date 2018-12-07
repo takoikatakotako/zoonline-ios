@@ -14,19 +14,19 @@ import SCLAlertView
 
 class CommentListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource  {
 
-    var postsID:Int!
+    var postsID: Int!
     
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
-    var tableViewHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    private var statusBarHeight: CGFloat!
+    private var navigationBarHeight: CGFloat!
+    private var tabBarHeight: CGFloat!
+    var tableViewHeight: CGFloat!
     
     //テーブルビューインスタンス
     private var commentTableView: UITableView!
-    private var postsComments:JSON = []
+    private var postsComments: JSON = []
     
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -68,7 +68,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         UINavigationBar.appearance().tintColor = UIColor.white
         
         //ナビゲーションアイテムを作成
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
+        let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "コメント一覧"
@@ -82,7 +82,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
         }else{
             //バーの右側に設置するボタンの作成
             let rightNavBtn = UIBarButtonItem()
-            rightNavBtn.image = UIImage(named:"submit_nav_btn")!
+            rightNavBtn.image = UIImage(named: "submit_nav_btn")!
             rightNavBtn.action = #selector(goWriteCommentView(sender:))
             rightNavBtn.target = self
             self.navigationItem.rightBarButtonItem = rightNavBtn
@@ -120,7 +120,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
             switch response.result {
             case .success:
                 
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 self.postsComments = json["comments"]
                 
@@ -135,7 +135,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     }
     
     
-    func deleatePostComment(commentID:Int) {
+    func deleatePostComment(commentID: Int) {
         
         print(EveryZooAPI.deleateComments(commentID: commentID))
         
@@ -151,7 +151,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
             switch response.result {
             case .success:
                 
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 if json["is_success"].boolValue {
                     SCLAlertView().showInfo("コメント削除", subTitle: "コメントを削除しました")
                     self.indicator.startAnimating()
@@ -177,11 +177,11 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell:CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self), for: indexPath) as! CommentTableViewCell
+        let cell: CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self), for: indexPath) as! CommentTableViewCell
 
-        let iconUrlStr:String = self.postsComments[indexPath.row]["icon_url"].stringValue
+        let iconUrlStr: String = self.postsComments[indexPath.row]["icon_url"].stringValue
         print(iconUrlStr)
-        if let url = URL(string:iconUrlStr) {
+        if let url = URL(string: iconUrlStr) {
             cell.thumbnail.sd_setImage(with: url)
         }
         
@@ -226,7 +226,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // セルの高さを設定
         
-        var cellHeight:CGFloat = viewWidth*0.28 * 0.66
+        var cellHeight: CGFloat = viewWidth*0.28 * 0.66
         cellHeight+=UtilityLibrary.calcTextViewHeight(text: self.postsComments[indexPath.row]["comment"].stringValue, width: viewWidth*0.8, font: UIFont.systemFont(ofSize: 12))
         
         if cellHeight > viewWidth * 0.28 {

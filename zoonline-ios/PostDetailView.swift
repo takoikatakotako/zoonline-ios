@@ -10,7 +10,7 @@ class PostDetailView: UIView {
     // Dateの高さ
     let dateHeight: CGFloat = 20
     // テーブルビューまでのマージン
-    let bottomMargin:CGFloat = 8
+    let bottomMargin: CGFloat = 8
     
     // Viewのパーツ
     // UserInfo
@@ -42,7 +42,7 @@ class PostDetailView: UIView {
     var detailTextView: UITextView!
     
     // BottomLine
-    var bottomLine:UIView!
+    var bottomLine: UIView!
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -171,11 +171,11 @@ class PostDetailView: UIView {
             height: 0.5)
     }
     
-    func getTextViewSize(viewWidth:CGFloat) -> CGSize {
+    func getTextViewSize(viewWidth: CGFloat) -> CGSize {
         return detailTextView.sizeThatFits(CGSize(width: viewWidth - 40, height: 0))
     }
     
-    func calcHeight(viewWidth:CGFloat) -> CGFloat {
+    func calcHeight(viewWidth: CGFloat) -> CGFloat {
         let textViewSize = getTextViewSize(viewWidth: viewWidth)
         return userInfoHeight + viewWidth + menuHeight + dateHeight + textViewSize.height + bottomMargin
     }

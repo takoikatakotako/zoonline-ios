@@ -2,8 +2,8 @@ import UIKit
 
 class NoLoginTableViewCell: UITableViewCell {
     
-    var loginBtn:UIButton!
-    var newResisterBtn:UIButton!
+    var loginBtn: UIButton!
+    var newResisterBtn: UIButton!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,11 +34,11 @@ class NoLoginTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let cellWidth:CGFloat = self.frame.width
-        let cellHeight:CGFloat = self.frame.height
+        let cellWidth: CGFloat = self.frame.width
+        let cellHeight: CGFloat = self.frame.height
         
         //LoginLabel
-        let claimLoginLabel:UILabel = UILabel()
+        let claimLoginLabel: UILabel = UILabel()
         claimLoginLabel.text = "投稿・タイムラインを利用する\nにはログインしてください"
         claimLoginLabel.numberOfLines = 0
         claimLoginLabel.frame = CGRect(x: 0, y: cellHeight*0.05, width: cellWidth, height: cellHeight*0.1)
@@ -46,9 +46,9 @@ class NoLoginTableViewCell: UITableViewCell {
         self.addSubview(claimLoginLabel)
         
         //アイコン
-        var loginCanDoView:UIImageView!
+        var loginCanDoView: UIImageView!
         loginCanDoView = UIImageView()
-        loginCanDoView.image = UIImage(named:"login_can_do")
+        loginCanDoView.image = UIImage(named: "login_can_do")
         loginCanDoView.contentMode = UIView.ContentMode.scaleAspectFit
         loginCanDoView.frame = CGRect(x: 0, y: cellHeight*0.2, width: cellWidth, height: cellHeight*0.4)
         self.addSubview(loginCanDoView)

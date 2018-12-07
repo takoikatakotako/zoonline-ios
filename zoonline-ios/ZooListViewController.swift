@@ -14,8 +14,8 @@ class ZooListViewController: UIViewController {
     
     
     //width, height
-    var pageMenuHeight:CGFloat!
-    private var contentsViewHeight:CGFloat!
+    var pageMenuHeight: CGFloat!
+    private var contentsViewHeight: CGFloat!
     
     // var pageMenu : CAPSPageMenu?
 

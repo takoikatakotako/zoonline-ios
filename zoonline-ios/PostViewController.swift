@@ -16,16 +16,16 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
 
     //datas
-    public var postImage:UIImage! = UIImage(named:"photoimage")
-    public var postImageWidth:CGFloat! = 100
-    public var postImageHeight:CGFloat! = 62
+    public var postImage: UIImage! = UIImage(named: "photoimage")
+    public var postImageWidth: CGFloat! = 100
+    public var postImageHeight: CGFloat! = 62
     public var titleStr: String! = "タイトルをつけてみよう"
     public var commentStr: String! = "コメントを書いてみよう"
-    var tagsAry:Array<String> = []
+    var tagsAry: Array<String> = []
     
 
     //サポートボタン
-    let supportBtn:UIButton = UIButton()
+    let supportBtn: UIButton = UIButton()
     
     //投稿フラグ
     var isSelectedImage = false
@@ -82,13 +82,13 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func setNavigationBar() {
         
         let rightNavBtn = UIBarButtonItem()
-        rightNavBtn.image = UIImage(named:"submit_nav_btn")!
+        rightNavBtn.image = UIImage(named: "submit_nav_btn")!
         //rightNavBtn.action = #selector(postBarBtnClicked(sender:))
         //rightNavBtn.target = self
         self.navigationItem.rightBarButtonItem = rightNavBtn
         
         //ナビゲーションアイテムを作成
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
+        let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "投稿"
@@ -186,12 +186,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func doImageUpload() {
         
-        let userID:String = UtilityLibrary.getUserID()
+        let userID: String = UtilityLibrary.getUserID()
         let imageData = postImage.pngData()!
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to:EveryZooAPI.getUploadPicture(),  headers: UtilityLibrary.getAPIAccessHeader())
+        }, to: EveryZooAPI.getUploadPicture(),  headers: UtilityLibrary.getAPIAccessHeader())
         { (result) in
             switch result {
             case .success(let upload, _, _):
@@ -209,12 +209,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                     switch response.result {
                     case .success:
                         print("Validation Successful")
-                        let json:JSON = JSON(response.result.value ?? kill)
+                        let json: JSON = JSON(response.result.value ?? kill)
                         print(json)
                         
                         
                         if json["is_success"].boolValue  {
-                            let pic_id:String = json["picture"]["pic_id"].stringValue
+                            let pic_id: String = json["picture"]["pic_id"].stringValue
                             
                             self.doPost(pic_id: pic_id)
                         }
@@ -231,13 +231,13 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func doPost(pic_id:String) {
+    func doPost(pic_id: String) {
         
         let parameters: Parameters = [
             "title": titleStr,
             "caption": commentStr,
-            "pic_id":pic_id,
-            "tags":tagsAry
+            "pic_id": pic_id,
+            "tags": tagsAry
         ]
         
         Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
@@ -246,7 +246,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             case .success:
                 print("Validation Successful")
                 
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 self.indicator.stopAnimating()
                 
@@ -337,31 +337,31 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if indexPath.row == 0 {
             //画像選択View
-            let cell:PostImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostImageTableViewCell.self), for: indexPath) as! PostImageTableViewCell
+            let cell: PostImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostImageTableViewCell.self), for: indexPath) as! PostImageTableViewCell
             cell.postImageView.image = postImage
             return cell
         }else if indexPath.row == 2 {
             //画像選択View
-            let cell:PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
-            cell.iconImageView.image = UIImage(named:"title_logo")
+            let cell: PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
+            cell.iconImageView.image = UIImage(named: "title_logo")
             cell.postTextView.text = titleStr
             return cell
         }else if indexPath.row == 4 {
             //画像選択View
-            let cell:PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
-            cell.iconImageView.image = UIImage(named:"comment_blue")
+            let cell: PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
+            cell.iconImageView.image = UIImage(named: "comment_blue")
             cell.postTextView.text = commentStr
             return cell
         }else if indexPath.row == 6 {
             //タグの選択View
-            let cell:PostTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTagTableViewCell.self), for: indexPath) as! PostTagTableViewCell
+            let cell: PostTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTagTableViewCell.self), for: indexPath) as! PostTagTableViewCell
             cell.tagsAry = tagsAry
 
             return cell
         }else{
         
             //スペーサーView
-            let cell:PostSpaceTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostSpaceTableViewCell.self), for: indexPath) as! PostSpaceTableViewCell
+            let cell: PostSpaceTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostSpaceTableViewCell.self), for: indexPath) as! PostSpaceTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         }

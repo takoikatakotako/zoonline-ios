@@ -10,8 +10,8 @@ import UIKit
 
 class PostTextsTableViewCell: UITableViewCell {
 
-    var iconImageView:UIImageView = UIImageView()
-    var postTextView:UITextView = UITextView()
+    var iconImageView: UIImageView = UIImageView()
+    var postTextView: UITextView = UITextView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,8 +37,8 @@ class PostTextsTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let cellWidth:CGFloat = self.frame.width
-        let cellHeight:CGFloat = self.frame.height
+        let cellWidth: CGFloat = self.frame.width
+        let cellHeight: CGFloat = self.frame.height
 
         iconImageView.frame =  CGRect(x: cellWidth*0.06, y: cellWidth*0.03, width: cellWidth*0.08, height: cellWidth*0.08)
         postTextView.frame = CGRect(x: cellWidth*0.18, y: cellWidth*0.02, width: cellWidth*0.8, height: cellHeight-(cellWidth*0.02))

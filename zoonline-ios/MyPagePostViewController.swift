@@ -6,19 +6,19 @@ import SCLAlertView
 
 class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
-    var userID:Int!
+    var userID: Int!
 
     //width, height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
-    private var tableViewHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    private var statusBarHeight: CGFloat!
+    private var navigationBarHeight: CGFloat!
+    private var tabBarHeight: CGFloat!
+    private var tableViewHeight: CGFloat!
     
     //テーブルビューインスタンス
     private var postListTableView: UITableView!
-    private var postsContents:JSON = []
+    private var postsContents: JSON = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
             switch response.result {
             case .success:
                 
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 
                 if json["is_success"].boolValue {
                     print(json)
@@ -81,7 +81,7 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
         self.navigationController?.navigationBar.isTranslucent = false
         
         //ナビゲーションアイテムを作成
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
+        let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "投稿一覧"
@@ -100,19 +100,19 @@ class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableVie
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self))! as! MyPagePostCell
+        let cell: MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self))! as! MyPagePostCell
         
         print("----------")
         print(self.postsContents[indexPath.row])
         
         let dates = UtilityLibrary.parseDates(text: self.postsContents[indexPath.row]["created_at"].stringValue)
-        var dateText:String = dates["year"]! + "/"
+        var dateText: String = dates["year"]! + "/"
         dateText += dates["month"]! + "/"
         dateText += dates["day"]!
         cell.dateLabel.text = dateText
         cell.titleLabel.text = self.postsContents[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.postsContents[indexPath.row]["caption"].stringValue
-        let imageUrl = URL(string:self.postsContents[indexPath.row]["image_url"].stringValue)!
+        let imageUrl = URL(string: self.postsContents[indexPath.row]["image_url"].stringValue)!
         cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
 
         return cell

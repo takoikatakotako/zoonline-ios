@@ -7,12 +7,12 @@ import GoogleMobileAds
 class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UITableViewDataSource {
     
     //width, height
-    private var tableViewHeight:CGFloat!
-    private var timeLineTableView:UITableView = UITableView()
-    private var isNetWorkConnect:Bool!
+    private var tableViewHeight: CGFloat!
+    private var timeLineTableView: UITableView = UITableView()
+    private var isNetWorkConnect: Bool!
     
     //Contents
-    var timeLineContents:JSON = []
+    var timeLineContents: JSON = []
 
     //Ad
     var bannerView: GADBannerView!
@@ -69,13 +69,13 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     // MARK: - インターネット
     func getNews() {
         
-        let userID:Int = Int(UtilityLibrary.getUserID())!
+        let userID: Int = Int(UtilityLibrary.getUserID())!
         Alamofire.request(EveryZooAPI.getTimeLinePosts(userID: userID)).responseJSON{ response in
             
             switch response.result {
             case .success:
                 
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 self.isNetWorkConnect = true
                 
                 if json["is_success"].boolValue {
@@ -102,7 +102,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     }
     
     // MARK: - テーブルビュー関連
-    @objc func scrollReflesh(sender : UIRefreshControl) {
+    @objc func scrollReflesh(sender: UIRefreshControl) {
         self.timeLineTableView.refreshControl?.endRefreshing()
         refleshTableView()
     }
@@ -143,7 +143,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if !UtilityLibrary.isLogin() {
-            let cell:NoLoginTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NoLoginTableViewCell.self), for: indexPath) as! NoLoginTableViewCell
+            let cell: NoLoginTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NoLoginTableViewCell.self), for: indexPath) as! NoLoginTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
             cell.newResisterBtn.addTarget(self, action: #selector(resistBtnClicked(sender:)), for: .touchUpInside)
@@ -151,13 +151,13 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         }
         
         if !isNetWorkConnect {
-            let cell:NetWorkErrorTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self), for: indexPath) as! NetWorkErrorTableViewCell
+            let cell: NetWorkErrorTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NetWorkErrorTableViewCell.self), for: indexPath) as! NetWorkErrorTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         }
         
         if adInsertNums.contains(indexPath.row) {
-            let cell:BannerAdTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(BannerAdTableViewCell.self), for: indexPath) as! BannerAdTableViewCell
+            let cell: BannerAdTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(BannerAdTableViewCell.self), for: indexPath) as! BannerAdTableViewCell
             cell.addSubview(bannerView)
             return cell
         }
@@ -166,21 +166,21 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         print(indexPath.row)
         print(calcIndexDiff(indexRow: indexPath.row))
         
-        let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
+        let cell: MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         let dates = UtilityLibrary.parseDates(text: self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["updated_at"].stringValue)
-        var dateText:String = dates["year"]! + "/"
+        var dateText: String = dates["year"]! + "/"
         dateText += dates["month"]! + "/" + dates["day"]!
         cell.dateLabel.text = dateText
         cell.titleLabel.text = self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["title"].stringValue
         cell.commentLabel.text = self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["caption"].stringValue
-        if let imageUrl = URL(string:self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["itemImage"].stringValue){
+        if let imageUrl = URL(string: self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["itemImage"].stringValue){
             cell.thumbnailImg.sd_setImage(with: imageUrl)
         }
         return cell
     }
     
     //Adをインサートしたことでindexがずれるので、それを修正
-    func calcIndexDiff(indexRow:Int)->Int{
+    func calcIndexDiff(indexRow: Int)->Int{
     
         var indexDiff = 0
         for i in adInsertNums{
@@ -199,7 +199,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         goDetailView(postID: self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["id"].intValue)
     }
     
-    func goDetailView(postID:Int) {
+    func goDetailView(postID: Int) {
         //画面遷移、投稿詳細画面へ
         let picDetailView: PostDetailVC = PostDetailVC()
         //picDetailView.postID = postID

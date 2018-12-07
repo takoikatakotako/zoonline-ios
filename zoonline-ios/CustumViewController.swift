@@ -1,21 +1,21 @@
 import UIKit
 
-class CustumViewController:UIViewController {
+class CustumViewController: UIViewController {
 
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
-    var statusBarHeight:CGFloat!
-    var navigationBarHeight:CGFloat!
-    var tabBarHeight:CGFloat!
+    var viewWidth: CGFloat!
+    var viewHeight: CGFloat!
+    var statusBarHeight: CGFloat!
+    var navigationBarHeight: CGFloat!
+    var tabBarHeight: CGFloat!
     
-    private var indicator:UIActivityIndicatorView!
+    private var indicator: UIActivityIndicatorView!
     
-    var supportBtn:SupportBtn!
+    var supportBtn: SupportBtn!
     
     var pageName = 0
     
     // MARK: NavigationBar
-    func setNavigationBarBar(navTitle:String){
+    func setNavigationBarBar(navTitle: String){
         
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -27,13 +27,13 @@ class CustumViewController:UIViewController {
     func setSupportBtn(btnHeight: CGFloat) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: SupportBtn.getSupportKey(pageNum: pageName)))!
+        let didSupport: Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: SupportBtn.getSupportKey(pageNum: pageName)))!
         if !didSupport && UtilityLibrary.isLogin(){
         
             supportBtn = SupportBtn()
             supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: btnHeight)
-            supportBtn.setImage(UIImage(named:SupportBtn.getSupportImgName(pageNum: pageName)), for: UIControl.State.normal)
-            supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
+            supportBtn.setImage(UIImage(named: SupportBtn.getSupportImgName(pageNum: pageName)), for: UIControl.State.normal)
+            supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for: .touchUpInside)
             self.view.addSubview(supportBtn)
         }
     }
@@ -78,7 +78,7 @@ class CustumViewController:UIViewController {
     //ログインボタンが押されたら呼ばれます
     @objc func loginBtnClicked(sender: UIButton){
         
-        let loginView:LoginVC = LoginVC()
+        let loginView: LoginVC = LoginVC()
         //loginView.statusBarHeight = self.statusBarHeight
         //loginView.navigationBarHeight = self.navigationBarHeight
         self.present(loginView, animated: true, completion: nil)
@@ -87,7 +87,7 @@ class CustumViewController:UIViewController {
     //登録ボタンが押されたら呼ばれます
     @objc func resistBtnClicked(sender: UIButton){
         
-        let loginView:SignInVC = SignInVC()
+        let loginView: SignInVC = SignInVC()
         loginView.statusBarHeight = self.statusBarHeight
         loginView.navigationBarHeight = self.navigationBarHeight
         self.present(loginView, animated: true, completion: nil)

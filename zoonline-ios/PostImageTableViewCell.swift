@@ -10,7 +10,7 @@ import UIKit
 
 class PostImageTableViewCell: UITableViewCell {
     
-    var postImageView:UIImageView = UIImageView()
+    var postImageView: UIImageView = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

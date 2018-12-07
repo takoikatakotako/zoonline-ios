@@ -6,23 +6,23 @@ import SwiftyJSON
 class SignInVC: UIViewController,UITextFieldDelegate {
     
     //width,height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    var statusBarHeight:CGFloat!
-    var navigationBarHeight:CGFloat!
-    private var textFieldHeight:CGFloat!
-    private var loginBtnHeight:CGFloat!
-    private var forgetPassWordBtnHeight:CGFloat!
-    private var loginViewHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    var statusBarHeight: CGFloat!
+    var navigationBarHeight: CGFloat!
+    private var textFieldHeight: CGFloat!
+    private var loginBtnHeight: CGFloat!
+    private var forgetPassWordBtnHeight: CGFloat!
+    private var loginViewHeight: CGFloat!
     
     //ViewParts
-    var mailTextField:UITextField!
-    var userNameTextField:UITextField!
-    var passWordTextField:UITextField!
-    var registBtn:UIButton!
+    var mailTextField: UITextField!
+    var userNameTextField: UITextField!
+    var passWordTextField: UITextField!
+    var registBtn: UIButton!
     
     //
-    let indicator:UIActivityIndicatorView = UIActivityIndicatorView()
+    let indicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,7 @@ class SignInVC: UIViewController,UITextFieldDelegate {
     func setNavigationBar() {
         
         //ステータスバー部分の覆い
-        let statusView:UIView = UIView()
+        let statusView: UIView = UIView()
         statusView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: statusBarHeight*2)
         statusView.backgroundColor = UIColor.init(named: "main")
         self.view.addSubview(statusView)
@@ -68,7 +68,7 @@ class SignInVC: UIViewController,UITextFieldDelegate {
         
         //ナビゲーションアイテムを作成
         let navItems = UINavigationItem()
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
+        let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "新規登録"
@@ -76,7 +76,7 @@ class SignInVC: UIViewController,UITextFieldDelegate {
         navItems.titleView = titleLabel
         
         //バーの左側に設置するボタンの作成
-        let leftNavBtn =  UIBarButtonItem(title: "閉じる", style: .plain, target: self, action:  #selector(leftBarBtnClicked(sender:)))
+        let leftNavBtn =  UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(leftBarBtnClicked(sender:)))
         navItems.leftBarButtonItem = leftNavBtn
         navBar.pushItem(navItems, animated: true)
         self.view.addSubview(navBar)
@@ -109,7 +109,7 @@ class SignInVC: UIViewController,UITextFieldDelegate {
         self.view.addSubview(mailTextField)
         
         //MailUnderLine
-        let mailTextFieldLine:UIView = UIView()
+        let mailTextFieldLine: UIView = UIView()
         mailTextFieldLine.frame = CGRect(x: 0, y: mailTextFieldYPos+textFieldHeight, width: viewWidth, height: 1)
         mailTextFieldLine.backgroundColor = UIColor.gray
         self.view.addSubview(mailTextFieldLine)
@@ -129,7 +129,7 @@ class SignInVC: UIViewController,UITextFieldDelegate {
         self.view.addSubview(userNameTextField)
         
         //UserUnderLine
-        let userNameTextFieldLine:UIView = UIView()
+        let userNameTextFieldLine: UIView = UIView()
         userNameTextFieldLine.frame = CGRect(x: 0, y: userNameTextYPos+textFieldHeight, width: viewWidth, height: 1)
         userNameTextFieldLine.backgroundColor = UIColor.gray
         self.view.addSubview(userNameTextFieldLine)
@@ -149,7 +149,7 @@ class SignInVC: UIViewController,UITextFieldDelegate {
         self.view.addSubview(passWordTextField)
         
         //PassUnderLine
-        let passWordTextFieldLine:UIView = UIView()
+        let passWordTextFieldLine: UIView = UIView()
         passWordTextFieldLine.frame = CGRect(x: 0, y: passTextYPos+textFieldHeight, width: viewWidth, height: 1)
         passWordTextFieldLine.backgroundColor = UIColor.gray
         self.view.addSubview(passWordTextFieldLine)
@@ -228,9 +228,9 @@ class SignInVC: UIViewController,UITextFieldDelegate {
         
         indicator.startAnimating()
         
-        let mail:String = self.mailTextField.text!
-        let userName:String = userNameTextField.text!
-        let passWord:String = passWordTextField.text!
+        let mail: String = self.mailTextField.text!
+        let userName: String = userNameTextField.text!
+        let passWord: String = passWordTextField.text!
         
         if mail.isEmpty {
         
@@ -252,7 +252,7 @@ class SignInVC: UIViewController,UITextFieldDelegate {
             "email": mail,
             "name": userName,
             "password": passWord,
-            "confirm_success_url":API_CONFIRM_SUCCESS_URL]
+            "confirm_success_url": API_CONFIRM_SUCCESS_URL]
         
         Alamofire.request(EveryZooAPI.getSignUp(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             
@@ -261,7 +261,7 @@ class SignInVC: UIViewController,UITextFieldDelegate {
             switch response.result {
                 
             case .success:
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 
                 

@@ -3,16 +3,16 @@ import UIKit
 class MyPagePostCell: UITableViewCell {
     
     //thumbnail
-    var thumbnailImg:UIImageView!
+    var thumbnailImg: UIImageView!
     
     //title
-    var titleLabel:UILabel!
+    var titleLabel: UILabel!
     
     //date
-    var dateLabel:UILabel!
+    var dateLabel: UILabel!
     
     //cooment
-    var commentLabel:UILabel!
+    var commentLabel: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,8 +55,8 @@ class MyPagePostCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let cellWidth:CGFloat = self.frame.size.width
-        let cellHeight:CGFloat = self.frame.size.height
+        let cellWidth: CGFloat = self.frame.size.width
+        let cellHeight: CGFloat = self.frame.size.height
 
         thumbnailImg.layer.cornerRadius = cellWidth*0.04
         thumbnailImg.frame =  CGRect(x: cellHeight*0.03, y: cellHeight*0.05, width: cellHeight*0.9, height: cellHeight*0.9)

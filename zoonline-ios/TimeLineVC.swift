@@ -4,15 +4,15 @@ import SCLAlertView
 class TimeLineVC: UIViewController {
     
     //width,height
-    private var viewWidth:CGFloat!
-    private var viewHeight:CGFloat!
-    private var statusBarHeight:CGFloat!
-    private var navigationBarHeight:CGFloat!
-    private var tabBarHeight:CGFloat!
+    private var viewWidth: CGFloat!
+    private var viewHeight: CGFloat!
+    private var statusBarHeight: CGFloat!
+    private var navigationBarHeight: CGFloat!
+    private var tabBarHeight: CGFloat!
     
     
-    private var pageMenuHeight:CGFloat!
-    private var contentsViewHeight:CGFloat!
+    private var pageMenuHeight: CGFloat!
+    private var contentsViewHeight: CGFloat!
 
     
     //var pageMenu : CAPSPageMenu?

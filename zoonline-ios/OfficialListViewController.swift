@@ -12,26 +12,26 @@ import SwiftyJSON
 import SDWebImage
 
 protocol OfficialDelegate: class  {
-    func openNews(newsUrl:String)
+    func openNews(newsUrl: String)
 }
 
 class OfficialListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     //heights
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
-    var statusBarHeight:CGFloat!
-    var navigationBarHeight:CGFloat!
-    var pageMenuHeight:CGFloat!
-    var tabBarHeight:CGFloat!
+    var viewWidth: CGFloat!
+    var viewHeight: CGFloat!
+    var statusBarHeight: CGFloat!
+    var navigationBarHeight: CGFloat!
+    var pageMenuHeight: CGFloat!
+    var tabBarHeight: CGFloat!
     
-    private var tableViewHeight:CGFloat!
+    private var tableViewHeight: CGFloat!
     
     //テーブルビューインスタンス
     private var officialTableView: UITableView!
     var indicator: UIActivityIndicatorView!
 
-    var officialContents:JSON = []
+    var officialContents: JSON = []
 
     
     //テーブルビューに表示する配列
@@ -91,7 +91,7 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
 
                 //print(response.value)
                 
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
 
                 print(EveryZooAPI.getOfficialNews())
                 //print("!-!-!-!-----------------------")
@@ -121,12 +121,12 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
+        let cell: MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         cell.titleLabel.text = officialContents[indexPath.row]["title"]["rendered"].stringValue
         cell.commentLabel.text = UtilityLibrary.removeHtmlTags(text: officialContents[indexPath.row]["excerpt"]["rendered"].stringValue)
         let dateDic = UtilityLibrary.parseDates(text: officialContents[indexPath.row]["date"].stringValue)
         cell.dateLabel.text = dateDic["year"]! + "年"+dateDic["month"]! + "月"+dateDic["day"]! + "日"
-        cell.thumbnailImg.image = UIImage(named:"no_img")
+        cell.thumbnailImg.image = UIImage(named: "no_img")
 
         return cell
     }

@@ -13,21 +13,21 @@ import SDWebImage
 
 
 protocol NewsDelegate: class  {
-    func openNews(newsUrl:String)
+    func openNews(newsUrl: String)
 }
 
 class NewsListViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource {
 
     //
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
-    var statusBarHeight:CGFloat!
-    var navigationBarHeight:CGFloat!
-    var pageMenuHeight:CGFloat!
-    var tabBarHeight:CGFloat!
-    private var tableViewHeight:CGFloat!
+    var viewWidth: CGFloat!
+    var viewHeight: CGFloat!
+    var statusBarHeight: CGFloat!
+    var navigationBarHeight: CGFloat!
+    var pageMenuHeight: CGFloat!
+    var tabBarHeight: CGFloat!
+    private var tableViewHeight: CGFloat!
 
-    var newsContents:JSON = []
+    var newsContents: JSON = []
 
     //delegate
     weak var delegate: NewsDelegate?
@@ -37,7 +37,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     private var newsTableView: UITableView!
     
     //サポートボタン
-    var supportBtn:UIButton!
+    var supportBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         getNews()
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Zoo"))!
+        let didSupport: Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Zoo"))!
         if !didSupport {
             setSupportBtn()
         }
@@ -75,12 +75,12 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         //サポート
         supportBtn = UIButton()
         supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: self.tableViewHeight)
-        supportBtn.setImage(UIImage(named:"support_official"), for: UIControl.State.normal)
+        supportBtn.setImage(UIImage(named: "support_official"), for: UIControl.State.normal)
         supportBtn.imageView?.contentMode = UIView.ContentMode.bottomRight
         supportBtn.contentHorizontalAlignment = .fill
         supportBtn.contentVerticalAlignment = .fill
         supportBtn.backgroundColor = UIColor.clear
-        supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for:.touchUpInside)
+        supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for: .touchUpInside)
         self.view.addSubview(supportBtn)
     }
     
@@ -101,7 +101,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
             switch response.result {
             case .success:
                 
-                let json:JSON = JSON(response.result.value ?? kill)
+                let json: JSON = JSON(response.result.value ?? kill)
                 //print(json)
                 print(json["is_success"].stringValue)
                 //print(json["content"].arrayValue)
@@ -125,17 +125,17 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
-        let cell:MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
+        let cell: MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
 
         let dates = UtilityLibrary.parseDates(text: self.newsContents[indexPath.row]["posted_at"].stringValue)
-        var dateText:String = dates["year"]! + "/"
+        var dateText: String = dates["year"]! + "/"
         dateText += dates["month"]! + "/"
         dateText += dates["day"]!
         cell.dateLabel.text = dateText
         
         cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.newsContents[indexPath.row]["content"].stringValue
-        let imageUrl = URL(string:self.newsContents[indexPath.row]["image_url"].stringValue)!
+        let imageUrl = URL(string: self.newsContents[indexPath.row]["image_url"].stringValue)!
         cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
         return cell
     }

@@ -4,29 +4,29 @@ import UIKit
 class PostDetailTableCell: UITableViewCell {
 
     //UserInfoBtn
-    var userInfoBtn:UIButton!
-    var thumbnailImgView:UIImageView!
-    var userNameTextView:UILabel!
+    var userInfoBtn: UIButton!
+    var thumbnailImgView: UIImageView!
+    var userNameTextView: UILabel!
     
     //FollowBtn
-    var followBtn:FollowUserButton!
+    var followBtn: FollowUserButton!
 
     //PostView
-    var postImgView:UIImageView!
+    var postImgView: UIImageView!
     
     //FavImgBtn
-    var favBtn:FavCommentButton!
+    var favBtn: FavCommentButton!
     
     //CommentBtn
-    var commentBtn:FavCommentButton!
+    var commentBtn: FavCommentButton!
 
     //MunuButton
-    var menuBtn:MenuButton!
+    var menuBtn: MenuButton!
     
-    var dateLabel:UILabel!
-    var descriptionTextView:UITextView!
-    var tag1Label:UILabel!
-    var tag2Label:UILabel!
+    var dateLabel: UILabel!
+    var descriptionTextView: UITextView!
+    var tag1Label: UILabel!
+    var tag2Label: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,7 +37,7 @@ class PostDetailTableCell: UITableViewCell {
         
         thumbnailImgView = UIImageView()
         thumbnailImgView.clipsToBounds = true
-        thumbnailImgView.image = UIImage(named:"icon_default")
+        thumbnailImgView.image = UIImage(named: "icon_default")
         userInfoBtn.addSubview(thumbnailImgView)
 
         userNameTextView = UILabel()
@@ -122,8 +122,8 @@ class PostDetailTableCell: UITableViewCell {
 
 class FollowUserButton: UIButton {
     
-    var followImgView:UIImageView!
-    var followLabel:UILabel!
+    var followImgView: UIImageView!
+    var followLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -143,8 +143,8 @@ class FollowUserButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let viewWidth:CGFloat = frame.width
-        let viewHeight:CGFloat = frame.height
+        let viewWidth: CGFloat = frame.width
+        let viewHeight: CGFloat = frame.height
         followImgView.frame = CGRect(x: 0, y: viewHeight*0.25, width: viewHeight*0.5, height: viewHeight*0.5)
         followLabel.frame = CGRect(x: viewHeight*0.6, y: 0, width: viewWidth-viewHeight*0.6, height: viewHeight)
     }
@@ -152,8 +152,8 @@ class FollowUserButton: UIButton {
 
 class FavCommentButton: UIButton {
     
-    var imgView:UIImageView!
-    var countLabel:UILabel!
+    var imgView: UIImageView!
+    var countLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -171,8 +171,8 @@ class FavCommentButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let viewWidth:CGFloat = frame.width
-        let viewHeight:CGFloat = frame.height
+        let viewWidth: CGFloat = frame.width
+        let viewHeight: CGFloat = frame.height
         imgView.frame = CGRect(x: 0, y: viewHeight*0.2, width: viewHeight*0.6, height: viewHeight*0.6)
         countLabel.frame = CGRect(x: viewHeight*0.8, y: 0, width: viewWidth-viewHeight*0.8, height: viewHeight)
     }
@@ -180,13 +180,13 @@ class FavCommentButton: UIButton {
 
 class MenuButton: UIButton {
     
-    var imgView:UIImageView!
+    var imgView: UIImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         imgView = UIImageView()
-        imgView.image = UIImage(named:"action")
+        imgView.image = UIImage(named: "action")
         self.addSubview(imgView)
     }
     
@@ -196,8 +196,8 @@ class MenuButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let viewWidth:CGFloat = frame.width
-        let viewHeight:CGFloat = frame.height
+        let viewWidth: CGFloat = frame.width
+        let viewHeight: CGFloat = frame.height
         
         imgView.frame = CGRect(x: viewWidth*0.2, y: viewHeight*0.2, width: viewHeight*0.6, height: viewHeight*0.6)
     }
