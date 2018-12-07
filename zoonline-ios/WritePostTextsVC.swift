@@ -1,6 +1,6 @@
 import UIKit
 
-//MARK: step 1 Add Protocol here
+// MARK: step 1 Add Protocol here
 protocol SetTextDelegate: class {
     
     func setTitle(str: String)

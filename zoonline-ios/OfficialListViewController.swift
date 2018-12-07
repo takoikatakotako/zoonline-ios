@@ -112,13 +112,13 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
     }
 
     
-    //MARK: テーブルビューのセルの数を設定する
+    // MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
         return self.officialContents.count
     }
     
-    //MARK: テーブルビューのセルの中身を設定する
+    // MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell: MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
@@ -131,7 +131,7 @@ class OfficialListViewController: UIViewController,UITableViewDelegate, UITableV
         return cell
     }
     
-    //Mark: テーブルビューのセルが押されたら呼ばれる
+    // MARK: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         tableView.deselectRow(at: indexPath, animated: true)

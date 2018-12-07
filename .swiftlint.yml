@@ -12,9 +12,7 @@ disabled_rules:
   - return_arrow_whitespace
   - shorthand_operator
   - force_cast
-  - mark
   - function_parameter_count
-  - line_length
   - vertical_whitespace
   - trailing_whitespace
   - trailing_newline
@@ -31,6 +29,8 @@ disabled_rules:
   - todo
   - type_body_length
   - private_over_fileprivate
+
+line_length: 300
 
 excluded:
   - Pods
