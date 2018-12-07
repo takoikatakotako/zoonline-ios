@@ -73,7 +73,7 @@ class CustumViewController: UIViewController {
         indicator.stopAnimating()
     }
     
-    // MARK: 未ログイン関係の処理
+    //Mark: 未ログイン関係の処理
     
     //ログインボタンが押されたら呼ばれます
     @objc func loginBtnClicked(sender: UIButton){

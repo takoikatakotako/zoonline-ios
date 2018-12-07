@@ -169,12 +169,12 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     
     
     
-    // MARK: テーブルビューのセルの数を設定する
+    //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.postsComments.count
     }
     
-    // MARK: テーブルビューのセルの中身を設定する
+    //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell: CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self), for: indexPath) as! CommentTableViewCell
@@ -206,7 +206,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     
     
     
-    // MARK: テーブルビューのセルが押されたら呼ばれる
+    //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         tableView.deselectRow(at: indexPath, animated: true)
@@ -237,7 +237,7 @@ class CommentListViewController: UIViewController,UITableViewDelegate, UITableVi
     }
     
     
-    // MARK: シングルタップ時に実行される
+    //MARK: シングルタップ時に実行される
     @objc func tapSingle(sender: UITapGestureRecognizer) {
         print(sender.view?.tag ?? 1)
         

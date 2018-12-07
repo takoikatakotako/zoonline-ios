@@ -306,13 +306,13 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     
     
     // MARK: - TableViewのデリゲートメリット
-    // MARK: テーブルビューのセルの数を設定する
+    //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return changeUserInfoAry.count
     }
     
-    // MARK: テーブルビューのセルの高さを計算する
+    //MARK: テーブルビューのセルの高さを計算する
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if changeUserInfoAry[indexPath.row] == "" {
@@ -322,7 +322,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         }
     }
     
-    // MARK: テーブルビューのセルの中身を設定する
+    //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         
@@ -345,7 +345,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         return cell
     }
     
-    // MARK: テーブルビューのセルが押されたら呼ばれる
+    //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)

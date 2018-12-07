@@ -143,7 +143,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
          */
     }
     
-    // MARK: ButtonActions
+    //MARK: ButtonActions
     @objc func supportBtnClicked(sender: UIButton){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -266,7 +266,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    // MARK: テーブルビューのセルの高さを計算する
+    //MARK: テーブルビューのセルの高さを計算する
     /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -318,7 +318,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     */
     
-    // MARK: テーブルビューのセルの数を設定する
+    //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if !UtilityLibrary.isLogin() {
@@ -329,7 +329,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 8
     }
     
-    // MARK: テーブルビューのセルの中身を設定する
+    //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
@@ -367,7 +367,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    // MARK: テーブルビューのセルが押されたら呼ばれる
+    //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         
@@ -415,12 +415,54 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    // MARK: 未ログイン関係の処理
+    /*
+    func setTitle(str:String){
+        titleStr = str
+    }
+    
+    func setComment(str:String) {
+        commentStr = str
+    }
+    
+    func setTags(ary:Array<String>){
+        tagsAry = ary
+    }
+    
+    //画像が選択された時に呼ばれる.
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
+        
+        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
+            
+            postImage = image
+            postImageWidth = postImage.size.width
+            postImageHeight = postImage.size.height
+            postTableView.reloadData()
+            
+            isSelectedImage = true
+
+        } else{
+            print("Error:Class name : \(NSStringFromClass(type(of: self))) ")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    //画像選択がキャンセルされた時に呼ばれる.
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    //Mark: 未ログイン関係の処理
     
     //ログインボタンが押されたら呼ばれます
     @objc func loginBtnClicked(sender: UIButton){
         
-        let loginView: LoginViewController = LoginViewController()
+        let loginView:LoginViewController = LoginViewController()
         loginView.statusBarHeight = self.statusBarHeight
         loginView.navigationBarHeight = self.navigationBarHeight
         self.present(loginView, animated: true, completion: nil)
@@ -429,7 +471,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //登録ボタンが押されたら呼ばれます
     @objc func resistBtnClicked(sender: UIButton){
         
-        let resistView: NewResistViewController = NewResistViewController()
+        let resistView:NewResistViewController = NewResistViewController()
         resistView.statusBarHeight = self.statusBarHeight
         resistView.navigationBarHeight = self.navigationBarHeight
         self.present(resistView, animated: true, completion: nil)

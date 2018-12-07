@@ -100,13 +100,13 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
     }
     
     
-    // MARK: テーブルビューのセルの数を設定する
+    //MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
         return self.favoritePosts.count
     }
     
-    // MARK: テーブルビューのセルの中身を設定する
+    //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self))! as! MyPagePostCell
         let dates = UtilityLibrary.parseDates(text: self.favoritePosts[indexPath.row]["created_at"].stringValue)
@@ -125,7 +125,7 @@ class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITabl
         return cell
     }
     
-    // MARK: テーブルビューのセルが押されたら呼ばれる
+    //Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //画面遷移、投稿詳細画面へ
         let picDetailView: PostDetailVC = PostDetailVC()

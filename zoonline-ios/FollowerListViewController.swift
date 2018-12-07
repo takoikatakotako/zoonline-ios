@@ -130,7 +130,7 @@ class FollowerListViewController: UIViewController,UICollectionViewDelegate, UIC
         }
     }
     
-    // MARK: テーブルビューのセルの数を設定する
+    //MARK: テーブルビューのセルの数を設定する
     //Cellが選択された際に呼び出される
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
