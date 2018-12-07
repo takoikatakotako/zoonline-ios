@@ -117,7 +117,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         }
     }
     
-    //MARK: テーブルビューのセルの数を設定する
+    // MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         if !UtilityLibrary.isLogin() { return 1}
@@ -139,7 +139,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         return viewWidth*0.28
     }
     
-    //MARK: テーブルビューのセルの中身を設定する
+    // MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if !UtilityLibrary.isLogin() {
@@ -191,7 +191,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
         return indexRow - indexDiff
     }
     
-    //Mark: テーブルビューのセルが押されたら呼ばれる
+    // MARK: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         if !UtilityLibrary.isLogin() { return }

@@ -86,7 +86,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     
     
     
-    //MARK: ButtonActions
+    // MARK: ButtonActions
     @objc func supportBtnClicked(sender: UIButton){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -116,13 +116,13 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
     }
     
     
-    //MARK: テーブルビューのセルの数を設定する
+    // MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
         return self.newsContents.count
     }
     
-    //MARK: テーブルビューのセルの中身を設定する
+    // MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell: MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
@@ -140,7 +140,7 @@ class NewsListViewController: UIViewController ,UITableViewDelegate, UITableView
         return cell
     }
     
-    //Mark: テーブルビューのセルが押されたら呼ばれる
+    // MARK: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         

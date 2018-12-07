@@ -114,8 +114,6 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
     let supportBtn:UIButton = UIButton()
     
     var myComposeView : SLComposeViewController!
-    */
-        /*
         
         viewWidth = self.view.frame.width
         viewHeight = self.view.frame.height
@@ -136,8 +134,6 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
  
 
     }
- */
-    /*
     
     // MARK: - Viewにパーツの設置
     // MARK: NavigationBar

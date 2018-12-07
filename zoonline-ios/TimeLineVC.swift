@@ -14,16 +14,15 @@ class TimeLineVC: UIViewController {
     private var pageMenuHeight: CGFloat!
     private var contentsViewHeight: CGFloat!
 
-    
+    /*
     //var pageMenu : CAPSPageMenu?
 
-    /*
     
     //view parts
     private var postDetailTableView: UITableView!
     
-    // MARK: - OverRideMethod
-    override func viewDidLoad() {
+
+     override func viewDidLoad() {
         super.viewDidLoad()
 
         //画面横サイズを取得

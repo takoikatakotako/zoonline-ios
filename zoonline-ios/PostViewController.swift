@@ -143,7 +143,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
          */
     }
     
-    //MARK: ButtonActions
+    // MARK: ButtonActions
     @objc func supportBtnClicked(sender: UIButton){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -266,7 +266,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    //MARK: テーブルビューのセルの高さを計算する
+    // MARK: テーブルビューのセルの高さを計算する
     /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -318,7 +318,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     */
     
-    //MARK: テーブルビューのセルの数を設定する
+    // MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if !UtilityLibrary.isLogin() {
@@ -329,7 +329,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 8
     }
     
-    //MARK: テーブルビューのセルの中身を設定する
+    // MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
@@ -367,7 +367,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    //Mark: テーブルビューのセルが押されたら呼ばれる
+    // Mark: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         

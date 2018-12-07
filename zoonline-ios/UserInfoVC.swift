@@ -105,13 +105,13 @@ class UserInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: TableViewDelegateMethods
     
-    //MARK: テーブルビューのセルの数を設定する
+    // MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.postsInfos.count+1
     }
     
-    //MARK: テーブルビューのセルの高さを計算する
+    // MARK: テーブルビューのセルの高さを計算する
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 0 {
@@ -121,7 +121,7 @@ class UserInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    //MARK: テーブルビューのセルの中身を設定する
+    // MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
@@ -150,7 +150,7 @@ class UserInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    //Mark: テーブルビューのセルが押されたら呼ばれる
+    // MARK: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
         
