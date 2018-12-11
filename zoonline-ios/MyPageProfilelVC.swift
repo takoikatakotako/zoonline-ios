@@ -354,7 +354,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         case 0:
             //プロフィールのプレビューが押された、ユーザー情報画面へ
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let userInfoView: UserInfoVC = UserInfoVC()
+            let userInfoView: UserInfoViewController = UserInfoViewController()
             userInfoView.postUserID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
             let btn_back = UIBarButtonItem()
             btn_back.title = ""

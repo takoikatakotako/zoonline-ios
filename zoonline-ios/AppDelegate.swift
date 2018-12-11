@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ページを格納する配列
         var viewControllers: [UIViewController] = []
         
-        let firstViewController: FieldVC? = FieldVC()
+        let firstViewController: FieldViewController? = FieldViewController()
         firstViewController?.tabBarItem = UITabBarItem(title: "ひろば", image: UIImage(named: "tab_field"), tag: 1)
         let firstNavigationController = UINavigationController(rootViewController: firstViewController!)
         viewControllers.append(firstNavigationController)

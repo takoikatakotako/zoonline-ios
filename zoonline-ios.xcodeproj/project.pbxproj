@@ -11,12 +11,12 @@
 		0DE61C2237B1839A198BAC86 /* Pods_zoonline_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCBE60A9317FF3B3051F278 /* Pods_zoonline_iosUITests.framework */; };
 		835239FDC3EA5D1B0674910F /* Pods_zoonline_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54AA7E29AF57EBFE420AA58 /* Pods_zoonline_iosTests.framework */; };
 		8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */; };
-		8D0FB4541E7AED8E0008D997 /* FieldVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* FieldVC.swift */; };
+		8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */; };
 		8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */; };
 		8D0FB4581E8030AD0008D997 /* TimeLineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4571E8030AD0008D997 /* TimeLineVC.swift */; };
 		8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4591E8031800008D997 /* ZooListViewController.swift */; };
 		8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */; };
-		8D1586721ED848F400802F54 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586711ED848F400802F54 /* UserInfoVC.swift */; };
+		8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586711ED848F400802F54 /* UserInfoViewController.swift */; };
 		8D2533BE1F64FB4F00DB9C96 /* EditUserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2533BD1F64FB4F00DB9C96 /* EditUserProfileVC.swift */; };
 		8D2A9AEF1FB4F914006ECD20 /* PictureExpandVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */; };
 		8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */; };
@@ -70,7 +70,7 @@
 		8DE541771EFAB3010085F916 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE541761EFAB3010085F916 /* SignInVC.swift */; };
 		8DF3A73E1F58724300A5A3B1 /* SupportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF3A73D1F58724300A5A3B1 /* SupportVC.swift */; };
 		8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */; };
-		8DF862E11E992CB200FBF176 /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862E01E992CB200FBF176 /* PostDetailVC.swift */; };
+		8DF862E11E992CB200FBF176 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862E01E992CB200FBF176 /* PostDetailViewController.swift */; };
 		8DF9CFE41EE959F9002B8459 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF9CFE31EE959F9002B8459 /* WebViewController.swift */; };
 		8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */; };
 /* End PBXBuildFile section */
@@ -99,12 +99,12 @@
 		2F3F8A8E3B7639D596420D56 /* Pods-zoonline-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosTests/Pods-zoonline-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 		380765E1943574F6D5DE7C79 /* Pods-zoonline-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-ios/Pods-zoonline-ios.release.xcconfig"; sourceTree = "<group>"; };
 		8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustumViewController.swift; sourceTree = "<group>"; };
-		8D0FB4531E7AED8E0008D997 /* FieldVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldVC.swift; sourceTree = "<group>"; };
+		8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldViewController.swift; sourceTree = "<group>"; };
 		8D0FB4551E7FD32D0008D997 /* UtilityLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityLibrary.swift; sourceTree = "<group>"; };
 		8D0FB4571E8030AD0008D997 /* TimeLineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineVC.swift; sourceTree = "<group>"; };
 		8D0FB4591E8031800008D997 /* ZooListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZooListViewController.swift; sourceTree = "<group>"; };
 		8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
-		8D1586711ED848F400802F54 /* UserInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
+		8D1586711ED848F400802F54 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		8D2533BD1F64FB4F00DB9C96 /* EditUserProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserProfileVC.swift; sourceTree = "<group>"; };
 		8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureExpandVC.swift; sourceTree = "<group>"; };
 		8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 		8DE541761EFAB3010085F916 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		8DF3A73D1F58724300A5A3B1 /* SupportVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportVC.swift; sourceTree = "<group>"; };
 		8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		8DF862E01E992CB200FBF176 /* PostDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
+		8DF862E01E992CB200FBF176 /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		8DF9CFE31EE959F9002B8459 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageUserCellBtn.swift; sourceTree = "<group>"; };
 		AFCBE60A9317FF3B3051F278 /* Pods_zoonline_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zoonline_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,7 +302,7 @@
 		8D57A7971F89E1C400A85D83 /* PostDetail */ = {
 			isa = PBXGroup;
 			children = (
-				8DF862E01E992CB200FBF176 /* PostDetailVC.swift */,
+				8DF862E01E992CB200FBF176 /* PostDetailViewController.swift */,
 				8D3E39B021A1125E0083E661 /* PostDetailView.swift */,
 				8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */,
 				8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */,
@@ -323,7 +323,7 @@
 		8D5F259F1F8B3FD3008D6BF1 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
-				8D1586711ED848F400802F54 /* UserInfoVC.swift */,
+				8D1586711ED848F400802F54 /* UserInfoViewController.swift */,
 				8D5F25A11F8B522C008D6BF1 /* UserInfoTableViewCell.swift */,
 			);
 			name = UserInfo;
@@ -463,7 +463,7 @@
 		8DA0AB711ECB0A0000D75B1A /* Field */ = {
 			isa = PBXGroup;
 			children = (
-				8D0FB4531E7AED8E0008D997 /* FieldVC.swift */,
+				8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */,
 				8D48576D1F40457F00608A56 /* NewPostsVC.swift */,
 				8D48576F1F40A02500608A56 /* PopularPostsVC.swift */,
 				8DA4C6981FE045A800C84A73 /* FieldCollectionViewFlowLayout.swift */,
@@ -787,7 +787,7 @@
 				8D3E39B121A1125E0083E661 /* PostDetailView.swift in Sources */,
 				8DC719131F08BC3F003C5E00 /* WritePostTextsVC.swift in Sources */,
 				8D6215AD1EC3689600593E55 /* MyPageVC.swift in Sources */,
-				8D0FB4541E7AED8E0008D997 /* FieldVC.swift in Sources */,
+				8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */,
 				8DA4C69B1FE0D95800C84A73 /* FieldCollectionViewCell.swift in Sources */,
 				8DF9CFE41EE959F9002B8459 /* WebViewController.swift in Sources */,
 				8D7CDC371F14DD8F00C3844E /* EditUserNameViewController.swift in Sources */,
@@ -833,11 +833,11 @@
 				8D5F25A21F8B522C008D6BF1 /* UserInfoTableViewCell.swift in Sources */,
 				8DDAF0DD1ED184790079D443 /* FriendsListViewController.swift in Sources */,
 				8D532C501FC4904C00D2E532 /* SupportBtn.swift in Sources */,
-				8D1586721ED848F400802F54 /* UserInfoVC.swift in Sources */,
+				8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */,
 				8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */,
 				8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */,
 				8D6A73EE1F83BE2A00902AFC /* UserCollectionViewCell.swift in Sources */,
-				8DF862E11E992CB200FBF176 /* PostDetailVC.swift in Sources */,
+				8DF862E11E992CB200FBF176 /* PostDetailViewController.swift in Sources */,
 				8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */,
 				8D532C4D1FC31AEB00D2E532 /* BannerAdTableViewCell.swift in Sources */,
 				8DE541771EFAB3010085F916 /* SignInVC.swift in Sources */,

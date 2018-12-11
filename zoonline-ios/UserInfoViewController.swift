@@ -4,7 +4,7 @@ import SwiftyJSON
 import SDWebImage
 import SCLAlertView
 
-class UserInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UserInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //テーブルビューインスタンス
     private var profileTableView: UITableView!
@@ -159,7 +159,7 @@ class UserInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         //画面遷移、投稿詳細画面へ
-        let picDetailView: PostDetailVC = PostDetailVC()
+        let picDetailView: PostDetailViewController = PostDetailViewController()
         //picDetailView.postID = self.postsInfos[indexPath.row-1]["id"].intValue
         let btn_back = UIBarButtonItem()
         btn_back.title = ""

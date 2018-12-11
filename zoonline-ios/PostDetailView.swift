@@ -16,9 +16,11 @@ class PostDetailView: UIView {
     // UserInfo
     var userThumbnail: UIImageView!
     var usetName: UILabel!
+    var userInfoButton: UIButton!
 
     // Follow Info
     var followButton: UIButton!
+    var followIcon: UIImageView!
     var followLabel: UILabel!
 
     // Image
@@ -51,24 +53,27 @@ class PostDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        //self.backgroundColor = .orange
-
         // UserInfo
+        userInfoButton = UIButton()
+        addSubview(userInfoButton)
+        
         userThumbnail = UIImageView()
         userThumbnail.image = UIImage(named: "common-icon-default")
+        userThumbnail.isUserInteractionEnabled = false
         addSubview(userThumbnail)
 
         usetName = UILabel()
         usetName.text = "いろはにほへと"
         usetName.textAlignment = .left
         usetName.font = UIFont.systemFont(ofSize: 20)
+        usetName.isUserInteractionEnabled = false
         addSubview(usetName)
 
         // Follow Info
         followButton = UIButton()
         followButton.setImage(UIImage(named: "post-detail-follow-icon"), for: .normal)
         addSubview(followButton)
-
+        
         followLabel = UILabel()
         followLabel.text = "フォロー"
         followLabel.textColor = .gray
@@ -133,11 +138,13 @@ class PostDetailView: UIView {
         // UserInfo
         userThumbnail.frame = CGRect(x: 20, y: (userInfoHeight - 40) / 2, width: 40, height: 40)
         userThumbnail.layer.cornerRadius = 24
-        usetName.frame = CGRect(x: 72, y: 0, width: 200, height: userInfoHeight)
+        usetName.frame = CGRect(x: 72, y: 0, width: 250, height: userInfoHeight)
+        userInfoButton.frame = CGRect(x: 0, y: 0, width: 250, height: userInfoHeight)
 
+        // Follow
         followButton.frame = CGRect(x: width - 140, y: 0, width: userInfoHeight, height: userInfoHeight)
         followLabel.frame = CGRect(x: width - 80, y: 0, width: 80, height: userInfoHeight)
-
+        
         // Image
         postImage.frame = CGRect(x: 0, y: userInfoHeight, width: width, height: width)
 

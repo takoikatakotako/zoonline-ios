@@ -5,7 +5,7 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class PostDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
     private var postDetailTableView: UITableView!
 
@@ -27,6 +27,10 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
         let postDetailView = PostDetailView()
         postDetailView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: postDetailView.calcHeight(viewWidth: view.frame.width))
         
+        // ボタンアクションの設定
+        postDetailView.userInfoButton.addTarget(self, action: #selector(userInfoButtonTouched(sender:)), for: .touchUpInside)
+        postDetailView.followButton.addTarget(self, action: #selector(followButtonTouched(sender:)), for: .touchUpInside)
+
         //テーブルビューの初期化
         postDetailTableView = UITableView()
         postDetailTableView.delegate = self
@@ -41,10 +45,17 @@ class PostDetailVC: UIViewController,UITableViewDelegate, UITableViewDataSource 
         super.viewDidLayoutSubviews()
         let width = view.frame.width
         let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
-        //テーブルビューの大きさの指定
         postDetailTableView.frame = CGRect(x: 0, y: 0, width: width, height: height)
     }
-
+    
+    // MARK: Button Methods
+    @objc func userInfoButtonTouched(sender: UIButton){
+        print("basicButtonBtnClicked")
+    }
+    
+    @objc func followButtonTouched(sender: UIButton){
+        print("basicButtonBtnClicked")
+    }
     
     // MARK: TableView Delegate Methods
     // テーブルビューのセルの数を設定する

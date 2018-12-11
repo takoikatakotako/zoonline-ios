@@ -201,7 +201,7 @@ class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UIT
     
     func goDetailView(postID: Int) {
         //画面遷移、投稿詳細画面へ
-        let picDetailView: PostDetailVC = PostDetailVC()
+        let picDetailView: PostDetailViewController = PostDetailViewController()
         //picDetailView.postID = postID
         
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
