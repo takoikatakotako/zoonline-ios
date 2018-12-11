@@ -28,7 +28,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var loginTitle: [String] = ["ログイン"]
     var loginIcon: [String] = ["mypage_logout"]
 
-
     // Sectionで使用する配列を定義する.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +96,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return unloginedSectionTitle[section]
         }
     }
-
 
     //セクションの高さ
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -232,7 +230,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
 
     // MARK: - アクションの設定
 

@@ -43,7 +43,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         collectionView.collectionViewLayout.invalidateLayout()
         let layout2 = FieldCollectionViewFlowLayout()
         collectionView.setCollectionViewLayout(layout2, animated: false)
-        
+
         postButton = UIButton()
         postButton.backgroundColor = UIColor(named: "main")
         postButton.frame = CGRect(x: width - 100, y: height - 100, width: 80, height: 80)
@@ -60,7 +60,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         let postNavigationController = UINavigationController(rootViewController: PostViewController())
         self.present(postNavigationController, animated: true, completion: nil)
     }
-    
+
     //Cellが選択された際に呼び出される
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Section: \(indexPath.section)")
@@ -79,12 +79,12 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
-    
+
     //セクションの総数を返す
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 5
     }
-    
+
     //Cellに値を設定する
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: FieldCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(FieldCollectionViewCell.self), for: indexPath as IndexPath) as! FieldCollectionViewCell

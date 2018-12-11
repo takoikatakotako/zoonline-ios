@@ -1,40 +1,39 @@
 import UIKit
 
-
 class PostDetailTableCell: UITableViewCell {
 
     //UserInfoBtn
     var userInfoBtn: UIButton!
     var thumbnailImgView: UIImageView!
     var userNameTextView: UILabel!
-    
+
     //FollowBtn
     var followBtn: FollowUserButton!
 
     //PostView
     var postImgView: UIImageView!
-    
+
     //FavImgBtn
     var favBtn: FavCommentButton!
-    
+
     //CommentBtn
     var commentBtn: FavCommentButton!
 
     //MunuButton
     var menuBtn: MenuButton!
-    
+
     var dateLabel: UILabel!
     var descriptionTextView: UITextView!
     var tag1Label: UILabel!
     var tag2Label: UILabel!
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         //UserInfoBtn
         userInfoBtn = UIButton()
         contentView.addSubview(userInfoBtn)
-        
+
         thumbnailImgView = UIImageView()
         thumbnailImgView.clipsToBounds = true
         thumbnailImgView.image = UIImage(named: "icon_default")
@@ -44,7 +43,7 @@ class PostDetailTableCell: UITableViewCell {
         userNameTextView.textAlignment =  NSTextAlignment.left
         userNameTextView.text = "いろはにほへと"
         userInfoBtn.addSubview(userNameTextView)
-    
+
         //FollowBtn
         followBtn = FollowUserButton()
         contentView.addSubview(followBtn)
@@ -56,7 +55,7 @@ class PostDetailTableCell: UITableViewCell {
         postImgView.contentMode = UIView.ContentMode.scaleAspectFit
         postImgView.isUserInteractionEnabled = true
         contentView.addSubview(postImgView)
-        
+
         //FavImg
         favBtn = FavCommentButton()
         favBtn.imgView.image = UIImage(named: "fav_off")!
@@ -76,12 +75,12 @@ class PostDetailTableCell: UITableViewCell {
         //MenuBtn
         menuBtn = MenuButton()
         contentView.addSubview(menuBtn)
-        
+
         dateLabel = UILabel()
         dateLabel.font = UIFont.systemFont(ofSize: 16)
         dateLabel.textColor = UIColor.gray
         contentView.addSubview(dateLabel)
-        
+
         descriptionTextView = UITextView()
         descriptionTextView.text = "天王寺動物園にサイをみました。思ったよりも大きかったです"
         descriptionTextView.textColor = UIColor.black
@@ -89,7 +88,7 @@ class PostDetailTableCell: UITableViewCell {
         descriptionTextView.isEditable = false
         descriptionTextView.isScrollEnabled = false
         contentView.addSubview(descriptionTextView)
-        
+
         tag1Label = UILabel()
         tag1Label.text = "#天王寺動物園"
         tag1Label.textColor = UIColor.white
@@ -104,45 +103,44 @@ class PostDetailTableCell: UITableViewCell {
         tag2Label.textAlignment = NSTextAlignment.center
         contentView.addSubview(tag2Label)
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder: ) has not been implemented")
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
     }
 }
 
-
 class FollowUserButton: UIButton {
-    
+
     var followImgView: UIImageView!
     var followLabel: UILabel!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         followImgView = UIImageView()
         followImgView.image = UIImage(named: "follow_icon")!
         self.addSubview(followImgView)
-        
+
         followLabel = UILabel()
         followLabel.text = "フォロー"
         self.addSubview(followLabel)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         let viewWidth: CGFloat = frame.width
         let viewHeight: CGFloat = frame.height
         followImgView.frame = CGRect(x: 0, y: viewHeight*0.25, width: viewHeight*0.5, height: viewHeight*0.5)
@@ -151,26 +149,26 @@ class FollowUserButton: UIButton {
 }
 
 class FavCommentButton: UIButton {
-    
+
     var imgView: UIImageView!
     var countLabel: UILabel!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         imgView = UIImageView()
         self.addSubview(imgView)
-        
+
         countLabel = UILabel()
         self.addSubview(countLabel)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         let viewWidth: CGFloat = frame.width
         let viewHeight: CGFloat = frame.height
         imgView.frame = CGRect(x: 0, y: viewHeight*0.2, width: viewHeight*0.6, height: viewHeight*0.6)
@@ -179,26 +177,26 @@ class FavCommentButton: UIButton {
 }
 
 class MenuButton: UIButton {
-    
+
     var imgView: UIImageView!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         imgView = UIImageView()
         imgView.image = UIImage(named: "action")
         self.addSubview(imgView)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         let viewWidth: CGFloat = frame.width
         let viewHeight: CGFloat = frame.height
-        
+
         imgView.frame = CGRect(x: viewWidth*0.2, y: viewHeight*0.2, width: viewHeight*0.6, height: viewHeight*0.6)
     }
 }

@@ -6,15 +6,14 @@ import SCLAlertView
 import SDWebImage
 
 class PostDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
     private var postDetailTableView: UITableView!
 
     private var myItems: Array<String> = []
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = UIColor.white
 
         myItems = ["天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
@@ -26,7 +25,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         // 投稿
         let postDetailView = PostDetailView()
         postDetailView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: postDetailView.calcHeight(viewWidth: view.frame.width))
-        
+
         // ボタンアクションの設定
         postDetailView.userInfoButton.addTarget(self, action: #selector(userInfoButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.followButton.addTarget(self, action: #selector(followButtonTouched(sender:)), for: .touchUpInside)
@@ -40,30 +39,30 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         postDetailTableView.rowHeight = 100
         view.addSubview(postDetailTableView)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let width = view.frame.width
         let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
         postDetailTableView.frame = CGRect(x: 0, y: 0, width: width, height: height)
     }
-    
+
     // MARK: Button Methods
     @objc func userInfoButtonTouched(sender: UIButton) {
         print("basicButtonBtnClicked")
     }
-    
+
     @objc func followButtonTouched(sender: UIButton) {
         print("basicButtonBtnClicked")
     }
-    
+
     // MARK: TableView Delegate Methods
     // テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
         return myItems.count
     }
-    
+
     // テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
@@ -71,19 +70,17 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.commentTextView.text = myItems[indexPath.row]
         return cell
     }
-    
+
     // テーブルビューの高さを指定する
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CommentTableViewCell.calcHeight(viewWidth: view.frame.width, comments: myItems[indexPath.row])
     }
-    
+
     // テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
     }
-    
-    
-    
+
     /*
     //Post ID
     public var postID:Int!

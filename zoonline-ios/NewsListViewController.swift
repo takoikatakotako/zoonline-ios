@@ -11,7 +11,6 @@ import Alamofire
 import SwiftyJSON
 import SDWebImage
 
-
 protocol NewsDelegate: class {
     func openNews(newsUrl: String)
 }
@@ -31,22 +30,21 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
 
     //delegate
     weak var delegate: NewsDelegate?
-    
-    
+
     //テーブルビューインスタンス
     private var newsTableView: UITableView!
-    
+
     //サポートボタン
     var supportBtn: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
         tableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+pageMenuHeight+tabBarHeight)
-        
+
         setTableView()
         getNews()
 
@@ -56,7 +54,7 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
             setSupportBtn()
         }
     }
-    
+
     func setTableView() {
         //テーブルビューの初期化
         newsTableView = UITableView()
@@ -70,7 +68,7 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
         }
         self.view.addSubview(newsTableView)
     }
-    
+
     func setSupportBtn() {
         //サポート
         supportBtn = UIButton()
@@ -83,45 +81,42 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
         supportBtn.addTarget(self, action: #selector(supportBtnClicked(sender:)), for: .touchUpInside)
         self.view.addSubview(supportBtn)
     }
-    
-    
-    
+
     // MARK: ButtonActions
     @objc func supportBtnClicked(sender: UIButton) {
-        
+
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Zoo")
         supportBtn.removeFromSuperview()
     }
-    
+
     func getNews() {
-        
+
         Alamofire.request(EveryZooAPI.getZooNews()).responseJSON { response in
-            
+
             switch response.result {
             case .success:
-                
+
                 let json: JSON = JSON(response.result.value ?? kill)
                 //print(json)
                 print(json["is_success"].stringValue)
                 //print(json["content"].arrayValue)
                 self.newsContents = json["content"]
                 self.newsTableView.reloadData()
-                
+
             case .failure(let error):
                 print(error)
                 //テーブルの再読み込み
             }
         }
     }
-    
-    
+
     // MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
         return self.newsContents.count
     }
-    
+
     // MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
@@ -132,18 +127,18 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
         dateText += dates["month"]! + "/"
         dateText += dates["day"]!
         cell.dateLabel.text = dateText
-        
+
         cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
         cell.commentLabel.text = self.newsContents[indexPath.row]["content"].stringValue
         let imageUrl = URL(string: self.newsContents[indexPath.row]["image_url"].stringValue)!
         cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
         return cell
     }
-    
+
     // MARK: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
-        
+
         tableView.deselectRow(at: indexPath, animated: true)
         delegate?.openNews(newsUrl: self.newsContents[indexPath.row]["article_url"].stringValue)
     }

@@ -5,18 +5,18 @@ import SDWebImage
 import SCLAlertView
 
 class UserInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
     //テーブルビューインスタンス
     private var profileTableView: UITableView!
-    
+
     //width, height
     private var profileCellHeight: CGFloat!
     private var postCellHeight: CGFloat!
-    
+
     //UserInfo
     //ユーザーIDとユーザー名は受け取る
     var postUserID: Int!
-    
+
     var userInfos: JSON = []
     var userName: String = ""
     var userProfile: String = ""
@@ -31,14 +31,14 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         setTableView()
         getUserInfo()
     }
-    
+
     func getUserInfo() {
         //ユーザーの情報を取得する
         Alamofire.request(EveryZooAPI.getUserInfo(userID: postUserID)).responseJSON { response in
-            
+
             switch response.result {
             case .success:
-            
+
                 let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 if !json["userName"].stringValue.isEmpty {
@@ -50,7 +50,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
                 if !json["iconUrl"].stringValue.isEmpty {
                     self.userIconUrl = json["iconUrl"].stringValue
                 }
-                
+
                 self.getPosts()
 
             case .failure(let error):
@@ -59,12 +59,11 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
-    
-    
+
     func getPosts() {
         //ユーザーの投稿を取得する
         Alamofire.request(EveryZooAPI.getUserPosts(userID: postUserID)).responseJSON { response in
-            
+
             switch response.result {
             case .success:
                 let json: JSON = JSON(response.result.value ?? kill)
@@ -75,14 +74,14 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
                     //不明なエラー
                     SCLAlertView().showError("エラー", subTitle: "不明なエラーです")
                 }
-                
+
             case .failure(let error):
                 print(error)
                 SCLAlertView().showError("エラー", subTitle: "ユーザー情報の取得に失敗しました")
             }
         }
     }
-    
+
     // MARK: ViewParts
     func setNavigationBar() {
         let titleLabel: NavigationBarLabel = NavigationBarLabel()
@@ -92,7 +91,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
     }
-    
+
     func setTableView() {
         profileTableView = UITableView()
         profileTableView.delegate = self
@@ -102,28 +101,28 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         profileTableView.register(UserInfoTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UserInfoTableViewCell.self))
         self.view.addSubview(profileTableView)
     }
-    
+
     // MARK: TableViewDelegateMethods
-    
+
     // MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+
         return self.postsInfos.count+1
     }
-    
+
     // MARK: テーブルビューのセルの高さを計算する
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         if indexPath.row == 0 {
             return profileCellHeight
         }else {
             return postCellHeight
         }
     }
-    
+
     // MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         if indexPath.row == 0 {
             let cell: UserInfoTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UserInfoTableViewCell.self), for: indexPath) as! UserInfoTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -133,12 +132,12 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
             cell.profileLabel.text = self.userProfile
             return cell
         }
-        
+
         let cell: MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
         if self.postsInfos.count == 0 {
             return cell
         }
-        
+
         let dates = UtilityLibrary.parseDates(text: self.postsInfos[indexPath.row-1]["updated_at"].stringValue)
         var dateText: String = dates["year"]! + "/"
         dateText += dates["month"]! + "/" + dates["day"]!
@@ -149,15 +148,15 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
         return cell
     }
-    
+
     // MARK: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
-        
+
         if indexPath.row == 0 {
             return
         }
-        
+
         //画面遷移、投稿詳細画面へ
         let picDetailView: PostDetailViewController = PostDetailViewController()
         //picDetailView.postID = self.postsInfos[indexPath.row-1]["id"].intValue

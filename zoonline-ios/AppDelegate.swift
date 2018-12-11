@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //ステータスバー
         //UIApplication.shared.statusBarStyle = .lightContent
-        
+
         //ナビゲーションバー
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().barTintColor = UIColor.init(named: "main")
@@ -21,44 +21,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)
         ]
-        
+
         //タブバー
         UITabBar.appearance().tintColor = UIColor.init(named: "main")
         UITabBar.appearance().unselectedItemTintColor = UIColor(named: "textColorGray")
         UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().isTranslucent = false
-        
+
         //Managers
         self.networkManager = NetWorkManager()
         self.userDefaultsManager = UserDefaultsManager()
 
-        
-        
         // ページを格納する配列
         var viewControllers: [UIViewController] = []
-        
+
         let firstViewController: FieldViewController? = FieldViewController()
         firstViewController?.tabBarItem = UITabBarItem(title: "ひろば", image: UIImage(named: "tab_field"), tag: 1)
         let firstNavigationController = UINavigationController(rootViewController: firstViewController!)
         viewControllers.append(firstNavigationController)
-        
+
         // let secondViewController: TimeLineVC? = TimeLineVC()
         // secondViewController?.tabBarItem = UITabBarItem(title: "タイムライン", image: UIImage(named: "tab_timeline"), tag: 2)
         // let secondNavigationController = UINavigationController(rootViewController: secondViewController!)
         // viewControllers.append(secondNavigationController)
-        
+
         let thirdViewController: MyPageVC? = MyPageVC()
         thirdViewController?.tabBarItem = UITabBarItem(title: "マイページ", image: UIImage(named: "tab_mypage"), tag: 2)
         let thirdNavigationController = UINavigationController(rootViewController: thirdViewController!)
         viewControllers.append(thirdNavigationController)
-        
+
         tabBarController = UITabBarController()
         tabBarController?.setViewControllers(viewControllers, animated: false)
-        
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window!.makeKeyAndVisible()
         window?.rootViewController = tabBarController
-        
+
         return true
     }
 
@@ -83,7 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 

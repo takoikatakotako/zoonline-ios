@@ -10,8 +10,6 @@ disabled_rules:
   - force_cast
   - function_parameter_count
   - line_length
-  - vertical_whitespace
-  - trailing_whitespace
   - trailing_newline
   - trailing_semicolon
   - statement_position
@@ -22,7 +20,6 @@ disabled_rules:
   - unused_closure_parameter
   - for_where
   - function_body_length
-  - leading_whitespace
   - todo
   - type_body_length
   - private_over_fileprivate

@@ -12,31 +12,31 @@ class PostTextsTableViewCell: UITableViewCell {
 
     var iconImageView: UIImageView = UIImageView()
     var postTextView: UITextView = UITextView()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         iconImageView.isUserInteractionEnabled = false
         self.contentView.addSubview(iconImageView)
-        
+
         postTextView.isUserInteractionEnabled = false
         postTextView.isEditable = false
         postTextView.font = UIFont.systemFont(ofSize: 14)
         postTextView.textColor = UIColor.gray
         self.contentView.addSubview(postTextView)
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder: ) has not been implemented")
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         let cellWidth: CGFloat = self.frame.width
         let cellHeight: CGFloat = self.frame.height
 

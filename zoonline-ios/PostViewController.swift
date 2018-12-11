@@ -4,11 +4,10 @@ import SwiftyJSON
 import SCLAlertView
 
 //class PostViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate,SetTagsDelegate{
-    
+
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     //width, height
-
 
     //views
     private var postTableView: UITableView!
@@ -22,25 +21,23 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     public var titleStr: String! = "タイトルをつけてみよう"
     public var commentStr: String! = "コメントを書いてみよう"
     var tagsAry: Array<String> = []
-    
 
     //サポートボタン
     let supportBtn: UIButton = UIButton()
-    
+
     //投稿フラグ
     var isSelectedImage = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .white
-        
+
         setNavigationBar()
         setTableView()
-        
+
     }
-    
-    
+
     /*
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -74,19 +71,17 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
  
     }
  */
-    
-    
-    
+
     // MARK: - Viewにパーツの設置
     // MARK: ナビゲーションバー
     func setNavigationBar() {
-        
+
         let rightNavBtn = UIBarButtonItem()
         rightNavBtn.image = UIImage(named: "submit_nav_btn")!
         //rightNavBtn.action = #selector(postBarBtnClicked(sender:))
         //rightNavBtn.target = self
         self.navigationItem.rightBarButtonItem = rightNavBtn
-        
+
         //ナビゲーションアイテムを作成
         let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
@@ -95,7 +90,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         titleLabel.textColor = UIColor.white
         self.navigationItem.titleView = titleLabel
     }
-    
+
     //TableViewの設置
     func setTableView() {
         postTableView = UITableView()
@@ -116,7 +111,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         self.view.addSubview(postTableView)
     }
-    
+
     // MARK: くるくるの生成
     func setActivityIndicator() {
         /*
@@ -128,7 +123,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(indicator)
          */
     }
-    
+
     func setSupportBtn() {
         //サポート
         /*
@@ -142,28 +137,28 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(supportBtn)
          */
     }
-    
+
     // MARK: ButtonActions
     @objc func supportBtnClicked(sender: UIButton) {
-        
+
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Post")
         supportBtn.removeFromSuperview()
     }
-    
+
     //投稿ボタンが押されたら呼ばれる
     @objc internal func postBarBtnClicked(sender: UIButton) {
-        
+
         if !isSelectedImage {
             SCLAlertView().showInfo("エラー", subTitle: "画像が選択されていません。")
             return
         }
-        
+
         if titleStr == "タイトルをつけてみよう" {
             SCLAlertView().showInfo("エラー", subTitle: "タイトルを入力して下さい。")
             return
         }
-        
+
         if titleStr.isEmpty {
             SCLAlertView().showInfo("エラー", subTitle: "タイトルが空です。")
             return
@@ -173,19 +168,18 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             SCLAlertView().showInfo("エラー", subTitle: "タイトルを入力して下さい。")
             return
         }
-        
+
         if commentStr.isEmpty {
             SCLAlertView().showInfo("エラー", subTitle: "コメントを入力してください。")
             return
         }
-        
+
         doImageUpload()
         self.indicator.startAnimating()
     }
-    
-    
+
     func doImageUpload() {
-        
+
         let userID: String = UtilityLibrary.getUserID()
         let imageData = postImage.pngData()!
         Alamofire.upload(multipartFormData: { (multipartFormData) in
@@ -194,68 +188,66 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }, to: EveryZooAPI.getUploadPicture(), headers: UtilityLibrary.getAPIAccessHeader()) { (result) in
             switch result {
             case .success(let upload, _, _):
-                
+
                 upload.uploadProgress(closure: { (Progress) in
                     //print("Upload Progress: \(Progress.fractionCompleted)")
                 })
-                
+
                 upload.responseJSON { response in
                     print(response.request ?? "response.request")  // original URL request
                     print(response.response ?? "response.response") // URL response
                     print(response.data ?? "response.data")     // server data
                     print(response.result)   // result of response serialization
-                    
+
                     switch response.result {
                     case .success:
                         print("Validation Successful")
                         let json: JSON = JSON(response.result.value ?? kill)
                         print(json)
-                        
-                        
+
                         if json["is_success"].boolValue {
                             let pic_id: String = json["picture"]["pic_id"].stringValue
-                            
+
                             self.doPost(pic_id: pic_id)
                         }
-                        
+
                     case .failure(let error):
                         print(error)
-                        
+
                     }
                 }
-                
+
             case .failure(let encodingError):
                 print(encodingError)
             }
         }
     }
-    
+
     func doPost(pic_id: String) {
-        
+
         let parameters: Parameters = [
             "title": titleStr,
             "caption": commentStr,
             "pic_id": pic_id,
             "tags": tagsAry
         ]
-        
+
         Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
-            
+
             switch response.result {
             case .success:
                 print("Validation Successful")
-                
+
                 let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 self.indicator.stopAnimating()
-                
+
                 if json["is_success"].boolValue {
                     SCLAlertView().showSuccess("投稿完了", subTitle: "投稿が完了しました。")
                 }else {
                     SCLAlertView().showSuccess("投稿失敗", subTitle: "投稿に失敗しました。不明なエラーです。")
                 }
-                
-                
+
             case .failure(let error):
                 print(error)
                 //テーブルの再読み込み
@@ -263,8 +255,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    
-    
+
     /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -315,24 +306,21 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     */
-    
+
     // MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+
         if !UtilityLibrary.isLogin() {
             return 1
         }
-        
+
         //通常は8
         return 8
     }
-    
+
     // MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
 
-        
         if indexPath.row == 0 {
             //画像選択View
             let cell: PostImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostImageTableViewCell.self), for: indexPath) as! PostImageTableViewCell
@@ -357,19 +345,18 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
             return cell
         }else {
-        
+
             //スペーサーView
             let cell: PostSpaceTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostSpaceTableViewCell.self), for: indexPath) as! PostSpaceTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         }
     }
-    
+
     // MARK: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
-        
-        
+
         /*
         if !UtilityLibrary.isLogin() {
             return
@@ -411,8 +398,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
  
  */
     }
-    
-    
+
     /*
     func setTitle(str:String){
         titleStr = str

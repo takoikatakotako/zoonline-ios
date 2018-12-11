@@ -10,10 +10,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     var passWordTextField: UITextField!
     var loginBtn: UIButton!
     let indicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = UIColor.white
         title = "ログイン"
 
@@ -28,7 +28,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         mailTextFieldPadding.frame = CGRect(x: 0, y: 0, width: 20, height: 60)
         let passWordTextFieldPadding = UIView()
         passWordTextFieldPadding.frame = CGRect(x: 0, y: 0, width: 20, height: 60)
-        
+
         //MailTest
         mailTextField = UITextField()
         mailTextField.delegate = self
@@ -42,14 +42,13 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         mailTextField.leftView = mailTextFieldPadding
         mailTextField.leftViewMode = UITextField.ViewMode.always
         view.addSubview(mailTextField)
-        
-        
+
         //MailUnderLine
         let mailTextFieldLine: UIView = UIView()
         mailTextFieldLine.frame = CGRect(x: 0, y: 60, width: view.frame.width, height: 1)
         mailTextFieldLine.backgroundColor = UIColor.gray
         view.addSubview(mailTextFieldLine)
-        
+
         //PassTest
         passWordTextField = UITextField()
         passWordTextField.delegate = self
@@ -61,13 +60,13 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         passWordTextField.leftView = passWordTextFieldPadding
         passWordTextField.leftViewMode = UITextField.ViewMode.always
         view.addSubview(passWordTextField)
-        
+
         //MailUnderLine
         let passWordTextFieldLine: UIView = UIView()
         passWordTextFieldLine.frame = CGRect(x: 0, y: 121, width: view.frame.width, height: 1)
         passWordTextFieldLine.backgroundColor = UIColor.gray
         view.addSubview(passWordTextFieldLine)
-        
+
         //LoginButton
         loginBtn = UIButton()
         loginBtn.frame = CGRect(x: view.frame.width * 0.1, y: 122, width: view.frame.width * 0.8, height: 60)
@@ -79,7 +78,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         loginBtn.addTarget(self, action: #selector(loginBtnClicked(sender:)), for: .touchUpInside)
         view.addSubview(loginBtn)
 
-        
         //Indicator
         indicator.style = .whiteLarge
         indicator.center = self.view.center
@@ -88,8 +86,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         self.view.bringSubviewToFront(indicator)
         indicator.color = UIColor.init(named: "main")
     }
-    
-    
+
     // MARK: ナビゲーションバー
     func setView() {
         /*
@@ -119,26 +116,25 @@ class LoginVC: UIViewController, UITextFieldDelegate {
        // self.view.addSubview(forgetPassWordBtn)
  */
     }
-    
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textFieldDidBeginEditing: \(textField.text!)")
-        
+
         //初期入力値の場合は空にする
         if textField.text == "ユーザー名またはメールアドレス"{
             textField.text = ""
         }
-        
+
         if  textField.text == "パスワード" {
             textField.text = ""
             passWordTextField.isSecureTextEntry = true
         }
     }
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
         print(string)
-        
+
         //ChangeLoginBtn
         if self.mailTextField.text == "メールアドレス" || self.passWordTextField.text == "パスワード" {
             loginBtn.isEnabled = false
@@ -150,38 +146,36 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             loginBtn.isEnabled = true
             loginBtn.backgroundColor = UIColor(named: "loginRegistSkyBlue")
         }
-        
+
         return true
     }
-    
-    
+
     //UITextFieldが編集された直後に呼ばれる
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textFieldDidEndEditing: \(textField.text!)")
         //passWordTestの場合
-        
+
     }
- 
-    
+
     //改行ボタンが押された際に呼ばれる
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn \(textField.text!)")
-        
+
         // 改行ボタンが押されたらKeyboardを閉じる処理.
         textField.resignFirstResponder()
 
         return true
     }
-    
+
     //ログインボタンが押されたら呼ばれる
     @objc func loginBtnClicked(sender: UIButton) {
         print("touped")
-        
+
         //self.loginFailed.isHidden = true
         indicator.startAnimating()
-        
+
         //post:http://minzoo.herokuapp.com/api/v0/login
-        
+
         //onojun@sommelier.com
         //password
         let parameters: Parameters!
@@ -194,28 +188,24 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 "email": self.mailTextField.text ?? "",
                 "password": self.passWordTextField.text ?? ""]
         }
-        
-        
+
         Alamofire.request(EveryZooAPI.getSignIn(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            
-            
+
             self.indicator.stopAnimating()
-            
-            
+
             switch response.result {
             case .success:
                 let json: JSON = JSON(response.result.value ?? kill)
-                
-                
+
                 print(json)
-                
+
                 if json["data"].isEmpty {
-                    
+
                     //メールなどが違うと判断
                     //self.loginFailed.isHidden = false
                     SCLAlertView().showInfo("ログイン失敗", subTitle: "メールアドレス、パスワードを確認してください。")
                 }else {
-                    
+
                     //ログイン成功
                     var myUserID: String = ""
                     var myUserName: String = ""
@@ -227,47 +217,47 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     var myClientToken: String = ""
                     var myExpiry: String = ""
                     var myUniqID: String = ""
-                    
+
                     myUserID = String(json["data"]["id"].intValue)
-                    
+
                     if !json["data"]["name"].stringValue.isEmpty {
                         myUserName = json["data"]["name"].stringValue
                     }
-                    
+
                     if !json["data"]["email"].stringValue.isEmpty {
                         myUserEmail = json["data"]["email"].stringValue
                     }
-                    
+
                     if !json["data"]["icon_url"].stringValue.isEmpty {
                         myUserIconUrl = json["data"]["icon_url"].stringValue
                     }
-                    
+
                     if !json["data"]["profile"].stringValue.isEmpty {
                         myUserProfile = json["data"]["profile"].stringValue
                     }
-                    
+
                     if let accessToken = response.response?.allHeaderFields["Access-Token"] as? String {
                         myAccessToken = accessToken
                     }
-                    
+
                     if let clientToken = response.response?.allHeaderFields["Client"] as? String {
                         myClientToken = clientToken
                     }
-                    
+
                     if let expiry = response.response?.allHeaderFields["Expiry"] as? String {
                         myExpiry = expiry
                     }
-                    
+
                     if let uid = response.response?.allHeaderFields["Uid"] as? String {
                         myUniqID = uid
                     }
-                    
+
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.userDefaultsManager?.doLogin(userID: myUserID, userName: myUserName, email: myUserEmail, iconUrl: myUserIconUrl, profile: myUserProfile, accessToken: myAccessToken, clientToken: myClientToken, expiry: myExpiry, uniqID: myUniqID)
-                
+
                     self.dismiss(animated: true, completion: nil)
                 }
-                
+
             case .failure(let error):
                 print(error)
                //通信に失敗と判断
@@ -276,8 +266,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
-    
+
     //パスワード再発行ボタンが押された。
     @objc func forgetPassWordBtnClicked(sender: UIButton) {
         let alert = SCLAlertView()
@@ -288,10 +277,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         }
         alert.showEdit("パスワード再発行", subTitle: "メールアドレスを入力してください。")
     }
-    
+
     //左側のボタンが押されたら呼ばれる
     @objc func leftBarBtnClicked(sender: UIButton) {
-        
+
         self.dismiss(animated: true, completion: nil)
     }
 }

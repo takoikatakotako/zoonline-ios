@@ -1,24 +1,24 @@
 import UIKit
 
 class NetWorkErrorTableViewCell: UITableViewCell {
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder: ) has not been implemented")
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         let cellWidth: CGFloat = self.frame.width
         let cellHeight: CGFloat = self.frame.height
-        
+
         let errorLabelHeight = cellHeight*0.1
         let conformLabelHeight = cellHeight*0.1
         let errorImgViewHeight = cellWidth-(errorLabelHeight+conformLabelHeight)
@@ -31,7 +31,7 @@ class NetWorkErrorTableViewCell: UITableViewCell {
         errorLabel.textColor = UIColor(named: "ff92ae")
         errorLabel.textAlignment = NSTextAlignment.center
         self.addSubview(errorLabel)
-        
+
         //Conform Label
         let conformLabel: UILabel = UILabel()
         conformLabel.frame = CGRect(x: 0, y: errorLabelHeight*2, width: cellWidth, height: conformLabelHeight)
@@ -39,7 +39,7 @@ class NetWorkErrorTableViewCell: UITableViewCell {
         conformLabel.textAlignment = NSTextAlignment.center
         conformLabel.font = UIFont.systemFont(ofSize: 16)
         self.addSubview(conformLabel)
-        
+
         //Error Img View
         let errorImgView: UIImageView = UIImageView()
         errorImgView.image = UIImage(named: "chara_penpen")

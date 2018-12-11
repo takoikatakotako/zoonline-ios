@@ -1,9 +1,9 @@
 import UIKit
 
 class SupportBtn: UIButton {
-    
+
     class func getSupportKey(pageNum: Int) -> String {
-        
+
         switch pageNum {
         case 0:
             return "KEY_SUPPORT_Field"
@@ -19,9 +19,9 @@ class SupportBtn: UIButton {
             return "KEY_SUPPORT_Field"
         }
     }
-    
+
     class func getSupportImgName(pageNum: Int) -> String {
-        
+
         switch pageNum {
         case 0:
             return "support_plaza"
@@ -37,14 +37,14 @@ class SupportBtn: UIButton {
             return "support_plaza"
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         self.imageView?.contentMode = UIView.ContentMode.bottomRight
         self.contentHorizontalAlignment = .fill
         self.contentVerticalAlignment = .fill

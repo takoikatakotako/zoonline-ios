@@ -12,9 +12,9 @@ import SwiftyJSON
 import SCLAlertView
 
 class WritePostsCommentsViewController: UIViewController {
-    
+
     var postsID: Int!
-    
+
     //width, height
     private var viewWidth: CGFloat!
     private var viewHeight: CGFloat!
@@ -25,13 +25,13 @@ class WritePostsCommentsViewController: UIViewController {
 
     //テキストビューインスタンス
     private var commentTextView: UITextView!
-    
+
     //Indicater
     private var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
         viewHeight = self.view.frame.size.height
@@ -40,32 +40,31 @@ class WritePostsCommentsViewController: UIViewController {
         tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
         textViewHeight = viewHeight - (statusBarHeight + navigationBarHeight + tabBarHeight)
         self.view.backgroundColor = UIColor.white
-        
+
         setNavigationBar()
-        
+
         setTextView()
-        
+
         setActivityIndicator()
     }
-    
-    
+
     // MARK: - Viewにパーツの設置
     // MARK: NavigationBar
     func setNavigationBar() {
-        
+
         self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
         self.navigationController?.navigationBar.isTranslucent = false
         UINavigationBar.appearance().tintColor = UIColor.white
-        
+
         //ナビゲーションアイテムを作成
         let titleLabel: NavigationBarLabel = NavigationBarLabel()
         titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "コメント"
         titleLabel.textColor = UIColor.white
-        
+
         self.navigationItem.titleView = titleLabel
-        
+
         //バーの右側に設置するボタンの作成
         let rightNavBtn = UIBarButtonItem()
         rightNavBtn.image = UIImage(named: "submit_nav_btn")!
@@ -73,9 +72,9 @@ class WritePostsCommentsViewController: UIViewController {
         rightNavBtn.target = self
         self.navigationItem.rightBarButtonItem = rightNavBtn
     }
-    
+
     func setTextView() {
-        
+
         // TextView生成する.
         commentTextView = UITextView()
         commentTextView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: textViewHeight)
@@ -83,14 +82,14 @@ class WritePostsCommentsViewController: UIViewController {
         commentTextView.font = UIFont.systemFont(ofSize: 20.0)
         commentTextView.textColor = UIColor.black
         self.view.addSubview(commentTextView)
-        
+
         //キーボードは出しておく
         commentTextView.becomeFirstResponder()
     }
-    
+
     // MARK: くるくるの生成
     func setActivityIndicator() {
-        
+
         let indicaterSize: CGFloat = viewWidth*0.3
         indicator.frame = CGRect(x: (viewWidth-indicaterSize)/2, y: viewWidth*0.25, width: indicaterSize, height: indicaterSize)
         indicator.hidesWhenStopped = true
@@ -99,35 +98,35 @@ class WritePostsCommentsViewController: UIViewController {
         self.view.bringSubviewToFront(indicator)
         self.view.addSubview(indicator)
     }
-    
+
     // MARK: -
     @objc func postNavBtnClicked(sender: UIButton) {
-        
+
         if commentTextView.text.isEmpty {
             SCLAlertView().showInfo("エラー", subTitle: "コメントの入力必要です。")
             return
         }
-        
+
         //indicatrer
         indicator.startAnimating()
 
         let parameters: Parameters = [
             "comments": commentTextView.text
             ]
-        
+
         Alamofire.request(EveryZooAPI.getDoComments(postID: postsID), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
-            
+
             switch response.result {
             case .success:
-                
+
                 let json: JSON = JSON(response.result.value ?? kill)
                 print(json)
                 _ = self.navigationController?.popViewController(animated: true)
-                
+
             case .failure(let error):
                 print(error)
             }
-            
+
             self.indicator.stopAnimating()
         }
     }

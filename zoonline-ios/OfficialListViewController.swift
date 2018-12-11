@@ -16,7 +16,7 @@ protocol OfficialDelegate: class {
 }
 
 class OfficialListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
     //heights
     var viewWidth: CGFloat!
     var viewHeight: CGFloat!
@@ -24,24 +24,22 @@ class OfficialListViewController: UIViewController, UITableViewDelegate, UITable
     var navigationBarHeight: CGFloat!
     var pageMenuHeight: CGFloat!
     var tabBarHeight: CGFloat!
-    
+
     private var tableViewHeight: CGFloat!
-    
+
     //テーブルビューインスタンス
     private var officialTableView: UITableView!
     var indicator: UIActivityIndicatorView!
 
     var officialContents: JSON = []
 
-    
     //テーブルビューに表示する配列
 
     weak var delegate: OfficialDelegate?
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //テーブルビューに表示する配列        
         //Viewの大きさを取得
         viewWidth = self.view.frame.size.width
@@ -51,12 +49,10 @@ class OfficialListViewController: UIViewController, UITableViewDelegate, UITable
         setTableView()
         setActivityIndicator()
         indicator.startAnimating()
-        
-        
+
         getNews()
     }
-    
-    
+
     func setTableView() {
         //テーブルビューの初期化
         officialTableView = UITableView()
@@ -67,11 +63,10 @@ class OfficialListViewController: UIViewController, UITableViewDelegate, UITable
         officialTableView.rowHeight = viewWidth*0.28
         self.view.addSubview(officialTableView)
     }
-    
-    
+
     // MARK: くるくるの生成
     func setActivityIndicator() {
-        
+
         indicator = UIActivityIndicatorView()
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.3, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
@@ -79,31 +74,30 @@ class OfficialListViewController: UIViewController, UITableViewDelegate, UITable
         indicator.color = UIColor.init(named: "main")
         self.view.addSubview(indicator)
     }
-    
+
     func getNews() {
-        
+
         Alamofire.request(EveryZooAPI.getOfficialNews(), method: .get, encoding: JSONEncoding.default).responseJSON { response in
-            
+
             switch response.result {
             case .success:
-                
+
                 //print("--------------------------")
 
                 //print(response.value)
-                
+
                 let json: JSON = JSON(response.result.value ?? kill)
 
                 print(EveryZooAPI.getOfficialNews())
                 //print("!-!-!-!-----------------------")
-                
+
                 print(json[0])
-                
 
                 self.officialContents = json
-                
+
                 self.indicator.stopAnimating()
                 self.officialTableView.reloadData()
-                
+
             case .failure(let error):
                 print(error)
                 //テーブルの再読み込み
@@ -111,13 +105,12 @@ class OfficialListViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
 
-    
     // MARK: テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
         return self.officialContents.count
     }
-    
+
     // MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
@@ -130,7 +123,7 @@ class OfficialListViewController: UIViewController, UITableViewDelegate, UITable
 
         return cell
     }
-    
+
     // MARK: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
