@@ -1,13 +1,11 @@
 disabled_rules:
   - class_delegate_protocol
-  - closing_brace
   - closure_parameter_position
   - compiler_protocol_init
   - control_statement
   - cyclomatic_complexity
   - file_length
   - identifier_name
-  - return_arrow_whitespace
   - shorthand_operator
   - force_cast
   - function_parameter_count

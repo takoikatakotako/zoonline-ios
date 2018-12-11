@@ -180,7 +180,7 @@ class TempTimeLineViewController: CustumViewController, UITableViewDelegate, UIT
     }
     
     //Adをインサートしたことでindexがずれるので、それを修正
-    func calcIndexDiff(indexRow: Int)->Int {
+    func calcIndexDiff(indexRow: Int) -> Int {
     
         var indexDiff = 0
         for i in adInsertNums {

@@ -48,13 +48,13 @@ class EveryZooAPI: NSObject {
         return API_URL+API_VERSION+"plaza/popular/"
     }
     
-    class func getZooNews()->String {
+    class func getZooNews() -> String {
         //動物園のニュースの取得
         //http://minzoo.herokuapp.com/api/v0/zoo_news
         return API_URL+API_VERSION+"zoo_news"
     }
     
-    class func getOfficialNews()->String {
+    class func getOfficialNews() -> String {
         //オフィシャルの投稿の取得
         //https://blog.team-sommelier.com/wp-json/wp/v2/posts/
         return "https://blog.team-sommelier.com/wp-json/wp/v2/posts/"
@@ -65,7 +65,7 @@ class EveryZooAPI: NSObject {
       return API_URL+API_VERSION+"users/"+String(userID)+"/favorite_post/" + String(postID)
     }
     
-    class func getPostsInfo(postID: Int)->String {
+    class func getPostsInfo(postID: Int) -> String {
         //投稿の詳細の取得、投稿の削除
         return API_URL+API_VERSION+"posts/"+String(postID)
     }
@@ -113,18 +113,18 @@ class EveryZooAPI: NSObject {
         return API_URL+API_VERSION+"picture/"
     }
     
-    class func getUserPosts(userID: Int) ->String {
+    class func getUserPosts(userID: Int) -> String {
         //ユーザーの投稿を取得する
         return API_URL + API_VERSION + "users/"+String(userID)+"/posts"
     }
     
-    class func getUserInfo(userID: Int)->String {
+    class func getUserInfo(userID: Int) -> String {
     
         //ユーザーの情報を取得する
         return API_URL + API_VERSION + "users/"+String(userID)
     }
     
-    class func getFollower(userID: Int) ->String {
+    class func getFollower(userID: Int) -> String {
         //フォロワーを取得する
         return API_URL+API_VERSION+"users/" + String(userID)+"/followed"
     }
