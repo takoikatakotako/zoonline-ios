@@ -50,6 +50,11 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: Button Methods
     @objc func userInfoButtonTouched(sender: UIButton) {
         print("basicButtonBtnClicked")
+        // ユーザー詳細画面へ
+        let userInfoViewController = UserInfoViewController()
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
+        self.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
 
     @objc func followButtonTouched(sender: UIButton) {

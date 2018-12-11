@@ -1,5 +1,4 @@
 disabled_rules:
-  - class_delegate_protocol
   - compiler_protocol_init
   - control_statement
   - cyclomatic_complexity
