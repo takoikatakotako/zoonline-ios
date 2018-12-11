@@ -60,7 +60,7 @@ class PictureExpandVC: UIViewController, UIScrollViewDelegate {
         self.view.addSubview(navBar)
     }
     
-    func setImageScrollView(){
+    func setImageScrollView() {
         imageScrollView = UIScrollView()
         imageScrollView.frame = CGRect(x: 0, y: statusBarHeight+navigationBarHeight, width: self.view.frame.width, height: scrollViewHeight)
         self.imageScrollView.delegate = self
@@ -79,7 +79,7 @@ class PictureExpandVC: UIViewController, UIScrollViewDelegate {
         return self.postImgView
     }
     
-    @objc func doClose(sender: UIButton){
+    @objc func doClose(sender: UIButton) {
         
         self.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.dismiss(animated: true, completion: nil)

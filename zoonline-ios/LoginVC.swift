@@ -3,7 +3,7 @@ import SCLAlertView
 import Alamofire
 import SwiftyJSON
 
-class LoginVC: UIViewController, UITextFieldDelegate{
+class LoginVC: UIViewController, UITextFieldDelegate {
 
     //ViewParts
     var mailTextField: UITextField!
@@ -143,10 +143,10 @@ class LoginVC: UIViewController, UITextFieldDelegate{
         if self.mailTextField.text == "メールアドレス" || self.passWordTextField.text == "パスワード" {
             loginBtn.isEnabled = false
             loginBtn.backgroundColor = UIColor.gray
-        }else if (self.mailTextField.text?.isEmpty)! || (self.passWordTextField.text?.isEmpty)!{
+        }else if (self.mailTextField.text?.isEmpty)! || (self.passWordTextField.text?.isEmpty)! {
             loginBtn.isEnabled = false
             loginBtn.backgroundColor = UIColor.gray
-        } else{
+        } else {
             loginBtn.isEnabled = true
             loginBtn.backgroundColor = UIColor(named: "loginRegistSkyBlue")
         }
@@ -174,7 +174,7 @@ class LoginVC: UIViewController, UITextFieldDelegate{
     }
     
     //ログインボタンが押されたら呼ばれる
-    @objc func loginBtnClicked(sender: UIButton){
+    @objc func loginBtnClicked(sender: UIButton) {
         print("touped")
         
         //self.loginFailed.isHidden = true
@@ -189,14 +189,14 @@ class LoginVC: UIViewController, UITextFieldDelegate{
             parameters = [
                 "email": "onojun@sommelier.com",
                 "password": "password"]
-        }else{
+        }else {
             parameters = [
                 "email": self.mailTextField.text ?? "",
                 "password": self.passWordTextField.text ?? ""]
         }
         
         
-        Alamofire.request(EveryZooAPI.getSignIn(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getSignIn(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
             
             
             self.indicator.stopAnimating()
@@ -209,12 +209,12 @@ class LoginVC: UIViewController, UITextFieldDelegate{
                 
                 print(json)
                 
-                if json["data"].isEmpty{
+                if json["data"].isEmpty {
                     
                     //メールなどが違うと判断
                     //self.loginFailed.isHidden = false
                     SCLAlertView().showInfo("ログイン失敗", subTitle: "メールアドレス、パスワードを確認してください。")
-                }else{
+                }else {
                     
                     //ログイン成功
                     var myUserID: String = ""
@@ -279,7 +279,7 @@ class LoginVC: UIViewController, UITextFieldDelegate{
     
     
     //パスワード再発行ボタンが押された。
-    @objc func forgetPassWordBtnClicked(sender: UIButton){
+    @objc func forgetPassWordBtnClicked(sender: UIButton) {
         let alert = SCLAlertView()
         let txt = alert.addTextField(UtilityLibrary.getUserEmail())
         alert.addButton("発行") {
@@ -290,7 +290,7 @@ class LoginVC: UIViewController, UITextFieldDelegate{
     }
     
     //左側のボタンが押されたら呼ばれる
-    @objc func leftBarBtnClicked(sender: UIButton){
+    @objc func leftBarBtnClicked(sender: UIButton) {
         
         self.dismiss(animated: true, completion: nil)
     }

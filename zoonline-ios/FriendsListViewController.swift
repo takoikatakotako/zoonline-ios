@@ -55,7 +55,7 @@ class FriendsListViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func getMyFriends() {
         
-        Alamofire.request(EveryZooAPI.getFriends(userID: userID)).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getFriends(userID: userID)).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -67,7 +67,7 @@ class FriendsListViewController: UIViewController, UICollectionViewDelegate, UIC
                     self.frindsList = json["responce"]
                     self.indicator.stopAnimating()
                     self.friendsCollectionView.reloadData()
-                }else{
+                }else {
                     //エラー
                     SCLAlertView().showInfo("エラー", subTitle: "フレンズの取得に失敗しました。")
                 }
@@ -116,7 +116,7 @@ class FriendsListViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     // MARK: くるくるの生成
-    func setActivityIndicator(){
+    func setActivityIndicator() {
         
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.clipsToBounds = true

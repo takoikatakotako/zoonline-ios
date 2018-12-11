@@ -200,11 +200,11 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         print("textFieldDidEndEditing: \(textField.text!)")
         //passWordTestの場合
         
-        if !(self.mailTextField.text?.isEmpty)! && !(self.userNameTextField.text?.isEmpty)! && !(self.passWordTextField.text?.isEmpty)!{
+        if !(self.mailTextField.text?.isEmpty)! && !(self.userNameTextField.text?.isEmpty)! && !(self.passWordTextField.text?.isEmpty)! {
         
             registBtn.isEnabled = true
             registBtn.backgroundColor = UIColor(named: "loginRegistSkyBlue")
-        }else{
+        }else {
         
             registBtn.isEnabled = false
             registBtn.backgroundColor = UIColor.gray
@@ -223,7 +223,7 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     }
     
     //ログインボタンが押されたら呼ばれる
-    @objc func registBtnClicked(sender: UIButton){
+    @objc func registBtnClicked(sender: UIButton) {
         print("touped")
         
         indicator.startAnimating()
@@ -254,7 +254,7 @@ class SignInVC: UIViewController, UITextFieldDelegate {
             "password": passWord,
             "confirm_success_url": API_CONFIRM_SUCCESS_URL]
         
-        Alamofire.request(EveryZooAPI.getSignUp(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getSignUp(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
             
             self.indicator.stopAnimating()
             
@@ -271,7 +271,7 @@ class SignInVC: UIViewController, UITextFieldDelegate {
                 }else if json["status"].stringValue != "success"{
                     //原因不明
                     SCLAlertView().showInfo("登録失敗", subTitle: "予期せぬエラーです。")
-                }else{
+                }else {
                     //登録成功
 
                     SCLAlertView().showInfo("会員登録成功", subTitle: "登録したメールアドレスに届いたメールから会員登録を完了させ、ログインしてください。")
@@ -289,7 +289,7 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     
     
     //パスワード再発行ボタンが押された。
-    func forgetPassWordBtnClicked(sender: UIButton){
+    func forgetPassWordBtnClicked(sender: UIButton) {
         let alert = SCLAlertView()
         let txt = alert.addTextField(UtilityLibrary.getUserEmail())
         alert.addButton("発行") {
@@ -300,7 +300,7 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     }
     
     //左側のボタンが押されたら呼ばれる
-    @objc func leftBarBtnClicked(sender: UIButton){
+    @objc func leftBarBtnClicked(sender: UIButton) {
         
         self.dismiss(animated: true, completion: nil)
     }

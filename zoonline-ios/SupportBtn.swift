@@ -2,7 +2,7 @@ import UIKit
 
 class SupportBtn: UIButton {
     
-    class func getSupportKey(pageNum: Int)->String{
+    class func getSupportKey(pageNum: Int)->String {
         
         switch pageNum {
         case 0:
@@ -20,7 +20,7 @@ class SupportBtn: UIButton {
         }
     }
     
-    class func getSupportImgName(pageNum: Int)->String{
+    class func getSupportImgName(pageNum: Int)->String {
         
         switch pageNum {
         case 0:

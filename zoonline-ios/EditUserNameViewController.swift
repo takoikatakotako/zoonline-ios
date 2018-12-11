@@ -87,7 +87,7 @@ class EditUserNameViewController: UIViewController, UITextFieldDelegate {
     }
     
     //名前の変更ボタン押されたら呼ばれます
-    @objc internal func changeUserNameBtn(sender: UIButton){
+    @objc internal func changeUserNameBtn(sender: UIButton) {
         
         if (userNameTextFIeld.text?.isEmpty)! {
             SCLAlertView().showInfo("エラー", subTitle: "ユーザー名の入力が必要です。")
@@ -98,7 +98,7 @@ class EditUserNameViewController: UIViewController, UITextFieldDelegate {
             "name": userNameTextFIeld.text!
         ]
         
-        Alamofire.request(EveryZooAPI.getEditName(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+        Alamofire.request(EveryZooAPI.getEditName(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON {response in
             
             switch response.result {
             case .success:

@@ -74,7 +74,7 @@ class WritePostsCommentsViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightNavBtn
     }
     
-    func setTextView(){
+    func setTextView() {
         
         // TextView生成する.
         commentTextView = UITextView()
@@ -89,7 +89,7 @@ class WritePostsCommentsViewController: UIViewController {
     }
     
     // MARK: くるくるの生成
-    func setActivityIndicator(){
+    func setActivityIndicator() {
         
         let indicaterSize: CGFloat = viewWidth*0.3
         indicator.frame = CGRect(x: (viewWidth-indicaterSize)/2, y: viewWidth*0.25, width: indicaterSize, height: indicaterSize)
@@ -101,7 +101,7 @@ class WritePostsCommentsViewController: UIViewController {
     }
     
     // MARK: -
-    @objc func postNavBtnClicked(sender: UIButton){
+    @objc func postNavBtnClicked(sender: UIButton) {
         
         if commentTextView.text.isEmpty {
             SCLAlertView().showInfo("エラー", subTitle: "コメントの入力必要です。")
@@ -115,7 +115,7 @@ class WritePostsCommentsViewController: UIViewController {
             "comments": commentTextView.text
             ]
         
-        Alamofire.request(EveryZooAPI.getDoComments(postID: postsID), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getDoComments(postID: postsID), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
             
             switch response.result {
             case .success:

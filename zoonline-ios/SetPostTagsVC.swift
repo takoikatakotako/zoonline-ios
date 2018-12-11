@@ -83,7 +83,7 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
     }
     
     
-    func setTextField()  {
+    func setTextField() {
         
         //
         let grayView: UIView = UIView()
@@ -114,7 +114,7 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
     }
     
 
-    func setTableView(){
+    func setTableView() {
         
         //デリゲートの設定
         tagTableView.delegate = self
@@ -189,14 +189,14 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
     }
     
     //角丸ボタンが押されたら呼ばれます
-    @objc func deleatBtnClicked(sender: UIButton){
+    @objc func deleatBtnClicked(sender: UIButton) {
 
         tagsAry.remove(at: sender.tag)
         tagTableView.reloadData()
     }
     
     //タグ画面を閉じる
-    @objc internal func doClose(sender: UIButton){
+    @objc internal func doClose(sender: UIButton) {
         
         _ = self.navigationController?.popViewController(animated: true)
     }

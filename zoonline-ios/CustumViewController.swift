@@ -15,7 +15,7 @@ class CustumViewController: UIViewController {
     var pageName = 0
     
     // MARK: NavigationBar
-    func setNavigationBarBar(navTitle: String){
+    func setNavigationBarBar(navTitle: String) {
         
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: statusBarHeight, width: viewWidth, height: navigationBarHeight)
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -28,7 +28,7 @@ class CustumViewController: UIViewController {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let didSupport: Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: SupportBtn.getSupportKey(pageNum: pageName)))!
-        if !didSupport && UtilityLibrary.isLogin(){
+        if !didSupport && UtilityLibrary.isLogin() {
         
             supportBtn = SupportBtn()
             supportBtn.frame = CGRect(x: 0, y: 0, width: viewWidth, height: btnHeight)
@@ -38,7 +38,7 @@ class CustumViewController: UIViewController {
         }
     }
     
-    @objc func supportBtnClicked(sender: UIButton){
+    @objc func supportBtnClicked(sender: UIButton) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: SupportBtn.getSupportKey(pageNum: pageName))
@@ -46,7 +46,7 @@ class CustumViewController: UIViewController {
     }
     
     // MARK: Indicator
-    func setIndicater(){
+    func setIndicater() {
         
         indicator = UIActivityIndicatorView()
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
@@ -54,7 +54,7 @@ class CustumViewController: UIViewController {
         
         if let navBar = self.navigationController {
             indicator.frame = CGRect(x: self.view.frame.width * 0.4, y: self.view.frame.height * 0.4 - navBar.navigationBar.frame.size.height, width: self.view.frame.width * 0.2, height: self.view.frame.width * 0.2)
-        }else{
+        }else {
             indicator.frame = CGRect(x: self.view.frame.width * 0.4, y: self.view.frame.height * 0.4, width: self.view.frame.width * 0.2, height: self.view.frame.width * 0.2)
         }
         
@@ -76,7 +76,7 @@ class CustumViewController: UIViewController {
     // MARK: 未ログイン関係の処理
     
     //ログインボタンが押されたら呼ばれます
-    @objc func loginBtnClicked(sender: UIButton){
+    @objc func loginBtnClicked(sender: UIButton) {
         
         let loginView: LoginVC = LoginVC()
         //loginView.statusBarHeight = self.statusBarHeight
@@ -85,7 +85,7 @@ class CustumViewController: UIViewController {
     }
     
     //登録ボタンが押されたら呼ばれます
-    @objc func resistBtnClicked(sender: UIButton){
+    @objc func resistBtnClicked(sender: UIButton) {
         
         let loginView: SignInVC = SignInVC()
         loginView.statusBarHeight = self.statusBarHeight

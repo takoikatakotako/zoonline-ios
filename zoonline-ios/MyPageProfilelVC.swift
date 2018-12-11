@@ -53,10 +53,10 @@ class MyPageProfilelVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewWillAppear(animated)
     
         let defaultIcon = UIImage(named: "icon_default")
-        if let url = URL(string: UtilityLibrary.getUserIconUrl()){
+        if let url = URL(string: UtilityLibrary.getUserIconUrl()) {
             icon.sd_setImage(with: url, placeholderImage: defaultIcon)
 
-        }else{
+        }else {
             icon.image = defaultIcon
         }
         
@@ -82,7 +82,7 @@ class MyPageProfilelVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     // MARK: くるくるの生成
-    func setActivityIndicator(){
+    func setActivityIndicator() {
         
         indicator = UIActivityIndicatorView()
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
@@ -157,7 +157,7 @@ class MyPageProfilelVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     
     //
-    @objc func choseIconBtnClicked(sender: UIButton){
+    @objc func choseIconBtnClicked(sender: UIButton) {
         
         // インスタンス生成
         let myImagePicker = UIImagePickerController()
@@ -184,7 +184,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             self.indicator.startAnimating()
             self.doImageUpload(postImage: image)
             
-        } else{
+        } else {
             print("Error:Class name : \(NSStringFromClass(type(of: self))) ")
         }
         
@@ -207,8 +207,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to: EveryZooAPI.getUploadPicture(), headers: UtilityLibrary.getAPIAccessHeader())
-        { (result) in
+        }, to: EveryZooAPI.getUploadPicture(), headers: UtilityLibrary.getAPIAccessHeader()) { (result) in
             switch result {
             case .success(let upload, _, _):
                 
@@ -230,10 +229,10 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                         
                         
                         
-                        if json["is_success"].boolValue  {
+                        if json["is_success"].boolValue {
                             let pic_id: String = json["picture"]["pic_id"].stringValue
                             self.doPost(pic_id: pic_id, postImage: postImage)
-                        }else{
+                        }else {
                             SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。不明なエラーです。")
                         }
                         
@@ -255,7 +254,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             "pic_id": pic_id
         ]
 
-        Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+        Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON {response in
             
             switch response.result {
             case .success:
@@ -265,7 +264,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                 if json["is_success"].boolValue {
                     self.icon.image = postImage
                     self.indicator.stopAnimating()
-                }else{
+                }else {
                     SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。不明なエラーです。")
                 }
                 
@@ -281,7 +280,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         //ユーザーの情報を取得する
         
         let userID: Int = Int(UtilityLibrary.getUserID())!
-        Alamofire.request(EveryZooAPI.getUserInfo(userID: userID)).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getUserInfo(userID: userID)).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -317,7 +316,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         
         if changeUserInfoAry[indexPath.row] == "" {
             return 24
-        }else{
+        }else {
             return 44
         }
     }
@@ -326,18 +325,18 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         
-        if indexPath.row == 0{
+        if indexPath.row == 0 {
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
             cell.textLabel?.textColor = UIColor.init(named: "main")
             cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        }else if indexPath.row == 1{
+        }else if indexPath.row == 1 {
             cell.backgroundColor = UIColor(named: "liginCushionLightGray")
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        }else if indexPath.row == 6{
+        }else if indexPath.row == 6 {
             cell.backgroundColor = UIColor(named: "liginCushionLightGray")
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        }else{
+        }else {
             cell.textLabel?.text = changeUserInfoAry[indexPath.row]
             cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         }
@@ -410,7 +409,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     
     
     //名前の変更ボタン押されたら呼ばれます
-    func changeUserName(newName: String){
+    func changeUserName(newName: String) {
         
         if (newName.isEmpty) {
             SCLAlertView().showInfo("エラー", subTitle: "ユーザー名の入力が必要です。")
@@ -422,7 +421,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         ]
         
         //print(API_URL+"v0/auth/")
-        Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+        Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON {response in
             
             switch response.result {
             case .success:
@@ -439,7 +438,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     }
     
     //メールアドレス変更
-    func changeUserEmail(newEmail: String){
+    func changeUserEmail(newEmail: String) {
         
         if (newEmail.isEmpty) {
             SCLAlertView().showInfo("エラー", subTitle: "Emailの入力が必要です。")
@@ -451,7 +450,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         ]
         
         //print(API_URL+"v0/auth/")
-        Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+        Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON {response in
             
             switch response.result {
             case .success:
@@ -461,7 +460,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                 
                 if (json["status"].stringValue == "error") {
                     SCLAlertView().showInfo("エラー", subTitle: "メールアドレスの値が不正です。")
-                }else{
+                }else {
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.userDefaultsManager?.doLogout()
                     SCLAlertView().showInfo("メールアドレス変更", subTitle: "メールアドレスを変更しました。ログアウトします。")

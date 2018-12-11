@@ -12,7 +12,7 @@ import SwiftyJSON
 import SDWebImage
 import SCLAlertView
 
-class MyPageFavoriteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class MyPageFavoriteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var userID: Int!
 
@@ -59,7 +59,7 @@ class MyPageFavoriteViewController: UIViewController, UITableViewDelegate, UITab
     
     func getMyFavoritePosts() {
         
-        Alamofire.request(EveryZooAPI.getFavoritePosts(userID: userID)).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getFavoritePosts(userID: userID)).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -71,7 +71,7 @@ class MyPageFavoriteViewController: UIViewController, UITableViewDelegate, UITab
                 
                     self.favoritePosts = json["responce"]
                     self.favoriteListTableView.reloadData()
-                }else{
+                }else {
                     SCLAlertView().showInfo("エラー", subTitle: "お気に入りの投稿の取得に失敗しました。")
                 }
                 
@@ -119,7 +119,7 @@ class MyPageFavoriteViewController: UIViewController, UITableViewDelegate, UITab
         cell.commentLabel.text = self.favoritePosts[indexPath.row]["caption"].stringValue
         
         let imageUrlText = self.favoritePosts[indexPath.row]["image_url"].stringValue
-        if let imageUrl = URL(string: imageUrlText){
+        if let imageUrl = URL(string: imageUrlText) {
             cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
         }
         return cell

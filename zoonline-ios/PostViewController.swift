@@ -97,7 +97,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //TableViewの設置
-    func setTableView(){
+    func setTableView() {
         postTableView = UITableView()
         postTableView.frame = view.frame
         postTableView.dataSource = self
@@ -118,7 +118,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: くるくるの生成
-    func setActivityIndicator(){
+    func setActivityIndicator() {
         /*
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewWidth*0.5, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
@@ -144,7 +144,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: ButtonActions
-    @objc func supportBtnClicked(sender: UIButton){
+    @objc func supportBtnClicked(sender: UIButton) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Post")
@@ -152,7 +152,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //投稿ボタンが押されたら呼ばれる
-    @objc internal func postBarBtnClicked(sender: UIButton){
+    @objc internal func postBarBtnClicked(sender: UIButton) {
         
         if !isSelectedImage {
             SCLAlertView().showInfo("エラー", subTitle: "画像が選択されていません。")
@@ -191,8 +191,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to: EveryZooAPI.getUploadPicture(), headers: UtilityLibrary.getAPIAccessHeader())
-        { (result) in
+        }, to: EveryZooAPI.getUploadPicture(), headers: UtilityLibrary.getAPIAccessHeader()) { (result) in
             switch result {
             case .success(let upload, _, _):
                 
@@ -213,7 +212,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print(json)
                         
                         
-                        if json["is_success"].boolValue  {
+                        if json["is_success"].boolValue {
                             let pic_id: String = json["picture"]["pic_id"].stringValue
                             
                             self.doPost(pic_id: pic_id)
@@ -240,7 +239,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             "tags": tagsAry
         ]
         
-        Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
+        Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -252,7 +251,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 if json["is_success"].boolValue {
                     SCLAlertView().showSuccess("投稿完了", subTitle: "投稿が完了しました。")
-                }else{
+                }else {
                     SCLAlertView().showSuccess("投稿失敗", subTitle: "投稿に失敗しました。不明なエラーです。")
                 }
                 
@@ -357,7 +356,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.tagsAry = tagsAry
 
             return cell
-        }else{
+        }else {
         
             //スペーサーView
             let cell: PostSpaceTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostSpaceTableViewCell.self), for: indexPath) as! PostSpaceTableViewCell

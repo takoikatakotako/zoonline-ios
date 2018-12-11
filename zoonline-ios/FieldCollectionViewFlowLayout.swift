@@ -50,7 +50,7 @@ class FieldCollectionViewFlowLayout: UICollectionViewFlowLayout {
                             y = contentSize.height + super.sectionInset.top
                             cellwidth = 2 * smallCellSideLength + super.minimumInteritemSpacing
                             cellheight = 2 * smallCellSideLength + super.minimumLineSpacing
-                        }else{
+                        }else {
                             x = super.sectionInset.left
                             y = contentSize.height + super.sectionInset.top
                             cellwidth = smallCellSideLength
@@ -72,7 +72,7 @@ class FieldCollectionViewFlowLayout: UICollectionViewFlowLayout {
                             x = 2 * (smallCellSideLength + super.minimumInteritemSpacing) + super.sectionInset.left
                             y = 1 * (smallCellSideLength + super.minimumLineSpacing) + contentSize.height + super.sectionInset.top
                             cellwidth = smallCellSideLength; cellheight = smallCellSideLength
-                        }else{
+                        }else {
                             x = super.sectionInset.left
                             y = (1 * (smallCellSideLength + super.minimumLineSpacing)) + contentSize.height + super.sectionInset.top
                             cellwidth = smallCellSideLength; cellheight = smallCellSideLength

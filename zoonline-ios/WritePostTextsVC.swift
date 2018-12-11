@@ -50,7 +50,7 @@ class WritePostTextsVC: UIViewController, UITextViewDelegate {
         
         if isTitle! {
             delegate?.setTitle(str: textView.text)
-        }else{
+        }else {
             delegate?.setComment(str: textView.text)
         }
     }
@@ -80,12 +80,12 @@ class WritePostTextsVC: UIViewController, UITextViewDelegate {
     }
     
     //投稿ボタンが押されたら呼ばれる
-    @objc internal func doClose(sender: UIButton){
+    @objc internal func doClose(sender: UIButton) {
         
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func setTextView(){
+    func setTextView() {
     
         textView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
         //textView.backgroundColor = UIColor.red

@@ -70,7 +70,7 @@ class TempTimeLineViewController: CustumViewController, UITableViewDelegate, UIT
     func getNews() {
         
         let userID: Int = Int(UtilityLibrary.getUserID())!
-        Alamofire.request(EveryZooAPI.getTimeLinePosts(userID: userID)).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getTimeLinePosts(userID: userID)).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -111,7 +111,7 @@ class TempTimeLineViewController: CustumViewController, UITableViewDelegate, UIT
         
         if !UtilityLibrary.isLogin() {
             timeLineTableView.reloadData()
-        }else{
+        }else {
             self.showIndicater()
             getNews()
         }
@@ -132,7 +132,7 @@ class TempTimeLineViewController: CustumViewController, UITableViewDelegate, UIT
         if !UtilityLibrary.isLogin() { return tableViewHeight }
         if !isNetWorkConnect { return tableViewHeight }
         
-        if adInsertNums.contains(indexPath.row){
+        if adInsertNums.contains(indexPath.row) {
             return 50
         }
         
@@ -173,17 +173,17 @@ class TempTimeLineViewController: CustumViewController, UITableViewDelegate, UIT
         cell.dateLabel.text = dateText
         cell.titleLabel.text = self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["title"].stringValue
         cell.commentLabel.text = self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["caption"].stringValue
-        if let imageUrl = URL(string: self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["itemImage"].stringValue){
+        if let imageUrl = URL(string: self.timeLineContents[calcIndexDiff(indexRow: indexPath.row)]["itemImage"].stringValue) {
             cell.thumbnailImg.sd_setImage(with: imageUrl)
         }
         return cell
     }
     
     //Adをインサートしたことでindexがずれるので、それを修正
-    func calcIndexDiff(indexRow: Int)->Int{
+    func calcIndexDiff(indexRow: Int)->Int {
     
         var indexDiff = 0
-        for i in adInsertNums{
+        for i in adInsertNums {
             if indexRow > i {
                 indexDiff += 1
             }

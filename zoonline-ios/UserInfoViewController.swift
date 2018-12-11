@@ -34,7 +34,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     
     func getUserInfo() {
         //ユーザーの情報を取得する
-        Alamofire.request(EveryZooAPI.getUserInfo(userID: postUserID)).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getUserInfo(userID: postUserID)).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -63,7 +63,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     
     func getPosts() {
         //ユーザーの投稿を取得する
-        Alamofire.request(EveryZooAPI.getUserPosts(userID: postUserID)).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getUserPosts(userID: postUserID)).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -71,7 +71,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
                 if json["is_success"].boolValue {
                     self.postsInfos = json["response"]
                     self.profileTableView.reloadData()
-                }else{
+                }else {
                     //不明なエラー
                     SCLAlertView().showError("エラー", subTitle: "不明なエラーです")
                 }

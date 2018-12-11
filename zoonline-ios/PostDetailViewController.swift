@@ -49,11 +49,11 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     // MARK: Button Methods
-    @objc func userInfoButtonTouched(sender: UIButton){
+    @objc func userInfoButtonTouched(sender: UIButton) {
         print("basicButtonBtnClicked")
     }
     
-    @objc func followButtonTouched(sender: UIButton){
+    @objc func followButtonTouched(sender: UIButton) {
         print("basicButtonBtnClicked")
     }
     

@@ -11,11 +11,11 @@ import Alamofire
 import SwiftyJSON
 import SDWebImage
 
-protocol OfficialDelegate: class  {
+protocol OfficialDelegate: class {
     func openNews(newsUrl: String)
 }
 
-class OfficialListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class OfficialListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //heights
     var viewWidth: CGFloat!
@@ -70,7 +70,7 @@ class OfficialListViewController: UIViewController, UITableViewDelegate, UITable
     
     
     // MARK: くるくるの生成
-    func setActivityIndicator(){
+    func setActivityIndicator() {
         
         indicator = UIActivityIndicatorView()
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.3, width: viewWidth*0.3, height: viewWidth*0.3)
@@ -82,7 +82,7 @@ class OfficialListViewController: UIViewController, UITableViewDelegate, UITable
     
     func getNews() {
         
-        Alamofire.request(EveryZooAPI.getOfficialNews(), method: .get, encoding: JSONEncoding.default).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getOfficialNews(), method: .get, encoding: JSONEncoding.default).responseJSON { response in
             
             switch response.result {
             case .success:

@@ -83,7 +83,7 @@ class FollowerListViewController: UIViewController, UICollectionViewDelegate, UI
         self.view.addSubview(followerCollectionView)
     }
     
-    func setActivityIndicator(){
+    func setActivityIndicator() {
         
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.clipsToBounds = true
@@ -98,7 +98,7 @@ class FollowerListViewController: UIViewController, UICollectionViewDelegate, UI
     
     func getMyFriends() {
         
-        Alamofire.request(EveryZooAPI.getFollower(userID: userID)).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getFollower(userID: userID)).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -110,7 +110,7 @@ class FollowerListViewController: UIViewController, UICollectionViewDelegate, UI
                     self.followerList = json["responce"]
                     self.indicator.stopAnimating()
                     self.followerCollectionView.reloadData()
-                }else{
+                }else {
                     //エラー
                     SCLAlertView().showInfo("エラー", subTitle: "フレンズの取得に失敗しました。")
                 }

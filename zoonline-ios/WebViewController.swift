@@ -1,6 +1,6 @@
 import UIKit
 
-class WebViewController: UIViewController, UIWebViewDelegate{
+class WebViewController: UIViewController, UIWebViewDelegate {
     
     //width, height
     private var viewWidth: CGFloat!
@@ -87,7 +87,7 @@ class WebViewController: UIViewController, UIWebViewDelegate{
     
     
     // MARK: くるくるの生成
-    func setActivityIndicator(){
+    func setActivityIndicator() {
         
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
@@ -99,7 +99,7 @@ class WebViewController: UIViewController, UIWebViewDelegate{
         indicator.startAnimating()
     }
     
-    @objc func doClose(sender: UIButton){
+    @objc func doClose(sender: UIButton) {
     
         self.dismiss(animated: true, completion: nil)
     }

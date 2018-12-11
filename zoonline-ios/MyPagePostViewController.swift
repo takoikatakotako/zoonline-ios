@@ -51,7 +51,7 @@ class MyPagePostViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func getMyPosts() {
         
-        Alamofire.request(EveryZooAPI.getUserPosts(userID: userID)).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getUserPosts(userID: userID)).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -62,7 +62,7 @@ class MyPagePostViewController: UIViewController, UITableViewDelegate, UITableVi
                     print(json)
                     self.postsContents = json["response"]
                     self.postListTableView.reloadData()
-                }else{
+                }else {
                     SCLAlertView().showInfo("エラー", subTitle: "不明なエラーです")
                 }
         

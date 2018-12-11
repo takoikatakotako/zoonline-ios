@@ -65,10 +65,10 @@ class PostTagTableViewCell: UITableViewCell {
             tagLabel.text = "タグをつけてみよう"
             tagLabel.sizeToFit()
             self.contentView.addSubview(tagLabel)
-        }else{
+        }else {
             var count: Int = 0
             let separatedHeight: CGFloat = cellHeight/CGFloat(tagsAry.count+1)
-            for tag in tagsAry{
+            for tag in tagsAry {
                 
                 let tagsLabel: UILabel = UILabel()
                 tagsLabel.text = "#"+tag

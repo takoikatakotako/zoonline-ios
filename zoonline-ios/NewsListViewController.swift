@@ -12,7 +12,7 @@ import SwiftyJSON
 import SDWebImage
 
 
-protocol NewsDelegate: class  {
+protocol NewsDelegate: class {
     func openNews(newsUrl: String)
 }
 
@@ -87,7 +87,7 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     // MARK: ButtonActions
-    @objc func supportBtnClicked(sender: UIButton){
+    @objc func supportBtnClicked(sender: UIButton) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Zoo")
@@ -96,7 +96,7 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func getNews() {
         
-        Alamofire.request(EveryZooAPI.getZooNews()).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getZooNews()).responseJSON { response in
             
             switch response.result {
             case .success:

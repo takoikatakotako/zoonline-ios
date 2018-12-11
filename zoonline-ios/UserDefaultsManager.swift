@@ -50,7 +50,7 @@ class UserDefaultsManager: NSObject {
         userDefaults.set(uniqID, forKey: "KEY_MyUniqID")
     }
     
-    func doLogout(){
+    func doLogout() {
         
         userDefaults.set(false, forKey: "KEY_login")
         userDefaults.set("", forKey: "KEY_MyUserID")

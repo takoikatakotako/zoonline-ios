@@ -12,7 +12,7 @@ import SwiftyJSON
 import SDWebImage
 import SCLAlertView
 
-class CommentListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class CommentListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var postsID: Int!
     
@@ -79,7 +79,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
         if !(UtilityLibrary.isLogin()) {
             //ログインしていない
             return
-        }else{
+        }else {
             //バーの右側に設置するボタンの作成
             let rightNavBtn = UIBarButtonItem()
             rightNavBtn.image = UIImage(named: "submit_nav_btn")!
@@ -102,7 +102,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     // MARK: くるくるの生成
-    func setActivityIndicator(){
+    func setActivityIndicator() {
         
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
         indicator.hidesWhenStopped = true
@@ -115,7 +115,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
     
     func getPostsComments() {
 
-        Alamofire.request(EveryZooAPI.getComments(postID: postsID)).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.getComments(postID: postsID)).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -146,7 +146,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
         print(EveryZooAPI.deleateComments(commentID: commentID))
         
         
-        Alamofire.request(EveryZooAPI.deleateComments(commentID: commentID), method: .delete, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{ response in
+        Alamofire.request(EveryZooAPI.deleateComments(commentID: commentID), method: .delete, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
             
             switch response.result {
             case .success:
@@ -156,7 +156,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
                     SCLAlertView().showInfo("コメント削除", subTitle: "コメントを削除しました")
                     self.indicator.startAnimating()
                     self.getPostsComments()
-                }else{
+                }else {
                     SCLAlertView().showInfo("エラー", subTitle: "不明なエラーです")
                 }
                 
@@ -211,7 +211,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
         print("\(indexPath.row)番のセルを選択しました！ ")
         tableView.deselectRow(at: indexPath, animated: true)
         print(postsComments[indexPath.row]["user_id"].stringValue)
-        if postsComments[indexPath.row]["user_id"].stringValue == UtilityLibrary.getUserID(){
+        if postsComments[indexPath.row]["user_id"].stringValue == UtilityLibrary.getUserID() {
             let alertView = SCLAlertView()
             alertView.addButton("削除") {
                 let commentID = self.postsComments[indexPath.row]["comment_id"].intValue
@@ -231,7 +231,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
         
         if cellHeight > viewWidth * 0.28 {
             return cellHeight
-        }else{
+        }else {
             return viewWidth * 0.28
         }        
     }
@@ -253,7 +253,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     // MARK: -
-    @objc func goWriteCommentView(sender: UIButton){
+    @objc func goWriteCommentView(sender: UIButton) {
         
         let wirtePostCommentsVC: WritePostsCommentsViewController = WritePostsCommentsViewController()
         wirtePostCommentsVC.postsID = postsID

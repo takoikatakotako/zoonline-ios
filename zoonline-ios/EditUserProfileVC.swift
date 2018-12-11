@@ -35,7 +35,7 @@ class EditUserProfileVC: UIViewController {
         let myProfile = UtilityLibrary.getUserProfile()
         if myProfile.isEmpty {
             userProfileTexView.text = "あなたのプロフィールを記入してください。"
-        }else{
+        }else {
             userProfileTexView.text = myProfile
         }
     }
@@ -61,7 +61,7 @@ class EditUserProfileVC: UIViewController {
     }
     
     //プロフィール変更ボタンが押されたら
-    @objc internal func doChageProfile(sender: UIButton){
+    @objc internal func doChageProfile(sender: UIButton) {
         
         if (userProfileTexView.text?.isEmpty)! {
             SCLAlertView().showInfo("エラー", subTitle: "プロフィールの入力が必要です。")
@@ -72,7 +72,7 @@ class EditUserProfileVC: UIViewController {
             "profile": userProfileTexView.text
         ]
         
-        Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON{response in
+        Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON {response in
             
             switch response.result {
             case .success:
@@ -88,7 +88,7 @@ class EditUserProfileVC: UIViewController {
     }
     
     
-    func setTextView(){
+    func setTextView() {
         
         // TextView生成する.
         userProfileTexView = UITextView()
