@@ -113,7 +113,7 @@ class FieldCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
         if let collectionView = self.collectionView {
             for i in 0..<collectionView.numberOfSections {
-                let numberOfCellsInSection = collectionView.numberOfItems(inSection: i);
+                let numberOfCellsInSection = collectionView.numberOfItems(inSection: i)
                 for j in 0..<numberOfCellsInSection {
 
                     let indexPath = IndexPath(row: j, section: i)

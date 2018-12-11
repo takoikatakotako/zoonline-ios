@@ -10,7 +10,7 @@ extension UIColor {
         let rString = (cString as NSString).substring(with: NSRange(location: 0, length: 2))
         let gString = (cString as NSString).substring(with: NSRange(location: 2, length: 2))
         let bString = (cString as NSString).substring(with: NSRange(location: 4, length: 2))
-        var r: CUnsignedInt = 0, g: CUnsignedInt = 0, b: CUnsignedInt = 0;
+        var r: CUnsignedInt = 0, g: CUnsignedInt = 0, b: CUnsignedInt = 0
         Scanner(string: rString).scanHexInt32(&r)
         Scanner(string: gString).scanHexInt32(&g)
         Scanner(string: bString).scanHexInt32(&b)
