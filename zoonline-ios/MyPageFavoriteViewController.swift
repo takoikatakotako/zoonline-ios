@@ -12,7 +12,7 @@ import SwiftyJSON
 import SDWebImage
 import SCLAlertView
 
-class MyPageFavoriteViewController: UIViewController,UITableViewDelegate, UITableViewDataSource  {
+class MyPageFavoriteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
     var userID: Int!
 

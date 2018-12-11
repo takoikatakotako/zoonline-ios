@@ -4,7 +4,7 @@ import SwiftyJSON
 import SDWebImage
 import GoogleMobileAds
 
-class TempTimeLineViewController: CustumViewController ,UITableViewDelegate, UITableViewDataSource {
+class TempTimeLineViewController: CustumViewController, UITableViewDelegate, UITableViewDataSource {
     
     //width, height
     private var tableViewHeight: CGFloat!

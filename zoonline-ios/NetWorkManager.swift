@@ -15,7 +15,7 @@ class NetWorkManager: NSObject {
     static let sharedInstance = NetWorkManager()
 
     //push:/api/v0/users/{:自分のuser_id}/following/{:フォローしたいuser_id}
-    func followUser(myUserId: Int,followUserId: Int){
+    func followUser(myUserId: Int, followUserId: Int){
         
         let url: String = API_URL + API_VERSION + "users/" + String(myUserId) + "/following/" + String(followUserId)
         
@@ -32,7 +32,7 @@ class NetWorkManager: NSObject {
     }
     
     //delete:/api/v0/user/{:自分のuser_id}/following/{:フォロー解除したいuser_id}
-    func unfollowUser(myUserId: Int,followUserId: Int){
+    func unfollowUser(myUserId: Int, followUserId: Int){
         
         let url: String = API_URL + API_VERSION + "/users/" + String(myUserId) + "/following/" + String(followUserId)
         

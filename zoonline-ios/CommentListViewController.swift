@@ -12,7 +12,7 @@ import SwiftyJSON
 import SDWebImage
 import SCLAlertView
 
-class CommentListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource  {
+class CommentListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
     var postsID: Int!
     

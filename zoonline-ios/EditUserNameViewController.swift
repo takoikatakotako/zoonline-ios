@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import SCLAlertView
 
-class EditUserNameViewController: UIViewController,UITextFieldDelegate {
+class EditUserNameViewController: UIViewController, UITextFieldDelegate {
     
     //width, height
     private var viewWidth: CGFloat!

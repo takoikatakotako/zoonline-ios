@@ -4,7 +4,7 @@ import SwiftyJSON
 import SDWebImage
 import SCLAlertView
 
-class MyPagePostViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class MyPagePostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var userID: Int!
 

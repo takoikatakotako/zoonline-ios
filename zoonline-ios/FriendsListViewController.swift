@@ -12,7 +12,7 @@ import SwiftyJSON
 import SDWebImage
 import SCLAlertView
 
-class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource {
+class FriendsListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var userID: Int!
     
@@ -106,7 +106,7 @@ class FriendsListViewController: UIViewController,UICollectionViewDelegate, UICo
         layout.sectionInset = UIEdgeInsets.zero
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
-        layout.headerReferenceSize = CGSize(width: 0,height: 0)
+        layout.headerReferenceSize = CGSize(width: 0, height: 0)
         friendsCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
         friendsCollectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self))
         friendsCollectionView.delegate = self

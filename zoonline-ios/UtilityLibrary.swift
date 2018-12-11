@@ -91,7 +91,7 @@ class UtilityLibrary: NSObject {
         return headers
     }
     
-    class func calcTextViewHeight(text: String,width: CGFloat,font: UIFont)->CGFloat{
+    class func calcTextViewHeight(text: String, width: CGFloat, font: UIFont)->CGFloat{
         
         let calcTextView: UITextView = UITextView()
         calcTextView.frame = CGRect(x: 0, y: 0, width: width, height: 5)
@@ -102,7 +102,7 @@ class UtilityLibrary: NSObject {
         return calcTextView.frame.size.height
     }
     
-    class func calcLabelSize(text: String,font: UIFont)->CGSize{
+    class func calcLabelSize(text: String, font: UIFont)->CGSize{
         
         let calcLabel: UILabel = UILabel()
         calcLabel.text = text

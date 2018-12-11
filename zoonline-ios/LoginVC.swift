@@ -3,7 +3,7 @@ import SCLAlertView
 import Alamofire
 import SwiftyJSON
 
-class LoginVC: UIViewController ,UITextFieldDelegate{
+class LoginVC: UIViewController, UITextFieldDelegate{
 
     //ViewParts
     var mailTextField: UITextField!
@@ -263,7 +263,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate{
                     }
                     
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.userDefaultsManager?.doLogin(userID: myUserID, userName: myUserName, email: myUserEmail, iconUrl: myUserIconUrl, profile: myUserProfile, accessToken: myAccessToken, clientToken: myClientToken,expiry: myExpiry, uniqID: myUniqID)
+                    appDelegate.userDefaultsManager?.doLogin(userID: myUserID, userName: myUserName, email: myUserEmail, iconUrl: myUserIconUrl, profile: myUserProfile, accessToken: myAccessToken, clientToken: myClientToken, expiry: myExpiry, uniqID: myUniqID)
                 
                     self.dismiss(animated: true, completion: nil)
                 }

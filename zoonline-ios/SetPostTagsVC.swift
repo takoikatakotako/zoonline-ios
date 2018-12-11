@@ -6,7 +6,7 @@ protocol SetTagsDelegate: class {
     func setTags(ary: Array<String>)
 }
 
-class SetPostTagsViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource {
+class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     //width, height
     private var viewWidth: CGFloat!

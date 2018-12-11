@@ -5,7 +5,7 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class PostDetailViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class PostDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private var postDetailTableView: UITableView!
 

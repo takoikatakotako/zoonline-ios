@@ -1,17 +1,9 @@
-//
-//  FollowerListViewController.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/08/06.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import Alamofire
 import SwiftyJSON
 import SCLAlertView
 
-class FollowerListViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource {
+class FollowerListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var userID: Int!
     
@@ -82,7 +74,7 @@ class FollowerListViewController: UIViewController,UICollectionViewDelegate, UIC
         layout.sectionInset = UIEdgeInsets.zero
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
-        layout.headerReferenceSize = CGSize(width: 0,height: 0)
+        layout.headerReferenceSize = CGSize(width: 0, height: 0)
         followerCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
         followerCollectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self))
         followerCollectionView.delegate = self

@@ -1,6 +1,6 @@
 import UIKit
 
-class WebViewController: UIViewController , UIWebViewDelegate{
+class WebViewController: UIViewController, UIWebViewDelegate{
     
     //width, height
     private var viewWidth: CGFloat!

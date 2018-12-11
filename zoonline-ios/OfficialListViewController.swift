@@ -15,7 +15,7 @@ protocol OfficialDelegate: class  {
     func openNews(newsUrl: String)
 }
 
-class OfficialListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
+class OfficialListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     //heights
     var viewWidth: CGFloat!

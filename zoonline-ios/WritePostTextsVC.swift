@@ -7,7 +7,7 @@ protocol SetTextDelegate: class {
     func setComment(str: String)
 }
 
-class WritePostTextsVC: UIViewController,UITextViewDelegate {
+class WritePostTextsVC: UIViewController, UITextViewDelegate {
 
     //width, height
     private var viewWidth: CGFloat!

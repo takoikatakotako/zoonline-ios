@@ -4,7 +4,7 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class MyPageProfilelVC: UIViewController,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate ,UINavigationControllerDelegate {
+class MyPageProfilelVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //width, height
     private var viewWidth: CGFloat!
@@ -27,7 +27,7 @@ class MyPageProfilelVC: UIViewController,UITableViewDelegate, UITableViewDataSou
     
     //表示するもの
     //let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","プロフィールの変更","メールアドレスの変更","パスワードの変更",""]
-    let changeUserInfoAry: Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","プロフィールの変更","メールアドレスの変更"]
+    let changeUserInfoAry: Array<String> = ["プロフィールのプレビュー", "", "ユーザー名の変更", "プロフィールの変更", "メールアドレスの変更"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,7 +207,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
             multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to: EveryZooAPI.getUploadPicture(),headers: UtilityLibrary.getAPIAccessHeader())
+        }, to: EveryZooAPI.getUploadPicture(), headers: UtilityLibrary.getAPIAccessHeader())
         { (result) in
             switch result {
             case .success(let upload, _, _):

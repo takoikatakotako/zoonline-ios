@@ -2,7 +2,6 @@ disabled_rules:
   - class_delegate_protocol
   - closing_brace
   - closure_parameter_position
-  - comma
   - compiler_protocol_init
   - control_statement
   - cyclomatic_complexity

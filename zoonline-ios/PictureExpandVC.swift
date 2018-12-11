@@ -1,6 +1,6 @@
 import UIKit
 
-class PictureExpandVC: UIViewController,UIScrollViewDelegate {
+class PictureExpandVC: UIViewController, UIScrollViewDelegate {
     
     //width, height
     private var viewWidth: CGFloat!

@@ -60,7 +60,7 @@ class EveryZooAPI: NSObject {
         return "https://blog.team-sommelier.com/wp-json/wp/v2/posts/"
     }
 
-    class func getDoFavoritePost(userID: Int,postID: Int) -> String{
+    class func getDoFavoritePost(userID: Int, postID: Int) -> String{
         
       return API_URL+API_VERSION+"users/"+String(userID)+"/favorite_post/" + String(postID)
     }
