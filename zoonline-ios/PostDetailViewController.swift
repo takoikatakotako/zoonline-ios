@@ -146,8 +146,6 @@ class PostDetailViewController: UIViewController,UITableViewDelegate, UITableVie
 
     }
     
-    // MARK: - Viewにパーツの設置
-    // MARK: NavigationBar
     func setNavigationBar() {
         
         //ナビゲーションアイテムを作成
@@ -160,7 +158,6 @@ class PostDetailViewController: UIViewController,UITableViewDelegate, UITableVie
         self.navigationItem.titleView = titleLabel
     }
     
-    // MARK: TableView
     func setTableView() {
         
         //テーブルビューの初期化
@@ -178,7 +175,6 @@ class PostDetailViewController: UIViewController,UITableViewDelegate, UITableVie
         self.view.addSubview(postDetailTableView)
     }
     
-    // MARK: くるくるの生成
     func setActivityIndicator(){
         indicator = UIActivityIndicatorView()
         indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.4-44, width: viewWidth*0.3, height: viewWidth*0.3)
@@ -202,7 +198,6 @@ class PostDetailViewController: UIViewController,UITableViewDelegate, UITableVie
         self.view.addSubview(supportBtn)
     }
     
-    //MARK: ButtonActions
     @objc func supportBtnClicked(sender: UIButton){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -223,14 +218,12 @@ class PostDetailViewController: UIViewController,UITableViewDelegate, UITableVie
         favComentMenuBtnHeight = viewWidth * 0.15
         dateLabelHeigt = viewWidth * 0.05
     }
-    
-    // MARK: - TableView Delegate Method
-    //MARK: テーブルビューのセルの数を設定する
+
+     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    //MARK: テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell:PostDetailTableCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostDetailTableCell.self), for: indexPath) as! PostDetailTableCell
@@ -341,10 +334,7 @@ class PostDetailViewController: UIViewController,UITableViewDelegate, UITableVie
         return cellHeight
     }
     
-    
-    //Mark: - Actions
-    
-    //MARK: シングルタップ時に実行される
+
     @objc func tapSingle(sender: UITapGestureRecognizer) {
         print(sender.view?.tag ?? 400)
         
@@ -454,7 +444,6 @@ class PostDetailViewController: UIViewController,UITableViewDelegate, UITableVie
         self.navigationController?.pushViewController(userInfoView, animated: true)
     }
     
-    //Mark: コメント投稿画面への遷移
     @objc func showActionShert(sender: UIButton){
         
         // インスタンス生成　styleはActionSheet.
@@ -523,8 +512,8 @@ class PostDetailViewController: UIViewController,UITableViewDelegate, UITableVie
         self.present(actionAlert, animated: true, completion: nil)
     }
   
-    // MARK: - GoOtherViews
-    func goCommentView(){
+
+     func goCommentView(){
         // 移動先のViewを定義する.
         let commentListlView: CommentListViewController = CommentListViewController()
         commentListlView.postsID = postID
@@ -535,7 +524,6 @@ class PostDetailViewController: UIViewController,UITableViewDelegate, UITableVie
     }
     
 
-    // MARK: - NetWorks
     func getPostInfo(postID:Int){
         
         Alamofire.request(EveryZooAPI.getPostsInfo(postID: postID)).responseJSON{

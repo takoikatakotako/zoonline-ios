@@ -54,8 +54,6 @@ class TimeLineVC: UIViewController {
     }
     
 
-    // MARK: - Viewにパーツの設置
-    // MARK: NavigationBarの設置
     func setNavigationBarBar(){
         
         //UINavigationBarの位置とサイズを指定
@@ -108,9 +106,6 @@ class TimeLineVC: UIViewController {
     }
     
     
-    //Mark: 未ログイン関係の処理
-    
-    // MARK: setLoginView
     func setLoginView()  {
         
 

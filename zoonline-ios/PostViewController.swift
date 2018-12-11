@@ -266,7 +266,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    // MARK: テーブルビューのセルの高さを計算する
     /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -457,8 +456,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     }
     
     
-    //Mark: 未ログイン関係の処理
-    
+
+     
     //ログインボタンが押されたら呼ばれます
     @objc func loginBtnClicked(sender: UIButton){
         
