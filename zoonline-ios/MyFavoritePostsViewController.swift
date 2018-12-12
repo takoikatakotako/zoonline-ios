@@ -1,18 +1,10 @@
-//
-//  MyPageFavoriteViewController.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/05/21.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 import Alamofire
 import SwiftyJSON
 import SDWebImage
 import SCLAlertView
 
-class MyPageFavoriteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyFavoritePostsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var userID: Int!
 

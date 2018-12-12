@@ -28,6 +28,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     }
 
     @objc func doClose(sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }

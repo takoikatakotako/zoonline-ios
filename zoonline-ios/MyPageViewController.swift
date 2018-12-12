@@ -35,7 +35,9 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //ナビゲーションアイテムを作成
         let titleLabel: NavigationBarLabel = NavigationBarLabel(frame: CGRect(x: view.frame.width, y: 0, width: view.frame.width, height: 40))
         titleLabel.text = "マイページ"
-        self.navigationItem.titleView = titleLabel
+        navigationItem.titleView = titleLabel
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
 
         // header
         userCellBtn = MyPageUserCellBtn(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
@@ -151,36 +153,23 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             switch indexPath.row {
             case 0:
                 //投稿一覧
-                let vc: MyPagePostViewController = MyPagePostViewController()
-                vc.userID = Int(UtilityLibrary.getUserID())
-
-                let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                self.navigationItem.backBarButtonItem = backButton
-                self.navigationController?.pushViewController(vc, animated: true)
+                let vc: MyPostsViewController = MyPostsViewController()
+                navigationController?.pushViewController(vc, animated: true)
                 break
             case 1:
                 //フレンズ一覧
                 let vc: FriendsListViewController = FriendsListViewController()
-                let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                self.navigationItem.backBarButtonItem = backButton
-                self.navigationController?.pushViewController(vc, animated: true)
+                navigationController?.pushViewController(vc, animated: true)
                 break
             case 2:
                 //フォロワー一覧
                 let vc: FollowerListViewController = FollowerListViewController()
-
-                let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                self.navigationItem.backBarButtonItem = backButton
-                self.navigationController?.pushViewController(vc, animated: true)
+                navigationController?.pushViewController(vc, animated: true)
                 break
             case 3:
                 //お気に入り
-                let vc: MyPageFavoriteViewController = MyPageFavoriteViewController()
-                vc.userID = Int(UtilityLibrary.getUserID())
-
-                let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                self.navigationItem.backBarButtonItem = backButton
-                self.navigationController?.pushViewController(vc, animated: true)
+                let vc: MyFavoritePostsViewController = MyFavoritePostsViewController()
+                navigationController?.pushViewController(vc, animated: true)
                 break
             default:
                 break
@@ -235,13 +224,11 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func openWebView(navTitle: String, url: String) {
-
         //利用規約
         let contactView: WebViewController = WebViewController()
         contactView.url = url
         contactView.navTitle = navTitle
         contactView.view.backgroundColor = .white
-
-        self.present(UINavigationController(rootViewController: contactView), animated: true, completion: nil)
+        present(UINavigationController(rootViewController: contactView), animated: true, completion: nil)
     }
 }
