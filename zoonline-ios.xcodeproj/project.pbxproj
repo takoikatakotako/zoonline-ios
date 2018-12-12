@@ -32,7 +32,7 @@
 		8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D53FD611F375DA800809E7F /* FollowerListViewController.swift */; };
 		8D57A7941F89D2BA00A85D83 /* EveryZooAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D57A7931F89D2BA00A85D83 /* EveryZooAPI.swift */; };
 		8D5F25A21F8B522C008D6BF1 /* UserInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F25A11F8B522C008D6BF1 /* UserInfoTableViewCell.swift */; };
-		8D6215AD1EC3689600593E55 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215AC1EC3689600593E55 /* MyPageVC.swift */; };
+		8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215AC1EC3689600593E55 /* MyPageViewController.swift */; };
 		8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D6888781E9E7C2E00140508 /* Localizable.strings */; };
 		8D6A73EE1F83BE2A00902AFC /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6A73ED1F83BE2A00902AFC /* UserCollectionViewCell.swift */; };
 		8D7343631F3A1CB700EB232E /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7343621F3A1CB700EB232E /* NewsListViewController.swift */; };
@@ -121,7 +121,7 @@
 		8D53FD611F375DA800809E7F /* FollowerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
 		8D57A7931F89D2BA00A85D83 /* EveryZooAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EveryZooAPI.swift; sourceTree = "<group>"; };
 		8D5F25A11F8B522C008D6BF1 /* UserInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoTableViewCell.swift; sourceTree = "<group>"; };
-		8D6215AC1EC3689600593E55 /* MyPageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
+		8D6215AC1EC3689600593E55 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		8D6888771E9E7C2E00140508 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D68887C1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8D68887D1E9E7CBA00140508 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -347,7 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */,
-				8D6215AC1EC3689600593E55 /* MyPageVC.swift */,
+				8D6215AC1EC3689600593E55 /* MyPageViewController.swift */,
 				8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */,
 				8D5121251F0D405B00C6D774 /* MyPageItem */,
 			);
@@ -789,7 +789,7 @@
 			files = (
 				8D3E39B121A1125E0083E661 /* PostDetailView.swift in Sources */,
 				8DC719131F08BC3F003C5E00 /* WritePostTextsVC.swift in Sources */,
-				8D6215AD1EC3689600593E55 /* MyPageVC.swift in Sources */,
+				8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */,
 				8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */,
 				8DA4C69B1FE0D95800C84A73 /* FieldCollectionViewCell.swift in Sources */,
 				8DF9CFE41EE959F9002B8459 /* WebViewController.swift in Sources */,

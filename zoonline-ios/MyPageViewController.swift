@@ -3,7 +3,7 @@ import Social
 import SCLAlertView
 import SDWebImage
 
-class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     //ユーザー数の
     var userCellBtn: MyPageUserCellBtn!
@@ -32,8 +32,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(named: "mypageArrowGray")
-
         //ナビゲーションアイテムを作成
         let titleLabel: NavigationBarLabel = NavigationBarLabel(frame: CGRect(x: view.frame.width, y: 0, width: view.frame.width, height: 40))
         titleLabel.text = "マイページ"
@@ -42,7 +40,7 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // header
         userCellBtn = MyPageUserCellBtn(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
         userCellBtn.backgroundColor = UIColor.white
-        userCellBtn.addTarget(self, action: #selector(MyPageVC.goMyProfile(sender:)), for: .touchUpInside)
+        userCellBtn.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for: .touchUpInside)
         let defaultIcon = UIImage(named: "common-icon-default")
         if let url = URL(string: UtilityLibrary.getUserIconUrl()) {
             userCellBtn.iconImgView.sd_setImage(with: url, placeholderImage: defaultIcon)
@@ -163,8 +161,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             case 1:
                 //フレンズ一覧
                 let vc: FriendsListViewController = FriendsListViewController()
-                vc.userID = Int(UtilityLibrary.getUserID())
-
                 let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
                 self.navigationItem.backBarButtonItem = backButton
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -172,7 +168,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             case 2:
                 //フォロワー一覧
                 let vc: FollowerListViewController = FollowerListViewController()
-                vc.userID = Int(UtilityLibrary.getUserID())
 
                 let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
                 self.navigationItem.backBarButtonItem = backButton
@@ -201,7 +196,6 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 //アプリシェア
                 let alertView = SCLAlertView()
                 alertView.addButton("Twitter") {
-                    self.tweet()
                 }
                 alertView.showInfo("シェア", subTitle: "みんなの動物園を広める")
 
@@ -244,18 +238,10 @@ class MyPageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         //利用規約
         let contactView: WebViewController = WebViewController()
-        //contactView.statusBarHeight = self.statusBarHeight
-        //contactView.navigationBarHeight = self.navigationBarHeight
         contactView.url = url
         contactView.navTitle = navTitle
-        self.present(contactView, animated: true, completion: nil)
-    }
+        contactView.view.backgroundColor = .white
 
-    func tweet() {
-        /*
-        myComposeView = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-        myComposeView.setInitialText("#みんなの動物園")
-        self.present(myComposeView, animated: true, completion: nil)
- */
+        self.present(UINavigationController(rootViewController: contactView), animated: true, completion: nil)
     }
 }

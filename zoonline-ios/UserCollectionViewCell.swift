@@ -1,11 +1,3 @@
-//
-//  UserCollectionViewCell.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/10/03.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class UserCollectionViewCell: UICollectionViewCell {
@@ -25,7 +17,7 @@ class UserCollectionViewCell: UICollectionViewCell {
         //iconImage
         icomImageView = UIImageView()
         icomImageView!.frame = CGRect(x: cellWidth*0.2, y: cellHeight*0.1, width: cellWidth*0.6, height: cellHeight*0.6)
-        icomImageView!.image = UIImage(named: "icon_default")
+        icomImageView!.image = UIImage(named: "common-icon-default")
         icomImageView.clipsToBounds = true
         icomImageView.layer.cornerRadius = cellWidth*0.6*0.5
         self.contentView.addSubview(icomImageView!)

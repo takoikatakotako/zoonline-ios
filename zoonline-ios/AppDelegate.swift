@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // let secondNavigationController = UINavigationController(rootViewController: secondViewController!)
         // viewControllers.append(secondNavigationController)
 
-        let thirdViewController: MyPageVC? = MyPageVC()
+        let thirdViewController: MyPageViewController? = MyPageViewController()
         thirdViewController?.tabBarItem = UITabBarItem(title: "マイページ", image: UIImage(named: "tab_mypage"), tag: 2)
         let thirdNavigationController = UINavigationController(rootViewController: thirdViewController!)
         viewControllers.append(thirdNavigationController)
