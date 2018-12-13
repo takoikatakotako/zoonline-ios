@@ -1,6 +1,6 @@
 import UIKit
 
-class PostsCollectionView: UICollectionViewCell {
+class PostsCollectionViewCell: UICollectionViewCell {
     var imageView: UIImageView!
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!

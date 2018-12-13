@@ -1,27 +1,12 @@
 import UIKit
-import Alamofire
-import SwiftyJSON
-import SDWebImage
-import SCLAlertView
 
-class UserInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    //テーブルビューインスタンス
-    private var profileTableView: UITableView!
-
-    //width, height
-    private var profileCellHeight: CGFloat!
-    private var postCellHeight: CGFloat!
+class UserInfoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     //UserInfo
-    //ユーザーIDとユーザー名は受け取る
     var postUserID: Int!
 
-    var userInfos: JSON = []
-    var userName: String = ""
-    var userProfile: String = ""
-    var userIconUrl: String = ""
-    var postsInfos: JSON = []
+    private var profileCollectionView: UICollectionView!
+    private var userInfoView: UserInfoCollectionReusableView!
 
     private var myItems: Array<String> = ["天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
     "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
@@ -35,51 +20,57 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         view.backgroundColor = UIColor.white
 
         // ユーザー情報
-        let userInfoView = UserInfoView()
+        userInfoView = UserInfoCollectionReusableView()
         userInfoView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 260)
 
-        profileTableView = UITableView()
-        profileTableView.delegate = self
-        profileTableView.dataSource = self
-        profileTableView.tableHeaderView = userInfoView
-        profileTableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
-        view.addSubview(profileTableView)
+        // CollectionViewのレイアウトを生成.
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width/3, height: view.frame.width/3)
+        layout.sectionInset = UIEdgeInsets.zero
+        layout.minimumInteritemSpacing = 0.0
+        layout.minimumLineSpacing = 0.0
+        layout.headerReferenceSize = CGSize(width: 0, height: 0)
+        profileCollectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        profileCollectionView?.register(UserInfoCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NSStringFromClass(UserInfoCollectionReusableView.self))
+        profileCollectionView.register(PostsCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(PostsCollectionViewCell.self))
+        profileCollectionView.delegate = self
+        profileCollectionView.dataSource = self
+        profileCollectionView.backgroundColor = UIColor.white
+        view.addSubview(profileCollectionView)
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let width = view.frame.width
         let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
-        profileTableView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        profileCollectionView.frame = CGRect(x: 0, y: 0, width: width, height: height)
     }
 
-    // MARK: ViewParts
-    func setNavigationBar() {
-        let titleLabel: NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
-        titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "プロフィール"
-        titleLabel.textColor = UIColor.white
-        self.navigationItem.titleView = titleLabel
+    // MARK: CollectionView Delegate Methods
+    // Cellが選択された際に呼び出される
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let postDetail: PostDetailViewController = PostDetailViewController()
+        navigationController?.pushViewController(postDetail, animated: true)
     }
 
-    // MARK: TableView Delegate Methods
-    // テーブルビューのセルの数を設定する
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //テーブルビューのセルの数はmyItems配列の数とした
-        return 20
+    // Cellの総数を返す
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 24
     }
 
-    // テーブルビューのセルの中身を設定する
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //myItems配列の中身をテキストにして登録した
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UITableViewCell.self))!
-        cell.textLabel?.text = "aaaaaaaaa"
+    // Cellに値を設定する
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: PostsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(PostsCollectionViewCell.self), for: indexPath) as! PostsCollectionViewCell
         return cell
     }
 
-    // テーブルビューのセルが押されたら呼ばれる
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return userInfoView.frame.size
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NSStringFromClass(UserInfoCollectionReusableView.self), for: indexPath)
+        header.addSubview(userInfoView)
+        return header
     }
 }

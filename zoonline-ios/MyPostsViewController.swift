@@ -5,8 +5,7 @@ import SDWebImage
 import SCLAlertView
 
 class MyPostsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
-    //テーブルビューインスタンス
+    //
     var friendsCollectionView: UICollectionView!
     private var frindsList: JSON = []
 
@@ -30,7 +29,7 @@ class MyPostsViewController: UIViewController, UICollectionViewDelegate, UIColle
         layout.minimumLineSpacing = 0.0
         layout.headerReferenceSize = CGSize(width: 0, height: 0)
         friendsCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
-        friendsCollectionView.register(PostsCollectionView.self, forCellWithReuseIdentifier: NSStringFromClass(PostsCollectionView.self))
+        friendsCollectionView.register(PostsCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(PostsCollectionViewCell.self))
         friendsCollectionView.delegate = self
         friendsCollectionView.dataSource = self
         friendsCollectionView.backgroundColor = UIColor.white
@@ -72,7 +71,7 @@ class MyPostsViewController: UIViewController, UICollectionViewDelegate, UIColle
 
     // Cellに値を設定する
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: PostsCollectionView = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(PostsCollectionView.self), for: indexPath) as! PostsCollectionView
+        let cell: PostsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(PostsCollectionViewCell.self), for: indexPath) as! PostsCollectionViewCell
         return cell
     }
 }

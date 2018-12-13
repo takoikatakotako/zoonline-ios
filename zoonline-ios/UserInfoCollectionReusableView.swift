@@ -1,7 +1,6 @@
 import UIKit
 
-class UserInfoView: UIView {
-
+class UserInfoCollectionReusableView: UICollectionReusableView {
     //  各種高さ
     // Icon
     let userIconSize: CGFloat = 100
