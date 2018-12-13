@@ -15,6 +15,8 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
 
         myItems = ["天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
                    "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
@@ -58,8 +60,6 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         print("basicButtonBtnClicked")
         // ユーザー詳細画面へ
         let userInfoViewController = UserInfoViewController()
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = backButton
         self.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
 

@@ -154,21 +154,25 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             case 0:
                 //投稿一覧
                 let vc: MyPostsViewController = MyPostsViewController()
+                vc.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(vc, animated: true)
                 break
             case 1:
                 //フレンズ一覧
                 let vc: FriendsListViewController = FriendsListViewController()
+                vc.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(vc, animated: true)
                 break
             case 2:
                 //フォロワー一覧
                 let vc: FollowerListViewController = FollowerListViewController()
+                vc.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(vc, animated: true)
                 break
             case 3:
                 //お気に入り
                 let vc: MyFavoritePostsViewController = MyFavoritePostsViewController()
+                vc.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(vc, animated: true)
                 break
             default:

@@ -36,7 +36,7 @@ class FollowerListViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let width = view.frame.width
-        let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
+        let height = view.frame.height
         friendsCollectionView.frame = CGRect(x: 0, y: 0, width: width, height: height)
     }
 
