@@ -207,7 +207,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             switch result {
             case .success(let upload, _, _):
 
-                upload.uploadProgress(closure: { (Progress) in
+                upload.uploadProgress(closure: { (_) in
                     //print("Upload Progress: \(Progress.fractionCompleted)")
                 })
 
