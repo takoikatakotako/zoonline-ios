@@ -19,6 +19,9 @@ class UserInfoViewController: UIViewController, UICollectionViewDelegate, UIColl
 
         view.backgroundColor = UIColor.white
 
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
+
         // ユーザー情報
         userInfoView = UserInfoCollectionReusableView()
         userInfoView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 260)
@@ -42,7 +45,7 @@ class UserInfoViewController: UIViewController, UICollectionViewDelegate, UIColl
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let width = view.frame.width
-        let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
+        let height = view.frame.height
         profileCollectionView.frame = CGRect(x: 0, y: 0, width: width, height: height)
     }
 

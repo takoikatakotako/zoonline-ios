@@ -40,10 +40,16 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         view.addSubview(postDetailTableView)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // tabBarController?.tabBar.isHidden = true
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let width = view.frame.width
-        let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
+        let height = view.frame.height
+        // let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
         postDetailTableView.frame = CGRect(x: 0, y: 0, width: width, height: height)
     }
 

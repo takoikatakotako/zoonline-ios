@@ -9,13 +9,17 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
+
         //ナビゲーションアイテムを作成
-        let titleLabel: NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: view.frame.width * 0.3, y: 0, width: view.frame.width * 0.4, height: 40)
-        titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "ひろば"
-        titleLabel.textColor = UIColor.white
-        self.navigationItem.titleView = titleLabel
+        title = "ひろば"
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
     }
 
     override func viewDidLayoutSubviews() {
@@ -69,9 +73,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
 
         //画面遷移、投稿詳細画面へ
         let picDetailView: PostDetailViewController = PostDetailViewController()
-        //picDetailView.postID = 0
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = backButton
+        picDetailView.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(picDetailView, animated: true)
     }
 
