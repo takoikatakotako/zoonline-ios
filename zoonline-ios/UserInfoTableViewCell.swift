@@ -1,11 +1,3 @@
-//
-//  UserInfoTableViewCell.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/10/09.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class UserInfoTableViewCell: UITableViewCell {

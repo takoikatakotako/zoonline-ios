@@ -17,7 +17,7 @@ class UserInfoCollectionReusableView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.backgroundColor = UIColor(named: "mypageArrowGray")
+        self.backgroundColor = UIColor(named: "backgroundGray")
 
         // UserInfo
         userThumbnail = UIImageView()

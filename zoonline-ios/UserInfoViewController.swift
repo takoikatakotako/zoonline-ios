@@ -34,7 +34,8 @@ class UserInfoViewController: UIViewController, UICollectionViewDelegate, UIColl
         layout.minimumLineSpacing = 0.0
         layout.headerReferenceSize = CGSize(width: 0, height: 0)
         profileCollectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        profileCollectionView?.register(UserInfoCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NSStringFromClass(UserInfoCollectionReusableView.self))
+        profileCollectionView.backgroundColor = UIColor(named: "backgroundGray")
+        profileCollectionView.register(UserInfoCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NSStringFromClass(UserInfoCollectionReusableView.self))
         profileCollectionView.register(PostsCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(PostsCollectionViewCell.self))
         profileCollectionView.delegate = self
         profileCollectionView.dataSource = self

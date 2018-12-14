@@ -30,6 +30,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
         // ボタンアクションの設定
         postDetailView.userInfoButton.addTarget(self, action: #selector(userInfoButtonTouched(sender:)), for: .touchUpInside)
+        postDetailView.commentButton.addTarget(self, action: #selector(commentButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.followButton.addTarget(self, action: #selector(followButtonTouched(sender:)), for: .touchUpInside)
 
         //テーブルビューの初期化
@@ -55,12 +56,17 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         postDetailTableView.frame = CGRect(x: 0, y: 0, width: width, height: height)
     }
 
-    // MARK: Button Methods
+    // MARK: Button Actions
     @objc func userInfoButtonTouched(sender: UIButton) {
-        print("basicButtonBtnClicked")
         // ユーザー詳細画面へ
         let userInfoViewController = UserInfoViewController()
         self.navigationController?.pushViewController(userInfoViewController, animated: true)
+    }
+
+    @objc func commentButtonTouched(sender: UIButton) {
+        // コメント投稿へ
+        let  postCommentViewController = PostCommentViewController()
+        self.navigationController?.pushViewController(postCommentViewController, animated: true)
     }
 
     @objc func followButtonTouched(sender: UIButton) {

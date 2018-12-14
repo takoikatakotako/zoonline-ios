@@ -11,6 +11,7 @@
 		0DE61C2237B1839A198BAC86 /* Pods_zoonline_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCBE60A9317FF3B3051F278 /* Pods_zoonline_iosUITests.framework */; };
 		177F526F21C1202F00CA3DD8 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F526E21C1202F00CA3DD8 /* PostsCollectionViewCell.swift */; };
 		17AD3CE721C2107800A6DC9E /* UserInfoCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */; };
+		17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */; };
 		835239FDC3EA5D1B0674910F /* Pods_zoonline_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54AA7E29AF57EBFE420AA58 /* Pods_zoonline_iosTests.framework */; };
 		8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */; };
 		8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */; };
@@ -98,6 +99,7 @@
 		0E3AC825FD16C81DC3DB4B7B /* Pods-zoonline-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		177F526E21C1202F00CA3DD8 /* PostsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionViewCell.swift; sourceTree = "<group>"; };
 		17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCollectionReusableView.swift; sourceTree = "<group>"; };
+		17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentViewController.swift; sourceTree = "<group>"; };
 		19243D79DF1EB566ABF62814 /* Pods-zoonline-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		232224ED8A7FFF835259B090 /* Pods_zoonline_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zoonline_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F3F8A8E3B7639D596420D56 /* Pods-zoonline-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosTests/Pods-zoonline-iosTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +236,14 @@
 			name = SignIn;
 			sourceTree = "<group>";
 		};
+		17AD3CE821C358EB00A6DC9E /* PostComment */ = {
+			isa = PBXGroup;
+			children = (
+				17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */,
+			);
+			name = PostComment;
+			sourceTree = "<group>";
+		};
 		568484AC1AB1FC4B6C88B766 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +377,7 @@
 				1743803421A4186B00673721 /* Login */,
 				1743803621A424FD00673721 /* SignIn */,
 				8D57A7971F89E1C400A85D83 /* PostDetail */,
+				17AD3CE821C358EB00A6DC9E /* PostComment */,
 				8DE569B01F9F5D0C00C37397 /* EditMyProfile */,
 				8D5F259F1F8B3FD3008D6BF1 /* UserInfo */,
 				8D5F259E1F8B3F1A008D6BF1 /* CommentList */,
@@ -832,6 +843,7 @@
 				8D7CDC3C1F14F12D00C3844E /* NavigationBarLabel.swift in Sources */,
 				8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */,
 				8D9DE17E1EE4145E00121FC1 /* NetWorkManager.swift in Sources */,
+				17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */,
 				8DDCD3211F49B953004C91C9 /* TempTimeLineViewController.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyFavoritePostsViewController.swift in Sources */,
 				8D35113F1EEED5E6004BA744 /* LoginVC.swift in Sources */,
