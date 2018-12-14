@@ -222,9 +222,13 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     //basicボタンが押されたら呼ばれます
     @objc internal func goMyProfile(sender: UIButton) {
-        let loginVC = LoginVC()
-        let navigationController = UINavigationController(rootViewController: loginVC)
-        self.present(navigationController, animated: true, completion: nil)
+        let myProfilelViewController = MyProfilelViewController()
+        myProfilelViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(myProfilelViewController, animated: true)
+        // ログイン
+        // let loginVC = LoginViewController()
+        // let navigationController = UINavigationController(rootViewController: loginVC)
+        // self.present(navigationController, animated: true, completion: nil)
     }
 
     func openWebView(navTitle: String, url: String) {

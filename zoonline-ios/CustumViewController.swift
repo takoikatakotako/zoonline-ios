@@ -77,7 +77,7 @@ class CustumViewController: UIViewController {
     //ログインボタンが押されたら呼ばれます
     @objc func loginBtnClicked(sender: UIButton) {
 
-        let loginView: LoginVC = LoginVC()
+        let loginView: LoginViewController = LoginViewController()
         //loginView.statusBarHeight = self.statusBarHeight
         //loginView.navigationBarHeight = self.navigationBarHeight
         self.present(loginView, animated: true, completion: nil)

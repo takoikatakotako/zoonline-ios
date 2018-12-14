@@ -4,7 +4,7 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class MyPageProfilelVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //width, height
     private var viewWidth: CGFloat!
@@ -31,37 +31,30 @@ class MyPageProfilelVC: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "プロフィール"
+        view.backgroundColor = UIColor(named: "backgroundGray")
 
-        self.view.backgroundColor = UIColor(named: "liginCushionLightGray")
+        // setActivityIndicator()
+        // getUserInfo()
 
-        //Viewの大きさを取得
-        viewWidth = self.view.frame.size.width
-        viewHeight = self.view.frame.size.height
-        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
-        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
-        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+        let myProfileView = MyProfileView()
+        myProfileView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 260)
 
-        myProfielViewHeight = viewWidth*0.56
-        userConfigTableViewHeight = viewHeight - (statusBarHeight+navigationBarHeight+myProfielViewHeight+tabBarHeight)
-
-        setNavigationBar()
-        setActivityIndicator()
-        getUserInfo()
+        //テーブルビューの初期化
+        userConfigTableView = UITableView()
+        userConfigTableView.delegate = self
+        userConfigTableView.dataSource = self
+        userConfigTableView.frame = view.frame
+        userConfigTableView.tableHeaderView = myProfileView
+        userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        userConfigTableView.backgroundColor = UIColor(named: "backgroundGray")
+        //userConfigTableView.isScrollEnabled = false
+        self.view.addSubview(userConfigTableView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let defaultIcon = UIImage(named: "icon_default")
-        if let url = URL(string: UtilityLibrary.getUserIconUrl()) {
-            icon.sd_setImage(with: url, placeholderImage: defaultIcon)
-
-        }else {
-            icon.image = defaultIcon
-        }
-
-        indicator.startAnimating()
-        getUserInfo()
     }
 
     // MARK: - Viewにパーツの設置
@@ -140,19 +133,6 @@ class MyPageProfilelVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         mailLabel.font = UIFont.systemFont(ofSize: 14)
         mailLabel.textColor = UIColor.gray
         self.view.addSubview(mailLabel)
-    }
-
-    func setTableView() {
-
-        //テーブルビューの初期化
-        userConfigTableView = UITableView()
-        userConfigTableView.delegate = self
-        userConfigTableView.dataSource = self
-        userConfigTableView.frame = CGRect(x: 0, y: myProfielViewHeight, width: viewWidth, height: userConfigTableViewHeight)
-        userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        userConfigTableView.backgroundColor = UIColor(named: "liginCushionLightGray")
-        //userConfigTableView.isScrollEnabled = false
-        self.view.addSubview(userConfigTableView)
     }
 
     //
@@ -289,8 +269,6 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                 self.indicator.stopAnimating()
 
                 self.setProfielView()
-                self.setTableView()
-
             case .failure(let error):
                 print(error)
             }

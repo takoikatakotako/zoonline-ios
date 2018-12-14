@@ -12,6 +12,7 @@
 		177F526F21C1202F00CA3DD8 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F526E21C1202F00CA3DD8 /* PostsCollectionViewCell.swift */; };
 		17AD3CE721C2107800A6DC9E /* UserInfoCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */; };
 		17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */; };
+		17AD3CED21C3BF7100A6DC9E /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CEC21C3BF7100A6DC9E /* MyProfileView.swift */; };
 		835239FDC3EA5D1B0674910F /* Pods_zoonline_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54AA7E29AF57EBFE420AA58 /* Pods_zoonline_iosTests.framework */; };
 		8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */; };
 		8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */; };
@@ -23,7 +24,7 @@
 		8D2533BE1F64FB4F00DB9C96 /* EditUserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2533BD1F64FB4F00DB9C96 /* EditUserProfileVC.swift */; };
 		8D2A9AEF1FB4F914006ECD20 /* PictureExpandVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */; };
 		8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */; };
-		8D35113F1EEED5E6004BA744 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113E1EEED5E6004BA744 /* LoginVC.swift */; };
+		8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113E1EEED5E6004BA744 /* LoginViewController.swift */; };
 		8D3E39B121A1125E0083E661 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E39B021A1125E0083E661 /* PostDetailView.swift */; };
 		8D46EFBC1F2DEC3100FFD8D7 /* MyPagePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D46EFBB1F2DEC3100FFD8D7 /* MyPagePostCell.swift */; };
 		8D48576E1F40457F00608A56 /* NewPostsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D48576D1F40457F00608A56 /* NewPostsVC.swift */; };
@@ -63,7 +64,7 @@
 		8DC719151F08F189003C5E00 /* PostTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC719141F08F189003C5E00 /* PostTagTableViewCell.swift */; };
 		8DC719171F08F3A4003C5E00 /* SetPostTagsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC719161F08F3A4003C5E00 /* SetPostTagsVC.swift */; };
 		8DC719191F08FDA5003C5E00 /* TagListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC719181F08FDA5003C5E00 /* TagListTableViewCell.swift */; };
-		8DD2A0DD1F556609002048B4 /* MyPageProfilelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD2A0DC1F556609002048B4 /* MyPageProfilelVC.swift */; };
+		8DD2A0DD1F556609002048B4 /* MyProfilelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD2A0DC1F556609002048B4 /* MyProfilelViewController.swift */; };
 		8DD2A0DF1F56F0E5002048B4 /* WritePostsCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD2A0DE1F56F0E5002048B4 /* WritePostsCommentsViewController.swift */; };
 		8DDAF0DB1ED183E00079D443 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DA1ED183E00079D443 /* MyPostsViewController.swift */; };
 		8DDAF0DD1ED184790079D443 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */; };
@@ -100,6 +101,7 @@
 		177F526E21C1202F00CA3DD8 /* PostsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionViewCell.swift; sourceTree = "<group>"; };
 		17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCollectionReusableView.swift; sourceTree = "<group>"; };
 		17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentViewController.swift; sourceTree = "<group>"; };
+		17AD3CEC21C3BF7100A6DC9E /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		19243D79DF1EB566ABF62814 /* Pods-zoonline-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		232224ED8A7FFF835259B090 /* Pods_zoonline_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zoonline_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F3F8A8E3B7639D596420D56 /* Pods-zoonline-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosTests/Pods-zoonline-iosTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,7 +116,7 @@
 		8D2533BD1F64FB4F00DB9C96 /* EditUserProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserProfileVC.swift; sourceTree = "<group>"; };
 		8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureExpandVC.swift; sourceTree = "<group>"; };
 		8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		8D35113E1EEED5E6004BA744 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		8D35113E1EEED5E6004BA744 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D3E39B021A1125E0083E661 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		8D46EFBB1F2DEC3100FFD8D7 /* MyPagePostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPagePostCell.swift; sourceTree = "<group>"; };
 		8D48576D1F40457F00608A56 /* NewPostsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostsVC.swift; sourceTree = "<group>"; };
@@ -162,7 +164,7 @@
 		8DC719141F08F189003C5E00 /* PostTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTagTableViewCell.swift; sourceTree = "<group>"; };
 		8DC719161F08F3A4003C5E00 /* SetPostTagsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPostTagsVC.swift; sourceTree = "<group>"; };
 		8DC719181F08FDA5003C5E00 /* TagListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListTableViewCell.swift; sourceTree = "<group>"; };
-		8DD2A0DC1F556609002048B4 /* MyPageProfilelVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageProfilelVC.swift; sourceTree = "<group>"; };
+		8DD2A0DC1F556609002048B4 /* MyProfilelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfilelViewController.swift; sourceTree = "<group>"; };
 		8DD2A0DE1F56F0E5002048B4 /* WritePostsCommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritePostsCommentsViewController.swift; sourceTree = "<group>"; };
 		8DDAF0DA1ED183E00079D443 /* MyPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
 		8DDAF0DC1ED184790079D443 /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
@@ -213,7 +215,7 @@
 		1743803421A4186B00673721 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				8D35113E1EEED5E6004BA744 /* LoginVC.swift */,
+				8D35113E1EEED5E6004BA744 /* LoginViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -378,7 +380,7 @@
 				1743803621A424FD00673721 /* SignIn */,
 				8D57A7971F89E1C400A85D83 /* PostDetail */,
 				17AD3CE821C358EB00A6DC9E /* PostComment */,
-				8DE569B01F9F5D0C00C37397 /* EditMyProfile */,
+				8DE569B01F9F5D0C00C37397 /* MyProfile */,
 				8D5F259F1F8B3FD3008D6BF1 /* UserInfo */,
 				8D5F259E1F8B3F1A008D6BF1 /* CommentList */,
 				8D1586701ED8027900802F54 /* Common */,
@@ -511,14 +513,15 @@
 			name = PostTableCells;
 			sourceTree = "<group>";
 		};
-		8DE569B01F9F5D0C00C37397 /* EditMyProfile */ = {
+		8DE569B01F9F5D0C00C37397 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
-				8DD2A0DC1F556609002048B4 /* MyPageProfilelVC.swift */,
+				8DD2A0DC1F556609002048B4 /* MyProfilelViewController.swift */,
 				8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */,
 				8D2533BD1F64FB4F00DB9C96 /* EditUserProfileVC.swift */,
+				17AD3CEC21C3BF7100A6DC9E /* MyProfileView.swift */,
 			);
-			name = EditMyProfile;
+			name = MyProfile;
 			sourceTree = "<group>";
 		};
 		8DF3A73C1F58722B00A5A3B1 /* Support */ = {
@@ -818,7 +821,7 @@
 				8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */,
 				8D48576E1F40457F00608A56 /* NewPostsVC.swift in Sources */,
 				17AD3CE721C2107800A6DC9E /* UserInfoCollectionReusableView.swift in Sources */,
-				8DD2A0DD1F556609002048B4 /* MyPageProfilelVC.swift in Sources */,
+				8DD2A0DD1F556609002048B4 /* MyProfilelViewController.swift in Sources */,
 				8D532C521FC495DD00D2E532 /* ZooForEveryoneConfig.swift in Sources */,
 				8DF3A73E1F58724300A5A3B1 /* SupportVC.swift in Sources */,
 				8D57A7941F89D2BA00A85D83 /* EveryZooAPI.swift in Sources */,
@@ -846,7 +849,7 @@
 				17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */,
 				8DDCD3211F49B953004C91C9 /* TempTimeLineViewController.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyFavoritePostsViewController.swift in Sources */,
-				8D35113F1EEED5E6004BA744 /* LoginVC.swift in Sources */,
+				8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */,
 				8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */,
 				8DC719191F08FDA5003C5E00 /* TagListTableViewCell.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
@@ -861,6 +864,7 @@
 				8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */,
 				8D532C4D1FC31AEB00D2E532 /* BannerAdTableViewCell.swift in Sources */,
 				8DE541771EFAB3010085F916 /* SignInVC.swift in Sources */,
+				17AD3CED21C3BF7100A6DC9E /* MyProfileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
