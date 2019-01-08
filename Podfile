@@ -6,7 +6,7 @@ target 'zoonline-ios' do
   use_frameworks!
 
   # Pods for EveryoneZoo
-  pod 'SCLAlertView'
+  pod 'SCLAlertView', '~> 0.8'
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'SDWebImage/GIF'

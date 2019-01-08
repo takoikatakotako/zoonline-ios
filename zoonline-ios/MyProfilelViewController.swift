@@ -26,8 +26,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     var userConfigTableView: UITableView!
 
     //表示するもの
-    //let changeUserInfoAry:Array<String> = ["プロフィールのプレビュー","","ユーザー名の変更","プロフィールの変更","メールアドレスの変更","パスワードの変更",""]
-    let changeUserInfoAry: Array<String> = ["プロフィールのプレビュー", "", "ユーザー名の変更", "プロフィールの変更", "メールアドレスの変更"]
+    let changeUserInfoAry: Array<String> = ["ユーザー名の変更", "自己紹介の変更", "メールアドレスの変更", "パスワードの変更"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,49 +40,31 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         myProfileView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 260)
 
         //テーブルビューの初期化
-        userConfigTableView = UITableView()
+        userConfigTableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         userConfigTableView.delegate = self
         userConfigTableView.dataSource = self
         userConfigTableView.frame = view.frame
         userConfigTableView.tableHeaderView = myProfileView
         userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         userConfigTableView.backgroundColor = UIColor(named: "backgroundGray")
-        //userConfigTableView.isScrollEnabled = false
+        userConfigTableView.rowHeight = 60
         self.view.addSubview(userConfigTableView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
     }
 
     // MARK: - Viewにパーツの設置
-    // MARK: ナビゲーションバーの設定
-    func setNavigationBar() {
-
-        self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
-        self.navigationController?.navigationBar.isTranslucent = false
-
-        //ナビゲーションアイテムを作成
-        let titleLabel: UILabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
-        titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "プロフィール"
-        titleLabel.textColor = UIColor.white
-
-        self.navigationItem.titleView = titleLabel
-    }
 
     // MARK: くるくるの生成
     func setActivityIndicator() {
-
         indicator = UIActivityIndicatorView()
-        indicator.frame = CGRect(x: viewWidth*0.35, y: viewHeight*0.25, width: viewWidth*0.3, height: viewWidth*0.3)
+        indicator.frame = CGRect(x: viewWidth * 0.35, y: viewHeight * 0.25, width: viewWidth * 0.3, height: viewWidth * 0.3)
         indicator.hidesWhenStopped = true
         indicator.style = UIActivityIndicatorView.Style.whiteLarge
         indicator.color = UIColor.init(named: "main")
         self.view.bringSubviewToFront(indicator)
-
         self.view.addSubview(indicator)
     }
 
@@ -94,20 +75,20 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
         //自分の情報
         let myProfielView: UIView = UIView()
-        myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth*0.56)
+        myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth * 0.56)
         myProfielView.backgroundColor = UIColor(named: "liginCushionLightGray")
         self.view.addSubview(myProfielView)
 
         //アイコン選択ボタン
         let iconChoseBtn: UIButton = UIButton()
-        let iconChoseBtnHeight: CGFloat = myProfielView.frame.height*0.44
-        iconChoseBtn.frame =  CGRect(x: viewWidth/2-iconChoseBtnHeight/2, y: myProfielView.frame.height*0.1, width: iconChoseBtnHeight, height: iconChoseBtnHeight)
+        let iconChoseBtnHeight: CGFloat = myProfielView.frame.height * 0.44
+        iconChoseBtn.frame = CGRect(x: viewWidth / 2 - iconChoseBtnHeight / 2, y: myProfielView.frame.height * 0.1, width: iconChoseBtnHeight, height: iconChoseBtnHeight)
         iconChoseBtn.addTarget(self, action: #selector(choseIconBtnClicked(sender:)), for: .touchUpInside)
         myProfielView.addSubview(iconChoseBtn)
 
         //卵アイコン
         icon.frame = CGRect(x: 0, y: 0, width: iconChoseBtn.frame.size.width, height: iconChoseBtn.frame.size.height)
-        icon.layer.cornerRadius = iconChoseBtn.frame.size.width/2
+        icon.layer.cornerRadius = iconChoseBtn.frame.size.width / 2
         icon.layer.masksToBounds = true
         icon.isUserInteractionEnabled = false
         iconChoseBtn.addSubview(icon)
@@ -115,24 +96,24 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         //プラスのボタン
         let iconPlusImg: UIImageView = UIImageView()
         iconPlusImg.isUserInteractionEnabled = false
-        iconPlusImg.frame = CGRect(x: iconChoseBtn.frame.size.width*0.7, y: iconChoseBtn.frame.size.width*0.7, width: iconChoseBtn.frame.size.width*0.3, height: iconChoseBtn.frame.size.height*0.3)
+        iconPlusImg.frame = CGRect(x: iconChoseBtn.frame.size.width * 0.7, y: iconChoseBtn.frame.size.width * 0.7, width: iconChoseBtn.frame.size.width * 0.3, height: iconChoseBtn.frame.size.height * 0.3)
         iconPlusImg.image = UIImage(named: "iconChange")
         iconChoseBtn.addSubview(iconPlusImg)
 
         // 名前
-        nameLabel.frame = CGRect(x: 0, y: myProfielView.frame.height*0.58, width: viewWidth, height: myProfielView.frame.height*0.2)
+        nameLabel.frame = CGRect(x: 0, y: myProfielView.frame.height * 0.58, width: viewWidth, height: myProfielView.frame.height * 0.2)
         nameLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName")
         nameLabel.textAlignment = NSTextAlignment.center
         nameLabel.font = UIFont.systemFont(ofSize: 28)
-        self.view.addSubview(nameLabel)
+        view.addSubview(nameLabel)
 
         // Mail
-        mailLabel.frame = CGRect(x: 0, y: myProfielView.frame.height*0.75, width: viewWidth, height: myProfielView.frame.height*0.2)
+        mailLabel.frame = CGRect(x: 0, y: myProfielView.frame.height * 0.75, width: viewWidth, height: myProfielView.frame.height * 0.2)
         mailLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserEmail")
         mailLabel.textAlignment = NSTextAlignment.center
         mailLabel.font = UIFont.systemFont(ofSize: 14)
         mailLabel.textColor = UIColor.gray
-        self.view.addSubview(mailLabel)
+        view.addSubview(mailLabel)
     }
 
     //
@@ -153,7 +134,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     //画像が選択された時に呼ばれる.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 // Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
 
@@ -165,7 +146,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             print("Error:Class name : \(NSStringFromClass(type(of: self))) ")
         }
 
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     //画像選択がキャンセルされた時に呼ばれる.
@@ -192,10 +173,10 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                 })
 
                 upload.responseJSON { response in
-                    print(response.request ?? "response.request")  // original URL request
+                    print(response.request ?? "response.request") // original URL request
                     print(response.response ?? "response.response") // URL response
-                    print(response.data ?? "response.data")     // server data
-                    print(response.result)   // result of response serialization
+                    print(response.data ?? "response.data") // server data
+                    print(response.result) // result of response serialization
 
                     switch response.result {
                     case .success:
@@ -206,7 +187,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                         if json["is_success"].boolValue {
                             let pic_id: String = json["picture"]["pic_id"].stringValue
                             self.doPost(pic_id: pic_id, postImage: postImage)
-                        }else {
+                        } else {
                             SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。不明なエラーです。")
                         }
 
@@ -228,7 +209,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             "pic_id": pic_id
         ]
 
-        Alamofire.request(API_URL+"v0/users/"+UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON {response in
+        Alamofire.request(API_URL + "v0/users/" + UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
 
             switch response.result {
             case .success:
@@ -238,7 +219,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                 if json["is_success"].boolValue {
                     self.icon.image = postImage
                     self.indicator.stopAnimating()
-                }else {
+                } else {
                     SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。不明なエラーです。")
                 }
 
@@ -275,107 +256,6 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         }
     }
 
-    // MARK: - TableViewのデリゲートメリット
-    // MARK: テーブルビューのセルの数を設定する
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return changeUserInfoAry.count
-    }
-
-    // MARK: テーブルビューのセルの高さを計算する
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        if changeUserInfoAry[indexPath.row] == "" {
-            return 24
-        }else {
-            return 44
-        }
-    }
-
-    // MARK: テーブルビューのセルの中身を設定する
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-
-        if indexPath.row == 0 {
-            cell.textLabel?.text = changeUserInfoAry[indexPath.row]
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-            cell.textLabel?.textColor = UIColor.init(named: "main")
-            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        }else if indexPath.row == 1 {
-            cell.backgroundColor = UIColor(named: "liginCushionLightGray")
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        }else if indexPath.row == 6 {
-            cell.backgroundColor = UIColor(named: "liginCushionLightGray")
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        }else {
-            cell.textLabel?.text = changeUserInfoAry[indexPath.row]
-            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        }
-
-        return cell
-    }
-
-    // MARK: テーブルビューのセルが押されたら呼ばれる
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        tableView.deselectRow(at: indexPath, animated: true)
-
-        switch indexPath.row {
-        case 0:
-            //プロフィールのプレビューが押された、ユーザー情報画面へ
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let userInfoView: UserInfoViewController = UserInfoViewController()
-            userInfoView.postUserID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
-            let btn_back = UIBarButtonItem()
-            btn_back.title = ""
-            self.navigationItem.backBarButtonItem = btn_back
-            self.navigationController?.pushViewController(userInfoView, animated: true)
-
-            break
-        case 2:
-            //ユーザー名の編集
-
-            let alert = SCLAlertView()
-            let txt = alert.addTextField(UtilityLibrary.getUserName())
-            alert.addButton("変更") {
-                print("Text value: \(String(describing: txt.text))")
-                self.changeUserName(newName: txt.text!)
-                self.indicator.startAnimating()
-            }
-            alert.showEdit("ユーザー名変更", subTitle: "新しいユーザー名を入力してください。")
-            break
-        case 3:
-            //プロフィールの編集
-            let vc: EditUserProfileVC = EditUserProfileVC()
-
-            let btn_back = UIBarButtonItem()
-            btn_back.title = ""
-            self.navigationItem.backBarButtonItem = btn_back
-            self.navigationController?.pushViewController(vc, animated: true)
-            break
-        case 4:
-            //メールアドレスの変更
-            print("メールアドレス")
-            let alert = SCLAlertView()
-            let txt = alert.addTextField(UtilityLibrary.getUserEmail())
-            alert.addButton("変更") {
-                print("Text value: \(String(describing: txt.text))")
-                self.changeUserEmail(newEmail: txt.text!)
-                self.indicator.startAnimating()
-            }
-            alert.showEdit("メールアドレス変更", subTitle: "新しいメールアドレスを入力してください。\n(変更後にログアウトします。)")
-            break
-        case 5:
-            //パスワードの変更
-            print("パスワード")
-            break
-
-        default:
-
-            break
-        }
-    }
-
     //名前の変更ボタン押されたら呼ばれます
     func changeUserName(newName: String) {
 
@@ -389,7 +269,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         ]
 
         //print(API_URL+"v0/auth/")
-        Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON {response in
+        Alamofire.request(API_URL + "v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
 
             switch response.result {
             case .success:
@@ -418,7 +298,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         ]
 
         //print(API_URL+"v0/auth/")
-        Alamofire.request(API_URL+"v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON {response in
+        Alamofire.request(API_URL + "v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
 
             switch response.result {
             case .success:
@@ -428,7 +308,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
                 if (json["status"].stringValue == "error") {
                     SCLAlertView().showInfo("エラー", subTitle: "メールアドレスの値が不正です。")
-                }else {
+                } else {
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.userDefaultsManager?.doLogout()
                     SCLAlertView().showInfo("メールアドレス変更", subTitle: "メールアドレスを変更しました。ログアウトします。")
@@ -441,14 +321,101 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             }
         }
     }
+
+    // MARK: - TableView Delegate Methods
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        } else {
+            return changeUserInfoAry.count
+        }
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return " "
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        if indexPath.section == 0 {
+            cell.textLabel?.text = "プロフィールのプレビュー"
+            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            cell.textLabel?.textColor = UIColor.init(named: "main")
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        } else {
+            cell.textLabel?.text = changeUserInfoAry[indexPath.row]
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        }
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        switch indexPath.row {
+        case 0:
+            //プロフィールのプレビューが押された、ユーザー情報画面へ
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let userInfoView: UserInfoViewController = UserInfoViewController()
+            userInfoView.postUserID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
+            let btn_back = UIBarButtonItem()
+            btn_back.title = ""
+            navigationItem.backBarButtonItem = btn_back
+            navigationController?.pushViewController(userInfoView, animated: true)
+            break
+        case 2:
+            //ユーザー名の編集
+
+            let alert = SCLAlertView()
+            let txt = alert.addTextField(UtilityLibrary.getUserName())
+            alert.addButton("変更") {
+                print("Text value: \(String(describing: txt.text))")
+                self.changeUserName(newName: txt.text!)
+                self.indicator.startAnimating()
+            }
+            alert.showEdit("ユーザー名変更", subTitle: "新しいユーザー名を入力してください。")
+            break
+        case 3:
+            //プロフィールの編集
+            let vc: EditUserProfileVC = EditUserProfileVC()
+
+            let btn_back = UIBarButtonItem()
+            btn_back.title = ""
+            navigationItem.backBarButtonItem = btn_back
+            navigationController?.pushViewController(vc, animated: true)
+            break
+        case 4:
+            //メールアドレスの変更
+            print("メールアドレス")
+            let alert = SCLAlertView()
+            let txt = alert.addTextField(UtilityLibrary.getUserEmail())
+            alert.addButton("変更") {
+                print("Text value: \(String(describing: txt.text))")
+                self.changeUserEmail(newEmail: txt.text!)
+                self.indicator.startAnimating()
+            }
+            alert.showEdit("メールアドレス変更", subTitle: "新しいメールアドレスを入力してください。\n(変更後にログアウトします。)")
+            break
+        case 5:
+            //パスワードの変更
+            print("パスワード")
+            break
+
+        default: break
+        }
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 }
 
 // Helper function inserted by Swift 4.2 migrator.
 private func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+    return Dictionary(uniqueKeysWithValues: input.map { key, value in (key.rawValue, value) })
 }
 
 // Helper function inserted by Swift 4.2 migrator.
 private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
+    return input.rawValue
 }
