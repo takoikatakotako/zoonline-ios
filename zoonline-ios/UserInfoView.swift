@@ -1,6 +1,6 @@
 import UIKit
 
-class MyProfileView: UIView {
+class UserInfoView: UIView {
 
     //  各種高さ
     // Icon
@@ -9,7 +9,7 @@ class MyProfileView: UIView {
     // UserInfo
     var userThumbnail: UIImageView!
     var userName: UILabel!
-    var userEmail: UILabel!
+    var userDescription: UILabel!
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,12 +31,11 @@ class MyProfileView: UIView {
         userName.textAlignment = .center
         addSubview(userName)
 
-        userEmail = UILabel()
-        userEmail.numberOfLines = 0
-        userEmail.font = UIFont.systemFont(ofSize: 18)
-        userEmail.textAlignment = .center
-        userEmail.text = "inferior.to.octopus@gmail.com"
-        addSubview(userEmail)
+        userDescription = UILabel()
+        userDescription.numberOfLines = 0
+        userDescription.font = UIFont.systemFont(ofSize: 18)
+        userDescription.text = "自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己自己紹介自己紹介自己自己紹介自己紹介自己紹介自己紹介"
+        addSubview(userDescription)
     }
 
     override func layoutSubviews() {
@@ -46,6 +45,6 @@ class MyProfileView: UIView {
         userThumbnail.frame = CGRect(x: (width - userIconSize) / 2, y: 28, width: userIconSize, height: userIconSize)
         userThumbnail.layer.cornerRadius = userIconSize / 2
         userName.frame = CGRect(x: 0, y: 144, width: width, height: 32)
-        userEmail.frame = CGRect(x: width * 0.05, y: 180, width: width * 0.9, height: 40)
+        userDescription.frame = CGRect(x: width * 0.05, y: 180, width: width * 0.9, height: 80)
     }
 }

@@ -33,11 +33,13 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         title = "プロフィール"
         view.backgroundColor = UIColor(named: "backgroundGray")
 
-        // setActivityIndicator()
-        // getUserInfo()
+        // NavigationBar
+        let btn_back = UIBarButtonItem()
+        btn_back.title = ""
+        navigationItem.backBarButtonItem = btn_back
 
         let myProfileView = MyProfileView()
-        myProfileView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 260)
+        myProfileView.frame.size = CGSize(width: view.frame.width, height: 240)
 
         //テーブルビューの初期化
         userConfigTableView = UITableView.init(frame: CGRect.zero, style: .grouped)
@@ -48,7 +50,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         userConfigTableView.backgroundColor = UIColor(named: "backgroundGray")
         userConfigTableView.rowHeight = 60
-        self.view.addSubview(userConfigTableView)
+        view.addSubview(userConfigTableView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -57,22 +59,10 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
     // MARK: - Viewにパーツの設置
 
-    // MARK: くるくるの生成
-    func setActivityIndicator() {
-        indicator = UIActivityIndicatorView()
-        indicator.frame = CGRect(x: viewWidth * 0.35, y: viewHeight * 0.25, width: viewWidth * 0.3, height: viewWidth * 0.3)
-        indicator.hidesWhenStopped = true
-        indicator.style = UIActivityIndicatorView.Style.whiteLarge
-        indicator.color = UIColor.init(named: "main")
-        self.view.bringSubviewToFront(indicator)
-        self.view.addSubview(indicator)
-    }
-
     // MARK: プロフィールビュー
     func setProfielView() {
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
         //自分の情報
         let myProfielView: UIView = UIView()
         myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth * 0.56)
@@ -258,7 +248,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
     //名前の変更ボタン押されたら呼ばれます
     func changeUserName(newName: String) {
-
         if (newName.isEmpty) {
             SCLAlertView().showInfo("エラー", subTitle: "ユーザー名の入力が必要です。")
             return
@@ -268,7 +257,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
             "name": newName
         ]
 
-        //print(API_URL+"v0/auth/")
         Alamofire.request(API_URL + "v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
 
             switch response.result {
@@ -287,7 +275,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
     //メールアドレス変更
     func changeUserEmail(newEmail: String) {
-
         if (newEmail.isEmpty) {
             SCLAlertView().showInfo("エラー", subTitle: "Emailの入力が必要です。")
             return
@@ -312,7 +299,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.userDefaultsManager?.doLogout()
                     SCLAlertView().showInfo("メールアドレス変更", subTitle: "メールアドレスを変更しました。ログアウトします。")
-                    _ = self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.popViewController(animated: true)
                 }
 
             case .failure(let error):
@@ -329,10 +316,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             return changeUserInfoAry.count
         }
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return " "
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -352,57 +335,56 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        switch indexPath.row {
+        switch indexPath.section {
         case 0:
-            //プロフィールのプレビューが押された、ユーザー情報画面へ
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let userInfoView: UserInfoViewController = UserInfoViewController()
-            userInfoView.postUserID = appDelegate.userDefaultsManager?.userDefaults.integer(forKey: "KEY_MyUserID")
-            let btn_back = UIBarButtonItem()
-            btn_back.title = ""
-            navigationItem.backBarButtonItem = btn_back
-            navigationController?.pushViewController(userInfoView, animated: true)
-            break
-        case 2:
-            //ユーザー名の編集
+            let userInfoViewController: UserInfoViewController = UserInfoViewController()
+            navigationController?.pushViewController(userInfoViewController, animated: true)
+        case 1 :
+            switch indexPath.row {
+            case 0:
+                //プロフィールのプレビューが押された、ユーザー情報画面へ
+                let userInfoViewController: UserInfoViewController = UserInfoViewController()
+                navigationController?.pushViewController(userInfoViewController, animated: true)
+                break
+            case 1:
+                //ユーザー名の編集
 
-            let alert = SCLAlertView()
-            let txt = alert.addTextField(UtilityLibrary.getUserName())
-            alert.addButton("変更") {
-                print("Text value: \(String(describing: txt.text))")
-                self.changeUserName(newName: txt.text!)
-                self.indicator.startAnimating()
+                let alert = SCLAlertView()
+                let txt = alert.addTextField(UtilityLibrary.getUserName())
+                alert.addButton("変更") {
+                    print("Text value: \(String(describing: txt.text))")
+                    self.changeUserName(newName: txt.text!)
+                    self.indicator.startAnimating()
+                }
+                alert.showEdit("ユーザー名変更", subTitle: "新しいユーザー名を入力してください。")
+                break
+            case 2:
+                //プロフィールの編集
+                let vc: EditUserProfileViewController = EditUserProfileViewController()
+                navigationController?.pushViewController(vc, animated: true)
+                break
+            case 3:
+                //メールアドレスの変更
+                print("メールアドレス")
+                let alert = SCLAlertView()
+                let txt = alert.addTextField(UtilityLibrary.getUserEmail())
+                alert.addButton("変更") {
+                    print("Text value: \(String(describing: txt.text))")
+                    self.changeUserEmail(newEmail: txt.text!)
+                    self.indicator.startAnimating()
+                }
+                alert.showEdit("メールアドレス変更", subTitle: "新しいメールアドレスを入力してください。\n(変更後にログアウトします。)")
+                break
+            case 5:
+                //パスワードの変更
+                print("パスワード")
+                break
+
+            default: break
             }
-            alert.showEdit("ユーザー名変更", subTitle: "新しいユーザー名を入力してください。")
-            break
-        case 3:
-            //プロフィールの編集
-            let vc: EditUserProfileVC = EditUserProfileVC()
-
-            let btn_back = UIBarButtonItem()
-            btn_back.title = ""
-            navigationItem.backBarButtonItem = btn_back
-            navigationController?.pushViewController(vc, animated: true)
-            break
-        case 4:
-            //メールアドレスの変更
-            print("メールアドレス")
-            let alert = SCLAlertView()
-            let txt = alert.addTextField(UtilityLibrary.getUserEmail())
-            alert.addButton("変更") {
-                print("Text value: \(String(describing: txt.text))")
-                self.changeUserEmail(newEmail: txt.text!)
-                self.indicator.startAnimating()
-            }
-            alert.showEdit("メールアドレス変更", subTitle: "新しいメールアドレスを入力してください。\n(変更後にログアウトします。)")
-            break
-        case 5:
-            //パスワードの変更
-            print("パスワード")
-            break
-
         default: break
         }
+
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

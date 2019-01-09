@@ -3,7 +3,7 @@ import Alamofire
 import SwiftyJSON
 import SCLAlertView
 
-class EditUserProfileVC: UIViewController {
+class EditUserProfileViewController: UIViewController {
 
     //width, height
     private var viewWidth: CGFloat!
