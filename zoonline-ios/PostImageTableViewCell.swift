@@ -1,22 +1,22 @@
-//
-//  PostImageTableViewCell.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/07/02.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 class PostImageTableViewCell: UITableViewCell {
 
-    var postImageView: UIImageView = UIImageView()
+    var backgroundImageView: UIImageView!
+    var postImageView: UIImageView!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        self.contentView.addSubview(postImageView)
+        backgroundImageView = UIImageView()
+        backgroundImageView.isUserInteractionEnabled = false
+        backgroundImageView.image = UIImage(named: "photoimage")    // width: 1242, height: 767
+        contentView.addSubview(backgroundImageView)
 
+        postImageView = UIImageView()
+        postImageView.isUserInteractionEnabled = false
+        postImageView.contentMode = .scaleAspectFill
+        contentView.addSubview(postImageView)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -29,10 +29,8 @@ class PostImageTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        postImageView.isUserInteractionEnabled = false
+        backgroundImageView.frame = self.frame
         postImageView.frame = self.frame
-
     }
 }
 

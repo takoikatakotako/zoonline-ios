@@ -34,9 +34,8 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         view.backgroundColor = UIColor(named: "backgroundGray")
 
         // NavigationBar
-        let btn_back = UIBarButtonItem()
-        btn_back.title = ""
-        navigationItem.backBarButtonItem = btn_back
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
 
         let myProfileView = MyProfileView()
         myProfileView.frame.size = CGSize(width: view.frame.width, height: 240)

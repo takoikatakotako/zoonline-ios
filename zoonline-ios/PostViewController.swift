@@ -32,84 +32,42 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        title = "投稿する"
 
-        setNavigationBar()
-        setTableView()
-
-    }
-
-    /*
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-        
-        self.navigationItem.rightBarButtonItem = nil
-        
-        
-        if UtilityLibrary.isLogin() {
-            
-            //バーの右側に設置するボタンの作成
-            let rightNavBtn = UIBarButtonItem()
-            rightNavBtn.image = UIImage(named:"submit_nav_btn")!
-            rightNavBtn.action = #selector(postBarBtnClicked(sender:))
-            rightNavBtn.target = self
-            self.navigationItem.rightBarButtonItem = rightNavBtn
-            
-            
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let didSupport:Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Post"))!
-            if !didSupport {
-                setSupportBtn()
-            }
-        }else{
-            //
-            
-        }
-        self.postTableView.reloadData()
- 
- 
-    }
- */
-
-    // MARK: - Viewにパーツの設置
-    // MARK: ナビゲーションバー
-    func setNavigationBar() {
-
+        // NavigationBar
         let rightNavBtn = UIBarButtonItem()
         rightNavBtn.image = UIImage(named: "submit_nav_btn")!
-        //rightNavBtn.action = #selector(postBarBtnClicked(sender:))
-        //rightNavBtn.target = self
-        self.navigationItem.rightBarButtonItem = rightNavBtn
+        navigationItem.rightBarButtonItem = rightNavBtn
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(dismissView))
 
-        //ナビゲーションアイテムを作成
-        let titleLabel: NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
-        titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "投稿"
-        titleLabel.textColor = UIColor.white
-        self.navigationItem.titleView = titleLabel
-    }
-
-    //TableViewの設置
-    func setTableView() {
-        postTableView = UITableView()
+        postTableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         postTableView.frame = view.frame
         postTableView.dataSource = self
         postTableView.delegate = self
-        postTableView.separatorStyle = .none
         postTableView.backgroundColor = UIColor(named: "mypageArrowGray")
-        postTableView.separatorStyle = .none
-
+        // postTableView.separatorStyle = .none
+        postTableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         postTableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostImageTableViewCell.self))
         postTableView.register(PostSpaceTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostSpaceTableViewCell.self))
         postTableView.register(PostTextsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTextsTableViewCell.self))
         postTableView.register(PostTagTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTagTableViewCell.self))
         postTableView.register(NoLoginTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NoLoginTableViewCell.self))
+        postTableView.backgroundColor = .lightGray
         postTableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
-        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
-        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
-        self.view.addSubview(postTableView)
+        // UITableView.appearance().layoutMargins = UIEdgeInsets.zero
+        // UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
+        view.addSubview(postTableView)
+    }
+
+    @objc func dismissView() {
+        dismiss(animated: true, completion: nil)
+    }
+
+    // MARK: - Viewにパーツの設置
+
+    //TableViewの設置
+    func setTableView() {
+
     }
 
     // MARK: くるくるの生成
@@ -140,7 +98,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     // MARK: ButtonActions
     @objc func supportBtnClicked(sender: UIButton) {
-
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Post")
         supportBtn.removeFromSuperview()
@@ -256,147 +213,92 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    /*
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        
-        
-        if !UtilityLibrary.isLogin() {
-            return tableViewHeight
-        }
-        
-        if indexPath.row == 0 {
-            //投稿画像のView
-            return viewWidth*(postImageHeight/postImageWidth)
-        }else if indexPath.row == 2{
-            //タイトルのセル
-            return viewWidth*0.15
-        }else if indexPath.row == 4{
-            //コメントのセル
-            //コメントの高さを計算して、規定の値と比較。高い方を返す
-            var testHeight:CGFloat = UtilityLibrary.calcTextViewHeight(text: commentStr, width: viewWidth*0.8, font: UIFont.systemFont(ofSize: 14))
-            testHeight += viewWidth*0.03
-            if testHeight >  viewWidth*0.3{
-                return testHeight
-            }
-            return viewWidth*0.3
-        }else if indexPath.row == 6{
-            //タグのセル
-            
-            //タグに何も入っていないときは最初の規定値を返す
-            if tagsAry.count == 0 {
-                return viewWidth*0.3
-            }
-            
-            //サイズの計算
-            let rect:CGSize = UtilityLibrary.calcLabelSize(text: "#SampleTag", font: UIFont.boldSystemFont(ofSize: 16))
-
-            //タグ自体は80%、そして上下に0.5個分のマージン
-            let tagCellHeoght:CGFloat = rect.height*CGFloat(tagsAry.count+1)*(10/8)
-            return tagCellHeoght
-            
-        }else if indexPath.row == 8{
-            //サブミッションポリシーのボタン
-            return viewWidth*0.15
-        }
-        
-        else{
-            //スペース部分
-            return viewWidth*0.04
-        }
+    // MARK: - TableView Delegate Methods
+    // MARK: Section
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
     }
-    */
 
-    // MARK: テーブルビューのセルの数を設定する
+    // MARK: Headers
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+
+    // MARK: Rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        if !UtilityLibrary.isLogin() {
-            return 1
-        }
-
-        //通常は8
-        return 8
+        return 1
     }
 
-    // MARK: テーブルビューのセルの中身を設定する
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return view.frame.width * (767.0 / 1242.0)
+        }
+        return 240
+    }
 
-        if indexPath.row == 0 {
-            //画像選択View
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
             let cell: PostImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostImageTableViewCell.self), for: indexPath) as! PostImageTableViewCell
-            cell.postImageView.image = postImage
             return cell
-        }else if indexPath.row == 2 {
-            //画像選択View
+        } else if indexPath.section == 1 {
             let cell: PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
             cell.iconImageView.image = UIImage(named: "title_logo")
             cell.postTextView.text = titleStr
             return cell
-        }else if indexPath.row == 4 {
-            //画像選択View
-            let cell: PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
-            cell.iconImageView.image = UIImage(named: "comment_blue")
-            cell.postTextView.text = commentStr
-            return cell
-        }else if indexPath.row == 6 {
-            //タグの選択View
+        } else {
             let cell: PostTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTagTableViewCell.self), for: indexPath) as! PostTagTableViewCell
             cell.tagsAry = tagsAry
-
-            return cell
-        }else {
-
-            //スペーサーView
-            let cell: PostSpaceTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostSpaceTableViewCell.self), for: indexPath) as! PostSpaceTableViewCell
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         }
     }
 
-    // MARK: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
 
         /*
-        if !UtilityLibrary.isLogin() {
-            return
-        }
-        
-        //画面遷移、投稿詳細画面へ
-        if indexPath.row == 0{
-            
-            // インスタンス生成
-            myImagePicker = UIImagePickerController()
-            myImagePicker.delegate = self
-            myImagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-            myImagePicker.navigationBar.barTintColor = UIColor.init(named: "main")
-            myImagePicker.navigationBar.tintColor = UIColor.white
-            myImagePicker.navigationBar.isTranslucent = false
-            //myImagePicker.allowsEditing = false
-            self.present(myImagePicker, animated: true, completion: nil)
-            
-        }else if indexPath.row == 2 {
-            let writePosTextsVC:WritePostTextsVC = WritePostTextsVC()
-            writePosTextsVC.text = titleStr
-            writePosTextsVC.isTitle = true
-            writePosTextsVC.navTitle = "タイトル"
-            writePosTextsVC.delegate = self
-            self.navigationController?.pushViewController(writePosTextsVC, animated: true)
-        }else if indexPath.row == 4 {
-            let writePosTextsVC:WritePostTextsVC = WritePostTextsVC()
-            writePosTextsVC.text = commentStr
-            writePosTextsVC.isTitle = false
-            writePosTextsVC.navTitle = "コメント"
-            writePosTextsVC.delegate = self
-            self.navigationController?.pushViewController(writePosTextsVC, animated: true)
-        }else if indexPath.row == 6{
-            let SetPostTagsVC:SetPostTagsViewController = SetPostTagsViewController()
-            SetPostTagsVC.tagsAry = self.tagsAry
-            SetPostTagsVC.delegate = self
-            self.navigationController?.pushViewController(SetPostTagsVC, animated: true)
-        }
- 
- */
+         if !UtilityLibrary.isLogin() {
+         return
+         }
+         
+         //画面遷移、投稿詳細画面へ
+         if indexPath.row == 0{
+         
+         // インスタンス生成
+         myImagePicker = UIImagePickerController()
+         myImagePicker.delegate = self
+         myImagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+         myImagePicker.navigationBar.barTintColor = UIColor.init(named: "main")
+         myImagePicker.navigationBar.tintColor = UIColor.white
+         myImagePicker.navigationBar.isTranslucent = false
+         //myImagePicker.allowsEditing = false
+         self.present(myImagePicker, animated: true, completion: nil)
+         
+         }else if indexPath.row == 2 {
+         let writePosTextsVC:WritePostTextsVC = WritePostTextsVC()
+         writePosTextsVC.text = titleStr
+         writePosTextsVC.isTitle = true
+         writePosTextsVC.navTitle = "タイトル"
+         writePosTextsVC.delegate = self
+         self.navigationController?.pushViewController(writePosTextsVC, animated: true)
+         }else if indexPath.row == 4 {
+         let writePosTextsVC:WritePostTextsVC = WritePostTextsVC()
+         writePosTextsVC.text = commentStr
+         writePosTextsVC.isTitle = false
+         writePosTextsVC.navTitle = "コメント"
+         writePosTextsVC.delegate = self
+         self.navigationController?.pushViewController(writePosTextsVC, animated: true)
+         }else if indexPath.row == 6{
+         let SetPostTagsVC:SetPostTagsViewController = SetPostTagsViewController()
+         SetPostTagsVC.tagsAry = self.tagsAry
+         SetPostTagsVC.delegate = self
+         self.navigationController?.pushViewController(SetPostTagsVC, animated: true)
+         }
+         
+         */
     }
 
     /*

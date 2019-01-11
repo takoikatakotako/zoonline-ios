@@ -10,7 +10,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         super.viewDidLoad()
 
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = backButton
+        navigationItem.backBarButtonItem = backButton
 
         //ナビゲーションアイテムを作成
         title = "ひろば"
