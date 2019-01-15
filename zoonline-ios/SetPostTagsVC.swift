@@ -32,11 +32,11 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewWidth = self.view.frame.width
-        viewHeight =  self.view.frame.height
-        statusBarHeight = (self.navigationController?.navigationBar.frame.origin.y)!
-        navigationBarHeight = (self.navigationController?.navigationBar.frame.size.height)!
-        tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+        viewWidth = view.frame.width
+        viewHeight =  view.frame.height
+        statusBarHeight = (navigationController?.navigationBar.frame.origin.y)!
+        navigationBarHeight = (navigationController?.navigationBar.frame.size.height)!
+        tabBarHeight = (tabBarController?.tabBar.frame.size.height)!
 
         postTagLabelHeight = viewWidth*0.14
         setTagTextFieldSpaceHeight = viewWidth*0.02
@@ -182,14 +182,12 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
 
     //角丸ボタンが押されたら呼ばれます
     @objc func deleatBtnClicked(sender: UIButton) {
-
         tagsAry.remove(at: sender.tag)
         tagTableView.reloadData()
     }
 
     //タグ画面を閉じる
     @objc internal func doClose(sender: UIButton) {
-
-        _ = self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
 }

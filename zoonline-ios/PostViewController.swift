@@ -5,7 +5,9 @@ import SCLAlertView
 
 //class PostViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate,SetTagsDelegate{
 
-class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    var picker: UIImagePickerController!
 
     //width, height
 
@@ -28,6 +30,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //投稿フラグ
     var isSelectedImage = false
 
+    //
+    var image: UIImage!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,6 +45,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationItem.rightBarButtonItem = rightNavBtn
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(dismissView))
 
+        // TableView
         postTableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         postTableView.frame = view.frame
         postTableView.dataSource = self
@@ -57,6 +63,19 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         // UITableView.appearance().layoutMargins = UIEdgeInsets.zero
         // UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         view.addSubview(postTableView)
+
+        picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        picker.allowsEditing = true // Whether to make it possible to edit the size etc after selecting the image
+        // set picker's navigationBar appearance
+        picker.view.backgroundColor = .white
+        picker.navigationBar.isTranslucent = false
+        picker.navigationBar.barTintColor = .blue
+        picker.navigationBar.tintColor = .white
+        picker.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ] // Title color
     }
 
     @objc func dismissView() {
@@ -235,6 +254,11 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
+            if image != nil {
+                let width = CGFloat(image.cgImage!.width)
+                let height = CGFloat(image.cgImage!.height)
+                return view.frame.width * (height / width)
+            }
             return view.frame.width * (767.0 / 1242.0)
         }
         return 240
@@ -243,6 +267,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell: PostImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostImageTableViewCell.self), for: indexPath) as! PostImageTableViewCell
+            if image != nil {
+                cell.postImageView.image = image
+            }
             return cell
         } else if indexPath.section == 1 {
             let cell: PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
@@ -258,6 +285,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
+        present(picker, animated: true, completion: nil)
 
         /*
          if !UtilityLibrary.isLogin() {
@@ -299,6 +327,24 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
          }
          
          */
+    }
+
+    // MARK: ImageVicker Delegate Methods
+    // called when image picked
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            image = editedImage
+        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            image = originalImage
+        }
+        postTableView.reloadData()
+        dismiss(animated: true, completion: nil)
+    }
+
+    // called when cancel select image
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        // close picker modal
+        dismiss(animated: true, completion: nil)
     }
 
     /*
