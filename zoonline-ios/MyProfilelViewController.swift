@@ -26,7 +26,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     var userConfigTableView: UITableView!
 
     //表示するもの
-    let changeUserInfoAry: Array<String> = ["ユーザー名の変更", "自己紹介の変更", "メールアドレスの変更", "パスワードの変更"]
+    let changeUserInfoAry: [String] = ["ユーザー名の変更", "自己紹介の変更", "メールアドレスの変更", "パスワードの変更"]
 
     override func viewDidLoad() {
         super.viewDidLoad()

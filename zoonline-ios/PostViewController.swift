@@ -22,7 +22,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     public var postImageHeight: CGFloat! = 62
     public var titleStr: String! = "タイトルをつけてみよう"
     public var commentStr: String! = "コメントを書いてみよう"
-    var tagsAry: Array<String> = []
+    var tagsAry: [String] = []
 
     //サポートボタン
     let supportBtn: UIButton = UIButton()

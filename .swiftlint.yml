@@ -10,7 +10,6 @@ disabled_rules:
   - line_length
   - trailing_newline
   - statement_position
-  - syntactic_sugar
   - unneeded_break_in_switch
   - unction_body_length
   - multiple_closures_with_trailing_closure

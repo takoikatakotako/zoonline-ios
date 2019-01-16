@@ -2,7 +2,7 @@ import UIKit
 
 protocol SetTagsDelegate: class {
 
-    func setTags(ary: Array<String>)
+    func setTags(ary: [String])
 }
 
 class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -20,7 +20,7 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
     var tagTableViewHeight: CGFloat!
 
     //segue
-    var tagsAry: Array<String>!
+    var tagsAry: [String]!
 
     //ViewParts
     var setTagTextField: UITextField = UITextField()

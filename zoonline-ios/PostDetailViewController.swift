@@ -9,7 +9,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     private var postDetailTableView: UITableView!
 
-    private var myItems: Array<String> = []
+    private var myItems: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()

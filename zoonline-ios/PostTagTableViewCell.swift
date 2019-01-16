@@ -2,7 +2,7 @@ import UIKit
 
 class PostTagTableViewCell: UITableViewCell {
 
-    var tagsAry: Array<String> = []
+    var tagsAry: [String] = []
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
