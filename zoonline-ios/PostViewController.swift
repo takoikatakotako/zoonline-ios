@@ -54,7 +54,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         // postTableView.separatorStyle = .none
         postTableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         postTableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostImageTableViewCell.self))
-        postTableView.register(PostSpaceTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostSpaceTableViewCell.self))
         postTableView.register(PostTextsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTextsTableViewCell.self))
         postTableView.register(PostTagTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTagTableViewCell.self))
         postTableView.register(NoLoginTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NoLoginTableViewCell.self))
@@ -254,14 +253,20 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            if image != nil {
-                let width = CGFloat(image.cgImage!.width)
-                let height = CGFloat(image.cgImage!.height)
+            if image == nil {
+                let photoImage = UIImage(named: "photoimage")!.cgImage!
+                let width = CGFloat(photoImage.width)
+                let height = CGFloat(photoImage.height)
                 return view.frame.width * (height / width)
             }
-            return view.frame.width * (767.0 / 1242.0)
+            let width = CGFloat(image.cgImage!.width)
+            let height = CGFloat(image.cgImage!.height)
+            return view.frame.width * (height / width)
+        } else if indexPath.section == 1 {
+            return 160
+        } else {
+            return 160
         }
-        return 240
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -285,7 +290,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
-        present(picker, animated: true, completion: nil)
+        if indexPath.section == 0 {
+            present(picker, animated: true, completion: nil)
+        } else if indexPath.section == 1 {
+            let writePosTextsVC: WritePostTextsVC = WritePostTextsVC()
+            navigationController?.pushViewController(writePosTextsVC, animated: true)
+        }
 
         /*
          if !UtilityLibrary.isLogin() {
