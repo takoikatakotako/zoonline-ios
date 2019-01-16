@@ -33,17 +33,17 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
         super.viewDidLoad()
 
         viewWidth = view.frame.width
-        viewHeight =  view.frame.height
+        viewHeight = view.frame.height
         statusBarHeight = (navigationController?.navigationBar.frame.origin.y)!
         navigationBarHeight = (navigationController?.navigationBar.frame.size.height)!
         tabBarHeight = (tabBarController?.tabBar.frame.size.height)!
 
-        postTagLabelHeight = viewWidth*0.14
-        setTagTextFieldSpaceHeight = viewWidth*0.02
-        setTagTextFieldHeight = viewWidth*0.15
+        postTagLabelHeight = viewWidth * 0.14
+        setTagTextFieldSpaceHeight = viewWidth * 0.02
+        setTagTextFieldHeight = viewWidth * 0.15
         //tagTableViewHeight = viewHeight-(statusBarHeight+navigationBarHeight+postTagLabelHeight+setTagTextFieldSpaceHeight+setTagTextFieldHeight+tabBarHeight)
         tagTableViewHeight = viewHeight
-        self.view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.white
 
         setNavigationBar()
         setTextField()
@@ -68,7 +68,7 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
         navigationController!.navigationBar.topItem!.title = " "
         //ナビゲーションアイテムを作成
         let titleLabel: UILabel = UILabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
+        titleLabel.frame = CGRect(x: viewWidth * 0.3, y: 0, width: viewWidth * 0.4, height: navigationBarHeight)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "タグの編集"
         titleLabel.textColor = UIColor.white
@@ -87,12 +87,12 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
         grayView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: postTagLabelHeight)
         self.view.addSubview(grayView)
 
-        let label: UILabel  = UILabel()
-        label.frame = CGRect(x: viewWidth*0.1, y: 0, width: viewWidth*0.8, height: postTagLabelHeight)
+        let label: UILabel = UILabel()
+        label.frame = CGRect(x: viewWidth * 0.1, y: 0, width: viewWidth * 0.8, height: postTagLabelHeight)
         label.text = "投稿のタグ"
         self.view.addSubview(label)
 
-        setTagTextField.frame = CGRect(x: viewWidth*0.1, y: postTagLabelHeight+setTagTextFieldSpaceHeight, width: viewWidth*0.8, height: setTagTextFieldHeight)
+        setTagTextField.frame = CGRect(x: viewWidth * 0.1, y: postTagLabelHeight + setTagTextFieldSpaceHeight, width: viewWidth * 0.8, height: setTagTextFieldHeight)
         setTagTextField.text = "登録するタグ名"
         setTagTextField.textColor = UIColor.gray
         setTagTextField.textAlignment = NSTextAlignment.left
@@ -104,7 +104,7 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
         setTagTextFieldLine.backgroundColor = UIColor.gray
         var linePos: CGFloat = postTagLabelHeight + setTagTextFieldSpaceHeight
         linePos = linePos + setTagTextFieldHeight!
-        setTagTextFieldLine.frame = CGRect(x: viewWidth*0.1, y: linePos, width: viewWidth*0.8, height: 1)
+        setTagTextFieldLine.frame = CGRect(x: viewWidth * 0.1, y: linePos, width: viewWidth * 0.8, height: 1)
         self.view.addSubview(setTagTextFieldLine)
 
     }
@@ -114,7 +114,7 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
         //デリゲートの設定
         tagTableView.delegate = self
         tagTableView.dataSource = self
-        tagTableView.frame = CGRect(x: viewWidth*0.1, y: (postTagLabelHeight+setTagTextFieldSpaceHeight+setTagTextFieldHeight!)+2, width: viewWidth*0.8, height: tagTableViewHeight)
+        tagTableView.frame = CGRect(x: viewWidth * 0.1, y: (postTagLabelHeight + setTagTextFieldSpaceHeight + setTagTextFieldHeight!) + 2, width: viewWidth * 0.8, height: tagTableViewHeight)
         tagTableView.register(TagListTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TagListTableViewCell.self))
         tagTableView.separatorInset = UIEdgeInsets.zero
         tagTableView.separatorInset = .zero
@@ -124,28 +124,28 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
         self.view.addSubview(tagTableView)
     }
 
-     //UITextFieldが編集された直前に呼ばれる
+    //UITextFieldが編集された直前に呼ばれる
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textFieldDidBeginEditing: \(textField.text!)")
 
-        if textField.text == "登録するタグ名"{
+        if textField.text == "登録するタグ名" {
             textField.text = ""
         }
     }
 
-     //UITextFieldが編集された直後に呼ばれる
+    //UITextFieldが編集された直後に呼ばれる
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textFieldDidEndEditing: \(textField.text!)")
     }
 
-     //改行ボタンが押された際に呼ばれる
+    //改行ボタンが押された際に呼ばれる
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn \(textField.text!)")
 
         // 改行ボタンが押されたらKeyboardを閉じる処理.
         textField.resignFirstResponder()
 
-        if  textField.text == ""{
+        if textField.text == "" {
             return true
         }
 
@@ -154,40 +154,40 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
         textField.text = "登録するタグ名"
 
         return true
-    }
+        }
 
-    // MARK: テーブルビューのセルの数を設定する
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //テーブルビューのセルの数はmyItems配列の数とした
-        return tagsAry.count
-    }
+        // MARK: テーブルビューのセルの数を設定する
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            //テーブルビューのセルの数はmyItems配列の数とした
+            return tagsAry.count
+        }
 
-    // MARK: テーブルビューのセルの中身を設定する
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //myItems配列の中身をテキストにして登録した
-        let cell: TagListTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(TagListTableViewCell.self), for: indexPath) as! TagListTableViewCell
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        cell.layoutMargins = UIEdgeInsets.zero
-        cell.tagLabel.text = tagsAry[tagsAry.count-indexPath.row-1]
+        // MARK: テーブルビューのセルの中身を設定する
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            //myItems配列の中身をテキストにして登録した
+            let cell: TagListTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(TagListTableViewCell.self), for: indexPath) as! TagListTableViewCell
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            cell.layoutMargins = UIEdgeInsets.zero
+            cell.tagLabel.text = tagsAry[tagsAry.count - indexPath.row - 1]
 
-        cell.deleateBtn.tag = tagsAry.count-indexPath.row-1
-        cell.deleateBtn.addTarget(self, action: #selector(deleatBtnClicked(sender:)), for: .touchUpInside)
-        return cell
-    }
+            cell.deleateBtn.tag = tagsAry.count - indexPath.row - 1
+            cell.deleateBtn.addTarget(self, action: #selector(deleatBtnClicked(sender:)), for: .touchUpInside)
+            return cell
+        }
 
-    // MARK: テーブルビューのセルが押されたら呼ばれる
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
-    }
+        // MARK: テーブルビューのセルが押されたら呼ばれる
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            print("\(indexPath.row)番のセルを選択しました！ ")
+        }
 
-    //角丸ボタンが押されたら呼ばれます
-    @objc func deleatBtnClicked(sender: UIButton) {
-        tagsAry.remove(at: sender.tag)
-        tagTableView.reloadData()
-    }
+        //角丸ボタンが押されたら呼ばれます
+        @objc func deleatBtnClicked(sender: UIButton) {
+            tagsAry.remove(at: sender.tag)
+            tagTableView.reloadData()
+        }
 
-    //タグ画面を閉じる
-    @objc internal func doClose(sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        //タグ画面を閉じる
+        @objc internal func doClose(sender: UIButton) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
-}

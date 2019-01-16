@@ -5,7 +5,7 @@ import SCLAlertView
 
 //class PostViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate,SetTagsDelegate{
 
-class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SetTextDelegate {
 
     var picker: UIImagePickerController!
 
@@ -40,6 +40,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         title = "投稿する"
 
         // NavigationBar
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+
         let rightNavBtn = UIBarButtonItem()
         rightNavBtn.image = UIImage(named: "submit_nav_btn")!
         navigationItem.rightBarButtonItem = rightNavBtn
@@ -294,6 +297,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             present(picker, animated: true, completion: nil)
         } else if indexPath.section == 1 {
             let writePosTextsVC: WritePostTextsVC = WritePostTextsVC()
+            writePosTextsVC.delegate = self
             navigationController?.pushViewController(writePosTextsVC, animated: true)
         }
 
@@ -337,6 +341,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
          }
          
          */
+    }
+
+    func setTitle(str: String) {
+
+    }
+
+    func setComment(str: String) {
+
     }
 
     // MARK: ImageVicker Delegate Methods

@@ -9,13 +9,14 @@ class PostTextsTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         iconImageView.isUserInteractionEnabled = false
-        self.contentView.addSubview(iconImageView)
+        iconImageView.contentMode = .scaleAspectFit
+        contentView.addSubview(iconImageView)
 
         postTextView.isUserInteractionEnabled = false
         postTextView.isEditable = false
-        postTextView.font = UIFont.systemFont(ofSize: 14)
+        postTextView.font = UIFont.systemFont(ofSize: 18)
         postTextView.textColor = UIColor.gray
-        self.contentView.addSubview(postTextView)
+        contentView.addSubview(postTextView)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -29,10 +30,13 @@ class PostTextsTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let cellWidth: CGFloat = self.frame.width
-        let cellHeight: CGFloat = self.frame.height
+        let width = self.frame.width
+        let height = self.frame.height
+        let sideMargin: CGFloat = 12
+        let topMargin: CGFloat = 12
+        let iconSize: CGFloat = 32
 
-        iconImageView.frame =  CGRect(x: cellWidth*0.06, y: cellWidth*0.03, width: cellWidth*0.08, height: cellWidth*0.08)
-        postTextView.frame = CGRect(x: cellWidth*0.18, y: cellWidth*0.02, width: cellWidth*0.8, height: cellHeight-(cellWidth*0.02))
+        iconImageView.frame = CGRect(x: sideMargin, y: topMargin, width: iconSize, height: iconSize)
+        postTextView.frame = CGRect(x: sideMargin * 2 + iconSize, y: topMargin, width: width - (sideMargin * 3 + iconSize), height: height - topMargin * 2)
     }
 }
