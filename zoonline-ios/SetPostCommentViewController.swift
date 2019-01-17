@@ -12,6 +12,17 @@ class SetPostCommentViewController: UIViewController, UITextViewDelegate {
     private var textView: UITextView!
     weak var delegate: SetTextDelegate?
 
+    init(comment: String?) {
+        super.init(nibName: nil, bundle: nil)
+        if let text = comment {
+            self.text = text
+        }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

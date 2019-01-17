@@ -353,8 +353,8 @@
 			children = (
 				8DC7190B1F08A032003C5E00 /* PostTableCells */,
 				8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */,
-				8DC719161F08F3A4003C5E00 /* SetPostTagsVC.swift */,
 				8DC719121F08BC3F003C5E00 /* SetPostCommentViewController.swift */,
+				8DC719161F08F3A4003C5E00 /* SetPostTagsVC.swift */,
 			);
 			name = Post;
 			sourceTree = "<group>";

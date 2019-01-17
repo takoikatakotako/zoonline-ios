@@ -72,11 +72,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         // set picker's navigationBar appearance
         picker.view.backgroundColor = .white
         picker.navigationBar.isTranslucent = false
-        picker.navigationBar.barTintColor = .blue
-        picker.navigationBar.tintColor = .white
-        picker.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.white
-        ] // Title color
+        picker.navigationBar.barTintColor = UIColor(named: "main")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -159,7 +155,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func doPost(pic_id: String) {
-
         let parameters: Parameters = [
             "title": titleStr,
             "caption": comment,
@@ -168,7 +163,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         ]
 
         Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
-
             switch response.result {
             case .success:
                 print("Validation Successful")
@@ -252,7 +246,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.section == 0 {
             present(picker, animated: true, completion: nil)
         } else if indexPath.section == 1 {
-            let writeCommentViewController: SetPostCommentViewController = SetPostCommentViewController()
+            let writeCommentViewController = SetPostCommentViewController(comment: comment)
             writeCommentViewController.delegate = self
             navigationController?.pushViewController(writeCommentViewController, animated: true)
         }
