@@ -17,11 +17,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
 
     //datas
-    public var postImage: UIImage! = UIImage(named: "photoimage")
     public var postImageWidth: CGFloat! = 100
     public var postImageHeight: CGFloat! = 62
     public var titleStr: String! = "タイトルをつけてみよう"
-    public var commentStr: String! = "コメントを書いてみよう"
     var tagsAry: [String] = []
 
     //サポートボタン
@@ -31,7 +29,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var isSelectedImage = false
 
     //
-    var image: UIImage!
+    private var image: UIImage!
+    private var comment: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +77,11 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         picker.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.white
         ] // Title color
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        postTableView.reloadData()
     }
 
     @objc func dismissView() {
@@ -142,70 +146,23 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             return
         }
 
-        if commentStr == "コメントを書いてみよう" {
+        if comment == "コメントを書いてみよう" {
             SCLAlertView().showInfo("エラー", subTitle: "タイトルを入力して下さい。")
             return
         }
 
-        if commentStr.isEmpty {
+        if comment.isEmpty {
             SCLAlertView().showInfo("エラー", subTitle: "コメントを入力してください。")
             return
         }
-
-        doImageUpload()
         self.indicator.startAnimating()
-    }
-
-    func doImageUpload() {
-
-        let userID: String = UtilityLibrary.getUserID()
-        let imageData = postImage.pngData()!
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
-            multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to: EveryZooAPI.getUploadPicture(), headers: UtilityLibrary.getAPIAccessHeader()) { (result) in
-            switch result {
-            case .success(let upload, _, _):
-
-                upload.uploadProgress(closure: { (_) in
-                    //print("Upload Progress: \(Progress.fractionCompleted)")
-                })
-
-                upload.responseJSON { response in
-                    print(response.request ?? "response.request")  // original URL request
-                    print(response.response ?? "response.response") // URL response
-                    print(response.data ?? "response.data")     // server data
-                    print(response.result)   // result of response serialization
-
-                    switch response.result {
-                    case .success:
-                        print("Validation Successful")
-                        let json: JSON = JSON(response.result.value ?? kill)
-                        print(json)
-
-                        if json["is_success"].boolValue {
-                            let pic_id: String = json["picture"]["pic_id"].stringValue
-
-                            self.doPost(pic_id: pic_id)
-                        }
-
-                    case .failure(let error):
-                        print(error)
-
-                    }
-                }
-
-            case .failure(let encodingError):
-                print(encodingError)
-            }
-        }
     }
 
     func doPost(pic_id: String) {
 
         let parameters: Parameters = [
             "title": titleStr,
-            "caption": commentStr,
+            "caption": comment,
             "pic_id": pic_id,
             "tags": tagsAry
         ]
@@ -281,8 +238,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         } else if indexPath.section == 1 {
             let cell: PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
-            cell.iconImageView.image = UIImage(named: "title_logo")
-            cell.postTextView.text = titleStr
+            cell.postTextView.text = (comment == nil) ? "コメントを書いて見ましょう" : comment
             return cell
         } else {
             let cell: PostTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTagTableViewCell.self), for: indexPath) as! PostTagTableViewCell
@@ -296,9 +252,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.section == 0 {
             present(picker, animated: true, completion: nil)
         } else if indexPath.section == 1 {
-            let writePosTextsVC: WritePostTextsVC = WritePostTextsVC()
-            writePosTextsVC.delegate = self
-            navigationController?.pushViewController(writePosTextsVC, animated: true)
+            let writeCommentViewController: SetPostCommentViewController = SetPostCommentViewController()
+            writeCommentViewController.delegate = self
+            navigationController?.pushViewController(writeCommentViewController, animated: true)
         }
 
         /*
@@ -343,12 +299,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
          */
     }
 
-    func setTitle(str: String) {
-
-    }
-
-    func setComment(str: String) {
-
+    func setComment(comment: String) {
+        self.comment = comment
     }
 
     // MARK: ImageVicker Delegate Methods
@@ -359,7 +311,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             image = originalImage
         }
-        postTableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
 

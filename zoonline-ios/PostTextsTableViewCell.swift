@@ -10,6 +10,7 @@ class PostTextsTableViewCell: UITableViewCell {
 
         iconImageView.isUserInteractionEnabled = false
         iconImageView.contentMode = .scaleAspectFit
+        iconImageView.image = UIImage(named: "title_logo")
         contentView.addSubview(iconImageView)
 
         postTextView.isUserInteractionEnabled = false
