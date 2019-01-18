@@ -1,6 +1,6 @@
 import UIKit
 
-class PostTextsTableViewCell: UITableViewCell {
+class PostCommentTableViewCell: UITableViewCell {
 
     var iconImageView: UIImageView = UIImageView()
     var postTextView: UITextView = UITextView()
@@ -31,8 +31,8 @@ class PostTextsTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let width = self.frame.width
-        let height = self.frame.height
+        let width = frame.width
+        let height = frame.height
         let sideMargin: CGFloat = 12
         let topMargin: CGFloat = 12
         let iconSize: CGFloat = 32

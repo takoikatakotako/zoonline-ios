@@ -2,16 +2,19 @@ import UIKit
 
 class TagListTableViewCell: UITableViewCell {
 
-    var tagLabel: UILabel = UILabel()
+    var tagLabel: UILabel!
     var deleateBtn: UIButton = UIButton()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        //self.contentView.backgroundColor = UIColor.blue
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
+        self.layoutMargins = UIEdgeInsets.zero
+
+        tagLabel = UILabel()
         tagLabel.textAlignment = NSTextAlignment.center
-        self.contentView.addSubview(tagLabel)
-        self.contentView.addSubview(deleateBtn)
+        contentView.addSubview(tagLabel)
+        contentView.addSubview(deleateBtn)
     }
 
     required init(coder aDecoder: NSCoder) {

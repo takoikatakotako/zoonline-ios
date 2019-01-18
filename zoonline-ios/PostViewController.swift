@@ -3,9 +3,7 @@ import Alamofire
 import SwiftyJSON
 import SCLAlertView
 
-//class PostViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SetTextDelegate,SetTagsDelegate{
-
-class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SetTextDelegate {
+class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SetTextDelegate, SetTagsDelegate {
 
     var picker: UIImagePickerController!
 
@@ -56,7 +54,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         // postTableView.separatorStyle = .none
         postTableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         postTableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostImageTableViewCell.self))
-        postTableView.register(PostTextsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTextsTableViewCell.self))
+        postTableView.register(PostCommentTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostCommentTableViewCell.self))
         postTableView.register(PostTagTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostTagTableViewCell.self))
         postTableView.register(NoLoginTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NoLoginTableViewCell.self))
         postTableView.backgroundColor = .lightGray
@@ -231,12 +229,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             return cell
         } else if indexPath.section == 1 {
-            let cell: PostTextsTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTextsTableViewCell.self), for: indexPath) as! PostTextsTableViewCell
+            let cell: PostCommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostCommentTableViewCell.self), for: indexPath) as! PostCommentTableViewCell
             cell.postTextView.text = (comment == nil) ? "コメントを書いて見ましょう" : comment
             return cell
         } else {
             let cell: PostTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTagTableViewCell.self), for: indexPath) as! PostTagTableViewCell
-            cell.tagsAry = tagsAry
+            cell.tagsAry = ["Str", "sdfsdf"]
             return cell
         }
     }
@@ -249,52 +247,21 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             let writeCommentViewController = SetPostCommentViewController(comment: comment)
             writeCommentViewController.delegate = self
             navigationController?.pushViewController(writeCommentViewController, animated: true)
+        }  else if indexPath.section == 2 {
+            let setPostTagsViewController = SetPostTagsViewController()
+            setPostTagsViewController.delegate = self
+            setPostTagsViewController.tagsAry = ["Str", "sdfsdf"]
+            navigationController?.pushViewController(setPostTagsViewController, animated: true)
         }
-
-        /*
-         if !UtilityLibrary.isLogin() {
-         return
-         }
-         
-         //画面遷移、投稿詳細画面へ
-         if indexPath.row == 0{
-         
-         // インスタンス生成
-         myImagePicker = UIImagePickerController()
-         myImagePicker.delegate = self
-         myImagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-         myImagePicker.navigationBar.barTintColor = UIColor.init(named: "main")
-         myImagePicker.navigationBar.tintColor = UIColor.white
-         myImagePicker.navigationBar.isTranslucent = false
-         //myImagePicker.allowsEditing = false
-         self.present(myImagePicker, animated: true, completion: nil)
-         
-         }else if indexPath.row == 2 {
-         let writePosTextsVC:WritePostTextsVC = WritePostTextsVC()
-         writePosTextsVC.text = titleStr
-         writePosTextsVC.isTitle = true
-         writePosTextsVC.navTitle = "タイトル"
-         writePosTextsVC.delegate = self
-         self.navigationController?.pushViewController(writePosTextsVC, animated: true)
-         }else if indexPath.row == 4 {
-         let writePosTextsVC:WritePostTextsVC = WritePostTextsVC()
-         writePosTextsVC.text = commentStr
-         writePosTextsVC.isTitle = false
-         writePosTextsVC.navTitle = "コメント"
-         writePosTextsVC.delegate = self
-         self.navigationController?.pushViewController(writePosTextsVC, animated: true)
-         }else if indexPath.row == 6{
-         let SetPostTagsVC:SetPostTagsViewController = SetPostTagsViewController()
-         SetPostTagsVC.tagsAry = self.tagsAry
-         SetPostTagsVC.delegate = self
-         self.navigationController?.pushViewController(SetPostTagsVC, animated: true)
-         }
-         
-         */
     }
 
+    // Delate Mathods
     func setComment(comment: String) {
         self.comment = comment
+    }
+
+    func setTags(ary: [String]) {
+
     }
 
     // MARK: ImageVicker Delegate Methods
@@ -315,17 +282,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     /*
-    func setTitle(str:String){
-        titleStr = str
-    }
-    
-    func setComment(str:String) {
-        commentStr = str
-    }
-    
-    func setTags(ary:Array<String>){
-        tagsAry = ary
-    }
+
     
     //画像が選択された時に呼ばれる.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
