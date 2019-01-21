@@ -6,6 +6,10 @@ target 'zoonline-ios' do
   use_frameworks!
 
   # Pods for EveryoneZoo
+  pod 'Firebase/Core'
+  pod 'FirebaseUI'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
   pod 'SCLAlertView', '~> 0.8'
   pod 'Alamofire'
   pod 'SwiftyJSON'

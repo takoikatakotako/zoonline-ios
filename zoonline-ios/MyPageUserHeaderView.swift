@@ -1,6 +1,6 @@
 import UIKit
 
-class MyPageUserCellBtn: UIButton {
+class MyPageUserHeaderView: UIButton {
 
     let iconImgView: UIImageView = UIImageView()
     let userNameLabel: UILabel = UILabel()

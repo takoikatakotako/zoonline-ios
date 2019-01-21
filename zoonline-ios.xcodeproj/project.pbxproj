@@ -14,6 +14,7 @@
 		17AD3CE721C2107800A6DC9E /* UserInfoCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */; };
 		17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */; };
 		17AD3CED21C3BF7100A6DC9E /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CEC21C3BF7100A6DC9E /* UserInfoView.swift */; };
+		17FBE89E21F5752F00196CEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17FBE89D21F5752F00196CEF /* GoogleService-Info.plist */; };
 		835239FDC3EA5D1B0674910F /* Pods_zoonline_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54AA7E29AF57EBFE420AA58 /* Pods_zoonline_iosTests.framework */; };
 		8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */; };
 		8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */; };
@@ -76,7 +77,7 @@
 		8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */; };
 		8DF862E11E992CB200FBF176 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862E01E992CB200FBF176 /* PostDetailViewController.swift */; };
 		8DF9CFE41EE959F9002B8459 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF9CFE31EE959F9002B8459 /* WebViewController.swift */; };
-		8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */; };
+		8DFBFD611EC8029100E1EA57 /* MyPageUserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBFD601EC8029100E1EA57 /* MyPageUserHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCollectionReusableView.swift; sourceTree = "<group>"; };
 		17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentViewController.swift; sourceTree = "<group>"; };
 		17AD3CEC21C3BF7100A6DC9E /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		17FBE89D21F5752F00196CEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		19243D79DF1EB566ABF62814 /* Pods-zoonline-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		232224ED8A7FFF835259B090 /* Pods_zoonline_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zoonline_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F3F8A8E3B7639D596420D56 /* Pods-zoonline-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosTests/Pods-zoonline-iosTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,7 +178,7 @@
 		8DF862DE1E991E1F00FBF176 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8DF862E01E992CB200FBF176 /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		8DF9CFE31EE959F9002B8459 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageUserCellBtn.swift; sourceTree = "<group>"; };
+		8DFBFD601EC8029100E1EA57 /* MyPageUserHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageUserHeaderView.swift; sourceTree = "<group>"; };
 		AFCBE60A9317FF3B3051F278 /* Pods_zoonline_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zoonline_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9473A82F86608DFF7AF0DA2 /* Pods-zoonline-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-ios/Pods-zoonline-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		E54AA7E29AF57EBFE420AA58 /* Pods_zoonline_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zoonline_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -362,9 +364,9 @@
 		8D6215AB1EC3685200593E55 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */,
 				8D6215AC1EC3689600593E55 /* MyPageViewController.swift */,
-				8DFBFD601EC8029100E1EA57 /* MyPageUserCellBtn.swift */,
+				8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */,
+				8DFBFD601EC8029100E1EA57 /* MyPageUserHeaderView.swift */,
 				8D5121251F0D405B00C6D774 /* MyPageItem */,
 			);
 			name = MyPage;
@@ -427,6 +429,7 @@
 				8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */,
 				8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */,
 				8D73B4301E7AE08F00E3B301 /* Info.plist */,
+				17FBE89D21F5752F00196CEF /* GoogleService-Info.plist */,
 			);
 			name = Zoonline;
 			path = "zoonline-ios";
@@ -556,6 +559,7 @@
 				8D73B41F1E7AE08F00E3B301 /* Resources */,
 				D6FB85B5DDCBAD93FB9B0ABD /* [CP] Embed Pods Frameworks */,
 				179F8C5F21BA1DC600F728D1 /* ShellScript */,
+				054846552B2D62203DF22121 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -662,6 +666,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D73B42F1E7AE08F00E3B301 /* LaunchScreen.storyboard in Resources */,
+				17FBE89E21F5752F00196CEF /* GoogleService-Info.plist in Resources */,
 				8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */,
 				8D73B42C1E7AE08F00E3B301 /* Assets.xcassets in Resources */,
 			);
@@ -684,6 +689,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		054846552B2D62203DF22121 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-zoonline-ios/Pods-zoonline-ios-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAnonymousAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebasePhoneAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseTwitterAuthUI.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAnonymousAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFacebookAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebasePhoneAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseTwitterAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-zoonline-ios/Pods-zoonline-ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		179F8C5F21BA1DC600F728D1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -755,20 +798,48 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-zoonline-ios/Pods-zoonline-ios-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -856,7 +927,7 @@
 				8DDAF0DD1ED184790079D443 /* FriendsListViewController.swift in Sources */,
 				8D532C501FC4904C00D2E532 /* SupportBtn.swift in Sources */,
 				8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */,
-				8DFBFD611EC8029100E1EA57 /* MyPageUserCellBtn.swift in Sources */,
+				8DFBFD611EC8029100E1EA57 /* MyPageUserHeaderView.swift in Sources */,
 				8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */,
 				8D6A73EE1F83BE2A00902AFC /* UserCollectionViewCell.swift in Sources */,
 				8DF862E11E992CB200FBF176 /* PostDetailViewController.swift in Sources */,

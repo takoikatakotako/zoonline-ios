@@ -1,12 +1,17 @@
 import UIKit
 import Social
+import FirebaseAuth
+import GoogleSignIn
 import SCLAlertView
 import SDWebImage
 
-class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GIDSignInUIDelegate {
+
+    var handle: AuthStateDidChangeListenerHandle!
+    var isSignedIn: Bool!
 
     //ユーザー数の
-    var userCellBtn: MyPageUserCellBtn!
+    var userHeaderView: MyPageUserHeaderView!
 
     //テーブルビューインスタンス
     private var myPageTableView: UITableView!
@@ -32,23 +37,16 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //ナビゲーションアイテムを作成
-        let titleLabel: NavigationBarLabel = NavigationBarLabel(frame: CGRect(x: view.frame.width, y: 0, width: view.frame.width, height: 40))
-        titleLabel.text = "マイページ"
-        navigationItem.titleView = titleLabel
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backButton
+        GIDSignIn.sharedInstance().uiDelegate = self
+
+        title = "マイページ"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         // header
-        userCellBtn = MyPageUserCellBtn(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
-        userCellBtn.backgroundColor = UIColor.white
-        userCellBtn.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for: .touchUpInside)
-        let defaultIcon = UIImage(named: "common-icon-default")
-        if let url = URL(string: UtilityLibrary.getUserIconUrl()) {
-            userCellBtn.iconImgView.sd_setImage(with: url, placeholderImage: defaultIcon)
-        } else {
-            userCellBtn.iconImgView.image = defaultIcon
-        }
+        userHeaderView = MyPageUserHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
+        userHeaderView.backgroundColor = UIColor.white
+        userHeaderView.addTarget(self, action: #selector(MyPageViewController.goMyProfile(sender:)), for: .touchUpInside)
+        userHeaderView.iconImgView.image = UIImage(named: "common-icon-default")
 
         // table
         myPageTableView = UITableView(frame: view.frame, style: UITableView.Style.grouped)
@@ -57,26 +55,36 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myPageTableView.backgroundColor = UIColor(named: "mypageArrowGray")
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(MyPageTableViewCell.self))
         myPageTableView.rowHeight = 48
-        myPageTableView.tableHeaderView = userCellBtn
+        myPageTableView.tableHeaderView = userHeaderView
         view.addSubview(myPageTableView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        //user用のセル
-        if (UtilityLibrary.isLogin()) {
-            //ログイン
-            userCellBtn.userNameLabel.text = UtilityLibrary.getUserName()
-            userCellBtn.userMailAdressLabel.text = UtilityLibrary.getUserEmail()
-        } else {
-            //未ログイン
-            userCellBtn.userNameLabel.text = "未ログイン"
-            userCellBtn.userMailAdressLabel.text = "ログインしてください"
-            userCellBtn.iconImgView.image = UIImage(named: "common-icon-default")
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            print(auth)
+            print(user)
         }
 
+        if let user = Auth.auth().currentUser {
+            // User is signed in.
+            isSignedIn = true
+            userHeaderView.userNameLabel.text = user.displayName
+            userHeaderView.userMailAdressLabel.text = user.email
+        } else {
+            // No user is signed in.
+            isSignedIn = false
+            userHeaderView.userNameLabel.text = "未ログイン"
+            userHeaderView.userMailAdressLabel.text = "ログインしてください"
+            userHeaderView.iconImgView.image = UIImage(named: "common-icon-default")
+        }
         myPageTableView.reloadData()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Auth.auth().removeStateDidChangeListener(handle!)
     }
 
     // MARK: - TableViewのデリゲートメソッド
@@ -108,7 +116,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     //テーブルに表示する配列の総数を返す.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         switch section {
         case 0:
             return userInfoTitle.count
@@ -119,7 +126,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         default:
             return 0
         }
-
     }
 
     //Cellに値を設定する.
@@ -222,9 +228,13 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     //basicボタンが押されたら呼ばれます
     @objc internal func goMyProfile(sender: UIButton) {
-        let myProfilelViewController = MyProfilelViewController()
-        myProfilelViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(myProfilelViewController, animated: true)
+        if isSignedIn {
+            let myProfilelViewController = MyProfilelViewController()
+            myProfilelViewController.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(myProfilelViewController, animated: true)
+        } else {
+            showConfirmAlert()
+        }
         // ログイン
         // let loginVC = LoginViewController()
         // let navigationController = UINavigationController(rootViewController: loginVC)
@@ -238,5 +248,22 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         contactView.navTitle = navTitle
         contactView.view.backgroundColor = .white
         present(UINavigationController(rootViewController: contactView), animated: true, completion: nil)
+    }
+
+    func showConfirmAlert() {
+        let actionAlert = UIAlertController(title: "", message: "Googleログインが必要です", preferredStyle: UIAlertController.Style.alert)
+
+        // set login alert
+        let kabigonAction = UIAlertAction(title: "ログイン", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+            GIDSignIn.sharedInstance().signIn()
+        })
+        actionAlert.addAction(kabigonAction)
+
+        // set cancel alert
+        let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
+        actionAlert.addAction(cancelAction)
+
+        // show alert
+        present(actionAlert, animated: true, completion: nil)
     }
 }
