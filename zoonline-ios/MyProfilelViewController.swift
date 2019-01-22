@@ -1,10 +1,14 @@
 import UIKit
+import FirebaseAuth
+import GoogleSignIn
 import Alamofire
 import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
 class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    var handle: AuthStateDidChangeListenerHandle!
 
     var indicator: UIActivityIndicatorView!
 
@@ -40,15 +44,10 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        picker.allowsEditing = true // Whether to make it possible to edit the size etc after selecting the image
-        // set picker's navigationBar appearance
+        picker.allowsEditing = true
         picker.view.backgroundColor = .white
         picker.navigationBar.isTranslucent = false
         picker.navigationBar.barTintColor = .blue
-        picker.navigationBar.tintColor = .white
-        picker.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.white
-        ] // Title color
 
         //テーブルビューの初期化
         userConfigTableView = UITableView.init(frame: view.frame, style: .grouped)
@@ -63,6 +62,25 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            print(auth)
+            print(user)
+        }
+
+        if let user = Auth.auth().currentUser {
+            // User is signed in.
+            myProfileView.userName.text = user.displayName
+            myProfileView.userEmail.text = user.email
+        } else {
+            // No user is signed in.
+            // TODO: 即ログアウトさせる
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Auth.auth().removeStateDidChangeListener(handle!)
     }
 
     // MARK: - Viewにパーツの設置
@@ -82,169 +100,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-    }
-
-    func doImageUpload(postImage: UIImage) {
-
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let userID: String = (appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserID"))!
-
-        let imageData = postImage.pngData()!
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(imageData, withName: "picture", fileName: "file_name.png", mimeType: "image/png")
-            multipartFormData.append(userID.data(using: String.Encoding.utf8)!, withName: "user_id")
-        }, to: EveryZooAPI.getUploadPicture(), headers: UtilityLibrary.getAPIAccessHeader()) { (result) in
-            switch result {
-            case .success(let upload, _, _):
-
-                upload.uploadProgress(closure: { (_) in
-                    //print("Upload Progress: \(Progress.fractionCompleted)")
-                })
-
-                upload.responseJSON { response in
-                    print(response.request ?? "response.request") // original URL request
-                    print(response.response ?? "response.response") // URL response
-                    print(response.data ?? "response.data") // server data
-                    print(response.result) // result of response serialization
-
-                    switch response.result {
-                    case .success:
-                        print("Validation Successful")
-                        let json: JSON = JSON(response.result.value ?? kill)
-                        print(json)
-
-                        if json["is_success"].boolValue {
-                            let pic_id: String = json["picture"]["pic_id"].stringValue
-                            self.doPost(pic_id: pic_id, postImage: postImage)
-                        } else {
-                            SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。不明なエラーです。")
-                        }
-
-                    case .failure(let error):
-                        print(error)
-                        SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。通信状況を確認してください。")
-                    }
-                }
-
-            case .failure(let encodingError):
-                print(encodingError)
-            }
-        }
-    }
-
-    func doPost(pic_id: String, postImage: UIImage) {
-
-        let parameters: Parameters = [
-            "pic_id": pic_id
-        ]
-
-        Alamofire.request(API_URL + "v0/users/" + UtilityLibrary.getUserID(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
-
-            switch response.result {
-            case .success:
-                print("Validation Successful")
-                let json: JSON = JSON(response.result.value ?? kill)
-                print(json)
-                if json["is_success"].boolValue {
-                    self.icon.image = postImage
-                    self.indicator.stopAnimating()
-                } else {
-                    SCLAlertView().showError("アップロード失敗", subTitle: "アイコン画像のアップロードに失敗しました。不明なエラーです。")
-                }
-
-            case .failure(let error):
-                print(error)
-                SCLAlertView().showError("変更失敗", subTitle: "アイコン画像の変更に失敗しました。通信状況を確認してください。")
-            }
-        }
-    }
-
-    //
-    func getUserInfo() {
-        //ユーザーの情報を取得する
-
-        let userID: Int = Int(UtilityLibrary.getUserID())!
-        Alamofire.request(EveryZooAPI.getUserInfo(userID: userID)).responseJSON { response in
-
-            switch response.result {
-            case .success:
-
-                let json: JSON = JSON(response.result.value ?? kill)
-                print(json)
-
-                UtilityLibrary.setUserName(userName: json["userName"].stringValue)
-                UtilityLibrary.setUserProfile(userProfile: json["profile"].stringValue)
-                UtilityLibrary.setUserIconUrl(userIconUrl: json["iconUrl"].stringValue)
-
-                self.indicator.stopAnimating()
-
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-
-    //名前の変更ボタン押されたら呼ばれます
-    func changeUserName(newName: String) {
-        if (newName.isEmpty) {
-            SCLAlertView().showInfo("エラー", subTitle: "ユーザー名の入力が必要です。")
-            return
-        }
-
-        let parameters: Parameters = [
-            "name": newName
-        ]
-
-        Alamofire.request(API_URL + "v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
-
-            switch response.result {
-            case .success:
-                print("Validation Successful")
-                let json: JSON = JSON(response.result.value ?? kill)
-                self.getUserInfo()
-                print(json)
-
-            case .failure(let error):
-                print(error)
-                //テーブルの再読み込み
-            }
-        }
-    }
-
-    //メールアドレス変更
-    func changeUserEmail(newEmail: String) {
-        if (newEmail.isEmpty) {
-            SCLAlertView().showInfo("エラー", subTitle: "Emailの入力が必要です。")
-            return
-        }
-
-        let parameters: Parameters = [
-            "email": newEmail
-        ]
-
-        //print(API_URL+"v0/auth/")
-        Alamofire.request(API_URL + "v0/auth/", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
-
-            switch response.result {
-            case .success:
-                print("Validation Successful")
-                let json: JSON = JSON(response.result.value ?? kill)
-                print(json)
-
-                if (json["status"].stringValue == "error") {
-                    SCLAlertView().showInfo("エラー", subTitle: "メールアドレスの値が不正です。")
-                } else {
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.userDefaultsManager?.doLogout()
-                    SCLAlertView().showInfo("メールアドレス変更", subTitle: "メールアドレスを変更しました。ログアウトします。")
-                    self.navigationController?.popViewController(animated: true)
-                }
-
-            case .failure(let error):
-                print(error)
-                //テーブルの再読み込み
-            }
-        }
     }
 
     // MARK: - TableView Delegate Methods
@@ -275,7 +130,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
         switch indexPath.section {
         case 0:
-            let userInfoViewController: UserInfoViewController = UserInfoViewController()
+            let userInfoViewController = UserInfoViewController()
             navigationController?.pushViewController(userInfoViewController, animated: true)
         case 1 :
             switch indexPath.row {
@@ -291,7 +146,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
                 let txt = alert.addTextField(UtilityLibrary.getUserName())
                 alert.addButton("変更") {
                     print("Text value: \(String(describing: txt.text))")
-                    self.changeUserName(newName: txt.text!)
                     self.indicator.startAnimating()
                 }
                 alert.showEdit("ユーザー名変更", subTitle: "新しいユーザー名を入力してください。")
@@ -308,7 +162,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
                 let txt = alert.addTextField(UtilityLibrary.getUserEmail())
                 alert.addButton("変更") {
                     print("Text value: \(String(describing: txt.text))")
-                    self.changeUserEmail(newEmail: txt.text!)
                     self.indicator.startAnimating()
                 }
                 alert.showEdit("メールアドレス変更", subTitle: "新しいメールアドレスを入力してください。\n(変更後にログアウトします。)")

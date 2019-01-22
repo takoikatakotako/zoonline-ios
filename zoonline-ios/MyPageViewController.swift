@@ -52,7 +52,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myPageTableView = UITableView(frame: view.frame, style: UITableView.Style.grouped)
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
-        myPageTableView.backgroundColor = UIColor(named: "mypageArrowGray")
+        myPageTableView.backgroundColor = UIColor(named: "backgroundGray")
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(MyPageTableViewCell.self))
         myPageTableView.rowHeight = 48
         myPageTableView.tableHeaderView = userHeaderView
@@ -235,10 +235,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             showConfirmAlert()
         }
-        // ログイン
-        // let loginVC = LoginViewController()
-        // let navigationController = UINavigationController(rootViewController: loginVC)
-        // self.present(navigationController, animated: true, completion: nil)
     }
 
     func openWebView(navTitle: String, url: String) {
