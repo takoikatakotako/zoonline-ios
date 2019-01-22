@@ -6,15 +6,6 @@ import SDWebImage
 
 class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    //width, height
-    private var viewWidth: CGFloat!
-    private var viewHeight: CGFloat!
-    private var statusBarHeight: CGFloat!
-    private var navigationBarHeight: CGFloat!
-    var myProfielViewHeight: CGFloat!
-    private var userConfigTableViewHeight: CGFloat!
-    private var tabBarHeight: CGFloat!
-
     var indicator: UIActivityIndicatorView!
 
     //プロフィール
@@ -25,8 +16,12 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     //テーブルビューインスタンス
     var userConfigTableView: UITableView!
 
+    var myProfileView: MyProfileView!
+
     //表示するもの
     let changeUserInfoAry: [String] = ["ユーザー名の変更", "自己紹介の変更", "メールアドレスの変更", "パスワードの変更"]
+
+    var picker: UIImagePickerController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,14 +32,28 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButton
 
-        let myProfileView = MyProfileView()
+        myProfileView = MyProfileView()
         myProfileView.frame.size = CGSize(width: view.frame.width, height: 240)
+        myProfileView.selectIcon.addTarget(self, action: #selector(choseIconBtnClicked(sender:)), for: .touchUpInside)
+
+        // picker
+        picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        picker.allowsEditing = true // Whether to make it possible to edit the size etc after selecting the image
+        // set picker's navigationBar appearance
+        picker.view.backgroundColor = .white
+        picker.navigationBar.isTranslucent = false
+        picker.navigationBar.barTintColor = .blue
+        picker.navigationBar.tintColor = .white
+        picker.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ] // Title color
 
         //テーブルビューの初期化
-        userConfigTableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        userConfigTableView = UITableView.init(frame: view.frame, style: .grouped)
         userConfigTableView.delegate = self
         userConfigTableView.dataSource = self
-        userConfigTableView.frame = view.frame
         userConfigTableView.tableHeaderView = myProfileView
         userConfigTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         userConfigTableView.backgroundColor = UIColor(named: "backgroundGray")
@@ -57,91 +66,22 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     // MARK: - Viewにパーツの設置
-
-    // MARK: プロフィールビュー
-    func setProfielView() {
-
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        //自分の情報
-        let myProfielView: UIView = UIView()
-        myProfielView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth * 0.56)
-        myProfielView.backgroundColor = UIColor(named: "liginCushionLightGray")
-        self.view.addSubview(myProfielView)
-
-        //アイコン選択ボタン
-        let iconChoseBtn: UIButton = UIButton()
-        let iconChoseBtnHeight: CGFloat = myProfielView.frame.height * 0.44
-        iconChoseBtn.frame = CGRect(x: viewWidth / 2 - iconChoseBtnHeight / 2, y: myProfielView.frame.height * 0.1, width: iconChoseBtnHeight, height: iconChoseBtnHeight)
-        iconChoseBtn.addTarget(self, action: #selector(choseIconBtnClicked(sender:)), for: .touchUpInside)
-        myProfielView.addSubview(iconChoseBtn)
-
-        //卵アイコン
-        icon.frame = CGRect(x: 0, y: 0, width: iconChoseBtn.frame.size.width, height: iconChoseBtn.frame.size.height)
-        icon.layer.cornerRadius = iconChoseBtn.frame.size.width / 2
-        icon.layer.masksToBounds = true
-        icon.isUserInteractionEnabled = false
-        iconChoseBtn.addSubview(icon)
-
-        //プラスのボタン
-        let iconPlusImg: UIImageView = UIImageView()
-        iconPlusImg.isUserInteractionEnabled = false
-        iconPlusImg.frame = CGRect(x: iconChoseBtn.frame.size.width * 0.7, y: iconChoseBtn.frame.size.width * 0.7, width: iconChoseBtn.frame.size.width * 0.3, height: iconChoseBtn.frame.size.height * 0.3)
-        iconPlusImg.image = UIImage(named: "iconChange")
-        iconChoseBtn.addSubview(iconPlusImg)
-
-        // 名前
-        nameLabel.frame = CGRect(x: 0, y: myProfielView.frame.height * 0.58, width: viewWidth, height: myProfielView.frame.height * 0.2)
-        nameLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserName")
-        nameLabel.textAlignment = NSTextAlignment.center
-        nameLabel.font = UIFont.systemFont(ofSize: 28)
-        view.addSubview(nameLabel)
-
-        // Mail
-        mailLabel.frame = CGRect(x: 0, y: myProfielView.frame.height * 0.75, width: viewWidth, height: myProfielView.frame.height * 0.2)
-        mailLabel.text = appDelegate.userDefaultsManager?.userDefaults.string(forKey: "KEY_MyUserEmail")
-        mailLabel.textAlignment = NSTextAlignment.center
-        mailLabel.font = UIFont.systemFont(ofSize: 14)
-        mailLabel.textColor = UIColor.gray
-        view.addSubview(mailLabel)
-    }
-
-    //
     @objc func choseIconBtnClicked(sender: UIButton) {
-
-        // インスタンス生成
-        let myImagePicker = UIImagePickerController()
-        myImagePicker.delegate = self
-        myImagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        myImagePicker.navigationBar.barTintColor = UIColor.init(named: "main")
-        myImagePicker.navigationBar.tintColor = UIColor.white
-        myImagePicker.navigationBar.isTranslucent = false
-        self.present(myImagePicker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
     }
 
-    // MARK: - UIImagePickerのDelgate
-
-    //画像が選択された時に呼ばれる.
+    // MARK: - UIImagePicker Delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
-        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
-
-            self.view.bringSubviewToFront(self.indicator)
-            self.indicator.startAnimating()
-            self.doImageUpload(postImage: image)
-
-        } else {
-            print("Error:Class name : \(NSStringFromClass(type(of: self))) ")
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            myProfileView.userThumbnail.image = editedImage
+        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            myProfileView.userThumbnail.image = originalImage
         }
-
         dismiss(animated: true, completion: nil)
     }
 
-    //画像選択がキャンセルされた時に呼ばれる.
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     func doImageUpload(postImage: UIImage) {
@@ -238,7 +178,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
                 self.indicator.stopAnimating()
 
-                self.setProfielView()
             case .failure(let error):
                 print(error)
             }
@@ -389,14 +328,4 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-private func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-    return Dictionary(uniqueKeysWithValues: input.map { key, value in (key.rawValue, value) })
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-    return input.rawValue
 }
