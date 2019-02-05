@@ -61,7 +61,7 @@ class MyProfileView: UIView {
         plusIcon.frame.size = CGSize(width: 28, height: 28)
         plusIcon.center.x =  width / 2 + (userIconSize / 2) / sqrt(2)
         plusIcon.center.y = 28 + userIconSize / 2 + (userIconSize / 2) / sqrt(2)
-        userName.frame = CGRect(x: 0, y: 144, width: width, height: 32)
+        userName.frame = CGRect(x: 0, y: 144, width: width, height: 36)
         userEmail.frame = CGRect(x: width * 0.05, y: 180, width: width * 0.9, height: 40)
 
         selectIcon.frame.size = CGSize(width: userIconSize * 1.5, height: userIconSize * 1.5)

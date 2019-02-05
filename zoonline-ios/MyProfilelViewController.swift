@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 import FirebaseAuth
 import GoogleSignIn
 import Alamofire
@@ -70,7 +71,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
         if let user = Auth.auth().currentUser {
             // User is signed in.
-            myProfileView.userName.text = user.displayName
+            getUserName()
             myProfileView.userEmail.text = user.email
         } else {
             // No user is signed in.
@@ -86,6 +87,69 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: - Viewにパーツの設置
     @objc func choseIconBtnClicked(sender: UIButton) {
         present(picker, animated: true, completion: nil)
+    }
+
+    func editUserName() {
+        //UIAlertControllerを用意する
+        let actionAlert = UIAlertController(title: "", message: "新しいユーザー名を入力してください。", preferredStyle: UIAlertController.Style.alert)
+        let kabigonAction = UIAlertAction(title: "変更", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+            let textFields =  actionAlert.textFields
+            if textFields != nil {
+                for textField: UITextField in textFields! {
+                    self.setUserName(name: textField.text!)
+                    self.myProfileView.userName.text = textField.text
+                }
+            }
+        })
+        actionAlert.addAction(kabigonAction)
+
+        let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
+        actionAlert.addAction(cancelAction)
+
+        actionAlert.addTextField(configurationHandler: {(text: UITextField!) -> Void in
+            text.placeholder = "new user name"
+        })
+        present(actionAlert, animated: true, completion: nil)
+    }
+
+    func setUserName(name: String) {
+        guard let user = Auth.auth().currentUser else {
+            print("想定外")
+            return
+        }
+
+        let db = Firestore.firestore()
+        let docData: [String: Any] = [
+            "name": name
+        ]
+        db.collection("user").document(String(user.uid)).setData(docData) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+
+    func getUserName() {
+        guard let user = Auth.auth().currentUser else {
+            print("想定外")
+            return
+        }
+
+        let db = Firestore.firestore()
+        let docRef = db.collection("user").document(String(user.uid))
+        docRef.getDocument { (document, _) in
+            if let document = document, document.exists {
+                if let data = document.data() {
+                    if let name = data["name"] as? String {
+                        self.myProfileView.userName.text = name
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
 
     // MARK: - UIImagePicker Delegate
@@ -135,12 +199,9 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         case 1 :
             switch indexPath.row {
             case 0:
-                //プロフィールのプレビューが押された、ユーザー情報画面へ
-                let userInfoViewController: UserInfoViewController = UserInfoViewController()
-                navigationController?.pushViewController(userInfoViewController, animated: true)
+                editUserName()
                 break
             case 1:
-                //ユーザー名の編集
 
                 let alert = SCLAlertView()
                 let txt = alert.addTextField(UtilityLibrary.getUserName())
