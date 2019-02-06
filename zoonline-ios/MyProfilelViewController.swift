@@ -1,6 +1,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 import GoogleSignIn
 import Alamofire
 import SwiftyJSON
@@ -71,6 +72,31 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
             uid = user.uid
             getUserName()
             myProfileView.userEmail.text = user.email
+
+            let storage = Storage.storage()
+            let storageRef = storage.reference()
+            let reference = storageRef.child("user/" + String(uid) + "/icon.png")
+            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+            reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error {
+                    // Uh-oh, an error occurred!
+                    print(error)
+                } else {
+                    // Data for "images/island.jpg" is returned
+                    let image = UIImage(data: data!)
+                    self.myProfileView.userThumbnail.image = image
+                }
+            }
+
+            /*
+            reference.getData(maxSize: <#T##Int64#>, completion: <#T##(Data?, Error?) -> Void#>)
+            
+            
+            putData(data, metadata: nil, completion: { metaData, error in
+                print(metaData as Any)
+                print(error as Any)
+            })
+            */
         } else {
             // No user is signed in.
             // TODO: 即ログアウトさせる
@@ -154,10 +180,21 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
     // MARK: - UIImagePicker Delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        var image: UIImage!
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            myProfileView.userThumbnail.image = editedImage
+            image = editedImage
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            myProfileView.userThumbnail.image = originalImage
+            image = originalImage
+        }
+        myProfileView.userThumbnail.image = image
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        if let data = image.pngData() {
+            let reference = storageRef.child("user/" + String(uid) + "/icon.png")
+            reference.putData(data, metadata: nil, completion: { metaData, error in
+                print(metaData as Any)
+                print(error as Any)
+            })
         }
         dismiss(animated: true, completion: nil)
     }
