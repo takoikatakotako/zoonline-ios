@@ -13,10 +13,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
     var indicator: UIActivityIndicatorView!
 
-    //プロフィール
-    var icon: UIImageView = UIImageView()
-    let nameLabel: UILabel = UILabel()
-    let mailLabel: UILabel = UILabel()
+    var uid: String!
 
     //テーブルビューインスタンス
     var userConfigTableView: UITableView!
@@ -71,6 +68,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
         if let user = Auth.auth().currentUser {
             // User is signed in.
+            uid = user.uid
             getUserName()
             myProfileView.userEmail.text = user.email
         } else {
@@ -113,16 +111,11 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func setUserName(name: String) {
-        guard let user = Auth.auth().currentUser else {
-            print("想定外")
-            return
-        }
-
         let db = Firestore.firestore()
         let docData: [String: Any] = [
             "name": name
         ]
-        db.collection("user").document(String(user.uid)).setData(docData) { err in
+        db.collection("user").document(String(uid)).setData(docData) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
@@ -132,13 +125,8 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func getUserName() {
-        guard let user = Auth.auth().currentUser else {
-            print("想定外")
-            return
-        }
-
         let db = Firestore.firestore()
-        let docRef = db.collection("user").document(String(user.uid))
+        let docRef = db.collection("user").document(String(uid))
         docRef.getDocument { (document, _) in
             if let document = document, document.exists {
                 if let data = document.data() {
@@ -205,7 +193,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
         case 0:
-            let userInfoViewController = UserInfoViewController(uid: "sdfsdf")
+            let userInfoViewController = UserInfoViewController(uid: String(uid))
             navigationController?.pushViewController(userInfoViewController, animated: true)
         case 1:
             switch indexPath.row {

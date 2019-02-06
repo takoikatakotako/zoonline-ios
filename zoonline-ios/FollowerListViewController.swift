@@ -61,7 +61,7 @@ class FollowerListViewController: UIViewController, UICollectionViewDelegate, UI
 
         //画面遷移、ユーザー情報画面へ
         let userInfoView = UserInfoViewController(uid: "sdfsdfsfd")
-        userInfoView.postUserID = frindsList[indexPath.row]["user-id"].intValue
+        // userInfoView.postUserID = frindsList[indexPath.row]["user-id"].intValue
 
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton

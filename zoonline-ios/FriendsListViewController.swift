@@ -62,7 +62,7 @@ class FriendsListViewController: UIViewController, UICollectionViewDelegate, UIC
 
         //画面遷移、ユーザー情報画面へ
         let userInfoView = UserInfoViewController(uid: "sdfsdf")
-        userInfoView.postUserID = frindsList[indexPath.row]["user-id"].intValue
+        // userInfoView.postUserID = frindsList[indexPath.row]["user-id"].intValue
 
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton

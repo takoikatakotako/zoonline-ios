@@ -1,14 +1,16 @@
 import UIKit
+import Firebase
 
 class UserInfoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     //UserInfo
-    var postUserID: Int!
+    private var uid: String!
 
     private var profileCollectionView: UICollectionView!
     private var userInfoView: UserInfoCollectionReusableView!
 
     init(uid: String) {
+        self.uid = uid
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -27,6 +29,20 @@ class UserInfoViewController: UIViewController, UICollectionViewDelegate, UIColl
         // ユーザー情報
         userInfoView = UserInfoCollectionReusableView()
         userInfoView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 260)
+
+        let db = Firestore.firestore()
+        let docRef = db.collection("user").document(String(uid))
+        docRef.getDocument { (document, _) in
+            if let document = document, document.exists {
+                if let data = document.data() {
+                    if let name = data["name"] as? String {
+                        self.userInfoView.userName.text = name
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
 
         // CollectionViewのレイアウトを生成.
         let layout = UICollectionViewFlowLayout()
@@ -53,18 +69,15 @@ class UserInfoViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
 
     // MARK: CollectionView Delegate Methods
-    // Cellが選択された際に呼び出される
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let postDetail: PostDetailViewController = PostDetailViewController()
         navigationController?.pushViewController(postDetail, animated: true)
     }
 
-    // Cellの総数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 24
     }
 
-    // Cellに値を設定する
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PostsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(PostsCollectionViewCell.self), for: indexPath) as! PostsCollectionViewCell
         return cell
