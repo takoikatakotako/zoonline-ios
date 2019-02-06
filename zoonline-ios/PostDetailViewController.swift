@@ -59,7 +59,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: Button Actions
     @objc func userInfoButtonTouched(sender: UIButton) {
         // ユーザー詳細画面へ
-        let userInfoViewController = UserInfoViewController()
+        let userInfoViewController = UserInfoViewController(uid: "sdfsdf")
         self.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
 

@@ -225,7 +225,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
 
         //画面遷移を行う
 
-        let userInfoView: UserInfoViewController = UserInfoViewController()
+        let userInfoView = UserInfoViewController(uid: "sdfsdf")
         userInfoView.postUserID = sender.view?.tag
 
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

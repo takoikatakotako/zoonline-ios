@@ -92,8 +92,8 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     func editUserName() {
         //UIAlertControllerを用意する
         let actionAlert = UIAlertController(title: "", message: "新しいユーザー名を入力してください。", preferredStyle: UIAlertController.Style.alert)
-        let kabigonAction = UIAlertAction(title: "変更", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
-            let textFields =  actionAlert.textFields
+        let kabigonAction = UIAlertAction(title: "変更", style: UIAlertAction.Style.default, handler: { (_: UIAlertAction!) in
+            let textFields = actionAlert.textFields
             if textFields != nil {
                 for textField: UITextField in textFields! {
                     self.setUserName(name: textField.text!)
@@ -106,7 +106,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
         actionAlert.addAction(cancelAction)
 
-        actionAlert.addTextField(configurationHandler: {(text: UITextField!) -> Void in
+        actionAlert.addTextField(configurationHandler: { (text: UITextField!) -> Void in
             text.placeholder = "new user name"
         })
         present(actionAlert, animated: true, completion: nil)
@@ -152,6 +152,18 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
+    func showMessageAlert(message: String) {
+        let actionAlert = UIAlertController(title: "", message: message, preferredStyle: UIAlertController.Style.alert)
+        let closeAction = UIAlertAction(title: "閉じる", style: UIAlertAction.Style.cancel, handler: nil)
+        actionAlert.addAction(closeAction)
+        present(actionAlert, animated: true, completion: nil)
+    }
+
+    // MARK: -
+    func setImage(image: UIImage) {
+
+    }
+
     // MARK: - UIImagePicker Delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
@@ -191,52 +203,34 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
         switch indexPath.section {
         case 0:
-            let userInfoViewController = UserInfoViewController()
+            let userInfoViewController = UserInfoViewController(uid: "sdfsdf")
             navigationController?.pushViewController(userInfoViewController, animated: true)
-        case 1 :
+        case 1:
             switch indexPath.row {
             case 0:
                 editUserName()
                 break
             case 1:
-
-                let alert = SCLAlertView()
-                let txt = alert.addTextField(UtilityLibrary.getUserName())
-                alert.addButton("変更") {
-                    print("Text value: \(String(describing: txt.text))")
-                    self.indicator.startAnimating()
-                }
-                alert.showEdit("ユーザー名変更", subTitle: "新しいユーザー名を入力してください。")
-                break
-            case 2:
                 //プロフィールの編集
-                let vc: EditUserProfileViewController = EditUserProfileViewController()
+                let vc = EditUserProfileViewController()
                 navigationController?.pushViewController(vc, animated: true)
                 break
-            case 3:
+            case 2:
                 //メールアドレスの変更
                 print("メールアドレス")
-                let alert = SCLAlertView()
-                let txt = alert.addTextField(UtilityLibrary.getUserEmail())
-                alert.addButton("変更") {
-                    print("Text value: \(String(describing: txt.text))")
-                    self.indicator.startAnimating()
-                }
-                alert.showEdit("メールアドレス変更", subTitle: "新しいメールアドレスを入力してください。\n(変更後にログアウトします。)")
+                showMessageAlert(message: "メールアドレス変更はあっちからおなしゃす")
                 break
-            case 5:
+            case 3:
                 //パスワードの変更
                 print("パスワード")
+                showMessageAlert(message: "パスワード変更はあっちからおなしゃす")
                 break
-
             default: break
             }
         default: break
         }
-
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
