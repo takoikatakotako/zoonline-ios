@@ -22,6 +22,7 @@ class UserInfoCollectionReusableView: UICollectionReusableView {
         // UserInfo
         userThumbnail = UIImageView()
         userThumbnail.image = UIImage(named: "common-icon-default")
+        userThumbnail.clipsToBounds = true
         addSubview(userThumbnail)
 
         userName = UILabel()

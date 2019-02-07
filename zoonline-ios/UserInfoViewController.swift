@@ -24,11 +24,28 @@ class UserInfoViewController: UIViewController, UICollectionViewDelegate, UIColl
         view.backgroundColor = UIColor.white
 
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = backButton
+        navigationItem.backBarButtonItem = backButton
 
         // ユーザー情報
         userInfoView = UserInfoCollectionReusableView()
         userInfoView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 260)
+
+        // icon
+
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let reference = storageRef.child("user/" + String(uid) + "/icon.png")
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                // Uh-oh, an error occurred!
+                print(error)
+            } else {
+                // Data for "images/island.jpg" is returned
+                let image = UIImage(data: data!)
+                self.userInfoView.userThumbnail.image = image
+            }
+        }
 
         let db = Firestore.firestore()
         let docRef = db.collection("user").document(String(uid))
@@ -37,6 +54,9 @@ class UserInfoViewController: UIViewController, UICollectionViewDelegate, UIColl
                 if let data = document.data() {
                     if let name = data["name"] as? String {
                         self.userInfoView.userName.text = name
+                    }
+                    if let profile = data["profile"] as? String {
+                        self.userInfoView.userDescription.text = profile
                     }
                 }
             } else {

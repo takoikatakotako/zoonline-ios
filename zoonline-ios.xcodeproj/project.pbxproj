@@ -15,6 +15,7 @@
 		17AD3CE721C2107800A6DC9E /* UserInfoCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */; };
 		17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */; };
 		17AD3CED21C3BF7100A6DC9E /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CEC21C3BF7100A6DC9E /* UserInfoView.swift */; };
+		17E14F4D220BD7CC00B8218A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17E14F4C220BD7CC00B8218A /* GoogleService-Info.plist */; };
 		835239FDC3EA5D1B0674910F /* Pods_zoonline_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54AA7E29AF57EBFE420AA58 /* Pods_zoonline_iosTests.framework */; };
 		8D07EF701FBC9B5600A37543 /* CustumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */; };
 		8D0FB4541E7AED8E0008D997 /* FieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FB4531E7AED8E0008D997 /* FieldViewController.swift */; };
@@ -58,7 +59,6 @@
 		8DA4153D1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4153C1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift */; };
 		8DA4C6991FE045A800C84A73 /* FieldCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4C6981FE045A800C84A73 /* FieldCollectionViewFlowLayout.swift */; };
 		8DA4C69B1FE0D95800C84A73 /* FieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4C69A1FE0D95800C84A73 /* FieldCollectionViewCell.swift */; };
-		8DB6DFCD220B27F400794856 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DB6DFCC220B27F300794856 /* GoogleService-Info.plist */; };
 		8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */; };
 		8DC7190D1F08A0F3003C5E00 /* PostImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7190C1F08A0F3003C5E00 /* PostImageTableViewCell.swift */; };
 		8DC719111F08A580003C5E00 /* PostCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC719101F08A580003C5E00 /* PostCommentTableViewCell.swift */; };
@@ -106,6 +106,7 @@
 		17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCollectionReusableView.swift; sourceTree = "<group>"; };
 		17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentViewController.swift; sourceTree = "<group>"; };
 		17AD3CEC21C3BF7100A6DC9E /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		17E14F4C220BD7CC00B8218A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		19243D79DF1EB566ABF62814 /* Pods-zoonline-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		232224ED8A7FFF835259B090 /* Pods_zoonline_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zoonline_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F3F8A8E3B7639D596420D56 /* Pods-zoonline-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosTests/Pods-zoonline-iosTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -160,7 +161,6 @@
 		8DA4153C1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoLoginTableViewCell.swift; sourceTree = "<group>"; };
 		8DA4C6981FE045A800C84A73 /* FieldCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		8DA4C69A1FE0D95800C84A73 /* FieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCollectionViewCell.swift; sourceTree = "<group>"; };
-		8DB6DFCC220B27F300794856 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8DBC88351EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkErrorTableViewCell.swift; sourceTree = "<group>"; };
 		8DC7190C1F08A0F3003C5E00 /* PostImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImageTableViewCell.swift; sourceTree = "<group>"; };
 		8DC719101F08A580003C5E00 /* PostCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -440,7 +440,7 @@
 				8D73B42B1E7AE08F00E3B301 /* Assets.xcassets */,
 				8D73B42D1E7AE08F00E3B301 /* LaunchScreen.storyboard */,
 				8D73B4301E7AE08F00E3B301 /* Info.plist */,
-				8DB6DFCC220B27F300794856 /* GoogleService-Info.plist */,
+				17E14F4C220BD7CC00B8218A /* GoogleService-Info.plist */,
 			);
 			name = Zoonline;
 			path = "zoonline-ios";
@@ -677,7 +677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D73B42F1E7AE08F00E3B301 /* LaunchScreen.storyboard in Resources */,
-				8DB6DFCD220B27F400794856 /* GoogleService-Info.plist in Resources */,
+				17E14F4D220BD7CC00B8218A /* GoogleService-Info.plist in Resources */,
 				8D6888761E9E7C2E00140508 /* Localizable.strings in Resources */,
 				8D73B42C1E7AE08F00E3B301 /* Assets.xcassets in Resources */,
 			);

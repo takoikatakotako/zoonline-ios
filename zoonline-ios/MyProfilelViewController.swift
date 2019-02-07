@@ -8,7 +8,7 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SampleDelegate {
 
     var handle: AuthStateDidChangeListenerHandle!
 
@@ -141,7 +141,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         let docData: [String: Any] = [
             "name": name
         ]
-        db.collection("user").document(String(uid)).setData(docData) { err in
+        db.collection("user").document(String(uid)).updateData(docData) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
@@ -162,6 +162,21 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
                 }
             } else {
                 print("Document does not exist")
+            }
+        }
+    }
+
+    // プロフィール変更
+    func changeMyProfile(profile: String) {
+        let db = Firestore.firestore()
+        let docData: [String: Any] = [
+            "profile": profile
+        ]
+        db.collection("user").document(String(uid)).updateData(docData) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
             }
         }
     }
@@ -240,6 +255,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
             case 1:
                 //プロフィールの編集
                 let vc = EditUserProfileViewController()
+                vc.delegate = self
                 navigationController?.pushViewController(vc, animated: true)
                 break
             case 2:
