@@ -8,7 +8,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
     var userDefaultsManager: UserDefaultsManager?
-    var tabBarController: UITabBarController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -26,16 +25,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)
         ]
 
-        //タブバー
+        // タブバー
         UITabBar.appearance().tintColor = UIColor.init(named: "main")
         UITabBar.appearance().unselectedItemTintColor = UIColor(named: "textColorGray")
         UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().isTranslucent = false
 
-        //Managers
+        // Managers
        self.userDefaultsManager = UserDefaultsManager()
 
-        // ページを格納する配列
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window!.makeKeyAndVisible()
+        window?.rootViewController = makeControllers()
+        return true
+    }
+
+    func makeControllers() -> UITabBarController {
         var viewControllers: [UIViewController] = []
 
         let firstViewController: FieldViewController? = FieldViewController()
@@ -43,24 +48,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let firstNavigationController = UINavigationController(rootViewController: firstViewController!)
         viewControllers.append(firstNavigationController)
 
-        // let secondViewController: TimeLineVC? = TimeLineVC()
-        // secondViewController?.tabBarItem = UITabBarItem(title: "タイムライン", image: UIImage(named: "tab_timeline"), tag: 2)
-        // let secondNavigationController = UINavigationController(rootViewController: secondViewController!)
-        // viewControllers.append(secondNavigationController)
-
         let thirdViewController: MyPageViewController? = MyPageViewController()
         thirdViewController?.tabBarItem = UITabBarItem(title: "マイページ", image: UIImage(named: "tab_mypage"), tag: 2)
         let thirdNavigationController = UINavigationController(rootViewController: thirdViewController!)
         viewControllers.append(thirdNavigationController)
 
-        tabBarController = UITabBarController()
-        tabBarController?.setViewControllers(viewControllers, animated: false)
+        let tabBarController = UITabBarController()
+        tabBarController.setViewControllers(viewControllers, animated: false)
+        return tabBarController
+    }
 
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window!.makeKeyAndVisible()
-        window?.rootViewController = tabBarController
-
-        return true
+    func switchViewController(viewController: UIViewController) {
+        UIView.transition(with: self.window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            let oldState: Bool = UIView.areAnimationsEnabled
+            UIView.setAnimationsEnabled(false)
+            self.window?.rootViewController = self.makeControllers()
+            UIView.setAnimationsEnabled(oldState)
+        }, completion: nil)
     }
 
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
@@ -70,9 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        // ...
         if let error = error {
-            // ...
             print(error)
             return
         }
@@ -80,15 +82,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-        // ...
         Auth.auth().signInAndRetrieveData(with: credential) { (_, error) in
             if let error = error {
-                // ...
                 print(error)
                 return
             }
-            // User is signed in
-            // ...
             print(credential)
         }
     }
