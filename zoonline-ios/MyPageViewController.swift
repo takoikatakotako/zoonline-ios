@@ -8,30 +8,29 @@ import SDWebImage
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GIDSignInUIDelegate {
 
     var handle: AuthStateDidChangeListenerHandle!
-    var isSignedIn: Bool!
+    var isSignIn: Bool!
 
-    //ユーザー数の
-    var userHeaderView: MyPageUserHeaderView!
+    // Sign In
+    var signInSection: [String] = ["ユーザー情報", "設定・その他", "ログアウト"]
+    var signInUserInfoTitle: [String] = ["投稿", "フレンズ", "フォロワー", "お気に入り"]
+    var signInUserInfoIcon: [String] = ["mypage_post", "mypage_friends", "mypage_follower", "mypage_favorite"]
+    var signInConfigTitle: [String] = ["お問い合わせ", "シェア", "利用規約", "プライバシーポリシー"]
+    var signInConfigIcon: [String] = ["mypage_contact", "mypage_share", "mypage_info", "mypage_caution"]
+    var signInLogoutTitle: [String] = ["ログアウト"]
+    var signInLogoutIcon: [String] = ["mypage_logout"]
+
+    // Sign Out
+    var signOutSection: [String] = ["設定・その他", "ログイン"]
+    var signOutConfigTitle: [String] = ["お問い合わせ", "シェア", "利用規約", "プライバシーポリシー"]
+    var signOutConfigIcon: [String] = ["mypage_contact", "mypage_share", "mypage_info", "mypage_caution"]
+    var signOutLoginTitle: [String] = ["ログイン"]
+    var signOutLoginIcon: [String] = ["mypage_logout"]
+
+    // ユーザー情報
+    private var userHeaderView: MyPageUserHeaderView!
 
     //テーブルビューインスタンス
     private var myPageTableView: UITableView!
-
-    var myComposeView: SLComposeViewController!
-
-    //
-    var loginedSectionTitle: [String] = ["ユーザー情報", "設定・その他", "ログアウト"]
-    var unloginedSectionTitle: [String] = ["設定・その他", "ログイン"]
-
-    var userInfoTitle: [String] = ["投稿", "フレンズ", "フォロワー", "お気に入り"]
-    var userInfoIcon: [String] = ["mypage_post", "mypage_friends", "mypage_follower", "mypage_favorite"]
-
-    var configsTitle: [String] = ["お問い合わせ", "シェア", "利用規約", "プライバシーポリシー"]
-    var configsIcon: [String] = ["mypage_contact", "mypage_share", "mypage_info", "mypage_caution"]
-
-    var logoutTitle: [String] = ["ログアウト"]
-    var logoutIcon: [String] = ["mypage_logout"]
-    var loginTitle: [String] = ["ログイン"]
-    var loginIcon: [String] = ["mypage_logout"]
 
     // Sectionで使用する配列を定義する.
     override func viewDidLoad() {
@@ -69,12 +68,12 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         if let user = Auth.auth().currentUser {
             // User is signed in.
-            isSignedIn = true
+            isSignIn = true
             userHeaderView.userNameLabel.text = user.displayName
             userHeaderView.userMailAdressLabel.text = user.email
         } else {
             // No user is signed in.
-            isSignedIn = false
+            isSignIn = false
             userHeaderView.userNameLabel.text = "未ログイン"
             userHeaderView.userMailAdressLabel.text = "ログインしてください"
             userHeaderView.iconImgView.image = UIImage(named: "common-icon-default")
@@ -88,10 +87,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     // MARK: - TableViewのデリゲートメソッド
-
-    //セクションの数を返す.
     func numberOfSections(in tableView: UITableView) -> Int {
-        return unloginedSectionTitle.count
+        return signOutSection.count
     }
 
     //セクションのタイトルを返す.
@@ -99,9 +96,9 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         //ログインしている場合はボタンをつける
         if UtilityLibrary.isLogin() {
-            return loginedSectionTitle[section]
+            return signInSection[section]
         } else {
-            return unloginedSectionTitle[section]
+            return signOutSection[section]
         }
     }
 
@@ -118,11 +115,11 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return userInfoTitle.count
+            return signInUserInfoTitle.count
         case 1:
-            return configsTitle.count
+            return signInConfigTitle.count
         case 2:
-            return logoutTitle.count
+            return signInLogoutTitle.count
         default:
             return 0
         }
@@ -134,14 +131,14 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell: MyPageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPageTableViewCell.self), for: indexPath) as! MyPageTableViewCell
         switch indexPath.section {
         case 0:
-            cell.textCellLabel.text = userInfoTitle[indexPath.row]
-            cell.thumbnailImgView.image = UIImage(named: userInfoIcon[indexPath.row])
+            cell.textCellLabel.text = signInUserInfoTitle[indexPath.row]
+            cell.thumbnailImgView.image = UIImage(named: signInUserInfoIcon[indexPath.row])
         case 1:
-            cell.textCellLabel.text = configsTitle[indexPath.row]
-            cell.thumbnailImgView.image = UIImage(named: configsIcon[indexPath.row])
+            cell.textCellLabel.text = signInConfigTitle[indexPath.row]
+            cell.thumbnailImgView.image = UIImage(named: signInConfigIcon[indexPath.row])
         case 2:
-            cell.textCellLabel.text = logoutTitle[indexPath.row]
-            cell.thumbnailImgView.image = UIImage(named: loginIcon[indexPath.row])
+            cell.textCellLabel.text = signInLogoutTitle[indexPath.row]
+            cell.thumbnailImgView.image = UIImage(named: signOutLoginIcon[indexPath.row])
         default: break
 
         }
@@ -227,7 +224,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     //basicボタンが押されたら呼ばれます
     @objc internal func goMyProfile(sender: UIButton) {
-        if isSignedIn {
+        if isSignIn {
             let myProfilelViewController = MyProfilelViewController()
             myProfilelViewController.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(myProfilelViewController, animated: true)
