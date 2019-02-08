@@ -95,25 +95,5 @@ class WritePostsCommentsViewController: UIViewController {
 
         //indicatrer
         indicator.startAnimating()
-
-        let parameters: Parameters = [
-            "comments": commentTextView.text
-            ]
-
-        Alamofire.request(EveryZooAPI.getDoComments(postID: postsID), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
-
-            switch response.result {
-            case .success:
-
-                let json: JSON = JSON(response.result.value ?? kill)
-                print(json)
-                _ = self.navigationController?.popViewController(animated: true)
-
-            case .failure(let error):
-                print(error)
-            }
-
-            self.indicator.stopAnimating()
-        }
     }
 }

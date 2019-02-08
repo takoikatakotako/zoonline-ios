@@ -80,19 +80,6 @@ class EditUserNameViewController: UIViewController, UITextFieldDelegate {
             "name": userNameTextFIeld.text!
         ]
 
-        Alamofire.request(EveryZooAPI.getEditName(), method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON {response in
-
-            switch response.result {
-            case .success:
-                print("Validation Successful")
-                let json: JSON = JSON(response.result.value ?? kill)
-                print(json)
-
-            case .failure(let error):
-                print(error)
-                //テーブルの再読み込み
-            }
-        }
     }
 
     // MARK: - TextFieldのDelegateメソッド

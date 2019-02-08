@@ -84,23 +84,6 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
 
     func getNews() {
 
-        Alamofire.request(EveryZooAPI.getZooNews()).responseJSON { response in
-
-            switch response.result {
-            case .success:
-
-                let json: JSON = JSON(response.result.value ?? kill)
-                //print(json)
-                print(json["is_success"].stringValue)
-                //print(json["content"].arrayValue)
-                self.newsContents = json["content"]
-                self.newsTableView.reloadData()
-
-            case .failure(let error):
-                print(error)
-                //テーブルの再読み込み
-            }
-        }
     }
 
     // MARK: テーブルビューのセルの数を設定する

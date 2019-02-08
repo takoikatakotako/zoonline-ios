@@ -235,37 +235,6 @@ class SignInVC: UIViewController, UITextFieldDelegate {
             "name": userName,
             "password": passWord,
             "confirm_success_url": API_CONFIRM_SUCCESS_URL]
-
-        Alamofire.request(EveryZooAPI.getSignUp(), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-
-            self.indicator.stopAnimating()
-
-            switch response.result {
-
-            case .success:
-                let json: JSON = JSON(response.result.value ?? kill)
-                print(json)
-
-                if json["status"].stringValue == "error" {
-                    //エラー
-                    SCLAlertView().showInfo("登録失敗", subTitle: "登録に失敗しました。メールアドレス、パスワードをご確認ください。")
-                }else if json["status"].stringValue != "success"{
-                    //原因不明
-                    SCLAlertView().showInfo("登録失敗", subTitle: "予期せぬエラーです。")
-                }else {
-                    //登録成功
-
-                    SCLAlertView().showInfo("会員登録成功", subTitle: "登録したメールアドレスに届いたメールから会員登録を完了させ、ログインしてください。")
-                    self.dismiss(animated: true, completion: nil)
-                }
-
-            case .failure(let error):
-                print(error)
-                //通信に失敗と判断
-                // self.loginFailed.isHidden = false
-                SCLAlertView().showInfo("ログイン失敗", subTitle: "メールアドレス、パスワードを確認してください。")
-            }
-        }
     }
 
     //パスワード再発行ボタンが押された。

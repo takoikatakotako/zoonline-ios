@@ -77,32 +77,6 @@ class OfficialListViewController: UIViewController, UITableViewDelegate, UITable
 
     func getNews() {
 
-        Alamofire.request(EveryZooAPI.getOfficialNews(), method: .get, encoding: JSONEncoding.default).responseJSON { response in
-
-            switch response.result {
-            case .success:
-
-                //print("--------------------------")
-
-                //print(response.value)
-
-                let json: JSON = JSON(response.result.value ?? kill)
-
-                print(EveryZooAPI.getOfficialNews())
-                //print("!-!-!-!-----------------------")
-
-                print(json[0])
-
-                self.officialContents = json
-
-                self.indicator.stopAnimating()
-                self.officialTableView.reloadData()
-
-            case .failure(let error):
-                print(error)
-                //テーブルの再読み込み
-            }
-        }
     }
 
     // MARK: テーブルビューのセルの数を設定する
