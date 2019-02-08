@@ -7,7 +7,10 @@ import SDWebImage
 
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GIDSignInUIDelegate {
 
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var handle: AuthStateDidChangeListenerHandle!
+
+    var uid: String!
     var isSignIn: Bool!
 
     // Sign In
@@ -36,6 +39,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        isSignIn = appDelegate.userDefaultsManager?.isSignIn()
         GIDSignIn.sharedInstance().uiDelegate = self
 
         title = "マイページ"
@@ -67,13 +71,15 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
 
         if let user = Auth.auth().currentUser {
-            // User is signed in.
+            // User is signed in
             isSignIn = true
+            appDelegate.userDefaultsManager?.signIn()
             userHeaderView.userNameLabel.text = user.displayName
             userHeaderView.userMailAdressLabel.text = user.email
         } else {
-            // No user is signed in.
+            // No user is signed in
             isSignIn = false
+            appDelegate.userDefaultsManager?.signOut()
             userHeaderView.userNameLabel.text = "未ログイン"
             userHeaderView.userMailAdressLabel.text = "ログインしてください"
             userHeaderView.iconImgView.image = UIImage(named: "common-icon-default")
@@ -86,23 +92,23 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         Auth.auth().removeStateDidChangeListener(handle!)
     }
 
-    // MARK: - TableViewのデリゲートメソッド
+    // MARK: TableView Delegate Methods
     func numberOfSections(in tableView: UITableView) -> Int {
-        return signOutSection.count
+        if isSignIn {
+            return signInSection.count
+        } else {
+            return signOutSection.count
+        }
     }
 
-    //セクションのタイトルを返す.
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-
-        //ログインしている場合はボタンをつける
-        if UtilityLibrary.isLogin() {
+        if isSignIn {
             return signInSection[section]
         } else {
             return signOutSection[section]
         }
     }
 
-    //セクションの高さ
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 40
@@ -111,119 +117,156 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
 
-    //テーブルに表示する配列の総数を返す.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return signInUserInfoTitle.count
-        case 1:
-            return signInConfigTitle.count
-        case 2:
-            return signInLogoutTitle.count
-        default:
-            return 0
+        if isSignIn {
+            switch section {
+            case 0:
+                return signInUserInfoTitle.count
+            case 1:
+                return signInConfigTitle.count
+            case 2:
+                return signInLogoutTitle.count
+            default:
+                return 0
+            }
+        } else {
+            switch section {
+            case 0:
+                return signOutConfigTitle.count
+            case 1:
+                return signOutLoginIcon.count
+            default:
+                return 0
+            }
         }
     }
 
-    //Cellに値を設定する.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell: MyPageTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPageTableViewCell.self), for: indexPath) as! MyPageTableViewCell
-        switch indexPath.section {
-        case 0:
-            cell.textCellLabel.text = signInUserInfoTitle[indexPath.row]
-            cell.thumbnailImgView.image = UIImage(named: signInUserInfoIcon[indexPath.row])
-        case 1:
-            cell.textCellLabel.text = signInConfigTitle[indexPath.row]
-            cell.thumbnailImgView.image = UIImage(named: signInConfigIcon[indexPath.row])
-        case 2:
-            cell.textCellLabel.text = signInLogoutTitle[indexPath.row]
-            cell.thumbnailImgView.image = UIImage(named: signOutLoginIcon[indexPath.row])
-        default: break
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPageTableViewCell.self), for: indexPath) as! MyPageTableViewCell
+        if isSignIn {
+            switch indexPath.section {
+            case 0:
+                cell.textCellLabel.text = signInUserInfoTitle[indexPath.row]
+                cell.thumbnailImgView.image = UIImage(named: signInUserInfoIcon[indexPath.row])
+            case 1:
+                cell.textCellLabel.text = signInConfigTitle[indexPath.row]
+                cell.thumbnailImgView.image = UIImage(named: signInConfigIcon[indexPath.row])
+            case 2:
+                cell.textCellLabel.text = signInLogoutTitle[indexPath.row]
+                cell.thumbnailImgView.image = UIImage(named: signOutLoginIcon[indexPath.row])
+            default: break
+            }
+        } else {
+            switch indexPath.section {
+            case 0:
+                cell.textCellLabel.text = signOutConfigTitle[indexPath.row]
+                cell.thumbnailImgView.image = UIImage(named: signOutConfigIcon[indexPath.row])
+            case 1:
+                cell.textCellLabel.text = signOutLoginTitle[indexPath.row]
+                cell.thumbnailImgView.image = UIImage(named: signOutLoginIcon[indexPath.row])
+            default: break
+            }
         }
-
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         return cell
     }
 
-    //Cellが選択された際に呼び出される.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isSignIn {
+            switch indexPath.section {
+            case 0:
+                //ユーザー情報
+                switch indexPath.row {
+                case 0:
+                    goMyPosts()
+                    break
+                case 1:
+                    goMyFriends()
+                    break
+                case 2:
+                    goMyFollows()
+                    break
+                case 3:
 
-        switch indexPath.section {
-        case 0:
-            //ユーザー情報
-            switch indexPath.row {
-            case 0:
-                //投稿一覧
-                let vc: MyPostsViewController = MyPostsViewController()
-                vc.hidesBottomBarWhenPushed = true
-                navigationController?.pushViewController(vc, animated: true)
-                break
-            case 1:
-                //フレンズ一覧
-                let vc: FriendsListViewController = FriendsListViewController()
-                vc.hidesBottomBarWhenPushed = true
-                navigationController?.pushViewController(vc, animated: true)
-                break
-            case 2:
-                //フォロワー一覧
-                let vc: FollowerListViewController = FollowerListViewController()
-                vc.hidesBottomBarWhenPushed = true
-                navigationController?.pushViewController(vc, animated: true)
-                break
-            case 3:
-                //お気に入り
-                let vc: MyFavoritePostsViewController = MyFavoritePostsViewController()
-                vc.hidesBottomBarWhenPushed = true
-                navigationController?.pushViewController(vc, animated: true)
-                break
-            default:
-                break
-            }
-            break
-        case 1:
-            switch indexPath.row {
-            case 0:
-                //お問い合わせ
-                openWebView(navTitle: "お問い合わせ", url: CONTACT_PAGE_URL_STRING)
-                break
-            case 1:
-                //アプリシェア
-                let alertView = SCLAlertView()
-                alertView.addButton("Twitter") {
+                    break
+                default:
+                    break
                 }
-                alertView.showInfo("シェア", subTitle: "みんなの動物園を広める")
-
                 break
+            case 1:
+                switch indexPath.row {
+                case 0:
+                    //お問い合わせ
+                    openWebView(navTitle: "お問い合わせ", url: CONTACT_PAGE_URL_STRING)
+                    break
+                case 1:
+                    //アプリシェア
+                    let alertView = SCLAlertView()
+                    alertView.addButton("Twitter") {
+                    }
+                    alertView.showInfo("シェア", subTitle: "みんなの動物園を広める")
+
+                    break
+                case 2:
+                    //利用規約
+                    openWebView(navTitle: "利用規約", url: TOS_PAGE_URL_STRING)
+                    break
+                case 3:
+                    //プライバシーポリシー
+                    openWebView(navTitle: "プライバシーポリシー", url: PRIVACY_PAGE_URL)
+                    break
+                default:
+                    break
+                }
             case 2:
-                //利用規約
-                openWebView(navTitle: "利用規約", url: TOS_PAGE_URL_STRING)
+                //ログアウト
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                self.myPageTableView.reloadData()
+                SCLAlertView().showInfo("ログアウト", subTitle: "ログアウトが完了しました。")
                 break
-            case 3:
-                //プライバシーポリシー
-                openWebView(navTitle: "プライバシーポリシー", url: PRIVACY_PAGE_URL)
-                break
-            default:
-                break
+            default: break
             }
-        case 2:
-            //ログアウト
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            self.myPageTableView.reloadData()
-            SCLAlertView().showInfo("ログアウト", subTitle: "ログアウトが完了しました。")
-            break
-        default: break
+        } else {
+            switch indexPath.section {
+            case 0:
+                switch indexPath.row {
+                case 0:
+                    //お問い合わせ
+                    openWebView(navTitle: "お問い合わせ", url: CONTACT_PAGE_URL_STRING)
+                    break
+                case 1:
+                    //アプリシェア
+                    let alertView = SCLAlertView()
+                    alertView.addButton("Twitter") {
+                    }
+                    alertView.showInfo("シェア", subTitle: "みんなの動物園を広める")
 
+                    break
+                case 2:
+                    //利用規約
+                    openWebView(navTitle: "利用規約", url: TOS_PAGE_URL_STRING)
+                    break
+                case 3:
+                    //プライバシーポリシー
+                    openWebView(navTitle: "プライバシーポリシー", url: PRIVACY_PAGE_URL)
+                    break
+                default:
+                    break
+                }
+            case 1:
+                //ログイン
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                self.myPageTableView.reloadData()
+                SCLAlertView().showInfo("ログアウト", subTitle: "ログアウトが完了しました。")
+                break
+            default: break
+            }
         }
-
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    // MARK: - アクションの設定
-
-    //basicボタンが押されたら呼ばれます
-    @objc internal func goMyProfile(sender: UIButton) {
+    // MARK: Actions
+    @objc func goMyProfile(sender: UIButton) {
         if isSignIn {
             let myProfilelViewController = MyProfilelViewController()
             myProfilelViewController.hidesBottomBarWhenPushed = true
@@ -233,8 +276,36 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
 
+    func goMyPosts() {
+        // My Posts List
+        let vc = MyPostsViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func goMyFriends() {
+        // Friends List
+        let vc = FriendsListViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func goMyFollows() {
+        // Follower List
+        let vc = FollowerListViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func goMyFavorites() {
+        // My Favorites List
+        let vc = MyFavoritePostsViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
     func openWebView(navTitle: String, url: String) {
-        //利用規約
+        // Term of Service
         let contactView: WebViewController = WebViewController()
         contactView.url = url
         contactView.navTitle = navTitle
@@ -243,19 +314,22 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func showConfirmAlert() {
-        let actionAlert = UIAlertController(title: "", message: "Googleログインが必要です", preferredStyle: UIAlertController.Style.alert)
-
-        // set login alert
-        let kabigonAction = UIAlertAction(title: "ログイン", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+        let alert = UIAlertController(title: "", message: "Googleログインが必要です", preferredStyle: UIAlertController.Style.alert)
+        let signInAction = UIAlertAction(title: "ログイン", style: UIAlertAction.Style.default, handler: { (_: UIAlertAction!) in
             GIDSignIn.sharedInstance().signIn()
         })
-        actionAlert.addAction(kabigonAction)
-
-        // set cancel alert
+        alert.addAction(signInAction)
         let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
-        actionAlert.addAction(cancelAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
 
-        // show alert
-        present(actionAlert, animated: true, completion: nil)
+    func signOut() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
 }

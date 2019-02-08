@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         UITabBar.appearance().isTranslucent = false
 
         //Managers
-       // self.userDefaultsManager = UserDefaultsManager()
+       self.userDefaultsManager = UserDefaultsManager()
 
         // ページを格納する配列
         var viewControllers: [UIViewController] = []
