@@ -64,18 +64,8 @@ class EditUserNameViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Viewにパーツの設置
     // MARK: ナビゲーションバーの設定
     func setNavigationBar() {
-
-        self.navigationController?.navigationBar.barTintColor = UIColor.init(named: "main")
-        self.navigationController?.navigationBar.isTranslucent = false
-
         //ナビゲーションアイテムを作成
-        let titleLabel: UILabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
-        titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "ユーザー名の変更"
-        titleLabel.textColor = UIColor.white
-
-        self.navigationItem.titleView = titleLabel
+        title = "ユーザー名の変更"
     }
 
     //名前の変更ボタン押されたら呼ばれます

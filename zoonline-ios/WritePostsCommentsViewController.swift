@@ -49,13 +49,7 @@ class WritePostsCommentsViewController: UIViewController {
         UINavigationBar.appearance().tintColor = UIColor.white
 
         //ナビゲーションアイテムを作成
-        let titleLabel: NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
-        titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "コメント"
-        titleLabel.textColor = UIColor.white
-
-        self.navigationItem.titleView = titleLabel
+        self.title = "コメント"
 
         //バーの右側に設置するボタンの作成
         let rightNavBtn = UIBarButtonItem()

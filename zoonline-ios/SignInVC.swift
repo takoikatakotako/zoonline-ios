@@ -67,19 +67,8 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
 
         //ナビゲーションアイテムを作成
-        let navItems = UINavigationItem()
-        let titleLabel: NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
-        titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "新規登録"
-        titleLabel.textColor = UIColor.white
-        navItems.titleView = titleLabel
+        title = "新規登録"
 
-        //バーの左側に設置するボタンの作成
-        let leftNavBtn =  UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(leftBarBtnClicked(sender:)))
-        navItems.leftBarButtonItem = leftNavBtn
-        navBar.pushItem(navItems, animated: true)
-        self.view.addSubview(navBar)
     }
 
     // MARK: ナビゲーションバー

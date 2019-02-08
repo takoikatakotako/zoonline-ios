@@ -46,13 +46,6 @@ class PictureExpandVC: UIViewController, UIScrollViewDelegate {
 
         //ナビゲーションアイテムを作成
         let navItems = UINavigationItem()
-        let titleLabel: NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
-        titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = navigationTitle
-        titleLabel.textColor = UIColor.white
-        navItems.titleView = titleLabel
-        navBar.pushItem(navItems, animated: true)
 
         //バーの左側に設置するボタンの作成
         let leftNavBtn =  UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(doClose(sender:)))

@@ -160,17 +160,6 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     }
     
-    func setNavigationBar() {
-        
-        //ナビゲーションアイテムを作成
-        let titleLabel:NavigationBarLabel = NavigationBarLabel()
-        titleLabel.frame = CGRect(x: viewWidth*0.3, y: 0, width: viewWidth*0.4, height: navigationBarHeight)
-        titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = self.postTitle
-        titleLabel.textColor = UIColor.white
-        
-        self.navigationItem.titleView = titleLabel
-    }
     
     func setTableView() {
         
