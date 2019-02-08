@@ -7,7 +7,6 @@ import FirebaseUI
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
-    var networkManager: NetWorkManager?
     var userDefaultsManager: UserDefaultsManager?
     var tabBarController: UITabBarController?
 
@@ -37,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         UITabBar.appearance().isTranslucent = false
 
         //Managers
-        self.networkManager = NetWorkManager()
         self.userDefaultsManager = UserDefaultsManager()
 
         // ページを格納する配列

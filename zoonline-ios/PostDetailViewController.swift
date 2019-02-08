@@ -370,22 +370,6 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     //フォローボタンが押されたら呼ばれる
     @objc func followBtnClicked(sender: FollowUserButton){
         
-        if !(UtilityLibrary.isLogin()){
-            SCLAlertView().showInfo("ログインしてね", subTitle: "フォロー機能を使うにはログインが必要だよ！")
-            return
-        }
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if sender.followImgView.image == UIImage(named:"follow_icon") {
-            sender.followImgView.image = UIImage(named: "follow_icon_on")!
-            appDelegate.networkManager?.followUser(myUserId: Int(UtilityLibrary.getUserID())!, followUserId: postUserID)
-            sender.followLabel.text = "フレンズ"
-            
-        }else{
-            sender.followImgView.image = UIImage(named: "follow_icon")!
-            appDelegate.networkManager?.unfollowUser(myUserId: Int(UtilityLibrary.getUserID())!, followUserId: postUserID)
-            sender.followLabel.text = "フォロー"
-        }
     }
     
     //ファボボタンが押されたら呼ばれる
