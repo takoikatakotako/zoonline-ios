@@ -17,9 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
 
-        //ステータスバー
-        //UIApplication.shared.statusBarStyle = .lightContent
-
         //ナビゲーションバー
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().barTintColor = UIColor.init(named: "main")
@@ -36,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         UITabBar.appearance().isTranslucent = false
 
         //Managers
-        self.userDefaultsManager = UserDefaultsManager()
+       // self.userDefaultsManager = UserDefaultsManager()
 
         // ページを格納する配列
         var viewControllers: [UIViewController] = []

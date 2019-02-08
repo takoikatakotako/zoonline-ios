@@ -213,7 +213,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         case 2:
             //ログアウト
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.userDefaultsManager?.doLogout()
             self.myPageTableView.reloadData()
             SCLAlertView().showInfo("ログアウト", subTitle: "ログアウトが完了しました。")
             break
