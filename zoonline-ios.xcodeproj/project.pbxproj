@@ -53,7 +53,6 @@
 		8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */; };
 		8D8A43301F7D421700F79C0F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8A432F1F7D421700F79C0F /* Social.framework */; };
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
-		8D9DE17E1EE4145E00121FC1 /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9DE17D1EE4145E00121FC1 /* NetWorkManager.swift */; };
 		8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */; };
 		8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */; };
 		8DA4153D1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4153C1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift */; };
@@ -155,7 +154,6 @@
 		8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableCell.swift; sourceTree = "<group>"; };
 		8D8A432F1F7D421700F79C0F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		8D9DE17D1EE4145E00121FC1 /* NetWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkManager.swift; sourceTree = "<group>"; };
 		8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListViewController.swift; sourceTree = "<group>"; };
 		8DA4153C1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoLoginTableViewCell.swift; sourceTree = "<group>"; };
@@ -479,7 +477,6 @@
 		8D9DE17F1EE4147500121FC1 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				8D9DE17D1EE4145E00121FC1 /* NetWorkManager.swift */,
 				8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */,
 			);
 			name = Manager;
@@ -927,7 +924,6 @@
 				8DC7190D1F08A0F3003C5E00 /* PostImageTableViewCell.swift in Sources */,
 				8D7CDC3C1F14F12D00C3844E /* NavigationBarLabel.swift in Sources */,
 				8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */,
-				8D9DE17E1EE4145E00121FC1 /* NetWorkManager.swift in Sources */,
 				17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */,
 				8DDCD3211F49B953004C91C9 /* TempTimeLineViewController.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyFavoritePostsViewController.swift in Sources */,

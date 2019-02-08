@@ -1,11 +1,3 @@
-//
-//  EveryZooAPI.swift
-//  EveryoneZoo
-//
-//  Created by junpei ono on 2017/10/08.
-//  Copyright © 2017年 junpei ono. All rights reserved.
-//
-
 import UIKit
 
 //let API_URL:String = "http://minzoo.herokuapp.com/api/"
