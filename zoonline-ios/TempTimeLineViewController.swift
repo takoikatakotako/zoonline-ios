@@ -4,6 +4,7 @@ import SwiftyJSON
 import SDWebImage
 import GoogleMobileAds
 
+/*
 class TempTimeLineViewController: CustumViewController, UITableViewDelegate, UITableViewDataSource {
 
     //width, height
@@ -208,3 +209,5 @@ class TempTimeLineViewController: CustumViewController, UITableViewDelegate, UIT
         self.navigationController?.pushViewController(picDetailView, animated: true)
     }
 }
+
+ */

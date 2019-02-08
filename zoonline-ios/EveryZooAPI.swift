@@ -116,9 +116,9 @@ class EveryZooAPI: NSObject {
         return API_URL + API_VERSION + "users/"+String(userID)
     }
 
-    class func getFollower(userID: Int) -> String {
-        //フォロワーを取得する
-        return API_URL+API_VERSION+"users/" + String(userID)+"/followed"
-    }
+//    class func getFollower(userID: Int) -> String {
+//        //フォロワーを取得する
+//        return API_URL+API_VERSION+"users/" + String(userID)+"/followed"
+//    }
 
 }
