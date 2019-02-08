@@ -49,7 +49,6 @@
 		8D73B43A1E7AE09000E3B301 /* EveryoneZooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */; };
 		8D73B4451E7AE09000E3B301 /* EveryoneZooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */; };
 		8D7CDC371F14DD8F00C3844E /* EditUserNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */; };
-		8D7CDC3C1F14F12D00C3844E /* NavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CDC3B1F14F12D00C3844E /* NavigationBarLabel.swift */; };
 		8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */; };
 		8D8A43301F7D421700F79C0F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8A432F1F7D421700F79C0F /* Social.framework */; };
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
@@ -150,7 +149,6 @@
 		8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryoneZooUITests.swift; sourceTree = "<group>"; };
 		8D73B4461E7AE09000E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserNameViewController.swift; sourceTree = "<group>"; };
-		8D7CDC3B1F14F12D00C3844E /* NavigationBarLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarLabel.swift; sourceTree = "<group>"; };
 		8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableCell.swift; sourceTree = "<group>"; };
 		8D8A432F1F7D421700F79C0F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -303,7 +301,6 @@
 			isa = PBXGroup;
 			children = (
 				8D07EF6F1FBC9B5600A37543 /* CustumViewController.swift */,
-				8D7CDC3B1F14F12D00C3844E /* NavigationBarLabel.swift */,
 				8D532C4F1FC4904C00D2E532 /* SupportBtn.swift */,
 			);
 			name = Inheritance;
@@ -922,7 +919,6 @@
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
 				8DA4C6991FE045A800C84A73 /* FieldCollectionViewFlowLayout.swift in Sources */,
 				8DC7190D1F08A0F3003C5E00 /* PostImageTableViewCell.swift in Sources */,
-				8D7CDC3C1F14F12D00C3844E /* NavigationBarLabel.swift in Sources */,
 				8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */,
 				17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */,
 				8DDCD3211F49B953004C91C9 /* TempTimeLineViewController.swift in Sources */,
