@@ -87,16 +87,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
                     self.myProfileView.userThumbnail.image = image
                 }
             }
-
-            /*
-            reference.getData(maxSize: <#T##Int64#>, completion: <#T##(Data?, Error?) -> Void#>)
-            
-            
-            putData(data, metadata: nil, completion: { metaData, error in
-                print(metaData as Any)
-                print(error as Any)
-            })
-            */
         } else {
             // No user is signed in.
             // TODO: 即ログアウトさせる
