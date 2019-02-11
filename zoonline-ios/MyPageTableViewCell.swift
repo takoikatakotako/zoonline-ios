@@ -25,12 +25,12 @@ class MyPageTableViewCell: UITableViewCell {
         let cellWidth: CGFloat = self.frame.width
         let cellHeight: CGFloat = self.frame.height
 
-        //ThumbnailUmg
+        // ThumbnailUmg
         thumbnailImgView.frame = CGRect(x: cellWidth*0.05, y: cellHeight*0.15, width: cellHeight*0.7, height: cellHeight*0.7)
         thumbnailImgView.layer.cornerRadius = cellHeight*0.7/2
         thumbnailImgView.layer.masksToBounds = true
 
-        //TitleText
+        // TitleText
         textCellLabel.frame = CGRect(x: cellWidth*0.2, y: cellHeight*0.1, width: cellWidth*0.6, height: cellHeight*0.8)
     }
 }

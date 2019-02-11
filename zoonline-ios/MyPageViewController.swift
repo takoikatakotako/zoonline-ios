@@ -7,7 +7,7 @@ import SDWebImage
 
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GIDSignInUIDelegate {
 
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var handle: AuthStateDidChangeListenerHandle!
 
     var uid: String!
@@ -39,7 +39,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        isSignIn = appDelegate.userDefaultsManager?.isSignIn()
+        //isSignIn = appDelegate.userDefaultsManager?.isSignIn()
+        isSignIn = false
         GIDSignIn.sharedInstance().uiDelegate = self
 
         title = "マイページ"
@@ -76,6 +77,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             appDelegate.userDefaultsManager?.signIn()
             userHeaderView.userNameLabel.text = user.displayName
             userHeaderView.userMailAdressLabel.text = user.email
+            myPageTableView.reloadData()
         } else {
             // No user is signed in
             isSignIn = false
@@ -83,8 +85,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             userHeaderView.userNameLabel.text = "未ログイン"
             userHeaderView.userMailAdressLabel.text = "ログインしてください"
             userHeaderView.iconImgView.image = UIImage(named: "common-icon-default")
+            myPageTableView.reloadData()
         }
-        myPageTableView.reloadData()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

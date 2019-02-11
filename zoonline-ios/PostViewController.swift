@@ -153,34 +153,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func doPost(pic_id: String) {
-        let parameters: Parameters = [
-            "title": titleStr,
-            "caption": comment,
-            "pic_id": pic_id,
-            "tags": tagsAry
-        ]
-
-        Alamofire.request(API_URL+"/v0/posts", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: UtilityLibrary.getAPIAccessHeader()).responseJSON { response in
-            switch response.result {
-            case .success:
-                print("Validation Successful")
-
-                let json: JSON = JSON(response.result.value ?? kill)
-                print(json)
-                self.indicator.stopAnimating()
-
-                if json["is_success"].boolValue {
-                    SCLAlertView().showSuccess("投稿完了", subTitle: "投稿が完了しました。")
-                }else {
-                    SCLAlertView().showSuccess("投稿失敗", subTitle: "投稿に失敗しました。不明なエラーです。")
-                }
-
-            case .failure(let error):
-                print(error)
-                //テーブルの再読み込み
-                SCLAlertView().showError("投稿失敗", subTitle: "投稿に失敗しました。通信状況を確認してください。")
-            }
-        }
     }
 
     // MARK: - TableView Delegate Methods
@@ -280,68 +252,4 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         // close picker modal
         dismiss(animated: true, completion: nil)
     }
-
-    /*
-
-    
-    //画像が選択された時に呼ばれる.
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
-        
-        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
-            
-            postImage = image
-            postImageWidth = postImage.size.width
-            postImageHeight = postImage.size.height
-            postTableView.reloadData()
-            
-            isSelectedImage = true
-
-        } else{
-            print("Error:Class name : \(NSStringFromClass(type(of: self))) ")
-        }
-        
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    //画像選択がキャンセルされた時に呼ばれる.
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-
-     
-    //ログインボタンが押されたら呼ばれます
-    @objc func loginBtnClicked(sender: UIButton){
-        
-        let loginView:LoginViewController = LoginViewController()
-        loginView.statusBarHeight = self.statusBarHeight
-        loginView.navigationBarHeight = self.navigationBarHeight
-        self.present(loginView, animated: true, completion: nil)
-    }
-    
-    //登録ボタンが押されたら呼ばれます
-    @objc func resistBtnClicked(sender: UIButton){
-        
-        let resistView:NewResistViewController = NewResistViewController()
-        resistView.statusBarHeight = self.statusBarHeight
-        resistView.navigationBarHeight = self.navigationBarHeight
-        self.present(resistView, animated: true, completion: nil)
-    }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
- 
- */
 }

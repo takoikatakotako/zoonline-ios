@@ -3,17 +3,27 @@ import UIKit
 class TagListTableViewCell: UITableViewCell {
 
     var tagLabel: UILabel!
-    var deleateBtn: UIButton = UIButton()
+    var deleateBtn: UIButton!
+    var removeImg: UIImageView!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        self.selectionStyle = UITableViewCell.SelectionStyle.none
-        self.layoutMargins = UIEdgeInsets.zero
+        selectionStyle = UITableViewCell.SelectionStyle.none
+        layoutMargins = UIEdgeInsets.zero
 
         tagLabel = UILabel()
         tagLabel.textAlignment = NSTextAlignment.center
+        tagLabel.textColor = UIColor.white
+        tagLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        tagLabel.backgroundColor = UIColor(named: "main")
         contentView.addSubview(tagLabel)
+
+        removeImg = UIImageView()
+        removeImg.image = UIImage(named: "remove")
+
+        deleateBtn = UIButton()
+        deleateBtn.addSubview(removeImg)
         contentView.addSubview(deleateBtn)
     }
 
@@ -28,27 +38,18 @@ class TagListTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let cellWidth: CGFloat = self.frame.width
-        let cellHeight: CGFloat = self.frame.height
+        let width = frame.width
+        let height = frame.height
+        let btnSize: CGFloat = 24
 
-        //#を先頭に追加
-        tagLabel.text = "#"+tagLabel.text!
-        tagLabel.textColor = UIColor.white
-        tagLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        tagLabel.backgroundColor = UIColor(named: "ff92ae")
+        // add # to top
+        tagLabel.text = "#\(tagLabel.text!)"
 
-        //サイズの計算
-        let frame: CGSize = CGSize(width: cellWidth*0.8, height: cellHeight*0.6)
-        let rect: CGSize = tagLabel.sizeThatFits(frame)
+        // calc tag label size
+        let rect = tagLabel.sizeThatFits(CGSize.zero)
 
-        tagLabel.frame =  CGRect(x: 0, y: cellHeight*0.2, width: rect.width+cellWidth*0.05, height: cellHeight*0.6)
-        deleateBtn.frame =  CGRect(x: cellWidth-cellHeight, y: 0, width: cellHeight, height: cellHeight)
-
-        //削除ボタンの追加
-        let removeImg: UIImageView = UIImageView()
-        removeImg.image = UIImage(named: "remove")
-        removeImg.frame = CGRect(x: deleateBtn.frame.width*0.2, y: deleateBtn.frame.height*0.2, width: deleateBtn.frame.width*0.6, height: deleateBtn.frame.height*0.6)
-        deleateBtn.addSubview(removeImg)
-
+        tagLabel.frame = CGRect(x: 0, y: (height - rect.height) / 2, width: rect.width + 8, height: rect.height)
+        deleateBtn.frame = CGRect(x: width - height, y: 0, width: height, height: height)
+        removeImg.frame = CGRect(x: (height - btnSize) / 2, y: (height - btnSize) / 2, width: btnSize, height: btnSize)
     }
 }

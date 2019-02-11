@@ -7,18 +7,12 @@ protocol SetTagsDelegate: class {
 
 class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
-    //width, height
-
-    var postTagLabelHeight: CGFloat!
-    var setTagTextFieldSpaceHeight: CGFloat!
-    var setTagTextFieldHeight: CGFloat!
-    var tagTableViewHeight: CGFloat!
-
-    //segue
+    // segue
     var tagsAry: [String]!
 
     //ViewParts
-    var setTagTextField: UITextField!
+    var tagTextField: UITextField!
+    let placeHolder = "登録するタグ名"
     var tagTableView: UITableView!
 
     //delegate
@@ -27,13 +21,12 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let viewWidth = view.frame.width
-        let viewHeight = view.frame.height
-
-        postTagLabelHeight = viewWidth * 0.14
-        setTagTextFieldSpaceHeight = viewWidth * 0.02
-        setTagTextFieldHeight = viewWidth * 0.15
-        tagTableViewHeight = viewHeight
+        // width, height
+        let width = view.frame.width
+        let height = view.frame.height
+        let margin: CGFloat = 16
+        let tagTextFieldHeight: CGFloat = 40
+        let tagTableViewHeight = height - tagTextFieldHeight
         view.backgroundColor = UIColor.white
 
         // close button
@@ -41,33 +34,29 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
         navigationItem.rightBarButtonItem = rightNavBtn
 
         // text field
-        setTagTextField = UITextField()
-        setTagTextField.frame = CGRect(x: viewWidth * 0.1, y: 0, width: viewWidth * 0.8, height: setTagTextFieldHeight)
-        setTagTextField.text = "登録するタグ名"
-        setTagTextField.textColor = UIColor.gray
-        setTagTextField.textAlignment = NSTextAlignment.left
-        setTagTextField.backgroundColor = UIColor.red
-        setTagTextField.delegate = self
-        view.addSubview(setTagTextField)
-
-        let setTagTextFieldLine: UIView = UIView()
-        setTagTextFieldLine.backgroundColor = UIColor.gray
-        var linePos: CGFloat = postTagLabelHeight + setTagTextFieldSpaceHeight
-        linePos = linePos + setTagTextFieldHeight!
-        setTagTextFieldLine.frame = CGRect(x: viewWidth * 0.1, y: linePos, width: viewWidth * 0.8, height: 1)
-        view.addSubview(setTagTextFieldLine)
+        tagTextField = UITextField()
+        tagTextField.frame = CGRect(x: width * 0.1, y: margin, width: width * 0.8, height: tagTextFieldHeight)
+        tagTextField.placeholder = placeHolder
+        tagTextField.textColor = UIColor.gray
+        tagTextField.textAlignment = NSTextAlignment.left
+        tagTextField.delegate = self
+        let border = CALayer()
+        let borderWidth = CGFloat(2.0)
+        border.borderColor = UIColor.gray.cgColor
+        border.frame = CGRect(x: 0, y: tagTextField.frame.size.height - borderWidth, width: tagTextField.frame.size.width, height: 1)
+        border.borderWidth = width
+        tagTextField.layer.addSublayer(border)
+        view.addSubview(tagTextField)
 
         // table view
         tagTableView = UITableView()
         tagTableView.delegate = self
         tagTableView.dataSource = self
-        tagTableView.frame = CGRect(x: viewWidth * 0.1, y: ( setTagTextFieldHeight!) + 2, width: viewWidth * 0.8, height: tagTableViewHeight)
+        tagTableView.frame = CGRect(x: width * 0.1, y: tagTextFieldHeight + margin * 2, width: width * 0.8, height: tagTableViewHeight)
         tagTableView.register(TagListTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TagListTableViewCell.self))
-        tagTableView.separatorInset = UIEdgeInsets.zero
         tagTableView.separatorInset = .zero
         tagTableView.separatorColor = UIColor.white
-        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
-        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
+        tagTableView.rowHeight = 40
         view.addSubview(tagTableView)
     }
 
@@ -76,39 +65,37 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
         delegate?.setTags(ary: tagsAry)
     }
 
-    //タグ画面を閉じる
-    @objc internal func doClose(sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+    // close view
+    @objc func doClose(sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+
+    // delete tag
+    @objc func deleatBtnClicked(sender: UIButton) {
+        tagsAry.remove(at: sender.tag)
+        tagTableView.reloadData()
     }
 
     // MARK: UITextField delegate methods
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textFieldDidBeginEditing: \(textField.text!)")
-        if textField.text == "登録するタグ名" {
-            textField.text = ""
-        }
     }
 
-    //UITextFieldが編集された直後に呼ばれる
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textFieldDidEndEditing: \(textField.text!)")
     }
 
-    //改行ボタンが押された際に呼ばれる
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn \(textField.text!)")
 
-        // 改行ボタンが押されたらKeyboardを閉じる処理.
+        // close keyboard
         textField.resignFirstResponder()
-
-        if textField.text == "" {
+        guard let text = textField.text else {
             return true
         }
-
-        tagsAry.append(textField.text!)
+        tagTextField.text = ""
+        tagsAry.append(text)
         tagTableView.reloadData()
-        textField.text = "登録するタグ名"
-
         return true
     }
 
@@ -123,15 +110,5 @@ class SetPostTagsViewController: UIViewController, UITextFieldDelegate, UITableV
         cell.deleateBtn.tag = tagsAry.count - indexPath.row - 1
         cell.deleateBtn.addTarget(self, action: #selector(deleatBtnClicked(sender:)), for: .touchUpInside)
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
-    }
-
-    //角丸ボタンが押されたら呼ばれます
-    @objc func deleatBtnClicked(sender: UIButton) {
-        tagsAry.remove(at: sender.tag)
-        tagTableView.reloadData()
     }
 }
