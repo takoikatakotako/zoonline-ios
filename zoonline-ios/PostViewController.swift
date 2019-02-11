@@ -51,7 +51,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         postTableView.dataSource = self
         postTableView.delegate = self
         postTableView.backgroundColor = UIColor(named: "mypageArrowGray")
-        // postTableView.separatorStyle = .none
         postTableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         postTableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostImageTableViewCell.self))
         postTableView.register(PostCommentTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(PostCommentTableViewCell.self))
@@ -59,8 +58,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         postTableView.register(NoLoginTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(NoLoginTableViewCell.self))
         postTableView.backgroundColor = .lightGray
         postTableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
-        // UITableView.appearance().layoutMargins = UIEdgeInsets.zero
-        // UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         view.addSubview(postTableView)
 
         picker = UIImagePickerController()
@@ -156,12 +153,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     // MARK: - TableView Delegate Methods
-    // MARK: Section
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
 
-    // MARK: Headers
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
     }
@@ -170,7 +165,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 0
     }
 
-    // MARK: Rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -206,7 +200,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         } else {
             let cell: PostTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(PostTagTableViewCell.self), for: indexPath) as! PostTagTableViewCell
-            cell.tagsAry = ["Str", "sdfsdf"]
+            cell.tagsAry = tagsAry
             return cell
         }
     }
@@ -220,20 +214,20 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             writeCommentViewController.delegate = self
             navigationController?.pushViewController(writeCommentViewController, animated: true)
         }  else if indexPath.section == 2 {
-            let setPostTagsViewController = SetPostTagsViewController()
+            let setPostTagsViewController = SetPostTagsViewController(tagsAry: tagsAry)
             setPostTagsViewController.delegate = self
-            setPostTagsViewController.tagsAry = ["Str", "sdfsdf"]
             navigationController?.pushViewController(setPostTagsViewController, animated: true)
         }
     }
 
-    // Delate Mathods
+    // MARK: Set Comment Delate Methods
     func setComment(comment: String) {
         self.comment = comment
     }
 
+    // MARK: Set Tag Delate Methods
     func setTags(ary: [String]) {
-
+        self.tagsAry = ary
     }
 
     // MARK: ImageVicker Delegate Methods
