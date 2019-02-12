@@ -1,9 +1,13 @@
 import UIKit
+import Firebase
+import FirebaseAuth
 import Alamofire
 import SwiftyJSON
 import SCLAlertView
 
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SetTextDelegate, SetTagsDelegate {
+
+    var uid: String!
 
     var picker: UIImagePickerController!
 
@@ -18,7 +22,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     public var postImageWidth: CGFloat! = 100
     public var postImageHeight: CGFloat! = 62
     public var titleStr: String! = "タイトルをつけてみよう"
-    var tagsAry: [String] = []
 
     //サポートボタン
     let supportBtn: UIButton = UIButton()
@@ -29,6 +32,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     //
     private var image: UIImage!
     private var comment: String!
+    private var tagsAry: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +44,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButton
 
-        let rightNavBtn = UIBarButtonItem()
-        rightNavBtn.image = UIImage(named: "submit_nav_btn")!
+        let rightNavBtn = UIBarButtonItem(image: UIImage(named: "submit_nav_btn")!, style: .plain, target: self, action: #selector(postBarBtnClicked))
         navigationItem.rightBarButtonItem = rightNavBtn
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(dismissView))
 
@@ -73,10 +76,58 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         postTableView.reloadData()
+
+        if let user = Auth.auth().currentUser {
+            // User is signed in.
+            uid = user.uid
+        } else {
+            // No user is signed in.
+            // TODO: 即ログアウトさせる
+        }
     }
 
+    // MARK: Navigation Bar Button Actions
     @objc func dismissView() {
         dismiss(animated: true, completion: nil)
+    }
+
+    // 投稿ボタンが押されたら呼ばれる
+    @objc func postBarBtnClicked() {
+        if image == nil {
+            SCLAlertView().showInfo("エラー", subTitle: "画像が選択されていません。")
+            return
+        }
+
+        if comment.isEmpty {
+            SCLAlertView().showInfo("エラー", subTitle: "コメントを入力して下さい。")
+            return
+        }
+
+        // TODO: トランザクション
+        var ref: DocumentReference?
+        let db = Firestore.firestore()
+        let docData: [String: Any] = [
+            "uid": uid,
+            "comment": comment,
+            "tag": tagsAry
+        ]
+        ref = db.collection("post").addDocument(data: docData) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        if let data = image.pngData() {
+            let reference = storageRef.child("post/" + String(ref!.documentID) + "/image.png")
+            reference.putData(data, metadata: nil, completion: { metaData, error in
+                print(metaData as Any)
+                print(error as Any)
+            })
+        }
     }
 
     // MARK: - Viewにパーツの設置
@@ -117,36 +168,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Post")
         supportBtn.removeFromSuperview()
-    }
-
-    //投稿ボタンが押されたら呼ばれる
-    @objc internal func postBarBtnClicked(sender: UIButton) {
-
-        if !isSelectedImage {
-            SCLAlertView().showInfo("エラー", subTitle: "画像が選択されていません。")
-            return
-        }
-
-        if titleStr == "タイトルをつけてみよう" {
-            SCLAlertView().showInfo("エラー", subTitle: "タイトルを入力して下さい。")
-            return
-        }
-
-        if titleStr.isEmpty {
-            SCLAlertView().showInfo("エラー", subTitle: "タイトルが空です。")
-            return
-        }
-
-        if comment == "コメントを書いてみよう" {
-            SCLAlertView().showInfo("エラー", subTitle: "タイトルを入力して下さい。")
-            return
-        }
-
-        if comment.isEmpty {
-            SCLAlertView().showInfo("エラー", subTitle: "コメントを入力してください。")
-            return
-        }
-        self.indicator.startAnimating()
     }
 
     func doPost(pic_id: String) {
