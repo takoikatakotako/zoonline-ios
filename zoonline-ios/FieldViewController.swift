@@ -1,10 +1,13 @@
 import UIKit
-
+import Firebase
+import FirebaseStorage
 class FieldViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     //CollectionViews
     var collectionView: UICollectionView!
     var postButton: UIButton!
+
+    var posts: [Post] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,6 +17,19 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
 
         //ナビゲーションアイテムを作成
         title = "ひろば"
+
+        let db = Firestore.firestore()
+        db.collection("post").order(by: "created_at").limit(to: 50).getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let post = Post(id: document.documentID, data: document.data())
+                    self.posts.append(post)
+                }
+                self.collectionView.reloadData()
+            }
+        }
 
     }
 
@@ -84,7 +100,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     //セクションの総数を返す
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
+        return posts.count / 6
     }
 
     //Cellに値を設定する
@@ -92,7 +108,22 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         let cell: FieldCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(FieldCollectionViewCell.self), for: indexPath as IndexPath) as! FieldCollectionViewCell
         cell.clipsToBounds = true
         cell.layer.cornerRadius = 16
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let reference = storageRef.child("post/" + posts[indexPath.row / 6].id + "/image.png")
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                // Uh-oh, an error occurred!
+                print(error)
+            } else {
+                // Data for "images/island.jpg" is returned
+                let image = UIImage(data: data!)
+                cell.thumbnailImgView?.image = image
+            }
+        }
         cell.thumbnailImgView?.image = UIImage(named: "no_img")
+
         return cell
     }
 }

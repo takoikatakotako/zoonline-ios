@@ -109,7 +109,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         let docData: [String: Any] = [
             "uid": uid,
             "comment": comment,
-            "tag": tagsAry
+            "tag": tagsAry,
+            "created_at": Date(),
+            "uploaded_at": Date()
         ]
         ref = db.collection("post").addDocument(data: docData) { err in
             if let err = err {
