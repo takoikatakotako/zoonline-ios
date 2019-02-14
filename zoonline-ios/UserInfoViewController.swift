@@ -90,7 +90,7 @@ class UserInfoViewController: UIViewController, UICollectionViewDelegate, UIColl
 
     // MARK: CollectionView Delegate Methods
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let postDetail: PostDetailViewController = PostDetailViewController()
+        let postDetail: PostDetailViewController = PostDetailViewController(post: Post())
         navigationController?.pushViewController(postDetail, animated: true)
     }
 

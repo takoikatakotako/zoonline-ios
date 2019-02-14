@@ -60,7 +60,7 @@ class MyPostsViewController: UIViewController, UICollectionViewDelegate, UIColle
     // Cellが選択された際に呼び出される
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //画面遷移、ユーザー情報画面へ
-        let postDetail: PostDetailViewController = PostDetailViewController()
+        let postDetail: PostDetailViewController = PostDetailViewController(post: Post())
         self.navigationController?.pushViewController(postDetail, animated: true)
     }
 

@@ -19,7 +19,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         title = "ひろば"
 
         let db = Firestore.firestore()
-        db.collection("post").order(by: "created_at").limit(to: 50).getDocuments { (querySnapshot, err) in
+        db.collection("post").order(by: "created_at", descending: true).limit(to: 50).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -30,7 +30,6 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
                 self.collectionView.reloadData()
             }
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -88,9 +87,9 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         print("Number: \(indexPath.section * 6 + indexPath.row)")
 
         //画面遷移、投稿詳細画面へ
-        let picDetailView: PostDetailViewController = PostDetailViewController()
+        let picDetailView: PostDetailViewController = PostDetailViewController(post: posts[indexPath.row])
         picDetailView.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(picDetailView, animated: true)
+        navigationController?.pushViewController(picDetailView, animated: true)
     }
 
     //セクションあたりのセルの数を返す
@@ -110,7 +109,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         cell.layer.cornerRadius = 16
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let reference = storageRef.child("post/" + posts[indexPath.row / 6].id + "/image.png")
+        let reference = storageRef.child("post/" + posts[indexPath.row].id + "/image.png")
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
