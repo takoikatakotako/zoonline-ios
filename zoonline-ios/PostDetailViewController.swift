@@ -39,31 +39,16 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                    "天王寺動物園"]
 
         // 投稿
-        postDetailView = PostDetailView()
-        postDetailView.detailTextView.text = post.comment
-        postDetailView.dateLabel.text = post.createdAt.description
-
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let reference = storageRef.child("post/" + post.id + "/image.png")
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-            if let error = error {
-                // Uh-oh, an error occurred!
-                print(error)
-            } else {
-                // Data for "images/island.jpg" is returned
-                let image = UIImage(data: data!)
-                self.postDetailView.postImage.image = image
-            }
-        }
-
+        postDetailView = PostDetailView(post: post)
         postDetailView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: postDetailView.calcHeight(viewWidth: view.frame.width))
 
         // ボタンアクションの設定
         postDetailView.userInfoButton.addTarget(self, action: #selector(userInfoButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.commentButton.addTarget(self, action: #selector(commentButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.followButton.addTarget(self, action: #selector(followButtonTouched(sender:)), for: .touchUpInside)
+
+        //
+        fetchImage()
 
         //テーブルビューの初期化
         postDetailTableView = UITableView()
@@ -88,10 +73,28 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         postDetailTableView.frame = CGRect(x: 0, y: 0, width: width, height: height)
     }
 
+    // MARK: Fetch FireBase
+    func fetchImage() {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let reference = storageRef.child("post/" + post.id + "/image.png")
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                // Uh-oh, an error occurred!
+                print(error)
+            } else {
+                // Data for "images/island.jpg" is returned
+                let image = UIImage(data: data!)
+                self.postDetailView.postImage.image = image
+            }
+        }
+    }
+
     // MARK: Button Actions
     @objc func userInfoButtonTouched(sender: UIButton) {
         // ユーザー詳細画面へ
-        let userInfoViewController = UserInfoViewController(uid: "sdfsdf")
+        let userInfoViewController = UserInfoViewController(uid: post.uid)
         self.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
 

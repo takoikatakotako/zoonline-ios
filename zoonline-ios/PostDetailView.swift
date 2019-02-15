@@ -1,21 +1,25 @@
 import UIKit
+import Firebase
 
 class PostDetailView: UIView {
 
+    //
+    private var post: Post!
+
     //  各種高さ
     // Iconとフォロー
-    let userInfoHeight: CGFloat = 60
+    private let userInfoHeight: CGFloat = 60
     // Favoriteとコメントなど
-    let menuHeight: CGFloat = 60
+    private let menuHeight: CGFloat = 60
     // Dateの高さ
-    let dateHeight: CGFloat = 20
+    private let dateHeight: CGFloat = 20
     // テーブルビューまでのマージン
     let bottomMargin: CGFloat = 8
 
     // Viewのパーツ
     // UserInfo
     var userThumbnail: UIImageView!
-    var usetName: UILabel!
+    var userName: UILabel!
     var userInfoButton: UIButton!
 
     // Follow Info
@@ -50,8 +54,9 @@ class PostDetailView: UIView {
         super.init(coder: aDecoder)
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    convenience init(post: Post) {
+        self.init()
+        self.post = post
 
         // UserInfo
         userInfoButton = UIButton()
@@ -60,14 +65,14 @@ class PostDetailView: UIView {
         userThumbnail = UIImageView()
         userThumbnail.image = UIImage(named: "common-icon-default")
         userThumbnail.isUserInteractionEnabled = false
+        userThumbnail.clipsToBounds = true
         addSubview(userThumbnail)
 
-        usetName = UILabel()
-        usetName.text = "いろはにほへと"
-        usetName.textAlignment = .left
-        usetName.font = UIFont.systemFont(ofSize: 20)
-        usetName.isUserInteractionEnabled = false
-        addSubview(usetName)
+        userName = UILabel()
+        userName.textAlignment = .left
+        userName.font = UIFont.systemFont(ofSize: 20)
+        userName.isUserInteractionEnabled = false
+        addSubview(userName)
 
         // Follow Info
         followButton = UIButton()
@@ -113,14 +118,14 @@ class PostDetailView: UIView {
 
         // Date
         dateLabel = UILabel()
-        dateLabel.text = "2017年4月1日"
+        dateLabel.text = post.createdAt.description
         dateLabel.textColor = UIColor(named: "textColorGray")
         dateLabel.font = UIFont.systemFont(ofSize: 18)
         addSubview(dateLabel)
 
         // Detail
         detailTextView = UITextView()
-        detailTextView.text = "アライさんなのだ！！天王寺動物園でサイさんをみたのだ。思ったよりも大きかったのだ。"
+        detailTextView.text = post.comment
         detailTextView.font = UIFont.systemFont(ofSize: 18)
         detailTextView.textAlignment = .left
         detailTextView.isEditable = false
@@ -130,6 +135,13 @@ class PostDetailView: UIView {
         bottomLine = UIView()
         bottomLine.backgroundColor = UIColor(named: "mypageArrowGray")
         addSubview(bottomLine)
+
+        // Featch FireBases
+        featchUser(uid: post.uid)
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
 
     override func layoutSubviews() {
@@ -137,8 +149,8 @@ class PostDetailView: UIView {
 
         // UserInfo
         userThumbnail.frame = CGRect(x: 20, y: (userInfoHeight - 40) / 2, width: 40, height: 40)
-        userThumbnail.layer.cornerRadius = 24
-        usetName.frame = CGRect(x: 72, y: 0, width: 250, height: userInfoHeight)
+        userThumbnail.layer.cornerRadius = 20
+        userName.frame = CGRect(x: 72, y: 0, width: 250, height: userInfoHeight)
         userInfoButton.frame = CGRect(x: 0, y: 0, width: 250, height: userInfoHeight)
 
         // Follow
@@ -185,5 +197,48 @@ class PostDetailView: UIView {
     func calcHeight(viewWidth: CGFloat) -> CGFloat {
         let textViewSize = getTextViewSize(viewWidth: viewWidth)
         return userInfoHeight + viewWidth + menuHeight + dateHeight + textViewSize.height + bottomMargin
+    }
+
+    // Featch FireBase
+    func featchUser(uid: String) {
+        featchUserName(uid: uid)
+        featchUserIcon(uid: uid)
+    }
+
+    func featchUserName(uid: String) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("user").document(String(uid))
+        docRef.getDocument { (document, _) in
+            guard let document = document, document.exists else {
+                self.userName.text = "ななしさん"
+                return
+            }
+            guard let data = document.data() else {
+                self.userName.text = "ななしさん"
+                return
+            }
+            guard let name = data["name"] as? String else {
+                self.userName.text = "ななしさん"
+                return
+            }
+            self.userName.text = name
+        }
+    }
+
+    func featchUserIcon(uid: String) {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let reference = storageRef.child("user/" + String(uid) + "/icon.png")
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                // Uh-oh, an error occurred!
+                print(error)
+            } else {
+                // Data for "images/island.jpg" is returned
+                let image = UIImage(data: data!)
+                self.userThumbnail.image = image
+            }
+        }
     }
 }
