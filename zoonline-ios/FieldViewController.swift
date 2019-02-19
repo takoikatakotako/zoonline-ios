@@ -3,6 +3,8 @@ import Firebase
 import FirebaseStorage
 class FieldViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    var isSignIn = false
+
     //CollectionViews
     var collectionView: UICollectionView!
     var postButton: UIButton!
@@ -35,10 +37,19 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+
+        if let user = Auth.auth().currentUser {
+            // User is signed in
+            isSignIn = true
+        } else {
+            // No user is signed in
+            isSignIn = false
+        }
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
         let width = view.frame.width
         let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
         let collectionFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
@@ -68,48 +79,65 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         postButton.frame = CGRect(x: width - 100, y: height - 100, width: 80, height: 80)
         postButton.layer.cornerRadius = 40
         postButton.setImage(UIImage(named: "field-add"), for: .normal)
-        postButton.addTarget(self, action: #selector(showPostVC(sender:)), for: .touchUpInside)
+        postButton.addTarget(self, action: #selector(postBtnTapped), for: .touchUpInside)
         view.addSubview(postButton)
     }
 
     @objc func scrollReflesh(sender: UIRefreshControl) {
     }
 
-    @objc func showPostVC(sender: UIRefreshControl) {
-        let postNavigationController = UINavigationController(rootViewController: PostViewController())
-        self.present(postNavigationController, animated: true, completion: nil)
+    @objc func postBtnTapped() {
+        if isSignIn {
+             let postNavigationController = UINavigationController(rootViewController: PostViewController())
+             present(postNavigationController, animated: true, completion: nil)
+        } else {
+            showLoginAlert()
+        }
     }
 
-    //Cellが選択された際に呼び出される
+    func showLoginAlert() {
+        let actionAlert = UIAlertController(title: "", message: "投稿機能を使うにはログインが必要です", preferredStyle: UIAlertController.Style.alert)
+
+        let kabigonAction = UIAlertAction(title: "ログイン", style: UIAlertAction.Style.default, handler: {
+            (_: UIAlertAction!) in
+            // TODO: ログイン関係
+            print("ログイン")
+        })
+        actionAlert.addAction(kabigonAction)
+
+        let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
+        actionAlert.addAction(cancelAction)
+
+       present(actionAlert, animated: true, completion: nil)
+    }
+
+    // MARK: CollectionView Delegate Methods
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Section: \(indexPath.section)")
         print("Num: \(indexPath.row)")
         print("Number: \(indexPath.section * 6 + indexPath.row)")
 
         //画面遷移、投稿詳細画面へ
-        let picDetailView: PostDetailViewController = PostDetailViewController(post: posts[indexPath.row])
+        let picDetailView: PostDetailViewController = PostDetailViewController(post: posts[indexPath.section * 6 + indexPath.row])
         picDetailView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(picDetailView, animated: true)
     }
 
-    //セクションあたりのセルの数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
 
-    //セクションの総数を返す
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return posts.count / 6
     }
 
-    //Cellに値を設定する
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: FieldCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(FieldCollectionViewCell.self), for: indexPath as IndexPath) as! FieldCollectionViewCell
         cell.clipsToBounds = true
         cell.layer.cornerRadius = 16
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let reference = storageRef.child("post/" + posts[indexPath.row].id + "/image.png")
+        let reference = storageRef.child("post/" + posts[indexPath.section * 6 + indexPath.row].id + "/image.png")
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {

@@ -41,8 +41,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         title = "投稿する"
 
         // NavigationBar
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backButton
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         let rightNavBtn = UIBarButtonItem(image: UIImage(named: "submit_nav_btn")!, style: .plain, target: self, action: #selector(postBarBtnClicked))
         navigationItem.rightBarButtonItem = rightNavBtn
@@ -102,7 +101,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             SCLAlertView().showInfo("エラー", subTitle: "コメントを入力して下さい。")
             return
         }
+        write(uid: uid, comment: comment, tagsAry: tagsAry, image: image)
+    }
 
+    func write(uid: String, comment: String, tagsAry: [String], image: UIImage) {
         // TODO: トランザクション
         var ref: DocumentReference?
         let db = Firestore.firestore()
@@ -116,18 +118,23 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         ref = db.collection("post").addDocument(data: docData) { err in
             if let err = err {
                 print("Error adding document: \(err)")
+                SCLAlertView().showInfo("", subTitle: "ドキュメント")
             } else {
                 print("Document added with ID: \(ref!.documentID)")
+                self.uploadImage(documentID: ref!.documentID, image: image)
             }
         }
+    }
 
+    func uploadImage(documentID: String, image: UIImage) {
         let storage = Storage.storage()
         let storageRef = storage.reference()
         if let data = image.pngData() {
-            let reference = storageRef.child("post/" + String(ref!.documentID) + "/image.png")
+            let reference = storageRef.child("post/" + String(documentID) + "/image.png")
             reference.putData(data, metadata: nil, completion: { metaData, error in
                 print(metaData as Any)
                 print(error as Any)
+
             })
         }
     }
