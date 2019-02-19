@@ -10,6 +10,7 @@
 		04FD03A2BED6DC1F6E82BAE6 /* Pods_zoonline_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232224ED8A7FFF835259B090 /* Pods_zoonline_ios.framework */; };
 		0DE61C2237B1839A198BAC86 /* Pods_zoonline_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCBE60A9317FF3B3051F278 /* Pods_zoonline_iosUITests.framework */; };
 		1765468922142CE90027D8A7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765468822142CE90027D8A7 /* Post.swift */; };
+		1765468D221C12380027D8A7 /* FullLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765468C221C12380027D8A7 /* FullLoadingView.swift */; };
 		177AF8C8220A92A300DF04AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AF8C7220A92A300DF04AB /* User.swift */; };
 		177EEC2A21E5A17200CA4DF5 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177EEC2921E5A17200CA4DF5 /* MyProfileView.swift */; };
 		177F526F21C1202F00CA3DD8 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F526E21C1202F00CA3DD8 /* PostsCollectionViewCell.swift */; };
@@ -99,6 +100,7 @@
 /* Begin PBXFileReference section */
 		0E3AC825FD16C81DC3DB4B7B /* Pods-zoonline-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1765468822142CE90027D8A7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		1765468C221C12380027D8A7 /* FullLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullLoadingView.swift; sourceTree = "<group>"; };
 		177AF8C7220A92A300DF04AB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		177EEC2921E5A17200CA4DF5 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		177F526E21C1202F00CA3DD8 /* PostsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */,
+				1765468C221C12380027D8A7 /* FullLoadingView.swift */,
 				8DC7190B1F08A032003C5E00 /* PostTableCells */,
 				8DC719121F08BC3F003C5E00 /* SetPostCommentViewController.swift */,
 				8DC719161F08F3A4003C5E00 /* SetPostTagsViewController.swift */,
@@ -924,6 +927,7 @@
 				8DDCD3211F49B953004C91C9 /* TempTimeLineViewController.swift in Sources */,
 				8DDAF0DF1ED184AF0079D443 /* MyFavoritePostsViewController.swift in Sources */,
 				8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */,
+				1765468D221C12380027D8A7 /* FullLoadingView.swift in Sources */,
 				8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */,
 				8DC719191F08FDA5003C5E00 /* TagListTableViewCell.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
