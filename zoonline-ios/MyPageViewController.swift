@@ -75,6 +75,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let user = Auth.auth().currentUser {
             // User is signed in
             isSignIn = true
+            uid = user.uid
             appDelegate.userDefaultsManager?.signIn()
             setUserIcon(uid: user.uid)
             setUserName(uid: user.uid)
@@ -315,7 +316,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     func goMyPosts() {
         // My Posts List
-        let vc = MyPostsViewController()
+        let vc = MyPostsViewController(uid: uid)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }

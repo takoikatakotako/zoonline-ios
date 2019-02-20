@@ -98,8 +98,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
     func showLoginAlert() {
         let actionAlert = UIAlertController(title: "", message: "投稿機能を使うにはログインが必要です", preferredStyle: UIAlertController.Style.alert)
 
-        let kabigonAction = UIAlertAction(title: "ログイン", style: UIAlertAction.Style.default, handler: {
-            (_: UIAlertAction!) in
+        let kabigonAction = UIAlertAction(title: "ログイン", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
             // TODO: ログイン関係
             print("ログイン")
         })
