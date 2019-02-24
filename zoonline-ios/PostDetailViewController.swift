@@ -43,9 +43,9 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         postDetailView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: postDetailView.calcHeight(viewWidth: view.frame.width))
 
         // ボタンアクションの設定
+        postDetailView.followButton.addTarget(self, action: #selector(followButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.userInfoButton.addTarget(self, action: #selector(userInfoButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.commentButton.addTarget(self, action: #selector(commentButtonTouched(sender:)), for: .touchUpInside)
-        postDetailView.followButton.addTarget(self, action: #selector(followButtonTouched(sender:)), for: .touchUpInside)
 
         //
         fetchImage()
@@ -96,6 +96,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @objc func followButtonTouched(sender: UIButton) {
         print("basicButtonBtnClicked")
+
     }
 
     // MARK: TableView Delegate Methods

@@ -1,5 +1,5 @@
 import UIKit
 
-class User: NSObject {
+class User {
 
 }

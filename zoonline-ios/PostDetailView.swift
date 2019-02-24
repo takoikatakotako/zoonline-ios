@@ -23,9 +23,7 @@ class PostDetailView: UIView {
     var userInfoButton: UIButton!
 
     // Follow Info
-    var followButton: UIButton!
-    var followIcon: UIImageView!
-    var followLabel: UILabel!
+    var followButton: FollowButton!
 
     // Image
     var postImage: UIImageView!
@@ -75,14 +73,8 @@ class PostDetailView: UIView {
         addSubview(userName)
 
         // Follow Info
-        followButton = UIButton()
-        followButton.setImage(UIImage(named: "post-detail-follow-icon"), for: .normal)
+        followButton = FollowButton()
         addSubview(followButton)
-
-        followLabel = UILabel()
-        followLabel.text = "フォロー"
-        followLabel.textColor = .gray
-        addSubview(followLabel)
 
         // Image
         postImage = UIImageView()
@@ -154,8 +146,9 @@ class PostDetailView: UIView {
         userInfoButton.frame = CGRect(x: 0, y: 0, width: 250, height: userInfoHeight)
 
         // Follow
-        followButton.frame = CGRect(x: width - 140, y: 0, width: userInfoHeight, height: userInfoHeight)
-        followLabel.frame = CGRect(x: width - 80, y: 0, width: 80, height: userInfoHeight)
+        // followButton.frame = CGRect(x: width - 140, y: 0, width: userInfoHeight, height: userInfoHeight)
+        // followLabel.frame = CGRect(x: width - 80, y: 0, width: 80, height: userInfoHeight)
+        followButton.frame = CGRect(x: width - 120, y: 0, width: 120, height: userInfoHeight)
 
         // Image
         postImage.frame = CGRect(x: 0, y: userInfoHeight, width: width, height: width)
@@ -172,7 +165,7 @@ class PostDetailView: UIView {
         menuButton.frame = CGRect(x: width - 60, y: userInfoHeight + width + (menuHeight - 48) / 2, width: 48, height: 48)
 
         // Date
-        dateLabel.frame = CGRect(x: 20, y: userInfoHeight + width + menuHeight, width: 200, height: dateHeight)
+        dateLabel.frame = CGRect(x: 20, y: userInfoHeight + width + menuHeight, width: 240, height: dateHeight)
 
         // Detail
         let textViewSize = getTextViewSize(viewWidth: frame.width)

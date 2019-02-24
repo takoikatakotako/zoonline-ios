@@ -53,6 +53,8 @@
 		8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */; };
 		8D8A43301F7D421700F79C0F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8A432F1F7D421700F79C0F /* Social.framework */; };
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
+		8D92B40C2222C557002D8A42 /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D92B40B2222C557002D8A42 /* FollowButton.swift */; };
+		8D92B40E2222D4F6002D8A42 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D92B40D2222D4F6002D8A42 /* Follow.swift */; };
 		8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */; };
 		8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */; };
 		8DA4153D1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4153C1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift */; };
@@ -154,6 +156,8 @@
 		8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableCell.swift; sourceTree = "<group>"; };
 		8D8A432F1F7D421700F79C0F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		8D92B40B2222C557002D8A42 /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
+		8D92B40D2222D4F6002D8A42 /* Follow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		8DA0AB6E1ECA103500D75B1A /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		8DA2E43A1EAFAD5D004331D1 /* CommentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListViewController.swift; sourceTree = "<group>"; };
 		8DA4153C1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoLoginTableViewCell.swift; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 			children = (
 				177AF8C7220A92A300DF04AB /* User.swift */,
 				1765468822142CE90027D8A7 /* Post.swift */,
+				8D92B40D2222D4F6002D8A42 /* Follow.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 				8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */,
 				8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */,
 				8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */,
+				8D92B40B2222C557002D8A42 /* FollowButton.swift */,
 			);
 			name = PostDetail;
 			sourceTree = "<group>";
@@ -897,6 +903,7 @@
 				8D7343651F3A1D5D00EB232E /* OfficialListViewController.swift in Sources */,
 				8DC719111F08A580003C5E00 /* PostCommentTableViewCell.swift in Sources */,
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
+				8D92B40C2222C557002D8A42 /* FollowButton.swift in Sources */,
 				8D48576E1F40457F00608A56 /* NewPostsVC.swift in Sources */,
 				17AD3CE721C2107800A6DC9E /* UserInfoCollectionReusableView.swift in Sources */,
 				8DD2A0DD1F556609002048B4 /* MyProfilelViewController.swift in Sources */,
@@ -939,6 +946,7 @@
 				8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */,
 				8D6A73EE1F83BE2A00902AFC /* UserCollectionViewCell.swift in Sources */,
 				8DF862E11E992CB200FBF176 /* PostDetailViewController.swift in Sources */,
+				8D92B40E2222D4F6002D8A42 /* Follow.swift in Sources */,
 				8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */,
 				8D532C4D1FC31AEB00D2E532 /* BannerAdTableViewCell.swift in Sources */,
 				8DE541771EFAB3010085F916 /* SignInVC.swift in Sources */,
