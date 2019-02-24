@@ -190,6 +190,7 @@ DEPENDENCIES:
   - FirebaseUI
   - FirebaseUI/Auth
   - FirebaseUI/Google
+  - FirebaseUI/Storage
   - Google-Mobile-Ads-SDK
   - SCLAlertView (~> 0.8)
   - SDWebImage/GIF
@@ -267,6 +268,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: 57c4dd70876a9d7441869068787a11c44f38e312
+PODFILE CHECKSUM: 5e1ec554b065b4038fce04452350433b678e4bc0
 
 COCOAPODS: 1.5.3

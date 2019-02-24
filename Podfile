@@ -10,6 +10,7 @@ target 'zoonline-ios' do
   pod 'FirebaseUI'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Storage'
   pod 'SCLAlertView', '~> 0.8'
   pod 'Alamofire'
   pod 'SwiftyJSON'

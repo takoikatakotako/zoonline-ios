@@ -137,19 +137,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         let storage = Storage.storage()
         let storageRef = storage.reference()
         let reference = storageRef.child("post/" + posts[indexPath.section * 6 + indexPath.row].id + "/image.png")
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        reference.getData(maxSize: 2 * 2048 * 2048) { data, error in
-            if let error = error {
-                // Uh-oh, an error occurred!
-                print(error)
-            } else {
-                // Data for "images/island.jpg" is returned
-                let image = UIImage(data: data!)
-                cell.thumbnailImgView?.image = image
-            }
-        }
-        cell.thumbnailImgView?.image = UIImage(named: "no_img")
-
+        cell.thumbnailImgView?.sd_setImage(with: reference, placeholderImage: UIImage(named: "no_img"))
         return cell
     }
 }
