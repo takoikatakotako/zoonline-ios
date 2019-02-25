@@ -1,5 +1,6 @@
 import UIKit
 import Social
+import FirebaseAuth
 import FirebaseStorage
 import Alamofire
 import SwiftyJSON
@@ -7,6 +8,9 @@ import SCLAlertView
 import SDWebImage
 
 class PostDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    private var isSignIn = false
+    private var uid: String?
 
     private var postDetailView: PostDetailView!
 
@@ -62,7 +66,14 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // tabBarController?.tabBar.isHidden = true
+        if let user = Auth.auth().currentUser {
+            // User is signed in
+            uid = user.uid
+            isSignIn = true
+        } else {
+            // No user is signed in
+            isSignIn = false
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -96,17 +107,23 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @objc func followButtonTouched(sender: UIButton) {
         print("basicButtonBtnClicked")
+        guard let uid = uid else {
+            print("ログインが必要です")
+            return
+        }
 
+        let follow = Follow(uid: uid, targetUid: post.uid, isFollow: true)
+        follow.save(error: {
+            print("エラーだよ")
+        })
     }
 
     // MARK: TableView Delegate Methods
-    // テーブルビューのセルの数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
         return myItems.count
     }
 
-    // テーブルビューのセルの中身を設定する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell: CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self))! as! CommentTableViewCell
@@ -114,12 +131,10 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
 
-    // テーブルビューの高さを指定する
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CommentTableViewCell.calcHeight(viewWidth: view.frame.width, comments: myItems[indexPath.row])
     }
 
-    // テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)番のセルを選択しました！ ")
     }

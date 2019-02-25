@@ -4,7 +4,6 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 import SCLAlertView
-import SDWebImage
 
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GIDSignInUIDelegate {
 

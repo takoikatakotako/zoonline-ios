@@ -33,4 +33,12 @@ class FollowButton: UIButton {
         followIcon.frame = CGRect(x: 0, y: (height - iconSize.height) / 2, width: iconSize.width, height: iconSize.height)
         followLabel.frame = CGRect(x: iconSize.width + margin, y: 0, width: labelSize.width, height: labelSize.height)
     }
+
+    func setFollow() {
+        followLabel.text = "フォロー中"
+    }
+
+    func setUnFollow() {
+        followLabel.text = "フォローする"
+    }
 }
