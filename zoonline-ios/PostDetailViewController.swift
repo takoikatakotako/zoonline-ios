@@ -37,10 +37,10 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         self.navigationItem.backBarButtonItem = backButton
 
         myItems = ["天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
-                   "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
-                   "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
-                   "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
-                   "天王寺動物園"]
+            "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
+            "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
+            "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
+            "天王寺動物園"]
 
         // 投稿
         postDetailView = PostDetailView(post: post)
@@ -70,6 +70,22 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             // User is signed in
             uid = user.uid
             isSignIn = true
+
+            guard let uid = uid else {
+                return
+            }
+
+            // フォローしているか取得する
+            Follow.xxxxxx(uid: uid, targetUid: post.uid, completion: { result in
+                print(result)
+                if result == true {
+                    print("フォローしてます")
+                    self.postDetailView.followButton.setFollow()
+                } else {
+                    print("フォローしてません")
+                    self.postDetailView.followButton.setUnFollow()
+                }
+            })
         } else {
             // No user is signed in
             isSignIn = false
@@ -101,7 +117,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @objc func commentButtonTouched(sender: UIButton) {
         // コメント投稿へ
-        let  postCommentViewController = PostCommentViewController()
+        let postCommentViewController = PostCommentViewController()
         self.navigationController?.pushViewController(postCommentViewController, animated: true)
     }
 
@@ -113,9 +129,17 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         }
 
         let follow = Follow(uid: uid, targetUid: post.uid, isFollow: true)
-        follow.save(error: {
-            print("エラーだよ")
-        })
+        follow.save { error in
+            if let error = error {
+                let alert = UIAlertController(title: "エラー", message: error.description, preferredStyle: UIAlertController.Style.alert)
+                let cancelAction = UIAlertAction(title: "閉じる", style: UIAlertAction.Style.cancel, handler: nil)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                // 投稿成功
+                print("投稿成功")
+            }
+        }
     }
 
     // MARK: TableView Delegate Methods
