@@ -2,20 +2,14 @@ import UIKit
 import Firebase
 
 class Follow {
-    var uid: String
-    var targetUid: String
-    var isFollow: Bool
 
-    init(uid: String, targetUid: String, isFollow: Bool) {
-        self.uid = uid
-        self.targetUid = targetUid
-        self.isFollow = isFollow
-    }
-
-    func save(error: @escaping (NSError?) -> Void) {
+    static func follow(uid: String, followUid: String, error: @escaping (NSError?) -> Void) {
         let db = Firestore.firestore()
         let data: [String: Any] = [
-            targetUid: isFollow
+            "uid": uid,
+            "follow_uid": followUid,
+            "is_follow": true,
+            "created_at": FieldValue.serverTimestamp()
         ]
         db.collection("follow").document(uid).setData(data, completion: { err in
             error(err as NSError?)

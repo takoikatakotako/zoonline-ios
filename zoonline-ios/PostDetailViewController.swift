@@ -133,25 +133,21 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             return
         }
 
-        let newFollowStatus = !isFollow
-        let follow = Follow(uid: uid, targetUid: post.uid, isFollow: newFollowStatus)
-        follow.save { error in
-            if let error = error {
-                let alert = UIAlertController(title: "エラー", message: error.description, preferredStyle: UIAlertController.Style.alert)
-                let cancelAction = UIAlertAction(title: "閉じる", style: UIAlertAction.Style.cancel, handler: nil)
-                alert.addAction(cancelAction)
-                self.present(alert, animated: true, completion: nil)
-            } else {
-                // 投稿成功
-                print("投稿成功")
-                if newFollowStatus {
-                    // フォロー中
-                    self.postDetailView.followButton.setFollow()
-                } else {
-                    // フォローしてない
-                    self.postDetailView.followButton.setUnFollow()
+        if isFollow {
+            // フォロー解除する
+
+        } else {
+            // フォローする
+            Follow.follow(uid: uid, followUid: post.uid, error: { error in
+                if let error = error {
+                    let alert = UIAlertController(title: "エラー", message: error.description, preferredStyle: UIAlertController.Style.alert)
+                    let cancelAction = UIAlertAction(title: "閉じる", style: UIAlertAction.Style.cancel, handler: nil)
+                    alert.addAction(cancelAction)
+                    self.present(alert, animated: true, completion: nil)
+                    return
                 }
-            }
+
+            })
         }
     }
 
