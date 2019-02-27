@@ -2,6 +2,7 @@ import UIKit
 
 class FollowButton: UIButton {
 
+    var isFollow: Bool?
     var followIcon: UIImageView!
     var followLabel: UILabel!
 
@@ -9,15 +10,17 @@ class FollowButton: UIButton {
         super.init(frame: frame)
 
         followIcon = UIImageView()
-        followIcon.image = UIImage(named: "post-detail-follow-icon")
+        followIcon.image = UIImage(named: "follow-icon-off")
         followIcon.isUserInteractionEnabled = false
         addSubview(followIcon)
 
         followLabel = UILabel()
-        followLabel.text = "フレンズ"
+        followLabel.text = "フォロー"
         followLabel.textColor = .gray
         followLabel.isUserInteractionEnabled = false
         addSubview(followLabel)
+
+        isHidden = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -35,10 +38,16 @@ class FollowButton: UIButton {
     }
 
     func setFollow() {
-        followLabel.text = "フォロー中"
+        followLabel.text = "フレンズ"
+        followIcon.image = UIImage(named: "follow-icon-on")
+        isFollow = true
+        isHidden = false
     }
 
     func setUnFollow() {
-        followLabel.text = "フォローする"
+        followLabel.text = "フォロー"
+        followIcon.image = UIImage(named: "follow-icon-off")
+        isFollow = false
+        isHidden = false
     }
 }

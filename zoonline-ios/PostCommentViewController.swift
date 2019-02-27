@@ -7,8 +7,7 @@ class PostCommentViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        let rightNavBtn = UIBarButtonItem(title: "投稿", style: .plain, target: self, action: #selector(postComments(sender:)))
-        self.navigationItem.rightBarButtonItem = rightNavBtn
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "投稿", style: .plain, target: self, action: #selector(postComments(sender:)))
 
         NotificationCenter.default.addObserver(
             self,
@@ -40,5 +39,8 @@ class PostCommentViewController: UIViewController {
     }
 
     @objc internal func postComments(sender: UIButton) {
+
+        // let comment = Comment(uid: <#T##String#>, postId: <#T##String#>, userName: <#T##String#>, comment: <#T##String#>)
+
     }
 }

@@ -78,7 +78,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             // フォローしているか取得する
             Follow.xxxxxx(uid: uid, targetUid: post.uid, completion: { result in
                 print(result)
-                if result == true {
+                if result {
                     print("フォローしてます")
                     self.postDetailView.followButton.setFollow()
                 } else {
@@ -128,7 +128,13 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             return
         }
 
-        let follow = Follow(uid: uid, targetUid: post.uid, isFollow: true)
+        guard let isFollow = postDetailView.followButton.isFollow else {
+            print("フェッチ中です")
+            return
+        }
+
+        let newFollowStatus = !isFollow
+        let follow = Follow(uid: uid, targetUid: post.uid, isFollow: newFollowStatus)
         follow.save { error in
             if let error = error {
                 let alert = UIAlertController(title: "エラー", message: error.description, preferredStyle: UIAlertController.Style.alert)
@@ -138,6 +144,13 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             } else {
                 // 投稿成功
                 print("投稿成功")
+                if newFollowStatus {
+                    // フォロー中
+                    self.postDetailView.followButton.setFollow()
+                } else {
+                    // フォローしてない
+                    self.postDetailView.followButton.setUnFollow()
+                }
             }
         }
     }

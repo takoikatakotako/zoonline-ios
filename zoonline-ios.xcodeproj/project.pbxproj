@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04FD03A2BED6DC1F6E82BAE6 /* Pods_zoonline_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232224ED8A7FFF835259B090 /* Pods_zoonline_ios.framework */; };
 		0DE61C2237B1839A198BAC86 /* Pods_zoonline_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCBE60A9317FF3B3051F278 /* Pods_zoonline_iosUITests.framework */; };
+		1736445722263DEC0096F8F8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1736445622263DEC0096F8F8 /* Comment.swift */; };
 		1765468922142CE90027D8A7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765468822142CE90027D8A7 /* Post.swift */; };
 		1765468D221C12380027D8A7 /* FullLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765468C221C12380027D8A7 /* FullLoadingView.swift */; };
 		177AF8C8220A92A300DF04AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AF8C7220A92A300DF04AB /* User.swift */; };
@@ -101,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		0E3AC825FD16C81DC3DB4B7B /* Pods-zoonline-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1736445622263DEC0096F8F8 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		1765468822142CE90027D8A7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1765468C221C12380027D8A7 /* FullLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullLoadingView.swift; sourceTree = "<group>"; };
 		177AF8C7220A92A300DF04AB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				177AF8C7220A92A300DF04AB /* User.swift */,
 				1765468822142CE90027D8A7 /* Post.swift */,
 				8D92B40D2222D4F6002D8A42 /* Follow.swift */,
+				1736445622263DEC0096F8F8 /* Comment.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -948,6 +951,7 @@
 				8DF862E11E992CB200FBF176 /* PostDetailViewController.swift in Sources */,
 				8D92B40E2222D4F6002D8A42 /* Follow.swift in Sources */,
 				8D0FB45A1E8031800008D997 /* ZooListViewController.swift in Sources */,
+				1736445722263DEC0096F8F8 /* Comment.swift in Sources */,
 				8D532C4D1FC31AEB00D2E532 /* BannerAdTableViewCell.swift in Sources */,
 				8DE541771EFAB3010085F916 /* SignInVC.swift in Sources */,
 				177EEC2A21E5A17200CA4DF5 /* MyProfileView.swift in Sources */,
