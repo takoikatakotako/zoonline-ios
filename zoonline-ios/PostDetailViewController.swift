@@ -7,7 +7,7 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class PostDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PostDetailViewController: UIViewController {
 
     private var isSignIn = false
     private var uid: String?
@@ -33,8 +33,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = backButton
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         myItems = ["天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
             "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
@@ -75,18 +74,19 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                 return
             }
 
+            if uid == post.uid {
+                return
+            }
+
             // フォローしているか取得する
             Follow.isFollow(uid: uid, followUid: post.uid, completion: { (isFollow, err) in
                 if let err = err {
-                    print("フォロー情報の取得に失敗しました")
-                    print(err.description)
+                    self.showErrorAlert(message: err.description)
+                    return
                 }
-
                 if isFollow {
-                    print("フォローしてます")
                     self.postDetailView.followButton.setFollow()
                 } else {
-                    print("フォローしてません")
                     self.postDetailView.followButton.setUnFollow()
                 }
             })
@@ -98,10 +98,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let width = view.frame.width
-        let height = view.frame.height
-        // let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
-        postDetailTableView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        postDetailTableView.frame = view.frame
     }
 
     // MARK: Fetch FireBase
@@ -109,20 +106,20 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         let storage = Storage.storage()
         let storageRef = storage.reference()
         let reference = storageRef.child("post/" + post.id + "/image.png")
-        self.postDetailView.postImage.sd_setImage(with: reference, placeholderImage: UIImage(named: "no_img"))
+        postDetailView.postImage.sd_setImage(with: reference, placeholderImage: UIImage(named: "no_img"))
     }
 
     // MARK: Button Actions
     @objc func userInfoButtonTouched(sender: UIButton) {
         // ユーザー詳細画面へ
         let userInfoViewController = UserInfoViewController(uid: post.uid)
-        self.navigationController?.pushViewController(userInfoViewController, animated: true)
+        navigationController?.pushViewController(userInfoViewController, animated: true)
     }
 
     @objc func commentButtonTouched(sender: UIButton) {
         // コメント投稿へ
         let postCommentViewController = PostCommentViewController()
-        self.navigationController?.pushViewController(postCommentViewController, animated: true)
+        navigationController?.pushViewController(postCommentViewController, animated: true)
     }
 
     @objc func followButtonTouched(sender: UIButton) {
@@ -139,25 +136,34 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
         if isFollow {
             // フォロー解除する
-
-        } else {
-            // フォローする
-            Follow.follow(uid: uid, followUid: post.uid, error: { error in
+            Follow.unFollow(uid: uid, followUid: post.uid, completion: { error in
                 if let error = error {
-                    let alert = UIAlertController(title: "エラー", message: error.description, preferredStyle: UIAlertController.Style.alert)
-                    let cancelAction = UIAlertAction(title: "閉じる", style: UIAlertAction.Style.cancel, handler: nil)
-                    alert.addAction(cancelAction)
-                    self.present(alert, animated: true, completion: nil)
+                    self.showErrorAlert(message: error.description)
                     return
                 }
-                // フォロー成功
-                print("フォローしてます")
+                self.postDetailView.followButton.setUnFollow()
+            })
+        } else {
+            // フォローする
+            Follow.follow(uid: uid, followUid: post.uid, completion: { error in
+                if let error = error {
+                    self.showErrorAlert(message: error.description)
+                    return
+                }
                 self.postDetailView.followButton.setFollow()
             })
         }
     }
 
-    // MARK: TableView Delegate Methods
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "エラー", message: message, preferredStyle: UIAlertController.Style.alert)
+        let cancelAction = UIAlertAction(title: "閉じる", style: UIAlertAction.Style.cancel, handler: nil)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+extension PostDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //テーブルビューのセルの数はmyItems配列の数とした
         return myItems.count
