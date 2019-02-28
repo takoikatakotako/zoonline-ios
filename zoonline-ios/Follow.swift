@@ -11,25 +11,48 @@ class Follow {
             "is_follow": true,
             "created_at": FieldValue.serverTimestamp()
         ]
-        db.collection("follow").document(uid).setData(data, completion: { err in
+        db.collection("follow").addDocument(data: data, completion: { err in
             error(err as NSError?)
         })
     }
 
-    static func xxxxxx(uid: String, targetUid: String, completion: @escaping (Bool) -> Void) {
+    static func unFollow(uid: String, followUid: String, error: @escaping (NSError?) -> Void) {
         let db = Firestore.firestore()
-        let docRef = db.collection("follow").document(uid)
-        docRef.getDocument { (document, _) in
-            if let document = document, document.exists {
-                if let data = document.data() {
-                    if let isFollow = data[targetUid] as? Bool {
-                        completion(isFollow)
+        let docsRef = db.collection("follow").whereField("uid", isEqualTo: uid).whereField("follow_uid", isEqualTo: followUid).whereField("is_follow", isEqualTo: true)
+        docsRef.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                error(err as NSError)
+                return
+            }
+
+            for document in querySnapshot!.documents {
+                db.collection("follow").document(document.documentID).delete { err in
+                    if let err = err {
+                        error(err as NSError)
                     }
                 }
-            } else {
-                print("Document does not exist")
             }
-            completion(false)
+        }
+
+    }
+
+    static func isFollow(uid: String, followUid: String, completion: @escaping (Bool, NSError?) -> Void) {
+        let db = Firestore.firestore()
+        let docsRef = db.collection("follow").whereField("uid", isEqualTo: uid).whereField("follow_uid", isEqualTo: followUid).whereField("is_follow", isEqualTo: true)
+        docsRef.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                completion(false, err as NSError)
+                return
+            }
+            if querySnapshot!.documents.count > 0 {
+                completion(true, nil)
+                return
+            } else {
+                completion(false, nil)
+                return
+            }
         }
     }
 }
