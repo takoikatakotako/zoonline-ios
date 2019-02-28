@@ -18,9 +18,7 @@ class PostDetailView: UIView {
 
     // Viewのパーツ
     // UserInfo
-    var userThumbnail: UIImageView!
-    var userName: UILabel!
-    var userInfoButton: UIButton!
+    var userInfoButton: UserInfoButton!
 
     // Follow Info
     var followButton: FollowButton!
@@ -57,20 +55,8 @@ class PostDetailView: UIView {
         self.post = post
 
         // UserInfo
-        userInfoButton = UIButton()
+        userInfoButton = UserInfoButton()
         addSubview(userInfoButton)
-
-        userThumbnail = UIImageView()
-        userThumbnail.image = UIImage(named: "common-icon-default")
-        userThumbnail.isUserInteractionEnabled = false
-        userThumbnail.clipsToBounds = true
-        addSubview(userThumbnail)
-
-        userName = UILabel()
-        userName.textAlignment = .left
-        userName.font = UIFont.systemFont(ofSize: 20)
-        userName.isUserInteractionEnabled = false
-        addSubview(userName)
 
         // Follow Info
         followButton = FollowButton()
@@ -140,14 +126,9 @@ class PostDetailView: UIView {
         let width = frame.width
 
         // UserInfo
-        userThumbnail.frame = CGRect(x: 20, y: (userInfoHeight - 40) / 2, width: 40, height: 40)
-        userThumbnail.layer.cornerRadius = 20
-        userName.frame = CGRect(x: 72, y: 0, width: 250, height: userInfoHeight)
         userInfoButton.frame = CGRect(x: 0, y: 0, width: 250, height: userInfoHeight)
 
         // Follow
-        // followButton.frame = CGRect(x: width - 140, y: 0, width: userInfoHeight, height: userInfoHeight)
-        // followLabel.frame = CGRect(x: width - 80, y: 0, width: 80, height: userInfoHeight)
         followButton.frame = CGRect(x: width - 120, y: 0, width: 120, height: userInfoHeight)
 
         // Image
@@ -203,18 +184,18 @@ class PostDetailView: UIView {
         let docRef = db.collection("user").document(String(uid))
         docRef.getDocument { (document, _) in
             guard let document = document, document.exists else {
-                self.userName.text = "ななしさん"
+                self.userInfoButton.userName.text = "ななしさん"
                 return
             }
             guard let data = document.data() else {
-                self.userName.text = "ななしさん"
+                self.userInfoButton.userName.text = "ななしさん"
                 return
             }
             guard let name = data["name"] as? String else {
-                self.userName.text = "ななしさん"
+                self.userInfoButton.userName.text = "ななしさん"
                 return
             }
-            self.userName.text = name
+            self.userInfoButton.userName.text = name
         }
     }
 
@@ -222,16 +203,6 @@ class PostDetailView: UIView {
         let storage = Storage.storage()
         let storageRef = storage.reference()
         let reference = storageRef.child("user/" + String(uid) + "/icon.png")
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-            if let error = error {
-                // Uh-oh, an error occurred!
-                print(error)
-            } else {
-                // Data for "images/island.jpg" is returned
-                let image = UIImage(data: data!)
-                self.userThumbnail.image = image
-            }
-        }
+        userInfoButton.userIcon.sd_setImage(with: reference, placeholderImage: UIImage(named: "common-icon-default"))
     }
 }

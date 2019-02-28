@@ -1,6 +1,6 @@
 import UIKit
 
-class PictureExpandVC: UIViewController, UIScrollViewDelegate {
+class PictureExpandViewController: UIViewController, UIScrollViewDelegate {
 
     //width, height
     private var viewWidth: CGFloat!
@@ -21,7 +21,7 @@ class PictureExpandVC: UIViewController, UIScrollViewDelegate {
         viewHeight = self.view.frame.size.height
         scrollViewHeight = viewHeight - (statusBarHeight+navigationBarHeight)
 
-        self.view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.white
 
         setNavigationBar()
         setImageScrollView()
@@ -35,7 +35,7 @@ class PictureExpandVC: UIViewController, UIScrollViewDelegate {
         let aadView: UIView = UIView()
         aadView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: statusBarHeight*2)
         aadView.backgroundColor = UIColor.init(named: "main")
-        self.view.addSubview(aadView)
+        view.addSubview(aadView)
 
         //ナビゲーションコントローラーの色の変更
         let navBar = UINavigationBar()
@@ -50,7 +50,7 @@ class PictureExpandVC: UIViewController, UIScrollViewDelegate {
         //バーの左側に設置するボタンの作成
         let leftNavBtn =  UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(doClose(sender:)))
         navItems.leftBarButtonItem = leftNavBtn
-        self.view.addSubview(navBar)
+        view.addSubview(navBar)
     }
 
     func setImageScrollView() {
@@ -73,8 +73,7 @@ class PictureExpandVC: UIViewController, UIScrollViewDelegate {
     }
 
     @objc func doClose(sender: UIButton) {
-
-        self.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.dismiss(animated: true, completion: nil)
+        modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dismiss(animated: true, completion: nil)
     }
 }

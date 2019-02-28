@@ -10,6 +10,7 @@
 		04FD03A2BED6DC1F6E82BAE6 /* Pods_zoonline_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232224ED8A7FFF835259B090 /* Pods_zoonline_ios.framework */; };
 		0DE61C2237B1839A198BAC86 /* Pods_zoonline_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCBE60A9317FF3B3051F278 /* Pods_zoonline_iosUITests.framework */; };
 		1736445722263DEC0096F8F8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1736445622263DEC0096F8F8 /* Comment.swift */; };
+		173644592227F3680096F8F8 /* UserInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173644582227F3680096F8F8 /* UserInfoButton.swift */; };
 		1765468922142CE90027D8A7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765468822142CE90027D8A7 /* Post.swift */; };
 		1765468D221C12380027D8A7 /* FullLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765468C221C12380027D8A7 /* FullLoadingView.swift */; };
 		177AF8C8220A92A300DF04AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AF8C7220A92A300DF04AB /* User.swift */; };
@@ -27,7 +28,7 @@
 		8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */; };
 		8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1586711ED848F400802F54 /* UserInfoViewController.swift */; };
 		8D2533BE1F64FB4F00DB9C96 /* EditUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2533BD1F64FB4F00DB9C96 /* EditUserProfileViewController.swift */; };
-		8D2A9AEF1FB4F914006ECD20 /* PictureExpandVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */; };
+		8D2A9AEF1FB4F914006ECD20 /* PictureExpandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A9AEE1FB4F914006ECD20 /* PictureExpandViewController.swift */; };
 		8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */; };
 		8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D35113E1EEED5E6004BA744 /* LoginViewController.swift */; };
 		8D3E39B121A1125E0083E661 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E39B021A1125E0083E661 /* PostDetailView.swift */; };
@@ -51,7 +52,6 @@
 		8D73B43A1E7AE09000E3B301 /* EveryoneZooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4391E7AE09000E3B301 /* EveryoneZooTests.swift */; };
 		8D73B4451E7AE09000E3B301 /* EveryoneZooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */; };
 		8D7CDC371F14DD8F00C3844E /* EditUserNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */; };
-		8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */; };
 		8D8A43301F7D421700F79C0F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8A432F1F7D421700F79C0F /* Social.framework */; };
 		8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */; };
 		8D92B40C2222C557002D8A42 /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D92B40B2222C557002D8A42 /* FollowButton.swift */; };
@@ -103,6 +103,7 @@
 /* Begin PBXFileReference section */
 		0E3AC825FD16C81DC3DB4B7B /* Pods-zoonline-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1736445622263DEC0096F8F8 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		173644582227F3680096F8F8 /* UserInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoButton.swift; sourceTree = "<group>"; };
 		1765468822142CE90027D8A7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1765468C221C12380027D8A7 /* FullLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullLoadingView.swift; sourceTree = "<group>"; };
 		177AF8C7220A92A300DF04AB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -123,7 +124,7 @@
 		8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		8D1586711ED848F400802F54 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		8D2533BD1F64FB4F00DB9C96 /* EditUserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserProfileViewController.swift; sourceTree = "<group>"; };
-		8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureExpandVC.swift; sourceTree = "<group>"; };
+		8D2A9AEE1FB4F914006ECD20 /* PictureExpandViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureExpandViewController.swift; sourceTree = "<group>"; };
 		8D35113A1EEEC078004BA744 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		8D35113E1EEED5E6004BA744 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D3E39B021A1125E0083E661 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
@@ -155,7 +156,6 @@
 		8D73B4441E7AE09000E3B301 /* EveryoneZooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryoneZooUITests.swift; sourceTree = "<group>"; };
 		8D73B4461E7AE09000E3B301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7CDC361F14DD8F00C3844E /* EditUserNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserNameViewController.swift; sourceTree = "<group>"; };
-		8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableCell.swift; sourceTree = "<group>"; };
 		8D8A432F1F7D421700F79C0F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8D8EED2D1E990CCC0055D8EB /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		8D92B40B2222C557002D8A42 /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
@@ -339,8 +339,8 @@
 				8DF862E01E992CB200FBF176 /* PostDetailViewController.swift */,
 				8D3E39B021A1125E0083E661 /* PostDetailView.swift */,
 				8D132E381EB4CF1B00B0C146 /* CommentTableViewCell.swift */,
-				8D7E86031EAB46AE00C4049B /* PostDetailTableCell.swift */,
-				8D2A9AEE1FB4F914006ECD20 /* PictureExpandVC.swift */,
+				8D2A9AEE1FB4F914006ECD20 /* PictureExpandViewController.swift */,
+				173644582227F3680096F8F8 /* UserInfoButton.swift */,
 				8D92B40B2222C557002D8A42 /* FollowButton.swift */,
 			);
 			name = PostDetail;
@@ -908,6 +908,7 @@
 				8DBC88361EAC7465006D85A5 /* NetWorkErrorTableViewCell.swift in Sources */,
 				8D92B40C2222C557002D8A42 /* FollowButton.swift in Sources */,
 				8D48576E1F40457F00608A56 /* NewPostsVC.swift in Sources */,
+				173644592227F3680096F8F8 /* UserInfoButton.swift in Sources */,
 				17AD3CE721C2107800A6DC9E /* UserInfoCollectionReusableView.swift in Sources */,
 				8DD2A0DD1F556609002048B4 /* MyProfilelViewController.swift in Sources */,
 				8D532C521FC495DD00D2E532 /* ZooForEveryoneConfig.swift in Sources */,
@@ -921,11 +922,10 @@
 				8D2533BE1F64FB4F00DB9C96 /* EditUserProfileViewController.swift in Sources */,
 				8D8EED2E1E990CCC0055D8EB /* PostViewController.swift in Sources */,
 				8DA2E43B1EAFAD5D004331D1 /* CommentListViewController.swift in Sources */,
-				8D7E86041EAB46AE00C4049B /* PostDetailTableCell.swift in Sources */,
 				8DA4153D1F93ADEA00A38AC8 /* NoLoginTableViewCell.swift in Sources */,
 				8DDF85901FE83F89002CD0FC /* NetWorkErrorCollectionViewCell.swift in Sources */,
 				8D7343631F3A1CB700EB232E /* NewsListViewController.swift in Sources */,
-				8D2A9AEF1FB4F914006ECD20 /* PictureExpandVC.swift in Sources */,
+				8D2A9AEF1FB4F914006ECD20 /* PictureExpandViewController.swift in Sources */,
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
