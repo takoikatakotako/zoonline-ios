@@ -27,8 +27,7 @@ class PostDetailView: UIView {
     var postImage: UIImageView!
 
     // Favorite
-    var favoriteButton: UIButton!
-    var favoriteLabel: UILabel!
+    var favoriteButton: FavoriteButton!
 
     // Comment
     var commentButton: UIButton!
@@ -55,7 +54,7 @@ class PostDetailView: UIView {
         self.post = post
 
         // UserInfo
-        userInfoButton = UserInfoButton()
+        userInfoButton = UserInfoButton(uid: post.uid)
         addSubview(userInfoButton)
 
         // Follow Info
@@ -68,15 +67,8 @@ class PostDetailView: UIView {
         addSubview(postImage)
 
         // Favorite
-        favoriteButton = UIButton()
-        favoriteButton.setImage(UIImage(named: "post-detail-fav-on"), for: .normal)
+        favoriteButton = FavoriteButton()
         addSubview(favoriteButton)
-
-        favoriteLabel = UILabel()
-        favoriteLabel.textColor = UIColor(named: "postDetailFavPink")
-        favoriteLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        favoriteLabel.text = "10"
-        addSubview(favoriteLabel)
 
         // Comment
         commentButton = UIButton()
@@ -113,9 +105,6 @@ class PostDetailView: UIView {
         bottomLine = UIView()
         bottomLine.backgroundColor = UIColor(named: "mypageArrowGray")
         addSubview(bottomLine)
-
-        // Featch FireBases
-        featchUser(uid: post.uid)
     }
 
     override init(frame: CGRect) {
@@ -135,8 +124,7 @@ class PostDetailView: UIView {
         postImage.frame = CGRect(x: 0, y: userInfoHeight, width: width, height: width)
 
         // Favorite
-        favoriteButton.frame = CGRect(x: 20, y: userInfoHeight + width + (menuHeight - 48) / 2, width: 48, height: 48)
-        favoriteLabel.frame = CGRect(x: 68, y: userInfoHeight + width, width: 40, height: menuHeight)
+        favoriteButton.frame = CGRect(x: 0, y: userInfoHeight + width, width: 120, height: menuHeight)
 
         // Comment
         commentButton.frame = CGRect(x: 112, y: userInfoHeight + width + (menuHeight - 48) / 2, width: 48, height: 48)
@@ -171,38 +159,5 @@ class PostDetailView: UIView {
     func calcHeight(viewWidth: CGFloat) -> CGFloat {
         let textViewSize = getTextViewSize(viewWidth: viewWidth)
         return userInfoHeight + viewWidth + menuHeight + dateHeight + textViewSize.height + bottomMargin
-    }
-
-    // Featch FireBase
-    func featchUser(uid: String) {
-        featchUserName(uid: uid)
-        featchUserIcon(uid: uid)
-    }
-
-    func featchUserName(uid: String) {
-        let db = Firestore.firestore()
-        let docRef = db.collection("user").document(String(uid))
-        docRef.getDocument { (document, _) in
-            guard let document = document, document.exists else {
-                self.userInfoButton.userName.text = "ななしさん"
-                return
-            }
-            guard let data = document.data() else {
-                self.userInfoButton.userName.text = "ななしさん"
-                return
-            }
-            guard let name = data["name"] as? String else {
-                self.userInfoButton.userName.text = "ななしさん"
-                return
-            }
-            self.userInfoButton.userName.text = name
-        }
-    }
-
-    func featchUserIcon(uid: String) {
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let reference = storageRef.child("user/" + String(uid) + "/icon.png")
-        userInfoButton.userIcon.sd_setImage(with: reference, placeholderImage: UIImage(named: "common-icon-default"))
     }
 }

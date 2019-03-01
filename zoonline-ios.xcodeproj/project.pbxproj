@@ -11,6 +11,7 @@
 		0DE61C2237B1839A198BAC86 /* Pods_zoonline_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCBE60A9317FF3B3051F278 /* Pods_zoonline_iosUITests.framework */; };
 		1736445722263DEC0096F8F8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1736445622263DEC0096F8F8 /* Comment.swift */; };
 		173644592227F3680096F8F8 /* UserInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173644582227F3680096F8F8 /* UserInfoButton.swift */; };
+		1736445B222936200096F8F8 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1736445A222936200096F8F8 /* FavoriteButton.swift */; };
 		1765468922142CE90027D8A7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765468822142CE90027D8A7 /* Post.swift */; };
 		1765468D221C12380027D8A7 /* FullLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765468C221C12380027D8A7 /* FullLoadingView.swift */; };
 		177AF8C8220A92A300DF04AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AF8C7220A92A300DF04AB /* User.swift */; };
@@ -104,6 +105,7 @@
 		0E3AC825FD16C81DC3DB4B7B /* Pods-zoonline-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoonline-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zoonline-iosUITests/Pods-zoonline-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1736445622263DEC0096F8F8 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		173644582227F3680096F8F8 /* UserInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoButton.swift; sourceTree = "<group>"; };
+		1736445A222936200096F8F8 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		1765468822142CE90027D8A7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1765468C221C12380027D8A7 /* FullLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullLoadingView.swift; sourceTree = "<group>"; };
 		177AF8C7220A92A300DF04AB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				8D2A9AEE1FB4F914006ECD20 /* PictureExpandViewController.swift */,
 				173644582227F3680096F8F8 /* UserInfoButton.swift */,
 				8D92B40B2222C557002D8A42 /* FollowButton.swift */,
+				1736445A222936200096F8F8 /* FavoriteButton.swift */,
 			);
 			name = PostDetail;
 			sourceTree = "<group>";
@@ -930,6 +933,7 @@
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
 				8DA4C6991FE045A800C84A73 /* FieldCollectionViewFlowLayout.swift in Sources */,
+				1736445B222936200096F8F8 /* FavoriteButton.swift in Sources */,
 				8DC7190D1F08A0F3003C5E00 /* PostImageTableViewCell.swift in Sources */,
 				8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */,
 				1765468922142CE90027D8A7 /* Post.swift in Sources */,
