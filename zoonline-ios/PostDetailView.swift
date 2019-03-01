@@ -30,8 +30,7 @@ class PostDetailView: UIView {
     var favoriteButton: FavoriteButton!
 
     // Comment
-    var commentButton: UIButton!
-    var commentLabel: UILabel!
+    var commentButton: CommentButton!
 
     // Menu
     var menuButton: UIButton!
@@ -71,15 +70,8 @@ class PostDetailView: UIView {
         addSubview(favoriteButton)
 
         // Comment
-        commentButton = UIButton()
-        commentButton.setImage(UIImage(named: "post-detail-comment"), for: .normal)
+        commentButton = CommentButton()
         addSubview(commentButton)
-
-        commentLabel = UILabel()
-        commentLabel.textColor = UIColor(named: "textColorGray")
-        commentLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        commentLabel.text = "10"
-        addSubview(commentLabel)
 
         // Menu
         menuButton = UIButton()
@@ -124,11 +116,10 @@ class PostDetailView: UIView {
         postImage.frame = CGRect(x: 0, y: userInfoHeight, width: width, height: width)
 
         // Favorite
-        favoriteButton.frame = CGRect(x: 0, y: userInfoHeight + width, width: 120, height: menuHeight)
+        favoriteButton.frame = CGRect(x: 0, y: userInfoHeight + width, width: 100, height: menuHeight)
 
         // Comment
-        commentButton.frame = CGRect(x: 112, y: userInfoHeight + width + (menuHeight - 48) / 2, width: 48, height: 48)
-        commentLabel.frame = CGRect(x: 160, y: userInfoHeight + width, width: 40, height: menuHeight)
+        commentButton.frame = CGRect(x: 100, y: userInfoHeight + width, width: 100, height: menuHeight)
 
         // Menu
         menuButton.frame = CGRect(x: width - 60, y: userInfoHeight + width + (menuHeight - 48) / 2, width: 48, height: 48)

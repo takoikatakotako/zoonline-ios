@@ -48,6 +48,7 @@ class PostDetailViewController: UIViewController {
         // ボタンアクションの設定
         postDetailView.followButton.addTarget(self, action: #selector(followButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.userInfoButton.addTarget(self, action: #selector(userInfoButtonTouched(sender:)), for: .touchUpInside)
+        postDetailView.favoriteButton.addTarget(self, action: #selector(favoriteButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.commentButton.addTarget(self, action: #selector(commentButtonTouched(sender:)), for: .touchUpInside)
 
         //
@@ -116,12 +117,6 @@ class PostDetailViewController: UIViewController {
         navigationController?.pushViewController(userInfoViewController, animated: true)
     }
 
-    @objc func commentButtonTouched(sender: UIButton) {
-        // コメント投稿へ
-        let postCommentViewController = PostCommentViewController()
-        navigationController?.pushViewController(postCommentViewController, animated: true)
-    }
-
     @objc func followButtonTouched(sender: UIButton) {
         print("basicButtonBtnClicked")
         guard let uid = uid else {
@@ -136,23 +131,38 @@ class PostDetailViewController: UIViewController {
 
         if isFollow {
             // フォロー解除する
+            self.postDetailView.followButton.setUnFollow()
             Follow.unFollow(uid: uid, followUid: post.uid, completion: { error in
                 if let error = error {
                     self.showErrorAlert(message: error.description)
+                    // 状態を元に戻す
+                    self.postDetailView.followButton.setFollow()
                     return
                 }
-                self.postDetailView.followButton.setUnFollow()
             })
         } else {
             // フォローする
+            self.postDetailView.followButton.setFollow()
             Follow.follow(uid: uid, followUid: post.uid, completion: { error in
                 if let error = error {
                     self.showErrorAlert(message: error.description)
+                    // 状態を元に戻す
+                    self.postDetailView.followButton.setUnFollow()
                     return
                 }
-                self.postDetailView.followButton.setFollow()
             })
         }
+    }
+
+    @objc func favoriteButtonTouched(sender: UIButton) {
+        // お気に入り
+        postDetailView.favoriteButton.setFavorite()
+    }
+
+    @objc func commentButtonTouched(sender: UIButton) {
+        // コメント投稿へ
+        let postCommentViewController = PostCommentViewController()
+        navigationController?.pushViewController(postCommentViewController, animated: true)
     }
 
     func showErrorAlert(message: String) {

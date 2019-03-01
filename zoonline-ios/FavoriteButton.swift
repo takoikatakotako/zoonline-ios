@@ -10,13 +10,14 @@ class FavoriteButton: UIButton {
 
         // Favorite
         favoriteIcon = UIImageView()
-        favoriteIcon.image = UIImage(named: "post-detail-fav-on")
+        favoriteIcon.image = UIImage(named: "post-detail-fav-off")
         addSubview(favoriteIcon)
 
         favoriteLabel = UILabel()
-        favoriteLabel.textColor = UIColor(named: "postDetailFavPink")
+        // favoriteLabel.textColor = UIColor(named: "postDetailFavPink")
+        favoriteLabel.textColor = UIColor(named: "textColorGray")
         favoriteLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        favoriteLabel.text = "10"
+        favoriteLabel.text = "--"
         addSubview(favoriteLabel)
     }
 
@@ -31,5 +32,10 @@ class FavoriteButton: UIButton {
 
         favoriteIcon.frame = CGRect(x: 20, y: (height - iconSize.height) / 2, width: iconSize.width, height: iconSize.height)
         favoriteLabel.frame = CGRect(x: 60, y: 0, width: width, height: height)
+    }
+
+    func setFavorite() {
+        favoriteIcon.image = UIImage(named: "post-detail-fav-on")
+        favoriteLabel.textColor = UIColor(named: "postDetailFavPink")
     }
 }

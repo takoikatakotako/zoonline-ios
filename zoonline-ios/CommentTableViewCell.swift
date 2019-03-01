@@ -13,7 +13,7 @@ class CommentTableViewCell: UITableViewCell {
         thumbnail = UIImageView()
         thumbnail.layer.masksToBounds = true
         thumbnail.isUserInteractionEnabled = true
-        thumbnail.image = UIImage(named: "post-detail-follow-icon")
+        thumbnail.image = UIImage(named: "common-icon-default")
         contentView.addSubview(thumbnail)
 
         userName = UILabel()
