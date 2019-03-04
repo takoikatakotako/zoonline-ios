@@ -2,6 +2,7 @@ import UIKit
 import Firebase
 
 class Follow {
+    static let name = "follow"
 
     static func follow(uid: String, followUid: String, completion: @escaping (NSError?) -> Void) {
         let db = Firestore.firestore()
@@ -26,7 +27,7 @@ class Follow {
             }
 
             for document in querySnapshot!.documents {
-                db.collection("follow").document(document.documentID).delete { err in
+                db.collection(name).document(document.documentID).delete { err in
                     if let err = err {
                         completion(err as NSError)
                         return

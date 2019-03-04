@@ -2,13 +2,13 @@ import UIKit
 import Firebase
 
 class User {
-    static let collectionName = "user"
+    static let name = "user"
     static let defaultUserName = "名無しさん"
 
     // MARK: static methods
     static func featchUserName(uid: String, completion: @escaping (String, NSError?) -> Void) {
         let db = Firestore.firestore()
-        let docRef = db.collection(collectionName).document(String(uid))
+        let docRef = db.collection(name).document(String(uid))
         docRef.getDocument { (document, error) in
             if let error = error {
                 completion(defaultUserName, error as NSError)

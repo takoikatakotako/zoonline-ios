@@ -52,12 +52,16 @@ class PostCommentViewController: UIViewController {
     }
 
     @objc func postComments(sender: UIButton) {
-        let comment = Comment(uid: uid, postId: postId, comment: "コメントだお")
-        comment.save(error: { error in
+        guard let comment = commentTextView.text else {
+
+            return
+        }
+
+        Comment(uid: uid, postId: postId, comment: comment).save(error: { error in
             if let error = error {
-
+                print("エラーだお")
+                print(error)
             }
-
         })
     }
 }

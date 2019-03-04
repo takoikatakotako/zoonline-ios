@@ -97,6 +97,12 @@ class PostDetailView: UIView {
         bottomLine = UIView()
         bottomLine.backgroundColor = UIColor(named: "mypageArrowGray")
         addSubview(bottomLine)
+
+        // featch
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let reference = storageRef.child("post/" + post.id + "/image.png")
+        postImage.sd_setImage(with: reference, placeholderImage: UIImage(named: "no_img"))
     }
 
     override init(frame: CGRect) {

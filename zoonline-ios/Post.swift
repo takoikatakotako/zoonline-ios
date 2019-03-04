@@ -1,6 +1,7 @@
 import UIKit
 
 class Post {
+    static let name = "post"
     var id: String!
     var uid: String!
     var comment: String!

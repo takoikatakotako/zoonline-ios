@@ -16,7 +16,7 @@ class PostDetailViewController: UIViewController {
 
     private var postDetailTableView: UITableView!
 
-    private var myItems: [String] = []
+    private var myItems: [Comment] = []
 
     private let post: Post!
 
@@ -35,12 +35,6 @@ class PostDetailViewController: UIViewController {
         view.backgroundColor = UIColor.white
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-        myItems = ["天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
-            "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
-            "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
-            "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ",
-            "天王寺動物園"]
-
         // 投稿
         postDetailView = PostDetailView(post: post)
         postDetailView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: postDetailView.calcHeight(viewWidth: view.frame.width))
@@ -51,9 +45,6 @@ class PostDetailViewController: UIViewController {
         postDetailView.favoriteButton.addTarget(self, action: #selector(favoriteButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.commentButton.addTarget(self, action: #selector(commentButtonTouched(sender:)), for: .touchUpInside)
 
-        //
-        fetchImage()
-
         //テーブルビューの初期化
         postDetailTableView = UITableView()
         postDetailTableView.delegate = self
@@ -62,6 +53,16 @@ class PostDetailViewController: UIViewController {
         postDetailTableView.tableHeaderView = postDetailView
         postDetailTableView.rowHeight = 100
         view.addSubview(postDetailTableView)
+
+        //
+        Comment.featchComments(postId: post.id) { (comments, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            self.myItems = comments
+            self.postDetailTableView.reloadData()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -100,14 +101,6 @@ class PostDetailViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         postDetailTableView.frame = view.frame
-    }
-
-    // MARK: Fetch FireBase
-    func fetchImage() {
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let reference = storageRef.child("post/" + post.id + "/image.png")
-        postDetailView.postImage.sd_setImage(with: reference, placeholderImage: UIImage(named: "no_img"))
     }
 
     // MARK: Button Actions
@@ -179,19 +172,18 @@ class PostDetailViewController: UIViewController {
 
 extension PostDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //テーブルビューのセルの数はmyItems配列の数とした
         return myItems.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell: CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self))! as! CommentTableViewCell
-        cell.commentTextView.text = myItems[indexPath.row]
+        cell.commentTextView.text = myItems[indexPath.row].comment
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CommentTableViewCell.calcHeight(viewWidth: view.frame.width, comments: myItems[indexPath.row])
+        return CommentTableViewCell.calcHeight(viewWidth: view.frame.width, comments: myItems[indexPath.row].comment)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
