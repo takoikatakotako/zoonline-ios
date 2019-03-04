@@ -161,7 +161,11 @@ class PostDetailViewController: UIViewController {
 
     @objc func commentButtonTouched(sender: UIButton) {
         // コメント投稿へ
-        let postCommentViewController = PostCommentViewController()
+        guard let uid = uid else {
+            print("ログイン必須")
+            return
+        }
+        let postCommentViewController = PostCommentViewController(uid: uid, postId: post.id)
         navigationController?.pushViewController(postCommentViewController, animated: true)
     }
 
