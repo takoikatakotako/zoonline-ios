@@ -4,6 +4,7 @@ import Firebase
 class Comment {
     static let name = "comment"
 
+    // field
     static let uid = "uid"
     static let postId = "post_id"
     static let comment = "comment"
