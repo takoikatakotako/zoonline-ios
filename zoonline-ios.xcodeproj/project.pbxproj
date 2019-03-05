@@ -19,6 +19,7 @@
 		177AF8C8220A92A300DF04AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AF8C7220A92A300DF04AB /* User.swift */; };
 		177EEC2A21E5A17200CA4DF5 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177EEC2921E5A17200CA4DF5 /* MyProfileView.swift */; };
 		177F526F21C1202F00CA3DD8 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F526E21C1202F00CA3DD8 /* PostsCollectionViewCell.swift */; };
+		178A0009222E284A00952A82 /* UserHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178A0008222E284A00952A82 /* UserHandler.swift */; };
 		17AD3CE721C2107800A6DC9E /* UserInfoCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */; };
 		17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */; };
 		17AD3CED21C3BF7100A6DC9E /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CEC21C3BF7100A6DC9E /* UserInfoView.swift */; };
@@ -115,6 +116,7 @@
 		177AF8C7220A92A300DF04AB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		177EEC2921E5A17200CA4DF5 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		177F526E21C1202F00CA3DD8 /* PostsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionViewCell.swift; sourceTree = "<group>"; };
+		178A0008222E284A00952A82 /* UserHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHandler.swift; sourceTree = "<group>"; };
 		17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCollectionReusableView.swift; sourceTree = "<group>"; };
 		17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentViewController.swift; sourceTree = "<group>"; };
 		17AD3CEC21C3BF7100A6DC9E /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
@@ -262,6 +264,14 @@
 				1736445E2229485D0096F8F8 /* Favorite.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		178A0007222E27F800952A82 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				178A0008222E284A00952A82 /* UserHandler.swift */,
+			);
+			name = Handler;
 			sourceTree = "<group>";
 		};
 		17AD3CE821C358EB00A6DC9E /* PostComment */ = {
@@ -445,6 +455,7 @@
 				8D73B4241E7AE08F00E3B301 /* AppDelegate.swift */,
 				8D532C511FC495DD00D2E532 /* ZooForEveryoneConfig.swift */,
 				177AF8C6220A928C00DF04AB /* Model */,
+				178A0007222E27F800952A82 /* Handler */,
 				8D9DE17F1EE4147500121FC1 /* Manager */,
 				8D57A7951F89DADE00A85D83 /* Librarys */,
 				8D68887E1E9E7EF000140508 /* ViewController */,
@@ -646,9 +657,8 @@
 				TargetAttributes = {
 					8D73B4201E7AE08F00E3B301 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 5RH346BQ66;
 						LastSwiftMigration = 1010;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					8D73B4341E7AE09000E3B301 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -950,6 +960,7 @@
 				8D35113F1EEED5E6004BA744 /* LoginViewController.swift in Sources */,
 				1765468D221C12380027D8A7 /* FullLoadingView.swift in Sources */,
 				8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */,
+				178A0009222E284A00952A82 /* UserHandler.swift in Sources */,
 				8DC719191F08FDA5003C5E00 /* TagListTableViewCell.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
 				8D5F25A21F8B522C008D6BF1 /* UserInfoTableViewCell.swift in Sources */,
@@ -1140,13 +1151,15 @@
 			baseConfigurationReference = D9473A82F86608DFF7AF0DA2 /* Pods-zoonline-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5RH346BQ66;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "zoonline-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.everyzoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1158,13 +1171,15 @@
 			baseConfigurationReference = 380765E1943574F6D5DE7C79 /* Pods-zoonline-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5RH346BQ66;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "zoonline-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.everyzoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

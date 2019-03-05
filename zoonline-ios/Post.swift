@@ -2,6 +2,10 @@ import UIKit
 
 class Post {
     static let name = "post"
+    static let uid = "uid"
+    static let postId = "post_id"
+    static let comment = "comment"
+    static let createdAt = "created_at"
     var id: String!
     var uid: String!
     var comment: String!
@@ -12,13 +16,13 @@ class Post {
 
     init(id: String, data: [String: Any]) {
         self.id = id
-        if let uid = data["uid"] as? String {
+        if let uid = data[Post.uid] as? String {
             self.uid = uid
         }
-        if let comment = data["comment"] as? String {
+        if let comment = data[Post.comment] as? String {
             self.comment = comment
         }
-        if let createdAt = data["created_at"] as? Date {
+        if let createdAt = data[Post.createdAt] as? Date {
             self.createdAt = createdAt
         }
     }
