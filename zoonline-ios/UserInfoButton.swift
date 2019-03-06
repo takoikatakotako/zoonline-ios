@@ -45,12 +45,19 @@ class UserInfoButton: UIButton {
     }
 
     func featchUserName(uid: String) {
-        User.featchUserName(uid: uid, completion: { (name, error) in
+        UserHandler.featchUser(uid: uid) { (user, error) in
             if let error = error {
-                self.userName.text = "エラー" + name + error.description
+                print("エラー\(error)")
+                self.userName.text = "エラー"
             }
-            self.userName.text = name
-        })
+
+            guard let user = user else {
+                print("エラー")
+                self.userName.text = "エラー"
+                return
+            }
+            self.userName.text = user.nickname
+        }
     }
 
     func featchUserIcon(uid: String) {

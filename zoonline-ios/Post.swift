@@ -11,6 +11,14 @@ class Post {
     var comment: String!
     var createdAt: Date!
 
+    var date: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .medium
+        formatter.locale = Locale.current
+        return formatter.string(from: createdAt)
+    }
+
     init() {
     }
 
@@ -26,4 +34,5 @@ class Post {
             self.createdAt = createdAt
         }
     }
+
 }

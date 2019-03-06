@@ -20,6 +20,10 @@
 		177EEC2A21E5A17200CA4DF5 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177EEC2921E5A17200CA4DF5 /* MyProfileView.swift */; };
 		177F526F21C1202F00CA3DD8 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F526E21C1202F00CA3DD8 /* PostsCollectionViewCell.swift */; };
 		178A0009222E284A00952A82 /* UserHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178A0008222E284A00952A82 /* UserHandler.swift */; };
+		178A000B222F778C00952A82 /* PostHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178A000A222F778C00952A82 /* PostHandler.swift */; };
+		178A000D222F782500952A82 /* FollowHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178A000C222F782500952A82 /* FollowHandler.swift */; };
+		178A000F222F784000952A82 /* CommentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178A000E222F784000952A82 /* CommentHandler.swift */; };
+		178A0011222F786700952A82 /* FavoriteHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178A0010222F786700952A82 /* FavoriteHandler.swift */; };
 		17AD3CE721C2107800A6DC9E /* UserInfoCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */; };
 		17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */; };
 		17AD3CED21C3BF7100A6DC9E /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3CEC21C3BF7100A6DC9E /* UserInfoView.swift */; };
@@ -117,6 +121,10 @@
 		177EEC2921E5A17200CA4DF5 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		177F526E21C1202F00CA3DD8 /* PostsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionViewCell.swift; sourceTree = "<group>"; };
 		178A0008222E284A00952A82 /* UserHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHandler.swift; sourceTree = "<group>"; };
+		178A000A222F778C00952A82 /* PostHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHandler.swift; sourceTree = "<group>"; };
+		178A000C222F782500952A82 /* FollowHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowHandler.swift; sourceTree = "<group>"; };
+		178A000E222F784000952A82 /* CommentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentHandler.swift; sourceTree = "<group>"; };
+		178A0010222F786700952A82 /* FavoriteHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHandler.swift; sourceTree = "<group>"; };
 		17AD3CE621C2107800A6DC9E /* UserInfoCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCollectionReusableView.swift; sourceTree = "<group>"; };
 		17AD3CE921C3591800A6DC9E /* PostCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentViewController.swift; sourceTree = "<group>"; };
 		17AD3CEC21C3BF7100A6DC9E /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
@@ -270,6 +278,10 @@
 			isa = PBXGroup;
 			children = (
 				178A0008222E284A00952A82 /* UserHandler.swift */,
+				178A000A222F778C00952A82 /* PostHandler.swift */,
+				178A000C222F782500952A82 /* FollowHandler.swift */,
+				178A000E222F784000952A82 /* CommentHandler.swift */,
+				178A0010222F786700952A82 /* FavoriteHandler.swift */,
 			);
 			name = Handler;
 			sourceTree = "<group>";
@@ -949,6 +961,7 @@
 				8DF862DF1E991E1F00FBF176 /* UIColorExtension.swift in Sources */,
 				8DA0AB6F1ECA103500D75B1A /* MyPageTableViewCell.swift in Sources */,
 				8D0FB4561E7FD32D0008D997 /* UtilityLibrary.swift in Sources */,
+				178A000B222F778C00952A82 /* PostHandler.swift in Sources */,
 				8DA4C6991FE045A800C84A73 /* FieldCollectionViewFlowLayout.swift in Sources */,
 				1736445B222936200096F8F8 /* FavoriteButton.swift in Sources */,
 				8DC7190D1F08A0F3003C5E00 /* PostImageTableViewCell.swift in Sources */,
@@ -961,12 +974,14 @@
 				1765468D221C12380027D8A7 /* FullLoadingView.swift in Sources */,
 				8D132E391EB4CF1B00B0C146 /* CommentTableViewCell.swift in Sources */,
 				178A0009222E284A00952A82 /* UserHandler.swift in Sources */,
+				178A000F222F784000952A82 /* CommentHandler.swift in Sources */,
 				8DC719191F08FDA5003C5E00 /* TagListTableViewCell.swift in Sources */,
 				8D73B4251E7AE08F00E3B301 /* AppDelegate.swift in Sources */,
 				8D5F25A21F8B522C008D6BF1 /* UserInfoTableViewCell.swift in Sources */,
 				8DDAF0DD1ED184790079D443 /* FriendsListViewController.swift in Sources */,
 				8D532C501FC4904C00D2E532 /* SupportBtn.swift in Sources */,
 				8D1586721ED848F400802F54 /* UserInfoViewController.swift in Sources */,
+				178A000D222F782500952A82 /* FollowHandler.swift in Sources */,
 				8DFBFD611EC8029100E1EA57 /* MyPageUserHeaderView.swift in Sources */,
 				8D35113B1EEEC078004BA744 /* UserDefaultsManager.swift in Sources */,
 				8D6A73EE1F83BE2A00902AFC /* UserCollectionViewCell.swift in Sources */,
@@ -978,6 +993,7 @@
 				8DE541771EFAB3010085F916 /* SignInVC.swift in Sources */,
 				177EEC2A21E5A17200CA4DF5 /* MyProfileView.swift in Sources */,
 				17AD3CED21C3BF7100A6DC9E /* UserInfoView.swift in Sources */,
+				178A0011222F786700952A82 /* FavoriteHandler.swift in Sources */,
 				1736445F2229485D0096F8F8 /* Favorite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

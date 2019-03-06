@@ -80,7 +80,7 @@ class PostDetailView: UIView {
 
         // Date
         dateLabel = UILabel()
-        dateLabel.text = post.createdAt.description
+        dateLabel.text = post.date
         dateLabel.textColor = UIColor(named: "textColorGray")
         dateLabel.font = UIFont.systemFont(ofSize: 18)
         addSubview(dateLabel)
