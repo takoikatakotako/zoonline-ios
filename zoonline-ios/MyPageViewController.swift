@@ -5,10 +5,7 @@ import FirebaseAuth
 import GoogleSignIn
 import SCLAlertView
 
-class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GIDSignInUIDelegate {
-
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var handle: AuthStateDidChangeListenerHandle!
+class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
     var uid: String!
     var isSignIn: Bool!
@@ -66,16 +63,10 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            print(auth)
-            print(user)
-        }
-
         if let user = Auth.auth().currentUser {
             // User is signed in
             isSignIn = true
             uid = user.uid
-            appDelegate.userDefaultsManager?.signIn()
             setUserIcon(uid: user.uid)
             setUserName(uid: user.uid)
             userHeaderView.userMailAdressLabel.text = user.email
@@ -83,17 +74,11 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             // No user is signed in
             isSignIn = false
-            appDelegate.userDefaultsManager?.signOut()
             userHeaderView.userNameLabel.text = "未ログイン"
             userHeaderView.userMailAdressLabel.text = "ログインしてください"
             userHeaderView.iconImgView.image = UIImage(named: "common-icon-default")
             myPageTableView.reloadData()
         }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        Auth.auth().removeStateDidChangeListener(handle!)
     }
 
     func setUserName(uid: String) {
@@ -113,6 +98,76 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.userHeaderView.iconImgView.sd_setImage(with: reference, placeholderImage: UIImage(named: "common-icon-default"))
     }
 
+    // MARK: Actions
+    @objc func goMyProfile(sender: UIButton) {
+        if isSignIn {
+            let myProfilelViewController = MyProfilelViewController()
+            myProfilelViewController.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(myProfilelViewController, animated: true)
+        } else {
+            showConfirmAlert()
+        }
+    }
+
+    func goMyPosts() {
+        // My Posts List
+        let vc = MyPostsViewController(uid: uid)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func goMyFriends() {
+        // Friends List
+        let vc = FriendsListViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func goMyFollows() {
+        // Follower List
+        let vc = FollowerListViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func goMyFavorites() {
+        // My Favorites List
+        let vc = MyFavoritePostsViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func openWebView(navTitle: String, url: String) {
+        // Term of Service
+        let contactView: WebViewController = WebViewController()
+        contactView.url = url
+        contactView.navTitle = navTitle
+        contactView.view.backgroundColor = .white
+        present(UINavigationController(rootViewController: contactView), animated: true, completion: nil)
+    }
+
+    func showConfirmAlert() {
+        let alert = UIAlertController(title: "", message: "Googleログインが必要です", preferredStyle: UIAlertController.Style.alert)
+        let signInAction = UIAlertAction(title: "ログイン", style: UIAlertAction.Style.default, handler: { (_: UIAlertAction!) in
+            GIDSignIn.sharedInstance().signIn()
+        })
+        alert.addAction(signInAction)
+        let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+
+    func signOut() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+}
+
+extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: TableView Delegate Methods
     func numberOfSections(in tableView: UITableView) -> Int {
         if isSignIn {
@@ -241,7 +296,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             case 2:
                 //ログアウト
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 self.myPageTableView.reloadData()
                 SCLAlertView().showInfo("ログアウト", subTitle: "ログアウトが完了しました。")
                 break
@@ -284,73 +338,5 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    // MARK: Actions
-    @objc func goMyProfile(sender: UIButton) {
-        if isSignIn {
-            let myProfilelViewController = MyProfilelViewController()
-            myProfilelViewController.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(myProfilelViewController, animated: true)
-        } else {
-            showConfirmAlert()
-        }
-    }
-
-    func goMyPosts() {
-        // My Posts List
-        let vc = MyPostsViewController(uid: uid)
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-
-    func goMyFriends() {
-        // Friends List
-        let vc = FriendsListViewController()
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-
-    func goMyFollows() {
-        // Follower List
-        let vc = FollowerListViewController()
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-
-    func goMyFavorites() {
-        // My Favorites List
-        let vc = MyFavoritePostsViewController()
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-
-    func openWebView(navTitle: String, url: String) {
-        // Term of Service
-        let contactView: WebViewController = WebViewController()
-        contactView.url = url
-        contactView.navTitle = navTitle
-        contactView.view.backgroundColor = .white
-        present(UINavigationController(rootViewController: contactView), animated: true, completion: nil)
-    }
-
-    func showConfirmAlert() {
-        let alert = UIAlertController(title: "", message: "Googleログインが必要です", preferredStyle: UIAlertController.Style.alert)
-        let signInAction = UIAlertAction(title: "ログイン", style: UIAlertAction.Style.default, handler: { (_: UIAlertAction!) in
-            GIDSignIn.sharedInstance().signIn()
-        })
-        alert.addAction(signInAction)
-        let cancelAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
-    }
-
-    func signOut() {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
     }
 }

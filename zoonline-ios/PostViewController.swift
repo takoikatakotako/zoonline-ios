@@ -178,8 +178,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     // MARK: ButtonActions
     @objc func supportBtnClicked(sender: UIButton) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Post")
         supportBtn.removeFromSuperview()
     }
 

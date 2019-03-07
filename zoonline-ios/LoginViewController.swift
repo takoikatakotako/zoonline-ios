@@ -192,13 +192,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     //パスワード再発行ボタンが押された。
     @objc func forgetPassWordBtnClicked(sender: UIButton) {
-        let alert = SCLAlertView()
-        let txt = alert.addTextField(UtilityLibrary.getUserEmail())
-        alert.addButton("発行") {
-            print("Text value: \(String(describing: txt.text))")
-
-        }
-        alert.showEdit("パスワード再発行", subTitle: "メールアドレスを入力してください。")
+//        let alert = SCLAlertView()
+//        let txt = alert.addTextField(UtilityLibrary.getUserEmail())
+//        alert.addButton("発行") {
+//            print("Text value: \(String(describing: txt.text))")
+//
+//        }
+//        alert.showEdit("パスワード再発行", subTitle: "メールアドレスを入力してください。")
     }
 
     //左側のボタンが押されたら呼ばれる

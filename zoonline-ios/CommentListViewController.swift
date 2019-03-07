@@ -54,20 +54,20 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: NavigationBar
     func setNavigationBar() {
 
-        //ナビゲーションアイテムを作成
-        self.title = "コメント一覧"
-
-        if !(UtilityLibrary.isLogin()) {
-            //ログインしていない
-            return
-        }else {
-            //バーの右側に設置するボタンの作成
-            let rightNavBtn = UIBarButtonItem()
-            rightNavBtn.image = UIImage(named: "submit_nav_btn")!
-            rightNavBtn.action = #selector(goWriteCommentView(sender:))
-            rightNavBtn.target = self
-            self.navigationItem.rightBarButtonItem = rightNavBtn
-        }
+//        //ナビゲーションアイテムを作成
+//        self.title = "コメント一覧"
+//
+//        if !(UtilityLibrary.isLogin()) {
+//            //ログインしていない
+//            return
+//        }else {
+//            //バーの右側に設置するボタンの作成
+//            let rightNavBtn = UIBarButtonItem()
+//            rightNavBtn.image = UIImage(named: "submit_nav_btn")!
+//            rightNavBtn.action = #selector(goWriteCommentView(sender:))
+//            rightNavBtn.target = self
+//            self.navigationItem.rightBarButtonItem = rightNavBtn
+//        }
     }
 
     // MARK: TableView
@@ -118,10 +118,9 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
             cell.thumbnail.sd_setImage(with: url)
         }
 
-        let dates = UtilityLibrary.parseDates(text: self.postsComments[indexPath.row]["updated_at"].stringValue)
-        var dateStr = dates["year"]! + "年" + dates["month"]! + "月"
-        dateStr += dates["day"]! + "日"
-        cell.dateLabel.text = dateStr
+//        var dateStr = dates["year"]! + "年" + dates["month"]! + "月"
+//        dateStr += dates["day"]! + "日"
+//        cell.dateLabel.text = dateStr
 
         cell.commentTextView.text = self.postsComments[indexPath.row]["comment"].stringValue
 
@@ -138,17 +137,17 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
 
     // MARK: テーブルビューのセルが押されたら呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
-        tableView.deselectRow(at: indexPath, animated: true)
-        print(postsComments[indexPath.row]["user_id"].stringValue)
-        if postsComments[indexPath.row]["user_id"].stringValue == UtilityLibrary.getUserID() {
-            let alertView = SCLAlertView()
-            alertView.addButton("削除") {
-                let commentID = self.postsComments[indexPath.row]["comment_id"].intValue
-                self.deleatePostComment(commentID: commentID)
-            }
-            alertView.showInfo("コメント削除", subTitle: "このコメントを削除しますか？")
-        }
+//        print("\(indexPath.row)番のセルを選択しました！ ")
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        print(postsComments[indexPath.row]["user_id"].stringValue)
+//        if postsComments[indexPath.row]["user_id"].stringValue == UtilityLibrary.getUserID() {
+//            let alertView = SCLAlertView()
+//            alertView.addButton("削除") {
+//                let commentID = self.postsComments[indexPath.row]["comment_id"].intValue
+//                self.deleatePostComment(commentID: commentID)
+//            }
+//            alertView.showInfo("コメント削除", subTitle: "このコメントを削除しますか？")
+//        }
     }
 
     //高さの設定

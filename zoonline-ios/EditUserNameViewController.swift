@@ -35,7 +35,7 @@ class EditUserNameViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(nameLabel)
 
         //ユーザー名入力欄
-        userNameTextFIeld.text = UtilityLibrary.getUserName()
+//        userNameTextFIeld.text = UtilityLibrary.getUserName()
         userNameTextFIeld.delegate = self
         userNameTextFIeld.textAlignment = NSTextAlignment.center
         userNameTextFIeld.frame = CGRect(x: viewWidth*0.05, y: viewHeight*0.18, width: viewWidth*0.9, height: 40)

@@ -40,11 +40,11 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
         setTableView()
         getNews()
 
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let didSupport: Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Zoo"))!
-        if !didSupport {
-            setSupportBtn()
-        }
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let didSupport: Bool = (appDelegate.userDefaultsManager?.userDefaults.bool(forKey: "KEY_SUPPORT_Zoo"))!
+//        if !didSupport {
+//            setSupportBtn()
+//        }
     }
 
     func setTableView() {
@@ -76,9 +76,6 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
 
     // MARK: ButtonActions
     @objc func supportBtnClicked(sender: UIButton) {
-
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.userDefaultsManager?.userDefaults.set(true, forKey: "KEY_SUPPORT_Zoo")
         supportBtn.removeFromSuperview()
     }
 
@@ -96,17 +93,17 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //myItems配列の中身をテキストにして登録した
         let cell: MyPagePostCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPagePostCell.self), for: indexPath) as! MyPagePostCell
-
-        let dates = UtilityLibrary.parseDates(text: self.newsContents[indexPath.row]["posted_at"].stringValue)
-        var dateText: String = dates["year"]! + "/"
-        dateText += dates["month"]! + "/"
-        dateText += dates["day"]!
-        cell.dateLabel.text = dateText
-
-        cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
-        cell.commentLabel.text = self.newsContents[indexPath.row]["content"].stringValue
-        let imageUrl = URL(string: self.newsContents[indexPath.row]["image_url"].stringValue)!
-        cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
+//
+//        let dates = UtilityLibrary.parseDates(text: self.newsContents[indexPath.row]["posted_at"].stringValue)
+//        var dateText: String = dates["year"]! + "/"
+//        dateText += dates["month"]! + "/"
+//        dateText += dates["day"]!
+//        cell.dateLabel.text = dateText
+//
+//        cell.titleLabel.text = self.newsContents[indexPath.row]["title"].stringValue
+//        cell.commentLabel.text = self.newsContents[indexPath.row]["content"].stringValue
+//        let imageUrl = URL(string: self.newsContents[indexPath.row]["image_url"].stringValue)!
+//        cell.thumbnailImg.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "sample_loading"))
         return cell
     }
 
