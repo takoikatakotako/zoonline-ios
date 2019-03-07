@@ -97,18 +97,12 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func setUserName(uid: String) {
-        let db = Firestore.firestore()
-        let docRef = db.collection("user").document(String(uid))
-        docRef.getDocument { (document, _) in
-            if let document = document, document.exists {
-                if let data = document.data() {
-                    if let name = data["name"] as? String {
-                        self.userHeaderView.userNameLabel.text = name
-                    }
-                }
-            } else {
-                print("Document does not exist")
+        UserHandler.featchUser(uid: uid) { (user, error) in
+            if let error = error {
+                self.showMessageAlert(message: error.description)
+                return
             }
+            self.userHeaderView.userNameLabel.text = user?.nickname
         }
     }
 
@@ -116,17 +110,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let storage = Storage.storage()
         let storageRef = storage.reference()
         let reference = storageRef.child("user/" + String(uid) + "/icon.png")
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-            if let error = error {
-                // Uh-oh, an error occurred!
-                print(error)
-            } else {
-                // Data for "images/island.jpg" is returned
-                let image = UIImage(data: data!)
-                self.userHeaderView.iconImgView.image = image
-            }
-        }
+        self.userHeaderView.iconImgView.sd_setImage(with: reference, placeholderImage: UIImage(named: "common-icon-default"))
     }
 
     // MARK: TableView Delegate Methods

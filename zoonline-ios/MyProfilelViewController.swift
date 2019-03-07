@@ -8,9 +8,7 @@ import SwiftyJSON
 import SCLAlertView
 import SDWebImage
 
-class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SampleDelegate {
-
-    var handle: AuthStateDidChangeListenerHandle!
+class MyProfilelViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var indicator: UIActivityIndicatorView!
 
@@ -62,11 +60,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            print(auth)
-            print(user)
-        }
-
         if let user = Auth.auth().currentUser {
             // User is signed in.
             uid = user.uid
@@ -76,17 +69,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
             let storage = Storage.storage()
             let storageRef = storage.reference()
             let reference = storageRef.child("user/" + String(uid) + "/icon.png")
-            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-            reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                if let error = error {
-                    // Uh-oh, an error occurred!
-                    print(error)
-                } else {
-                    // Data for "images/island.jpg" is returned
-                    let image = UIImage(data: data!)
-                    self.myProfileView.userThumbnail.image = image
-                }
-            }
+            self.myProfileView.userThumbnail.sd_setImage(with: reference, placeholderImage: UIImage(named: "common-icon-default"))
         } else {
             // No user is signed in.
             // TODO: 即ログアウトさせる
@@ -95,7 +78,6 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        Auth.auth().removeStateDidChangeListener(handle!)
     }
 
     // MARK: - Viewにパーツの設置
@@ -127,32 +109,21 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func setUserName(name: String) {
-        let db = Firestore.firestore()
-        let docData: [String: Any] = [
-            "name": name
-        ]
-        db.collection("user").document(String(uid)).updateData(docData) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
+        UserHandler.setNickname(uid: uid, nickname: name) { (error) in
+            if let error = error {
+                // エラーだお
+                self.showMessageAlert(message: error.description)
             }
         }
     }
 
     func getUserName() {
-        let db = Firestore.firestore()
-        let docRef = db.collection("user").document(String(uid))
-        docRef.getDocument { (document, _) in
-            if let document = document, document.exists {
-                if let data = document.data() {
-                    if let name = data["name"] as? String {
-                        self.myProfileView.userName.text = name
-                    }
-                }
-            } else {
-                print("Document does not exist")
+        UserHandler.featchUser(uid: uid) { (user, error) in
+            if let error = error {
+                self.showMessageAlert(message: error.description)
+                return
             }
+            self.myProfileView.userName.text = user?.nickname
         }
     }
 
@@ -171,17 +142,7 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
-    func showMessageAlert(message: String) {
-        let actionAlert = UIAlertController(title: "", message: message, preferredStyle: UIAlertController.Style.alert)
-        let closeAction = UIAlertAction(title: "閉じる", style: UIAlertAction.Style.cancel, handler: nil)
-        actionAlert.addAction(closeAction)
-        present(actionAlert, animated: true, completion: nil)
-    }
-
     // MARK: -
-    func setImage(image: UIImage) {
-
-    }
 
     // MARK: - UIImagePicker Delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -208,7 +169,10 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         dismiss(animated: true, completion: nil)
     }
 
-    // MARK: - TableView Delegate Methods
+}
+
+// MARK: - TableView Delegate Methods
+extension MyProfilelViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
@@ -244,9 +208,8 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
                 break
             case 1:
                 //プロフィールの編集
-                let vc = EditUserProfileViewController()
-                vc.delegate = self
-                navigationController?.pushViewController(vc, animated: true)
+                let editUserProfileViewController = EditUserProfileViewController(uid: uid)
+                navigationController?.pushViewController(editUserProfileViewController, animated: true)
                 break
             case 2:
                 //メールアドレスの変更
@@ -268,3 +231,4 @@ class MyProfilelViewController: UIViewController, UITableViewDelegate, UITableVi
         return 2
     }
 }
+

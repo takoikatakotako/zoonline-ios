@@ -3,26 +3,28 @@ import Alamofire
 import SwiftyJSON
 import SCLAlertView
 
-protocol SampleDelegate: class {
-    func changeMyProfile(profile: String)
-}
-
 class EditUserProfileViewController: UIViewController {
 
     private var userProfileTexView: UITextView!
 
-    //delegate
-    weak var delegate: SampleDelegate?
+    var uid: String
+    init(uid: String) {
+        self.uid = uid
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .white
         title = "プロフィール編集"
 
         // Navigation Bar
-        let rightNavBtn = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(doChageProfile(sender:)))
-        self.navigationItem.rightBarButtonItem = rightNavBtn
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(doChageProfile(sender:)))
 
         // TextView生成する.
         userProfileTexView = UITextView()
@@ -34,24 +36,33 @@ class EditUserProfileViewController: UIViewController {
 
         //キーボードは出しておく
         userProfileTexView.becomeFirstResponder()
-        let myProfile = UtilityLibrary.getUserProfile()
-        if myProfile.isEmpty {
-            userProfileTexView.text = "あなたのプロフィールを記入してください。"
-        }else {
-            userProfileTexView.text = myProfile
+
+        UserHandler.featchUser(uid: uid) { (user, error) in
+            if let error = error {
+                self.showMessageAlert(message: error.description)
+                return
+            }
+
+            guard let profile = user?.profile else {
+                self.userProfileTexView.text = "あなたのプロフィールを記入してください。"
+                return
+            }
+            self.userProfileTexView.text = profile
         }
     }
 
-    // MARK: - Viewにパーツの設置
-
     //プロフィール変更ボタンが押されたら
     @objc func doChageProfile(sender: UIButton) {
-        if (userProfileTexView.text?.isEmpty)! {
+        guard let profile = userProfileTexView.text else {
             SCLAlertView().showInfo("エラー", subTitle: "プロフィールの入力が必要です。")
             return
         }
-        delegate?.changeMyProfile(profile: userProfileTexView.text)
-        self.navigationController?.popViewController(animated: true)
 
+        UserHandler.setProfile(uid: uid, profile: profile, completion: { (error) in
+            if let error = error {
+                self.showMessageAlert(message: error.description)
+            }
+        })
+        navigationController?.popViewController(animated: true)
     }
 }

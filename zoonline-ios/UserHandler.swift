@@ -21,4 +21,30 @@ class UserHandler: User {
             return
         }
     }
+
+    static func setNickname(uid: String, nickname: String, completion: @escaping (NSError?) -> Void) {
+        let data = [User.nickname: nickname]
+        let db = Firestore.firestore()
+        let docRef = db.collection(name).document(uid)
+        docRef.setData(data, merge: true, completion: { error in
+            if let error = error {
+                completion(error as NSError)
+            } else {
+                completion(nil)
+            }
+        })
+    }
+
+    static func setProfile(uid: String, profile: String, completion: @escaping (NSError?) -> Void) {
+        let data = [User.profile: profile]
+        let db = Firestore.firestore()
+        let docRef = db.collection(name).document(uid)
+        docRef.setData(data, merge: true, completion: { error in
+            if let error = error {
+                completion(error as NSError)
+            } else {
+                completion(nil)
+            }
+        })
+    }
 }
