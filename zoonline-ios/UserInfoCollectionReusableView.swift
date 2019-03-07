@@ -26,7 +26,6 @@ class UserInfoCollectionReusableView: UICollectionReusableView {
         addSubview(userThumbnail)
 
         userName = UILabel()
-        userName.text = "道県有事"
         userName.font = UIFont.systemFont(ofSize: 32)
         userName.textAlignment = .center
         addSubview(userName)
@@ -34,7 +33,6 @@ class UserInfoCollectionReusableView: UICollectionReusableView {
         userDescription = UILabel()
         userDescription.numberOfLines = 0
         userDescription.font = UIFont.systemFont(ofSize: 18)
-        userDescription.text = "自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己自己紹介自己紹介自己自己紹介自己紹介自己紹介自己紹介"
         addSubview(userDescription)
     }
 

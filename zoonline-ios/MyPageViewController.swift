@@ -8,7 +8,6 @@ import SCLAlertView
 class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
     var uid: String!
-    var isSignIn: Bool!
 
     // Sign In
     var signInSection: [String] = ["ユーザー情報", "設定・その他", "ログアウト"]
@@ -37,7 +36,6 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
 
         //isSignIn = appDelegate.userDefaultsManager?.isSignIn()
-        isSignIn = false
         GIDSignIn.sharedInstance().uiDelegate = self
 
         title = "マイページ"
@@ -65,15 +63,14 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
         if let user = Auth.auth().currentUser {
             // User is signed in
-            isSignIn = true
             uid = user.uid
             setUserIcon(uid: user.uid)
-            setUserName(uid: user.uid)
+            setNickname(uid: user.uid)
             userHeaderView.userMailAdressLabel.text = user.email
             myPageTableView.reloadData()
         } else {
             // No user is signed in
-            isSignIn = false
+            uid = nil
             userHeaderView.userNameLabel.text = "未ログイン"
             userHeaderView.userMailAdressLabel.text = "ログインしてください"
             userHeaderView.iconImgView.image = UIImage(named: "common-icon-default")
@@ -81,7 +78,7 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
         }
     }
 
-    func setUserName(uid: String) {
+    func setNickname(uid: String) {
         UserHandler.featchUser(uid: uid) { (user, error) in
             if let error = error {
                 self.showMessageAlert(message: error.description)
@@ -100,7 +97,7 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
     // MARK: Actions
     @objc func goMyProfile(sender: UIButton) {
-        if isSignIn {
+        if uid != nil {
             let myProfilelViewController = MyProfilelViewController()
             myProfilelViewController.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(myProfilelViewController, animated: true)
@@ -170,7 +167,7 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: TableView Delegate Methods
     func numberOfSections(in tableView: UITableView) -> Int {
-        if isSignIn {
+        if uid != nil {
             return signInSection.count
         } else {
             return signOutSection.count
@@ -178,7 +175,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if isSignIn {
+        if uid != nil {
             return signInSection[section]
         } else {
             return signOutSection[section]
@@ -194,7 +191,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSignIn {
+        if uid != nil {
             switch section {
             case 0:
                 return signInUserInfoTitle.count
@@ -219,7 +216,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MyPageTableViewCell.self), for: indexPath) as! MyPageTableViewCell
-        if isSignIn {
+        if uid != nil {
             switch indexPath.section {
             case 0:
                 cell.textCellLabel.text = signInUserInfoTitle[indexPath.row]
@@ -248,7 +245,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isSignIn {
+        if uid != nil {
             switch indexPath.section {
             case 0:
                 //ユーザー情報
@@ -330,7 +327,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             case 1:
                 //ログイン
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 self.myPageTableView.reloadData()
                 SCLAlertView().showInfo("ログアウト", subTitle: "ログアウトが完了しました。")
                 break

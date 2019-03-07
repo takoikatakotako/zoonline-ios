@@ -29,13 +29,11 @@ class MyPageUserHeaderView: UIButton {
         addSubview(iconImgView)
 
         //ユーザーラベル
-        userNameLabel.text = "未ログイン"
         userNameLabel.font = UIFont.systemFont(ofSize: 24)
         userNameLabel.frame = CGRect(x: viewHeight*1.1, y: viewHeight*0.2, width: viewWidth*0.6, height: viewHeight*0.4)
         addSubview(userNameLabel)
 
         //メールアドレス
-        userMailAdressLabel.text = "ログインしてください"
         userMailAdressLabel.font = UIFont.systemFont(ofSize: 14)
         userMailAdressLabel.frame = CGRect(x: viewHeight*1.1, y: viewHeight*0.6, width: viewWidth*0.6, height: viewHeight*0.3)
         addSubview(userMailAdressLabel)

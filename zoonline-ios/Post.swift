@@ -35,4 +35,7 @@ class Post {
         }
     }
 
+    static func getPostImagePath(postId: String) -> String {
+        return "post/" + postId + "/image.png"
+    }
 }

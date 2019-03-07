@@ -28,7 +28,6 @@ class MyProfileView: UIView {
         addSubview(userThumbnail)
 
         userName = UILabel()
-        userName.text = "道県有事"
         userName.font = UIFont.systemFont(ofSize: 32)
         userName.textAlignment = .center
         addSubview(userName)
@@ -37,7 +36,6 @@ class MyProfileView: UIView {
         userEmail.numberOfLines = 0
         userEmail.font = UIFont.systemFont(ofSize: 18)
         userEmail.textAlignment = .center
-        userEmail.text = "inferior.to.octopus@gmail.com"
         addSubview(userEmail)
 
         plusIcon = UIImageView()
