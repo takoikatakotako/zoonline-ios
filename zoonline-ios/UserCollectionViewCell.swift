@@ -29,7 +29,6 @@ class UserCollectionViewCell: UICollectionViewCell {
         userLabel?.font = UIFont.systemFont(ofSize: 12)
         userLabel?.numberOfLines = 0
         userLabel?.textAlignment = NSTextAlignment.center
-        userLabel?.text = "ユーザー名"
         self.contentView.addSubview(userLabel!)
     }
 }
