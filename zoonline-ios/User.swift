@@ -35,7 +35,14 @@ class User {
         self.profile = ""
     }
 
+    // @available(*, unavailable, deprecated: 3.0)
     static func getUserIconPath(uid: String) -> String {
         return "user/" + uid + "/icon.png"
+    }
+
+    static func getIconReference(uid: String) -> StorageReference {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        return storageRef.child("user/" + uid + "/icon.png")
     }
 }

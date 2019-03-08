@@ -11,7 +11,7 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
     // Sign In
     var signInSection: [String] = ["ユーザー情報", "設定・その他", "ログアウト"]
-    var signInUserInfoTitle: [String] = ["投稿", "フレンズ", "フォロワー", "お気に入り"]
+    var signInUserInfoTitle: [String] = ["投稿", "フォロイー", "フォロワー", "お気に入り"]
     var signInUserInfoIcon: [String] = ["mypage_post", "mypage_friends", "mypage_follower", "mypage_favorite"]
     var signInConfigTitle: [String] = ["お問い合わせ", "シェア", "利用規約", "プライバシーポリシー"]
     var signInConfigIcon: [String] = ["mypage_contact", "mypage_share", "mypage_info", "mypage_caution"]
@@ -115,7 +115,7 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
     func goMyFriends() {
         // Friends List
-        let vc = FriendsListViewController()
+        let vc = FolloweeViewController(uid: uid)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
