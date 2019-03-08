@@ -136,7 +136,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         cell.layer.cornerRadius = 16
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let reference = storageRef.child("post/" + posts[indexPath.section * 6 + indexPath.row].id + "/image.png")
+        let reference = storageRef.child("post/" + posts[indexPath.section * 6 + indexPath.row].postId + "/image.png")
         cell.thumbnailImgView?.sd_setImage(with: reference, placeholderImage: UIImage(named: "no_img"))
         return cell
     }

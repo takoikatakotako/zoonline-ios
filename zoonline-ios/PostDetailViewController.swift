@@ -55,7 +55,7 @@ class PostDetailViewController: UIViewController {
         view.addSubview(postDetailTableView)
 
         //
-        Comment.featchComments(postId: post.id) { (comments, error) in
+        Comment.featchComments(postId: post.postId) { (comments, error) in
             if let error = error {
                 print(error)
                 return
@@ -158,7 +158,7 @@ class PostDetailViewController: UIViewController {
             print("ログイン必須")
             return
         }
-        let postCommentViewController = PostCommentViewController(uid: uid, postId: post.id)
+        let postCommentViewController = PostCommentViewController(uid: uid, postId: post.postId)
         navigationController?.pushViewController(postCommentViewController, animated: true)
     }
 

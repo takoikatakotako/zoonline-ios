@@ -101,7 +101,7 @@ class PostDetailView: UIView {
         // featch
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let reference = storageRef.child("post/" + post.id + "/image.png")
+        let reference = storageRef.child("post/" + post.postId + "/image.png")
         postImage.sd_setImage(with: reference, placeholderImage: UIImage(named: "no_img"))
     }
 

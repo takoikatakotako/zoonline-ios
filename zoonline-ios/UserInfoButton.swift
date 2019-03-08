@@ -61,9 +61,6 @@ class UserInfoButton: UIButton {
     }
 
     func featchUserIcon(uid: String) {
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let reference = storageRef.child(User.getUserIconPath(uid: uid))
-        userIcon.sd_setImage(with: reference, placeholderImage: UIImage(named: "common-icon-default"))
+        userIcon.sd_setImage(with: User.getIconReference(uid: uid), placeholderImage: UIImage(named: "common-icon-default"))
     }
 }

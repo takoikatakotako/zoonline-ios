@@ -81,11 +81,8 @@ extension MyPostsViewController: UICollectionViewDelegate, UICollectionViewDataS
             return cell
         }
 
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let postId = posts[indexPath.section * 6 + indexPath.row].id!
-        let reference = storageRef.child(Post.getPostImagePath(postId: postId))
-        cell.imageView?.sd_setImage(with: reference, placeholderImage: UIImage(named: "no_img"))
+        let post = posts[indexPath.row]
+        cell.imageView?.sd_setImage(with: post.imageReference, placeholderImage: UIImage(named: "no_img"))
         return cell
     }
 }
