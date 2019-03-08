@@ -1,11 +1,11 @@
 import UIKit
 import Firebase
 
-class FolloweeViewController: UIViewController {
+class FollowerViewController: UIViewController {
 
     //テーブルビューインスタンス
     var friendsCollectionView: UICollectionView!
-    private var followee: [Follow] = []
+    private var follower: [Follow] = []
     private var uid: String!
 
     init(uid: String) {
@@ -38,12 +38,12 @@ class FolloweeViewController: UIViewController {
         friendsCollectionView.backgroundColor = UIColor.white
         view.addSubview(friendsCollectionView)
 
-        FollowHandler.featchFollowee(uid: uid) { (follows, error) in
+        FollowHandler.featchFollower(uid: uid) { (follows, error) in
             if let error = error {
                 self.showMessageAlert(message: error.description)
                 return
             }
-            self.followee = follows
+            self.follower = follows
             self.friendsCollectionView.reloadData()
         }
     }
@@ -54,20 +54,20 @@ class FolloweeViewController: UIViewController {
     }
 }
 
-extension FolloweeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension FollowerViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let followeeUid = followee[indexPath.row].followUid
+        let followeeUid = follower[indexPath.row].followUid
         let userInfoView = UserInfoViewController(uid: followeeUid)
         navigationController?.pushViewController(userInfoView, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return followee.count
+        return follower.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let followeeUid = followee[indexPath.row].followUid
+        let followeeUid = follower[indexPath.row].followUid
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self), for: indexPath) as! UserCollectionViewCell
         cell.icomImageView.sd_setImage(with: User.getIconReference(uid: followeeUid), placeholderImage: UIImage(named: "common-icon-default"))
         UserHandler.featchUser(uid: followeeUid) { (user, error) in

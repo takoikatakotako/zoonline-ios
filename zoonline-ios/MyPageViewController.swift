@@ -122,7 +122,7 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
     func goMyFollows() {
         // Follower List
-        let vc = FollowerListViewController()
+        let vc = FollowerViewController(uid: uid)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }

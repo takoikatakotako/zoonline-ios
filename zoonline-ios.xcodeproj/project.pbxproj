@@ -47,7 +47,7 @@
 		8D532C4D1FC31AEB00D2E532 /* BannerAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D532C4C1FC31AEB00D2E532 /* BannerAdTableViewCell.swift */; };
 		8D532C501FC4904C00D2E532 /* SupportBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D532C4F1FC4904C00D2E532 /* SupportBtn.swift */; };
 		8D532C521FC495DD00D2E532 /* ZooForEveryoneConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D532C511FC495DD00D2E532 /* ZooForEveryoneConfig.swift */; };
-		8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D53FD611F375DA800809E7F /* FollowerListViewController.swift */; };
+		8D53FD621F375DA800809E7F /* FollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D53FD611F375DA800809E7F /* FollowerViewController.swift */; };
 		8D57A7941F89D2BA00A85D83 /* EveryZooAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D57A7931F89D2BA00A85D83 /* EveryZooAPI.swift */; };
 		8D5F25A21F8B522C008D6BF1 /* UserInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F25A11F8B522C008D6BF1 /* UserInfoTableViewCell.swift */; };
 		8D6215AD1EC3689600593E55 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6215AC1EC3689600593E55 /* MyPageViewController.swift */; };
@@ -152,7 +152,7 @@
 		8D532C4C1FC31AEB00D2E532 /* BannerAdTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAdTableViewCell.swift; sourceTree = "<group>"; };
 		8D532C4F1FC4904C00D2E532 /* SupportBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportBtn.swift; sourceTree = "<group>"; };
 		8D532C511FC495DD00D2E532 /* ZooForEveryoneConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZooForEveryoneConfig.swift; sourceTree = "<group>"; };
-		8D53FD611F375DA800809E7F /* FollowerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
+		8D53FD611F375DA800809E7F /* FollowerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerViewController.swift; sourceTree = "<group>"; };
 		8D57A7931F89D2BA00A85D83 /* EveryZooAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EveryZooAPI.swift; sourceTree = "<group>"; };
 		8D5F25A11F8B522C008D6BF1 /* UserInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoTableViewCell.swift; sourceTree = "<group>"; };
 		8D6215AC1EC3689600593E55 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -332,9 +332,9 @@
 			children = (
 				8DDAF0DA1ED183E00079D443 /* MyPostsViewController.swift */,
 				8DDAF0DC1ED184790079D443 /* FolloweeViewController.swift */,
-				8D6A73ED1F83BE2A00902AFC /* UserCollectionViewCell.swift */,
 				8DDAF0DE1ED184AF0079D443 /* MyFavoritePostsViewController.swift */,
-				8D53FD611F375DA800809E7F /* FollowerListViewController.swift */,
+				8D53FD611F375DA800809E7F /* FollowerViewController.swift */,
+				8D6A73ED1F83BE2A00902AFC /* UserCollectionViewCell.swift */,
 			);
 			name = MyPageItem;
 			sourceTree = "<group>";
@@ -969,7 +969,7 @@
 				8DA4C6991FE045A800C84A73 /* FieldCollectionViewFlowLayout.swift in Sources */,
 				1736445B222936200096F8F8 /* FavoriteButton.swift in Sources */,
 				8DC7190D1F08A0F3003C5E00 /* PostImageTableViewCell.swift in Sources */,
-				8D53FD621F375DA800809E7F /* FollowerListViewController.swift in Sources */,
+				8D53FD621F375DA800809E7F /* FollowerViewController.swift in Sources */,
 				1765468922142CE90027D8A7 /* Post.swift in Sources */,
 				17AD3CEA21C3591800A6DC9E /* PostCommentViewController.swift in Sources */,
 				8DDCD3211F49B953004C91C9 /* TempTimeLineViewController.swift in Sources */,
