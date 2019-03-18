@@ -2,10 +2,8 @@ import UIKit
 import Social
 import FirebaseAuth
 import FirebaseStorage
-import Alamofire
-import SwiftyJSON
+import FirebaseUI
 import SCLAlertView
-import SDWebImage
 
 class PostDetailViewController: UIViewController {
 
@@ -16,7 +14,7 @@ class PostDetailViewController: UIViewController {
 
     private var postDetailTableView: UITableView!
 
-    private var myItems: [Comment] = []
+    private var comments: [Comment] = []
 
     private let post: Post!
 
@@ -60,7 +58,7 @@ class PostDetailViewController: UIViewController {
                 print(error)
                 return
             }
-            self.myItems = comments
+            self.comments = comments
             self.postDetailTableView.reloadData()
         }
     }
@@ -172,18 +170,28 @@ class PostDetailViewController: UIViewController {
 
 extension PostDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myItems.count
+        return comments.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //myItems配列の中身をテキストにして登録した
-        let cell: CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self))! as! CommentTableViewCell
-        cell.commentTextView.text = myItems[indexPath.row].comment
+        let comment = comments[indexPath.row]
+        let uid = comment.uid
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(CommentTableViewCell.self)) as! CommentTableViewCell
+        cell.commentTextView.text = comment.comment
+        UserHandler.featchUser(uid: uid) { (user, error) in
+            if let error = error {
+                self.showErrorAlert(message: error.description)
+                return
+            }
+            cell.userName.text = user?.nickname
+            cell.dateLabel.text = comment.date
+        }
+        cell.thumbnail.sd_setImage(with: User.getIconReference(uid: uid), placeholderImage: UIImage(named: "common-icon-default"))
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CommentTableViewCell.calcHeight(viewWidth: view.frame.width, comments: myItems[indexPath.row].comment)
+        return CommentTableViewCell.calcHeight(viewWidth: view.frame.width, comments: comments[indexPath.row].comment)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -17,21 +17,19 @@ class CommentTableViewCell: UITableViewCell {
         contentView.addSubview(thumbnail)
 
         userName = UILabel()
-        userName.text = "いろはにほへと"
         userName.font = UIFont.boldSystemFont(ofSize: 16)
         userName.textColor = UIColor(named: "main")
         userName.isUserInteractionEnabled = false
         contentView.addSubview(userName)
 
         dateLabel = UILabel()
-        dateLabel.text = "2017年4月26日"
         dateLabel.isUserInteractionEnabled = false
         dateLabel.font = UIFont.systemFont(ofSize: 14)
         dateLabel.textColor = UIColor.gray
+        dateLabel.textAlignment = .right
         contentView.addSubview(dateLabel)
 
         commentTextView = UITextView()
-        commentTextView.text = "天王寺動物園のサイさんを見ました。思ったより、大きかったです！！かっこよかったよ！！わたくし、結構サイってかっこいいと思うけど、評価されていない思うのよ"
         commentTextView.isUserInteractionEnabled = false
         commentTextView.font = UIFont.systemFont(ofSize: 16)
         commentTextView.isEditable = false
@@ -61,7 +59,7 @@ class CommentTableViewCell: UITableViewCell {
         userName.frame = CGRect(x: 64, y: 8, width: 120, height: 32)
 
         //dateLabel
-        dateLabel.frame = CGRect(x: width - 100 - 16, y: 8, width: 100, height: 32)
+        dateLabel.frame = CGRect(x: width - 160 - 16, y: 8, width: 160, height: 32)
 
         // comments
         let textViewSize = CommentTableViewCell.getTextViewSize(viewWidth: frame.width, textView: commentTextView)

@@ -13,17 +13,28 @@ class Comment {
     var uid: String
     var postId: String
     var comment: String
+    var createdAt: Date
+
+    var date: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .medium
+        formatter.locale = Locale.current
+        return formatter.string(from: createdAt)
+    }
 
     init(uid: String, postId: String, comment: String) {
         self.uid = uid
         self.postId = postId
         self.comment = comment
+        self.createdAt = Date()
     }
 
     init(document: DocumentSnapshot) {
         self.uid = document.get(Comment.uid) as! String
         self.postId = document.get(Comment.postId) as! String
         self.comment = document.get(Comment.comment) as! String
+        self.createdAt = document.get(Comment.createdAt) as! Date
     }
 
     func save(error: @escaping (NSError?) -> Void) {
