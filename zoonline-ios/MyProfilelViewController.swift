@@ -3,10 +3,8 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 import GoogleSignIn
-import Alamofire
 import SwiftyJSON
 import SCLAlertView
-import SDWebImage
 
 class MyProfilelViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -30,8 +28,7 @@ class MyProfilelViewController: UIViewController, UIImagePickerControllerDelegat
         view.backgroundColor = UIColor(named: "backgroundGray")
 
         // NavigationBar
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backButton
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         myProfileView = MyProfileView()
         myProfileView.frame.size = CGSize(width: view.frame.width, height: 240)
@@ -43,8 +40,6 @@ class MyProfilelViewController: UIViewController, UIImagePickerControllerDelegat
         picker.sourceType = UIImagePickerController.SourceType.photoLibrary
         picker.allowsEditing = true
         picker.view.backgroundColor = .white
-        picker.navigationBar.isTranslucent = false
-        picker.navigationBar.barTintColor = .blue
 
         //テーブルビューの初期化
         userConfigTableView = UITableView.init(frame: view.frame, style: .grouped)

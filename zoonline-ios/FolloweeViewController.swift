@@ -3,9 +3,8 @@ import Firebase
 
 class FolloweeViewController: UIViewController {
 
-    //テーブルビューインスタンス
-    var friendsCollectionView: UICollectionView!
-    private var followee: [Follow] = []
+    var followeeCollectionView: UICollectionView!
+    private var followee: [Follow]?
     private var uid: String!
 
     init(uid: String) {
@@ -31,12 +30,12 @@ class FolloweeViewController: UIViewController {
         layout.minimumLineSpacing = 0.0
         layout.headerReferenceSize = CGSize(width: 0, height: 0)
         let collectionFrame = view.frame
-        friendsCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
-        friendsCollectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self))
-        friendsCollectionView.delegate = self
-        friendsCollectionView.dataSource = self
-        friendsCollectionView.backgroundColor = UIColor.white
-        view.addSubview(friendsCollectionView)
+        followeeCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
+        followeeCollectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self))
+        followeeCollectionView.delegate = self
+        followeeCollectionView.dataSource = self
+        followeeCollectionView.backgroundColor = UIColor.white
+        view.addSubview(followeeCollectionView)
 
         FollowHandler.featchFollowee(uid: uid) { (follows, error) in
             if let error = error {
@@ -44,31 +43,40 @@ class FolloweeViewController: UIViewController {
                 return
             }
             self.followee = follows
-            self.friendsCollectionView.reloadData()
+            self.followeeCollectionView.reloadData()
         }
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        friendsCollectionView.frame = view.frame
+        followeeCollectionView.frame = view.frame
     }
 }
 
 extension FolloweeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let followee = self.followee else {
+            return
+        }
         let followeeUid = followee[indexPath.row].followUid
         let userInfoView = UserInfoViewController(uid: followeeUid)
         navigationController?.pushViewController(userInfoView, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let followee = self.followee else {
+            return 30
+        }
         return followee.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let followeeUid = followee[indexPath.row].followUid
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self), for: indexPath) as! UserCollectionViewCell
+        guard let followee = self.followee else {
+            return cell
+        }
+        let followeeUid = followee[indexPath.row].followUid
         cell.icomImageView.sd_setImage(with: User.getIconReference(uid: followeeUid), placeholderImage: UIImage(named: "common-icon-default"))
         UserHandler.featchUser(uid: followeeUid) { (user, error) in
             if let error = error {

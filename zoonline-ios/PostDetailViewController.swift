@@ -195,6 +195,12 @@ extension PostDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番のセルを選択しました！ ")
+        tableView.deselectRow(at: indexPath, animated: true)
+        let comment = comments[indexPath.row]
+        guard let uid = uid, uid == comment.uid else {
+            navigationController?.pushViewController(UserInfoViewController(uid: comment.uid), animated: true)
+            return
+        }
+        showErrorAlert(message: "自分のコメントです。")
     }
 }
