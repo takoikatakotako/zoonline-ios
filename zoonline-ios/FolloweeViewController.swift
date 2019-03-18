@@ -4,7 +4,7 @@ import Firebase
 class FolloweeViewController: UIViewController {
 
     var followeeCollectionView: UICollectionView!
-    private var followee: [Follow]?
+    private var followee: [Follow] = []
     private var uid: String!
 
     init(uid: String) {
@@ -19,6 +19,7 @@ class FolloweeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "フォロイー"
         view.backgroundColor = .white
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
@@ -56,27 +57,18 @@ class FolloweeViewController: UIViewController {
 extension FolloweeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let followee = self.followee else {
-            return
-        }
         let followeeUid = followee[indexPath.row].followUid
         let userInfoView = UserInfoViewController(uid: followeeUid)
         navigationController?.pushViewController(userInfoView, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let followee = self.followee else {
-            return 30
-        }
         return followee.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self), for: indexPath) as! UserCollectionViewCell
-        guard let followee = self.followee else {
-            return cell
-        }
         let followeeUid = followee[indexPath.row].followUid
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self), for: indexPath) as! UserCollectionViewCell
         cell.icomImageView.sd_setImage(with: User.getIconReference(uid: followeeUid), placeholderImage: UIImage(named: "common-icon-default"))
         UserHandler.featchUser(uid: followeeUid) { (user, error) in
             if let error = error {

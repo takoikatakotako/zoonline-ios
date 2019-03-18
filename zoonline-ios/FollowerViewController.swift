@@ -3,8 +3,7 @@ import Firebase
 
 class FollowerViewController: UIViewController {
 
-    //テーブルビューインスタンス
-    var friendsCollectionView: UICollectionView!
+    var followerCollectionView: UICollectionView!
     private var follower: [Follow] = []
     private var uid: String!
 
@@ -20,6 +19,7 @@ class FollowerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "フォロワー"
         view.backgroundColor = .white
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
@@ -31,12 +31,12 @@ class FollowerViewController: UIViewController {
         layout.minimumLineSpacing = 0.0
         layout.headerReferenceSize = CGSize(width: 0, height: 0)
         let collectionFrame = view.frame
-        friendsCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
-        friendsCollectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self))
-        friendsCollectionView.delegate = self
-        friendsCollectionView.dataSource = self
-        friendsCollectionView.backgroundColor = UIColor.white
-        view.addSubview(friendsCollectionView)
+        followerCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
+        followerCollectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self))
+        followerCollectionView.delegate = self
+        followerCollectionView.dataSource = self
+        followerCollectionView.backgroundColor = UIColor.white
+        view.addSubview(followerCollectionView)
 
         FollowHandler.featchFollower(uid: uid) { (follows, error) in
             if let error = error {
@@ -44,20 +44,20 @@ class FollowerViewController: UIViewController {
                 return
             }
             self.follower = follows
-            self.friendsCollectionView.reloadData()
+            self.followerCollectionView.reloadData()
         }
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        friendsCollectionView.frame = view.frame
+        followerCollectionView.frame = view.frame
     }
 }
 
 extension FollowerViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let followeeUid = follower[indexPath.row].followUid
+        let followeeUid = follower[indexPath.row].uid
         let userInfoView = UserInfoViewController(uid: followeeUid)
         navigationController?.pushViewController(userInfoView, animated: true)
     }
@@ -67,7 +67,7 @@ extension FollowerViewController: UICollectionViewDelegate, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let followeeUid = follower[indexPath.row].followUid
+        let followeeUid = follower[indexPath.row].uid
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UserCollectionViewCell.self), for: indexPath) as! UserCollectionViewCell
         cell.icomImageView.sd_setImage(with: User.getIconReference(uid: followeeUid), placeholderImage: UIImage(named: "common-icon-default"))
         UserHandler.featchUser(uid: followeeUid) { (user, error) in

@@ -332,8 +332,8 @@
 			children = (
 				8DDAF0DA1ED183E00079D443 /* MyPostsViewController.swift */,
 				8DDAF0DC1ED184790079D443 /* FolloweeViewController.swift */,
-				8DDAF0DE1ED184AF0079D443 /* MyFavoritePostsViewController.swift */,
 				8D53FD611F375DA800809E7F /* FollowerViewController.swift */,
+				8DDAF0DE1ED184AF0079D443 /* MyFavoritePostsViewController.swift */,
 				8D6A73ED1F83BE2A00902AFC /* UserCollectionViewCell.swift */,
 			);
 			name = MyPageItem;

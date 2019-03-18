@@ -1,9 +1,10 @@
 import UIKit
 import Firebase
 import FirebaseStorage
-class FieldViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    var isSignIn = false
+class FieldViewController: UIViewController {
+
+    var uid: String?
 
     //CollectionViews
     var collectionView: UICollectionView!
@@ -40,10 +41,7 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
 
         if let user = Auth.auth().currentUser {
             // User is signed in
-            isSignIn = true
-        } else {
-            // No user is signed in
-            isSignIn = false
+            uid = user.uid
         }
     }
 
@@ -80,6 +78,10 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
         postButton.layer.cornerRadius = 40
         postButton.setImage(UIImage(named: "field-add"), for: .normal)
         postButton.addTarget(self, action: #selector(postBtnTapped), for: .touchUpInside)
+        postButton.layer.shadowOpacity = 0.5
+        postButton.layer.shadowRadius = 12
+        postButton.layer.shadowColor = UIColor.black.cgColor
+        postButton.layer.shadowOffset = CGSize(width: 5, height: 5)
         view.addSubview(postButton)
     }
 
@@ -87,11 +89,11 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
 
     @objc func postBtnTapped() {
-        if isSignIn {
-             let postNavigationController = UINavigationController(rootViewController: PostViewController())
-             present(postNavigationController, animated: true, completion: nil)
-        } else {
+        if uid == nil {
             showLoginAlert()
+        } else {
+            let postNavigationController = UINavigationController(rootViewController: PostViewController())
+            present(postNavigationController, animated: true, completion: nil)
         }
     }
 
@@ -109,8 +111,9 @@ class FieldViewController: UIViewController, UICollectionViewDelegate, UICollect
 
        present(actionAlert, animated: true, completion: nil)
     }
+}
 
-    // MARK: CollectionView Delegate Methods
+extension FieldViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Section: \(indexPath.section)")
         print("Num: \(indexPath.row)")

@@ -7,7 +7,7 @@ import SCLAlertView
 
 class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
-    var uid: String!
+    var uid: String?
 
     // Sign In
     var signInSection: [String] = ["ユーザー情報", "設定・その他", "ログアウト"]
@@ -35,7 +35,6 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //isSignIn = appDelegate.userDefaultsManager?.isSignIn()
         GIDSignIn.sharedInstance().uiDelegate = self
 
         title = "マイページ"
@@ -64,9 +63,9 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
         if let user = Auth.auth().currentUser {
             // User is signed in
             uid = user.uid
-            setUserIcon(uid: user.uid)
             setNickname(uid: user.uid)
             userHeaderView.userMailAdressLabel.text = user.email
+            self.userHeaderView.iconImgView.sd_setImage(with: User.getIconReference(uid: user.uid), placeholderImage: UIImage(named: "common-icon-default"))
             myPageTableView.reloadData()
         } else {
             // No user is signed in
@@ -88,13 +87,6 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
         }
     }
 
-    func setUserIcon(uid: String) {
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let reference = storageRef.child("user/" + String(uid) + "/icon.png")
-        self.userHeaderView.iconImgView.sd_setImage(with: reference, placeholderImage: UIImage(named: "common-icon-default"))
-    }
-
     // MARK: Actions
     @objc func goMyProfile(sender: UIButton) {
         if uid != nil {
@@ -108,6 +100,7 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
     func goMyPosts() {
         // My Posts List
+        guard let uid = uid else { return }
         let vc = MyPostsViewController(uid: uid)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
@@ -115,6 +108,7 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
     func goMyFriends() {
         // Friends List
+        guard let uid = uid else { return }
         let vc = FolloweeViewController(uid: uid)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
@@ -122,6 +116,7 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 
     func goMyFollows() {
         // Follower List
+        guard let uid = uid else { return }
         let vc = FollowerViewController(uid: uid)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
@@ -165,7 +160,6 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
 }
 
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
-    // MARK: TableView Delegate Methods
     func numberOfSections(in tableView: UITableView) -> Int {
         if uid != nil {
             return signInSection.count

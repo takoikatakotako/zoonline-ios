@@ -6,7 +6,7 @@ class MyPostsViewController: UIViewController {
     //UserInfo
     private var uid: String!
     private var myPostsCollectionView: UICollectionView!
-    private var posts: [Post]?
+    private var posts: [Post] = []
 
     init(uid: String) {
         self.uid = uid
@@ -19,7 +19,7 @@ class MyPostsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "私の投稿"
         view.backgroundColor = .white
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
@@ -60,27 +60,16 @@ class MyPostsViewController: UIViewController {
 
 extension MyPostsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let posts = self.posts else {
-            return
-        }
         let postDetail = PostDetailViewController(post: posts[indexPath.row])
         navigationController?.pushViewController(postDetail, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let posts = self.posts else {
-            return 30
-        }
         return posts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(PostsCollectionViewCell.self), for: indexPath) as! PostsCollectionViewCell
-        guard let posts = self.posts else {
-            cell.imageView.image = UIImage(named: "no_img")
-            return cell
-        }
-
         let post = posts[indexPath.row]
         cell.imageView?.sd_setImage(with: post.imageReference, placeholderImage: UIImage(named: "no_img"))
         return cell
