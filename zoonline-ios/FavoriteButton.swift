@@ -38,4 +38,9 @@ class FavoriteButton: UIButton {
         favoriteIcon.image = UIImage(named: "post-detail-fav-on")
         favoriteLabel.textColor = UIColor(named: "postDetailFavPink")
     }
+
+    func setNoFavorite() {
+        favoriteIcon.image = UIImage(named: "post-detail-fav-off")
+        favoriteLabel.textColor = UIColor(named: "textColorGray")
+    }
 }

@@ -91,6 +91,19 @@ class PostDetailViewController: UIViewController {
                 }
             })
 
+            // お気に入り済みか調べる
+            FavoriteHandler.didFavorite(uid: uid, postId: post.postId) { (didFavorite, error) in
+                if let error = error {
+                    self.showErrorAlert(message: error.description)
+                    return
+                }
+                if didFavorite {
+                    self.postDetailView.favoriteButton.setFavorite()
+                } else {
+                    self.postDetailView.favoriteButton.setNoFavorite()
+                }
+            }
+
             // コメント済みか調べる
             CommentHandler.didComment(uid: uid, postId: post.postId) { (didComment, error) in
                 if let error = error {
@@ -98,9 +111,9 @@ class PostDetailViewController: UIViewController {
                     return
                 }
                 if didComment {
-                    self.postDetailView.commentButton.backgroundColor = .red
+                    self.postDetailView.commentButton.setDidComment()
                 } else {
-
+                    self.postDetailView.commentButton.setDidComment()
                 }
             }
 
@@ -160,8 +173,21 @@ class PostDetailViewController: UIViewController {
     }
 
     @objc func favoriteButtonTouched(sender: UIButton) {
+
+        guard let uid = uid else {
+            print("ログイン必須")
+            return
+        }
         // お気に入り
         postDetailView.favoriteButton.setFavorite()
+
+        FavoriteHandler.favorite(uid: uid, postId: post.postId) { (error) in
+            if let error = error {
+                self.showErrorAlert(message: error.description)
+                return
+            }
+        }
+
     }
 
     @objc func commentButtonTouched(sender: UIButton) {

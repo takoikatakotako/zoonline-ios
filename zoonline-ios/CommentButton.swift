@@ -10,7 +10,7 @@ class CommentButton: UIButton {
 
         // Comment
         commentIcon = UIImageView()
-        commentIcon.image = UIImage(named: "post-detail-comment")
+        commentIcon.image = UIImage(named: "post-detail-comment-off")
         addSubview(commentIcon)
 
         commentLabel = UILabel()
@@ -31,5 +31,13 @@ class CommentButton: UIButton {
 
         commentIcon.frame = CGRect(x: 20, y: (height - iconSize.height) / 2, width: iconSize.width, height: iconSize.height)
         commentLabel.frame = CGRect(x: 60, y: 0, width: width, height: height)
+    }
+
+    func setDidComment() {
+        commentIcon.image = UIImage(named: "post-detail-comment-on")
+    }
+
+    func setDidnotComment() {
+        commentIcon.image = UIImage(named: "post-detail-comment-off")
     }
 }
