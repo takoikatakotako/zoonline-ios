@@ -90,6 +90,20 @@ class PostDetailViewController: UIViewController {
                     self.postDetailView.followButton.setUnFollow()
                 }
             })
+
+            // コメント済みか調べる
+            CommentHandler.didComment(uid: uid, postId: post.postId) { (didComment, error) in
+                if let error = error {
+                    self.showErrorAlert(message: error.description)
+                    return
+                }
+                if didComment {
+                    self.postDetailView.commentButton.backgroundColor = .red
+                } else {
+
+                }
+            }
+
         } else {
             // No user is signed in
             isSignIn = false
