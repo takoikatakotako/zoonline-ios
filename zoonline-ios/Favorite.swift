@@ -11,4 +11,15 @@ class Favorite {
     var postId: String!
 //    var isFollow: Bool
 //    var createdAt: Date!
+
+    var postImageReference: StorageReference {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        return storageRef.child("post/" + postId + "/image.png")
+    }
+
+    init(document: DocumentSnapshot) {
+        self.uid = document.get(Favorite.uid) as! String
+        self.postId = document.get(Favorite.postId) as! String
+    }
 }

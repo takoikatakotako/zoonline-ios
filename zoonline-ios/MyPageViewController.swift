@@ -122,9 +122,10 @@ class MyPageViewController: UIViewController, GIDSignInUIDelegate {
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    func goMyFavorites() {
-        // My Favorites List
-        let vc = MyFavoritePostsViewController()
+    func goFavorites() {
+        // Favorites List
+        guard let uid = uid else { return }
+        let vc = FavoritePostsViewController(uid: uid)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -254,7 +255,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                     goMyFollows()
                     break
                 case 3:
-
+                    goFavorites()
                     break
                 default:
                     break

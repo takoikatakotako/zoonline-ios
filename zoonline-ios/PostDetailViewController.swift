@@ -79,7 +79,7 @@ class PostDetailViewController: UIViewController {
             }
 
             // フォローしているか取得する
-            Follow.isFollow(uid: uid, followUid: post.uid, completion: { (isFollow, err) in
+            FollowHandler.isFollow(uid: uid, followUid: post.uid, completion: { (isFollow, err) in
                 if let err = err {
                     self.showErrorAlert(message: err.description)
                     return
@@ -92,7 +92,7 @@ class PostDetailViewController: UIViewController {
             })
 
             // お気に入り済みか調べる
-            FavoriteHandler.didFavorite(uid: uid, postId: post.postId) { (didFavorite, error) in
+            FavoriteHandler.isFavorited(uid: uid, postId: post.postId) { (didFavorite, error) in
                 if let error = error {
                     self.showErrorAlert(message: error.description)
                     return
@@ -150,7 +150,7 @@ class PostDetailViewController: UIViewController {
         if isFollow {
             // フォロー解除する
             self.postDetailView.followButton.setUnFollow()
-            Follow.unFollow(uid: uid, followUid: post.uid, completion: { error in
+            FollowHandler.unFollow(uid: uid, followUid: post.uid, completion: { error in
                 if let error = error {
                     self.showErrorAlert(message: error.description)
                     // 状態を元に戻す
@@ -161,7 +161,7 @@ class PostDetailViewController: UIViewController {
         } else {
             // フォローする
             self.postDetailView.followButton.setFollow()
-            Follow.follow(uid: uid, followUid: post.uid, completion: { error in
+            FollowHandler.follow(uid: uid, followUid: post.uid, completion: { error in
                 if let error = error {
                     self.showErrorAlert(message: error.description)
                     // 状態を元に戻す
