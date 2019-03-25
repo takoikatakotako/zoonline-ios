@@ -21,18 +21,37 @@ class FieldViewController: UIViewController {
         //ナビゲーションアイテムを作成
         title = "ひろば"
 
-        let db = Firestore.firestore()
-        db.collection("post").order(by: "created_at", descending: true).limit(to: 50).getDocuments { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let post = Post(id: document.documentID, data: document.data())
-                    self.posts.append(post)
-                }
-                self.collectionView.reloadData()
-            }
-        }
+        let layout = FieldCollectionViewFlowLayout()
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.white
+        collectionView.register(FieldCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(FieldCollectionViewCell.self))
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UICollectionViewCell.self))
+        collectionView.register(NetWorkErrorCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(NetWorkErrorCollectionViewCell.self))
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.collectionViewLayout.invalidateLayout()
+        let layout2 = FieldCollectionViewFlowLayout()
+        collectionView.setCollectionViewLayout(layout2, animated: false)
+        view.addSubview(collectionView)
+
+        postButton = UIButton()
+        postButton.backgroundColor = UIColor(named: "main")
+        postButton.layer.cornerRadius = 40
+        postButton.setImage(UIImage(named: "field-add"), for: .normal)
+        postButton.addTarget(self, action: #selector(postBtnTapped), for: .touchUpInside)
+        postButton.layer.shadowOpacity = 0.5
+        postButton.layer.shadowRadius = 12
+        postButton.layer.shadowColor = UIColor.black.cgColor
+        postButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.addSubview(postButton)
+
+        //リフレッシュコントロールの追加
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+
+        featchPosts()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +61,8 @@ class FieldViewController: UIViewController {
         if let user = Auth.auth().currentUser {
             // User is signed in
             uid = user.uid
+        } else {
+            uid = nil
         }
     }
 
@@ -51,41 +72,25 @@ class FieldViewController: UIViewController {
         let width = view.frame.width
         let height = view.frame.height - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
         let collectionFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
-        let layout = FieldCollectionViewFlowLayout()
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        collectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.white
-        collectionView.register(FieldCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(FieldCollectionViewCell.self))
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UICollectionViewCell.self))
-        collectionView.register(NetWorkErrorCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(NetWorkErrorCollectionViewCell.self))
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.contentInsetAdjustmentBehavior = .never
-        view.addSubview(collectionView)
 
-        //リフレッシュコントロールの追加
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(scrollReflesh(sender:)), for: .valueChanged)
-        collectionView.refreshControl = refreshControl
-
-        collectionView.collectionViewLayout.invalidateLayout()
-        let layout2 = FieldCollectionViewFlowLayout()
-        collectionView.setCollectionViewLayout(layout2, animated: false)
-
-        postButton = UIButton()
-        postButton.backgroundColor = UIColor(named: "main")
         postButton.frame = CGRect(x: width - 100, y: height - 100, width: 80, height: 80)
-        postButton.layer.cornerRadius = 40
-        postButton.setImage(UIImage(named: "field-add"), for: .normal)
-        postButton.addTarget(self, action: #selector(postBtnTapped), for: .touchUpInside)
-        postButton.layer.shadowOpacity = 0.5
-        postButton.layer.shadowRadius = 12
-        postButton.layer.shadowColor = UIColor.black.cgColor
-        postButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-        view.addSubview(postButton)
+        collectionView.frame = collectionFrame
+    }
+
+    func featchPosts() {
+        PostHandler.featchNesPosts(limit: 50) { (posts, error) in
+            if let error = error {
+                self.showMessageAlert(message: error.description)
+                return
+            }
+            self.posts = posts
+            self.collectionView.refreshControl?.endRefreshing()
+            self.collectionView.reloadData()
+        }
     }
 
     @objc func scrollReflesh(sender: UIRefreshControl) {
+        featchPosts()
     }
 
     @objc func postBtnTapped() {
@@ -99,7 +104,6 @@ class FieldViewController: UIViewController {
 
     func showLoginAlert() {
         let actionAlert = UIAlertController(title: "", message: "投稿機能を使うにはログインが必要です", preferredStyle: UIAlertController.Style.alert)
-
         let kabigonAction = UIAlertAction(title: "ログイン", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
             // TODO: ログイン関係
             print("ログイン")
@@ -115,10 +119,6 @@ class FieldViewController: UIViewController {
 
 extension FieldViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Section: \(indexPath.section)")
-        print("Num: \(indexPath.row)")
-        print("Number: \(indexPath.section * 6 + indexPath.row)")
-
         //画面遷移、投稿詳細画面へ
         let picDetailView: PostDetailViewController = PostDetailViewController(post: posts[indexPath.section * 6 + indexPath.row])
         picDetailView.hidesBottomBarWhenPushed = true
