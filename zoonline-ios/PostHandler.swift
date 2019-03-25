@@ -23,19 +23,22 @@ class PostHandler: Post {
 
     static func featchPost(postId: String, completion: @escaping (Post, NSError?) -> Void) {
         let db = Firestore.firestore()
-        db.collection(Post.name).whereField(Post.postId, isEqualTo: postId).order(by: createdAt, descending: true).getDocuments { (querySnapshot, error) in
+
+        let docRef = db.collection(name).document(postId)
+        docRef.getDocument { (document, error) in
             if let error = error {
                 completion(Post(), error as NSError)
                 return
             }
 
-            guard let document = querySnapshot?.documents.first else {
+            guard let document = document, document.exists else {
                 completion(Post(), nil)
                 return
             }
 
-            let post = Post(id: postId, data: document.data())
+            let post = Post(id: postId, data: document.data()!)
             completion(post, nil)
+            return
         }
     }
 }

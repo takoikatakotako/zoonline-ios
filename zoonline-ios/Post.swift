@@ -41,4 +41,26 @@ class Post {
             self.createdAt = createdAt
         }
     }
+    
+    init(id: String, document: DocumentSnapshot) {
+        self.postId = id
+        
+        if let uid = document.get(Post.postId) as? String {
+            self.uid = uid
+        } else {
+            self.uid = "Error"
+        }
+        
+        if let comment = document.get(Post.comment) as? String {
+            self.comment = comment
+        } else {
+            self.comment = "エラーです(´・ω・｀)"
+        }
+        
+        if let date = document.get(Post.createdAt) as? Date {
+            self.createdAt = date
+        } else {
+            self.createdAt = Date()
+        }
+    }
 }
