@@ -3,7 +3,7 @@ import Firebase
 
 class CommentHandler: Comment {
 
-    static func didComment(uid: String, postId: String, completion: @escaping (Bool, NSError?) -> Void) {
+    static func isCommented(uid: String, postId: String, completion: @escaping (Bool, NSError?) -> Void) {
         let db = Firestore.firestore()
         let docsRef = db.collection(Comment.name)
             .whereField(Comment.uid, isEqualTo: uid)

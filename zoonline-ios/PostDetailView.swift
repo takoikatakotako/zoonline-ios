@@ -91,6 +91,7 @@ class PostDetailView: UIView {
         detailTextView.font = UIFont.systemFont(ofSize: 18)
         detailTextView.textAlignment = .left
         detailTextView.isEditable = false
+        detailTextView.isScrollEnabled = false
         addSubview(detailTextView)
 
         // BottomLine

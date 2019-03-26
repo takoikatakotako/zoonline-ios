@@ -61,11 +61,17 @@ class FavoritePostsViewController: UIViewController {
 extension FavoritePostsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let favorite = favorites[indexPath.row]
-        let post = PostHandler.featchPost(postId: favorite.postId) { (post, error) in
+        PostHandler.featchPost(postId: favorite.postId) { (post, error) in
             if let error = error {
                 self.showMessageAlert(message: error.description)
                 return
             }
+
+            guard let post = post else {
+                self.showMessageAlert(message: "投稿が見つかりません。。。")
+                return
+            }
+
             let postDetail = PostDetailViewController(post: post)
             self.navigationController?.pushViewController(postDetail, animated: true)
         }

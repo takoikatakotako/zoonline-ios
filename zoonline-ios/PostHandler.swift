@@ -12,7 +12,7 @@ class PostHandler: Post {
                 completion(posts, error as NSError)
             } else {
                 for document in querySnapshot!.documents {
-                    let post = Post(id: document.documentID, data: document.data())
+                    let post = Post(id: document.documentID, document: document)
                     posts.append(post)
                 }
                 completion(posts, nil)
@@ -31,29 +31,29 @@ class PostHandler: Post {
             }
 
             for document in querySnapshot!.documents {
-                let post = Post(id: document.documentID, data: document.data())
+                let post = Post(id: document.documentID, document: document)
                 posts.append(post)
             }
             completion(posts, nil)
         }
     }
 
-    static func featchPost(postId: String, completion: @escaping (Post, NSError?) -> Void) {
+    static func featchPost(postId: String, completion: @escaping (Post?, NSError?) -> Void) {
         let db = Firestore.firestore()
 
         let docRef = db.collection(name).document(postId)
         docRef.getDocument { (document, error) in
             if let error = error {
-                completion(Post(), error as NSError)
+                completion(nil, error as NSError)
                 return
             }
 
             guard let document = document, document.exists else {
-                completion(Post(), nil)
+                completion(nil, nil)
                 return
             }
 
-            let post = Post(id: postId, data: document.data()!)
+            let post = Post(id: document.documentID, document: document)
             completion(post, nil)
             return
         }

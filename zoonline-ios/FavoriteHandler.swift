@@ -15,6 +15,29 @@ class FavoriteHandler: Favorite {
         })
     }
 
+    static func unFavorite(uid: String, postId: String, completion: @escaping (NSError?) -> Void) {
+        let db = Firestore.firestore()
+        let docsRef = db.collection(Favorite.name)
+            .whereField(Favorite.uid, isEqualTo: uid)
+            .whereField(Favorite.postId, isEqualTo: postId)
+        docsRef.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                completion(err as NSError)
+                return
+            }
+
+            for document in querySnapshot!.documents {
+                db.collection(name).document(document.documentID).delete { err in
+                    if let err = err {
+                        completion(err as NSError)
+                        return
+                    }
+                }
+            }
+            completion(nil)
+        }
+    }
+
     static func isFavorited(uid: String, postId: String, completion: @escaping (Bool, NSError?) -> Void) {
         let db = Firestore.firestore()
         let docsRef = db.collection(Favorite.name)

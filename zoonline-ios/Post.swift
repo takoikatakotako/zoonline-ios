@@ -7,6 +7,7 @@ class Post {
     static let postId = "post_id"
     static let comment = "comment"
     static let createdAt = "created_at"
+
     var postId: String!
     var uid: String!
     var comment: String!
@@ -26,20 +27,10 @@ class Post {
         return storageRef.child("post/" + postId + "/image.png")
     }
 
-    init() {
-    }
-
-    init(id: String, data: [String: Any]) {
-        self.postId = id
-        if let uid = data[Post.uid] as? String {
-            self.uid = uid
-        }
-        if let comment = data[Post.comment] as? String {
-            self.comment = comment
-        }
-        if let createdAt = data[Post.createdAt] as? Date {
-            self.createdAt = createdAt
-        }
+    static func imageReference(postId: String) -> StorageReference {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        return storageRef.child("post/" + postId + "/image.png")
     }
 
     init(id: String, document: DocumentSnapshot) {

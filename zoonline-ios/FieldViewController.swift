@@ -136,9 +136,8 @@ extension FieldViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(FieldCollectionViewCell.self), for: indexPath as IndexPath) as! FieldCollectionViewCell
         cell.clipsToBounds = true
         cell.layer.cornerRadius = 16
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let reference = storageRef.child("post/" + posts[indexPath.section * 6 + indexPath.row].postId + "/image.png")
+        let postId = posts[indexPath.section * 6 + indexPath.row].postId
+        let reference = Post.imageReference(postId: postId!)
         cell.thumbnailImgView?.sd_setImage(with: reference, placeholderImage: UIImage(named: "no_img"))
         return cell
     }

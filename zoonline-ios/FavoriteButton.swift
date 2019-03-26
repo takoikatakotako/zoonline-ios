@@ -2,6 +2,7 @@ import UIKit
 
 class FavoriteButton: UIButton {
 
+    var isFovorited: Bool?
     var favoriteIcon: UIImageView!
     var favoriteLabel: UILabel!
 
@@ -14,7 +15,6 @@ class FavoriteButton: UIButton {
         addSubview(favoriteIcon)
 
         favoriteLabel = UILabel()
-        // favoriteLabel.textColor = UIColor(named: "postDetailFavPink")
         favoriteLabel.textColor = UIColor(named: "textColorGray")
         favoriteLabel.font = UIFont.boldSystemFont(ofSize: 24)
         favoriteLabel.text = "--"
@@ -35,11 +35,13 @@ class FavoriteButton: UIButton {
     }
 
     func setFavorite() {
+        isFovorited = true
         favoriteIcon.image = UIImage(named: "post-detail-fav-on")
         favoriteLabel.textColor = UIColor(named: "postDetailFavPink")
     }
 
-    func setNoFavorite() {
+    func setUnFavorite() {
+        isFovorited = false
         favoriteIcon.image = UIImage(named: "post-detail-fav-off")
         favoriteLabel.textColor = UIColor(named: "textColorGray")
     }

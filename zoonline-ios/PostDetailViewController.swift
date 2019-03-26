@@ -38,7 +38,7 @@ class PostDetailViewController: UIViewController {
         postDetailView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: postDetailView.calcHeight(viewWidth: view.frame.width))
 
         // ボタンアクションの設定
-        postDetailView.followButton.addTarget(self, action: #selector(followButtonTouched(sender:)), for: .touchUpInside)
+        postDetailView.followButton.addTarget(self, action: #selector(followButtonOnTapped(sender:)), for: .touchUpInside)
         postDetailView.userInfoButton.addTarget(self, action: #selector(userInfoButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.favoriteButton.addTarget(self, action: #selector(favoriteButtonTouched(sender:)), for: .touchUpInside)
         postDetailView.commentButton.addTarget(self, action: #selector(commentButtonTouched(sender:)), for: .touchUpInside)
@@ -100,12 +100,12 @@ class PostDetailViewController: UIViewController {
                 if didFavorite {
                     self.postDetailView.favoriteButton.setFavorite()
                 } else {
-                    self.postDetailView.favoriteButton.setNoFavorite()
+                    self.postDetailView.favoriteButton.setUnFavorite()
                 }
             }
 
             // コメント済みか調べる
-            CommentHandler.didComment(uid: uid, postId: post.postId) { (didComment, error) in
+            CommentHandler.isCommented(uid: uid, postId: post.postId) { (didComment, error) in
                 if let error = error {
                     self.showErrorAlert(message: error.description)
                     return
@@ -135,15 +135,15 @@ class PostDetailViewController: UIViewController {
         navigationController?.pushViewController(userInfoViewController, animated: true)
     }
 
-    @objc func followButtonTouched(sender: UIButton) {
+    @objc func followButtonOnTapped(sender: UIButton) {
         print("basicButtonBtnClicked")
         guard let uid = uid else {
-            print("ログインが必要です")
+            showMessageAlert(message: "ログイン必須です")
             return
         }
 
         guard let isFollow = postDetailView.followButton.isFollow else {
-            print("フェッチ中です")
+            showMessageAlert(message: "フェッチ中です")
             return
         }
 
@@ -173,27 +173,41 @@ class PostDetailViewController: UIViewController {
     }
 
     @objc func favoriteButtonTouched(sender: UIButton) {
-
         guard let uid = uid else {
-            print("ログイン必須")
+            showMessageAlert(message: "ログイン必須です")
             return
         }
-        // お気に入り
-        postDetailView.favoriteButton.setFavorite()
 
-        FavoriteHandler.favorite(uid: uid, postId: post.postId) { (error) in
-            if let error = error {
-                self.showErrorAlert(message: error.description)
-                return
-            }
+        guard let isFavorited = postDetailView.favoriteButton.isFovorited else {
+            showMessageAlert(message: "フェッチ中です")
+            return
         }
 
+        if isFavorited {
+            // お気に入り解除する
+            postDetailView.favoriteButton.setUnFavorite()
+            FavoriteHandler.unFavorite(uid: uid, postId: post.postId) { (error) in
+                if let error = error {
+                    self.showErrorAlert(message: error.description)
+                    return
+                }
+            }
+        } else {
+            // お気に入りする
+            postDetailView.favoriteButton.setFavorite()
+            FavoriteHandler.favorite(uid: uid, postId: post.postId) { (error) in
+                if let error = error {
+                    self.showErrorAlert(message: error.description)
+                    return
+                }
+            }
+        }
     }
 
     @objc func commentButtonTouched(sender: UIButton) {
         // コメント投稿へ
         guard let uid = uid else {
-            print("ログイン必須")
+            showMessageAlert(message: "ログイン必須ですよ")
             return
         }
         let postCommentViewController = PostCommentViewController(uid: uid, postId: post.postId)
